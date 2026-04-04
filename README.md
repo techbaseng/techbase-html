@@ -1,7 +1,7 @@
 # 🌐 HTML Fundamentals — Techbase STEM Academy
 
 > **Free beginner HTML course by [Techbase Consultant Services](https://techbasengr.com.ng), Ibadan, Nigeria**  
-> Instructor: Babatunde Awolaja · [github.com/techbaseng](https://github.com/techbaseng)
+> Instructor: Babatunde Awoyemi · [github.com/techbaseng](https://github.com/techbaseng)
 
 ---
 
