@@ -28,27 +28,18 @@ By the end of this course you will be able to:
 
 ---
 
-## Course Lessons
+## Prerequisites
 
-| # | Topic | File |
-|---|-------|------|
-| 01 | Introduction to HTML — what it is, how browsers work, your first page | [lesson_01.md](lessons/lesson_01.md) |
-| 02 | HTML Document Structure — `<!DOCTYPE>`, `<html>`, `<head>`, `<body>` | [lesson_02.md](lessons/lesson_02.md) |
-| 03 | Text Elements — headings `<h1>`–`<h6>`, paragraphs, line breaks | [lesson_03.md](lessons/lesson_03.md) |
-| 04 | Links & Navigation — `<a>` tags, href, internal and external links | [lesson_04.md](lessons/lesson_04.md) |
-| 05 | Images & Media — `<img>`, alt text, file paths | [lesson_05.md](lessons/lesson_05.md) |
-| 06 | Lists — ordered `<ol>`, unordered `<ul>`, nested lists | [lesson_06.md](lessons/lesson_06.md) |
-| 07 | Tables — `<table>`, `<tr>`, `<th>`, `<td>`, spanning rows and columns | [lesson_07.md](lessons/lesson_07.md) |
-| 08 | Forms — `<form>`, inputs, labels, buttons, and form attributes | [lesson_08.md](lessons/lesson_08.md) |
-| 09 | Semantic HTML — `<header>`, `<nav>`, `<main>`, `<section>`, `<footer>` | [lesson_09.md](lessons/lesson_09.md) |
-| 10 | Mini Project — Build a Personal Profile Page | [lesson_10.md](lessons/lesson_10.md) |
+None. This is the starting point for all web development.
+
+> If you complete this course, the natural next step is the **CSS Styling** course.
 
 ---
 
 ## How to Use This Course
 
 1. **Start here** — read this page to understand the full picture
-2. **Open Lesson 01** — click the link in the table above
+2. **Open Lesson 01** — click the link in the table below
 3. **Read the lesson** — each file explains the concept with examples and code
 4. **Try the exercises** — every lesson ends with hands-on practice tasks
 5. **Move forward** — go to the next lesson whenever you are ready
@@ -67,11 +58,20 @@ By the end of this course you will be able to:
 
 ---
 
-## Prerequisites
+## Course Lessons
 
-None. This is the starting point for all web development.
-
-> If you complete this course, the natural next step is the **CSS Styling** course.
+| # | Topic | File |
+|---|-------|------|
+| 01 | Introduction to HTML — what it is, how browsers work, your first page | [lesson_01.md](lessons/lesson_01.md) |
+| 02 | HTML Document Structure — `<!DOCTYPE>`, `<html>`, `<head>`, `<body>` | [lesson_02.md](lessons/lesson_02.md) |
+| 03 | Text Elements — headings `<h1>`–`<h6>`, paragraphs, line breaks | [lesson_03.md](lessons/lesson_03.md) |
+| 04 | Links & Navigation — `<a>` tags, href, internal and external links | [lesson_04.md](lessons/lesson_04.md) |
+| 05 | Images & Media — `<img>`, alt text, file paths | [lesson_05.md](lessons/lesson_05.md) |
+| 06 | Lists — ordered `<ol>`, unordered `<ul>`, nested lists | [lesson_06.md](lessons/lesson_06.md) |
+| 07 | Tables — `<table>`, `<tr>`, `<th>`, `<td>`, spanning rows and columns | [lesson_07.md](lessons/lesson_07.md) |
+| 08 | Forms — `<form>`, inputs, labels, buttons, and form attributes | [lesson_08.md](lessons/lesson_08.md) |
+| 09 | Semantic HTML — `<header>`, `<nav>`, `<main>`, `<section>`, `<footer>` | [lesson_09.md](lessons/lesson_09.md) |
+| 10 | Mini Project — Build a Personal Profile Page | [lesson_10.md](lessons/lesson_10.md) |
 
 ---
 
