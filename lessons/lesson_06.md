@@ -388,4 +388,4 @@ Save your practice files – we will build on them later.
 
 Keep practicing: Open your editor, try changing values, and always ask "What happens if...?"  
 
-See you in Lesson 7! 🚀  
+See you in Lesson 7! 🚀 
