@@ -5,44 +5,22 @@ title: HTML Fundamentals — Techbase STEM Academy
 
 # 🌐 HTML Fundamentals — Techbase STEM Academy
 
-> **Free beginner HTML course by [Techbase Consultant Services](https://techbasengr.com.ng), Ibadan, Nigeria**  
-> Instructor: Babatunde Awoyemi · [github.com/techbaseng](https://github.com/techbaseng)
-
-[← All Courses](https://techbaseng.github.io) | [🐙 GitHub Repo](https://github.com/techbaseng/techbase-html)
+> Free beginner HTML course · Techbase Consultant Services, Ibadan, Nigeria  
+> Instructor: Babatunde Awoyemi · [All Courses →](https://techbaseng.github.io)
 
 ---
 
-## About This Course
+## About
 
-HTML (HyperText Markup Language) is the foundation of every website on the internet. In this course you will build your first real web pages from scratch, learning how browsers read and display content using tags and elements.
+HTML (HyperText Markup Language) is the foundation of every website. In this course you will build real web pages from scratch — 34 lessons, zero prerequisites.
 
-**No prior experience needed. Just a browser and curiosity.**
-
----
-
-## What You Will Learn
-
-- Understand how web browsers read and display HTML
-- Create a properly structured HTML document
-- Use headings, paragraphs, lists, links, and images
-- Build tables and forms
-- Write semantic HTML that is accessible and meaningful
-- Add interactivity with JavaScript and media
-- Publish a simple webpage on the internet
-
----
-
-## Tools You Will Need
-
-| Tool | Purpose | Link |
-|------|---------|------|
-| VS Code | Write your HTML code | [code.visualstudio.com](https://code.visualstudio.com) |
-| Any web browser | Preview your pages | Chrome, Firefox, or Edge |
-| Chrome DevTools | Inspect and debug HTML | Press `F12` in Chrome |
+**Prerequisites:** None.  **Next step after this course:** [CSS Styling](https://techbaseng.github.io/techbase-css/)
 
 ---
 
 ## Course Lessons
+
+### Phase 1 — HTML Foundations (01–10)
 
 | # | Topic | Link |
 |---|-------|------|
@@ -56,18 +34,33 @@ HTML (HyperText Markup Language) is the foundation of every website on the inter
 | 08 | HTML Text Formatting | [lesson_08](lessons/lesson_08.html) |
 | 09 | HTML Quotation and Citation Elements | [lesson_09](lessons/lesson_09.html) |
 | 10 | HTML Comments | [lesson_10](lessons/lesson_10.html) |
+
+### Phase 2 — Color, Style & Links (11–15)
+
+| # | Topic | Link |
+|---|-------|------|
 | 11 | HTML Colors — Named Colors, RGB, HEX, and HSL | [lesson_11](lessons/lesson_11.html) |
-| 12 | HTML Styles — Introduction to CSS (Cascading Style Sheets) | [lesson_12](lessons/lesson_12.html) |
+| 12 | HTML Styles — Introduction to CSS | [lesson_12](lessons/lesson_12.html) |
 | 13 | HTML Links — Hyperlinks, Colors, Bookmarks & Challenges | [lesson_13](lessons/lesson_13.html) |
 | 14 | HTML Images: From Basics to Responsive Pictures | [lesson_14](lessons/lesson_14.html) |
 | 15 | HTML Favicon and Page Title | [lesson_15](lessons/lesson_15.html) |
+
+### Phase 3 — Tables, Lists & Structure (16–22)
+
+| # | Topic | Link |
+|---|-------|------|
 | 16 | HTML Tables — From Zero to Professional | [lesson_16](lessons/lesson_16.html) |
 | 17 | HTML Lists — Unordered, Ordered, Description, and Nested Lists | [lesson_17](lessons/lesson_17.html) |
 | 18 | HTML Block & Inline Elements, Div & Span | [lesson_18](lessons/lesson_18.html) |
 | 19 | HTML class and id Attributes | [lesson_19](lessons/lesson_19.html) |
-| 20 | HTML Buttons — Creating, Typing, Styling, Disabling, and Using Buttons | [lesson_20](lessons/lesson_20.html) |
+| 20 | HTML Buttons | [lesson_20](lessons/lesson_20.html) |
 | 21 | HTML Iframes — Embedding Web Pages Inside Web Pages | [lesson_21](lessons/lesson_21.html) |
 | 22 | HTML JavaScript — Making Web Pages Come Alive | [lesson_22](lessons/lesson_22.html) |
+
+### Phase 4 — Advanced & Real-World HTML (23–34)
+
+| # | Topic | Link |
+|---|-------|------|
 | 23 | HTML File Paths | [lesson_23](lessons/lesson_23.html) |
 | 24 | The HTML Head — Metadata, Titles, Styles, Links, Scripts & More | [lesson_24](lessons/lesson_24.html) |
 | 25 | HTML Layout Elements and Techniques | [lesson_25](lessons/lesson_25.html) |
@@ -83,8 +76,4 @@ HTML (HyperText Markup Language) is the foundation of every website on the inter
 
 ---
 
-## License
-
-Free to use and share under the [MIT License](LICENSE).  
-Created with ❤️ in Ibadan, Nigeria by **Techbase Consultant Services**  
-🌐 [techbasengr.com.ng](https://techbasengr.com.ng) · 🐙 [github.com/techbaseng](https://github.com/techbaseng)
+MIT License · © 2025 Techbase Consultant Services · Made with ❤️ in Ibadan, Nigeria
