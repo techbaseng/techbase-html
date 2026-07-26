@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lesson 33: HTML Media — Techbase HTML Course</title>
+<meta name="description" content="Add video, audio and YouTube embeds to your pages using HTML5 media elements">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root { 
+  --accent:#ea4f21;--accent-pale:#fff3ef;--accent-dark:#c23d15;
+  --accent-border:rgba(234,79,33,.3);--accent-shadow:rgba(234,79,33,.28);
+  --hero-bg:linear-gradient(160deg,#fff3ef 0%,#f8fafc 55%,#fef2e9 100%);
+  --s2:#f1f5f9;
+ }
+:root{
+  --bg:#f8fafc;--surface:#fff;--border:#e2e8f0;--border2:#cbd5e1;
+  --text:#0f172a;--t2:#334155;--muted:#64748b;
+  --D:'Space Grotesk',sans-serif;--B:'Plus Jakarta Sans',sans-serif;--M:'JetBrains Mono',monospace;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased}
+body{background:var(--bg);color:var(--text);font-family:var(--B);font-size:16px;line-height:1.7;overflow-x:hidden}
+/* NAV */
+.l-nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(255,255,255,.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);height:58px;display:flex;align-items:center;padding:0 1.5rem;gap:1rem;justify-content:space-between}
+.l-nav-logo{font-family:var(--D);font-weight:700;font-size:.88rem;color:var(--text);text-decoration:none}
+.l-nav-logo em{font-style:normal}
+.l-nav-back{font-size:.8rem;color:var(--muted);text-decoration:none;font-weight:500;display:flex;align-items:center;gap:.3rem;transition:color .2s}
+.l-nav-back:hover{color:var(--accent)}
+.l-nav-lesson{font-family:var(--M);font-size:.68rem;color:var(--muted)}
+/* PROGRESS BAR */
+.progress-wrap{position:fixed;top:58px;left:0;right:0;z-index:199;height:4px;background:var(--border)}
+.progress-bar{height:100%;background:var(--accent);transition:width .4s ease;width:0%}
+/* HERO */
+.l-hero{padding:88px 1.5rem 2rem;background:var(--hero-bg);border-bottom:1px solid var(--border)}
+.l-hero-inner{max-width:820px;margin:0 auto}
+.l-badge{display:inline-flex;align-items:center;gap:.4rem;border-radius:100px;padding:.2rem .8rem;font-family:var(--M);font-size:.62rem;letter-spacing:.08em;text-transform:uppercase;font-weight:600;border:1px solid;color:var(--accent);background:var(--accent-pale);border-color:var(--accent-border);margin-bottom:.8rem}
+.l-hero h1{font-family:var(--D);font-weight:700;font-size:clamp(1.6rem,4vw,2.4rem);letter-spacing:-.025em;line-height:1.15;margin-bottom:.5rem}
+.l-hero-tag{font-size:.95rem;color:var(--muted);margin-bottom:1.2rem}
+.l-hero-build{background:var(--surface);border:1.5px solid var(--border);border-radius:10px;padding:.9rem 1.2rem;display:flex;align-items:center;gap:.7rem;font-size:.88rem;max-width:520px}
+.l-hero-build strong{color:var(--accent)}
+/* WELCOME BOX */
+.welcome-box{background:linear-gradient(135deg,var(--accent),var(--accent-dark));color:#fff;border-radius:16px;padding:1.5rem 1.8rem;max-width:820px;margin:2rem auto 0}
+.welcome-box h2{font-family:var(--D);font-weight:700;font-size:1.1rem;margin-bottom:.6rem}
+.welcome-box p{font-size:.9rem;line-height:1.75;opacity:.92}
+.welcome-meta{display:flex;gap:1.5rem;margin-top:1rem;flex-wrap:wrap}
+.welcome-meta span{background:rgba(255,255,255,.15);border-radius:6px;padding:.25rem .8rem;font-family:var(--M);font-size:.7rem;font-weight:500}
+/* MAIN CONTENT */
+main{max-width:820px;margin:0 auto;padding:2rem 1.5rem 5rem}
+/* PHASE */
+.phase{background:var(--surface);border:1.5px solid var(--border);border-radius:16px;margin-bottom:1.5rem;overflow:hidden;transition:opacity .3s,transform .3s}
+.phase.locked{opacity:.4;pointer-events:none;filter:blur(1px)}
+.phase-header{padding:1rem 1.4rem;background:var(--s2,#f1f5f9);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;gap:1rem}
+.phase-num{font-family:var(--M);font-size:.7rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}
+.phase-title{font-family:var(--D);font-weight:700;font-size:1rem;color:var(--text)}
+.phase-check{width:24px;height:24px;border-radius:50%;background:var(--border);display:flex;align-items:center;justify-content:center;font-size:.75rem;flex-shrink:0;transition:background .3s}
+.phase-check.done{background:#10b981;color:#fff}
+.phase-body{padding:1.4rem}
+/* CONCEPT BOX */
+.concept-box{background:#f0f9ff;border-left:4px solid #0284c7;border-radius:0 10px 10px 0;padding:1rem 1.2rem;margin-bottom:1.2rem}
+.concept-label{font-family:var(--M);font-size:.65rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#0284c7;margin-bottom:.4rem}
+.concept-box p{font-size:.92rem;color:#0c4a6e;line-height:1.75}
+/* CODE BLOCK */
+.code-wrap{margin:1.2rem 0;border-radius:12px;overflow:hidden;border:1px solid #1e293b}
+.code-bar{background:#1e293b;padding:.6rem 1rem;display:flex;align-items:center;gap:.4rem}
+.code-dot{width:8px;height:8px;border-radius:50%}
+.code-dot.r{background:#ff5f57}.code-dot.y{background:#febc2e}.code-dot.g{background:#28c840}
+.code-filename{margin-left:.5rem;font-family:var(--M);font-size:.65rem;color:#64748b}
+.code-body{background:#0f172a;padding:1.2rem 1.4rem;overflow-x:auto}
+.code-body pre{font-family:var(--M);font-size:.78rem;line-height:1.9;color:#e2e8f0;margin:0;white-space:pre}
+.code-body pre .cm{color:#64748b} /* comment */
+.code-body pre .tg{color:#38bdf8} /* tag */
+.code-body pre .at{color:#c084fc} /* attribute */
+.code-body pre .vl{color:#86efac} /* value */
+.code-body pre .tx{color:#e2e8f0} /* text */
+/* TASK BOX */
+.task-box{background:#fffbeb;border:1.5px dashed #d97706;border-radius:12px;padding:1rem 1.2rem;margin:1.2rem 0}
+.task-label{font-family:var(--M);font-size:.65rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#b45309;margin-bottom:.4rem}
+.task-box p{font-size:.92rem;color:#78350f;line-height:1.75}
+.task-box code{background:rgba(180,83,9,.1);border-radius:4px;padding:.1rem .4rem;font-family:var(--M);font-size:.82em}
+/* NEXT BUTTON */
+.next-btn{display:inline-flex;align-items:center;gap:.5rem;background:var(--accent);color:#fff;font-family:var(--D);font-weight:700;font-size:.88rem;padding:.75rem 1.5rem;border-radius:10px;border:none;cursor:pointer;transition:transform .2s,box-shadow .2s;box-shadow:0 4px 12px var(--accent-shadow);margin-top:1rem}
+.next-btn:hover{transform:translateY(-2px);box-shadow:0 8px 20px var(--accent-shadow)}
+.next-btn:disabled{opacity:.5;cursor:not-allowed;transform:none}
+.next-tip{font-family:var(--M);font-size:.72rem;color:var(--muted);margin-top:.6rem}
+/* PROJECT BOX */
+.project-box{background:#f0fdf4;border:2px solid #16a34a;border-radius:16px;padding:1.5rem;margin:2rem 0}
+.project-label{font-family:var(--M);font-size:.65rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#15803d;margin-bottom:.4rem}
+.project-name{font-family:var(--D);font-weight:700;font-size:1.1rem;color:#14532d;margin-bottom:.5rem}
+.project-desc{font-size:.9rem;color:#166534;margin-bottom:1.2rem;line-height:1.7}
+/* CAPSTONE BOX */
+.capstone-box{background:linear-gradient(135deg,#1e1b4b,#312e81);border-radius:16px;padding:1.5rem;margin:2rem 0;color:#fff}
+.capstone-label{font-family:var(--M);font-size:.65rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#a5b4fc;margin-bottom:.4rem}
+.capstone-name{font-family:var(--D);font-weight:700;font-size:1.2rem;margin-bottom:.5rem}
+.capstone-desc{font-size:.9rem;color:rgba(255,255,255,.8);margin-bottom:1.2rem;line-height:1.7}
+/* FILE TABS */
+.file-tabs{display:flex;gap:.5rem;margin-bottom:0;flex-wrap:wrap}
+.file-tab{font-family:var(--M);font-size:.72rem;padding:.35rem .8rem;background:#1e293b;color:#94a3b8;border-radius:6px 6px 0 0;cursor:pointer;border:1px solid #334155;border-bottom:none;transition:background .15s}
+.file-tab.active{background:#0f172a;color:#e2e8f0}
+.file-content{display:none}.file-content.active{display:block}
+/* GITHUB ACCORDION */
+.github-acc{border:1.5px solid var(--border);border-radius:12px;overflow:hidden;margin:1.5rem 0}
+.github-acc-head{padding:1rem 1.2rem;background:#f8fafc;cursor:pointer;display:flex;align-items:center;justify-content:space-between;font-family:var(--D);font-weight:600;font-size:.9rem;user-select:none}
+.github-acc-body{display:none;padding:1.2rem;border-top:1px solid var(--border)}
+.github-acc-body.open{display:block}
+.github-step{display:flex;gap:.8rem;margin-bottom:1rem;align-items:flex-start}
+.github-step-n{width:24px;height:24px;border-radius:50%;background:var(--accent);color:#fff;font-family:var(--D);font-weight:700;font-size:.75rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px}
+.github-step p{font-size:.88rem;color:var(--t2);line-height:1.7}
+/* SESSION END */
+.session-end{background:linear-gradient(135deg,var(--accent),var(--accent-dark));color:#fff;border-radius:16px;padding:1.5rem 1.8rem;margin:2rem 0;display:none}
+.session-end.visible{display:block}
+.session-end h2{font-family:var(--D);font-weight:700;font-size:1.1rem;margin-bottom:.8rem}
+.session-end ul{list-style:none;display:flex;flex-direction:column;gap:.4rem}
+.session-end li{font-size:.9rem;opacity:.92;display:flex;align-items:center;gap:.5rem}
+/* LESSON NAV */
+.lesson-nav{display:flex;align-items:center;justify-content:space-between;padding-top:2rem;border-top:1px solid var(--border);margin-top:2rem;flex-wrap:wrap;gap:.75rem}
+.ln-btn{display:inline-flex;align-items:center;gap:.4rem;background:var(--surface);color:var(--t2);font-family:var(--D);font-weight:600;font-size:.82rem;padding:.65rem 1.2rem;border-radius:8px;text-decoration:none;border:1.5px solid var(--border);transition:border-color .2s,color .2s}
+.ln-btn:hover{border-color:var(--accent);color:var(--accent)}
+.ln-btn.primary{background:var(--accent);color:#fff;border-color:var(--accent)}
+.ln-btn.primary:hover{opacity:.9}
+/* UTILS */
+code{font-family:var(--M);font-size:.85em;background:#f1f5f9;border-radius:4px;padding:.1rem .35rem;color:var(--accent)}
+.emoji{font-style:normal}
+@media(max-width:600px){.l-hero h1{font-size:1.5rem}.welcome-meta{gap:.75rem}}
+
+</style>
+</head>
+<body>
+
+<!-- FIXED NAV -->
+<nav class="lesson-nav-bar">
+  <a href="../index.html" class="nav-back">← HTML Course</a>
+  <span class="nav-lesson">Lesson 33 of 34 &nbsp;·&nbsp; HTML Media</span>
+  <div class="nav-actions">
+    <a href="lesson_32.html" class="ln-btn">← Lesson 32</a>
+    <a href="lesson_34.html" class="ln-btn primary">Lesson 34 →</a>
+  </div>
+</nav>
+
+<!-- PROGRESS BAR -->
+<div id="progress-wrap">
+  <div id="pbar" style="width:5%;background:var(--accent);height:4px;
+       border-radius:2px;transition:width .4s ease;"></div>
+</div>
+
+<!-- HERO -->
+<section class="lesson-hero">
+  <div class="hero-inner">
+    <div class="lesson-num-badge">Lesson 33</div>
+    <h1>HTML Media</h1>
+    <p class="lesson-tagline">Add video, audio and YouTube embeds to your pages using HTML5 media elements</p>
+    <div class="lesson-meta">
+      <span>📚 3 phases</span>
+      <span>🏗️ Build: My Media Page</span>
+      
+    </div>
+  </div>
+</section>
+
+<!-- MAIN CONTENT -->
+<main class="lesson-main">
+
+<div class="welcome-box">
+  <div class="welcome-label">👋 Welcome to Lesson 33!</div>
+  <h2>HTML Media</h2>
+  <p>Add video, audio and YouTube embeds to your pages using HTML5 media elements. In this lesson you will work through
+     <strong>3 phases</strong>.
+     Complete each phase task before clicking <em>Next Phase</em>.
+     
+  </p>
+</div>
+
+<div class="phase " id="phase1" data-phase="1">
+  <div class="phase-header">
+    <div><div class="phase-num">Phase 1</div><div class="phase-title">HTML5 Video</div></div>
+    <div class="phase-check" id="check1"></div>
+  </div>
+  <div class="phase-body">
+    <div class="concept-box">
+      <div class="concept-label">💡 Concept</div>
+      <p>The <code>&lt;video&gt;</code> element adds a video player. Key attributes: <code>controls</code> (shows play/pause), <code>autoplay muted</code> (auto-starts — muted required by most browsers), <code>loop</code>, <code>poster="thumb.jpg"</code> (thumbnail before play). Provide multiple sources using <code>&lt;source&gt;</code> tags for browser compatibility — MP4 is the most supported format.</p>
+    </div>
+    <div class="code-wrap">
+  <div class="code-bar">
+    <span class="code-dot r"></span><span class="code-dot y"></span><span class="code-dot g"></span>
+    <span class="code-filename">index.html</span>
+  </div>
+  <div class="code-body"><pre>&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+  &lt;head&gt;&lt;title&gt;HTML Video&lt;/title&gt;&lt;/head&gt;
+  &lt;body&gt;
+    &lt;h1&gt;HTML5 Video&lt;/h1&gt;
+    &lt;video width="560" controls
+           style="border-radius:12px; display:block;"&gt;
+      &lt;source src="video.mp4"  type="video/mp4"&gt;
+      &lt;source src="video.webm" type="video/webm"&gt;
+      Your browser does not support the video element.
+    &lt;/video&gt;
+    &lt;p&gt;Replace src with a real video file path!&lt;/p&gt;
+    &lt;h2&gt;Auto-play (muted) background video&lt;/h2&gt;
+    &lt;video width="560" autoplay muted loop
+           style="border-radius:12px; display:block; margin-top:16px;"&gt;
+      &lt;source src="background.mp4" type="video/mp4"&gt;
+    &lt;/video&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</pre></div>
+</div>
+    <div class="task-box">
+      <div class="task-label">✏️ Your Task</div>
+      <p>Download any short MP4 video, place it in your project folder, add it with <code>&lt;video controls&gt;</code>. Set <code>width="100%"</code>. Try adding <code>poster="thumbnail.jpg"</code> to show a thumbnail before play.</p>
+    </div>
+    <button class="next-btn" onclick="unlockNext(1)">
+      Next Phase → <span>→</span>
+    </button>
+    <p class="next-tip">Try the task first, then click to continue!</p>
+  </div>
+</div><div class="phase locked" id="phase2" data-phase="2">
+  <div class="phase-header">
+    <div><div class="phase-num">Phase 2</div><div class="phase-title">HTML5 Audio</div></div>
+    <div class="phase-check" id="check2"></div>
+  </div>
+  <div class="phase-body">
+    <div class="concept-box">
+      <div class="concept-label">💡 Concept</div>
+      <p>The <code>&lt;audio&gt;</code> element works like video but for sound. Attributes: <code>controls</code>, <code>autoplay</code>, <code>loop</code>, <code>muted</code>. Supported formats: MP3 (most common), OGG, WAV. You can also control audio with JavaScript: <code>audio.play()</code>, <code>audio.pause()</code>, <code>audio.volume = 0.5</code>.</p>
+    </div>
+    <div class="code-wrap">
+  <div class="code-bar">
+    <span class="code-dot r"></span><span class="code-dot y"></span><span class="code-dot g"></span>
+    <span class="code-filename">index.html</span>
+  </div>
+  <div class="code-body"><pre>&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+  &lt;head&gt;&lt;title&gt;HTML Audio&lt;/title&gt;&lt;/head&gt;
+  &lt;body&gt;
+    &lt;h1&gt;HTML5 Audio&lt;/h1&gt;
+    &lt;audio controls style="width:100%;"&gt;
+      &lt;source src="music.mp3" type="audio/mpeg"&gt;
+      &lt;source src="music.ogg" type="audio/ogg"&gt;
+      Your browser does not support the audio element.
+    &lt;/audio&gt;
+    &lt;h2&gt;JavaScript Controls&lt;/h2&gt;
+    &lt;audio id="myAudio"&gt;
+      &lt;source src="music.mp3" type="audio/mpeg"&gt;
+    &lt;/audio&gt;
+    &lt;button onclick="myAudio.play()"&gt;▶️ Play&lt;/button&gt;
+    &lt;button onclick="myAudio.pause()"&gt;⏸️ Pause&lt;/button&gt;
+    &lt;button onclick="myAudio.volume=0.2"&gt;🔉 Low&lt;/button&gt;
+    &lt;button onclick="myAudio.volume=1"&gt;🔊 Full&lt;/button&gt;
+    &lt;br&gt;&lt;br&gt;
+    Volume slider:
+    &lt;input type="range" min="0" max="1" step="0.1"
+           oninput="myAudio.volume=this.value"&gt;
+    &lt;script&gt;const myAudio=document.getElementById('myAudio');&lt;/script&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</pre></div>
+</div>
+    <div class="task-box">
+      <div class="task-label">✏️ Your Task</div>
+      <p>Add an audio player with custom play/pause buttons. Add a volume slider using <code>&lt;input type="range"&gt;</code> and wire it up with <code>oninput="myAudio.volume=this.value"</code>.</p>
+    </div>
+    <button class="next-btn" onclick="unlockNext(2)">
+      Next Phase → <span>→</span>
+    </button>
+    <p class="next-tip">Try the task first, then click to continue!</p>
+  </div>
+</div><div class="phase locked" id="phase3" data-phase="3">
+  <div class="phase-header">
+    <div><div class="phase-num">Phase 3</div><div class="phase-title">Responsive YouTube Embeds</div></div>
+    <div class="phase-check" id="check3"></div>
+  </div>
+  <div class="phase-body">
+    <div class="concept-box">
+      <div class="concept-label">💡 Concept</div>
+      <p>YouTube embeds are the easiest way to add video — you don't host anything! Click Share → Embed on YouTube, copy the <code>&lt;iframe&gt;</code>. Make it responsive with the 56.25% padding-bottom trick (keeps 16:9 ratio at any width). Always add <code>title</code> on iframes for screen readers, and <code>loading="lazy"</code> for performance.</p>
+    </div>
+    <div class="code-wrap">
+  <div class="code-bar">
+    <span class="code-dot r"></span><span class="code-dot y"></span><span class="code-dot g"></span>
+    <span class="code-filename">index.html</span>
+  </div>
+  <div class="code-body"><pre>&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+  &lt;head&gt;
+    &lt;title&gt;YouTube Embed&lt;/title&gt;
+    &lt;style&gt;
+      .video-wrap {
+        position:relative; padding-bottom:56.25%;
+        height:0; overflow:hidden;
+        border-radius:14px; box-shadow:0 4px 20px rgba(0,0,0,.12);
+      }
+      .video-wrap iframe {
+        position:absolute; top:0; left:0;
+        width:100%; height:100%; border:0;
+      }
+    &lt;/style&gt;
+  &lt;/head&gt;
+  &lt;body style="font-family:Arial; padding:30px; background:#f8fafc;"&gt;
+    &lt;h1&gt;Responsive YouTube Embed&lt;/h1&gt;
+    &lt;div class="video-wrap"&gt;
+      &lt;iframe
+        src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+        title="My chosen tutorial video"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media"
+        allowfullscreen loading="lazy"&gt;
+      &lt;/iframe&gt;
+    &lt;/div&gt;
+    &lt;p style="margin-top:16px; font-size:14px; color:#64748b;"&gt;
+      Replace the video ID in the src URL with any YouTube video's ID!
+    &lt;/p&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</pre></div>
+</div>
+    <div class="task-box">
+      <div class="task-label">✏️ Your Task</div>
+      <p>Make your YouTube embed fully responsive. Replace the video ID with a tutorial you actually like. Add <code>loading="lazy"</code>. Resize the browser — the 16:9 ratio should be maintained at every width.</p>
+    </div>
+    <button class="next-btn" onclick="unlockNext(3)">
+      Build It! 🚀 <span>→</span>
+    </button>
+    <p class="next-tip">Try the task first, then click to continue!</p>
+  </div>
+</div>
+
+<div class="project-box" id="build-it" style="display:none">
+  <div class="project-label">🏗️ Build It!</div>
+  <div class="project-name">My Media Page</div>
+  <p class="project-desc">Build a dark-themed media page with a responsive YouTube embed, an audio player, and styled cards.</p>
+  <div class="code-wrap">
+    <div class="code-bar">
+      <span class="code-dot r"></span><span class="code-dot y"></span><span class="code-dot g"></span>
+      <span class="code-filename">starter.html — copy this into a new file!</span>
+    </div>
+    <div class="code-body"><pre id="starter-code">&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+  &lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;My Media Page — Lesson 33&lt;/title&gt;
+    &lt;style&gt;
+      * { box-sizing:border-box; }
+      body { font-family:Arial,sans-serif; background:#0f172a;
+             color:#e2e8f0; margin:0; padding:30px; }
+      h1 { color:#ea4f21; text-align:center; margin-bottom:6px; }
+      .sub { text-align:center; color:#64748b; margin-bottom:36px; }
+      .grid { display:flex; flex-wrap:wrap; gap:24px;
+              max-width:960px; margin:0 auto; }
+      .card { background:#1e293b; border-radius:16px; overflow:hidden;
+              flex:1; min-width:300px; }
+      .card-body { padding:20px; }
+      .card h2 { margin:0 0 6px; font-size:1.1rem; color:#f1f5f9; }
+      .card p  { font-size:13px; color:#64748b; margin:0 0 16px; }
+      .video-wrap { position:relative; padding-bottom:56.25%;
+                    height:0; overflow:hidden; }
+      .video-wrap iframe { position:absolute; top:0; left:0;
+                           width:100%; height:100%; border:0; }
+      audio { width:100%; border-radius:8px; }
+      .tag { display:inline-block; background:#ea4f21; color:white;
+             font-size:11px; padding:2px 8px; border-radius:100px;
+             font-weight:bold; margin-bottom:10px; }
+    &lt;/style&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;h1&gt;🎬 My Media Page&lt;/h1&gt;
+    &lt;p class="sub"&gt;HTML5 video, audio and YouTube embeds&lt;/p&gt;
+    &lt;div class="grid"&gt;
+      &lt;div class="card"&gt;
+        &lt;div class="video-wrap"&gt;
+          &lt;iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+                  title="Replace with your chosen video"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media"
+                  allowfullscreen loading="lazy"&gt;&lt;/iframe&gt;
+        &lt;/div&gt;
+        &lt;div class="card-body"&gt;
+          &lt;span class="tag"&gt;📺 VIDEO&lt;/span&gt;
+          &lt;h2&gt;[Your Video Title Here]&lt;/h2&gt;
+          &lt;p&gt;Replace the YouTube video ID in the src with a video you like!&lt;/p&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class="card"&gt;
+        &lt;div style="background:linear-gradient(135deg,#ea4f21,#7c3aed);
+                    height:180px; display:flex; align-items:center;
+                    justify-content:center; font-size:64px;"&gt;🎵&lt;/div&gt;
+        &lt;div class="card-body"&gt;
+          &lt;span class="tag"&gt;🎧 AUDIO&lt;/span&gt;
+          &lt;h2&gt;[Your Audio Track]&lt;/h2&gt;
+          &lt;p&gt;Add your own MP3 file — replace src with the file path.&lt;/p&gt;
+          &lt;audio id="player" controls&gt;
+            &lt;source src="music.mp3" type="audio/mpeg"&gt;
+            Your browser does not support audio.
+          &lt;/audio&gt;
+          &lt;div style="display:flex; gap:8px; margin-top:12px;"&gt;
+            &lt;button onclick="player.volume=.5"
+                    style="background:#1e293b;color:#94a3b8;border:1px solid #334155;
+                           padding:6px 12px;border-radius:6px;cursor:pointer;font-size:13px;"&gt;
+              🔉 50%
+            &lt;/button&gt;
+            &lt;button onclick="player.volume=1"
+                    style="background:#1e293b;color:#94a3b8;border:1px solid #334155;
+                           padding:6px 12px;border-radius:6px;cursor:pointer;font-size:13px;"&gt;
+              🔊 100%
+            &lt;/button&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;script&gt;const player=document.getElementById('player');&lt;/script&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</pre></div>
+  </div>
+  <button class="next-btn" onclick="downloadStarter()" style="margin-right:.75rem">
+    ⬇️ Download starter.html
+  </button>
+  <button class="next-btn" onclick="showGithub()" style="background:#10b981;box-shadow:0 4px 12px rgba(16,185,129,.3)">
+    Show GitHub Steps →
+  </button>
+  <script>
+  const __code = `<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Media Page — Lesson 33</title>
+    <style>
+      * { box-sizing:border-box; }
+      body { font-family:Arial,sans-serif; background:#0f172a;
+             color:#e2e8f0; margin:0; padding:30px; }
+      h1 { color:#ea4f21; text-align:center; margin-bottom:6px; }
+      .sub { text-align:center; color:#64748b; margin-bottom:36px; }
+      .grid { display:flex; flex-wrap:wrap; gap:24px;
+              max-width:960px; margin:0 auto; }
+      .card { background:#1e293b; border-radius:16px; overflow:hidden;
+              flex:1; min-width:300px; }
+      .card-body { padding:20px; }
+      .card h2 { margin:0 0 6px; font-size:1.1rem; color:#f1f5f9; }
+      .card p  { font-size:13px; color:#64748b; margin:0 0 16px; }
+      .video-wrap { position:relative; padding-bottom:56.25%;
+                    height:0; overflow:hidden; }
+      .video-wrap iframe { position:absolute; top:0; left:0;
+                           width:100%; height:100%; border:0; }
+      audio { width:100%; border-radius:8px; }
+      .tag { display:inline-block; background:#ea4f21; color:white;
+             font-size:11px; padding:2px 8px; border-radius:100px;
+             font-weight:bold; margin-bottom:10px; }
+    </style>
+  </head>
+  <body>
+    <h1>🎬 My Media Page</h1>
+    <p class="sub">HTML5 video, audio and YouTube embeds</p>
+    <div class="grid">
+      <div class="card">
+        <div class="video-wrap">
+          <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+                  title="Replace with your chosen video"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media"
+                  allowfullscreen loading="lazy"></iframe>
+        </div>
+        <div class="card-body">
+          <span class="tag">📺 VIDEO</span>
+          <h2>[Your Video Title Here]</h2>
+          <p>Replace the YouTube video ID in the src with a video you like!</p>
+        </div>
+      </div>
+      <div class="card">
+        <div style="background:linear-gradient(135deg,#ea4f21,#7c3aed);
+                    height:180px; display:flex; align-items:center;
+                    justify-content:center; font-size:64px;">🎵</div>
+        <div class="card-body">
+          <span class="tag">🎧 AUDIO</span>
+          <h2>[Your Audio Track]</h2>
+          <p>Add your own MP3 file — replace src with the file path.</p>
+          <audio id="player" controls>
+            <source src="music.mp3" type="audio/mpeg">
+            Your browser does not support audio.
+          </audio>
+          <div style="display:flex; gap:8px; margin-top:12px;">
+            <button onclick="player.volume=.5"
+                    style="background:#1e293b;color:#94a3b8;border:1px solid #334155;
+                           padding:6px 12px;border-radius:6px;cursor:pointer;font-size:13px;">
+              🔉 50%
+            </button>
+            <button onclick="player.volume=1"
+                    style="background:#1e293b;color:#94a3b8;border:1px solid #334155;
+                           padding:6px 12px;border-radius:6px;cursor:pointer;font-size:13px;">
+              🔊 100%
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script>const player=document.getElementById('player');</script>
+  </body>
+</html>`;
+  function downloadStarter(){
+    const a=document.createElement('a');
+    a.href='data:text/html;charset=utf-8,'+encodeURIComponent(__code);
+    a.download='starter.html'; a.click();
+  }
+  </script>
+</div>
+
+
+
+<div class="github-acc" id="github-steps" style="display:none">
+  <div class="github-acc-head" onclick="this.nextElementSibling.classList.toggle('open')">
+    🐙 GitHub Setup — Push your project online &nbsp;<span>▼</span>
+  </div>
+  <div class="github-acc-body">
+    <div class="github-step"><div class="github-step-n">1</div><p>Go to <strong>github.com</strong> and sign in. Click the green <strong>New</strong> button to create a new repository. Name it <code>html-lesson-33-html_media</code>.</p></div>
+    <div class="github-step"><div class="github-step-n">2</div><p>Leave it <strong>Public</strong> and tick <strong>Add a README file</strong>. Click <strong>Create repository</strong>.</p></div>
+    <div class="github-step"><div class="github-step-n">3</div><p>Click <strong>Add file → Upload files</strong>. Drag your <code>starter.html</code> (and rename it <code>index.html</code> first!) into the upload box.</p></div>
+    <div class="github-step"><div class="github-step-n">4</div><p>Scroll down, add a commit message like <em>"Add lesson 33 project"</em> and click <strong>Commit changes</strong>.</p></div>
+    <div class="github-step"><div class="github-step-n">5</div><p>Go to <strong>Settings → Pages</strong>. Under <em>Branch</em>, select <strong>main</strong> and click <strong>Save</strong>. Your page will be live at <code>https://YOUR-USERNAME.github.io/html-lesson-33-html_media/</code> in about 1 minute! 🎉</p></div>
+    <button class="next-btn" onclick="showEnd()" style="margin-top:.5rem">I'm done! Finish session ✅</button>
+  </div>
+</div>
+
+<div class="session-end" id="session-end">
+  <h2>🎉 Great work! Lesson 33 complete!</h2>
+  <p style="margin-bottom:.8rem;font-size:.9rem;opacity:.9">Today you learned:</p>
+  <ul><li>✅ HTML5 Video</li><li>✅ HTML5 Audio</li><li>✅ Responsive YouTube Embeds</li></ul>
+  <div class="lesson-nav" style="margin-top:1.5rem;border-color:rgba(255,255,255,.2)">
+    <a href="lesson_32.html" class="ln-btn">← Lesson 32</a>
+    <a href="lesson_34.html" class="ln-btn primary">Lesson 34 →</a>
+  </div>
+</div>
+
+</main>
+
+<!-- FOOTER -->
+<footer class="lesson-footer">
+  <p>Techbase Code Coach &nbsp;·&nbsp; HTML Course Lesson 33
+     &nbsp;·&nbsp; © 2025 Techbase Consultant Services, Ibadan</p>
+</footer>
+
+<script>
+const TOTAL=3, KEY='techbase_html_33_phase';
+let current=parseInt(localStorage.getItem(KEY)||'1');
+
+function init(){
+  for(let i=1;i<=current;i++) if(i>1) unlockPhase(i,false);
+  updateBar();
+}
+
+function unlockNext(n){
+  document.getElementById('check'+n).classList.add('done');
+  document.getElementById('check'+n).textContent='✓';
+  localStorage.setItem(KEY,n+1);
+  current=n+1;
+  if(n===TOTAL){
+    document.getElementById('build-it').style.display='block';
+    const cap=document.getElementById('capstone');
+    if(cap) cap.style.display='block';
+    updateBar(100);
+    setTimeout(()=>document.getElementById('build-it').scrollIntoView({behavior:'smooth'}),200);
+  } else {
+    unlockPhase(n+1,true);
+    updateBar();
+  }
+}
+
+function unlockPhase(n,scroll){
+  const el=document.getElementById('phase'+n);
+  if(el){ el.classList.remove('locked'); if(scroll) setTimeout(()=>el.scrollIntoView({behavior:'smooth',block:'start'}),150); }
+}
+
+function updateBar(pct){
+  const p=pct||Math.round((current-1)/TOTAL*95);
+  document.getElementById('pbar').style.width=p+'%';
+}
+
+function showGithub(){
+  const g=document.getElementById('github-steps');
+  if(g){ g.style.display='block'; setTimeout(()=>g.scrollIntoView({behavior:'smooth'}),150); }
+}
+
+function showEnd(){
+  const e=document.getElementById('session-end');
+  if(e){ e.classList.add('visible'); setTimeout(()=>e.scrollIntoView({behavior:'smooth'}),150); }
+}
+
+init();
+</script>
+
+</body>
+</html>

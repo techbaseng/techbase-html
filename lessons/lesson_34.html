@@ -1,0 +1,1119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lesson 34: HTML5 Web APIs — Techbase HTML Course</title>
+<meta name="description" content="Use powerful browser APIs — localStorage, geolocation and dark mode — to build smart pages">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root { 
+  --accent:#ea4f21;--accent-pale:#fff3ef;--accent-dark:#c23d15;
+  --accent-border:rgba(234,79,33,.3);--accent-shadow:rgba(234,79,33,.28);
+  --hero-bg:linear-gradient(160deg,#fff3ef 0%,#f8fafc 55%,#fef2e9 100%);
+  --s2:#f1f5f9;
+ }
+:root{
+  --bg:#f8fafc;--surface:#fff;--border:#e2e8f0;--border2:#cbd5e1;
+  --text:#0f172a;--t2:#334155;--muted:#64748b;
+  --D:'Space Grotesk',sans-serif;--B:'Plus Jakarta Sans',sans-serif;--M:'JetBrains Mono',monospace;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased}
+body{background:var(--bg);color:var(--text);font-family:var(--B);font-size:16px;line-height:1.7;overflow-x:hidden}
+/* NAV */
+.l-nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(255,255,255,.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);height:58px;display:flex;align-items:center;padding:0 1.5rem;gap:1rem;justify-content:space-between}
+.l-nav-logo{font-family:var(--D);font-weight:700;font-size:.88rem;color:var(--text);text-decoration:none}
+.l-nav-logo em{font-style:normal}
+.l-nav-back{font-size:.8rem;color:var(--muted);text-decoration:none;font-weight:500;display:flex;align-items:center;gap:.3rem;transition:color .2s}
+.l-nav-back:hover{color:var(--accent)}
+.l-nav-lesson{font-family:var(--M);font-size:.68rem;color:var(--muted)}
+/* PROGRESS BAR */
+.progress-wrap{position:fixed;top:58px;left:0;right:0;z-index:199;height:4px;background:var(--border)}
+.progress-bar{height:100%;background:var(--accent);transition:width .4s ease;width:0%}
+/* HERO */
+.l-hero{padding:88px 1.5rem 2rem;background:var(--hero-bg);border-bottom:1px solid var(--border)}
+.l-hero-inner{max-width:820px;margin:0 auto}
+.l-badge{display:inline-flex;align-items:center;gap:.4rem;border-radius:100px;padding:.2rem .8rem;font-family:var(--M);font-size:.62rem;letter-spacing:.08em;text-transform:uppercase;font-weight:600;border:1px solid;color:var(--accent);background:var(--accent-pale);border-color:var(--accent-border);margin-bottom:.8rem}
+.l-hero h1{font-family:var(--D);font-weight:700;font-size:clamp(1.6rem,4vw,2.4rem);letter-spacing:-.025em;line-height:1.15;margin-bottom:.5rem}
+.l-hero-tag{font-size:.95rem;color:var(--muted);margin-bottom:1.2rem}
+.l-hero-build{background:var(--surface);border:1.5px solid var(--border);border-radius:10px;padding:.9rem 1.2rem;display:flex;align-items:center;gap:.7rem;font-size:.88rem;max-width:520px}
+.l-hero-build strong{color:var(--accent)}
+/* WELCOME BOX */
+.welcome-box{background:linear-gradient(135deg,var(--accent),var(--accent-dark));color:#fff;border-radius:16px;padding:1.5rem 1.8rem;max-width:820px;margin:2rem auto 0}
+.welcome-box h2{font-family:var(--D);font-weight:700;font-size:1.1rem;margin-bottom:.6rem}
+.welcome-box p{font-size:.9rem;line-height:1.75;opacity:.92}
+.welcome-meta{display:flex;gap:1.5rem;margin-top:1rem;flex-wrap:wrap}
+.welcome-meta span{background:rgba(255,255,255,.15);border-radius:6px;padding:.25rem .8rem;font-family:var(--M);font-size:.7rem;font-weight:500}
+/* MAIN CONTENT */
+main{max-width:820px;margin:0 auto;padding:2rem 1.5rem 5rem}
+/* PHASE */
+.phase{background:var(--surface);border:1.5px solid var(--border);border-radius:16px;margin-bottom:1.5rem;overflow:hidden;transition:opacity .3s,transform .3s}
+.phase.locked{opacity:.4;pointer-events:none;filter:blur(1px)}
+.phase-header{padding:1rem 1.4rem;background:var(--s2,#f1f5f9);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;gap:1rem}
+.phase-num{font-family:var(--M);font-size:.7rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}
+.phase-title{font-family:var(--D);font-weight:700;font-size:1rem;color:var(--text)}
+.phase-check{width:24px;height:24px;border-radius:50%;background:var(--border);display:flex;align-items:center;justify-content:center;font-size:.75rem;flex-shrink:0;transition:background .3s}
+.phase-check.done{background:#10b981;color:#fff}
+.phase-body{padding:1.4rem}
+/* CONCEPT BOX */
+.concept-box{background:#f0f9ff;border-left:4px solid #0284c7;border-radius:0 10px 10px 0;padding:1rem 1.2rem;margin-bottom:1.2rem}
+.concept-label{font-family:var(--M);font-size:.65rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#0284c7;margin-bottom:.4rem}
+.concept-box p{font-size:.92rem;color:#0c4a6e;line-height:1.75}
+/* CODE BLOCK */
+.code-wrap{margin:1.2rem 0;border-radius:12px;overflow:hidden;border:1px solid #1e293b}
+.code-bar{background:#1e293b;padding:.6rem 1rem;display:flex;align-items:center;gap:.4rem}
+.code-dot{width:8px;height:8px;border-radius:50%}
+.code-dot.r{background:#ff5f57}.code-dot.y{background:#febc2e}.code-dot.g{background:#28c840}
+.code-filename{margin-left:.5rem;font-family:var(--M);font-size:.65rem;color:#64748b}
+.code-body{background:#0f172a;padding:1.2rem 1.4rem;overflow-x:auto}
+.code-body pre{font-family:var(--M);font-size:.78rem;line-height:1.9;color:#e2e8f0;margin:0;white-space:pre}
+.code-body pre .cm{color:#64748b} /* comment */
+.code-body pre .tg{color:#38bdf8} /* tag */
+.code-body pre .at{color:#c084fc} /* attribute */
+.code-body pre .vl{color:#86efac} /* value */
+.code-body pre .tx{color:#e2e8f0} /* text */
+/* TASK BOX */
+.task-box{background:#fffbeb;border:1.5px dashed #d97706;border-radius:12px;padding:1rem 1.2rem;margin:1.2rem 0}
+.task-label{font-family:var(--M);font-size:.65rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#b45309;margin-bottom:.4rem}
+.task-box p{font-size:.92rem;color:#78350f;line-height:1.75}
+.task-box code{background:rgba(180,83,9,.1);border-radius:4px;padding:.1rem .4rem;font-family:var(--M);font-size:.82em}
+/* NEXT BUTTON */
+.next-btn{display:inline-flex;align-items:center;gap:.5rem;background:var(--accent);color:#fff;font-family:var(--D);font-weight:700;font-size:.88rem;padding:.75rem 1.5rem;border-radius:10px;border:none;cursor:pointer;transition:transform .2s,box-shadow .2s;box-shadow:0 4px 12px var(--accent-shadow);margin-top:1rem}
+.next-btn:hover{transform:translateY(-2px);box-shadow:0 8px 20px var(--accent-shadow)}
+.next-btn:disabled{opacity:.5;cursor:not-allowed;transform:none}
+.next-tip{font-family:var(--M);font-size:.72rem;color:var(--muted);margin-top:.6rem}
+/* PROJECT BOX */
+.project-box{background:#f0fdf4;border:2px solid #16a34a;border-radius:16px;padding:1.5rem;margin:2rem 0}
+.project-label{font-family:var(--M);font-size:.65rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#15803d;margin-bottom:.4rem}
+.project-name{font-family:var(--D);font-weight:700;font-size:1.1rem;color:#14532d;margin-bottom:.5rem}
+.project-desc{font-size:.9rem;color:#166534;margin-bottom:1.2rem;line-height:1.7}
+/* CAPSTONE BOX */
+.capstone-box{background:linear-gradient(135deg,#1e1b4b,#312e81);border-radius:16px;padding:1.5rem;margin:2rem 0;color:#fff}
+.capstone-label{font-family:var(--M);font-size:.65rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#a5b4fc;margin-bottom:.4rem}
+.capstone-name{font-family:var(--D);font-weight:700;font-size:1.2rem;margin-bottom:.5rem}
+.capstone-desc{font-size:.9rem;color:rgba(255,255,255,.8);margin-bottom:1.2rem;line-height:1.7}
+/* FILE TABS */
+.file-tabs{display:flex;gap:.5rem;margin-bottom:0;flex-wrap:wrap}
+.file-tab{font-family:var(--M);font-size:.72rem;padding:.35rem .8rem;background:#1e293b;color:#94a3b8;border-radius:6px 6px 0 0;cursor:pointer;border:1px solid #334155;border-bottom:none;transition:background .15s}
+.file-tab.active{background:#0f172a;color:#e2e8f0}
+.file-content{display:none}.file-content.active{display:block}
+/* GITHUB ACCORDION */
+.github-acc{border:1.5px solid var(--border);border-radius:12px;overflow:hidden;margin:1.5rem 0}
+.github-acc-head{padding:1rem 1.2rem;background:#f8fafc;cursor:pointer;display:flex;align-items:center;justify-content:space-between;font-family:var(--D);font-weight:600;font-size:.9rem;user-select:none}
+.github-acc-body{display:none;padding:1.2rem;border-top:1px solid var(--border)}
+.github-acc-body.open{display:block}
+.github-step{display:flex;gap:.8rem;margin-bottom:1rem;align-items:flex-start}
+.github-step-n{width:24px;height:24px;border-radius:50%;background:var(--accent);color:#fff;font-family:var(--D);font-weight:700;font-size:.75rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px}
+.github-step p{font-size:.88rem;color:var(--t2);line-height:1.7}
+/* SESSION END */
+.session-end{background:linear-gradient(135deg,var(--accent),var(--accent-dark));color:#fff;border-radius:16px;padding:1.5rem 1.8rem;margin:2rem 0;display:none}
+.session-end.visible{display:block}
+.session-end h2{font-family:var(--D);font-weight:700;font-size:1.1rem;margin-bottom:.8rem}
+.session-end ul{list-style:none;display:flex;flex-direction:column;gap:.4rem}
+.session-end li{font-size:.9rem;opacity:.92;display:flex;align-items:center;gap:.5rem}
+/* LESSON NAV */
+.lesson-nav{display:flex;align-items:center;justify-content:space-between;padding-top:2rem;border-top:1px solid var(--border);margin-top:2rem;flex-wrap:wrap;gap:.75rem}
+.ln-btn{display:inline-flex;align-items:center;gap:.4rem;background:var(--surface);color:var(--t2);font-family:var(--D);font-weight:600;font-size:.82rem;padding:.65rem 1.2rem;border-radius:8px;text-decoration:none;border:1.5px solid var(--border);transition:border-color .2s,color .2s}
+.ln-btn:hover{border-color:var(--accent);color:var(--accent)}
+.ln-btn.primary{background:var(--accent);color:#fff;border-color:var(--accent)}
+.ln-btn.primary:hover{opacity:.9}
+/* UTILS */
+code{font-family:var(--M);font-size:.85em;background:#f1f5f9;border-radius:4px;padding:.1rem .35rem;color:var(--accent)}
+.emoji{font-style:normal}
+@media(max-width:600px){.l-hero h1{font-size:1.5rem}.welcome-meta{gap:.75rem}}
+
+</style>
+</head>
+<body>
+
+<!-- FIXED NAV -->
+<nav class="lesson-nav-bar">
+  <a href="../index.html" class="nav-back">← HTML Course</a>
+  <span class="nav-lesson">Lesson 34 of 34 &nbsp;·&nbsp; HTML5 Web APIs</span>
+  <div class="nav-actions">
+    <a href="lesson_33.html" class="ln-btn">← Lesson 33</a>
+    <a href="../index.html" class="ln-btn primary">🎉 Course Complete!</a>
+  </div>
+</nav>
+
+<!-- PROGRESS BAR -->
+<div id="progress-wrap">
+  <div id="pbar" style="width:5%;background:var(--accent);height:4px;
+       border-radius:2px;transition:width .4s ease;"></div>
+</div>
+
+<!-- HERO -->
+<section class="lesson-hero">
+  <div class="hero-inner">
+    <div class="lesson-num-badge">Lesson 34</div>
+    <h1>HTML5 Web APIs</h1>
+    <p class="lesson-tagline">Use powerful browser APIs — localStorage, geolocation and dark mode — to build smart pages</p>
+    <div class="lesson-meta">
+      <span>📚 3 phases</span>
+      <span>🏗️ Build: My Smart Web App</span>
+      <span>🏆 Capstone Included</span>
+    </div>
+  </div>
+</section>
+
+<!-- MAIN CONTENT -->
+<main class="lesson-main">
+
+<div class="welcome-box">
+  <div class="welcome-label">👋 Welcome to Lesson 34!</div>
+  <h2>HTML5 Web APIs</h2>
+  <p>Use powerful browser APIs — localStorage, geolocation and dark mode — to build smart pages. In this lesson you will work through
+     <strong>3 phases</strong>.
+     Complete each phase task before clicking <em>Next Phase</em>.
+     This lesson ends with a <strong>Capstone Project</strong>! 🏆
+  </p>
+</div>
+
+<div class="phase " id="phase1" data-phase="1">
+  <div class="phase-header">
+    <div><div class="phase-num">Phase 1</div><div class="phase-title">localStorage — Remember Things</div></div>
+    <div class="phase-check" id="check1"></div>
+  </div>
+  <div class="phase-body">
+    <div class="concept-box">
+      <div class="concept-label">💡 Concept</div>
+      <p><strong>localStorage</strong> saves data in the browser that persists after closing and reopening the page. Methods: <code>localStorage.setItem('key','value')</code> — save. <code>localStorage.getItem('key')</code> — retrieve. <code>localStorage.removeItem('key')</code> — delete. <code>localStorage.clear()</code> — delete all. Both key and value must be strings. This is how lesson progress is tracked throughout this Techbase HTML course!</p>
+    </div>
+    <div class="code-wrap">
+  <div class="code-bar">
+    <span class="code-dot r"></span><span class="code-dot y"></span><span class="code-dot g"></span>
+    <span class="code-filename">index.html</span>
+  </div>
+  <div class="code-body"><pre>&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+  &lt;head&gt;&lt;title&gt;localStorage&lt;/title&gt;&lt;/head&gt;
+  &lt;body&gt;
+    &lt;h1&gt;localStorage Demo&lt;/h1&gt;
+    &lt;input type="text" id="nameInput" placeholder="Type your name"&gt;
+    &lt;button onclick="saveName()"&gt;Save&lt;/button&gt;
+    &lt;button onclick="clearName()"&gt;Clear&lt;/button&gt;
+    &lt;p id="greeting"&gt;Loading...&lt;/p&gt;
+    &lt;script&gt;
+      function saveName() {
+        const name = document.getElementById('nameInput').value;
+        localStorage.setItem('username', name);
+        showGreeting();
+      }
+      function clearName() {
+        localStorage.removeItem('username');
+        document.getElementById('greeting').textContent = 'Name cleared!';
+      }
+      function showGreeting() {
+        const saved = localStorage.getItem('username');
+        const el = document.getElementById('greeting');
+        if (saved) { el.textContent = 'Welcome back, ' + saved + '! 👋';
+                     el.style.color = '#10b981'; }
+        else        { el.textContent = 'No name saved yet.'; }
+      }
+      showGreeting();
+    &lt;/script&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</pre></div>
+</div>
+    <div class="task-box">
+      <div class="task-label">✏️ Your Task</div>
+      <p>Add this code, type a name and save. Refresh the page — your name is still there! Open DevTools → Application → Local Storage to see the stored value. Then add a counter that increases every time the page loads, stored in localStorage.</p>
+    </div>
+    <button class="next-btn" onclick="unlockNext(1)">
+      Next Phase → <span>→</span>
+    </button>
+    <p class="next-tip">Try the task first, then click to continue!</p>
+  </div>
+</div><div class="phase locked" id="phase2" data-phase="2">
+  <div class="phase-header">
+    <div><div class="phase-num">Phase 2</div><div class="phase-title">Geolocation API</div></div>
+    <div class="phase-check" id="check2"></div>
+  </div>
+  <div class="phase-body">
+    <div class="concept-box">
+      <div class="concept-label">💡 Concept</div>
+      <p>The <strong>Geolocation API</strong> asks permission to access the user's location. Call <code>navigator.geolocation.getCurrentPosition(successFn, errorFn)</code>. Success gives <code>position.coords.latitude</code> and <code>position.coords.longitude</code>. The browser always shows a permission prompt — the user can deny it. Works great on mobile phones!</p>
+    </div>
+    <div class="code-wrap">
+  <div class="code-bar">
+    <span class="code-dot r"></span><span class="code-dot y"></span><span class="code-dot g"></span>
+    <span class="code-filename">index.html</span>
+  </div>
+  <div class="code-body"><pre>&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+  &lt;head&gt;&lt;title&gt;Geolocation&lt;/title&gt;&lt;/head&gt;
+  &lt;body&gt;
+    &lt;h1&gt;My Location&lt;/h1&gt;
+    &lt;button onclick="getLocation()"&gt;📍 Find My Location&lt;/button&gt;
+    &lt;p id="out"&gt;Click to request location.&lt;/p&gt;
+    &lt;script&gt;
+      function getLocation() {
+        const out = document.getElementById('out');
+        if (!navigator.geolocation) {
+          out.textContent = 'Not supported.'; return;
+        }
+        out.textContent = '⏳ Getting location...';
+        navigator.geolocation.getCurrentPosition(
+          function(pos) {
+            const lat = pos.coords.latitude.toFixed(4);
+            const lon = pos.coords.longitude.toFixed(4);
+            out.innerHTML = '📍 Lat: &lt;strong&gt;' + lat +
+                            '&lt;/strong&gt;, Lon: &lt;strong&gt;' + lon + '&lt;/strong&gt;&lt;br&gt;' +
+                            '&lt;a href="https://maps.google.com/?q=' +
+                            lat + ',' + lon + '" target="_blank" ' +
+                            'style="color:#ea4f21;"&gt;Open in Google Maps ↗&lt;/a&gt;';
+          },
+          function() { out.textContent = '❌ Location denied.'; }
+        );
+      }
+    &lt;/script&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</pre></div>
+</div>
+    <div class="task-box">
+      <div class="task-label">✏️ Your Task</div>
+      <p>Add the geolocation code. Click the button and allow access. Your coordinates should appear! Make the coordinates a clickable Google Maps link. Test on your phone — it will use GPS for a very accurate result!</p>
+    </div>
+    <button class="next-btn" onclick="unlockNext(2)">
+      Next Phase → <span>→</span>
+    </button>
+    <p class="next-tip">Try the task first, then click to continue!</p>
+  </div>
+</div><div class="phase locked" id="phase3" data-phase="3">
+  <div class="phase-header">
+    <div><div class="phase-num">Phase 3</div><div class="phase-title">Dark Mode, Online Status and Clipboard</div></div>
+    <div class="phase-check" id="check3"></div>
+  </div>
+  <div class="phase-body">
+    <div class="concept-box">
+      <div class="concept-label">💡 Concept</div>
+      <p>Three more handy APIs: <code>window.matchMedia('(prefers-color-scheme: dark)').matches</code> detects if the user has dark mode on their device. <code>navigator.onLine</code> returns true/false for internet connection. <code>navigator.clipboard.writeText(text)</code> copies text to clipboard. Use CSS <code>@media (prefers-color-scheme: dark)</code> to automatically apply dark styles for dark-mode users — no JavaScript needed!</p>
+    </div>
+    <div class="code-wrap">
+  <div class="code-bar">
+    <span class="code-dot r"></span><span class="code-dot y"></span><span class="code-dot g"></span>
+    <span class="code-filename">index.html</span>
+  </div>
+  <div class="code-body"><pre>&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+  &lt;head&gt;
+    &lt;title&gt;More APIs&lt;/title&gt;
+    &lt;style&gt;
+      /* Auto dark mode — activates if OS dark mode is on! */
+      @media (prefers-color-scheme: dark) {
+        body { background:#0f172a; color:#f1f5f9; }
+      }
+      button { padding:10px 20px; margin:6px; border-radius:8px;
+               border:none; background:#ea4f21; color:white;
+               font-weight:bold; cursor:pointer; }
+    &lt;/style&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;h1&gt;Browser APIs&lt;/h1&gt;
+    &lt;p&gt;Internet: &lt;strong id="status"&gt;&lt;/strong&gt;&lt;/p&gt;
+    &lt;button onclick="copyLink()"&gt;📋 Copy Page URL&lt;/button&gt;
+    &lt;span id="copy-msg"&gt;&lt;/span&gt;
+    &lt;script&gt;
+      function updateStatus() {
+        document.getElementById('status').textContent =
+          navigator.onLine ? '✅ Online' : '❌ Offline';
+      }
+      window.addEventListener('online',  updateStatus);
+      window.addEventListener('offline', updateStatus);
+      updateStatus();
+      function copyLink() {
+        navigator.clipboard.writeText(window.location.href).then(() =&gt; {
+          const m = document.getElementById('copy-msg');
+          m.textContent = ' ✅ Copied!';
+          setTimeout(()=&gt; m.textContent='', 2000);
+        });
+      }
+    &lt;/script&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</pre></div>
+</div>
+    <div class="task-box">
+      <div class="task-label">✏️ Your Task</div>
+      <p>Add all three features: (1) show online/offline status. (2) A 'Copy my email' button using Clipboard API. (3) Add <code>@media (prefers-color-scheme: dark)</code> CSS so your page auto-switches to dark mode for users who have it enabled.</p>
+    </div>
+    <button class="next-btn" onclick="unlockNext(3)">
+      Build It! 🚀 <span>→</span>
+    </button>
+    <p class="next-tip">Try the task first, then click to continue!</p>
+  </div>
+</div>
+
+<div class="project-box" id="build-it" style="display:none">
+  <div class="project-label">🏗️ Build It!</div>
+  <div class="project-name">My Smart Web App</div>
+  <p class="project-desc">Build a smart personal dashboard using localStorage, geolocation, online detection, and dark mode.</p>
+  <div class="code-wrap">
+    <div class="code-bar">
+      <span class="code-dot r"></span><span class="code-dot y"></span><span class="code-dot g"></span>
+      <span class="code-filename">starter.html — copy this into a new file!</span>
+    </div>
+    <div class="code-body"><pre id="starter-code">&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+  &lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;My Smart Dashboard&lt;/title&gt;
+    &lt;style&gt;
+      :root {
+        --bg:#f1f5f9; --surface:white; --text:#0f172a;
+        --muted:#64748b; --border:#e2e8f0;
+      }
+      @media (prefers-color-scheme: dark) {
+        :root { --bg:#0f172a; --surface:#1e293b; --text:#f1f5f9;
+                --muted:#94a3b8; --border:#334155; }
+      }
+      *  { box-sizing:border-box; margin:0; padding:0; }
+      body { font-family:Arial,sans-serif; background:var(--bg);
+             color:var(--text); padding:30px; min-height:100vh; }
+      h1 { color:#ea4f21; text-align:center; margin-bottom:6px; }
+      .lead { text-align:center; color:var(--muted); margin-bottom:30px; }
+      .grid { display:flex; flex-wrap:wrap; gap:18px; max-width:860px; margin:0 auto; }
+      .card { background:var(--surface); border:1.5px solid var(--border);
+              border-radius:16px; padding:22px; flex:1; min-width:240px; }
+      .card h2 { font-size:1rem; color:#ea4f21; margin-bottom:12px; }
+      input[type="text"] { width:100%; padding:10px; border:1.5px solid var(--border);
+                           border-radius:8px; font-size:14px; background:var(--bg);
+                           color:var(--text); margin-bottom:10px; }
+      .btn { display:inline-block; background:#ea4f21; color:white; border:none;
+             padding:9px 16px; border-radius:8px; font-weight:bold;
+             cursor:pointer; font-size:13px; margin:2px; }
+      .stat { font-size:2.5rem; font-weight:bold; color:#ea4f21; }
+      .status { font-size:14px; color:var(--muted); margin-top:8px; }
+    &lt;/style&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;h1&gt;⚡ My Smart Dashboard&lt;/h1&gt;
+    &lt;p class="lead"&gt;localStorage · Geolocation · Clipboard · Dark Mode APIs&lt;/p&gt;
+    &lt;div class="grid"&gt;
+      &lt;div class="card"&gt;
+        &lt;h2&gt;👤 Remember Me&lt;/h2&gt;
+        &lt;p id="greeting" style="font-size:1.1rem;font-weight:bold;color:#10b981;margin-bottom:10px;"&gt;Loading...&lt;/p&gt;
+        &lt;input type="text" id="nameInput" placeholder="Enter your name"&gt;
+        &lt;button class="btn" onclick="saveName()"&gt;💾 Save&lt;/button&gt;
+        &lt;button class="btn" style="background:#64748b" onclick="clearName()"&gt;Clear&lt;/button&gt;
+      &lt;/div&gt;
+      &lt;div class="card"&gt;
+        &lt;h2&gt;📊 Visit Counter&lt;/h2&gt;
+        &lt;div class="stat" id="visits"&gt;0&lt;/div&gt;
+        &lt;p class="status"&gt;page visits tracked in localStorage&lt;/p&gt;
+        &lt;button class="btn" style="background:#64748b;margin-top:12px"
+                onclick="resetVisits()"&gt;Reset&lt;/button&gt;
+      &lt;/div&gt;
+      &lt;div class="card"&gt;
+        &lt;h2&gt;📍 My Location&lt;/h2&gt;
+        &lt;button class="btn" onclick="getLocation()"&gt;Find Location&lt;/button&gt;
+        &lt;div class="status" id="geo"&gt;Click to request permission.&lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class="card"&gt;
+        &lt;h2&gt;🌐 Browser Status&lt;/h2&gt;
+        &lt;div class="status"&gt;Internet: &lt;strong id="online"&gt;Checking...&lt;/strong&gt;&lt;/div&gt;
+        &lt;div class="status" style="margin-top:8px;"&gt;
+          Dark mode: &lt;strong id="darkmode"&gt;&lt;/strong&gt;
+        &lt;/div&gt;
+        &lt;button class="btn" style="margin-top:12px" onclick="copyEmail()"&gt;
+          📋 Copy Email
+        &lt;/button&gt;
+        &lt;span id="copymsg" style="font-size:13px;color:#10b981;"&gt;&lt;/span&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;script&gt;
+      // Name
+      function saveName(){ const n=document.getElementById('nameInput').value.trim();
+        if(!n)return; localStorage.setItem('dash_name',n); showGreeting(); }
+      function clearName(){ localStorage.removeItem('dash_name');
+        document.getElementById('greeting').textContent='Hello, stranger!'; }
+      function showGreeting(){ const n=localStorage.getItem('dash_name');
+        document.getElementById('greeting').textContent=n?'Welcome, '+n+'! 👋':'Hello, stranger!'; }
+      // Visits
+      function updateVisits(){ let v=parseInt(localStorage.getItem('dash_v')||'0')+1;
+        localStorage.setItem('dash_v',v); document.getElementById('visits').textContent=v; }
+      function resetVisits(){ localStorage.setItem('dash_v','0');
+        document.getElementById('visits').textContent='0'; }
+      // Geo
+      function getLocation(){ const o=document.getElementById('geo');
+        if(!navigator.geolocation){o.textContent='Not supported.';return;}
+        o.textContent='⏳ Requesting...';
+        navigator.geolocation.getCurrentPosition(
+          p=&gt;{const la=p.coords.latitude.toFixed(4),lo=p.coords.longitude.toFixed(4);
+              o.innerHTML='📍 Lat: &lt;b&gt;'+la+'&lt;/b&gt;, Lon: &lt;b&gt;'+lo+'&lt;/b&gt;&lt;br&gt;'+
+              '&lt;a href="https://maps.google.com/?q='+la+','+lo+'" target="_blank" '+
+              'style="color:#ea4f21"&gt;Open Maps ↗&lt;/a&gt;';},
+          ()=&gt;{o.textContent='❌ Location denied.';});
+      }
+      // Online
+      function checkOnline(){ const e=document.getElementById('online');
+        e.textContent=navigator.onLine?'✅ Online':'❌ Offline';
+        e.style.color=navigator.onLine?'#10b981':'#f87171'; }
+      window.addEventListener('online',checkOnline);
+      window.addEventListener('offline',checkOnline);
+      // Dark mode
+      document.getElementById('darkmode').textContent=
+        window.matchMedia('(prefers-color-scheme:dark)').matches?'🌙 Dark':'☀️ Light';
+      // Clipboard
+      function copyEmail(){ navigator.clipboard.writeText('you@example.com').then(()=&gt;{
+        const m=document.getElementById('copymsg');
+        m.textContent=' ✅ Copied!'; setTimeout(()=&gt;m.textContent='',2000); }); }
+      // Init
+      showGreeting(); updateVisits(); checkOnline();
+    &lt;/script&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</pre></div>
+  </div>
+  <button class="next-btn" onclick="downloadStarter()" style="margin-right:.75rem">
+    ⬇️ Download starter.html
+  </button>
+  <button class="next-btn" onclick="showGithub()" style="background:#10b981;box-shadow:0 4px 12px rgba(16,185,129,.3)">
+    Show GitHub Steps →
+  </button>
+  <script>
+  const __code = `<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Smart Dashboard</title>
+    <style>
+      :root {
+        --bg:#f1f5f9; --surface:white; --text:#0f172a;
+        --muted:#64748b; --border:#e2e8f0;
+      }
+      @media (prefers-color-scheme: dark) {
+        :root { --bg:#0f172a; --surface:#1e293b; --text:#f1f5f9;
+                --muted:#94a3b8; --border:#334155; }
+      }
+      *  { box-sizing:border-box; margin:0; padding:0; }
+      body { font-family:Arial,sans-serif; background:var(--bg);
+             color:var(--text); padding:30px; min-height:100vh; }
+      h1 { color:#ea4f21; text-align:center; margin-bottom:6px; }
+      .lead { text-align:center; color:var(--muted); margin-bottom:30px; }
+      .grid { display:flex; flex-wrap:wrap; gap:18px; max-width:860px; margin:0 auto; }
+      .card { background:var(--surface); border:1.5px solid var(--border);
+              border-radius:16px; padding:22px; flex:1; min-width:240px; }
+      .card h2 { font-size:1rem; color:#ea4f21; margin-bottom:12px; }
+      input[type="text"] { width:100%; padding:10px; border:1.5px solid var(--border);
+                           border-radius:8px; font-size:14px; background:var(--bg);
+                           color:var(--text); margin-bottom:10px; }
+      .btn { display:inline-block; background:#ea4f21; color:white; border:none;
+             padding:9px 16px; border-radius:8px; font-weight:bold;
+             cursor:pointer; font-size:13px; margin:2px; }
+      .stat { font-size:2.5rem; font-weight:bold; color:#ea4f21; }
+      .status { font-size:14px; color:var(--muted); margin-top:8px; }
+    </style>
+  </head>
+  <body>
+    <h1>⚡ My Smart Dashboard</h1>
+    <p class="lead">localStorage · Geolocation · Clipboard · Dark Mode APIs</p>
+    <div class="grid">
+      <div class="card">
+        <h2>👤 Remember Me</h2>
+        <p id="greeting" style="font-size:1.1rem;font-weight:bold;color:#10b981;margin-bottom:10px;">Loading...</p>
+        <input type="text" id="nameInput" placeholder="Enter your name">
+        <button class="btn" onclick="saveName()">💾 Save</button>
+        <button class="btn" style="background:#64748b" onclick="clearName()">Clear</button>
+      </div>
+      <div class="card">
+        <h2>📊 Visit Counter</h2>
+        <div class="stat" id="visits">0</div>
+        <p class="status">page visits tracked in localStorage</p>
+        <button class="btn" style="background:#64748b;margin-top:12px"
+                onclick="resetVisits()">Reset</button>
+      </div>
+      <div class="card">
+        <h2>📍 My Location</h2>
+        <button class="btn" onclick="getLocation()">Find Location</button>
+        <div class="status" id="geo">Click to request permission.</div>
+      </div>
+      <div class="card">
+        <h2>🌐 Browser Status</h2>
+        <div class="status">Internet: <strong id="online">Checking...</strong></div>
+        <div class="status" style="margin-top:8px;">
+          Dark mode: <strong id="darkmode"></strong>
+        </div>
+        <button class="btn" style="margin-top:12px" onclick="copyEmail()">
+          📋 Copy Email
+        </button>
+        <span id="copymsg" style="font-size:13px;color:#10b981;"></span>
+      </div>
+    </div>
+    <script>
+      // Name
+      function saveName(){ const n=document.getElementById('nameInput').value.trim();
+        if(!n)return; localStorage.setItem('dash_name',n); showGreeting(); }
+      function clearName(){ localStorage.removeItem('dash_name');
+        document.getElementById('greeting').textContent='Hello, stranger!'; }
+      function showGreeting(){ const n=localStorage.getItem('dash_name');
+        document.getElementById('greeting').textContent=n?'Welcome, '+n+'! 👋':'Hello, stranger!'; }
+      // Visits
+      function updateVisits(){ let v=parseInt(localStorage.getItem('dash_v')||'0')+1;
+        localStorage.setItem('dash_v',v); document.getElementById('visits').textContent=v; }
+      function resetVisits(){ localStorage.setItem('dash_v','0');
+        document.getElementById('visits').textContent='0'; }
+      // Geo
+      function getLocation(){ const o=document.getElementById('geo');
+        if(!navigator.geolocation){o.textContent='Not supported.';return;}
+        o.textContent='⏳ Requesting...';
+        navigator.geolocation.getCurrentPosition(
+          p=>{const la=p.coords.latitude.toFixed(4),lo=p.coords.longitude.toFixed(4);
+              o.innerHTML='📍 Lat: <b>'+la+'</b>, Lon: <b>'+lo+'</b><br>'+
+              '<a href="https://maps.google.com/?q='+la+','+lo+'" target="_blank" '+
+              'style="color:#ea4f21">Open Maps ↗</a>';},
+          ()=>{o.textContent='❌ Location denied.';});
+      }
+      // Online
+      function checkOnline(){ const e=document.getElementById('online');
+        e.textContent=navigator.onLine?'✅ Online':'❌ Offline';
+        e.style.color=navigator.onLine?'#10b981':'#f87171'; }
+      window.addEventListener('online',checkOnline);
+      window.addEventListener('offline',checkOnline);
+      // Dark mode
+      document.getElementById('darkmode').textContent=
+        window.matchMedia('(prefers-color-scheme:dark)').matches?'🌙 Dark':'☀️ Light';
+      // Clipboard
+      function copyEmail(){ navigator.clipboard.writeText('you@example.com').then(()=>{
+        const m=document.getElementById('copymsg');
+        m.textContent=' ✅ Copied!'; setTimeout(()=>m.textContent='',2000); }); }
+      // Init
+      showGreeting(); updateVisits(); checkOnline();
+    </script>
+  </body>
+</html>`;
+  function downloadStarter(){
+    const a=document.createElement('a');
+    a.href='data:text/html;charset=utf-8,'+encodeURIComponent(__code);
+    a.download='starter.html'; a.click();
+  }
+  </script>
+</div>
+
+<div class="capstone-box" id="capstone" style="display:none">
+  <div class="capstone-label">🏆 Capstone Project</div>
+  <div class="capstone-name">My Complete Techbase Profile Website</div>
+  <p class="capstone-desc">🎉 You finished ALL 34 HTML lessons! Build your final showcase: a complete responsive personal website using EVERYTHING you learned — semantic HTML, forms, media, canvas, localStorage and more.</p>
+  <p style="font-size:.8rem;color:rgba(255,255,255,.6);margin-bottom:1rem">Covers: Lessons 01–34 — Complete HTML Mastery</p>
+  <div class="code-wrap" style="margin-bottom:1rem">
+    <div class="code-bar">
+      <span class="code-dot r"></span><span class="code-dot y"></span><span class="code-dot g"></span>
+      <span class="code-filename">capstone-starter.html</span>
+    </div>
+    <div class="code-body"><pre>&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+  &lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;meta name="description" content="[Your Name] — HTML developer and Techbase Academy graduate, Ibadan Nigeria."&gt;
+    &lt;title&gt;[Your Name] — Complete HTML Portfolio&lt;/title&gt;
+    &lt;link rel="preconnect" href="https://fonts.googleapis.com"&gt;
+    &lt;link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&amp;display=swap" rel="stylesheet"&gt;
+    &lt;style&gt;
+      :root { --a:#ea4f21; --ad:#c23d15; --bg:#f8fafc; --sf:white;
+              --tx:#0f172a; --m:#64748b; --b:#e2e8f0; }
+      @media (prefers-color-scheme:dark) {
+        :root { --bg:#0f172a; --sf:#1e293b; --tx:#f1f5f9; --m:#94a3b8; --b:#334155; }
+      }
+      *,*::before,*::after { box-sizing:border-box; margin:0; padding:0; }
+      html { scroll-behavior:smooth; }
+      body { font-family:'Plus Jakarta Sans',sans-serif; background:var(--bg);
+             color:var(--tx); font-size:16px; }
+      /* NAV */
+      nav { position:sticky; top:0; z-index:100;
+            background:rgba(255,255,255,.92); backdrop-filter:blur(12px);
+            border-bottom:1px solid var(--b); padding:14px 30px;
+            display:flex; justify-content:space-between; align-items:center; }
+      @media (prefers-color-scheme:dark){nav{background:rgba(15,23,42,.92);}}
+      .logo { font-weight:800; color:var(--a); font-size:1.1rem; }
+      .nav-links { display:flex; gap:22px; }
+      .nav-links a { color:var(--m); text-decoration:none; font-size:14px; font-weight:600; }
+      .nav-links a:hover { color:var(--a); }
+      /* HERO */
+      #hero { background:linear-gradient(135deg,#fff3ef,var(--bg));
+              padding:90px 30px 70px; text-align:center; }
+      @media(prefers-color-scheme:dark){#hero{background:linear-gradient(135deg,#1e293b,var(--bg));}}
+      .avatar { width:90px; height:90px; background:var(--a); border-radius:50%;
+                display:inline-flex; align-items:center; justify-content:center;
+                font-size:44px; margin-bottom:18px; }
+      #hero h1 { font-size:clamp(2rem,5vw,3rem); font-weight:800;
+                 letter-spacing:-.03em; margin-bottom:10px; }
+      #hero h1 span { color:var(--a); }
+      #hero p { font-size:1.05rem; color:var(--m); max-width:480px;
+                margin:0 auto 26px; }
+      .btns { display:flex; gap:12px; justify-content:center; flex-wrap:wrap; }
+      .btn-p { background:var(--a); color:white; text-decoration:none; padding:12px 26px;
+               border-radius:10px; font-weight:700; font-size:14px; border:none; cursor:pointer; }
+      .btn-o { background:transparent; color:var(--a); border:2px solid var(--a);
+               text-decoration:none; padding:12px 26px; border-radius:10px;
+               font-weight:700; font-size:14px; }
+      /* SECTIONS */
+      .sec { padding:60px 30px; max-width:960px; margin:0 auto; }
+      .sec-tag { font-size:12px; font-weight:800; letter-spacing:.1em;
+                 text-transform:uppercase; color:var(--a); margin-bottom:8px; }
+      .sec-h { font-size:1.8rem; font-weight:800; margin-bottom:28px; }
+      hr.div { border:none; border-top:1px solid var(--b); }
+      /* CARDS */
+      .cards { display:flex; flex-wrap:wrap; gap:18px; }
+      .card { flex:1; min-width:230px; background:var(--sf);
+              border:1.5px solid var(--b); border-radius:14px; padding:22px;
+              transition:transform .2s; }
+      .card:hover { transform:translateY(-3px); }
+      .card h3 { color:var(--a); margin:0 0 8px; font-size:15px; }
+      .card p  { color:var(--m); font-size:13px; line-height:1.7; }
+      /* TABLE */
+      table { width:100%; border-collapse:collapse; }
+      th { background:var(--a); color:white; padding:12px; text-align:left; }
+      td { padding:10px 12px; border-bottom:1px solid var(--b); font-size:14px; }
+      tr:nth-child(even) td { background:var(--bg); }
+      .badge { display:inline-block; padding:2px 9px; border-radius:100px;
+               font-size:11px; font-weight:700; }
+      .done  { background:#dcfce7; color:#166534; }
+      .prog  { background:#fef3c7; color:#92400e; }
+      /* FORM */
+      label { display:block; font-weight:700; font-size:13px;
+              color:var(--m); margin-bottom:5px; }
+      input, select, textarea {
+        width:100%; padding:11px 14px; font-size:14px;
+        border:1.5px solid var(--b); border-radius:9px;
+        background:var(--bg); color:var(--tx); font-family:inherit; outline:none;
+        transition:border-color .2s; margin-bottom:16px;
+      }
+      input:focus, select:focus, textarea:focus { border-color:var(--a); }
+      /* FOOTER */
+      footer { background:#0f172a; color:rgba(255,255,255,.4);
+               text-align:center; padding:28px; font-size:13px; margin-top:40px; }
+      footer a { color:rgba(255,255,255,.65); text-decoration:none; }
+      @media (max-width:640px) { .nav-links{display:none;} .sec{padding:40px 20px;} }
+    &lt;/style&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;!-- NAV --&gt;
+    &lt;nav&gt;
+      &lt;span class="logo"&gt;⚡ [Your Name]&lt;/span&gt;
+      &lt;div class="nav-links"&gt;
+        &lt;a href="#skills"&gt;Skills&lt;/a&gt;
+        &lt;a href="#projects"&gt;Projects&lt;/a&gt;
+        &lt;a href="#canvas"&gt;Graphics&lt;/a&gt;
+        &lt;a href="#contact"&gt;Contact&lt;/a&gt;
+      &lt;/div&gt;
+    &lt;/nav&gt;
+    &lt;!-- HERO --&gt;
+    &lt;section id="hero" style="max-width:100%;padding-top:90px;"&gt;
+      &lt;div class="avatar"&gt;🧑‍💻&lt;/div&gt;
+      &lt;h1&gt;Hi, I'm &lt;span&gt;[Your Name]!&lt;/span&gt;&lt;/h1&gt;
+      &lt;p&gt;HTML graduate · Future web developer · Techbase Academy, Ibadan 🇳🇬&lt;/p&gt;
+      &lt;div class="btns"&gt;
+        &lt;a href="#projects" class="btn-p"&gt;See My Projects →&lt;/a&gt;
+        &lt;a href="#contact"  class="btn-o"&gt;Contact Me&lt;/a&gt;
+      &lt;/div&gt;
+      &lt;p id="wmsg" style="margin-top:18px;font-size:14px;color:var(--a);font-weight:600;"&gt;&lt;/p&gt;
+    &lt;/section&gt;
+    &lt;hr class="div"&gt;
+    &lt;!-- SKILLS --&gt;
+    &lt;div class="sec" id="skills"&gt;
+      &lt;div class="sec-tag"&gt;What I know&lt;/div&gt;
+      &lt;h2 class="sec-h"&gt;My HTML Skills&lt;/h2&gt;
+      &lt;table&gt;
+        &lt;thead&gt;&lt;tr&gt;&lt;th&gt;Topic&lt;/th&gt;&lt;th&gt;What I Can Do&lt;/th&gt;&lt;th&gt;Status&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;
+        &lt;tbody&gt;
+          &lt;tr&gt;&lt;td&gt;HTML Structure&lt;/td&gt;&lt;td&gt;Build well-organised, semantic pages&lt;/td&gt;
+              &lt;td&gt;&lt;span class="badge done"&gt;✅ Done&lt;/span&gt;&lt;/td&gt;&lt;/tr&gt;
+          &lt;tr&gt;&lt;td&gt;CSS Styling&lt;/td&gt;&lt;td&gt;Style pages with inline, internal &amp; external CSS&lt;/td&gt;
+              &lt;td&gt;&lt;span class="badge done"&gt;✅ Done&lt;/span&gt;&lt;/td&gt;&lt;/tr&gt;
+          &lt;tr&gt;&lt;td&gt;Forms&lt;/td&gt;&lt;td&gt;Build accessible validated forms&lt;/td&gt;
+              &lt;td&gt;&lt;span class="badge done"&gt;✅ Done&lt;/span&gt;&lt;/td&gt;&lt;/tr&gt;
+          &lt;tr&gt;&lt;td&gt;Responsive Design&lt;/td&gt;&lt;td&gt;Media queries &amp; fluid layouts&lt;/td&gt;
+              &lt;td&gt;&lt;span class="badge done"&gt;✅ Done&lt;/span&gt;&lt;/td&gt;&lt;/tr&gt;
+          &lt;tr&gt;&lt;td&gt;JavaScript&lt;/td&gt;&lt;td&gt;Make pages interactive&lt;/td&gt;
+              &lt;td&gt;&lt;span class="badge prog"&gt;🔜 Coming soon&lt;/span&gt;&lt;/td&gt;&lt;/tr&gt;
+        &lt;/tbody&gt;
+      &lt;/table&gt;
+    &lt;/div&gt;
+    &lt;hr class="div"&gt;
+    &lt;!-- PROJECTS --&gt;
+    &lt;div class="sec" id="projects"&gt;
+      &lt;div class="sec-tag"&gt;What I built&lt;/div&gt;
+      &lt;h2 class="sec-h"&gt;My Projects&lt;/h2&gt;
+      &lt;div class="cards"&gt;
+        &lt;div class="card"&gt;&lt;h3&gt;About Me Page&lt;/h3&gt;
+          &lt;p&gt;First HTML page — headings, paragraphs, lists. Lesson 01.&lt;/p&gt;&lt;/div&gt;
+        &lt;div class="card"&gt;&lt;h3&gt;Photo Gallery&lt;/h3&gt;
+          &lt;p&gt;Responsive gallery with figure/figcaption. Lesson 14.&lt;/p&gt;&lt;/div&gt;
+        &lt;div class="card"&gt;&lt;h3&gt;Portfolio Homepage&lt;/h3&gt;
+          &lt;p&gt;Phase 2 Capstone — full layout with nav, table, iframes. Lesson 22.&lt;/p&gt;&lt;/div&gt;
+        &lt;div class="card"&gt;&lt;h3&gt;Contact Form&lt;/h3&gt;
+          &lt;p&gt;Fully validated, styled form with fieldsets. Lesson 31.&lt;/p&gt;&lt;/div&gt;
+        &lt;!-- ADD YOUR OWN PROJECTS! --&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;hr class="div"&gt;
+    &lt;!-- CANVAS --&gt;
+    &lt;div class="sec" id="canvas"&gt;
+      &lt;div class="sec-tag"&gt;HTML5 Graphics&lt;/div&gt;
+      &lt;h2 class="sec-h"&gt;Canvas Animation&lt;/h2&gt;
+      &lt;canvas id="myCanvas" width="860" height="220"
+              style="width:100%;background:#0f172a;border-radius:16px;display:block;"&gt;&lt;/canvas&gt;
+    &lt;/div&gt;
+    &lt;hr class="div"&gt;
+    &lt;!-- CONTACT --&gt;
+    &lt;div class="sec" id="contact"&gt;
+      &lt;div class="sec-tag"&gt;Get in touch&lt;/div&gt;
+      &lt;h2 class="sec-h"&gt;Contact Me&lt;/h2&gt;
+      &lt;div style="background:var(--sf);border:1.5px solid var(--b);
+                  border-radius:18px;padding:32px;max-width:580px;"&gt;
+        &lt;form action="#" method="post"&gt;
+          &lt;label for="nm"&gt;Name *&lt;/label&gt;
+          &lt;input id="nm" type="text" required placeholder="Tunde Awoyemi"&gt;
+          &lt;label for="em"&gt;Email *&lt;/label&gt;
+          &lt;input id="em" type="email" required placeholder="you@example.com"&gt;
+          &lt;label for="ms"&gt;Message&lt;/label&gt;
+          &lt;textarea id="ms" rows="4" placeholder="Say hello!"&gt;&lt;/textarea&gt;
+          &lt;button type="submit" class="btn-p" style="width:100%;"&gt;
+            Send Message ✉️
+          &lt;/button&gt;
+        &lt;/form&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;footer&gt;
+      &lt;p&gt;Made with ❤️ and &lt;strong&gt;pure HTML&lt;/strong&gt; by &lt;strong&gt;[Your Name]&lt;/strong&gt;&lt;/p&gt;
+      &lt;p style="margin-top:6px;"&gt;&amp;copy; 2025 [Your Name] &amp;nbsp;|&amp;nbsp;
+         &lt;a href="https://techbasengr.com.ng"&gt;Techbase Academy&lt;/a&gt;,
+         Ibadan, Nigeria&lt;/p&gt;
+      &lt;p style="margin-top:10px;font-size:12px;color:rgba(255,255,255,.25);"&gt;
+        All 34 HTML lessons complete ✅
+      &lt;/p&gt;
+    &lt;/footer&gt;
+    &lt;script&gt;
+      // localStorage greeting
+      const saved = localStorage.getItem('cap_name');
+      if (saved) document.getElementById('wmsg').textContent = 'Welcome back, '+saved+'! 👋';
+      // Canvas particles
+      const cv=document.getElementById('myCanvas'), cx=cv.getContext('2d');
+      const W=cv.width, H=cv.height;
+      const ps=Array.from({length:60},()=&gt;({
+        x:Math.random()*W, y:Math.random()*H,
+        vx:(Math.random()-.5), vy:(Math.random()-.5),
+        r:Math.random()*3+1,
+        c:['#ea4f21','#0284c7','#10b981','#7c3aed','#fbbf24'][Math.floor(Math.random()*5)]
+      }));
+      function anim(){
+        cx.fillStyle='rgba(15,23,42,.18)'; cx.fillRect(0,0,W,H);
+        ps.forEach(p=&gt;{
+          p.x+=p.vx; p.y+=p.vy;
+          if(p.x&lt;0||p.x&gt;W) p.vx*=-1; if(p.y&lt;0||p.y&gt;H) p.vy*=-1;
+          cx.fillStyle=p.c; cx.beginPath();
+          cx.arc(p.x,p.y,p.r,0,2*Math.PI); cx.fill();
+        });
+        requestAnimationFrame(anim);
+      }
+      anim();
+    &lt;/script&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</pre></div>
+  </div>
+  <button class="next-btn" onclick="downloadCapstone()">⬇️ Download capstone-starter.html</button>
+  <script>
+  const __cap = `<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="[Your Name] — HTML developer and Techbase Academy graduate, Ibadan Nigeria.">
+    <title>[Your Name] — Complete HTML Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+      :root { --a:#ea4f21; --ad:#c23d15; --bg:#f8fafc; --sf:white;
+              --tx:#0f172a; --m:#64748b; --b:#e2e8f0; }
+      @media (prefers-color-scheme:dark) {
+        :root { --bg:#0f172a; --sf:#1e293b; --tx:#f1f5f9; --m:#94a3b8; --b:#334155; }
+      }
+      *,*::before,*::after { box-sizing:border-box; margin:0; padding:0; }
+      html { scroll-behavior:smooth; }
+      body { font-family:'Plus Jakarta Sans',sans-serif; background:var(--bg);
+             color:var(--tx); font-size:16px; }
+      /* NAV */
+      nav { position:sticky; top:0; z-index:100;
+            background:rgba(255,255,255,.92); backdrop-filter:blur(12px);
+            border-bottom:1px solid var(--b); padding:14px 30px;
+            display:flex; justify-content:space-between; align-items:center; }
+      @media (prefers-color-scheme:dark){nav{background:rgba(15,23,42,.92);}}
+      .logo { font-weight:800; color:var(--a); font-size:1.1rem; }
+      .nav-links { display:flex; gap:22px; }
+      .nav-links a { color:var(--m); text-decoration:none; font-size:14px; font-weight:600; }
+      .nav-links a:hover { color:var(--a); }
+      /* HERO */
+      #hero { background:linear-gradient(135deg,#fff3ef,var(--bg));
+              padding:90px 30px 70px; text-align:center; }
+      @media(prefers-color-scheme:dark){#hero{background:linear-gradient(135deg,#1e293b,var(--bg));}}
+      .avatar { width:90px; height:90px; background:var(--a); border-radius:50%;
+                display:inline-flex; align-items:center; justify-content:center;
+                font-size:44px; margin-bottom:18px; }
+      #hero h1 { font-size:clamp(2rem,5vw,3rem); font-weight:800;
+                 letter-spacing:-.03em; margin-bottom:10px; }
+      #hero h1 span { color:var(--a); }
+      #hero p { font-size:1.05rem; color:var(--m); max-width:480px;
+                margin:0 auto 26px; }
+      .btns { display:flex; gap:12px; justify-content:center; flex-wrap:wrap; }
+      .btn-p { background:var(--a); color:white; text-decoration:none; padding:12px 26px;
+               border-radius:10px; font-weight:700; font-size:14px; border:none; cursor:pointer; }
+      .btn-o { background:transparent; color:var(--a); border:2px solid var(--a);
+               text-decoration:none; padding:12px 26px; border-radius:10px;
+               font-weight:700; font-size:14px; }
+      /* SECTIONS */
+      .sec { padding:60px 30px; max-width:960px; margin:0 auto; }
+      .sec-tag { font-size:12px; font-weight:800; letter-spacing:.1em;
+                 text-transform:uppercase; color:var(--a); margin-bottom:8px; }
+      .sec-h { font-size:1.8rem; font-weight:800; margin-bottom:28px; }
+      hr.div { border:none; border-top:1px solid var(--b); }
+      /* CARDS */
+      .cards { display:flex; flex-wrap:wrap; gap:18px; }
+      .card { flex:1; min-width:230px; background:var(--sf);
+              border:1.5px solid var(--b); border-radius:14px; padding:22px;
+              transition:transform .2s; }
+      .card:hover { transform:translateY(-3px); }
+      .card h3 { color:var(--a); margin:0 0 8px; font-size:15px; }
+      .card p  { color:var(--m); font-size:13px; line-height:1.7; }
+      /* TABLE */
+      table { width:100%; border-collapse:collapse; }
+      th { background:var(--a); color:white; padding:12px; text-align:left; }
+      td { padding:10px 12px; border-bottom:1px solid var(--b); font-size:14px; }
+      tr:nth-child(even) td { background:var(--bg); }
+      .badge { display:inline-block; padding:2px 9px; border-radius:100px;
+               font-size:11px; font-weight:700; }
+      .done  { background:#dcfce7; color:#166534; }
+      .prog  { background:#fef3c7; color:#92400e; }
+      /* FORM */
+      label { display:block; font-weight:700; font-size:13px;
+              color:var(--m); margin-bottom:5px; }
+      input, select, textarea {
+        width:100%; padding:11px 14px; font-size:14px;
+        border:1.5px solid var(--b); border-radius:9px;
+        background:var(--bg); color:var(--tx); font-family:inherit; outline:none;
+        transition:border-color .2s; margin-bottom:16px;
+      }
+      input:focus, select:focus, textarea:focus { border-color:var(--a); }
+      /* FOOTER */
+      footer { background:#0f172a; color:rgba(255,255,255,.4);
+               text-align:center; padding:28px; font-size:13px; margin-top:40px; }
+      footer a { color:rgba(255,255,255,.65); text-decoration:none; }
+      @media (max-width:640px) { .nav-links{display:none;} .sec{padding:40px 20px;} }
+    </style>
+  </head>
+  <body>
+    <!-- NAV -->
+    <nav>
+      <span class="logo">⚡ [Your Name]</span>
+      <div class="nav-links">
+        <a href="#skills">Skills</a>
+        <a href="#projects">Projects</a>
+        <a href="#canvas">Graphics</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </nav>
+    <!-- HERO -->
+    <section id="hero" style="max-width:100%;padding-top:90px;">
+      <div class="avatar">🧑‍💻</div>
+      <h1>Hi, I'm <span>[Your Name]!</span></h1>
+      <p>HTML graduate · Future web developer · Techbase Academy, Ibadan 🇳🇬</p>
+      <div class="btns">
+        <a href="#projects" class="btn-p">See My Projects →</a>
+        <a href="#contact"  class="btn-o">Contact Me</a>
+      </div>
+      <p id="wmsg" style="margin-top:18px;font-size:14px;color:var(--a);font-weight:600;"></p>
+    </section>
+    <hr class="div">
+    <!-- SKILLS -->
+    <div class="sec" id="skills">
+      <div class="sec-tag">What I know</div>
+      <h2 class="sec-h">My HTML Skills</h2>
+      <table>
+        <thead><tr><th>Topic</th><th>What I Can Do</th><th>Status</th></tr></thead>
+        <tbody>
+          <tr><td>HTML Structure</td><td>Build well-organised, semantic pages</td>
+              <td><span class="badge done">✅ Done</span></td></tr>
+          <tr><td>CSS Styling</td><td>Style pages with inline, internal & external CSS</td>
+              <td><span class="badge done">✅ Done</span></td></tr>
+          <tr><td>Forms</td><td>Build accessible validated forms</td>
+              <td><span class="badge done">✅ Done</span></td></tr>
+          <tr><td>Responsive Design</td><td>Media queries & fluid layouts</td>
+              <td><span class="badge done">✅ Done</span></td></tr>
+          <tr><td>JavaScript</td><td>Make pages interactive</td>
+              <td><span class="badge prog">🔜 Coming soon</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <hr class="div">
+    <!-- PROJECTS -->
+    <div class="sec" id="projects">
+      <div class="sec-tag">What I built</div>
+      <h2 class="sec-h">My Projects</h2>
+      <div class="cards">
+        <div class="card"><h3>About Me Page</h3>
+          <p>First HTML page — headings, paragraphs, lists. Lesson 01.</p></div>
+        <div class="card"><h3>Photo Gallery</h3>
+          <p>Responsive gallery with figure/figcaption. Lesson 14.</p></div>
+        <div class="card"><h3>Portfolio Homepage</h3>
+          <p>Phase 2 Capstone — full layout with nav, table, iframes. Lesson 22.</p></div>
+        <div class="card"><h3>Contact Form</h3>
+          <p>Fully validated, styled form with fieldsets. Lesson 31.</p></div>
+        <!-- ADD YOUR OWN PROJECTS! -->
+      </div>
+    </div>
+    <hr class="div">
+    <!-- CANVAS -->
+    <div class="sec" id="canvas">
+      <div class="sec-tag">HTML5 Graphics</div>
+      <h2 class="sec-h">Canvas Animation</h2>
+      <canvas id="myCanvas" width="860" height="220"
+              style="width:100%;background:#0f172a;border-radius:16px;display:block;"></canvas>
+    </div>
+    <hr class="div">
+    <!-- CONTACT -->
+    <div class="sec" id="contact">
+      <div class="sec-tag">Get in touch</div>
+      <h2 class="sec-h">Contact Me</h2>
+      <div style="background:var(--sf);border:1.5px solid var(--b);
+                  border-radius:18px;padding:32px;max-width:580px;">
+        <form action="#" method="post">
+          <label for="nm">Name *</label>
+          <input id="nm" type="text" required placeholder="Tunde Awoyemi">
+          <label for="em">Email *</label>
+          <input id="em" type="email" required placeholder="you@example.com">
+          <label for="ms">Message</label>
+          <textarea id="ms" rows="4" placeholder="Say hello!"></textarea>
+          <button type="submit" class="btn-p" style="width:100%;">
+            Send Message ✉️
+          </button>
+        </form>
+      </div>
+    </div>
+    <footer>
+      <p>Made with ❤️ and <strong>pure HTML</strong> by <strong>[Your Name]</strong></p>
+      <p style="margin-top:6px;">&copy; 2025 [Your Name] &nbsp;|&nbsp;
+         <a href="https://techbasengr.com.ng">Techbase Academy</a>,
+         Ibadan, Nigeria</p>
+      <p style="margin-top:10px;font-size:12px;color:rgba(255,255,255,.25);">
+        All 34 HTML lessons complete ✅
+      </p>
+    </footer>
+    <script>
+      // localStorage greeting
+      const saved = localStorage.getItem('cap_name');
+      if (saved) document.getElementById('wmsg').textContent = 'Welcome back, '+saved+'! 👋';
+      // Canvas particles
+      const cv=document.getElementById('myCanvas'), cx=cv.getContext('2d');
+      const W=cv.width, H=cv.height;
+      const ps=Array.from({length:60},()=>({
+        x:Math.random()*W, y:Math.random()*H,
+        vx:(Math.random()-.5), vy:(Math.random()-.5),
+        r:Math.random()*3+1,
+        c:['#ea4f21','#0284c7','#10b981','#7c3aed','#fbbf24'][Math.floor(Math.random()*5)]
+      }));
+      function anim(){
+        cx.fillStyle='rgba(15,23,42,.18)'; cx.fillRect(0,0,W,H);
+        ps.forEach(p=>{
+          p.x+=p.vx; p.y+=p.vy;
+          if(p.x<0||p.x>W) p.vx*=-1; if(p.y<0||p.y>H) p.vy*=-1;
+          cx.fillStyle=p.c; cx.beginPath();
+          cx.arc(p.x,p.y,p.r,0,2*Math.PI); cx.fill();
+        });
+        requestAnimationFrame(anim);
+      }
+      anim();
+    </script>
+  </body>
+</html>`;
+  function downloadCapstone(){
+    const a=document.createElement('a');
+    a.href='data:text/html;charset=utf-8,'+encodeURIComponent(__cap);
+    a.download='capstone-starter.html'; a.click();
+  }
+  </script>
+</div>
+
+<div class="github-acc" id="github-steps" style="display:none">
+  <div class="github-acc-head" onclick="this.nextElementSibling.classList.toggle('open')">
+    🐙 GitHub Setup — Push your project online &nbsp;<span>▼</span>
+  </div>
+  <div class="github-acc-body">
+    <div class="github-step"><div class="github-step-n">1</div><p>Go to <strong>github.com</strong> and sign in. Click the green <strong>New</strong> button to create a new repository. Name it <code>html-lesson-34-html5_web_apis</code>.</p></div>
+    <div class="github-step"><div class="github-step-n">2</div><p>Leave it <strong>Public</strong> and tick <strong>Add a README file</strong>. Click <strong>Create repository</strong>.</p></div>
+    <div class="github-step"><div class="github-step-n">3</div><p>Click <strong>Add file → Upload files</strong>. Drag your <code>starter.html</code> (and rename it <code>index.html</code> first!) into the upload box.</p></div>
+    <div class="github-step"><div class="github-step-n">4</div><p>Scroll down, add a commit message like <em>"Add lesson 34 project"</em> and click <strong>Commit changes</strong>.</p></div>
+    <div class="github-step"><div class="github-step-n">5</div><p>Go to <strong>Settings → Pages</strong>. Under <em>Branch</em>, select <strong>main</strong> and click <strong>Save</strong>. Your page will be live at <code>https://YOUR-USERNAME.github.io/html-lesson-34-html5_web_apis/</code> in about 1 minute! 🎉</p></div>
+    <button class="next-btn" onclick="showEnd()" style="margin-top:.5rem">I'm done! Finish session ✅</button>
+  </div>
+</div>
+
+<div class="session-end" id="session-end">
+  <h2>🎉 Great work! Lesson 34 complete!</h2>
+  <p style="margin-bottom:.8rem;font-size:.9rem;opacity:.9">Today you learned:</p>
+  <ul><li>✅ localStorage — Remember Things</li><li>✅ Geolocation API</li><li>✅ Dark Mode, Online Status and Clipboard</li><li>✅ Completed the My Complete Techbase Profile Website capstone project</li></ul>
+  <div class="lesson-nav" style="margin-top:1.5rem;border-color:rgba(255,255,255,.2)">
+    <a href="lesson_33.html" class="ln-btn">← Lesson 33</a>
+    <a href="../index.html" class="ln-btn primary">🎉 Course Complete!</a>
+  </div>
+</div>
+
+</main>
+
+<!-- FOOTER -->
+<footer class="lesson-footer">
+  <p>Techbase Code Coach &nbsp;·&nbsp; HTML Course Lesson 34
+     &nbsp;·&nbsp; © 2025 Techbase Consultant Services, Ibadan</p>
+</footer>
+
+<script>
+const TOTAL=3, KEY='techbase_html_34_phase';
+let current=parseInt(localStorage.getItem(KEY)||'1');
+
+function init(){
+  for(let i=1;i<=current;i++) if(i>1) unlockPhase(i,false);
+  updateBar();
+}
+
+function unlockNext(n){
+  document.getElementById('check'+n).classList.add('done');
+  document.getElementById('check'+n).textContent='✓';
+  localStorage.setItem(KEY,n+1);
+  current=n+1;
+  if(n===TOTAL){
+    document.getElementById('build-it').style.display='block';
+    const cap=document.getElementById('capstone');
+    if(cap) cap.style.display='block';
+    updateBar(100);
+    setTimeout(()=>document.getElementById('build-it').scrollIntoView({behavior:'smooth'}),200);
+  } else {
+    unlockPhase(n+1,true);
+    updateBar();
+  }
+}
+
+function unlockPhase(n,scroll){
+  const el=document.getElementById('phase'+n);
+  if(el){ el.classList.remove('locked'); if(scroll) setTimeout(()=>el.scrollIntoView({behavior:'smooth',block:'start'}),150); }
+}
+
+function updateBar(pct){
+  const p=pct||Math.round((current-1)/TOTAL*95);
+  document.getElementById('pbar').style.width=p+'%';
+}
+
+function showGithub(){
+  const g=document.getElementById('github-steps');
+  if(g){ g.style.display='block'; setTimeout(()=>g.scrollIntoView({behavior:'smooth'}),150); }
+}
+
+function showEnd(){
+  const e=document.getElementById('session-end');
+  if(e){ e.classList.add('visible'); setTimeout(()=>e.scrollIntoView({behavior:'smooth'}),150); }
+}
+
+init();
+</script>
+
+</body>
+</html>

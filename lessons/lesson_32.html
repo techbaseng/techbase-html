@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lesson 32: HTML Canvas and SVG — Techbase HTML Course</title>
+<meta name="description" content="Draw graphics directly in the browser using Canvas (JavaScript) and SVG (markup)">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root { 
+  --accent:#ea4f21;--accent-pale:#fff3ef;--accent-dark:#c23d15;
+  --accent-border:rgba(234,79,33,.3);--accent-shadow:rgba(234,79,33,.28);
+  --hero-bg:linear-gradient(160deg,#fff3ef 0%,#f8fafc 55%,#fef2e9 100%);
+  --s2:#f1f5f9;
+ }
+:root{
+  --bg:#f8fafc;--surface:#fff;--border:#e2e8f0;--border2:#cbd5e1;
+  --text:#0f172a;--t2:#334155;--muted:#64748b;
+  --D:'Space Grotesk',sans-serif;--B:'Plus Jakarta Sans',sans-serif;--M:'JetBrains Mono',monospace;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased}
+body{background:var(--bg);color:var(--text);font-family:var(--B);font-size:16px;line-height:1.7;overflow-x:hidden}
+/* NAV */
+.l-nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(255,255,255,.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);height:58px;display:flex;align-items:center;padding:0 1.5rem;gap:1rem;justify-content:space-between}
+.l-nav-logo{font-family:var(--D);font-weight:700;font-size:.88rem;color:var(--text);text-decoration:none}
+.l-nav-logo em{font-style:normal}
+.l-nav-back{font-size:.8rem;color:var(--muted);text-decoration:none;font-weight:500;display:flex;align-items:center;gap:.3rem;transition:color .2s}
+.l-nav-back:hover{color:var(--accent)}
+.l-nav-lesson{font-family:var(--M);font-size:.68rem;color:var(--muted)}
+/* PROGRESS BAR */
+.progress-wrap{position:fixed;top:58px;left:0;right:0;z-index:199;height:4px;background:var(--border)}
+.progress-bar{height:100%;background:var(--accent);transition:width .4s ease;width:0%}
+/* HERO */
+.l-hero{padding:88px 1.5rem 2rem;background:var(--hero-bg);border-bottom:1px solid var(--border)}
+.l-hero-inner{max-width:820px;margin:0 auto}
+.l-badge{display:inline-flex;align-items:center;gap:.4rem;border-radius:100px;padding:.2rem .8rem;font-family:var(--M);font-size:.62rem;letter-spacing:.08em;text-transform:uppercase;font-weight:600;border:1px solid;color:var(--accent);background:var(--accent-pale);border-color:var(--accent-border);margin-bottom:.8rem}
+.l-hero h1{font-family:var(--D);font-weight:700;font-size:clamp(1.6rem,4vw,2.4rem);letter-spacing:-.025em;line-height:1.15;margin-bottom:.5rem}
+.l-hero-tag{font-size:.95rem;color:var(--muted);margin-bottom:1.2rem}
+.l-hero-build{background:var(--surface);border:1.5px solid var(--border);border-radius:10px;padding:.9rem 1.2rem;display:flex;align-items:center;gap:.7rem;font-size:.88rem;max-width:520px}
+.l-hero-build strong{color:var(--accent)}
+/* WELCOME BOX */
+.welcome-box{background:linear-gradient(135deg,var(--accent),var(--accent-dark));color:#fff;border-radius:16px;padding:1.5rem 1.8rem;max-width:820px;margin:2rem auto 0}
+.welcome-box h2{font-family:var(--D);font-weight:700;font-size:1.1rem;margin-bottom:.6rem}
+.welcome-box p{font-size:.9rem;line-height:1.75;opacity:.92}
+.welcome-meta{display:flex;gap:1.5rem;margin-top:1rem;flex-wrap:wrap}
+.welcome-meta span{background:rgba(255,255,255,.15);border-radius:6px;padding:.25rem .8rem;font-family:var(--M);font-size:.7rem;font-weight:500}
+/* MAIN CONTENT */
+main{max-width:820px;margin:0 auto;padding:2rem 1.5rem 5rem}
+/* PHASE */
+.phase{background:var(--surface);border:1.5px solid var(--border);border-radius:16px;margin-bottom:1.5rem;overflow:hidden;transition:opacity .3s,transform .3s}
+.phase.locked{opacity:.4;pointer-events:none;filter:blur(1px)}
+.phase-header{padding:1rem 1.4rem;background:var(--s2,#f1f5f9);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;gap:1rem}
+.phase-num{font-family:var(--M);font-size:.7rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}
+.phase-title{font-family:var(--D);font-weight:700;font-size:1rem;color:var(--text)}
+.phase-check{width:24px;height:24px;border-radius:50%;background:var(--border);display:flex;align-items:center;justify-content:center;font-size:.75rem;flex-shrink:0;transition:background .3s}
+.phase-check.done{background:#10b981;color:#fff}
+.phase-body{padding:1.4rem}
+/* CONCEPT BOX */
+.concept-box{background:#f0f9ff;border-left:4px solid #0284c7;border-radius:0 10px 10px 0;padding:1rem 1.2rem;margin-bottom:1.2rem}
+.concept-label{font-family:var(--M);font-size:.65rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#0284c7;margin-bottom:.4rem}
+.concept-box p{font-size:.92rem;color:#0c4a6e;line-height:1.75}
+/* CODE BLOCK */
+.code-wrap{margin:1.2rem 0;border-radius:12px;overflow:hidden;border:1px solid #1e293b}
+.code-bar{background:#1e293b;padding:.6rem 1rem;display:flex;align-items:center;gap:.4rem}
+.code-dot{width:8px;height:8px;border-radius:50%}
+.code-dot.r{background:#ff5f57}.code-dot.y{background:#febc2e}.code-dot.g{background:#28c840}
+.code-filename{margin-left:.5rem;font-family:var(--M);font-size:.65rem;color:#64748b}
+.code-body{background:#0f172a;padding:1.2rem 1.4rem;overflow-x:auto}
+.code-body pre{font-family:var(--M);font-size:.78rem;line-height:1.9;color:#e2e8f0;margin:0;white-space:pre}
+.code-body pre .cm{color:#64748b} /* comment */
+.code-body pre .tg{color:#38bdf8} /* tag */
+.code-body pre .at{color:#c084fc} /* attribute */
+.code-body pre .vl{color:#86efac} /* value */
+.code-body pre .tx{color:#e2e8f0} /* text */
+/* TASK BOX */
+.task-box{background:#fffbeb;border:1.5px dashed #d97706;border-radius:12px;padding:1rem 1.2rem;margin:1.2rem 0}
+.task-label{font-family:var(--M);font-size:.65rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#b45309;margin-bottom:.4rem}
+.task-box p{font-size:.92rem;color:#78350f;line-height:1.75}
+.task-box code{background:rgba(180,83,9,.1);border-radius:4px;padding:.1rem .4rem;font-family:var(--M);font-size:.82em}
+/* NEXT BUTTON */
+.next-btn{display:inline-flex;align-items:center;gap:.5rem;background:var(--accent);color:#fff;font-family:var(--D);font-weight:700;font-size:.88rem;padding:.75rem 1.5rem;border-radius:10px;border:none;cursor:pointer;transition:transform .2s,box-shadow .2s;box-shadow:0 4px 12px var(--accent-shadow);margin-top:1rem}
+.next-btn:hover{transform:translateY(-2px);box-shadow:0 8px 20px var(--accent-shadow)}
+.next-btn:disabled{opacity:.5;cursor:not-allowed;transform:none}
+.next-tip{font-family:var(--M);font-size:.72rem;color:var(--muted);margin-top:.6rem}
+/* PROJECT BOX */
+.project-box{background:#f0fdf4;border:2px solid #16a34a;border-radius:16px;padding:1.5rem;margin:2rem 0}
+.project-label{font-family:var(--M);font-size:.65rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#15803d;margin-bottom:.4rem}
+.project-name{font-family:var(--D);font-weight:700;font-size:1.1rem;color:#14532d;margin-bottom:.5rem}
+.project-desc{font-size:.9rem;color:#166534;margin-bottom:1.2rem;line-height:1.7}
+/* CAPSTONE BOX */
+.capstone-box{background:linear-gradient(135deg,#1e1b4b,#312e81);border-radius:16px;padding:1.5rem;margin:2rem 0;color:#fff}
+.capstone-label{font-family:var(--M);font-size:.65rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#a5b4fc;margin-bottom:.4rem}
+.capstone-name{font-family:var(--D);font-weight:700;font-size:1.2rem;margin-bottom:.5rem}
+.capstone-desc{font-size:.9rem;color:rgba(255,255,255,.8);margin-bottom:1.2rem;line-height:1.7}
+/* FILE TABS */
+.file-tabs{display:flex;gap:.5rem;margin-bottom:0;flex-wrap:wrap}
+.file-tab{font-family:var(--M);font-size:.72rem;padding:.35rem .8rem;background:#1e293b;color:#94a3b8;border-radius:6px 6px 0 0;cursor:pointer;border:1px solid #334155;border-bottom:none;transition:background .15s}
+.file-tab.active{background:#0f172a;color:#e2e8f0}
+.file-content{display:none}.file-content.active{display:block}
+/* GITHUB ACCORDION */
+.github-acc{border:1.5px solid var(--border);border-radius:12px;overflow:hidden;margin:1.5rem 0}
+.github-acc-head{padding:1rem 1.2rem;background:#f8fafc;cursor:pointer;display:flex;align-items:center;justify-content:space-between;font-family:var(--D);font-weight:600;font-size:.9rem;user-select:none}
+.github-acc-body{display:none;padding:1.2rem;border-top:1px solid var(--border)}
+.github-acc-body.open{display:block}
+.github-step{display:flex;gap:.8rem;margin-bottom:1rem;align-items:flex-start}
+.github-step-n{width:24px;height:24px;border-radius:50%;background:var(--accent);color:#fff;font-family:var(--D);font-weight:700;font-size:.75rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px}
+.github-step p{font-size:.88rem;color:var(--t2);line-height:1.7}
+/* SESSION END */
+.session-end{background:linear-gradient(135deg,var(--accent),var(--accent-dark));color:#fff;border-radius:16px;padding:1.5rem 1.8rem;margin:2rem 0;display:none}
+.session-end.visible{display:block}
+.session-end h2{font-family:var(--D);font-weight:700;font-size:1.1rem;margin-bottom:.8rem}
+.session-end ul{list-style:none;display:flex;flex-direction:column;gap:.4rem}
+.session-end li{font-size:.9rem;opacity:.92;display:flex;align-items:center;gap:.5rem}
+/* LESSON NAV */
+.lesson-nav{display:flex;align-items:center;justify-content:space-between;padding-top:2rem;border-top:1px solid var(--border);margin-top:2rem;flex-wrap:wrap;gap:.75rem}
+.ln-btn{display:inline-flex;align-items:center;gap:.4rem;background:var(--surface);color:var(--t2);font-family:var(--D);font-weight:600;font-size:.82rem;padding:.65rem 1.2rem;border-radius:8px;text-decoration:none;border:1.5px solid var(--border);transition:border-color .2s,color .2s}
+.ln-btn:hover{border-color:var(--accent);color:var(--accent)}
+.ln-btn.primary{background:var(--accent);color:#fff;border-color:var(--accent)}
+.ln-btn.primary:hover{opacity:.9}
+/* UTILS */
+code{font-family:var(--M);font-size:.85em;background:#f1f5f9;border-radius:4px;padding:.1rem .35rem;color:var(--accent)}
+.emoji{font-style:normal}
+@media(max-width:600px){.l-hero h1{font-size:1.5rem}.welcome-meta{gap:.75rem}}
+
+</style>
+</head>
+<body>
+
+<!-- FIXED NAV -->
+<nav class="lesson-nav-bar">
+  <a href="../index.html" class="nav-back">← HTML Course</a>
+  <span class="nav-lesson">Lesson 32 of 34 &nbsp;·&nbsp; HTML Canvas and SVG</span>
+  <div class="nav-actions">
+    <a href="lesson_31.html" class="ln-btn">← Lesson 31</a>
+    <a href="lesson_33.html" class="ln-btn primary">Lesson 33 →</a>
+  </div>
+</nav>
+
+<!-- PROGRESS BAR -->
+<div id="progress-wrap">
+  <div id="pbar" style="width:5%;background:var(--accent);height:4px;
+       border-radius:2px;transition:width .4s ease;"></div>
+</div>
+
+<!-- HERO -->
+<section class="lesson-hero">
+  <div class="hero-inner">
+    <div class="lesson-num-badge">Lesson 32</div>
+    <h1>HTML Canvas and SVG</h1>
+    <p class="lesson-tagline">Draw graphics directly in the browser using Canvas (JavaScript) and SVG (markup)</p>
+    <div class="lesson-meta">
+      <span>📚 3 phases</span>
+      <span>🏗️ Build: My Graphics Page</span>
+      
+    </div>
+  </div>
+</section>
+
+<!-- MAIN CONTENT -->
+<main class="lesson-main">
+
+<div class="welcome-box">
+  <div class="welcome-label">👋 Welcome to Lesson 32!</div>
+  <h2>HTML Canvas and SVG</h2>
+  <p>Draw graphics directly in the browser using Canvas (JavaScript) and SVG (markup). In this lesson you will work through
+     <strong>3 phases</strong>.
+     Complete each phase task before clicking <em>Next Phase</em>.
+     
+  </p>
+</div>
+
+<div class="phase " id="phase1" data-phase="1">
+  <div class="phase-header">
+    <div><div class="phase-num">Phase 1</div><div class="phase-title">SVG — Scalable Vector Graphics</div></div>
+    <div class="phase-check" id="check1"></div>
+  </div>
+  <div class="phase-body">
+    <div class="concept-box">
+      <div class="concept-label">💡 Concept</div>
+      <p><strong>SVG</strong> draws shapes using HTML-like tags. Shapes scale to any size without blurring — perfect for logos and icons. Basic shapes: <code>&lt;rect&gt;</code> (rectangle with optional <code>rx</code> for rounded corners), <code>&lt;circle&gt;</code> (cx/cy=centre, r=radius), <code>&lt;line&gt;</code>, <code>&lt;polygon&gt;</code> (points), <code>&lt;text&gt;</code>. Attributes: <code>fill</code> (colour), <code>stroke</code> (outline colour), <code>stroke-width</code>.</p>
+    </div>
+    <div class="code-wrap">
+  <div class="code-bar">
+    <span class="code-dot r"></span><span class="code-dot y"></span><span class="code-dot g"></span>
+    <span class="code-filename">index.html</span>
+  </div>
+  <div class="code-body"><pre>&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+  &lt;head&gt;&lt;title&gt;SVG Shapes&lt;/title&gt;&lt;/head&gt;
+  &lt;body&gt;
+    &lt;h1&gt;SVG Drawing&lt;/h1&gt;
+    &lt;svg width="400" height="300"
+         style="border:1px solid #e2e8f0; border-radius:10px; background:#f8fafc;"&gt;
+      &lt;!-- Rectangle with rounded corners --&gt;
+      &lt;rect x="20" y="20" width="120" height="80"
+            fill="#ea4f21" rx="10"/&gt;
+      &lt;!-- Circle --&gt;
+      &lt;circle cx="260" cy="60" r="50" fill="#0284c7"/&gt;
+      &lt;!-- Triangle --&gt;
+      &lt;polygon points="300,120 380,270 220,270" fill="#d97706"/&gt;
+      &lt;!-- Ellipse --&gt;
+      &lt;ellipse cx="110" cy="210" rx="90" ry="50" fill="#10b981"/&gt;
+      &lt;!-- Line --&gt;
+      &lt;line x1="20" y1="290" x2="380" y2="290"
+            stroke="#7c3aed" stroke-width="3"/&gt;
+      &lt;!-- Text --&gt;
+      &lt;text x="20" y="285" fill="white"
+            font-family="Arial" font-size="14" font-weight="bold"&gt;
+        SVG shapes!
+      &lt;/text&gt;
+    &lt;/svg&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</pre></div>
+</div>
+    <div class="task-box">
+      <div class="task-label">✏️ Your Task</div>
+      <p>Draw your initials using SVG! Use <code>&lt;rect&gt;</code> and <code>&lt;polygon&gt;</code> shapes to form the letters, or use <code>&lt;text&gt;</code> with a large font-size. Colour each letter differently.</p>
+    </div>
+    <button class="next-btn" onclick="unlockNext(1)">
+      Next Phase → <span>→</span>
+    </button>
+    <p class="next-tip">Try the task first, then click to continue!</p>
+  </div>
+</div><div class="phase locked" id="phase2" data-phase="2">
+  <div class="phase-header">
+    <div><div class="phase-num">Phase 2</div><div class="phase-title">HTML Canvas with JavaScript</div></div>
+    <div class="phase-check" id="check2"></div>
+  </div>
+  <div class="phase-body">
+    <div class="concept-box">
+      <div class="concept-label">💡 Concept</div>
+      <p>The <code>&lt;canvas&gt;</code> element is a drawing surface controlled with JavaScript. Get the context: <code>const ctx = canvas.getContext('2d')</code>. Then draw: <code>fillRect(x,y,w,h)</code>, <code>beginPath()</code>, <code>arc(x,y,r,0,2*Math.PI)</code> for circles, <code>fillText(text,x,y)</code>. Canvas is pixel-based — better than SVG for games and animations.</p>
+    </div>
+    <div class="code-wrap">
+  <div class="code-bar">
+    <span class="code-dot r"></span><span class="code-dot y"></span><span class="code-dot g"></span>
+    <span class="code-filename">index.html</span>
+  </div>
+  <div class="code-body"><pre>&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+  &lt;head&gt;&lt;title&gt;Canvas&lt;/title&gt;&lt;/head&gt;
+  &lt;body&gt;
+    &lt;h1&gt;Canvas Drawing&lt;/h1&gt;
+    &lt;canvas id="myCanvas" width="500" height="300"
+            style="border:1px solid #e2e8f0; border-radius:10px; display:block;"&gt;&lt;/canvas&gt;
+    &lt;script&gt;
+      const canvas = document.getElementById('myCanvas');
+      const ctx = canvas.getContext('2d');
+      // Orange rectangle
+      ctx.fillStyle = '#ea4f21';
+      ctx.fillRect(20, 20, 150, 80);
+      // Blue circle
+      ctx.fillStyle = '#0284c7';
+      ctx.beginPath();
+      ctx.arc(320, 80, 60, 0, 2 * Math.PI);
+      ctx.fill();
+      // Green triangle (path)
+      ctx.fillStyle = '#10b981';
+      ctx.beginPath();
+      ctx.moveTo(100, 240);
+      ctx.lineTo(200, 140);
+      ctx.lineTo(300, 240);
+      ctx.closePath();
+      ctx.fill();
+      // Text
+      ctx.fillStyle = '#0f172a';
+      ctx.font = 'bold 18px Arial';
+      ctx.fillText('Canvas!', 20, 280);
+    &lt;/script&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</pre></div>
+</div>
+    <div class="task-box">
+      <div class="task-label">✏️ Your Task</div>
+      <p>Add a purple rectangle outline with <code>ctx.strokeStyle='#7c3aed'; ctx.strokeRect(x,y,w,h);</code>. Then add a line with <code>ctx.beginPath(); ctx.moveTo(x1,y1); ctx.lineTo(x2,y2); ctx.stroke();</code>.</p>
+    </div>
+    <button class="next-btn" onclick="unlockNext(2)">
+      Next Phase → <span>→</span>
+    </button>
+    <p class="next-tip">Try the task first, then click to continue!</p>
+  </div>
+</div><div class="phase locked" id="phase3" data-phase="3">
+  <div class="phase-header">
+    <div><div class="phase-num">Phase 3</div><div class="phase-title">SVG vs Canvas</div></div>
+    <div class="phase-check" id="check3"></div>
+  </div>
+  <div class="phase-body">
+    <div class="concept-box">
+      <div class="concept-label">💡 Concept</div>
+      <p>SVG is best for: logos, icons, interactive graphics (CSS hover works!), and accessible content (screen readers can read SVG text). Canvas is best for: pixel-level control, smooth animations (games), large numbers of moving objects, and image processing. Most modern sites use SVG for icons and Canvas for games or live charts.</p>
+    </div>
+    <div class="code-wrap">
+  <div class="code-bar">
+    <span class="code-dot r"></span><span class="code-dot y"></span><span class="code-dot g"></span>
+    <span class="code-filename">index.html</span>
+  </div>
+  <div class="code-body"><pre>&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+  &lt;head&gt;
+    &lt;title&gt;SVG vs Canvas&lt;/title&gt;
+    &lt;style&gt;
+      .demos { display:flex; gap:20px; flex-wrap:wrap; }
+      .demo  { background:white; border-radius:12px; padding:16px;
+               border:1.5px solid #e2e8f0; }
+    &lt;/style&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;h1&gt;SVG vs Canvas&lt;/h1&gt;
+    &lt;div class="demos"&gt;
+      &lt;div class="demo"&gt;
+        &lt;h3&gt;SVG — hover to grow!&lt;/h3&gt;
+        &lt;svg width="200" height="200"&gt;
+          &lt;style&gt;circle { transition:r .3s; } circle:hover { r:75; }&lt;/style&gt;
+          &lt;circle cx="100" cy="100" r="60" fill="#ea4f21" style="cursor:pointer;"/&gt;
+          &lt;text x="100" y="108" text-anchor="middle"
+                fill="white" font-family="Arial" font-weight="bold"&gt;SVG&lt;/text&gt;
+        &lt;/svg&gt;
+      &lt;/div&gt;
+      &lt;div class="demo"&gt;
+        &lt;h3&gt;Canvas — animated!&lt;/h3&gt;
+        &lt;canvas id="c" width="200" height="200"&gt;&lt;/canvas&gt;
+        &lt;script&gt;
+          const c=document.getElementById('c'), x=c.getContext('2d');
+          let a=0;
+          function draw(){
+            x.clearRect(0,0,200,200);
+            x.fillStyle='#0f172a'; x.fillRect(0,0,200,200);
+            x.fillStyle='#0284c7';
+            x.beginPath();
+            x.arc(100+Math.cos(a)*40, 100+Math.sin(a)*40, 20, 0, 2*Math.PI);
+            x.fill();
+            a+=0.03; requestAnimationFrame(draw);
+          }
+          draw();
+        &lt;/script&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</pre></div>
+</div>
+    <div class="task-box">
+      <div class="task-label">✏️ Your Task</div>
+      <p>Try adding a second circle to the SVG that also grows on hover. Then try changing the canvas animation speed by increasing or decreasing the <code>0.03</code> angle increment.</p>
+    </div>
+    <button class="next-btn" onclick="unlockNext(3)">
+      Build It! 🚀 <span>→</span>
+    </button>
+    <p class="next-tip">Try the task first, then click to continue!</p>
+  </div>
+</div>
+
+<div class="project-box" id="build-it" style="display:none">
+  <div class="project-label">🏗️ Build It!</div>
+  <div class="project-name">My Graphics Page</div>
+  <p class="project-desc">Build a graphics showcase page with an SVG illustration AND a Canvas animation side by side.</p>
+  <div class="code-wrap">
+    <div class="code-bar">
+      <span class="code-dot r"></span><span class="code-dot y"></span><span class="code-dot g"></span>
+      <span class="code-filename">starter.html — copy this into a new file!</span>
+    </div>
+    <div class="code-body"><pre id="starter-code">&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+  &lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;My Graphics Page — Lesson 32&lt;/title&gt;
+    &lt;style&gt;
+      * { box-sizing:border-box; }
+      body { font-family:Arial,sans-serif; background:#f1f5f9;
+             padding:30px; max-width:960px; margin:0 auto; }
+      h1 { color:#ea4f21; text-align:center; }
+      .grid { display:flex; gap:24px; flex-wrap:wrap; margin-top:30px; }
+      .panel { flex:1; min-width:300px; background:white;
+               border-radius:16px; padding:24px;
+               box-shadow:0 2px 10px rgba(0,0,0,.07); }
+      .panel h2 { color:#0f172a; margin:0 0 16px; font-size:1.1rem; }
+      .panel p  { color:#64748b; font-size:13px; margin-top:12px; }
+      canvas, svg { border-radius:10px; display:block; width:100%; }
+    &lt;/style&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;h1&gt;🎨 My HTML Graphics Page&lt;/h1&gt;
+    &lt;div class="grid"&gt;
+      &lt;div class="panel"&gt;
+        &lt;h2&gt;🔷 SVG — Landscape&lt;/h2&gt;
+        &lt;svg viewBox="0 0 300 200" style="background:#dbeafe;"&gt;
+          &lt;rect width="300" height="200" fill="#dbeafe"/&gt;
+          &lt;circle cx="250" cy="40" r="25" fill="#fbbf24"/&gt;
+          &lt;polygon points="0,200 100,80 200,200"  fill="#94a3b8"/&gt;
+          &lt;polygon points="80,200 190,60 300,200" fill="#64748b"/&gt;
+          &lt;rect x="0" y="170" width="300" height="30" fill="#10b981"/&gt;
+          &lt;rect x="30" y="150" width="8" height="22" fill="#78350f"/&gt;
+          &lt;polygon points="34,110 18,152 50,152" fill="#166534"/&gt;
+          &lt;text x="6" y="196" font-family="Arial" font-size="10"
+                fill="rgba(0,0,0,.4)"&gt;SVG Landscape — scales perfectly!&lt;/text&gt;
+        &lt;/svg&gt;
+        &lt;p&gt;✅ Scales without blurring | ✅ CSS hover works | ✅ Screen-reader friendly&lt;/p&gt;
+      &lt;/div&gt;
+      &lt;div class="panel" style="background:#0f172a;"&gt;
+        &lt;h2 style="color:#f1f5f9;"&gt;🔶 Canvas — Particle Animation&lt;/h2&gt;
+        &lt;canvas id="myCanvas" width="400" height="220"&gt;&lt;/canvas&gt;
+        &lt;p style="color:#475569;"&gt;✅ Smooth 60fps animation | ✅ Game-ready | ✅ Pixel control&lt;/p&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;script&gt;
+      const canvas=document.getElementById('myCanvas'), ctx=canvas.getContext('2d');
+      const W=canvas.width, H=canvas.height;
+      const pts=Array.from({length:50},()=&gt;({
+        x:Math.random()*W, y:Math.random()*H,
+        vx:(Math.random()-.5), vy:(Math.random()-.5),
+        r:Math.random()*3+1,
+        c:['#ea4f21','#0284c7','#10b981','#7c3aed','#fbbf24'][Math.floor(Math.random()*5)]
+      }));
+      function draw(){
+        ctx.fillStyle='rgba(15,23,42,.2)'; ctx.fillRect(0,0,W,H);
+        pts.forEach(p=&gt;{
+          p.x+=p.vx; p.y+=p.vy;
+          if(p.x&lt;0||p.x&gt;W) p.vx*=-1;
+          if(p.y&lt;0||p.y&gt;H) p.vy*=-1;
+          ctx.fillStyle=p.c;
+          ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,2*Math.PI); ctx.fill();
+        });
+        requestAnimationFrame(draw);
+      }
+      draw();
+    &lt;/script&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</pre></div>
+  </div>
+  <button class="next-btn" onclick="downloadStarter()" style="margin-right:.75rem">
+    ⬇️ Download starter.html
+  </button>
+  <button class="next-btn" onclick="showGithub()" style="background:#10b981;box-shadow:0 4px 12px rgba(16,185,129,.3)">
+    Show GitHub Steps →
+  </button>
+  <script>
+  const __code = `<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Graphics Page — Lesson 32</title>
+    <style>
+      * { box-sizing:border-box; }
+      body { font-family:Arial,sans-serif; background:#f1f5f9;
+             padding:30px; max-width:960px; margin:0 auto; }
+      h1 { color:#ea4f21; text-align:center; }
+      .grid { display:flex; gap:24px; flex-wrap:wrap; margin-top:30px; }
+      .panel { flex:1; min-width:300px; background:white;
+               border-radius:16px; padding:24px;
+               box-shadow:0 2px 10px rgba(0,0,0,.07); }
+      .panel h2 { color:#0f172a; margin:0 0 16px; font-size:1.1rem; }
+      .panel p  { color:#64748b; font-size:13px; margin-top:12px; }
+      canvas, svg { border-radius:10px; display:block; width:100%; }
+    </style>
+  </head>
+  <body>
+    <h1>🎨 My HTML Graphics Page</h1>
+    <div class="grid">
+      <div class="panel">
+        <h2>🔷 SVG — Landscape</h2>
+        <svg viewBox="0 0 300 200" style="background:#dbeafe;">
+          <rect width="300" height="200" fill="#dbeafe"/>
+          <circle cx="250" cy="40" r="25" fill="#fbbf24"/>
+          <polygon points="0,200 100,80 200,200"  fill="#94a3b8"/>
+          <polygon points="80,200 190,60 300,200" fill="#64748b"/>
+          <rect x="0" y="170" width="300" height="30" fill="#10b981"/>
+          <rect x="30" y="150" width="8" height="22" fill="#78350f"/>
+          <polygon points="34,110 18,152 50,152" fill="#166534"/>
+          <text x="6" y="196" font-family="Arial" font-size="10"
+                fill="rgba(0,0,0,.4)">SVG Landscape — scales perfectly!</text>
+        </svg>
+        <p>✅ Scales without blurring | ✅ CSS hover works | ✅ Screen-reader friendly</p>
+      </div>
+      <div class="panel" style="background:#0f172a;">
+        <h2 style="color:#f1f5f9;">🔶 Canvas — Particle Animation</h2>
+        <canvas id="myCanvas" width="400" height="220"></canvas>
+        <p style="color:#475569;">✅ Smooth 60fps animation | ✅ Game-ready | ✅ Pixel control</p>
+      </div>
+    </div>
+    <script>
+      const canvas=document.getElementById('myCanvas'), ctx=canvas.getContext('2d');
+      const W=canvas.width, H=canvas.height;
+      const pts=Array.from({length:50},()=>({
+        x:Math.random()*W, y:Math.random()*H,
+        vx:(Math.random()-.5), vy:(Math.random()-.5),
+        r:Math.random()*3+1,
+        c:['#ea4f21','#0284c7','#10b981','#7c3aed','#fbbf24'][Math.floor(Math.random()*5)]
+      }));
+      function draw(){
+        ctx.fillStyle='rgba(15,23,42,.2)'; ctx.fillRect(0,0,W,H);
+        pts.forEach(p=>{
+          p.x+=p.vx; p.y+=p.vy;
+          if(p.x<0||p.x>W) p.vx*=-1;
+          if(p.y<0||p.y>H) p.vy*=-1;
+          ctx.fillStyle=p.c;
+          ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,2*Math.PI); ctx.fill();
+        });
+        requestAnimationFrame(draw);
+      }
+      draw();
+    </script>
+  </body>
+</html>`;
+  function downloadStarter(){
+    const a=document.createElement('a');
+    a.href='data:text/html;charset=utf-8,'+encodeURIComponent(__code);
+    a.download='starter.html'; a.click();
+  }
+  </script>
+</div>
+
+
+
+<div class="github-acc" id="github-steps" style="display:none">
+  <div class="github-acc-head" onclick="this.nextElementSibling.classList.toggle('open')">
+    🐙 GitHub Setup — Push your project online &nbsp;<span>▼</span>
+  </div>
+  <div class="github-acc-body">
+    <div class="github-step"><div class="github-step-n">1</div><p>Go to <strong>github.com</strong> and sign in. Click the green <strong>New</strong> button to create a new repository. Name it <code>html-lesson-32-html_canvas_and_svg</code>.</p></div>
+    <div class="github-step"><div class="github-step-n">2</div><p>Leave it <strong>Public</strong> and tick <strong>Add a README file</strong>. Click <strong>Create repository</strong>.</p></div>
+    <div class="github-step"><div class="github-step-n">3</div><p>Click <strong>Add file → Upload files</strong>. Drag your <code>starter.html</code> (and rename it <code>index.html</code> first!) into the upload box.</p></div>
+    <div class="github-step"><div class="github-step-n">4</div><p>Scroll down, add a commit message like <em>"Add lesson 32 project"</em> and click <strong>Commit changes</strong>.</p></div>
+    <div class="github-step"><div class="github-step-n">5</div><p>Go to <strong>Settings → Pages</strong>. Under <em>Branch</em>, select <strong>main</strong> and click <strong>Save</strong>. Your page will be live at <code>https://YOUR-USERNAME.github.io/html-lesson-32-html_canvas_and_svg/</code> in about 1 minute! 🎉</p></div>
+    <button class="next-btn" onclick="showEnd()" style="margin-top:.5rem">I'm done! Finish session ✅</button>
+  </div>
+</div>
+
+<div class="session-end" id="session-end">
+  <h2>🎉 Great work! Lesson 32 complete!</h2>
+  <p style="margin-bottom:.8rem;font-size:.9rem;opacity:.9">Today you learned:</p>
+  <ul><li>✅ SVG — Scalable Vector Graphics</li><li>✅ HTML Canvas with JavaScript</li><li>✅ SVG vs Canvas</li></ul>
+  <div class="lesson-nav" style="margin-top:1.5rem;border-color:rgba(255,255,255,.2)">
+    <a href="lesson_31.html" class="ln-btn">← Lesson 31</a>
+    <a href="lesson_33.html" class="ln-btn primary">Lesson 33 →</a>
+  </div>
+</div>
+
+</main>
+
+<!-- FOOTER -->
+<footer class="lesson-footer">
+  <p>Techbase Code Coach &nbsp;·&nbsp; HTML Course Lesson 32
+     &nbsp;·&nbsp; © 2025 Techbase Consultant Services, Ibadan</p>
+</footer>
+
+<script>
+const TOTAL=3, KEY='techbase_html_32_phase';
+let current=parseInt(localStorage.getItem(KEY)||'1');
+
+function init(){
+  for(let i=1;i<=current;i++) if(i>1) unlockPhase(i,false);
+  updateBar();
+}
+
+function unlockNext(n){
+  document.getElementById('check'+n).classList.add('done');
+  document.getElementById('check'+n).textContent='✓';
+  localStorage.setItem(KEY,n+1);
+  current=n+1;
+  if(n===TOTAL){
+    document.getElementById('build-it').style.display='block';
+    const cap=document.getElementById('capstone');
+    if(cap) cap.style.display='block';
+    updateBar(100);
+    setTimeout(()=>document.getElementById('build-it').scrollIntoView({behavior:'smooth'}),200);
+  } else {
+    unlockPhase(n+1,true);
+    updateBar();
+  }
+}
+
+function unlockPhase(n,scroll){
+  const el=document.getElementById('phase'+n);
+  if(el){ el.classList.remove('locked'); if(scroll) setTimeout(()=>el.scrollIntoView({behavior:'smooth',block:'start'}),150); }
+}
+
+function updateBar(pct){
+  const p=pct||Math.round((current-1)/TOTAL*95);
+  document.getElementById('pbar').style.width=p+'%';
+}
+
+function showGithub(){
+  const g=document.getElementById('github-steps');
+  if(g){ g.style.display='block'; setTimeout(()=>g.scrollIntoView({behavior:'smooth'}),150); }
+}
+
+function showEnd(){
+  const e=document.getElementById('session-end');
+  if(e){ e.classList.add('visible'); setTimeout(()=>e.scrollIntoView({behavior:'smooth'}),150); }
+}
+
+init();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lesson 16: HTML Tables — Techbase HTML Course</title>
+<meta name="description" content="Organise data into rows and columns using HTML table tags">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root { 
+  --accent:#ea4f21;--accent-pale:#fff3ef;--accent-dark:#c23d15;
+  --accent-border:rgba(234,79,33,.3);--accent-shadow:rgba(234,79,33,.28);
+  --hero-bg:linear-gradient(160deg,#fff3ef 0%,#f8fafc 55%,#fef2e9 100%);
+  --s2:#f1f5f9;
+ }
+:root{
+  --bg:#f8fafc;--surface:#fff;--border:#e2e8f0;--border2:#cbd5e1;
+  --text:#0f172a;--t2:#334155;--muted:#64748b;
+  --D:'Space Grotesk',sans-serif;--B:'Plus Jakarta Sans',sans-serif;--M:'JetBrains Mono',monospace;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased}
+body{background:var(--bg);color:var(--text);font-family:var(--B);font-size:16px;line-height:1.7;overflow-x:hidden}
+/* NAV */
+.l-nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(255,255,255,.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);height:58px;display:flex;align-items:center;padding:0 1.5rem;gap:1rem;justify-content:space-between}
+.l-nav-logo{font-family:var(--D);font-weight:700;font-size:.88rem;color:var(--text);text-decoration:none}
+.l-nav-logo em{font-style:normal}
+.l-nav-back{font-size:.8rem;color:var(--muted);text-decoration:none;font-weight:500;display:flex;align-items:center;gap:.3rem;transition:color .2s}
+.l-nav-back:hover{color:var(--accent)}
+.l-nav-lesson{font-family:var(--M);font-size:.68rem;color:var(--muted)}
+/* PROGRESS BAR */
+.progress-wrap{position:fixed;top:58px;left:0;right:0;z-index:199;height:4px;background:var(--border)}
+.progress-bar{height:100%;background:var(--accent);transition:width .4s ease;width:0%}
+/* HERO */
+.l-hero{padding:88px 1.5rem 2rem;background:var(--hero-bg);border-bottom:1px solid var(--border)}
+.l-hero-inner{max-width:820px;margin:0 auto}
+.l-badge{display:inline-flex;align-items:center;gap:.4rem;border-radius:100px;padding:.2rem .8rem;font-family:var(--M);font-size:.62rem;letter-spacing:.08em;text-transform:uppercase;font-weight:600;border:1px solid;color:var(--accent);background:var(--accent-pale);border-color:var(--accent-border);margin-bottom:.8rem}
+.l-hero h1{font-family:var(--D);font-weight:700;font-size:clamp(1.6rem,4vw,2.4rem);letter-spacing:-.025em;line-height:1.15;margin-bottom:.5rem}
+.l-hero-tag{font-size:.95rem;color:var(--muted);margin-bottom:1.2rem}
+.l-hero-build{background:var(--surface);border:1.5px solid var(--border);border-radius:10px;padding:.9rem 1.2rem;display:flex;align-items:center;gap:.7rem;font-size:.88rem;max-width:520px}
+.l-hero-build strong{color:var(--accent)}
+/* WELCOME BOX */
+.welcome-box{background:linear-gradient(135deg,var(--accent),var(--accent-dark));color:#fff;border-radius:16px;padding:1.5rem 1.8rem;max-width:820px;margin:2rem auto 0}
+.welcome-box h2{font-family:var(--D);font-weight:700;font-size:1.1rem;margin-bottom:.6rem}
+.welcome-box p{font-size:.9rem;line-height:1.75;opacity:.92}
+.welcome-meta{display:flex;gap:1.5rem;margin-top:1rem;flex-wrap:wrap}
+.welcome-meta span{background:rgba(255,255,255,.15);border-radius:6px;padding:.25rem .8rem;font-family:var(--M);font-size:.7rem;font-weight:500}
+/* MAIN CONTENT */
+main{max-width:820px;margin:0 auto;padding:2rem 1.5rem 5rem}
+/* PHASE */
+.phase{background:var(--surface);border:1.5px solid var(--border);border-radius:16px;margin-bottom:1.5rem;overflow:hidden;transition:opacity .3s,transform .3s}
+.phase.locked{opacity:.4;pointer-events:none;filter:blur(1px)}
+.phase-header{padding:1rem 1.4rem;background:var(--s2,#f1f5f9);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;gap:1rem}
+.phase-num{font-family:var(--M);font-size:.7rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}
+.phase-title{font-family:var(--D);font-weight:700;font-size:1rem;color:var(--text)}
+.phase-check{width:24px;height:24px;border-radius:50%;background:var(--border);display:flex;align-items:center;justify-content:center;font-size:.75rem;flex-shrink:0;transition:background .3s}
+.phase-check.done{background:#10b981;color:#fff}
+.phase-body{padding:1.4rem}
+/* CONCEPT BOX */
+.concept-box{background:#f0f9ff;border-left:4px solid #0284c7;border-radius:0 10px 10px 0;padding:1rem 1.2rem;margin-bottom:1.2rem}
+.concept-label{font-family:var(--M);font-size:.65rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#0284c7;margin-bottom:.4rem}
+.concept-box p{font-size:.92rem;color:#0c4a6e;line-height:1.75}
+/* CODE BLOCK */
+.code-wrap{margin:1.2rem 0;border-radius:12px;overflow:hidden;border:1px solid #1e293b}
+.code-bar{background:#1e293b;padding:.6rem 1rem;display:flex;align-items:center;gap:.4rem}
+.code-dot{width:8px;height:8px;border-radius:50%}
+.code-dot.r{background:#ff5f57}.code-dot.y{background:#febc2e}.code-dot.g{background:#28c840}
+.code-filename{margin-left:.5rem;font-family:var(--M);font-size:.65rem;color:#64748b}
+.code-body{background:#0f172a;padding:1.2rem 1.4rem;overflow-x:auto}
+.code-body pre{font-family:var(--M);font-size:.78rem;line-height:1.9;color:#e2e8f0;margin:0;white-space:pre}
+.code-body pre .cm{color:#64748b} /* comment */
+.code-body pre .tg{color:#38bdf8} /* tag */
+.code-body pre .at{color:#c084fc} /* attribute */
+.code-body pre .vl{color:#86efac} /* value */
+.code-body pre .tx{color:#e2e8f0} /* text */
+/* TASK BOX */
+.task-box{background:#fffbeb;border:1.5px dashed #d97706;border-radius:12px;padding:1rem 1.2rem;margin:1.2rem 0}
+.task-label{font-family:var(--M);font-size:.65rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#b45309;margin-bottom:.4rem}
+.task-box p{font-size:.92rem;color:#78350f;line-height:1.75}
+.task-box code{background:rgba(180,83,9,.1);border-radius:4px;padding:.1rem .4rem;font-family:var(--M);font-size:.82em}
+/* NEXT BUTTON */
+.next-btn{display:inline-flex;align-items:center;gap:.5rem;background:var(--accent);color:#fff;font-family:var(--D);font-weight:700;font-size:.88rem;padding:.75rem 1.5rem;border-radius:10px;border:none;cursor:pointer;transition:transform .2s,box-shadow .2s;box-shadow:0 4px 12px var(--accent-shadow);margin-top:1rem}
+.next-btn:hover{transform:translateY(-2px);box-shadow:0 8px 20px var(--accent-shadow)}
+.next-btn:disabled{opacity:.5;cursor:not-allowed;transform:none}
+.next-tip{font-family:var(--M);font-size:.72rem;color:var(--muted);margin-top:.6rem}
+/* PROJECT BOX */
+.project-box{background:#f0fdf4;border:2px solid #16a34a;border-radius:16px;padding:1.5rem;margin:2rem 0}
+.project-label{font-family:var(--M);font-size:.65rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#15803d;margin-bottom:.4rem}
+.project-name{font-family:var(--D);font-weight:700;font-size:1.1rem;color:#14532d;margin-bottom:.5rem}
+.project-desc{font-size:.9rem;color:#166534;margin-bottom:1.2rem;line-height:1.7}
+/* CAPSTONE BOX */
+.capstone-box{background:linear-gradient(135deg,#1e1b4b,#312e81);border-radius:16px;padding:1.5rem;margin:2rem 0;color:#fff}
+.capstone-label{font-family:var(--M);font-size:.65rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#a5b4fc;margin-bottom:.4rem}
+.capstone-name{font-family:var(--D);font-weight:700;font-size:1.2rem;margin-bottom:.5rem}
+.capstone-desc{font-size:.9rem;color:rgba(255,255,255,.8);margin-bottom:1.2rem;line-height:1.7}
+/* FILE TABS */
+.file-tabs{display:flex;gap:.5rem;margin-bottom:0;flex-wrap:wrap}
+.file-tab{font-family:var(--M);font-size:.72rem;padding:.35rem .8rem;background:#1e293b;color:#94a3b8;border-radius:6px 6px 0 0;cursor:pointer;border:1px solid #334155;border-bottom:none;transition:background .15s}
+.file-tab.active{background:#0f172a;color:#e2e8f0}
+.file-content{display:none}.file-content.active{display:block}
+/* GITHUB ACCORDION */
+.github-acc{border:1.5px solid var(--border);border-radius:12px;overflow:hidden;margin:1.5rem 0}
+.github-acc-head{padding:1rem 1.2rem;background:#f8fafc;cursor:pointer;display:flex;align-items:center;justify-content:space-between;font-family:var(--D);font-weight:600;font-size:.9rem;user-select:none}
+.github-acc-body{display:none;padding:1.2rem;border-top:1px solid var(--border)}
+.github-acc-body.open{display:block}
+.github-step{display:flex;gap:.8rem;margin-bottom:1rem;align-items:flex-start}
+.github-step-n{width:24px;height:24px;border-radius:50%;background:var(--accent);color:#fff;font-family:var(--D);font-weight:700;font-size:.75rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px}
+.github-step p{font-size:.88rem;color:var(--t2);line-height:1.7}
+/* SESSION END */
+.session-end{background:linear-gradient(135deg,var(--accent),var(--accent-dark));color:#fff;border-radius:16px;padding:1.5rem 1.8rem;margin:2rem 0;display:none}
+.session-end.visible{display:block}
+.session-end h2{font-family:var(--D);font-weight:700;font-size:1.1rem;margin-bottom:.8rem}
+.session-end ul{list-style:none;display:flex;flex-direction:column;gap:.4rem}
+.session-end li{font-size:.9rem;opacity:.92;display:flex;align-items:center;gap:.5rem}
+/* LESSON NAV */
+.lesson-nav{display:flex;align-items:center;justify-content:space-between;padding-top:2rem;border-top:1px solid var(--border);margin-top:2rem;flex-wrap:wrap;gap:.75rem}
+.ln-btn{display:inline-flex;align-items:center;gap:.4rem;background:var(--surface);color:var(--t2);font-family:var(--D);font-weight:600;font-size:.82rem;padding:.65rem 1.2rem;border-radius:8px;text-decoration:none;border:1.5px solid var(--border);transition:border-color .2s,color .2s}
+.ln-btn:hover{border-color:var(--accent);color:var(--accent)}
+.ln-btn.primary{background:var(--accent);color:#fff;border-color:var(--accent)}
+.ln-btn.primary:hover{opacity:.9}
+/* UTILS */
+code{font-family:var(--M);font-size:.85em;background:#f1f5f9;border-radius:4px;padding:.1rem .35rem;color:var(--accent)}
+.emoji{font-style:normal}
+@media(max-width:600px){.l-hero h1{font-size:1.5rem}.welcome-meta{gap:.75rem}}
+
+</style>
+</head>
+<body>
+
+<!-- FIXED NAV -->
+<nav class="lesson-nav-bar">
+  <a href="../index.html" class="nav-back">← HTML Course</a>
+  <span class="nav-lesson">Lesson 16 of 34 &nbsp;·&nbsp; HTML Tables</span>
+  <div class="nav-actions">
+    <a href="lesson_15.html" class="ln-btn">← Lesson 15</a>
+    <a href="lesson_17.html" class="ln-btn primary">Lesson 17 →</a>
+  </div>
+</nav>
+
+<!-- PROGRESS BAR -->
+<div id="progress-wrap">
+  <div id="pbar" style="width:5%;background:var(--accent);height:4px;
+       border-radius:2px;transition:width .4s ease;"></div>
+</div>
+
+<!-- HERO -->
+<section class="lesson-hero">
+  <div class="hero-inner">
+    <div class="lesson-num-badge">Lesson 16</div>
+    <h1>HTML Tables</h1>
+    <p class="lesson-tagline">Organise data into rows and columns using HTML table tags</p>
+    <div class="lesson-meta">
+      <span>📚 4 phases</span>
+      <span>🏗️ Build: My Data Table</span>
+      
+    </div>
+  </div>
+</section>
+
+<!-- MAIN CONTENT -->
+<main class="lesson-main">
+
+<div class="welcome-box">
+  <div class="welcome-label">👋 Welcome to Lesson 16!</div>
+  <h2>HTML Tables</h2>
+  <p>Organise data into rows and columns using HTML table tags. In this lesson you will work through
+     <strong>4 phases</strong>.
+     Complete each phase task before clicking <em>Next Phase</em>.
+     
+  </p>
+</div>
+
+<div class="phase " id="phase1" data-phase="1">
+  <div class="phase-header">
+    <div><div class="phase-num">Phase 1</div><div class="phase-title">Basic Table Structure</div></div>
+    <div class="phase-check" id="check1"></div>
+  </div>
+  <div class="phase-body">
+    <div class="concept-box">
+      <div class="concept-label">💡 Concept</div>
+      <p>An HTML table is built with several tags working together. <code>&lt;table&gt;</code> is the container. <code>&lt;tr&gt;</code> is a <em>table row</em>. <code>&lt;td&gt;</code> is a <em>table data</em> cell. <code>&lt;th&gt;</code> is a <em>table header</em> cell — it is bold and centred by default. Wrap the header row in <code>&lt;thead&gt;</code> and the data rows in <code>&lt;tbody&gt;</code> for good structure.</p>
+    </div>
+    <div class="code-wrap">
+  <div class="code-bar">
+    <span class="code-dot r"></span><span class="code-dot y"></span><span class="code-dot g"></span>
+    <span class="code-filename">index.html</span>
+  </div>
+  <div class="code-body"><pre>&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+  &lt;head&gt;&lt;title&gt;Tables&lt;/title&gt;&lt;/head&gt;
+  &lt;body&gt;
+    &lt;h1&gt;My Timetable&lt;/h1&gt;
+
+    &lt;table border="1" style="border-collapse: collapse; width: 100%;"&gt;
+      &lt;thead&gt;
+        &lt;tr&gt;
+          &lt;th&gt;Day&lt;/th&gt;
+          &lt;th&gt;9:00 AM&lt;/th&gt;
+          &lt;th&gt;11:00 AM&lt;/th&gt;
+          &lt;th&gt;2:00 PM&lt;/th&gt;
+        &lt;/tr&gt;
+      &lt;/thead&gt;
+      &lt;tbody&gt;
+        &lt;tr&gt;
+          &lt;td&gt;Monday&lt;/td&gt;
+          &lt;td&gt;Maths&lt;/td&gt;
+          &lt;td&gt;English&lt;/td&gt;
+          &lt;td&gt;HTML Coding&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+          &lt;td&gt;Tuesday&lt;/td&gt;
+          &lt;td&gt;Science&lt;/td&gt;
+          &lt;td&gt;History&lt;/td&gt;
+          &lt;td&gt;PE&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+          &lt;td&gt;Wednesday&lt;/td&gt;
+          &lt;td&gt;Art&lt;/td&gt;
+          &lt;td&gt;Music&lt;/td&gt;
+          &lt;td&gt;CSS Coding&lt;/td&gt;
+        &lt;/tr&gt;
+      &lt;/tbody&gt;
+    &lt;/table&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</pre></div>
+</div>
+    <div class="task-box">
+      <div class="task-label">✏️ Your Task</div>
+      <p>Create a table showing your school timetable. Use <code>&lt;th&gt;</code> for the day names and subject names in the header row. Make sure every row has the same number of cells as the header.</p>
+    </div>
+    <button class="next-btn" onclick="unlockNext(1)">
+      Next Phase → <span>→</span>
+    </button>
+    <p class="next-tip">Try the task first, then click to continue!</p>
+  </div>
+</div><div class="phase locked" id="phase2" data-phase="2">
+  <div class="phase-header">
+    <div><div class="phase-num">Phase 2</div><div class="phase-title">Table Borders and Styling</div></div>
+    <div class="phase-check" id="check2"></div>
+  </div>
+  <div class="phase-body">
+    <div class="concept-box">
+      <div class="concept-label">💡 Concept</div>
+      <p>By default tables have no visible borders. Adding <code>border="1"</code> on the <code>&lt;table&gt;</code> tag adds a basic border, but the best way is CSS. <code>border-collapse: collapse</code> makes borders merge into single lines (removes the double-border look). You can also use <code>padding</code> on cells, alternate row colours with CSS, and make the header row stand out with a background colour.</p>
+    </div>
+    <div class="code-wrap">
+  <div class="code-bar">
+    <span class="code-dot r"></span><span class="code-dot y"></span><span class="code-dot g"></span>
+    <span class="code-filename">index.html</span>
+  </div>
+  <div class="code-body"><pre>&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+  &lt;head&gt;
+    &lt;title&gt;Styled Table&lt;/title&gt;
+    &lt;style&gt;
+      table { width: 100%; border-collapse: collapse; font-family: Arial; }
+      th { background-color: #ea4f21; color: white; padding: 12px; text-align: left; }
+      td { padding: 10px 12px; border-bottom: 1px solid #e2e8f0; }
+      tr:nth-child(even) { background-color: #f8fafc; }
+      tr:hover { background-color: #fff3ef; }
+    &lt;/style&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;h1&gt;Top Students&lt;/h1&gt;
+    &lt;table&gt;
+      &lt;thead&gt;
+        &lt;tr&gt;
+          &lt;th&gt;Name&lt;/th&gt;&lt;th&gt;Score&lt;/th&gt;&lt;th&gt;Grade&lt;/th&gt;
+        &lt;/tr&gt;
+      &lt;/thead&gt;
+      &lt;tbody&gt;
+        &lt;tr&gt;&lt;td&gt;Amina&lt;/td&gt;&lt;td&gt;98%&lt;/td&gt;&lt;td&gt;A+&lt;/td&gt;&lt;/tr&gt;
+        &lt;tr&gt;&lt;td&gt;Tunde&lt;/td&gt;&lt;td&gt;95%&lt;/td&gt;&lt;td&gt;A&lt;/td&gt;&lt;/tr&gt;
+        &lt;tr&gt;&lt;td&gt;Chidi&lt;/td&gt;&lt;td&gt;91%&lt;/td&gt;&lt;td&gt;A&lt;/td&gt;&lt;/tr&gt;
+        &lt;tr&gt;&lt;td&gt;Fatima&lt;/td&gt;&lt;td&gt;88%&lt;/td&gt;&lt;td&gt;B+&lt;/td&gt;&lt;/tr&gt;
+      &lt;/tbody&gt;
+    &lt;/table&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</pre></div>
+</div>
+    <div class="task-box">
+      <div class="task-label">✏️ Your Task</div>
+      <p>Style your timetable: give the <code>&lt;th&gt;</code> elements an orange background and white text. Add padding to all cells. Use <code>tr:nth-child(even)</code> to give alternate rows a light grey background. Add a <code>tr:hover</code> rule that highlights the row when you move the mouse over it.</p>
+    </div>
+    <button class="next-btn" onclick="unlockNext(2)">
+      Next Phase → <span>→</span>
+    </button>
+    <p class="next-tip">Try the task first, then click to continue!</p>
+  </div>
+</div><div class="phase locked" id="phase3" data-phase="3">
+  <div class="phase-header">
+    <div><div class="phase-num">Phase 3</div><div class="phase-title">Colspan and Rowspan</div></div>
+    <div class="phase-check" id="check3"></div>
+  </div>
+  <div class="phase-body">
+    <div class="concept-box">
+      <div class="concept-label">💡 Concept</div>
+      <p>Sometimes you want a cell to span multiple columns or rows. <code>colspan="2"</code> on a <code>&lt;td&gt;</code> makes it take up 2 columns. <code>rowspan="2"</code> makes it take up 2 rows. These are very useful for merged header cells or creating visual groupings in your data.</p>
+    </div>
+    <div class="code-wrap">
+  <div class="code-bar">
+    <span class="code-dot r"></span><span class="code-dot y"></span><span class="code-dot g"></span>
+    <span class="code-filename">index.html</span>
+  </div>
+  <div class="code-body"><pre>&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+  &lt;head&gt;
+    &lt;title&gt;Colspan and Rowspan&lt;/title&gt;
+    &lt;style&gt;
+      table { border-collapse: collapse; font-family: Arial; }
+      th, td { border: 1px solid #cbd5e1; padding: 10px 14px; }
+      th { background: #ea4f21; color: white; }
+      .merged { background: #fff3ef; font-weight: bold; }
+    &lt;/style&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;h1&gt;Exam Results&lt;/h1&gt;
+    &lt;table&gt;
+      &lt;tr&gt;
+        &lt;th rowspan="2"&gt;Student&lt;/th&gt;
+        &lt;th colspan="2"&gt;Term 1&lt;/th&gt;
+        &lt;th colspan="2"&gt;Term 2&lt;/th&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+        &lt;th&gt;Maths&lt;/th&gt;&lt;th&gt;English&lt;/th&gt;
+        &lt;th&gt;Maths&lt;/th&gt;&lt;th&gt;English&lt;/th&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+        &lt;td class="merged"&gt;Amina&lt;/td&gt;
+        &lt;td&gt;95&lt;/td&gt;&lt;td&gt;88&lt;/td&gt;
+        &lt;td&gt;97&lt;/td&gt;&lt;td&gt;92&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+        &lt;td class="merged"&gt;Tunde&lt;/td&gt;
+        &lt;td&gt;82&lt;/td&gt;&lt;td&gt;90&lt;/td&gt;
+        &lt;td&gt;85&lt;/td&gt;&lt;td&gt;91&lt;/td&gt;
+      &lt;/tr&gt;
+    &lt;/table&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</pre></div>
+</div>
+    <div class="task-box">
+      <div class="task-label">✏️ Your Task</div>
+      <p>Create a table where the top-left cell spans 2 rows (use <code>rowspan="2"</code>) and the top-right two cells each span 2 columns (use <code>colspan="2"</code>). This is the same pattern used in real exam result tables!</p>
+    </div>
+    <button class="next-btn" onclick="unlockNext(3)">
+      Next Phase → <span>→</span>
+    </button>
+    <p class="next-tip">Try the task first, then click to continue!</p>
+  </div>
+</div><div class="phase locked" id="phase4" data-phase="4">
+  <div class="phase-header">
+    <div><div class="phase-num">Phase 4</div><div class="phase-title">Table Caption and Accessibility</div></div>
+    <div class="phase-check" id="check4"></div>
+  </div>
+  <div class="phase-body">
+    <div class="concept-box">
+      <div class="concept-label">💡 Concept</div>
+      <p>The <code>&lt;caption&gt;</code> tag gives a table a visible title displayed above it. The <code>scope</code> attribute on <code>&lt;th&gt;</code> tells screen readers whether it is a column header (<code>scope="col"</code>) or a row header (<code>scope="row"</code>). Good tables also have a <code>summary</code> or <code>aria-label</code> for accessibility. Tables should only be used for <strong>data</strong> — never for page layout!</p>
+    </div>
+    <div class="code-wrap">
+  <div class="code-bar">
+    <span class="code-dot r"></span><span class="code-dot y"></span><span class="code-dot g"></span>
+    <span class="code-filename">index.html</span>
+  </div>
+  <div class="code-body"><pre>&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+  &lt;head&gt;
+    &lt;title&gt;Accessible Table&lt;/title&gt;
+    &lt;style&gt;
+      table { border-collapse: collapse; font-family: Arial; width: 100%; }
+      caption { font-weight: bold; font-size: 1.1rem;
+                margin-bottom: 8px; color: #ea4f21; }
+      th[scope="col"] { background: #ea4f21; color: white; padding: 10px; }
+      th[scope="row"] { background: #fff3ef; color: #ea4f21; padding: 10px; }
+      td { padding: 10px; border: 1px solid #e2e8f0; }
+    &lt;/style&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;table aria-label="Monthly sales data for 2024"&gt;
+      &lt;caption&gt;Monthly Sales — Techbase Academy 2024&lt;/caption&gt;
+      &lt;thead&gt;
+        &lt;tr&gt;
+          &lt;th scope="col"&gt;Month&lt;/th&gt;
+          &lt;th scope="col"&gt;Students&lt;/th&gt;
+          &lt;th scope="col"&gt;Revenue (₦)&lt;/th&gt;
+        &lt;/tr&gt;
+      &lt;/thead&gt;
+      &lt;tbody&gt;
+        &lt;tr&gt;
+          &lt;th scope="row"&gt;January&lt;/th&gt;
+          &lt;td&gt;24&lt;/td&gt;&lt;td&gt;120,000&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+          &lt;th scope="row"&gt;February&lt;/th&gt;
+          &lt;td&gt;31&lt;/td&gt;&lt;td&gt;155,000&lt;/td&gt;
+        &lt;/tr&gt;
+      &lt;/tbody&gt;
+    &lt;/table&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</pre></div>
+</div>
+    <div class="task-box">
+      <div class="task-label">✏️ Your Task</div>
+      <p>Add a <code>&lt;caption&gt;</code> to your timetable table. Add <code>scope="col"</code> to your column headers and <code>scope="row"</code> to any row headers. This makes your table work correctly with screen readers — great accessibility practice!</p>
+    </div>
+    <button class="next-btn" onclick="unlockNext(4)">
+      Build It! 🚀 <span>→</span>
+    </button>
+    <p class="next-tip">Try the task first, then click to continue!</p>
+  </div>
+</div>
+
+<div class="project-box" id="build-it" style="display:none">
+  <div class="project-label">🏗️ Build It!</div>
+  <div class="project-name">My Data Table</div>
+  <p class="project-desc">Build a fully styled data table with header, body, striped rows, hover effect, and a caption.</p>
+  <div class="code-wrap">
+    <div class="code-bar">
+      <span class="code-dot r"></span><span class="code-dot y"></span><span class="code-dot g"></span>
+      <span class="code-filename">starter.html — copy this into a new file!</span>
+    </div>
+    <div class="code-body"><pre id="starter-code">&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+  &lt;head&gt;
+    &lt;title&gt;My Data Table&lt;/title&gt;
+    &lt;style&gt;
+      body { font-family: Arial, sans-serif; padding: 30px;
+             max-width: 800px; margin: 0 auto; background: #f8fafc; }
+      h1 { color: #0f172a; }
+      table { width: 100%; border-collapse: collapse; margin-top: 20px;
+              box-shadow: 0 2px 8px rgba(0,0,0,.08); border-radius: 12px;
+              overflow: hidden; }
+      caption { font-weight: bold; color: #ea4f21; font-size: 1.05rem;
+                text-align: left; margin-bottom: 8px; }
+      th { background: #ea4f21; color: white; padding: 14px 16px;
+           text-align: left; font-size: 14px; letter-spacing: .03em; }
+      td { padding: 12px 16px; color: #334155; font-size: 14px;
+           border-bottom: 1px solid #e2e8f0; }
+      tr:nth-child(even) td { background: #f8fafc; }
+      tr:hover td { background: #fff3ef; }
+      .badge { display: inline-block; padding: 2px 10px; border-radius: 100px;
+               font-size: 12px; font-weight: bold; }
+      .a { background: #dcfce7; color: #166534; }
+      .b { background: #dbeafe; color: #1e40af; }
+    &lt;/style&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;h1&gt;Student Results Table&lt;/h1&gt;
+    &lt;table&gt;
+      &lt;caption&gt;Term 1 Examination Results — [Your Class]&lt;/caption&gt;
+      &lt;thead&gt;
+        &lt;tr&gt;
+          &lt;th scope="col"&gt;Name&lt;/th&gt;
+          &lt;th scope="col"&gt;Maths&lt;/th&gt;
+          &lt;th scope="col"&gt;English&lt;/th&gt;
+          &lt;th scope="col"&gt;Science&lt;/th&gt;
+          &lt;th scope="col"&gt;Grade&lt;/th&gt;
+        &lt;/tr&gt;
+      &lt;/thead&gt;
+      &lt;tbody&gt;
+        &lt;tr&gt;
+          &lt;th scope="row"&gt;Amina Bello&lt;/th&gt;
+          &lt;td&gt;95&lt;/td&gt;&lt;td&gt;88&lt;/td&gt;&lt;td&gt;92&lt;/td&gt;
+          &lt;td&gt;&lt;span class="badge a"&gt;A&lt;/span&gt;&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+          &lt;th scope="row"&gt;Tunde Awoyemi&lt;/th&gt;
+          &lt;td&gt;82&lt;/td&gt;&lt;td&gt;90&lt;/td&gt;&lt;td&gt;85&lt;/td&gt;
+          &lt;td&gt;&lt;span class="badge b"&gt;B+&lt;/span&gt;&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;!-- Add at least 4 more students! --&gt;
+      &lt;/tbody&gt;
+    &lt;/table&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</pre></div>
+  </div>
+  <button class="next-btn" onclick="downloadStarter()" style="margin-right:.75rem">
+    ⬇️ Download starter.html
+  </button>
+  <button class="next-btn" onclick="showGithub()" style="background:#10b981;box-shadow:0 4px 12px rgba(16,185,129,.3)">
+    Show GitHub Steps →
+  </button>
+  <script>
+  const __code = `<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>My Data Table</title>
+    <style>
+      body { font-family: Arial, sans-serif; padding: 30px;
+             max-width: 800px; margin: 0 auto; background: #f8fafc; }
+      h1 { color: #0f172a; }
+      table { width: 100%; border-collapse: collapse; margin-top: 20px;
+              box-shadow: 0 2px 8px rgba(0,0,0,.08); border-radius: 12px;
+              overflow: hidden; }
+      caption { font-weight: bold; color: #ea4f21; font-size: 1.05rem;
+                text-align: left; margin-bottom: 8px; }
+      th { background: #ea4f21; color: white; padding: 14px 16px;
+           text-align: left; font-size: 14px; letter-spacing: .03em; }
+      td { padding: 12px 16px; color: #334155; font-size: 14px;
+           border-bottom: 1px solid #e2e8f0; }
+      tr:nth-child(even) td { background: #f8fafc; }
+      tr:hover td { background: #fff3ef; }
+      .badge { display: inline-block; padding: 2px 10px; border-radius: 100px;
+               font-size: 12px; font-weight: bold; }
+      .a { background: #dcfce7; color: #166534; }
+      .b { background: #dbeafe; color: #1e40af; }
+    </style>
+  </head>
+  <body>
+    <h1>Student Results Table</h1>
+    <table>
+      <caption>Term 1 Examination Results — [Your Class]</caption>
+      <thead>
+        <tr>
+          <th scope="col">Name</th>
+          <th scope="col">Maths</th>
+          <th scope="col">English</th>
+          <th scope="col">Science</th>
+          <th scope="col">Grade</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row">Amina Bello</th>
+          <td>95</td><td>88</td><td>92</td>
+          <td><span class="badge a">A</span></td>
+        </tr>
+        <tr>
+          <th scope="row">Tunde Awoyemi</th>
+          <td>82</td><td>90</td><td>85</td>
+          <td><span class="badge b">B+</span></td>
+        </tr>
+        <!-- Add at least 4 more students! -->
+      </tbody>
+    </table>
+  </body>
+</html>`;
+  function downloadStarter(){
+    const a=document.createElement('a');
+    a.href='data:text/html;charset=utf-8,'+encodeURIComponent(__code);
+    a.download='starter.html'; a.click();
+  }
+  </script>
+</div>
+
+
+
+<div class="github-acc" id="github-steps" style="display:none">
+  <div class="github-acc-head" onclick="this.nextElementSibling.classList.toggle('open')">
+    🐙 GitHub Setup — Push your project online &nbsp;<span>▼</span>
+  </div>
+  <div class="github-acc-body">
+    <div class="github-step"><div class="github-step-n">1</div><p>Go to <strong>github.com</strong> and sign in. Click the green <strong>New</strong> button to create a new repository. Name it <code>html-lesson-16-html_tables</code>.</p></div>
+    <div class="github-step"><div class="github-step-n">2</div><p>Leave it <strong>Public</strong> and tick <strong>Add a README file</strong>. Click <strong>Create repository</strong>.</p></div>
+    <div class="github-step"><div class="github-step-n">3</div><p>Click <strong>Add file → Upload files</strong>. Drag your <code>starter.html</code> (and rename it <code>index.html</code> first!) into the upload box.</p></div>
+    <div class="github-step"><div class="github-step-n">4</div><p>Scroll down, add a commit message like <em>"Add lesson 16 project"</em> and click <strong>Commit changes</strong>.</p></div>
+    <div class="github-step"><div class="github-step-n">5</div><p>Go to <strong>Settings → Pages</strong>. Under <em>Branch</em>, select <strong>main</strong> and click <strong>Save</strong>. Your page will be live at <code>https://YOUR-USERNAME.github.io/html-lesson-16-html_tables/</code> in about 1 minute! 🎉</p></div>
+    <button class="next-btn" onclick="showEnd()" style="margin-top:.5rem">I'm done! Finish session ✅</button>
+  </div>
+</div>
+
+<div class="session-end" id="session-end">
+  <h2>🎉 Great work! Lesson 16 complete!</h2>
+  <p style="margin-bottom:.8rem;font-size:.9rem;opacity:.9">Today you learned:</p>
+  <ul><li>✅ Basic Table Structure</li><li>✅ Table Borders and Styling</li><li>✅ Colspan and Rowspan</li><li>✅ Table Caption and Accessibility</li></ul>
+  <div class="lesson-nav" style="margin-top:1.5rem;border-color:rgba(255,255,255,.2)">
+    <a href="lesson_15.html" class="ln-btn">← Lesson 15</a>
+    <a href="lesson_17.html" class="ln-btn primary">Lesson 17 →</a>
+  </div>
+</div>
+
+</main>
+
+<!-- FOOTER -->
+<footer class="lesson-footer">
+  <p>Techbase Code Coach &nbsp;·&nbsp; HTML Course Lesson 16
+     &nbsp;·&nbsp; © 2025 Techbase Consultant Services, Ibadan</p>
+</footer>
+
+<script>
+const TOTAL=4, KEY='techbase_html_16_phase';
+let current=parseInt(localStorage.getItem(KEY)||'1');
+
+function init(){
+  for(let i=1;i<=current;i++) if(i>1) unlockPhase(i,false);
+  updateBar();
+}
+
+function unlockNext(n){
+  document.getElementById('check'+n).classList.add('done');
+  document.getElementById('check'+n).textContent='✓';
+  localStorage.setItem(KEY,n+1);
+  current=n+1;
+  if(n===TOTAL){
+    document.getElementById('build-it').style.display='block';
+    const cap=document.getElementById('capstone');
+    if(cap) cap.style.display='block';
+    updateBar(100);
+    setTimeout(()=>document.getElementById('build-it').scrollIntoView({behavior:'smooth'}),200);
+  } else {
+    unlockPhase(n+1,true);
+    updateBar();
+  }
+}
+
+function unlockPhase(n,scroll){
+  const el=document.getElementById('phase'+n);
+  if(el){ el.classList.remove('locked'); if(scroll) setTimeout(()=>el.scrollIntoView({behavior:'smooth',block:'start'}),150); }
+}
+
+function updateBar(pct){
+  const p=pct||Math.round((current-1)/TOTAL*95);
+  document.getElementById('pbar').style.width=p+'%';
+}
+
+function showGithub(){
+  const g=document.getElementById('github-steps');
+  if(g){ g.style.display='block'; setTimeout(()=>g.scrollIntoView({behavior:'smooth'}),150); }
+}
+
+function showEnd(){
+  const e=document.getElementById('session-end');
+  if(e){ e.classList.add('visible'); setTimeout(()=>e.scrollIntoView({behavior:'smooth'}),150); }
+}
+
+init();
+</script>
+
+</body>
+</html>

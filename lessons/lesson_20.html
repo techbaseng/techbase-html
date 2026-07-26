@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lesson 20: HTML Id — Techbase HTML Course</title>
+<meta name="description" content="Give elements unique identities with the id attribute for styling and navigation">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root { 
+  --accent:#ea4f21;--accent-pale:#fff3ef;--accent-dark:#c23d15;
+  --accent-border:rgba(234,79,33,.3);--accent-shadow:rgba(234,79,33,.28);
+  --hero-bg:linear-gradient(160deg,#fff3ef 0%,#f8fafc 55%,#fef2e9 100%);
+  --s2:#f1f5f9;
+ }
+:root{
+  --bg:#f8fafc;--surface:#fff;--border:#e2e8f0;--border2:#cbd5e1;
+  --text:#0f172a;--t2:#334155;--muted:#64748b;
+  --D:'Space Grotesk',sans-serif;--B:'Plus Jakarta Sans',sans-serif;--M:'JetBrains Mono',monospace;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased}
+body{background:var(--bg);color:var(--text);font-family:var(--B);font-size:16px;line-height:1.7;overflow-x:hidden}
+/* NAV */
+.l-nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(255,255,255,.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);height:58px;display:flex;align-items:center;padding:0 1.5rem;gap:1rem;justify-content:space-between}
+.l-nav-logo{font-family:var(--D);font-weight:700;font-size:.88rem;color:var(--text);text-decoration:none}
+.l-nav-logo em{font-style:normal}
+.l-nav-back{font-size:.8rem;color:var(--muted);text-decoration:none;font-weight:500;display:flex;align-items:center;gap:.3rem;transition:color .2s}
+.l-nav-back:hover{color:var(--accent)}
+.l-nav-lesson{font-family:var(--M);font-size:.68rem;color:var(--muted)}
+/* PROGRESS BAR */
+.progress-wrap{position:fixed;top:58px;left:0;right:0;z-index:199;height:4px;background:var(--border)}
+.progress-bar{height:100%;background:var(--accent);transition:width .4s ease;width:0%}
+/* HERO */
+.l-hero{padding:88px 1.5rem 2rem;background:var(--hero-bg);border-bottom:1px solid var(--border)}
+.l-hero-inner{max-width:820px;margin:0 auto}
+.l-badge{display:inline-flex;align-items:center;gap:.4rem;border-radius:100px;padding:.2rem .8rem;font-family:var(--M);font-size:.62rem;letter-spacing:.08em;text-transform:uppercase;font-weight:600;border:1px solid;color:var(--accent);background:var(--accent-pale);border-color:var(--accent-border);margin-bottom:.8rem}
+.l-hero h1{font-family:var(--D);font-weight:700;font-size:clamp(1.6rem,4vw,2.4rem);letter-spacing:-.025em;line-height:1.15;margin-bottom:.5rem}
+.l-hero-tag{font-size:.95rem;color:var(--muted);margin-bottom:1.2rem}
+.l-hero-build{background:var(--surface);border:1.5px solid var(--border);border-radius:10px;padding:.9rem 1.2rem;display:flex;align-items:center;gap:.7rem;font-size:.88rem;max-width:520px}
+.l-hero-build strong{color:var(--accent)}
+/* WELCOME BOX */
+.welcome-box{background:linear-gradient(135deg,var(--accent),var(--accent-dark));color:#fff;border-radius:16px;padding:1.5rem 1.8rem;max-width:820px;margin:2rem auto 0}
+.welcome-box h2{font-family:var(--D);font-weight:700;font-size:1.1rem;margin-bottom:.6rem}
+.welcome-box p{font-size:.9rem;line-height:1.75;opacity:.92}
+.welcome-meta{display:flex;gap:1.5rem;margin-top:1rem;flex-wrap:wrap}
+.welcome-meta span{background:rgba(255,255,255,.15);border-radius:6px;padding:.25rem .8rem;font-family:var(--M);font-size:.7rem;font-weight:500}
+/* MAIN CONTENT */
+main{max-width:820px;margin:0 auto;padding:2rem 1.5rem 5rem}
+/* PHASE */
+.phase{background:var(--surface);border:1.5px solid var(--border);border-radius:16px;margin-bottom:1.5rem;overflow:hidden;transition:opacity .3s,transform .3s}
+.phase.locked{opacity:.4;pointer-events:none;filter:blur(1px)}
+.phase-header{padding:1rem 1.4rem;background:var(--s2,#f1f5f9);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;gap:1rem}
+.phase-num{font-family:var(--M);font-size:.7rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}
+.phase-title{font-family:var(--D);font-weight:700;font-size:1rem;color:var(--text)}
+.phase-check{width:24px;height:24px;border-radius:50%;background:var(--border);display:flex;align-items:center;justify-content:center;font-size:.75rem;flex-shrink:0;transition:background .3s}
+.phase-check.done{background:#10b981;color:#fff}
+.phase-body{padding:1.4rem}
+/* CONCEPT BOX */
+.concept-box{background:#f0f9ff;border-left:4px solid #0284c7;border-radius:0 10px 10px 0;padding:1rem 1.2rem;margin-bottom:1.2rem}
+.concept-label{font-family:var(--M);font-size:.65rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#0284c7;margin-bottom:.4rem}
+.concept-box p{font-size:.92rem;color:#0c4a6e;line-height:1.75}
+/* CODE BLOCK */
+.code-wrap{margin:1.2rem 0;border-radius:12px;overflow:hidden;border:1px solid #1e293b}
+.code-bar{background:#1e293b;padding:.6rem 1rem;display:flex;align-items:center;gap:.4rem}
+.code-dot{width:8px;height:8px;border-radius:50%}
+.code-dot.r{background:#ff5f57}.code-dot.y{background:#febc2e}.code-dot.g{background:#28c840}
+.code-filename{margin-left:.5rem;font-family:var(--M);font-size:.65rem;color:#64748b}
+.code-body{background:#0f172a;padding:1.2rem 1.4rem;overflow-x:auto}
+.code-body pre{font-family:var(--M);font-size:.78rem;line-height:1.9;color:#e2e8f0;margin:0;white-space:pre}
+.code-body pre .cm{color:#64748b} /* comment */
+.code-body pre .tg{color:#38bdf8} /* tag */
+.code-body pre .at{color:#c084fc} /* attribute */
+.code-body pre .vl{color:#86efac} /* value */
+.code-body pre .tx{color:#e2e8f0} /* text */
+/* TASK BOX */
+.task-box{background:#fffbeb;border:1.5px dashed #d97706;border-radius:12px;padding:1rem 1.2rem;margin:1.2rem 0}
+.task-label{font-family:var(--M);font-size:.65rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#b45309;margin-bottom:.4rem}
+.task-box p{font-size:.92rem;color:#78350f;line-height:1.75}
+.task-box code{background:rgba(180,83,9,.1);border-radius:4px;padding:.1rem .4rem;font-family:var(--M);font-size:.82em}
+/* NEXT BUTTON */
+.next-btn{display:inline-flex;align-items:center;gap:.5rem;background:var(--accent);color:#fff;font-family:var(--D);font-weight:700;font-size:.88rem;padding:.75rem 1.5rem;border-radius:10px;border:none;cursor:pointer;transition:transform .2s,box-shadow .2s;box-shadow:0 4px 12px var(--accent-shadow);margin-top:1rem}
+.next-btn:hover{transform:translateY(-2px);box-shadow:0 8px 20px var(--accent-shadow)}
+.next-btn:disabled{opacity:.5;cursor:not-allowed;transform:none}
+.next-tip{font-family:var(--M);font-size:.72rem;color:var(--muted);margin-top:.6rem}
+/* PROJECT BOX */
+.project-box{background:#f0fdf4;border:2px solid #16a34a;border-radius:16px;padding:1.5rem;margin:2rem 0}
+.project-label{font-family:var(--M);font-size:.65rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#15803d;margin-bottom:.4rem}
+.project-name{font-family:var(--D);font-weight:700;font-size:1.1rem;color:#14532d;margin-bottom:.5rem}
+.project-desc{font-size:.9rem;color:#166534;margin-bottom:1.2rem;line-height:1.7}
+/* CAPSTONE BOX */
+.capstone-box{background:linear-gradient(135deg,#1e1b4b,#312e81);border-radius:16px;padding:1.5rem;margin:2rem 0;color:#fff}
+.capstone-label{font-family:var(--M);font-size:.65rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#a5b4fc;margin-bottom:.4rem}
+.capstone-name{font-family:var(--D);font-weight:700;font-size:1.2rem;margin-bottom:.5rem}
+.capstone-desc{font-size:.9rem;color:rgba(255,255,255,.8);margin-bottom:1.2rem;line-height:1.7}
+/* FILE TABS */
+.file-tabs{display:flex;gap:.5rem;margin-bottom:0;flex-wrap:wrap}
+.file-tab{font-family:var(--M);font-size:.72rem;padding:.35rem .8rem;background:#1e293b;color:#94a3b8;border-radius:6px 6px 0 0;cursor:pointer;border:1px solid #334155;border-bottom:none;transition:background .15s}
+.file-tab.active{background:#0f172a;color:#e2e8f0}
+.file-content{display:none}.file-content.active{display:block}
+/* GITHUB ACCORDION */
+.github-acc{border:1.5px solid var(--border);border-radius:12px;overflow:hidden;margin:1.5rem 0}
+.github-acc-head{padding:1rem 1.2rem;background:#f8fafc;cursor:pointer;display:flex;align-items:center;justify-content:space-between;font-family:var(--D);font-weight:600;font-size:.9rem;user-select:none}
+.github-acc-body{display:none;padding:1.2rem;border-top:1px solid var(--border)}
+.github-acc-body.open{display:block}
+.github-step{display:flex;gap:.8rem;margin-bottom:1rem;align-items:flex-start}
+.github-step-n{width:24px;height:24px;border-radius:50%;background:var(--accent);color:#fff;font-family:var(--D);font-weight:700;font-size:.75rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px}
+.github-step p{font-size:.88rem;color:var(--t2);line-height:1.7}
+/* SESSION END */
+.session-end{background:linear-gradient(135deg,var(--accent),var(--accent-dark));color:#fff;border-radius:16px;padding:1.5rem 1.8rem;margin:2rem 0;display:none}
+.session-end.visible{display:block}
+.session-end h2{font-family:var(--D);font-weight:700;font-size:1.1rem;margin-bottom:.8rem}
+.session-end ul{list-style:none;display:flex;flex-direction:column;gap:.4rem}
+.session-end li{font-size:.9rem;opacity:.92;display:flex;align-items:center;gap:.5rem}
+/* LESSON NAV */
+.lesson-nav{display:flex;align-items:center;justify-content:space-between;padding-top:2rem;border-top:1px solid var(--border);margin-top:2rem;flex-wrap:wrap;gap:.75rem}
+.ln-btn{display:inline-flex;align-items:center;gap:.4rem;background:var(--surface);color:var(--t2);font-family:var(--D);font-weight:600;font-size:.82rem;padding:.65rem 1.2rem;border-radius:8px;text-decoration:none;border:1.5px solid var(--border);transition:border-color .2s,color .2s}
+.ln-btn:hover{border-color:var(--accent);color:var(--accent)}
+.ln-btn.primary{background:var(--accent);color:#fff;border-color:var(--accent)}
+.ln-btn.primary:hover{opacity:.9}
+/* UTILS */
+code{font-family:var(--M);font-size:.85em;background:#f1f5f9;border-radius:4px;padding:.1rem .35rem;color:var(--accent)}
+.emoji{font-style:normal}
+@media(max-width:600px){.l-hero h1{font-size:1.5rem}.welcome-meta{gap:.75rem}}
+
+</style>
+</head>
+<body>
+
+<!-- FIXED NAV -->
+<nav class="lesson-nav-bar">
+  <a href="../index.html" class="nav-back">← HTML Course</a>
+  <span class="nav-lesson">Lesson 20 of 34 &nbsp;·&nbsp; HTML Id</span>
+  <div class="nav-actions">
+    <a href="lesson_19.html" class="ln-btn">← Lesson 19</a>
+    <a href="lesson_21.html" class="ln-btn primary">Lesson 21 →</a>
+  </div>
+</nav>
+
+<!-- PROGRESS BAR -->
+<div id="progress-wrap">
+  <div id="pbar" style="width:5%;background:var(--accent);height:4px;
+       border-radius:2px;transition:width .4s ease;"></div>
+</div>
+
+<!-- HERO -->
+<section class="lesson-hero">
+  <div class="hero-inner">
+    <div class="lesson-num-badge">Lesson 20</div>
+    <h1>HTML Id</h1>
+    <p class="lesson-tagline">Give elements unique identities with the id attribute for styling and navigation</p>
+    <div class="lesson-meta">
+      <span>📚 2 phases</span>
+      <span>🏗️ Build: My Single-Page App</span>
+      
+    </div>
+  </div>
+</section>
+
+<!-- MAIN CONTENT -->
+<main class="lesson-main">
+
+<div class="welcome-box">
+  <div class="welcome-label">👋 Welcome to Lesson 20!</div>
+  <h2>HTML Id</h2>
+  <p>Give elements unique identities with the id attribute for styling and navigation. In this lesson you will work through
+     <strong>2 phases</strong>.
+     Complete each phase task before clicking <em>Next Phase</em>.
+     
+  </p>
+</div>
+
+<div class="phase " id="phase1" data-phase="1">
+  <div class="phase-header">
+    <div><div class="phase-num">Phase 1</div><div class="phase-title">The id Attribute — Unique Identity</div></div>
+    <div class="phase-check" id="check1"></div>
+  </div>
+  <div class="phase-body">
+    <div class="concept-box">
+      <div class="concept-label">💡 Concept</div>
+      <p>The <code>id</code> attribute gives an element a <strong>unique name</strong> on the page. Unlike <code>class</code> (which can be reused on many elements), each <code>id</code> must be used <em>only once</em> per page. In CSS you target it with a hash: <code>#header</code>. In HTML you can link directly to an id with <code>href="#header"</code>. In JavaScript you can find the element with <code>document.getElementById("header")</code>.</p>
+    </div>
+    <div class="code-wrap">
+  <div class="code-bar">
+    <span class="code-dot r"></span><span class="code-dot y"></span><span class="code-dot g"></span>
+    <span class="code-filename">index.html</span>
+  </div>
+  <div class="code-body"><pre>&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+  &lt;head&gt;
+    &lt;title&gt;Id Attribute&lt;/title&gt;
+    &lt;style&gt;
+      /* Target an id with # in CSS */
+      #header {
+        background: #ea4f21;
+        color: white;
+        padding: 20px;
+        text-align: center;
+      }
+      #main-content {
+        max-width: 700px;
+        margin: 0 auto;
+        padding: 20px;
+      }
+      #footer {
+        background: #0f172a;
+        color: #94a3b8;
+        text-align: center;
+        padding: 16px;
+        margin-top: 40px;
+      }
+    &lt;/style&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;div id="header"&gt;
+      &lt;h1&gt;My Page Header&lt;/h1&gt;
+      &lt;p&gt;Styled with #header CSS rule&lt;/p&gt;
+    &lt;/div&gt;
+
+    &lt;div id="main-content"&gt;
+      &lt;h2&gt;Main Content&lt;/h2&gt;
+      &lt;p&gt;Styled with #main-content CSS rule.&lt;/p&gt;
+      &lt;a href="#footer"&gt;Jump to footer&lt;/a&gt;
+    &lt;/div&gt;
+
+    &lt;div id="footer"&gt;
+      &lt;p&gt;Footer — linked here from above!&lt;/p&gt;
+    &lt;/div&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</pre></div>
+</div>
+    <div class="task-box">
+      <div class="task-label">✏️ Your Task</div>
+      <p>Add unique IDs to four sections of your page: <code>id="header"</code>, <code>id="about"</code>, <code>id="projects"</code>, <code>id="contact"</code>. Style each with CSS using the <code>#id</code> selector. Then add a navigation bar with links that jump to each section using <code>href="#about"</code> etc.</p>
+    </div>
+    <button class="next-btn" onclick="unlockNext(1)">
+      Next Phase → <span>→</span>
+    </button>
+    <p class="next-tip">Try the task first, then click to continue!</p>
+  </div>
+</div><div class="phase locked" id="phase2" data-phase="2">
+  <div class="phase-header">
+    <div><div class="phase-num">Phase 2</div><div class="phase-title">Id for Navigation and JavaScript</div></div>
+    <div class="phase-check" id="check2"></div>
+  </div>
+  <div class="phase-body">
+    <div class="concept-box">
+      <div class="concept-label">💡 Concept</div>
+      <p>The <code>id</code> attribute is used very heavily in <strong>single-page apps</strong> — where you click a menu item and the page scrolls to that section without loading a new page. It is also how JavaScript changes page content — <code>document.getElementById('myId').style.color = 'red'</code> finds the element by its id and changes its style. You will use this a LOT when you learn JavaScript!</p>
+    </div>
+    <div class="code-wrap">
+  <div class="code-bar">
+    <span class="code-dot r"></span><span class="code-dot y"></span><span class="code-dot g"></span>
+    <span class="code-filename">index.html</span>
+  </div>
+  <div class="code-body"><pre>&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+  &lt;head&gt;
+    &lt;title&gt;Id and JavaScript&lt;/title&gt;
+    &lt;style&gt;
+      #demo-box {
+        background: #f0f9ff;
+        border: 2px solid #0284c7;
+        border-radius: 12px;
+        padding: 20px;
+        margin: 20px 0;
+        text-align: center;
+        font-size: 1.1rem;
+        transition: background 0.3s;
+      }
+    &lt;/style&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;h1&gt;Id and JavaScript&lt;/h1&gt;
+
+    &lt;div id="demo-box"&gt;
+      Click a button to change me!
+    &lt;/div&gt;
+
+    &lt;!-- Buttons that use JavaScript + id to change the box --&gt;
+    &lt;button onclick="document.getElementById('demo-box').style.background='#fff3ef'"&gt;
+      Orange tint
+    &lt;/button&gt;
+    &lt;button onclick="document.getElementById('demo-box').style.background='#dcfce7'"&gt;
+      Green tint
+    &lt;/button&gt;
+    &lt;button onclick="document.getElementById('demo-box').innerHTML='&lt;strong&gt;You changed my content!&lt;/strong&gt;'"&gt;
+      Change text
+    &lt;/button&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</pre></div>
+</div>
+    <div class="task-box">
+      <div class="task-label">✏️ Your Task</div>
+      <p>Add a <code>&lt;div id="message"&gt;</code> to your page. Add three buttons that each change the div's background colour using <code>document.getElementById('message').style.background = '...'</code>. This is your first taste of JavaScript + id working together!</p>
+    </div>
+    <button class="next-btn" onclick="unlockNext(2)">
+      Build It! 🚀 <span>→</span>
+    </button>
+    <p class="next-tip">Try the task first, then click to continue!</p>
+  </div>
+</div>
+
+<div class="project-box" id="build-it" style="display:none">
+  <div class="project-label">🏗️ Build It!</div>
+  <div class="project-name">My Single-Page App</div>
+  <p class="project-desc">Build a single-page portfolio with a sticky nav that uses id-based jump links to all sections.</p>
+  <div class="code-wrap">
+    <div class="code-bar">
+      <span class="code-dot r"></span><span class="code-dot y"></span><span class="code-dot g"></span>
+      <span class="code-filename">starter.html — copy this into a new file!</span>
+    </div>
+    <div class="code-body"><pre id="starter-code">&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+  &lt;head&gt;
+    &lt;title&gt;[Your Name] — Portfolio&lt;/title&gt;
+    &lt;style&gt;
+      * { box-sizing: border-box; scroll-behavior: smooth; }
+      body { font-family: Arial, sans-serif; margin: 0;
+             background: #f8fafc; color: #0f172a; }
+      /* Sticky nav */
+      #nav {
+        position: sticky; top: 0; z-index: 100;
+        background: #ea4f21; padding: 14px 24px;
+        display: flex; gap: 20px; align-items: center;
+        box-shadow: 0 2px 8px rgba(234,79,33,.3);
+      }
+      #nav a { color: white; text-decoration: none;
+               font-weight: bold; font-size: 14px; }
+      #nav a:hover { text-decoration: underline; }
+      /* Sections */
+      section { padding: 60px 30px; max-width: 800px; margin: 0 auto; }
+      section h2 { font-size: 1.8rem; color: #ea4f21;
+                   border-bottom: 3px solid #ea4f21;
+                   padding-bottom: 8px; margin-bottom: 20px; }
+      #hero {
+        background: linear-gradient(135deg, #fff3ef, #f8fafc);
+        text-align: center; padding: 80px 30px;
+      }
+      #hero h1 { font-size: 2.5rem; color: #ea4f21; }
+      #contact a { color: #ea4f21; font-weight: bold; }
+    &lt;/style&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+
+    &lt;!-- STICKY NAVIGATION using id links --&gt;
+    &lt;div id="nav"&gt;
+      &lt;strong style="font-size:16px;"&gt;⚡ [Your Name]&lt;/strong&gt;
+      &lt;a href="#about"&gt;About&lt;/a&gt;
+      &lt;a href="#skills"&gt;Skills&lt;/a&gt;
+      &lt;a href="#projects"&gt;Projects&lt;/a&gt;
+      &lt;a href="#contact"&gt;Contact&lt;/a&gt;
+    &lt;/div&gt;
+
+    &lt;!-- HERO with id for jumping back to top --&gt;
+    &lt;div id="hero"&gt;
+      &lt;h1&gt;Hi, I'm [Your Name]!&lt;/h1&gt;
+      &lt;p&gt;HTML learner · Future web developer · Techbase Academy&lt;/p&gt;
+    &lt;/div&gt;
+
+    &lt;!-- ABOUT --&gt;
+    &lt;section id="about"&gt;
+      &lt;h2&gt;About Me&lt;/h2&gt;
+      &lt;p&gt;Write about yourself here — where you're from, what you love,
+         and why you're learning to code.&lt;/p&gt;
+    &lt;/section&gt;
+
+    &lt;!-- SKILLS --&gt;
+    &lt;section id="skills"&gt;
+      &lt;h2&gt;My Skills&lt;/h2&gt;
+      &lt;p&gt;✅ HTML &amp;nbsp;|&amp;nbsp; 🔄 CSS (learning) &amp;nbsp;|&amp;nbsp;
+         🔜 JavaScript (coming soon)&lt;/p&gt;
+    &lt;/section&gt;
+
+    &lt;!-- PROJECTS --&gt;
+    &lt;section id="projects"&gt;
+      &lt;h2&gt;My Projects&lt;/h2&gt;
+      &lt;p&gt;I have built these pages during my Techbase HTML course:&lt;/p&gt;
+      &lt;ul&gt;
+        &lt;li&gt;Lesson 01 — My First Web Page&lt;/li&gt;
+        &lt;li&gt;Lesson 07 — My Styled Info Card&lt;/li&gt;
+        &lt;li&gt;Lesson 14 — My Photo Gallery&lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/section&gt;
+
+    &lt;!-- CONTACT --&gt;
+    &lt;section id="contact"&gt;
+      &lt;h2&gt;Contact&lt;/h2&gt;
+      &lt;p&gt;Email: &lt;a href="mailto:you@example.com"&gt;you@example.com&lt;/a&gt;&lt;/p&gt;
+      &lt;p&gt;&lt;a href="#hero"&gt;↑ Back to top&lt;/a&gt;&lt;/p&gt;
+    &lt;/section&gt;
+
+  &lt;/body&gt;
+&lt;/html&gt;</pre></div>
+  </div>
+  <button class="next-btn" onclick="downloadStarter()" style="margin-right:.75rem">
+    ⬇️ Download starter.html
+  </button>
+  <button class="next-btn" onclick="showGithub()" style="background:#10b981;box-shadow:0 4px 12px rgba(16,185,129,.3)">
+    Show GitHub Steps →
+  </button>
+  <script>
+  const __code = `<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>[Your Name] — Portfolio</title>
+    <style>
+      * { box-sizing: border-box; scroll-behavior: smooth; }
+      body { font-family: Arial, sans-serif; margin: 0;
+             background: #f8fafc; color: #0f172a; }
+      /* Sticky nav */
+      #nav {
+        position: sticky; top: 0; z-index: 100;
+        background: #ea4f21; padding: 14px 24px;
+        display: flex; gap: 20px; align-items: center;
+        box-shadow: 0 2px 8px rgba(234,79,33,.3);
+      }
+      #nav a { color: white; text-decoration: none;
+               font-weight: bold; font-size: 14px; }
+      #nav a:hover { text-decoration: underline; }
+      /* Sections */
+      section { padding: 60px 30px; max-width: 800px; margin: 0 auto; }
+      section h2 { font-size: 1.8rem; color: #ea4f21;
+                   border-bottom: 3px solid #ea4f21;
+                   padding-bottom: 8px; margin-bottom: 20px; }
+      #hero {
+        background: linear-gradient(135deg, #fff3ef, #f8fafc);
+        text-align: center; padding: 80px 30px;
+      }
+      #hero h1 { font-size: 2.5rem; color: #ea4f21; }
+      #contact a { color: #ea4f21; font-weight: bold; }
+    </style>
+  </head>
+  <body>
+
+    <!-- STICKY NAVIGATION using id links -->
+    <div id="nav">
+      <strong style="font-size:16px;">⚡ [Your Name]</strong>
+      <a href="#about">About</a>
+      <a href="#skills">Skills</a>
+      <a href="#projects">Projects</a>
+      <a href="#contact">Contact</a>
+    </div>
+
+    <!-- HERO with id for jumping back to top -->
+    <div id="hero">
+      <h1>Hi, I'm [Your Name]!</h1>
+      <p>HTML learner · Future web developer · Techbase Academy</p>
+    </div>
+
+    <!-- ABOUT -->
+    <section id="about">
+      <h2>About Me</h2>
+      <p>Write about yourself here — where you're from, what you love,
+         and why you're learning to code.</p>
+    </section>
+
+    <!-- SKILLS -->
+    <section id="skills">
+      <h2>My Skills</h2>
+      <p>✅ HTML &nbsp;|&nbsp; 🔄 CSS (learning) &nbsp;|&nbsp;
+         🔜 JavaScript (coming soon)</p>
+    </section>
+
+    <!-- PROJECTS -->
+    <section id="projects">
+      <h2>My Projects</h2>
+      <p>I have built these pages during my Techbase HTML course:</p>
+      <ul>
+        <li>Lesson 01 — My First Web Page</li>
+        <li>Lesson 07 — My Styled Info Card</li>
+        <li>Lesson 14 — My Photo Gallery</li>
+      </ul>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact">
+      <h2>Contact</h2>
+      <p>Email: <a href="mailto:you@example.com">you@example.com</a></p>
+      <p><a href="#hero">↑ Back to top</a></p>
+    </section>
+
+  </body>
+</html>`;
+  function downloadStarter(){
+    const a=document.createElement('a');
+    a.href='data:text/html;charset=utf-8,'+encodeURIComponent(__code);
+    a.download='starter.html'; a.click();
+  }
+  </script>
+</div>
+
+
+
+<div class="github-acc" id="github-steps" style="display:none">
+  <div class="github-acc-head" onclick="this.nextElementSibling.classList.toggle('open')">
+    🐙 GitHub Setup — Push your project online &nbsp;<span>▼</span>
+  </div>
+  <div class="github-acc-body">
+    <div class="github-step"><div class="github-step-n">1</div><p>Go to <strong>github.com</strong> and sign in. Click the green <strong>New</strong> button to create a new repository. Name it <code>html-lesson-20-html_id</code>.</p></div>
+    <div class="github-step"><div class="github-step-n">2</div><p>Leave it <strong>Public</strong> and tick <strong>Add a README file</strong>. Click <strong>Create repository</strong>.</p></div>
+    <div class="github-step"><div class="github-step-n">3</div><p>Click <strong>Add file → Upload files</strong>. Drag your <code>starter.html</code> (and rename it <code>index.html</code> first!) into the upload box.</p></div>
+    <div class="github-step"><div class="github-step-n">4</div><p>Scroll down, add a commit message like <em>"Add lesson 20 project"</em> and click <strong>Commit changes</strong>.</p></div>
+    <div class="github-step"><div class="github-step-n">5</div><p>Go to <strong>Settings → Pages</strong>. Under <em>Branch</em>, select <strong>main</strong> and click <strong>Save</strong>. Your page will be live at <code>https://YOUR-USERNAME.github.io/html-lesson-20-html_id/</code> in about 1 minute! 🎉</p></div>
+    <button class="next-btn" onclick="showEnd()" style="margin-top:.5rem">I'm done! Finish session ✅</button>
+  </div>
+</div>
+
+<div class="session-end" id="session-end">
+  <h2>🎉 Great work! Lesson 20 complete!</h2>
+  <p style="margin-bottom:.8rem;font-size:.9rem;opacity:.9">Today you learned:</p>
+  <ul><li>✅ The id Attribute — Unique Identity</li><li>✅ Id for Navigation and JavaScript</li></ul>
+  <div class="lesson-nav" style="margin-top:1.5rem;border-color:rgba(255,255,255,.2)">
+    <a href="lesson_19.html" class="ln-btn">← Lesson 19</a>
+    <a href="lesson_21.html" class="ln-btn primary">Lesson 21 →</a>
+  </div>
+</div>
+
+</main>
+
+<!-- FOOTER -->
+<footer class="lesson-footer">
+  <p>Techbase Code Coach &nbsp;·&nbsp; HTML Course Lesson 20
+     &nbsp;·&nbsp; © 2025 Techbase Consultant Services, Ibadan</p>
+</footer>
+
+<script>
+const TOTAL=2, KEY='techbase_html_20_phase';
+let current=parseInt(localStorage.getItem(KEY)||'1');
+
+function init(){
+  for(let i=1;i<=current;i++) if(i>1) unlockPhase(i,false);
+  updateBar();
+}
+
+function unlockNext(n){
+  document.getElementById('check'+n).classList.add('done');
+  document.getElementById('check'+n).textContent='✓';
+  localStorage.setItem(KEY,n+1);
+  current=n+1;
+  if(n===TOTAL){
+    document.getElementById('build-it').style.display='block';
+    const cap=document.getElementById('capstone');
+    if(cap) cap.style.display='block';
+    updateBar(100);
+    setTimeout(()=>document.getElementById('build-it').scrollIntoView({behavior:'smooth'}),200);
+  } else {
+    unlockPhase(n+1,true);
+    updateBar();
+  }
+}
+
+function unlockPhase(n,scroll){
+  const el=document.getElementById('phase'+n);
+  if(el){ el.classList.remove('locked'); if(scroll) setTimeout(()=>el.scrollIntoView({behavior:'smooth',block:'start'}),150); }
+}
+
+function updateBar(pct){
+  const p=pct||Math.round((current-1)/TOTAL*95);
+  document.getElementById('pbar').style.width=p+'%';
+}
+
+function showGithub(){
+  const g=document.getElementById('github-steps');
+  if(g){ g.style.display='block'; setTimeout(()=>g.scrollIntoView({behavior:'smooth'}),150); }
+}
+
+function showEnd(){
+  const e=document.getElementById('session-end');
+  if(e){ e.classList.add('visible'); setTimeout(()=>e.scrollIntoView({behavior:'smooth'}),150); }
+}
+
+init();
+</script>
+
+</body>
+</html>
