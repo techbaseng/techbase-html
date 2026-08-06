@@ -2,594 +2,1002 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Lesson 18: HTML Div, Block and Inline Elements — Techbase HTML Course</title>
-<meta name="description" content="Understand the difference between block and inline elements, and master the div container">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Lesson 18: HTML Block &amp; Inline Elements, Div &amp; Span — Techbase HTML</title>
+<meta name="description" content="HTML Block &amp; Inline Elements, Div &amp; Span">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-:root { 
-  --accent:#ea4f21;--accent-pale:#fff3ef;--accent-dark:#c23d15;
-  --accent-border:rgba(234,79,33,.3);--accent-shadow:rgba(234,79,33,.28);
-  --hero-bg:linear-gradient(160deg,#fff3ef 0%,#f8fafc 55%,#fef2e9 100%);
-  --s2:#f1f5f9;
- }
 :root{
+  --acc:#e34c26;--acc-d:#c0391a;--acc-pale:#fff5f2;
+  --acc-b:rgba(227,76,38,.25);--acc-sh:rgba(227,76,38,.25);
   --bg:#f8fafc;--surface:#fff;--border:#e2e8f0;--border2:#cbd5e1;
   --text:#0f172a;--t2:#334155;--muted:#64748b;
   --D:'Space Grotesk',sans-serif;--B:'Plus Jakarta Sans',sans-serif;--M:'JetBrains Mono',monospace;
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased}
-body{background:var(--bg);color:var(--text);font-family:var(--B);font-size:16px;line-height:1.7;overflow-x:hidden}
+body{background:var(--bg);color:var(--text);font-family:var(--B);font-size:16px;line-height:1.75;overflow-x:hidden}
+
 /* NAV */
-.l-nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(255,255,255,.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);height:58px;display:flex;align-items:center;padding:0 1.5rem;gap:1rem;justify-content:space-between}
-.l-nav-logo{font-family:var(--D);font-weight:700;font-size:.88rem;color:var(--text);text-decoration:none}
-.l-nav-logo em{font-style:normal}
+.l-nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(255,255,255,.95);
+  backdrop-filter:blur(12px);border-bottom:1px solid var(--border);height:58px;
+  display:flex;align-items:center;padding:0 1.5rem;gap:1rem;justify-content:space-between}
+.l-nav-logo{font-family:var(--D);font-weight:700;font-size:.9rem;color:var(--text);text-decoration:none}
 .l-nav-back{font-size:.8rem;color:var(--muted);text-decoration:none;font-weight:500;display:flex;align-items:center;gap:.3rem;transition:color .2s}
-.l-nav-back:hover{color:var(--accent)}
-.l-nav-lesson{font-family:var(--M);font-size:.68rem;color:var(--muted)}
-/* PROGRESS BAR */
+.l-nav-back:hover{color:var(--acc)}
+.l-nav-label{font-family:var(--M);font-size:.68rem;color:var(--muted)}
+
+/* PROGRESS */
 .progress-wrap{position:fixed;top:58px;left:0;right:0;z-index:199;height:4px;background:var(--border)}
-.progress-bar{height:100%;background:var(--accent);transition:width .4s ease;width:0%}
+.progress-bar{height:100%;background:var(--acc);transition:width .4s ease;width:0%}
+
 /* HERO */
-.l-hero{padding:88px 1.5rem 2rem;background:var(--hero-bg);border-bottom:1px solid var(--border)}
-.l-hero-inner{max-width:820px;margin:0 auto}
-.l-badge{display:inline-flex;align-items:center;gap:.4rem;border-radius:100px;padding:.2rem .8rem;font-family:var(--M);font-size:.62rem;letter-spacing:.08em;text-transform:uppercase;font-weight:600;border:1px solid;color:var(--accent);background:var(--accent-pale);border-color:var(--accent-border);margin-bottom:.8rem}
-.l-hero h1{font-family:var(--D);font-weight:700;font-size:clamp(1.6rem,4vw,2.4rem);letter-spacing:-.025em;line-height:1.15;margin-bottom:.5rem}
-.l-hero-tag{font-size:.95rem;color:var(--muted);margin-bottom:1.2rem}
-.l-hero-build{background:var(--surface);border:1.5px solid var(--border);border-radius:10px;padding:.9rem 1.2rem;display:flex;align-items:center;gap:.7rem;font-size:.88rem;max-width:520px}
-.l-hero-build strong{color:var(--accent)}
+.l-hero{padding:80px 1.5rem 2rem;background:linear-gradient(160deg,#fff5f2 0%,#f8fafc 55%,#ffe8e0 100%);border-bottom:1px solid var(--border)}
+.l-hero-inner{max-width:860px;margin:0 auto}
+.l-badge{display:inline-flex;align-items:center;gap:.4rem;border-radius:100px;padding:.2rem .85rem;
+  font-family:var(--M);font-size:.62rem;letter-spacing:.08em;text-transform:uppercase;font-weight:600;
+  color:var(--acc);background:var(--acc-pale);border:1px solid var(--acc-b);margin-bottom:.8rem}
+.l-hero h1{font-family:var(--D);font-weight:700;font-size:clamp(1.5rem,4vw,2.3rem);
+  letter-spacing:-.02em;line-height:1.15;margin-bottom:.5rem}
+.l-hero-sub{font-size:.95rem;color:var(--muted);margin-bottom:1rem}
+
 /* WELCOME BOX */
-.welcome-box{background:linear-gradient(135deg,var(--accent),var(--accent-dark));color:#fff;border-radius:16px;padding:1.5rem 1.8rem;max-width:820px;margin:2rem auto 0}
-.welcome-box h2{font-family:var(--D);font-weight:700;font-size:1.1rem;margin-bottom:.6rem}
-.welcome-box p{font-size:.9rem;line-height:1.75;opacity:.92}
-.welcome-meta{display:flex;gap:1.5rem;margin-top:1rem;flex-wrap:wrap}
-.welcome-meta span{background:rgba(255,255,255,.15);border-radius:6px;padding:.25rem .8rem;font-family:var(--M);font-size:.7rem;font-weight:500}
-/* MAIN CONTENT */
-main{max-width:820px;margin:0 auto;padding:2rem 1.5rem 5rem}
+.welcome-box{background:linear-gradient(135deg,var(--acc),var(--acc-d));color:#fff;
+  border-radius:16px;padding:1.5rem 1.8rem;max-width:860px;margin:1.5rem auto 0}
+.welcome-box h2{font-family:var(--D);font-weight:700;font-size:1.05rem;margin-bottom:.6rem}
+.welcome-box p,.welcome-box li{font-size:.9rem;line-height:1.8;opacity:.93}
+.welcome-box ul{margin-left:1.2rem;margin-top:.5rem}
+.welcome-meta{display:flex;gap:1rem;margin-top:1rem;flex-wrap:wrap}
+.welcome-meta span{background:rgba(255,255,255,.18);border-radius:6px;padding:.2rem .75rem;
+  font-family:var(--M);font-size:.68rem;font-weight:500}
+
 /* PHASE */
-.phase{background:var(--surface);border:1.5px solid var(--border);border-radius:16px;margin-bottom:1.5rem;overflow:hidden;transition:opacity .3s,transform .3s}
-.phase.locked{opacity:.4;pointer-events:none;filter:blur(1px)}
-.phase-header{padding:1rem 1.4rem;background:var(--s2,#f1f5f9);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;gap:1rem}
-.phase-num{font-family:var(--M);font-size:.7rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}
-.phase-title{font-family:var(--D);font-weight:700;font-size:1rem;color:var(--text)}
-.phase-check{width:24px;height:24px;border-radius:50%;background:var(--border);display:flex;align-items:center;justify-content:center;font-size:.75rem;flex-shrink:0;transition:background .3s}
+.phase{background:var(--surface);border:1.5px solid var(--border);border-radius:16px;
+  margin-bottom:1.5rem;overflow:hidden;transition:opacity .3s,transform .3s,filter .3s}
+.phase.locked{opacity:.35;pointer-events:none;filter:blur(1.5px)}
+.phase-header{padding:1rem 1.4rem;background:#fff8f5;
+  border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;gap:1rem;cursor:default}
+.phase-num{font-family:var(--M);font-size:.7rem;font-weight:600;letter-spacing:.08em;
+  text-transform:uppercase;color:var(--acc)}
+.phase-title{font-family:var(--D);font-weight:700;font-size:.95rem;color:var(--text);
+  flex:1;margin:0 .8rem}
+.phase-check{width:26px;height:26px;border-radius:50%;background:var(--border);
+  display:flex;align-items:center;justify-content:center;font-size:.8rem;flex-shrink:0;
+  transition:background .3s,color .3s}
 .phase-check.done{background:#10b981;color:#fff}
-.phase-body{padding:1.4rem}
-/* CONCEPT BOX */
-.concept-box{background:#f0f9ff;border-left:4px solid #0284c7;border-radius:0 10px 10px 0;padding:1rem 1.2rem;margin-bottom:1.2rem}
-.concept-label{font-family:var(--M);font-size:.65rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#0284c7;margin-bottom:.4rem}
-.concept-box p{font-size:.92rem;color:#0c4a6e;line-height:1.75}
-/* CODE BLOCK */
-.code-wrap{margin:1.2rem 0;border-radius:12px;overflow:hidden;border:1px solid #1e293b}
-.code-bar{background:#1e293b;padding:.6rem 1rem;display:flex;align-items:center;gap:.4rem}
-.code-dot{width:8px;height:8px;border-radius:50%}
-.code-dot.r{background:#ff5f57}.code-dot.y{background:#febc2e}.code-dot.g{background:#28c840}
-.code-filename{margin-left:.5rem;font-family:var(--M);font-size:.65rem;color:#64748b}
-.code-body{background:#0f172a;padding:1.2rem 1.4rem;overflow-x:auto}
-.code-body pre{font-family:var(--M);font-size:.78rem;line-height:1.9;color:#e2e8f0;margin:0;white-space:pre}
-.code-body pre .cm{color:#64748b} /* comment */
-.code-body pre .tg{color:#38bdf8} /* tag */
-.code-body pre .at{color:#c084fc} /* attribute */
-.code-body pre .vl{color:#86efac} /* value */
-.code-body pre .tx{color:#e2e8f0} /* text */
+.phase-body{padding:1.6rem 1.8rem}
+
+/* RICH CONTENT STYLES */
+.v2-p{margin-bottom:1rem;font-size:.95rem;color:var(--t2);line-height:1.85}
+.v2-h3{font-family:var(--D);font-weight:700;font-size:1.05rem;color:var(--text);
+  margin:1.6rem 0 .5rem;padding-top:.2rem;border-top:2px solid var(--acc-pale)}
+.v2-h4{font-family:var(--D);font-weight:600;font-size:.95rem;color:var(--t2);margin:1.1rem 0 .4rem}
+.v2-h5,.v2-h6{font-family:var(--D);font-weight:600;font-size:.9rem;color:var(--muted);margin:.8rem 0 .3rem}
+.v2-ul,.v2-ol{margin:.6rem 0 1rem 1.4rem;font-size:.93rem;color:var(--t2);line-height:1.9}
+.v2-ul li,.v2-ol li{margin-bottom:.3rem}
+.v2-bq{border-left:4px solid var(--acc);background:var(--acc-pale);border-radius:0 10px 10px 0;
+  padding:.9rem 1.2rem;margin:1rem 0;font-size:.92rem;color:#7b1c06;font-style:italic}
+.v2-bq p{margin:0;color:inherit}
+.v2-bq strong{font-style:normal}
+.v2-hr{border:none;border-top:1px solid var(--border);margin:1.2rem 0}
+.v2-table-wrap{overflow-x:auto;margin:1rem 0}
+.v2-table{width:100%;border-collapse:collapse;font-size:.87rem}
+.v2-table th{background:var(--acc-pale);color:#7b1c06;font-family:var(--D);
+  font-weight:700;padding:9px 12px;text-align:left;border:1px solid var(--acc-b)}
+.v2-table td{padding:8px 12px;border:1px solid var(--border);color:var(--t2);vertical-align:top}
+.v2-table tr:nth-child(even) td{background:#f8fafc}
+.v2-table code{background:var(--acc-pale);color:var(--acc);border-radius:4px;
+  padding:1px 5px;font-family:var(--M);font-size:.8em}
+.phase-body code{background:var(--acc-pale);color:var(--acc-d);border-radius:4px;
+  padding:1px 6px;font-family:var(--M);font-size:.82em}
+.phase-body a{color:var(--acc);text-decoration:underline;text-underline-offset:2px}
+.phase-body strong{color:var(--text)}
+
+/* CODE BLOCKS */
+.v2-code-wrap{margin:1.2rem 0;border-radius:12px;overflow:hidden;border:1px solid #1e293b;box-shadow:0 4px 16px rgba(0,0,0,.15)}
+.v2-code-bar{background:#1e293b;padding:.55rem 1rem;display:flex;align-items:center;gap:.4rem}
+.v2-dot{width:10px;height:10px;border-radius:50%}
+.v2-dot.r{background:#ff5f57}.v2-dot.y{background:#febc2e}.v2-dot.g{background:#28c840}
+.v2-code-lang{margin-left:.6rem;font-family:var(--M);font-size:.65rem;color:#64748b;text-transform:uppercase;letter-spacing:.08em}
+.v2-code-body{background:#0f172a;padding:1.3rem 1.5rem;overflow-x:auto}
+.v2-code-body pre{margin:0}
+.v2-code-body code{font-family:var(--M);font-size:.8rem;line-height:1.9;color:#e2e8f0;
+  white-space:pre;background:transparent;padding:0;border-radius:0}
+
 /* TASK BOX */
-.task-box{background:#fffbeb;border:1.5px dashed #d97706;border-radius:12px;padding:1rem 1.2rem;margin:1.2rem 0}
-.task-label{font-family:var(--M);font-size:.65rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#b45309;margin-bottom:.4rem}
-.task-box p{font-size:.92rem;color:#78350f;line-height:1.75}
-.task-box code{background:rgba(180,83,9,.1);border-radius:4px;padding:.1rem .4rem;font-family:var(--M);font-size:.82em}
-/* NEXT BUTTON */
-.next-btn{display:inline-flex;align-items:center;gap:.5rem;background:var(--accent);color:#fff;font-family:var(--D);font-weight:700;font-size:.88rem;padding:.75rem 1.5rem;border-radius:10px;border:none;cursor:pointer;transition:transform .2s,box-shadow .2s;box-shadow:0 4px 12px var(--accent-shadow);margin-top:1rem}
-.next-btn:hover{transform:translateY(-2px);box-shadow:0 8px 20px var(--accent-shadow)}
-.next-btn:disabled{opacity:.5;cursor:not-allowed;transform:none}
-.next-tip{font-family:var(--M);font-size:.72rem;color:var(--muted);margin-top:.6rem}
-/* PROJECT BOX */
-.project-box{background:#f0fdf4;border:2px solid #16a34a;border-radius:16px;padding:1.5rem;margin:2rem 0}
-.project-label{font-family:var(--M);font-size:.65rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#15803d;margin-bottom:.4rem}
-.project-name{font-family:var(--D);font-weight:700;font-size:1.1rem;color:#14532d;margin-bottom:.5rem}
-.project-desc{font-size:.9rem;color:#166534;margin-bottom:1.2rem;line-height:1.7}
-/* CAPSTONE BOX */
-.capstone-box{background:linear-gradient(135deg,#1e1b4b,#312e81);border-radius:16px;padding:1.5rem;margin:2rem 0;color:#fff}
-.capstone-label{font-family:var(--M);font-size:.65rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#a5b4fc;margin-bottom:.4rem}
-.capstone-name{font-family:var(--D);font-weight:700;font-size:1.2rem;margin-bottom:.5rem}
-.capstone-desc{font-size:.9rem;color:rgba(255,255,255,.8);margin-bottom:1.2rem;line-height:1.7}
-/* FILE TABS */
-.file-tabs{display:flex;gap:.5rem;margin-bottom:0;flex-wrap:wrap}
-.file-tab{font-family:var(--M);font-size:.72rem;padding:.35rem .8rem;background:#1e293b;color:#94a3b8;border-radius:6px 6px 0 0;cursor:pointer;border:1px solid #334155;border-bottom:none;transition:background .15s}
-.file-tab.active{background:#0f172a;color:#e2e8f0}
-.file-content{display:none}.file-content.active{display:block}
+.task-box{background:#fff0ec;border:2px dashed #e34c26;
+  border-radius:12px;padding:1rem 1.3rem;margin:1.4rem 0}
+.task-label{font-family:var(--M);font-size:.65rem;font-weight:700;letter-spacing:.1em;
+  text-transform:uppercase;color:#7b1c06;margin-bottom:.5rem;display:flex;align-items:center;gap:.4rem}
+.task-box p,.task-body{font-size:.92rem;color:#7b1c06;line-height:1.8}
+.task-box code{background:rgba(0,0,0,.08);border-radius:4px;padding:1px 6px;
+  font-family:var(--M);font-size:.82em}
+
+/* UNLOCK BUTTON */
+.unlock-btn{display:inline-flex;align-items:center;gap:.5rem;background:var(--acc);
+  color:#fff;font-family:var(--D);font-weight:700;font-size:.88rem;
+  padding:.75rem 1.6rem;border-radius:10px;border:none;cursor:pointer;
+  transition:transform .2s,box-shadow .2s;box-shadow:0 4px 14px var(--acc-sh);margin-top:1.2rem}
+.unlock-btn:hover{transform:translateY(-2px);box-shadow:0 8px 22px var(--acc-sh)}
+
+/* BUILD IT */
+.build-box{background:#f0fdf4;border:2px solid #16a34a;border-radius:16px;padding:1.6rem;margin:2rem 0;display:none}
+.build-label{font-family:var(--M);font-size:.65rem;font-weight:700;letter-spacing:.1em;
+  text-transform:uppercase;color:#15803d;margin-bottom:.4rem}
+.build-name{font-family:var(--D);font-weight:700;font-size:1.1rem;color:#14532d;margin-bottom:.5rem}
+.build-desc{font-size:.9rem;color:#166534;margin-bottom:1.2rem;line-height:1.75}
+.build-desc code{background:rgba(22,163,74,.12);border-radius:4px;padding:1px 6px;font-family:var(--M);font-size:.82em}
+.build-desc strong{color:#14532d}
+
 /* GITHUB ACCORDION */
-.github-acc{border:1.5px solid var(--border);border-radius:12px;overflow:hidden;margin:1.5rem 0}
-.github-acc-head{padding:1rem 1.2rem;background:#f8fafc;cursor:pointer;display:flex;align-items:center;justify-content:space-between;font-family:var(--D);font-weight:600;font-size:.9rem;user-select:none}
-.github-acc-body{display:none;padding:1.2rem;border-top:1px solid var(--border)}
-.github-acc-body.open{display:block}
-.github-step{display:flex;gap:.8rem;margin-bottom:1rem;align-items:flex-start}
-.github-step-n{width:24px;height:24px;border-radius:50%;background:var(--accent);color:#fff;font-family:var(--D);font-weight:700;font-size:.75rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px}
-.github-step p{font-size:.88rem;color:var(--t2);line-height:1.7}
+.gh-acc{border:1.5px solid var(--border);border-radius:12px;overflow:hidden;margin:1.5rem 0}
+.gh-acc-head{padding:1rem 1.2rem;background:#f8fafc;cursor:pointer;
+  display:flex;align-items:center;justify-content:space-between;
+  font-family:var(--D);font-weight:600;font-size:.9rem;user-select:none}
+.gh-acc-body{display:none;padding:1.2rem;border-top:1px solid var(--border)}
+.gh-acc-body.open{display:block}
+.gh-step{display:flex;gap:.8rem;margin-bottom:1rem;align-items:flex-start}
+.gh-step-n{width:26px;height:26px;border-radius:50%;background:var(--acc);color:#fff;
+  font-family:var(--D);font-weight:700;font-size:.75rem;display:flex;align-items:center;
+  justify-content:center;flex-shrink:0;margin-top:2px}
+.gh-step p{font-size:.88rem;color:var(--t2);line-height:1.7}
+.gh-step code{background:var(--acc-pale);color:var(--acc-d);border-radius:4px;
+  padding:1px 6px;font-family:var(--M);font-size:.82em}
+
 /* SESSION END */
-.session-end{background:linear-gradient(135deg,var(--accent),var(--accent-dark));color:#fff;border-radius:16px;padding:1.5rem 1.8rem;margin:2rem 0;display:none}
+.session-end{background:linear-gradient(135deg,var(--acc),var(--acc-d));color:#fff;
+  border-radius:16px;padding:1.6rem 1.8rem;margin:2rem 0;display:none}
 .session-end.visible{display:block}
 .session-end h2{font-family:var(--D);font-weight:700;font-size:1.1rem;margin-bottom:.8rem}
 .session-end ul{list-style:none;display:flex;flex-direction:column;gap:.4rem}
-.session-end li{font-size:.9rem;opacity:.92;display:flex;align-items:center;gap:.5rem}
-/* LESSON NAV */
-.lesson-nav{display:flex;align-items:center;justify-content:space-between;padding-top:2rem;border-top:1px solid var(--border);margin-top:2rem;flex-wrap:wrap;gap:.75rem}
-.ln-btn{display:inline-flex;align-items:center;gap:.4rem;background:var(--surface);color:var(--t2);font-family:var(--D);font-weight:600;font-size:.82rem;padding:.65rem 1.2rem;border-radius:8px;text-decoration:none;border:1.5px solid var(--border);transition:border-color .2s,color .2s}
-.ln-btn:hover{border-color:var(--accent);color:var(--accent)}
-.ln-btn.primary{background:var(--accent);color:#fff;border-color:var(--accent)}
+.session-end li{font-size:.9rem;opacity:.93;display:flex;align-items:center;gap:.5rem}
+.ln-btn{display:inline-flex;align-items:center;gap:.4rem;background:var(--surface);
+  color:var(--t2);font-family:var(--D);font-weight:600;font-size:.82rem;
+  padding:.65rem 1.2rem;border-radius:8px;text-decoration:none;
+  border:1.5px solid var(--border);transition:border-color .2s,color .2s}
+.ln-btn:hover{border-color:var(--acc);color:var(--acc)}
+.ln-btn.primary{background:var(--acc);color:#fff;border-color:var(--acc)}
 .ln-btn.primary:hover{opacity:.9}
-/* UTILS */
-code{font-family:var(--M);font-size:.85em;background:#f1f5f9;border-radius:4px;padding:.1rem .35rem;color:var(--accent)}
-.emoji{font-style:normal}
-@media(max-width:600px){.l-hero h1{font-size:1.5rem}.welcome-meta{gap:.75rem}}
-
+.lesson-nav{display:flex;align-items:center;justify-content:space-between;
+  padding-top:2rem;border-top:1px solid rgba(255,255,255,.25);margin-top:1.5rem;flex-wrap:wrap;gap:.75rem}
+.lesson-footer{text-align:center;padding:1.5rem;font-family:var(--M);font-size:.72rem;
+  color:var(--muted);border-top:1px solid var(--border);background:var(--surface)}
 </style>
 </head>
 <body>
-
-<!-- FIXED NAV -->
-<nav class="lesson-nav-bar">
-  <a href="../index.html" class="nav-back">← HTML Course</a>
-  <span class="nav-lesson">Lesson 18 of 34 &nbsp;·&nbsp; HTML Div, Block and Inline Elements</span>
-  <div class="nav-actions">
-    <a href="lesson_17.html" class="ln-btn">← Lesson 17</a>
-    <a href="lesson_19.html" class="ln-btn primary">Lesson 19 →</a>
-  </div>
+<nav class="l-nav">
+  <a href="../index.html" class="l-nav-logo">⚡ Techbase HTML</a>
+  <span class="l-nav-label">Lesson 18 of 34</span>
+  <a href="../index.html" class="l-nav-back">← All Lessons</a>
 </nav>
+<div class="progress-wrap"><div class="progress-bar" id="pbar"></div></div>
 
-<!-- PROGRESS BAR -->
-<div id="progress-wrap">
-  <div id="pbar" style="width:5%;background:var(--accent);height:4px;
-       border-radius:2px;transition:width .4s ease;"></div>
+<div class="l-hero">
+  <div class="l-hero-inner">
+    <div class="l-badge">HTML · Lesson 18</div>
+    <h1>HTML Block &amp; Inline Elements, Div &amp; Span</h1>
+    <div class="l-hero-sub">7 phases · Build: Stage 1: Setup — Build the Basic Structure</div>
+  </div>
 </div>
 
-<!-- HERO -->
-<section class="lesson-hero">
-  <div class="hero-inner">
-    <div class="lesson-num-badge">Lesson 18</div>
-    <h1>HTML Div, Block and Inline Elements</h1>
-    <p class="lesson-tagline">Understand the difference between block and inline elements, and master the div container</p>
-    <div class="lesson-meta">
-      <span>📚 3 phases</span>
-      <span>🏗️ Build: My Div Layout Page</span>
-      
-    </div>
+<section style="background:linear-gradient(160deg,#fff5f2 0%,#f8fafc 55%,#ffe8e0 100%);padding-bottom:1.5rem;border-bottom:1px solid var(--border)">
+  <div style="max-width:860px;margin:0 auto;padding:0 1.5rem"><div class="welcome-box">
+  <h2>👋 Welcome to Lesson 18</h2>
+  <div style="font-size:.9rem;line-height:1.85;opacity:.93"><p class="v2-p">Welcome to Lesson 18! In this lesson, you are going to learn one of the most important ideas in HTML: the difference between <strong>block-level elements</strong> and <strong>inline elements</strong>.</p>
+<p class="v2-p">You will also master two incredibly powerful and widely used HTML elements — <code>&lt;div&gt;</code> and <code>&lt;span&gt;</code> — which are the building blocks of almost every real website you see today.</p>
+<p class="v2-p">By the end of this lesson, you will:</p>
+<ul class="v2-ul"><li>Understand what "block" and "inline" mean in HTML</li><li>Know when each type of element is used</li><li>Be able to use <code>&lt;div&gt;</code> to group and structure sections of a page</li><li>Be able to use <code>&lt;span&gt;</code> to style specific parts of text</li><li>Know how to place multiple <code>&lt;div&gt;</code> elements side by side using CSS</li></ul>
+<p class="v2-p">This lesson naturally builds on everything you have learned so far about HTML elements, attributes, and inline CSS styling.</p>
+<hr class="v2-hr"></div>
+  <div class="welcome-meta">
+    <span>📚 7 phases</span>
+    <span>🏗️ Stage 1: Setup — Build the Basic Structure</span>
   </div>
+</div></div>
 </section>
 
-<!-- MAIN CONTENT -->
-<main class="lesson-main">
-
-<div class="welcome-box">
-  <div class="welcome-label">👋 Welcome to Lesson 18!</div>
-  <h2>HTML Div, Block and Inline Elements</h2>
-  <p>Understand the difference between block and inline elements, and master the div container. In this lesson you will work through
-     <strong>3 phases</strong>.
-     Complete each phase task before clicking <em>Next Phase</em>.
-     
-  </p>
-</div>
-
-<div class="phase " id="phase1" data-phase="1">
+<main style="max-width:860px;margin:0 auto;padding:2rem 1.5rem 5rem">
+<div class="phase" id="phase1">
   <div class="phase-header">
-    <div><div class="phase-num">Phase 1</div><div class="phase-title">Block vs Inline Elements</div></div>
-    <div class="phase-check" id="check1"></div>
+    <div class="phase-num">Phase 1 of 7</div>
+    <div class="phase-title">Lesson Introduction</div>
+    <div class="phase-check" id="chk1"></div>
   </div>
   <div class="phase-body">
-    <div class="concept-box">
-      <div class="concept-label">💡 Concept</div>
-      <p>Every HTML element is either <strong>block-level</strong> or <strong>inline</strong>. Block elements take up the full width of the page and always start on a new line — examples: <code>&lt;div&gt;</code>, <code>&lt;p&gt;</code>, <code>&lt;h1&gt;</code>, <code>&lt;ul&gt;</code>. Inline elements only take up as much space as their content and flow inside a line of text — examples: <code>&lt;span&gt;</code>, <code>&lt;a&gt;</code>, <code>&lt;strong&gt;</code>, <code>&lt;img&gt;</code>.</p>
-    </div>
-    <div class="code-wrap">
-  <div class="code-bar">
-    <span class="code-dot r"></span><span class="code-dot y"></span><span class="code-dot g"></span>
-    <span class="code-filename">index.html</span>
-  </div>
-  <div class="code-body"><pre>&lt;!DOCTYPE html&gt;
-&lt;html lang="en"&gt;
-  &lt;head&gt;
-    &lt;title&gt;Block vs Inline&lt;/title&gt;
-    &lt;style&gt;
-      p  { background: #dbeafe; padding: 8px; margin: 6px 0; }
-      span { background: #fef3c7; padding: 2px 6px; }
-      strong { background: #dcfce7; padding: 2px 4px; }
-    &lt;/style&gt;
-  &lt;/head&gt;
-  &lt;body&gt;
-
-    &lt;h2&gt;Block Elements (each starts on its own line)&lt;/h2&gt;
-    &lt;p&gt;First block paragraph (full width, new line).&lt;/p&gt;
-    &lt;p&gt;Second block paragraph (also full width, new line).&lt;/p&gt;
-
-    &lt;h2&gt;Inline Elements (flow with the text)&lt;/h2&gt;
-    &lt;p&gt;
-      This paragraph has &lt;span&gt;a span&lt;/span&gt; and
-      &lt;strong&gt;bold text&lt;/strong&gt; and
-      &lt;a href="#"&gt;a link&lt;/a&gt; — all inline, all in the same line.
-    &lt;/p&gt;
-
-  &lt;/body&gt;
-&lt;/html&gt;</pre></div>
-</div>
+    <p class="v2-p">Welcome to Lesson 18! In this lesson, you are going to learn one of the most important ideas in HTML: the difference between <strong>block-level elements</strong> and <strong>inline elements</strong>.</p>
+<p class="v2-p">You will also master two incredibly powerful and widely used HTML elements — <code>&lt;div&gt;</code> and <code>&lt;span&gt;</code> — which are the building blocks of almost every real website you see today.</p>
+<p class="v2-p">By the end of this lesson, you will:</p>
+<ul class="v2-ul"><li>Understand what "block" and "inline" mean in HTML</li><li>Know when each type of element is used</li><li>Be able to use <code>&lt;div&gt;</code> to group and structure sections of a page</li><li>Be able to use <code>&lt;span&gt;</code> to style specific parts of text</li><li>Know how to place multiple <code>&lt;div&gt;</code> elements side by side using CSS</li></ul>
+<p class="v2-p">This lesson naturally builds on everything you have learned so far about HTML elements, attributes, and inline CSS styling.</p>
+<hr class="v2-hr">
     <div class="task-box">
       <div class="task-label">✏️ Your Task</div>
-      <p>Add background colours to different elements in your developer tools (Inspect → Styles) to visually see which are block and which are inline. Notice how block elements stretch all the way across, while inline elements only cover their text.</p>
+      <div class="task-body">Now practise what you just learned about <strong>Lesson Introduction</strong>. Open your editor, type the examples above by hand, then modify them — change values, rename variables, and observe what happens. Active experimentation is how code sticks.</div>
     </div>
-    <button class="next-btn" onclick="unlockNext(1)">
-      Next Phase → <span>→</span>
-    </button>
-    <p class="next-tip">Try the task first, then click to continue!</p>
+    <button class="unlock-btn" onclick="unlockNext(1)">Start Lesson ✓</button>
   </div>
-</div><div class="phase locked" id="phase2" data-phase="2">
+</div>
+<div class="phase locked" id="phase2">
   <div class="phase-header">
-    <div><div class="phase-num">Phase 2</div><div class="phase-title">The div Container</div></div>
-    <div class="phase-check" id="check2"></div>
+    <div class="phase-num">Phase 2 of 7</div>
+    <div class="phase-title">Prerequisite Concepts</div>
+    <div class="phase-check" id="chk2"></div>
   </div>
   <div class="phase-body">
-    <div class="concept-box">
-      <div class="concept-label">💡 Concept</div>
-      <p>The <code>&lt;div&gt;</code> (division) element is a <strong>block-level container</strong> with no visual style by default — it is just a box. Use it to group related elements together so you can style or position them as a unit with CSS. <code>&lt;div&gt;</code> is one of the most used tags in HTML because it lets you create any layout you want when combined with CSS.</p>
-    </div>
-    <div class="code-wrap">
-  <div class="code-bar">
-    <span class="code-dot r"></span><span class="code-dot y"></span><span class="code-dot g"></span>
-    <span class="code-filename">index.html</span>
-  </div>
-  <div class="code-body"><pre>&lt;!DOCTYPE html&gt;
-&lt;html lang="en"&gt;
-  &lt;head&gt;
-    &lt;title&gt;Div Containers&lt;/title&gt;
-    &lt;style&gt;
-      .card {
-        background: white;
-        border: 1.5px solid #e2e8f0;
-        border-radius: 12px;
-        padding: 20px;
-        margin: 16px 0;
-        box-shadow: 0 2px 6px rgba(0,0,0,.06);
-      }
-      .card h3 { margin-top: 0; color: #ea4f21; }
-      .card p  { color: #475569; }
-    &lt;/style&gt;
-  &lt;/head&gt;
-  &lt;body style="background:#f1f5f9; padding:24px; font-family:Arial;"&gt;
-    &lt;h1&gt;My Cards&lt;/h1&gt;
-
-    &lt;div class="card"&gt;
-      &lt;h3&gt;Card 1 — HTML&lt;/h3&gt;
-      &lt;p&gt;HTML provides the structure of the page.&lt;/p&gt;
-    &lt;/div&gt;
-
-    &lt;div class="card"&gt;
-      &lt;h3&gt;Card 2 — CSS&lt;/h3&gt;
-      &lt;p&gt;CSS controls the visual style and layout.&lt;/p&gt;
-    &lt;/div&gt;
-
-    &lt;div class="card"&gt;
-      &lt;h3&gt;Card 3 — JavaScript&lt;/h3&gt;
-      &lt;p&gt;JavaScript makes things interactive and dynamic.&lt;/p&gt;
-    &lt;/div&gt;
-  &lt;/body&gt;
-&lt;/html&gt;</pre></div>
-</div>
+    <p class="v2-p">Before we dive in, let us make sure you understand a few ideas that this lesson builds on.</p>
+<h3 class="v2-h3">What is an HTML element?</h3>
+<p class="v2-p">An HTML element is a piece of content wrapped between an opening tag and a closing tag. For example:</p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;p&gt;This is a paragraph.&lt;/p&gt;</code></pre></div></div>
+<p class="v2-p">Here, <code>&lt;p&gt;</code> is the opening tag, <code>&lt;/p&gt;</code> is the closing tag, and "This is a paragraph." is the content in between.</p>
+<h3 class="v2-h3">What is CSS?</h3>
+<p class="v2-p">CSS stands for <strong>Cascading Style Sheets</strong>. It is a language used to control how HTML elements look — their colour, size, position, background, and much more. In this lesson, we will use a small amount of inline CSS (written directly inside an HTML tag using the <code>style</code> attribute) to style our elements.</p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;p style=&quot;color: red;&quot;&gt;This text is red.&lt;/p&gt;</code></pre></div></div>
+<ul class="v2-ul"><li><code>style</code> — the attribute that lets us add CSS directly to a tag</li><li><code>color: red;</code> — a CSS rule that changes the text colour to red</li></ul>
+<p class="v2-p">You do not need to be a CSS expert yet. We will explain every CSS property we use, line by line.</p>
+<hr class="v2-hr">
     <div class="task-box">
       <div class="task-label">✏️ Your Task</div>
-      <p>Build three <code>&lt;div&gt;</code> cards, each with a heading and a paragraph inside. Style the div with a white background, rounded corners (<code>border-radius</code>), padding, and a subtle box shadow (<code>box-shadow: 0 2px 6px rgba(0,0,0,.06)</code>).</p>
+      <div class="task-body">Now practise what you just learned about <strong>Prerequisite Concepts</strong>. Open your editor, type the examples above by hand, then modify them — change values, rename variables, and observe what happens. Active experimentation is how code sticks.</div>
     </div>
-    <button class="next-btn" onclick="unlockNext(2)">
-      Next Phase → <span>→</span>
-    </button>
-    <p class="next-tip">Try the task first, then click to continue!</p>
+    <button class="unlock-btn" onclick="unlockNext(2)">Phase Complete — Unlock Next ✓</button>
   </div>
-</div><div class="phase locked" id="phase3" data-phase="3">
+</div>
+<div class="phase locked" id="phase3">
   <div class="phase-header">
-    <div><div class="phase-num">Phase 3</div><div class="phase-title">The span Container</div></div>
-    <div class="phase-check" id="check3"></div>
+    <div class="phase-num">Phase 3 of 7</div>
+    <div class="phase-title">Part 1: Block-Level vs. Inline Elements</div>
+    <div class="phase-check" id="chk3"></div>
   </div>
   <div class="phase-body">
-    <div class="concept-box">
-      <div class="concept-label">💡 Concept</div>
-      <p><code>&lt;span&gt;</code> is the <strong>inline</strong> version of <code>&lt;div&gt;</code>. It has no visual style by default, but you can target it with CSS to style a specific part of a sentence without breaking the flow of text. Common uses: highlighting a single word, applying a colour to part of a paragraph, or wrapping text you want to target with JavaScript later.</p>
-    </div>
-    <div class="code-wrap">
-  <div class="code-bar">
-    <span class="code-dot r"></span><span class="code-dot y"></span><span class="code-dot g"></span>
-    <span class="code-filename">index.html</span>
-  </div>
-  <div class="code-body"><pre>&lt;!DOCTYPE html&gt;
-&lt;html lang="en"&gt;
-  &lt;head&gt;
-    &lt;title&gt;Span Examples&lt;/title&gt;
-    &lt;style&gt;
-      .highlight { background: #fef3c7; padding: 2px 5px;
-                   border-radius: 4px; font-weight: bold; }
-      .accent    { color: #ea4f21; font-weight: bold; }
-      .tag-name  { font-family: monospace; background: #f1f5f9;
-                   padding: 1px 5px; border-radius: 4px; color: #7c3aed; }
-    &lt;/style&gt;
-  &lt;/head&gt;
+    <h3 class="v2-h3">What Is a "Display Value"?</h3>
+<p class="v2-p">Every single HTML element has a built-in <strong>display value</strong>. Think of this like a default behaviour that tells the browser: <em>"How should I position this element on the page?"</em></p>
+<p class="v2-p">There are two main display types you need to know right now:</p>
+<ol class="v2-ol"><li><strong>Block</strong> — the element takes up the full width of the page and starts on a new line</li><li><strong>Inline</strong> — the element only takes up as much space as its content needs, and it sits side by side with other content</li></ol>
+<p class="v2-p">Let us understand each one thoroughly.</p>
+<hr class="v2-hr">
+<h3 class="v2-h3">Block-Level Elements</h3>
+<p class="v2-p"><strong>What is a block-level element?</strong></p>
+<p class="v2-p">A block-level element is like a paragraph in a book. When you start a new paragraph, it always goes on a <strong>new line</strong>. It doesn't squeeze in next to the previous paragraph — it occupies its own full row.</p>
+<p class="v2-p">In HTML, a block-level element:</p>
+<ul class="v2-ul"><li>Always <strong>starts on a new line</strong></li><li>Automatically <strong>stretches to fill the full width</strong> available (from left to right edge)</li><li>The browser automatically adds a small <strong>margin (empty space)</strong> above and below it</li></ul>
+<p class="v2-p"><strong>Analogy:</strong> Imagine you are stacking bricks. Each brick (block element) gets its own row. You can't put two bricks side by side unless you deliberately change how they are positioned.</p>
+<h4 class="v2-h4">The Two Most Common Block Elements: <code>&lt;p&gt;</code> and <code>&lt;div&gt;</code></h4>
+<p class="v2-p">The <code>&lt;p&gt;</code> element defines a paragraph of text. The <code>&lt;div&gt;</code> element defines a division or section (a container for other elements).</p>
+<p class="v2-p">Both are block-level elements.</p>
+<h4 class="v2-h4">Example 1 — Your First Look at Block Elements</h4>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
   &lt;body&gt;
-    &lt;p&gt;The &lt;span class="tag-name"&gt;&amp;lt;span&amp;gt;&lt;/span&gt; tag is an
-       &lt;span class="highlight"&gt;inline container&lt;/span&gt; — it flows
-       with your text without breaking to a new line.&lt;/p&gt;
-
-    &lt;p&gt;I got &lt;span class="accent"&gt;100%&lt;/span&gt; on my HTML quiz!&lt;/p&gt;
-
-    &lt;p&gt;The price is &lt;span style="text-decoration:line-through;"&gt;₦5,000&lt;/span&gt;
-       now only &lt;span style="color:green; font-weight:bold;"&gt;₦3,000!&lt;/span&gt;&lt;/p&gt;
+    &lt;p&gt;Hello World&lt;/p&gt;
+    &lt;div&gt;Hello World&lt;/div&gt;
   &lt;/body&gt;
-&lt;/html&gt;</pre></div>
-</div>
+&lt;/html&gt;</code></pre></div></div>
+<p class="v2-p"><strong>Expected Output (in browser):</strong></p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span></div><div class="v2-code-body"><pre><code>Hello World
+Hello World</code></pre></div></div>
+<p class="v2-p">Even though both pieces of text say "Hello World", each one appears on its <strong>own separate line</strong>. That is the block behaviour in action. Neither one tried to sit next to the other.</p>
+<blockquote class="v2-bq"><p class="v2-p"><strong>Thinking Prompt:</strong> What would happen if you put three <code>&lt;p&gt;</code> tags one after another? Would they all be on separate lines or bunched together? Try it!</p></blockquote>
+<hr class="v2-hr">
+<h4 class="v2-h4">The Full List of Block-Level Elements in HTML</h4>
+<p class="v2-p">Here is every block-level element in HTML. You do not need to memorise them all right now — just recognise that these are the elements that behave as "full-width, new line" boxes:</p>
+<p class="v2-p"><code>&lt;address&gt;</code>, <code>&lt;article&gt;</code>, <code>&lt;aside&gt;</code>, <code>&lt;blockquote&gt;</code>, <code>&lt;canvas&gt;</code>, <code>&lt;dd&gt;</code>, <code>&lt;div&gt;</code>, <code>&lt;dl&gt;</code>, <code>&lt;dt&gt;</code>, <code>&lt;fieldset&gt;</code>, <code>&lt;figcaption&gt;</code>, <code>&lt;figure&gt;</code>, <code>&lt;footer&gt;</code>, <code>&lt;form&gt;</code>, <code>&lt;h1&gt;</code> through <code>&lt;h6&gt;</code>, <code>&lt;header&gt;</code>, <code>&lt;hr&gt;</code>, <code>&lt;li&gt;</code>, <code>&lt;main&gt;</code>, <code>&lt;nav&gt;</code>, <code>&lt;noscript&gt;</code>, <code>&lt;ol&gt;</code>, <code>&lt;p&gt;</code>, <code>&lt;pre&gt;</code>, <code>&lt;section&gt;</code>, <code>&lt;table&gt;</code>, <code>&lt;tfoot&gt;</code>, <code>&lt;ul&gt;</code>, <code>&lt;video&gt;</code></p>
+<p class="v2-p">You have already used many of these in previous lessons: <code>&lt;p&gt;</code>, <code>&lt;h1&gt;</code> through <code>&lt;h6&gt;</code>, <code>&lt;ul&gt;</code>, <code>&lt;ol&gt;</code>, <code>&lt;li&gt;</code>, <code>&lt;table&gt;</code>. Notice how they all start on new lines? Now you know exactly why.</p>
+<hr class="v2-hr">
+<h3 class="v2-h3">Inline Elements</h3>
+<p class="v2-p"><strong>What is an inline element?</strong></p>
+<p class="v2-p">An inline element is the opposite of a block element. It does <strong>not</strong> start on a new line. Instead, it sits <strong>within</strong> a line of text or content, flowing along with everything around it.</p>
+<p class="v2-p">An inline element:</p>
+<ul class="v2-ul"><li>Does <strong>NOT</strong> start on a new line</li><li>Only takes up <strong>as much width as its content needs</strong></li><li>Lives inside other content, like words inside a sentence</li></ul>
+<p class="v2-p"><strong>Analogy:</strong> Think of inline elements like words inside a sentence. The word "big" in "That is a <strong>big</strong> dog" does not jump to a new line — it sits right there among the other words.</p>
+<h4 class="v2-h4">The Most Common Inline Element: <code>&lt;span&gt;</code></h4>
+<p class="v2-p">The <code>&lt;span&gt;</code> element is an inline container. It is used to wrap a small part of text or content — perhaps just one word or one sentence — so you can style it differently from the rest.</p>
+<h4 class="v2-h4">Example 2 — Your First Inline Element</h4>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;body&gt;
+    &lt;p&gt;My favourite colour is &lt;span style=&quot;color: blue;&quot;&gt;blue&lt;/span&gt;.&lt;/p&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</code></pre></div></div>
+<p class="v2-p"><strong>Expected Output:</strong></p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span></div><div class="v2-code-body"><pre><code>My favourite colour is blue.</code></pre></div></div>
+<p class="v2-p">(The word "blue" appears in blue colour, while the rest stays in the default colour.)</p>
+<p class="v2-p">Notice that <code>&lt;span&gt;</code> did not move "blue" to a new line. It stayed right inside the sentence — that is inline behaviour.</p>
+<blockquote class="v2-bq"><p class="v2-p"><strong>Thinking Prompt:</strong> What happens if you change <code>&lt;span&gt;</code> to <code>&lt;p&gt;</code> in the example above? Would "blue" still appear on the same line as the rest of the sentence?</p></blockquote>
+<hr class="v2-hr">
+<h4 class="v2-h4">The Full List of Inline Elements in HTML</h4>
+<p class="v2-p"><code>&lt;a&gt;</code>, <code>&lt;abbr&gt;</code>, <code>&lt;acronym&gt;</code>, <code>&lt;b&gt;</code>, <code>&lt;bdo&gt;</code>, <code>&lt;big&gt;</code>, <code>&lt;br&gt;</code>, <code>&lt;button&gt;</code>, <code>&lt;cite&gt;</code>, <code>&lt;code&gt;</code>, <code>&lt;dfn&gt;</code>, <code>&lt;em&gt;</code>, <code>&lt;i&gt;</code>, <code>&lt;img&gt;</code>, <code>&lt;input&gt;</code>, <code>&lt;kbd&gt;</code>, <code>&lt;label&gt;</code>, <code>&lt;map&gt;</code>, <code>&lt;object&gt;</code>, <code>&lt;output&gt;</code>, <code>&lt;q&gt;</code>, <code>&lt;samp&gt;</code>, <code>&lt;script&gt;</code>, <code>&lt;select&gt;</code>, <code>&lt;small&gt;</code>, <code>&lt;span&gt;</code>, <code>&lt;strong&gt;</code>, <code>&lt;sub&gt;</code>, <code>&lt;sup&gt;</code>, <code>&lt;textarea&gt;</code>, <code>&lt;time&gt;</code>, <code>&lt;tt&gt;</code>, <code>&lt;var&gt;</code></p>
+<p class="v2-p">You have used many of these already: <code>&lt;a&gt;</code> (links), <code>&lt;img&gt;</code> (images), <code>&lt;b&gt;</code> (bold), <code>&lt;i&gt;</code> (italic), <code>&lt;em&gt;</code>, <code>&lt;strong&gt;</code>. They all flow within lines, not below them.</p>
+<hr class="v2-hr">
+<h3 class="v2-h3">Critical Rule: Inline Cannot Contain Block</h3>
+<blockquote class="v2-bq"><p class="v2-p">⚠️ <strong>Important Rule:</strong> An <strong>inline element cannot contain a block-level element.</strong></p></blockquote>
+<p class="v2-p">This means you should NEVER put a <code>&lt;p&gt;</code>, <code>&lt;div&gt;</code>, or <code>&lt;h1&gt;</code> inside a <code>&lt;span&gt;</code>. Browsers may not display it correctly, and it violates HTML standards.</p>
+<p class="v2-p"><strong>Wrong — do NOT do this:</strong></p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;span&gt;
+  &lt;p&gt;This is wrong!&lt;/p&gt;
+&lt;/span&gt;</code></pre></div></div>
+<p class="v2-p"><strong>Correct — this is fine:</strong></p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;p&gt;This is correct. &lt;span&gt;This span is inside a paragraph.&lt;/span&gt;&lt;/p&gt;</code></pre></div></div>
+<hr class="v2-hr">
+<h3 class="v2-h3">Side-by-Side Comparison: Block vs. Inline</h3>
+<div class="v2-table-wrap"><table class="v2-table"><thead><tr><th>Feature</th><th>Block Element</th><th>Inline Element</th></tr></thead><tbody><tr><td>Starts on new line?</td><td>✅ Yes, always</td><td>❌ No, flows with content</td></tr><tr><td>Full width?</td><td>✅ Yes, stretches to edges</td><td>❌ No, only as wide as content</td></tr><tr><td>Can contain block elements?</td><td>✅ Yes</td><td>❌ No</td></tr><tr><td>Common example</td><td><code>&lt;p&gt;</code>, <code>&lt;div&gt;</code>, <code>&lt;h1&gt;</code></td><td><code>&lt;span&gt;</code>, <code>&lt;a&gt;</code>, <code>&lt;img&gt;</code></td></tr><tr><td>Use case</td><td>Structure/sections of a page</td><td>Styling part of a sentence</td></tr></tbody></table></div>
+<hr class="v2-hr">
     <div class="task-box">
       <div class="task-label">✏️ Your Task</div>
-      <p>Write a paragraph that uses at least three <code>&lt;span&gt;</code> tags with different classes to highlight, colour, and style specific words. Remember: span is inline so it doesn't break to a new line!</p>
+      <div class="task-body">Now practise what you just learned about <strong>: Block-Level vs. Inline Elements</strong>. Open your editor, type the examples above by hand, then modify them — change values, rename variables, and observe what happens. Active experimentation is how code sticks.</div>
     </div>
-    <button class="next-btn" onclick="unlockNext(3)">
-      Build It! 🚀 <span>→</span>
-    </button>
-    <p class="next-tip">Try the task first, then click to continue!</p>
+    <button class="unlock-btn" onclick="unlockNext(3)">Phase Complete — Unlock Next ✓</button>
   </div>
 </div>
-
-<div class="project-box" id="build-it" style="display:none">
-  <div class="project-label">🏗️ Build It!</div>
-  <div class="project-name">My Div Layout Page</div>
-  <p class="project-desc">Build a two-column layout using div containers: a main content area and a sidebar.</p>
-  <div class="code-wrap">
-    <div class="code-bar">
-      <span class="code-dot r"></span><span class="code-dot y"></span><span class="code-dot g"></span>
-      <span class="code-filename">starter.html — copy this into a new file!</span>
-    </div>
-    <div class="code-body"><pre id="starter-code">&lt;!DOCTYPE html&gt;
-&lt;html lang="en"&gt;
-  &lt;head&gt;
-    &lt;title&gt;My Div Layout&lt;/title&gt;
-    &lt;style&gt;
-      * { box-sizing: border-box; }
-      body { font-family: Arial, sans-serif; margin: 0;
-             background: #f1f5f9; padding: 24px; }
-      h1 { color: #ea4f21; text-align: center; }
-      .container { display: flex; gap: 24px; max-width: 900px; margin: 24px auto; }
-      .main {
-        flex: 2;
-        background: white;
-        border-radius: 14px;
-        padding: 24px;
-        box-shadow: 0 2px 8px rgba(0,0,0,.06);
-      }
-      .sidebar {
-        flex: 1;
-        background: white;
-        border-radius: 14px;
-        padding: 20px;
-        box-shadow: 0 2px 8px rgba(0,0,0,.06);
-      }
-      .sidebar h3 { color: #ea4f21; margin-top: 0; }
-      .tag { display: inline-block; background: #fff3ef;
-             color: #ea4f21; padding: 3px 10px; border-radius: 100px;
-             font-size: 12px; font-weight: bold; margin: 3px; }
-    &lt;/style&gt;
-  &lt;/head&gt;
+<div class="phase locked" id="phase4">
+  <div class="phase-header">
+    <div class="phase-num">Phase 4 of 7</div>
+    <div class="phase-title">Part 2: The `&lt;div&gt;` Element — Your Layout Superpower</div>
+    <div class="phase-check" id="chk4"></div>
+  </div>
+  <div class="phase-body">
+    <h3 class="v2-h3">What Is <code>&lt;div&gt;</code>?</h3>
+<p class="v2-p">The <code>&lt;div&gt;</code> element stands for <strong>division</strong>. It is a <strong>block-level container</strong> — meaning it is an empty box you can fill with other HTML elements.</p>
+<p class="v2-p">Think of <code>&lt;div&gt;</code> like a cardboard box. The box itself has no meaning — it is just a container. But you can put anything inside it (text, images, headings, lists), and then use CSS to style the whole box at once: give it a background colour, a border, a size, or a position on the page.</p>
+<p class="v2-p"><strong>Why does <code>&lt;div&gt;</code> exist?</strong> Because HTML needed a way to group things together so they could be styled or positioned as one unit. Before <code>&lt;div&gt;</code>, you had no easy way to say "make this entire section of the page have a dark background."</p>
+<p class="v2-p">The <code>&lt;div&gt;</code> element has <strong>no required attributes</strong>, but three are commonly used:</p>
+<ul class="v2-ul"><li><code>style</code> — to add CSS styling directly</li><li><code>class</code> — to apply a CSS class (you will learn this in Lesson 19)</li><li><code>id</code> — to give it a unique name (you will learn this in Lesson 20)</li></ul>
+<hr class="v2-hr">
+<h3 class="v2-h3"><code>&lt;div&gt;</code> Is a Block Element</h3>
+<p class="v2-p">Since <code>&lt;div&gt;</code> is a block element, it always takes up the full available width and creates a line break before and after itself.</p>
+<h4 class="v2-h4">Example 3 — <code>&lt;div&gt;</code> Takes Full Width</h4>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
   &lt;body&gt;
-    &lt;h1&gt;My Two-Column Div Layout&lt;/h1&gt;
+    Lorem Ipsum &lt;div&gt;I am a div&lt;/div&gt; dolor sit amet.
+  &lt;/body&gt;
+&lt;/html&gt;</code></pre></div></div>
+<p class="v2-p"><strong>Expected Output:</strong></p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span></div><div class="v2-code-body"><pre><code>Lorem Ipsum
+I am a div
+dolor sit amet.</code></pre></div></div>
+<p class="v2-p">Even though we put the <code>&lt;div&gt;</code> in the middle of text, it broke onto its own line. "Lorem Ipsum" appeared before it, and "dolor sit amet." appeared after it on a new line. The <code>&lt;div&gt;</code> took up its own full-width row.</p>
+<hr class="v2-hr">
+<h3 class="v2-h3">Using <code>&lt;div&gt;</code> as a Container</h3>
+<p class="v2-p">The real power of <code>&lt;div&gt;</code> is grouping elements together. You can put a heading, paragraphs, images, and lists all inside one <code>&lt;div&gt;</code>, and then style or move them all at once.</p>
+<h4 class="v2-h4">Example 4 — <code>&lt;div&gt;</code> Grouping Elements</h4>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;body&gt;
+    &lt;div&gt;
+      &lt;h2&gt;London&lt;/h2&gt;
+      &lt;p&gt;London is the capital city of England.&lt;/p&gt;
+      &lt;p&gt;London has over 9 million inhabitants.&lt;/p&gt;
+    &lt;/div&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</code></pre></div></div>
+<p class="v2-p"><strong>Expected Output:</strong></p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span></div><div class="v2-code-body"><pre><code>London          (displayed as a heading)
 
-    &lt;div class="container"&gt;
+London is the capital city of England.
 
-      &lt;!-- MAIN CONTENT --&gt;
-      &lt;div class="main"&gt;
-        &lt;h2&gt;Main Content Area&lt;/h2&gt;
-        &lt;p&gt;
-          This is the &lt;span style="color:#ea4f21; font-weight:bold;"&gt;main column&lt;/span&gt;
-          — it takes up 2/3 of the width. This is where your
-          primary article or blog post content goes.
-        &lt;/p&gt;
-        &lt;p&gt;
-          I used &lt;code&gt;display: flex&lt;/code&gt; on the container div to create
-          this two-column layout. CSS flex is powerful!
-        &lt;/p&gt;
-        &lt;h3&gt;What I Learned&lt;/h3&gt;
-        &lt;ul&gt;
-          &lt;li&gt;&lt;strong&gt;Block&lt;/strong&gt; elements take full width&lt;/li&gt;
-          &lt;li&gt;&lt;strong&gt;Inline&lt;/strong&gt; elements flow with text&lt;/li&gt;
-          &lt;li&gt;&lt;strong&gt;div&lt;/strong&gt; is a block container&lt;/li&gt;
-          &lt;li&gt;&lt;strong&gt;span&lt;/strong&gt; is an inline container&lt;/li&gt;
-        &lt;/ul&gt;
+London has over 9 million inhabitants.</code></pre></div></div>
+<p class="v2-p">All three elements (<code>&lt;h2&gt;</code> and both <code>&lt;p&gt;</code> tags) are now wrapped inside one <code>&lt;div&gt;</code>. They are a group. This means we can now apply one style to the <code>&lt;div&gt;</code> and ALL the content inside it will be affected.</p>
+<hr class="v2-hr">
+<h3 class="v2-h3">Styling a <code>&lt;div&gt;</code> with CSS</h3>
+<p class="v2-p">Here is where <code>&lt;div&gt;</code> becomes incredibly powerful. Let us give the whole "London" section a dark background with white text and some padding.</p>
+<h4 class="v2-h4">Example 5 — Styled <code>&lt;div&gt;</code> Container</h4>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;body&gt;
+    &lt;div style=&quot;background-color: black; color: white; padding: 20px;&quot;&gt;
+      &lt;h2&gt;London&lt;/h2&gt;
+      &lt;p&gt;London is the capital city of England. It is the most populous city
+      in the United Kingdom, with a metropolitan area of over 13 million
+      inhabitants.&lt;/p&gt;
+    &lt;/div&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</code></pre></div></div>
+<p class="v2-p"><strong>Expected Output:</strong> A box with a black background containing white-coloured text. The heading "London" and the paragraph text both appear white on the black box, with 20 pixels of space around them.</p>
+<p class="v2-p">Let us break down each CSS property used in <code>style="..."</code>:</p>
+<ul class="v2-ul"><li><code>background-color: black;</code> — Sets the background colour of the <code>&lt;div&gt;</code> to black. You can use colour names like <code>black</code>, <code>red</code>, <code>blue</code>, or HEX codes like <code>#000000</code>.</li><li><code>color: white;</code> — Sets the text colour inside the <code>&lt;div&gt;</code> to white. This applies to ALL text inside the div — the heading AND the paragraph.</li><li><code>padding: 20px;</code> — Adds 20 pixels of space <strong>inside</strong> the box, between the text and the box edges. Without padding, the text would be pressed right against the edges.</li></ul>
+<blockquote class="v2-bq"><p class="v2-p"><strong>Thinking Prompt:</strong> What would happen if you removed <code>padding: 20px;</code>? The text would be very close to the edges of the black box. Try it!</p></blockquote>
+<hr class="v2-hr">
+<h3 class="v2-h3">Multiple <code>&lt;div&gt;</code> Elements on One Page</h3>
+<p class="v2-p">You can use as many <code>&lt;div&gt;</code> elements as you need. Each one creates its own section.</p>
+<h4 class="v2-h4">Example 6 — Three <code>&lt;div&gt;</code> Sections</h4>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;body&gt;
+
+    &lt;div&gt;
+      &lt;h2&gt;London&lt;/h2&gt;
+      &lt;p&gt;London is the capital city of England.&lt;/p&gt;
+      &lt;p&gt;London has over 9 million inhabitants.&lt;/p&gt;
+    &lt;/div&gt;
+
+    &lt;div&gt;
+      &lt;h2&gt;Oslo&lt;/h2&gt;
+      &lt;p&gt;Oslo is the capital city of Norway.&lt;/p&gt;
+      &lt;p&gt;Oslo has over 700,000 inhabitants.&lt;/p&gt;
+    &lt;/div&gt;
+
+    &lt;div&gt;
+      &lt;h2&gt;Rome&lt;/h2&gt;
+      &lt;p&gt;Rome is the capital city of Italy.&lt;/p&gt;
+      &lt;p&gt;Rome has over 4 million inhabitants.&lt;/p&gt;
+    &lt;/div&gt;
+
+  &lt;/body&gt;
+&lt;/html&gt;</code></pre></div></div>
+<p class="v2-p"><strong>Expected Output:</strong></p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span></div><div class="v2-code-body"><pre><code>London
+London is the capital city of England.
+London has over 9 million inhabitants.
+
+Oslo
+Oslo is the capital city of Norway.
+Oslo has over 700,000 inhabitants.
+
+Rome
+Rome is the capital city of Italy.
+Rome has over 4 million inhabitants.</code></pre></div></div>
+<p class="v2-p">Each <code>&lt;div&gt;</code> is a separate block that flows one after another, from top to bottom.</p>
+<hr class="v2-hr">
+<h3 class="v2-h3">Centering a <code>&lt;div&gt;</code> Element</h3>
+<p class="v2-p">By default, a <code>&lt;div&gt;</code> takes up the full width available. But what if you make a <code>&lt;div&gt;</code> narrower — say only 300 pixels wide — and want to centre it on the page?</p>
+<p class="v2-p">You use the CSS property <code>margin: auto;</code>. This tells the browser to automatically calculate equal space on both the left and right sides of the element, effectively centering it.</p>
+<h4 class="v2-h4">Example 7 — Centering a <code>&lt;div&gt;</code></h4>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;style&gt;
+    div {
+      width: 300px;
+      margin: auto;
+    }
+  &lt;/style&gt;
+  &lt;body&gt;
+    &lt;div&gt;
+      &lt;h2&gt;London&lt;/h2&gt;
+      &lt;p&gt;London is the capital city of England.&lt;/p&gt;
+      &lt;p&gt;London has over 9 million inhabitants.&lt;/p&gt;
+    &lt;/div&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</code></pre></div></div>
+<p class="v2-p"><strong>Expected Output:</strong> The London section appears centred on the page, with 300px width.</p>
+<p class="v2-p">Breaking down the CSS:</p>
+<ul class="v2-ul"><li><code>width: 300px;</code> — Limits the <code>&lt;div&gt;</code> to 300 pixels wide (instead of the full page width)</li><li><code>margin: auto;</code> — Splits the remaining space equally on the left and right, causing the <code>&lt;div&gt;</code> to sit in the centre</li></ul>
+<hr class="v2-hr">
+<h3 class="v2-h3">Placing Multiple <code>&lt;div&gt;</code> Elements Side by Side</h3>
+<p class="v2-p">By default, since <code>&lt;div&gt;</code> is a block element, multiple <code>&lt;div&gt;</code>s stack on top of each other (vertically). But in real web design, we often want columns side by side — like a three-column layout.</p>
+<p class="v2-p">There are <strong>four main CSS techniques</strong> to achieve this. Let us explore each one.</p>
+<hr class="v2-hr">
+<h4 class="v2-h4">Method 1: CSS Float</h4>
+<p class="v2-p">The CSS <code>float</code> property was originally designed for things like wrapping text around images, but it has been widely used for years to place <code>&lt;div&gt;</code> elements side by side.</p>
+<p class="v2-p"><code>float: left;</code> tells an element to "float" to the left and allow other elements to appear next to it on the right.</p>
+<h4 class="v2-h4">Example 8 — Float Method</h4>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;style&gt;
+    .mycontainer {
+      width: 100%;
+      overflow: auto;
+    }
+    .mycontainer div {
+      width: 33%;
+      float: left;
+    }
+  &lt;/style&gt;
+  &lt;body&gt;
+    &lt;div class=&quot;mycontainer&quot;&gt;
+
+      &lt;div&gt;
+        &lt;h2&gt;London&lt;/h2&gt;
+        &lt;p&gt;London is the capital city of England.&lt;/p&gt;
+        &lt;p&gt;London has over 9 million inhabitants.&lt;/p&gt;
       &lt;/div&gt;
 
-      &lt;!-- SIDEBAR --&gt;
-      &lt;div class="sidebar"&gt;
-        &lt;h3&gt;Sidebar&lt;/h3&gt;
-        &lt;p&gt;This sidebar takes 1/3 of the width.&lt;/p&gt;
-        &lt;h4&gt;Tags I Know&lt;/h4&gt;
-        &lt;div&gt;
-          &lt;span class="tag"&gt;div&lt;/span&gt;
-          &lt;span class="tag"&gt;span&lt;/span&gt;
-          &lt;span class="tag"&gt;p&lt;/span&gt;
-          &lt;span class="tag"&gt;h1&lt;/span&gt;
-          &lt;span class="tag"&gt;ul&lt;/span&gt;
-          &lt;span class="tag"&gt;li&lt;/span&gt;
-          &lt;span class="tag"&gt;a&lt;/span&gt;
-          &lt;span class="tag"&gt;img&lt;/span&gt;
-        &lt;/div&gt;
+      &lt;div&gt;
+        &lt;h2&gt;Oslo&lt;/h2&gt;
+        &lt;p&gt;Oslo is the capital city of Norway.&lt;/p&gt;
+        &lt;p&gt;Oslo has over 700,000 inhabitants.&lt;/p&gt;
+      &lt;/div&gt;
+
+      &lt;div&gt;
+        &lt;h2&gt;Rome&lt;/h2&gt;
+        &lt;p&gt;Rome is the capital city of Italy.&lt;/p&gt;
+        &lt;p&gt;Rome has over 4 million inhabitants.&lt;/p&gt;
       &lt;/div&gt;
 
     &lt;/div&gt;
   &lt;/body&gt;
-&lt;/html&gt;</pre></div>
+&lt;/html&gt;</code></pre></div></div>
+<p class="v2-p"><strong>Expected Output:</strong> Three columns side by side — London on the left, Oslo in the middle, Rome on the right.</p>
+<p class="v2-p">CSS explanation:</p>
+<ul class="v2-ul"><li><code>.mycontainer</code> — This is a CSS class selector. It targets any element with <code>class="mycontainer"</code>. (You will learn classes fully in Lesson 19.)</li><li><code>width: 100%;</code> — The outer container takes the full page width</li><li><code>overflow: auto;</code> — Prevents layout issues caused by floated children</li><li><code>.mycontainer div</code> — Targets every <code>&lt;div&gt;</code> <em>inside</em> the <code>.mycontainer</code></li><li><code>width: 33%;</code> — Each inner div is 33% wide (three of them = ~99% of the container)</li><li><code>float: left;</code> — Each div floats to the left, placing them side by side</li></ul>
+<hr class="v2-hr">
+<h4 class="v2-h4">Method 2: Inline-Block</h4>
+<p class="v2-p">Remember how <code>&lt;div&gt;</code> is a block element? What if we changed its display behaviour to <code>inline-block</code>? Then it would still be a block (able to have width and height), but it would no longer force a line break after itself.</p>
+<h4 class="v2-h4">Example 9 — Inline-Block Method</h4>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;style&gt;
+    div {
+      width: 30%;
+      display: inline-block;
+    }
+  &lt;/style&gt;
+  &lt;body&gt;
+    &lt;div&gt;
+      &lt;h2&gt;London&lt;/h2&gt;
+      &lt;p&gt;London is the capital city of England.&lt;/p&gt;
+      &lt;p&gt;London has over 9 million inhabitants.&lt;/p&gt;
+    &lt;/div&gt;
+
+    &lt;div&gt;
+      &lt;h2&gt;Oslo&lt;/h2&gt;
+      &lt;p&gt;Oslo is the capital city of Norway.&lt;/p&gt;
+      &lt;p&gt;Oslo has over 700,000 inhabitants.&lt;/p&gt;
+    &lt;/div&gt;
+
+    &lt;div&gt;
+      &lt;h2&gt;Rome&lt;/h2&gt;
+      &lt;p&gt;Rome is the capital city of Italy.&lt;/p&gt;
+      &lt;p&gt;Rome has over 4 million inhabitants.&lt;/p&gt;
+    &lt;/div&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</code></pre></div></div>
+<p class="v2-p"><strong>Expected Output:</strong> Three columns appear side by side.</p>
+<p class="v2-p">CSS explanation:</p>
+<ul class="v2-ul"><li><code>display: inline-block;</code> — Changes how the <code>&lt;div&gt;</code> behaves. It acts like a block (you can set width/height) but flows inline (no automatic line break after it).</li><li><code>width: 30%;</code> — Each div is 30% of the page width (three × 30% = 90%, leaving some breathing room)</li></ul>
+<hr class="v2-hr">
+<h4 class="v2-h4">Method 3: Flexbox (flex)</h4>
+<p class="v2-p">The CSS Flexbox Layout Module is a modern, powerful way to build layouts. It makes it easy to align elements horizontally or vertically, and it handles spacing automatically.</p>
+<p class="v2-p">To use flex, you wrap your <code>&lt;div&gt;</code> elements inside a parent <code>&lt;div&gt;</code>, and then give that parent <code>display: flex;</code>.</p>
+<h4 class="v2-h4">Example 10 — Flexbox Method</h4>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;style&gt;
+    .mycontainer {
+      display: flex;
+    }
+    .mycontainer &gt; div {
+      width: 33%;
+    }
+  &lt;/style&gt;
+  &lt;body&gt;
+    &lt;div class=&quot;mycontainer&quot;&gt;
+
+      &lt;div&gt;
+        &lt;h2&gt;London&lt;/h2&gt;
+        &lt;p&gt;London is the capital city of England.&lt;/p&gt;
+        &lt;p&gt;London has over 9 million inhabitants.&lt;/p&gt;
+      &lt;/div&gt;
+
+      &lt;div&gt;
+        &lt;h2&gt;Oslo&lt;/h2&gt;
+        &lt;p&gt;Oslo is the capital city of Norway.&lt;/p&gt;
+        &lt;p&gt;Oslo has over 700,000 inhabitants.&lt;/p&gt;
+      &lt;/div&gt;
+
+      &lt;div&gt;
+        &lt;h2&gt;Rome&lt;/h2&gt;
+        &lt;p&gt;Rome is the capital city of Italy.&lt;/p&gt;
+        &lt;p&gt;Rome has over 4 million inhabitants.&lt;/p&gt;
+      &lt;/div&gt;
+
+    &lt;/div&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</code></pre></div></div>
+<p class="v2-p"><strong>Expected Output:</strong> Three columns side by side.</p>
+<p class="v2-p">CSS explanation:</p>
+<ul class="v2-ul"><li><code>display: flex;</code> — Turns the parent container into a "flex container". Its direct children (the three <code>&lt;div&gt;</code>s) automatically line up side by side.</li><li><code>.mycontainer &gt; div</code> — The <code>&gt;</code> symbol means "direct children". This targets only the <code>&lt;div&gt;</code> elements that are directly inside <code>.mycontainer</code>.</li><li><code>width: 33%;</code> — Each child div takes up one-third of the container</li></ul>
+<p class="v2-p">Flexbox is the <strong>most recommended modern method</strong> for this kind of layout.</p>
+<hr class="v2-hr">
+<h4 class="v2-h4">Method 4: CSS Grid</h4>
+<p class="v2-p">CSS Grid is the newest and most powerful layout system. It works like a spreadsheet: you define rows and columns, then place elements into that grid.</p>
+<h4 class="v2-h4">Example 11 — CSS Grid Method</h4>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;style&gt;
+    .grid-container {
+      display: grid;
+      grid-template-columns: 33% 33% 33%;
+    }
+  &lt;/style&gt;
+  &lt;body&gt;
+    &lt;div class=&quot;grid-container&quot;&gt;
+
+      &lt;div&gt;
+        &lt;h2&gt;London&lt;/h2&gt;
+        &lt;p&gt;London is the capital city of England.&lt;/p&gt;
+        &lt;p&gt;London has over 9 million inhabitants.&lt;/p&gt;
+      &lt;/div&gt;
+
+      &lt;div&gt;
+        &lt;h2&gt;Oslo&lt;/h2&gt;
+        &lt;p&gt;Oslo is the capital city of Norway.&lt;/p&gt;
+        &lt;p&gt;Oslo has over 700,000 inhabitants.&lt;/p&gt;
+      &lt;/div&gt;
+
+      &lt;div&gt;
+        &lt;h2&gt;Rome&lt;/h2&gt;
+        &lt;p&gt;Rome is the capital city of Italy.&lt;/p&gt;
+        &lt;p&gt;Rome has over 4 million inhabitants.&lt;/p&gt;
+      &lt;/div&gt;
+
+    &lt;/div&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</code></pre></div></div>
+<p class="v2-p"><strong>Expected Output:</strong> Three columns side by side.</p>
+<p class="v2-p">CSS explanation:</p>
+<ul class="v2-ul"><li><code>display: grid;</code> — Turns the container into a grid layout</li><li><code>grid-template-columns: 33% 33% 33%;</code> — Defines three columns, each 33% wide. The browser automatically places child elements into these columns from left to right.</li></ul>
+<p class="v2-p">Grid is excellent when you need to define <strong>both rows and columns</strong> in complex layouts.</p>
+<hr class="v2-hr">
+<h3 class="v2-h3">Summary: Choosing Your Side-by-Side Method</h3>
+<div class="v2-table-wrap"><table class="v2-table"><thead><tr><th>Method</th><th>Best For</th></tr></thead><tbody><tr><td>Float</td><td>Legacy code, simple layouts, older browser support</td></tr><tr><td>Inline-Block</td><td>Simple side-by-side with minimal setup</td></tr><tr><td>Flexbox ✅</td><td>Most modern layouts, alignment control, responsive design</td></tr><tr><td>Grid</td><td>Complex two-dimensional layouts (rows AND columns)</td></tr></tbody></table></div>
+<p class="v2-p">For most beginners starting today, <strong>Flexbox is the recommended choice</strong>.</p>
+<hr class="v2-hr">
+    <div class="task-box">
+      <div class="task-label">✏️ Your Task</div>
+      <div class="task-body">---
+
+### Multiple <div> Elements on One Page
+
+You can use as many <div> elements as you need. Each one creates its own section.</div>
+    </div>
+    <button class="unlock-btn" onclick="unlockNext(4)">Phase Complete — Unlock Next ✓</button>
   </div>
-  <button class="next-btn" onclick="downloadStarter()" style="margin-right:.75rem">
-    ⬇️ Download starter.html
-  </button>
-  <button class="next-btn" onclick="showGithub()" style="background:#10b981;box-shadow:0 4px 12px rgba(16,185,129,.3)">
-    Show GitHub Steps →
-  </button>
-  <script>
-  const __code = `<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <title>My Div Layout</title>
-    <style>
-      * { box-sizing: border-box; }
-      body { font-family: Arial, sans-serif; margin: 0;
-             background: #f1f5f9; padding: 24px; }
-      h1 { color: #ea4f21; text-align: center; }
-      .container { display: flex; gap: 24px; max-width: 900px; margin: 24px auto; }
-      .main {
-        flex: 2;
-        background: white;
-        border-radius: 14px;
-        padding: 24px;
-        box-shadow: 0 2px 8px rgba(0,0,0,.06);
-      }
-      .sidebar {
-        flex: 1;
-        background: white;
-        border-radius: 14px;
-        padding: 20px;
-        box-shadow: 0 2px 8px rgba(0,0,0,.06);
-      }
-      .sidebar h3 { color: #ea4f21; margin-top: 0; }
-      .tag { display: inline-block; background: #fff3ef;
-             color: #ea4f21; padding: 3px 10px; border-radius: 100px;
-             font-size: 12px; font-weight: bold; margin: 3px; }
-    </style>
-  </head>
+</div>
+<div class="phase locked" id="phase5">
+  <div class="phase-header">
+    <div class="phase-num">Phase 5 of 7</div>
+    <div class="phase-title">Part 3: The `&lt;span&gt;` Element — Styling Inside Text</div>
+    <div class="phase-check" id="chk5"></div>
+  </div>
+  <div class="phase-body">
+    <h3 class="v2-h3">What Is <code>&lt;span&gt;</code>?</h3>
+<p class="v2-p">The <code>&lt;span&gt;</code> element is the <strong>inline equivalent of <code>&lt;div&gt;</code></strong>. While <code>&lt;div&gt;</code> is a block-level container for large sections of a page, <code>&lt;span&gt;</code> is an inline container for a small piece of text or content <em>within</em> a line.</p>
+<p class="v2-p">Just like <code>&lt;div&gt;</code>, <code>&lt;span&gt;</code> has no visual effect on its own. It is invisible until you give it styling.</p>
+<ul class="v2-ul"><li><code>&lt;div&gt;</code> = a big box for grouping sections (block)</li><li><code>&lt;span&gt;</code> = a small wrapper for words or phrases inside text (inline)</li></ul>
+<p class="v2-p"><strong>Why does <code>&lt;span&gt;</code> exist?</strong> Because sometimes you want to style just one word or one sentence differently from the rest, without breaking it onto a new line. For example: you want to make just one word in a paragraph turn blue and bold.</p>
+<p class="v2-p">The <code>&lt;span&gt;</code> element also has no required attributes, but <code>style</code>, <code>class</code>, and <code>id</code> are commonly used.</p>
+<hr class="v2-hr">
+<h3 class="v2-h3">Example 12 — Your First <code>&lt;span&gt;</code></h3>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;body&gt;
+    &lt;p&gt;My mother has &lt;span style=&quot;color: blue; font-weight: bold;&quot;&gt;blue&lt;/span&gt;
+    eyes and my father has &lt;span style=&quot;color: darkgreen; font-weight: bold;&quot;&gt;
+    dark green&lt;/span&gt; eyes.&lt;/p&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</code></pre></div></div>
+<p class="v2-p"><strong>Expected Output:</strong></p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span></div><div class="v2-code-body"><pre><code>My mother has blue eyes and my father has dark green eyes.</code></pre></div></div>
+<p class="v2-p">(The word "blue" appears in blue and bold. The words "dark green" appear in dark green and bold. The rest of the sentence stays in the default colour and weight.)</p>
+<p class="v2-p">CSS explanation inside <code>style="..."</code>:</p>
+<ul class="v2-ul"><li><code>color: blue;</code> — Changes the text colour to blue</li><li><code>font-weight: bold;</code> — Makes the text bold</li><li><code>color: darkgreen;</code> — Changes the text colour to dark green</li></ul>
+<p class="v2-p">Notice: Both <code>&lt;span&gt;</code> elements are <strong>inside</strong> the <code>&lt;p&gt;</code> tag, and neither one jumps to a new line. They stayed inline within the sentence.</p>
+<hr class="v2-hr">
+<h3 class="v2-h3">Example 13 — <code>&lt;span&gt;</code> vs. <code>&lt;div&gt;</code> Comparison</h3>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;body&gt;
+    &lt;!-- Using span (inline) --&gt;
+    &lt;p&gt;I love &lt;span style=&quot;color: red;&quot;&gt;HTML&lt;/span&gt; so much!&lt;/p&gt;
+
+    &lt;!-- Using div (block) --&gt;
+    &lt;p&gt;I love &lt;div style=&quot;color: red;&quot;&gt;HTML&lt;/div&gt; so much!&lt;/p&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</code></pre></div></div>
+<p class="v2-p"><strong>Expected Output with <code>&lt;span&gt;</code> (correct):</strong></p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span></div><div class="v2-code-body"><pre><code>I love HTML so much!</code></pre></div></div>
+<p class="v2-p">(Everything on one line, "HTML" is red)</p>
+<p class="v2-p"><strong>Expected Output with <code>&lt;div&gt;</code> (incorrect usage):</strong></p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span></div><div class="v2-code-body"><pre><code>I love
+HTML
+so much!</code></pre></div></div>
+<p class="v2-p">("HTML" gets pushed to its own line because <code>&lt;div&gt;</code> is a block element)</p>
+<p class="v2-p">This example clearly shows why <code>&lt;span&gt;</code> exists. When you want to style something <em>within</em> a sentence without breaking the flow, <code>&lt;span&gt;</code> is the right tool.</p>
+<hr class="v2-hr">
+    <div class="task-box">
+      <div class="task-label">✏️ Your Task</div>
+      <div class="task-body">Now practise what you just learned about <strong>: The <code>&lt;span&gt;</code> Element — Styling Inside Text</strong>. Open your editor, type the examples above by hand, then modify them — change values, rename variables, and observe what happens. Active experimentation is how code sticks.</div>
+    </div>
+    <button class="unlock-btn" onclick="unlockNext(5)">Phase Complete — Unlock Next ✓</button>
+  </div>
+</div>
+<div class="phase locked" id="phase6">
+  <div class="phase-header">
+    <div class="phase-num">Phase 6 of 7</div>
+    <div class="phase-title">Guided Practice Exercises</div>
+    <div class="phase-check" id="chk6"></div>
+  </div>
+  <div class="phase-body">
+    <h3 class="v2-h3">Exercise 1: Identifying Block vs. Inline</h3>
+<p class="v2-p"><strong>Objective:</strong> Train your eye to recognise the difference between block and inline behaviour.</p>
+<p class="v2-p"><strong>Scenario:</strong> You are building a simple webpage about your city.</p>
+<p class="v2-p"><strong>Steps:</strong></p>
+<ol class="v2-ol"><li>Create an HTML file called <code>my_city.html</code></li><li>Add the following code and observe what happens:</li></ol>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;body&gt;
+    &lt;h1&gt;My City&lt;/h1&gt;
+    &lt;p&gt;Welcome to &lt;span style=&quot;color: green; font-weight: bold;&quot;&gt;Lagos&lt;/span&gt;,
+    the most vibrant city in Africa!&lt;/p&gt;
+    &lt;p&gt;Lagos is known for its:&lt;/p&gt;
+    &lt;ul&gt;
+      &lt;li&gt;Incredible music scene&lt;/li&gt;
+      &lt;li&gt;Delicious street food&lt;/li&gt;
+      &lt;li&gt;Beautiful beaches&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</code></pre></div></div>
+<p class="v2-p"><strong>Expected Output:</strong></p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span></div><div class="v2-code-body"><pre><code>My City                         (large heading, own line)
+
+Welcome to Lagos, the most vibrant city in Africa!
+(Lagos is green and bold, but stays inline in the sentence)
+
+Lagos is known for its:
+
+• Incredible music scene
+• Delicious street food
+• Beautiful beaches</code></pre></div></div>
+<p class="v2-p"><strong>Self-Check Questions:</strong></p>
+<ul class="v2-ul"><li>Which elements started on new lines? (<code>&lt;h1&gt;</code>, <code>&lt;p&gt;</code>, <code>&lt;ul&gt;</code>, <code>&lt;li&gt;</code>)</li><li>Which element stayed within the sentence? (<code>&lt;span&gt;</code>)</li><li>What would happen if you replaced <code>&lt;span&gt;</code> with <code>&lt;p&gt;</code>?</li></ul>
+<hr class="v2-hr">
+<h3 class="v2-h3">Exercise 2: Styling a <code>&lt;div&gt;</code> Container</h3>
+<p class="v2-p"><strong>Objective:</strong> Use <code>&lt;div&gt;</code> to create a styled info card.</p>
+<p class="v2-p"><strong>Scenario:</strong> You are building a product card for a school store.</p>
+<p class="v2-p"><strong>Steps:</strong></p>
+<ol class="v2-ol"><li>Create the following HTML:</li></ol>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;body&gt;
+
+    &lt;div style=&quot;background-color: #f0f8ff; border: 2px solid blue;
+                padding: 15px; width: 250px; margin: auto;&quot;&gt;
+      &lt;h2 style=&quot;color: navy;&quot;&gt;Maths Textbook&lt;/h2&gt;
+      &lt;p&gt;Subject: &lt;span style=&quot;color: green;&quot;&gt;Mathematics&lt;/span&gt;&lt;/p&gt;
+      &lt;p&gt;Price: &lt;span style=&quot;color: red; font-weight: bold;&quot;&gt;₦2,500&lt;/span&gt;&lt;/p&gt;
+      &lt;p&gt;Condition: New&lt;/p&gt;
+    &lt;/div&gt;
+
+  &lt;/body&gt;
+&lt;/html&gt;</code></pre></div></div>
+<p class="v2-p"><strong>Expected Output:</strong> A centred card with a light blue background, blue border, and padding. The heading "Maths Textbook" appears in navy blue. "Mathematics" appears in green, and "₦2,500" appears in red and bold.</p>
+<p class="v2-p"><strong>CSS Breakdown:</strong></p>
+<ul class="v2-ul"><li><code>background-color: #f0f8ff;</code> — A light sky-blue colour (using a HEX code)</li><li><code>border: 2px solid blue;</code> — A 2-pixel solid blue border around the div</li><li><code>padding: 15px;</code> — 15 pixels of space inside the box</li><li><code>width: 250px;</code> — The card is 250px wide</li><li><code>margin: auto;</code> — Centres the card on the page</li></ul>
+<p class="v2-p"><strong>Self-Check Questions:</strong></p>
+<ul class="v2-ul"><li>What CSS property controls the background colour?</li><li>What property centres the div horizontally?</li><li>What happened to the price text because of <code>&lt;span&gt;</code>?</li></ul>
+<p class="v2-p"><strong>Optional Challenge:</strong> Add a second product card below the first one for a different item.</p>
+<hr class="v2-hr">
+<h3 class="v2-h3">Exercise 3: Creating a Three-Column Layout</h3>
+<p class="v2-p"><strong>Objective:</strong> Place three <code>&lt;div&gt;</code> sections side by side using Flexbox.</p>
+<p class="v2-p"><strong>Scenario:</strong> Build a simple weather dashboard for three cities.</p>
+<p class="v2-p"><strong>Steps:</strong></p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;style&gt;
+    .weather-container {
+      display: flex;
+    }
+    .city-card {
+      width: 33%;
+      padding: 10px;
+      margin: 5px;
+      border: 1px solid grey;
+      text-align: center;
+    }
+  &lt;/style&gt;
+  &lt;body&gt;
+
+    &lt;h1&gt;Today&#x27;s Weather&lt;/h1&gt;
+
+    &lt;div class=&quot;weather-container&quot;&gt;
+
+      &lt;div class=&quot;city-card&quot; style=&quot;background-color: #ffe4b5;&quot;&gt;
+        &lt;h3&gt;Lagos&lt;/h3&gt;
+        &lt;p&gt;🌤 Partly Cloudy&lt;/p&gt;
+        &lt;p&gt;&lt;span style=&quot;font-size: 24px; font-weight: bold;&quot;&gt;32°C&lt;/span&gt;&lt;/p&gt;
+      &lt;/div&gt;
+
+      &lt;div class=&quot;city-card&quot; style=&quot;background-color: #e0f0ff;&quot;&gt;
+        &lt;h3&gt;London&lt;/h3&gt;
+        &lt;p&gt;🌧 Rainy&lt;/p&gt;
+        &lt;p&gt;&lt;span style=&quot;font-size: 24px; font-weight: bold;&quot;&gt;14°C&lt;/span&gt;&lt;/p&gt;
+      &lt;/div&gt;
+
+      &lt;div class=&quot;city-card&quot; style=&quot;background-color: #e8ffe8;&quot;&gt;
+        &lt;h3&gt;Tokyo&lt;/h3&gt;
+        &lt;p&gt;☀️ Sunny&lt;/p&gt;
+        &lt;p&gt;&lt;span style=&quot;font-size: 24px; font-weight: bold;&quot;&gt;26°C&lt;/span&gt;&lt;/p&gt;
+      &lt;/div&gt;
+
+    &lt;/div&gt;
+
+  &lt;/body&gt;
+&lt;/html&gt;</code></pre></div></div>
+<p class="v2-p"><strong>Expected Output:</strong> A heading "Today's Weather" followed by three coloured cards side by side — one for Lagos (warm yellow background), one for London (light blue background), one for Tokyo (light green background). Each card shows city name, weather condition, and temperature in large bold text.</p>
+<p class="v2-p"><strong>CSS Breakdown:</strong></p>
+<ul class="v2-ul"><li><code>.weather-container</code> — The outer flex container. <code>display: flex;</code> makes its children line up side by side.</li><li><code>.city-card</code> — Each individual city card. <code>width: 33%;</code> gives each card one-third of the space. <code>text-align: center;</code> centres all text inside.</li><li><code>font-size: 24px;</code> — Makes the temperature text 24 pixels tall (larger than normal)</li></ul>
+<p class="v2-p"><strong>Self-Check Questions:</strong></p>
+<ul class="v2-ul"><li>Which CSS property made the cards appear side by side?</li><li>What does <code>text-align: center;</code> do?</li><li>Why did we use <code>&lt;span&gt;</code> around the temperature number?</li></ul>
+<hr class="v2-hr">
+    <div class="task-box">
+      <div class="task-label">✏️ Your Task</div>
+      <div class="task-body">Now practise what you just learned about <strong>Guided Practice Exercises</strong>. Open your editor, type the examples above by hand, then modify them — change values, rename variables, and observe what happens. Active experimentation is how code sticks.</div>
+    </div>
+    <button class="unlock-btn" onclick="unlockNext(6)">Phase Complete — Unlock Next ✓</button>
+  </div>
+</div>
+<div class="phase locked" id="phase7">
+  <div class="phase-header">
+    <div class="phase-num">Phase 7 of 7</div>
+    <div class="phase-title">Common Beginner Mistakes</div>
+    <div class="phase-check" id="chk7"></div>
+  </div>
+  <div class="phase-body">
+    <h3 class="v2-h3">Mistake 1: Putting Block Elements Inside Inline Elements</h3>
+<p class="v2-p"><strong>Wrong:</strong></p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;span&gt;
+  &lt;p&gt;This paragraph is inside a span — this is invalid!&lt;/p&gt;
+&lt;/span&gt;</code></pre></div></div>
+<p class="v2-p"><strong>Why it is wrong:</strong> <code>&lt;span&gt;</code> is an inline element. Inline elements cannot contain block-level elements like <code>&lt;p&gt;</code>. The browser may try to fix this automatically, but the results are unpredictable.</p>
+<p class="v2-p"><strong>Correct:</strong></p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;p&gt;This paragraph is a block. &lt;span&gt;This span is inside the paragraph.&lt;/span&gt;&lt;/p&gt;</code></pre></div></div>
+<hr class="v2-hr">
+<h3 class="v2-h3">Mistake 2: Forgetting That <code>&lt;div&gt;</code> Is Block</h3>
+<p class="v2-p"><strong>Wrong expectation:</strong> A beginner writes two <code>&lt;div&gt;</code> elements expecting them to appear side by side, but they appear stacked vertically instead.</p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;div&gt;Box One&lt;/div&gt;
+&lt;div&gt;Box Two&lt;/div&gt;</code></pre></div></div>
+<p class="v2-p">Both boxes appear vertically stacked — this is correct default behaviour.</p>
+<p class="v2-p"><strong>To make them side by side</strong>, you MUST use one of the four CSS methods (float, inline-block, flex, or grid). Flex is the most recommended.</p>
+<hr class="v2-hr">
+<h3 class="v2-h3">Mistake 3: Confusing <code>&lt;div&gt;</code> and <code>&lt;p&gt;</code></h3>
+<p class="v2-p">Beginners sometimes use <code>&lt;div&gt;</code> to write paragraphs of text when they should use <code>&lt;p&gt;</code>.</p>
+<p class="v2-p"><strong>Incorrect (semantically wrong):</strong></p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;div&gt;This is a paragraph of text about my day.&lt;/div&gt;</code></pre></div></div>
+<p class="v2-p"><strong>Correct:</strong></p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;p&gt;This is a paragraph of text about my day.&lt;/p&gt;</code></pre></div></div>
+<p class="v2-p"><strong>Why it matters:</strong> HTML has meaning. <code>&lt;p&gt;</code> tells the browser (and screen readers) "this is a paragraph." <code>&lt;div&gt;</code> says "this is just a generic container." Use semantic elements like <code>&lt;p&gt;</code> for text, and save <code>&lt;div&gt;</code> for structural grouping.</p>
+<hr class="v2-hr">
+<h3 class="v2-h3">Mistake 4: Forgetting <code>margin: auto;</code> to Centre a <code>&lt;div&gt;</code></h3>
+<p class="v2-p"><strong>Wrong — no centering:</strong></p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;div style=&quot;width: 200px;&quot;&gt;I am not centred.&lt;/div&gt;</code></pre></div></div>
+<p class="v2-p"><strong>Correct — centred:</strong></p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;div style=&quot;width: 200px; margin: auto;&quot;&gt;I am centred!&lt;/div&gt;</code></pre></div></div>
+<p class="v2-p">Remember: <code>margin: auto;</code> only works when the element has a <strong>defined width</strong> less than the full page. If the <code>&lt;div&gt;</code> is already 100% wide, there is nothing to centre.</p>
+<hr class="v2-hr">
+<h3 class="v2-h3">Mistake 5: Incorrect CSS Syntax Inside <code>style</code> Attribute</h3>
+<p class="v2-p"><strong>Wrong:</strong></p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;div style=&quot;color red padding 10px&quot;&gt;Text&lt;/div&gt;</code></pre></div></div>
+<p class="v2-p"><strong>Correct:</strong></p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;div style=&quot;color: red; padding: 10px;&quot;&gt;Text&lt;/div&gt;</code></pre></div></div>
+<p class="v2-p">CSS properties inside <code>style="..."</code> must follow this exact pattern:</p>
+<ul class="v2-ul"><li><code>property: value;</code> — notice the <strong>colon</strong> after the property name and the <strong>semicolon</strong> at the end</li><li>Multiple properties are separated by semicolons</li></ul>
+<hr class="v2-hr">
+<h3 class="v2-h3">Mistake 6: Using <code>&lt;span&gt;</code> When You Mean <code>&lt;div&gt;</code></h3>
+<p class="v2-p"><strong>Wrong — using span to group a large section:</strong></p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;span&gt;
+  &lt;h2&gt;My Section&lt;/h2&gt;
+  &lt;p&gt;A paragraph here.&lt;/p&gt;
+  &lt;p&gt;Another paragraph.&lt;/p&gt;
+&lt;/span&gt;</code></pre></div></div>
+<p class="v2-p"><strong>Why it is wrong:</strong> <code>&lt;span&gt;</code> is inline and cannot properly contain block elements like <code>&lt;h2&gt;</code> and <code>&lt;p&gt;</code>.</p>
+<p class="v2-p"><strong>Correct:</strong></p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;div&gt;
+  &lt;h2&gt;My Section&lt;/h2&gt;
+  &lt;p&gt;A paragraph here.&lt;/p&gt;
+  &lt;p&gt;Another paragraph.&lt;/p&gt;
+&lt;/div&gt;</code></pre></div></div>
+<p class="v2-p"><strong>Simple rule to remember:</strong> Use <code>&lt;div&gt;</code> for sections and groups. Use <code>&lt;span&gt;</code> for words and phrases within sentences.</p>
+<hr class="v2-hr">
+    <div class="task-box">
+      <div class="task-label">✏️ Your Task</div>
+      <div class="task-body">Now practise what you just learned about <strong>Common Beginner Mistakes</strong>. Open your editor, type the examples above by hand, then modify them — change values, rename variables, and observe what happens. Active experimentation is how code sticks.</div>
+    </div>
+    <button class="unlock-btn" onclick="unlockNext(7)">Phase Complete — Unlock Next ✓</button>
+  </div>
+</div>
+<div class="build-box" id="build-it">
+  <div class="build-label">🏗️ Build It</div>
+  <div class="build-name">Stage 1: Setup — Build the Basic Structure</div>
+  <div class="build-desc"><strong>Milestone Output:</strong> A page with just the heading "Student Profiles".</div>
+  <div class="v2-code-wrap">
+    <div class="v2-code-bar">
+      <span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span>
+      <span class="v2-code-lang">starter.html</span>
+    </div>
+    <div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;body&gt;
+    &lt;h1&gt;Student Profiles&lt;/h1&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</code></pre></div>
+  </div>
+  <div style="display:flex;gap:.8rem;flex-wrap:wrap;margin-top:1.2rem">
+    <button class="unlock-btn" onclick="downloadStarter(`<!DOCTYPE html>
+<html>
   <body>
-    <h1>My Two-Column Div Layout</h1>
-
-    <div class="container">
-
-      <!-- MAIN CONTENT -->
-      <div class="main">
-        <h2>Main Content Area</h2>
-        <p>
-          This is the <span style="color:#ea4f21; font-weight:bold;">main column</span>
-          — it takes up 2/3 of the width. This is where your
-          primary article or blog post content goes.
-        </p>
-        <p>
-          I used <code>display: flex</code> on the container div to create
-          this two-column layout. CSS flex is powerful!
-        </p>
-        <h3>What I Learned</h3>
-        <ul>
-          <li><strong>Block</strong> elements take full width</li>
-          <li><strong>Inline</strong> elements flow with text</li>
-          <li><strong>div</strong> is a block container</li>
-          <li><strong>span</strong> is an inline container</li>
-        </ul>
-      </div>
-
-      <!-- SIDEBAR -->
-      <div class="sidebar">
-        <h3>Sidebar</h3>
-        <p>This sidebar takes 1/3 of the width.</p>
-        <h4>Tags I Know</h4>
-        <div>
-          <span class="tag">div</span>
-          <span class="tag">span</span>
-          <span class="tag">p</span>
-          <span class="tag">h1</span>
-          <span class="tag">ul</span>
-          <span class="tag">li</span>
-          <span class="tag">a</span>
-          <span class="tag">img</span>
-        </div>
-      </div>
-
-    </div>
+    <h1>Student Profiles</h1>
   </body>
-</html>`;
-  function downloadStarter(){
-    const a=document.createElement('a');
-    a.href='data:text/html;charset=utf-8,'+encodeURIComponent(__code);
-    a.download='starter.html'; a.click();
-  }
-  </script>
-</div>
-
-
-
-<div class="github-acc" id="github-steps" style="display:none">
-  <div class="github-acc-head" onclick="this.nextElementSibling.classList.toggle('open')">
-    🐙 GitHub Setup — Push your project online &nbsp;<span>▼</span>
-  </div>
-  <div class="github-acc-body">
-    <div class="github-step"><div class="github-step-n">1</div><p>Go to <strong>github.com</strong> and sign in. Click the green <strong>New</strong> button to create a new repository. Name it <code>html-lesson-18-html_div_block_and_inline_elem</code>.</p></div>
-    <div class="github-step"><div class="github-step-n">2</div><p>Leave it <strong>Public</strong> and tick <strong>Add a README file</strong>. Click <strong>Create repository</strong>.</p></div>
-    <div class="github-step"><div class="github-step-n">3</div><p>Click <strong>Add file → Upload files</strong>. Drag your <code>starter.html</code> (and rename it <code>index.html</code> first!) into the upload box.</p></div>
-    <div class="github-step"><div class="github-step-n">4</div><p>Scroll down, add a commit message like <em>"Add lesson 18 project"</em> and click <strong>Commit changes</strong>.</p></div>
-    <div class="github-step"><div class="github-step-n">5</div><p>Go to <strong>Settings → Pages</strong>. Under <em>Branch</em>, select <strong>main</strong> and click <strong>Save</strong>. Your page will be live at <code>https://YOUR-USERNAME.github.io/html-lesson-18-html_div_block_and_inline_elem/</code> in about 1 minute! 🎉</p></div>
-    <button class="next-btn" onclick="showEnd()" style="margin-top:.5rem">I'm done! Finish session ✅</button>
+</html>`)"
+      style="background:#10b981;box-shadow:0 4px 14px rgba(16,185,129,.3)">
+      ⬇ Download starter.html
+    </button>
+    <button class="unlock-btn" onclick="showGithub()"
+      style="background:#0f172a;box-shadow:none">
+      🐙 Push to GitHub →
+    </button>
   </div>
 </div>
-
+<div class="gh-acc" id="gh-steps" style="display:none">
+  <div class="gh-acc-head" onclick="toggleGh(this)">
+    🐙 Push Your Project to GitHub Pages &nbsp;<span>▼</span>
+  </div>
+  <div class="gh-acc-body">
+    <div class="gh-step"><div class="gh-step-n">1</div>
+    <p>Go to <strong>github.com</strong> → click <strong>New repository</strong> → name it <code>html-lesson-18-stage-1-setup-build-the-basic-structure</code>.</p></div>
+    <div class="gh-step"><div class="gh-step-n">2</div>
+    <p>Set it to <strong>Public</strong>, tick <strong>Add a README</strong>, then click <strong>Create repository</strong>.</p></div>
+    <div class="gh-step"><div class="gh-step-n">3</div>
+    <p>Click <strong>Add file → Upload files</strong>. Upload your <code>starter.html</code> — rename it to <code>index.html</code> before uploading.</p></div>
+    <div class="gh-step"><div class="gh-step-n">4</div>
+    <p>Commit message: <em>"Add HTML lesson 18 project"</em> → click <strong>Commit changes</strong>.</p></div>
+    <div class="gh-step"><div class="gh-step-n">5</div>
+    <p>Go to <strong>Settings → Pages</strong> → branch <strong>main</strong> → <strong>Save</strong>. Your project goes live at <code>https://YOUR-NAME.github.io/html-lesson-18-stage-1-setup-build-the-basic-structure/</code> in about 1 minute! 🎉</p></div>
+    <button class="unlock-btn" onclick="showEnd()" style="margin-top:.5rem">I've pushed to GitHub — Finish Session ✅</button>
+  </div>
+</div>
 <div class="session-end" id="session-end">
-  <h2>🎉 Great work! Lesson 18 complete!</h2>
-  <p style="margin-bottom:.8rem;font-size:.9rem;opacity:.9">Today you learned:</p>
-  <ul><li>✅ Block vs Inline Elements</li><li>✅ The div Container</li><li>✅ The span Container</li></ul>
-  <div class="lesson-nav" style="margin-top:1.5rem;border-color:rgba(255,255,255,.2)">
-    <a href="lesson_17.html" class="ln-btn">← Lesson 17</a>
-    <a href="lesson_19.html" class="ln-btn primary">Lesson 19 →</a>
-  </div>
+  <h2>🎉 Lesson 18 complete!</h2>
+  <p style="margin-bottom:.8rem;font-size:.9rem;opacity:.9">You covered:</p>
+  <ul><li>✅ Lesson Introduction</li><li>✅ Prerequisite Concepts</li><li>✅ Part 1: Block-Level vs. Inline Elements</li><li>✅ Part 2: The `<div>` Element — Your Layout Superpower</li><li>✅ Part 3: The `<span>` Element — Styling Inside Text</li><li>✅ Guided Practice Exercises</li><li>✅ Common Beginner Mistakes</li></ul>
+  <div class="lesson-nav"><a href="lesson_17.html" class="ln-btn">← Lesson 17</a><a href="lesson_19.html" class="ln-btn primary">Lesson 19 →</a></div>
 </div>
-
 </main>
 
-<!-- FOOTER -->
 <footer class="lesson-footer">
-  <p>Techbase Code Coach &nbsp;·&nbsp; HTML Course Lesson 18
-     &nbsp;·&nbsp; © 2025 Techbase Consultant Services, Ibadan</p>
+  Techbase Code Coach · HTML Course · Lesson 18 · © 2025 Techbase Consultant Services, Ibadan
 </footer>
-
 <script>
-const TOTAL=3, KEY='techbase_html_18_phase';
+const TOTAL=7,KEY='techbase_html_l18';
 let current=parseInt(localStorage.getItem(KEY)||'1');
-
 function init(){
-  for(let i=1;i<=current;i++) if(i>1) unlockPhase(i,false);
+  for(let i=2;i<=current;i++) unlockPhase(i,false);
   updateBar();
 }
-
 function unlockNext(n){
-  document.getElementById('check'+n).classList.add('done');
-  document.getElementById('check'+n).textContent='✓';
-  localStorage.setItem(KEY,n+1);
-  current=n+1;
+  const chk=document.getElementById('chk'+n);
+  if(chk){chk.classList.add('done');chk.textContent='✓';}
+  localStorage.setItem(KEY,n+1); current=n+1;
   if(n===TOTAL){
     document.getElementById('build-it').style.display='block';
-    const cap=document.getElementById('capstone');
-    if(cap) cap.style.display='block';
     updateBar(100);
     setTimeout(()=>document.getElementById('build-it').scrollIntoView({behavior:'smooth'}),200);
-  } else {
-    unlockPhase(n+1,true);
-    updateBar();
+  }else{
+    unlockPhase(n+1,true); updateBar();
   }
 }
-
 function unlockPhase(n,scroll){
   const el=document.getElementById('phase'+n);
-  if(el){ el.classList.remove('locked'); if(scroll) setTimeout(()=>el.scrollIntoView({behavior:'smooth',block:'start'}),150); }
+  if(el){el.classList.remove('locked');if(scroll)setTimeout(()=>el.scrollIntoView({behavior:'smooth',block:'start'}),150);}
 }
-
 function updateBar(pct){
-  const p=pct||Math.round((current-1)/TOTAL*95);
+  const p=pct!==undefined?pct:Math.round((current-1)/TOTAL*95);
   document.getElementById('pbar').style.width=p+'%';
 }
-
 function showGithub(){
-  const g=document.getElementById('github-steps');
-  if(g){ g.style.display='block'; setTimeout(()=>g.scrollIntoView({behavior:'smooth'}),150); }
+  const g=document.getElementById('gh-steps');
+  if(g){g.style.display='block';setTimeout(()=>g.scrollIntoView({behavior:'smooth'}),150);}
 }
-
 function showEnd(){
   const e=document.getElementById('session-end');
-  if(e){ e.classList.add('visible'); setTimeout(()=>e.scrollIntoView({behavior:'smooth'}),150); }
+  if(e){e.classList.add('visible');setTimeout(()=>e.scrollIntoView({behavior:'smooth'}),150);}
 }
-
+function toggleGh(el){el.nextElementSibling.classList.toggle('open');}
+function downloadStarter(code){
+  const a=document.createElement('a');
+  a.href='data:text/html;charset=utf-8,'+encodeURIComponent(code);
+  a.download='starter.html';a.click();
+}
 init();
 </script>
-
 </body>
 </html>

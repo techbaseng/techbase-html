@@ -2,466 +2,961 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Lesson 09: HTML Quotations — Techbase HTML Course</title>
-<meta name="description" content="Quote famous words correctly using blockquote, q, and cite tags">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Lesson 09: HTML Quotation and Citation Elements — Techbase HTML</title>
+<meta name="description" content="HTML Quotation and Citation Elements">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-:root { 
-  --accent:#ea4f21;--accent-pale:#fff3ef;--accent-dark:#c23d15;
-  --accent-border:rgba(234,79,33,.3);--accent-shadow:rgba(234,79,33,.28);
-  --hero-bg:linear-gradient(160deg,#fff3ef 0%,#f8fafc 55%,#fef2e9 100%);
-  --s2:#f1f5f9;
- }
 :root{
+  --acc:#e34c26;--acc-d:#c0391a;--acc-pale:#fff5f2;
+  --acc-b:rgba(227,76,38,.25);--acc-sh:rgba(227,76,38,.25);
   --bg:#f8fafc;--surface:#fff;--border:#e2e8f0;--border2:#cbd5e1;
   --text:#0f172a;--t2:#334155;--muted:#64748b;
   --D:'Space Grotesk',sans-serif;--B:'Plus Jakarta Sans',sans-serif;--M:'JetBrains Mono',monospace;
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased}
-body{background:var(--bg);color:var(--text);font-family:var(--B);font-size:16px;line-height:1.7;overflow-x:hidden}
+body{background:var(--bg);color:var(--text);font-family:var(--B);font-size:16px;line-height:1.75;overflow-x:hidden}
+
 /* NAV */
-.l-nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(255,255,255,.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);height:58px;display:flex;align-items:center;padding:0 1.5rem;gap:1rem;justify-content:space-between}
-.l-nav-logo{font-family:var(--D);font-weight:700;font-size:.88rem;color:var(--text);text-decoration:none}
-.l-nav-logo em{font-style:normal}
+.l-nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(255,255,255,.95);
+  backdrop-filter:blur(12px);border-bottom:1px solid var(--border);height:58px;
+  display:flex;align-items:center;padding:0 1.5rem;gap:1rem;justify-content:space-between}
+.l-nav-logo{font-family:var(--D);font-weight:700;font-size:.9rem;color:var(--text);text-decoration:none}
 .l-nav-back{font-size:.8rem;color:var(--muted);text-decoration:none;font-weight:500;display:flex;align-items:center;gap:.3rem;transition:color .2s}
-.l-nav-back:hover{color:var(--accent)}
-.l-nav-lesson{font-family:var(--M);font-size:.68rem;color:var(--muted)}
-/* PROGRESS BAR */
+.l-nav-back:hover{color:var(--acc)}
+.l-nav-label{font-family:var(--M);font-size:.68rem;color:var(--muted)}
+
+/* PROGRESS */
 .progress-wrap{position:fixed;top:58px;left:0;right:0;z-index:199;height:4px;background:var(--border)}
-.progress-bar{height:100%;background:var(--accent);transition:width .4s ease;width:0%}
+.progress-bar{height:100%;background:var(--acc);transition:width .4s ease;width:0%}
+
 /* HERO */
-.l-hero{padding:88px 1.5rem 2rem;background:var(--hero-bg);border-bottom:1px solid var(--border)}
-.l-hero-inner{max-width:820px;margin:0 auto}
-.l-badge{display:inline-flex;align-items:center;gap:.4rem;border-radius:100px;padding:.2rem .8rem;font-family:var(--M);font-size:.62rem;letter-spacing:.08em;text-transform:uppercase;font-weight:600;border:1px solid;color:var(--accent);background:var(--accent-pale);border-color:var(--accent-border);margin-bottom:.8rem}
-.l-hero h1{font-family:var(--D);font-weight:700;font-size:clamp(1.6rem,4vw,2.4rem);letter-spacing:-.025em;line-height:1.15;margin-bottom:.5rem}
-.l-hero-tag{font-size:.95rem;color:var(--muted);margin-bottom:1.2rem}
-.l-hero-build{background:var(--surface);border:1.5px solid var(--border);border-radius:10px;padding:.9rem 1.2rem;display:flex;align-items:center;gap:.7rem;font-size:.88rem;max-width:520px}
-.l-hero-build strong{color:var(--accent)}
+.l-hero{padding:80px 1.5rem 2rem;background:linear-gradient(160deg,#fff5f2 0%,#f8fafc 55%,#ffe8e0 100%);border-bottom:1px solid var(--border)}
+.l-hero-inner{max-width:860px;margin:0 auto}
+.l-badge{display:inline-flex;align-items:center;gap:.4rem;border-radius:100px;padding:.2rem .85rem;
+  font-family:var(--M);font-size:.62rem;letter-spacing:.08em;text-transform:uppercase;font-weight:600;
+  color:var(--acc);background:var(--acc-pale);border:1px solid var(--acc-b);margin-bottom:.8rem}
+.l-hero h1{font-family:var(--D);font-weight:700;font-size:clamp(1.5rem,4vw,2.3rem);
+  letter-spacing:-.02em;line-height:1.15;margin-bottom:.5rem}
+.l-hero-sub{font-size:.95rem;color:var(--muted);margin-bottom:1rem}
+
 /* WELCOME BOX */
-.welcome-box{background:linear-gradient(135deg,var(--accent),var(--accent-dark));color:#fff;border-radius:16px;padding:1.5rem 1.8rem;max-width:820px;margin:2rem auto 0}
-.welcome-box h2{font-family:var(--D);font-weight:700;font-size:1.1rem;margin-bottom:.6rem}
-.welcome-box p{font-size:.9rem;line-height:1.75;opacity:.92}
-.welcome-meta{display:flex;gap:1.5rem;margin-top:1rem;flex-wrap:wrap}
-.welcome-meta span{background:rgba(255,255,255,.15);border-radius:6px;padding:.25rem .8rem;font-family:var(--M);font-size:.7rem;font-weight:500}
-/* MAIN CONTENT */
-main{max-width:820px;margin:0 auto;padding:2rem 1.5rem 5rem}
+.welcome-box{background:linear-gradient(135deg,var(--acc),var(--acc-d));color:#fff;
+  border-radius:16px;padding:1.5rem 1.8rem;max-width:860px;margin:1.5rem auto 0}
+.welcome-box h2{font-family:var(--D);font-weight:700;font-size:1.05rem;margin-bottom:.6rem}
+.welcome-box p,.welcome-box li{font-size:.9rem;line-height:1.8;opacity:.93}
+.welcome-box ul{margin-left:1.2rem;margin-top:.5rem}
+.welcome-meta{display:flex;gap:1rem;margin-top:1rem;flex-wrap:wrap}
+.welcome-meta span{background:rgba(255,255,255,.18);border-radius:6px;padding:.2rem .75rem;
+  font-family:var(--M);font-size:.68rem;font-weight:500}
+
 /* PHASE */
-.phase{background:var(--surface);border:1.5px solid var(--border);border-radius:16px;margin-bottom:1.5rem;overflow:hidden;transition:opacity .3s,transform .3s}
-.phase.locked{opacity:.4;pointer-events:none;filter:blur(1px)}
-.phase-header{padding:1rem 1.4rem;background:var(--s2,#f1f5f9);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;gap:1rem}
-.phase-num{font-family:var(--M);font-size:.7rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}
-.phase-title{font-family:var(--D);font-weight:700;font-size:1rem;color:var(--text)}
-.phase-check{width:24px;height:24px;border-radius:50%;background:var(--border);display:flex;align-items:center;justify-content:center;font-size:.75rem;flex-shrink:0;transition:background .3s}
+.phase{background:var(--surface);border:1.5px solid var(--border);border-radius:16px;
+  margin-bottom:1.5rem;overflow:hidden;transition:opacity .3s,transform .3s,filter .3s}
+.phase.locked{opacity:.35;pointer-events:none;filter:blur(1.5px)}
+.phase-header{padding:1rem 1.4rem;background:#fff8f5;
+  border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;gap:1rem;cursor:default}
+.phase-num{font-family:var(--M);font-size:.7rem;font-weight:600;letter-spacing:.08em;
+  text-transform:uppercase;color:var(--acc)}
+.phase-title{font-family:var(--D);font-weight:700;font-size:.95rem;color:var(--text);
+  flex:1;margin:0 .8rem}
+.phase-check{width:26px;height:26px;border-radius:50%;background:var(--border);
+  display:flex;align-items:center;justify-content:center;font-size:.8rem;flex-shrink:0;
+  transition:background .3s,color .3s}
 .phase-check.done{background:#10b981;color:#fff}
-.phase-body{padding:1.4rem}
-/* CONCEPT BOX */
-.concept-box{background:#f0f9ff;border-left:4px solid #0284c7;border-radius:0 10px 10px 0;padding:1rem 1.2rem;margin-bottom:1.2rem}
-.concept-label{font-family:var(--M);font-size:.65rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#0284c7;margin-bottom:.4rem}
-.concept-box p{font-size:.92rem;color:#0c4a6e;line-height:1.75}
-/* CODE BLOCK */
-.code-wrap{margin:1.2rem 0;border-radius:12px;overflow:hidden;border:1px solid #1e293b}
-.code-bar{background:#1e293b;padding:.6rem 1rem;display:flex;align-items:center;gap:.4rem}
-.code-dot{width:8px;height:8px;border-radius:50%}
-.code-dot.r{background:#ff5f57}.code-dot.y{background:#febc2e}.code-dot.g{background:#28c840}
-.code-filename{margin-left:.5rem;font-family:var(--M);font-size:.65rem;color:#64748b}
-.code-body{background:#0f172a;padding:1.2rem 1.4rem;overflow-x:auto}
-.code-body pre{font-family:var(--M);font-size:.78rem;line-height:1.9;color:#e2e8f0;margin:0;white-space:pre}
-.code-body pre .cm{color:#64748b} /* comment */
-.code-body pre .tg{color:#38bdf8} /* tag */
-.code-body pre .at{color:#c084fc} /* attribute */
-.code-body pre .vl{color:#86efac} /* value */
-.code-body pre .tx{color:#e2e8f0} /* text */
+.phase-body{padding:1.6rem 1.8rem}
+
+/* RICH CONTENT STYLES */
+.v2-p{margin-bottom:1rem;font-size:.95rem;color:var(--t2);line-height:1.85}
+.v2-h3{font-family:var(--D);font-weight:700;font-size:1.05rem;color:var(--text);
+  margin:1.6rem 0 .5rem;padding-top:.2rem;border-top:2px solid var(--acc-pale)}
+.v2-h4{font-family:var(--D);font-weight:600;font-size:.95rem;color:var(--t2);margin:1.1rem 0 .4rem}
+.v2-h5,.v2-h6{font-family:var(--D);font-weight:600;font-size:.9rem;color:var(--muted);margin:.8rem 0 .3rem}
+.v2-ul,.v2-ol{margin:.6rem 0 1rem 1.4rem;font-size:.93rem;color:var(--t2);line-height:1.9}
+.v2-ul li,.v2-ol li{margin-bottom:.3rem}
+.v2-bq{border-left:4px solid var(--acc);background:var(--acc-pale);border-radius:0 10px 10px 0;
+  padding:.9rem 1.2rem;margin:1rem 0;font-size:.92rem;color:#7b1c06;font-style:italic}
+.v2-bq p{margin:0;color:inherit}
+.v2-bq strong{font-style:normal}
+.v2-hr{border:none;border-top:1px solid var(--border);margin:1.2rem 0}
+.v2-table-wrap{overflow-x:auto;margin:1rem 0}
+.v2-table{width:100%;border-collapse:collapse;font-size:.87rem}
+.v2-table th{background:var(--acc-pale);color:#7b1c06;font-family:var(--D);
+  font-weight:700;padding:9px 12px;text-align:left;border:1px solid var(--acc-b)}
+.v2-table td{padding:8px 12px;border:1px solid var(--border);color:var(--t2);vertical-align:top}
+.v2-table tr:nth-child(even) td{background:#f8fafc}
+.v2-table code{background:var(--acc-pale);color:var(--acc);border-radius:4px;
+  padding:1px 5px;font-family:var(--M);font-size:.8em}
+.phase-body code{background:var(--acc-pale);color:var(--acc-d);border-radius:4px;
+  padding:1px 6px;font-family:var(--M);font-size:.82em}
+.phase-body a{color:var(--acc);text-decoration:underline;text-underline-offset:2px}
+.phase-body strong{color:var(--text)}
+
+/* CODE BLOCKS */
+.v2-code-wrap{margin:1.2rem 0;border-radius:12px;overflow:hidden;border:1px solid #1e293b;box-shadow:0 4px 16px rgba(0,0,0,.15)}
+.v2-code-bar{background:#1e293b;padding:.55rem 1rem;display:flex;align-items:center;gap:.4rem}
+.v2-dot{width:10px;height:10px;border-radius:50%}
+.v2-dot.r{background:#ff5f57}.v2-dot.y{background:#febc2e}.v2-dot.g{background:#28c840}
+.v2-code-lang{margin-left:.6rem;font-family:var(--M);font-size:.65rem;color:#64748b;text-transform:uppercase;letter-spacing:.08em}
+.v2-code-body{background:#0f172a;padding:1.3rem 1.5rem;overflow-x:auto}
+.v2-code-body pre{margin:0}
+.v2-code-body code{font-family:var(--M);font-size:.8rem;line-height:1.9;color:#e2e8f0;
+  white-space:pre;background:transparent;padding:0;border-radius:0}
+
 /* TASK BOX */
-.task-box{background:#fffbeb;border:1.5px dashed #d97706;border-radius:12px;padding:1rem 1.2rem;margin:1.2rem 0}
-.task-label{font-family:var(--M);font-size:.65rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#b45309;margin-bottom:.4rem}
-.task-box p{font-size:.92rem;color:#78350f;line-height:1.75}
-.task-box code{background:rgba(180,83,9,.1);border-radius:4px;padding:.1rem .4rem;font-family:var(--M);font-size:.82em}
-/* NEXT BUTTON */
-.next-btn{display:inline-flex;align-items:center;gap:.5rem;background:var(--accent);color:#fff;font-family:var(--D);font-weight:700;font-size:.88rem;padding:.75rem 1.5rem;border-radius:10px;border:none;cursor:pointer;transition:transform .2s,box-shadow .2s;box-shadow:0 4px 12px var(--accent-shadow);margin-top:1rem}
-.next-btn:hover{transform:translateY(-2px);box-shadow:0 8px 20px var(--accent-shadow)}
-.next-btn:disabled{opacity:.5;cursor:not-allowed;transform:none}
-.next-tip{font-family:var(--M);font-size:.72rem;color:var(--muted);margin-top:.6rem}
-/* PROJECT BOX */
-.project-box{background:#f0fdf4;border:2px solid #16a34a;border-radius:16px;padding:1.5rem;margin:2rem 0}
-.project-label{font-family:var(--M);font-size:.65rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#15803d;margin-bottom:.4rem}
-.project-name{font-family:var(--D);font-weight:700;font-size:1.1rem;color:#14532d;margin-bottom:.5rem}
-.project-desc{font-size:.9rem;color:#166534;margin-bottom:1.2rem;line-height:1.7}
-/* CAPSTONE BOX */
-.capstone-box{background:linear-gradient(135deg,#1e1b4b,#312e81);border-radius:16px;padding:1.5rem;margin:2rem 0;color:#fff}
-.capstone-label{font-family:var(--M);font-size:.65rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#a5b4fc;margin-bottom:.4rem}
-.capstone-name{font-family:var(--D);font-weight:700;font-size:1.2rem;margin-bottom:.5rem}
-.capstone-desc{font-size:.9rem;color:rgba(255,255,255,.8);margin-bottom:1.2rem;line-height:1.7}
-/* FILE TABS */
-.file-tabs{display:flex;gap:.5rem;margin-bottom:0;flex-wrap:wrap}
-.file-tab{font-family:var(--M);font-size:.72rem;padding:.35rem .8rem;background:#1e293b;color:#94a3b8;border-radius:6px 6px 0 0;cursor:pointer;border:1px solid #334155;border-bottom:none;transition:background .15s}
-.file-tab.active{background:#0f172a;color:#e2e8f0}
-.file-content{display:none}.file-content.active{display:block}
+.task-box{background:#fff0ec;border:2px dashed #e34c26;
+  border-radius:12px;padding:1rem 1.3rem;margin:1.4rem 0}
+.task-label{font-family:var(--M);font-size:.65rem;font-weight:700;letter-spacing:.1em;
+  text-transform:uppercase;color:#7b1c06;margin-bottom:.5rem;display:flex;align-items:center;gap:.4rem}
+.task-box p,.task-body{font-size:.92rem;color:#7b1c06;line-height:1.8}
+.task-box code{background:rgba(0,0,0,.08);border-radius:4px;padding:1px 6px;
+  font-family:var(--M);font-size:.82em}
+
+/* UNLOCK BUTTON */
+.unlock-btn{display:inline-flex;align-items:center;gap:.5rem;background:var(--acc);
+  color:#fff;font-family:var(--D);font-weight:700;font-size:.88rem;
+  padding:.75rem 1.6rem;border-radius:10px;border:none;cursor:pointer;
+  transition:transform .2s,box-shadow .2s;box-shadow:0 4px 14px var(--acc-sh);margin-top:1.2rem}
+.unlock-btn:hover{transform:translateY(-2px);box-shadow:0 8px 22px var(--acc-sh)}
+
+/* BUILD IT */
+.build-box{background:#f0fdf4;border:2px solid #16a34a;border-radius:16px;padding:1.6rem;margin:2rem 0;display:none}
+.build-label{font-family:var(--M);font-size:.65rem;font-weight:700;letter-spacing:.1em;
+  text-transform:uppercase;color:#15803d;margin-bottom:.4rem}
+.build-name{font-family:var(--D);font-weight:700;font-size:1.1rem;color:#14532d;margin-bottom:.5rem}
+.build-desc{font-size:.9rem;color:#166534;margin-bottom:1.2rem;line-height:1.75}
+.build-desc code{background:rgba(22,163,74,.12);border-radius:4px;padding:1px 6px;font-family:var(--M);font-size:.82em}
+.build-desc strong{color:#14532d}
+
 /* GITHUB ACCORDION */
-.github-acc{border:1.5px solid var(--border);border-radius:12px;overflow:hidden;margin:1.5rem 0}
-.github-acc-head{padding:1rem 1.2rem;background:#f8fafc;cursor:pointer;display:flex;align-items:center;justify-content:space-between;font-family:var(--D);font-weight:600;font-size:.9rem;user-select:none}
-.github-acc-body{display:none;padding:1.2rem;border-top:1px solid var(--border)}
-.github-acc-body.open{display:block}
-.github-step{display:flex;gap:.8rem;margin-bottom:1rem;align-items:flex-start}
-.github-step-n{width:24px;height:24px;border-radius:50%;background:var(--accent);color:#fff;font-family:var(--D);font-weight:700;font-size:.75rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px}
-.github-step p{font-size:.88rem;color:var(--t2);line-height:1.7}
+.gh-acc{border:1.5px solid var(--border);border-radius:12px;overflow:hidden;margin:1.5rem 0}
+.gh-acc-head{padding:1rem 1.2rem;background:#f8fafc;cursor:pointer;
+  display:flex;align-items:center;justify-content:space-between;
+  font-family:var(--D);font-weight:600;font-size:.9rem;user-select:none}
+.gh-acc-body{display:none;padding:1.2rem;border-top:1px solid var(--border)}
+.gh-acc-body.open{display:block}
+.gh-step{display:flex;gap:.8rem;margin-bottom:1rem;align-items:flex-start}
+.gh-step-n{width:26px;height:26px;border-radius:50%;background:var(--acc);color:#fff;
+  font-family:var(--D);font-weight:700;font-size:.75rem;display:flex;align-items:center;
+  justify-content:center;flex-shrink:0;margin-top:2px}
+.gh-step p{font-size:.88rem;color:var(--t2);line-height:1.7}
+.gh-step code{background:var(--acc-pale);color:var(--acc-d);border-radius:4px;
+  padding:1px 6px;font-family:var(--M);font-size:.82em}
+
 /* SESSION END */
-.session-end{background:linear-gradient(135deg,var(--accent),var(--accent-dark));color:#fff;border-radius:16px;padding:1.5rem 1.8rem;margin:2rem 0;display:none}
+.session-end{background:linear-gradient(135deg,var(--acc),var(--acc-d));color:#fff;
+  border-radius:16px;padding:1.6rem 1.8rem;margin:2rem 0;display:none}
 .session-end.visible{display:block}
 .session-end h2{font-family:var(--D);font-weight:700;font-size:1.1rem;margin-bottom:.8rem}
 .session-end ul{list-style:none;display:flex;flex-direction:column;gap:.4rem}
-.session-end li{font-size:.9rem;opacity:.92;display:flex;align-items:center;gap:.5rem}
-/* LESSON NAV */
-.lesson-nav{display:flex;align-items:center;justify-content:space-between;padding-top:2rem;border-top:1px solid var(--border);margin-top:2rem;flex-wrap:wrap;gap:.75rem}
-.ln-btn{display:inline-flex;align-items:center;gap:.4rem;background:var(--surface);color:var(--t2);font-family:var(--D);font-weight:600;font-size:.82rem;padding:.65rem 1.2rem;border-radius:8px;text-decoration:none;border:1.5px solid var(--border);transition:border-color .2s,color .2s}
-.ln-btn:hover{border-color:var(--accent);color:var(--accent)}
-.ln-btn.primary{background:var(--accent);color:#fff;border-color:var(--accent)}
+.session-end li{font-size:.9rem;opacity:.93;display:flex;align-items:center;gap:.5rem}
+.ln-btn{display:inline-flex;align-items:center;gap:.4rem;background:var(--surface);
+  color:var(--t2);font-family:var(--D);font-weight:600;font-size:.82rem;
+  padding:.65rem 1.2rem;border-radius:8px;text-decoration:none;
+  border:1.5px solid var(--border);transition:border-color .2s,color .2s}
+.ln-btn:hover{border-color:var(--acc);color:var(--acc)}
+.ln-btn.primary{background:var(--acc);color:#fff;border-color:var(--acc)}
 .ln-btn.primary:hover{opacity:.9}
-/* UTILS */
-code{font-family:var(--M);font-size:.85em;background:#f1f5f9;border-radius:4px;padding:.1rem .35rem;color:var(--accent)}
-.emoji{font-style:normal}
-@media(max-width:600px){.l-hero h1{font-size:1.5rem}.welcome-meta{gap:.75rem}}
-
+.lesson-nav{display:flex;align-items:center;justify-content:space-between;
+  padding-top:2rem;border-top:1px solid rgba(255,255,255,.25);margin-top:1.5rem;flex-wrap:wrap;gap:.75rem}
+.lesson-footer{text-align:center;padding:1.5rem;font-family:var(--M);font-size:.72rem;
+  color:var(--muted);border-top:1px solid var(--border);background:var(--surface)}
 </style>
 </head>
 <body>
-
-<!-- FIXED NAV -->
-<nav class="lesson-nav-bar">
-  <a href="../index.html" class="nav-back">← HTML Course</a>
-  <span class="nav-lesson">Lesson 09 of 34 &nbsp;·&nbsp; HTML Quotations</span>
-  <div class="nav-actions">
-    <a href="lesson_08.html" class="ln-btn">← Lesson 08</a>
-    <a href="lesson_10.html" class="ln-btn primary">Lesson 10 →</a>
-  </div>
+<nav class="l-nav">
+  <a href="../index.html" class="l-nav-logo">⚡ Techbase HTML</a>
+  <span class="l-nav-label">Lesson 09 of 34</span>
+  <a href="../index.html" class="l-nav-back">← All Lessons</a>
 </nav>
+<div class="progress-wrap"><div class="progress-bar" id="pbar"></div></div>
 
-<!-- PROGRESS BAR -->
-<div id="progress-wrap">
-  <div id="pbar" style="width:5%;background:var(--accent);height:4px;
-       border-radius:2px;transition:width .4s ease;"></div>
+<div class="l-hero">
+  <div class="l-hero-inner">
+    <div class="l-badge">HTML · Lesson 09</div>
+    <h1>HTML Quotation and Citation Elements</h1>
+    <div class="l-hero-sub">13 phases · Build: Project Description</div>
+  </div>
 </div>
 
-<!-- HERO -->
-<section class="lesson-hero">
-  <div class="hero-inner">
-    <div class="lesson-num-badge">Lesson 09</div>
-    <h1>HTML Quotations</h1>
-    <p class="lesson-tagline">Quote famous words correctly using blockquote, q, and cite tags</p>
-    <div class="lesson-meta">
-      <span>📚 2 phases</span>
-      <span>🏗️ Build: My Quotations Page</span>
-      
-    </div>
+<section style="background:linear-gradient(160deg,#fff5f2 0%,#f8fafc 55%,#ffe8e0 100%);padding-bottom:1.5rem;border-bottom:1px solid var(--border)">
+  <div style="max-width:860px;margin:0 auto;padding:0 1.5rem"><div class="welcome-box">
+  <h2>👋 Welcome to Lesson 09</h2>
+  <div style="font-size:.9rem;line-height:1.85;opacity:.93"><p class="v2-p">Have you ever read a webpage that shows a famous quote from a scientist, a message from a company, or a title of a book? Web developers use special HTML tags to mark up that kind of content correctly.</p>
+<p class="v2-p">In this lesson, you will learn <strong>six important HTML elements</strong> that let you handle quotations, abbreviations, contact information, work titles, and text direction — all in a meaningful, structured way.</p>
+<p class="v2-p">These six elements are:</p>
+<ul class="v2-ul"><li><code>&lt;blockquote&gt;</code> — for long quotes from another source</li><li><code>&lt;q&gt;</code> — for short inline quotes</li><li><code>&lt;abbr&gt;</code> — for abbreviations and acronyms</li><li><code>&lt;address&gt;</code> — for contact information</li><li><code>&lt;cite&gt;</code> — for titles of creative works</li><li><code>&lt;bdo&gt;</code> — for changing text direction</li></ul>
+<p class="v2-p">By the end of this lesson, you will understand what each tag does, why it exists, how to write it, and how to use them all together in a real webpage.</p>
+<hr class="v2-hr"></div>
+  <div class="welcome-meta">
+    <span>📚 13 phases</span>
+    <span>🏗️ Project Description</span>
   </div>
+</div></div>
 </section>
 
-<!-- MAIN CONTENT -->
-<main class="lesson-main">
-
-<div class="welcome-box">
-  <div class="welcome-label">👋 Welcome to Lesson 09!</div>
-  <h2>HTML Quotations</h2>
-  <p>Quote famous words correctly using blockquote, q, and cite tags. In this lesson you will work through
-     <strong>2 phases</strong>.
-     Complete each phase task before clicking <em>Next Phase</em>.
-     
-  </p>
-</div>
-
-<div class="phase " id="phase1" data-phase="1">
+<main style="max-width:860px;margin:0 auto;padding:2rem 1.5rem 5rem">
+<div class="phase" id="phase1">
   <div class="phase-header">
-    <div><div class="phase-num">Phase 1</div><div class="phase-title">Blockquote and Inline Quotes</div></div>
-    <div class="phase-check" id="check1"></div>
+    <div class="phase-num">Phase 1 of 13</div>
+    <div class="phase-title">Lesson Introduction</div>
+    <div class="phase-check" id="chk1"></div>
   </div>
   <div class="phase-body">
-    <div class="concept-box">
-      <div class="concept-label">💡 Concept</div>
-      <p>When you want to show a long quote from another source, use <code>&lt;blockquote&gt;</code>. The browser will indent it automatically to show it's a quote. For a short inline quote (inside a sentence), use <code>&lt;q&gt;</code> — the browser automatically adds quotation marks around it. Always add a <code>cite</code> attribute to show where the quote comes from!</p>
-    </div>
-    <div class="code-wrap">
-  <div class="code-bar">
-    <span class="code-dot r"></span><span class="code-dot y"></span><span class="code-dot g"></span>
-    <span class="code-filename">index.html</span>
-  </div>
-  <div class="code-body"><pre>&lt;!DOCTYPE html&gt;
-&lt;html lang="en"&gt;
-  &lt;head&gt;&lt;title&gt;Quotations&lt;/title&gt;&lt;/head&gt;
-  &lt;body&gt;
-
-    &lt;h1&gt;Famous Quotes&lt;/h1&gt;
-
-    &lt;!-- A long block quote --&gt;
-    &lt;blockquote cite="https://en.wikipedia.org/wiki/Nelson_Mandela"&gt;
-      &lt;p&gt;Education is the most powerful weapon which you can use
-         to change the world.&lt;/p&gt;
-    &lt;/blockquote&gt;
-    &lt;p&gt;— Nelson Mandela&lt;/p&gt;
-
-    &lt;!-- An inline quote inside a paragraph --&gt;
-    &lt;p&gt;As Albert Einstein once said,
-       &lt;q&gt;Imagination is more important than knowledge.&lt;/q&gt;
-       This still holds true today.&lt;/p&gt;
-
-  &lt;/body&gt;
-&lt;/html&gt;</pre></div>
-</div>
+    <p class="v2-p">Have you ever read a webpage that shows a famous quote from a scientist, a message from a company, or a title of a book? Web developers use special HTML tags to mark up that kind of content correctly.</p>
+<p class="v2-p">In this lesson, you will learn <strong>six important HTML elements</strong> that let you handle quotations, abbreviations, contact information, work titles, and text direction — all in a meaningful, structured way.</p>
+<p class="v2-p">These six elements are:</p>
+<ul class="v2-ul"><li><code>&lt;blockquote&gt;</code> — for long quotes from another source</li><li><code>&lt;q&gt;</code> — for short inline quotes</li><li><code>&lt;abbr&gt;</code> — for abbreviations and acronyms</li><li><code>&lt;address&gt;</code> — for contact information</li><li><code>&lt;cite&gt;</code> — for titles of creative works</li><li><code>&lt;bdo&gt;</code> — for changing text direction</li></ul>
+<p class="v2-p">By the end of this lesson, you will understand what each tag does, why it exists, how to write it, and how to use them all together in a real webpage.</p>
+<hr class="v2-hr">
     <div class="task-box">
       <div class="task-label">✏️ Your Task</div>
-      <p>Find one of your favourite quotes from a person you admire. Use <code>&lt;blockquote&gt;</code> for it and add a <code>cite</code> attribute with the source URL. Then write a short sentence using <code>&lt;q&gt;</code> for an inline quote.</p>
+      <div class="task-body">Now practise what you just learned about <strong>Lesson Introduction</strong>. Open your editor, type the examples above by hand, then modify them — change values, rename variables, and observe what happens. Active experimentation is how code sticks.</div>
     </div>
-    <button class="next-btn" onclick="unlockNext(1)">
-      Next Phase → <span>→</span>
-    </button>
-    <p class="next-tip">Try the task first, then click to continue!</p>
+    <button class="unlock-btn" onclick="unlockNext(1)">Start Lesson ✓</button>
   </div>
-</div><div class="phase locked" id="phase2" data-phase="2">
+</div>
+<div class="phase locked" id="phase2">
   <div class="phase-header">
-    <div><div class="phase-num">Phase 2</div><div class="phase-title">Cite, Abbr, and Address</div></div>
-    <div class="phase-check" id="check2"></div>
+    <div class="phase-num">Phase 2 of 13</div>
+    <div class="phase-title">Prerequisite Concepts</div>
+    <div class="phase-check" id="chk2"></div>
   </div>
   <div class="phase-body">
-    <div class="concept-box">
-      <div class="concept-label">💡 Concept</div>
-      <p><code>&lt;cite&gt;</code> marks the title of a creative work (book, film, song) — it shows in italic. <code>&lt;abbr&gt;</code> marks an abbreviation and shows a tooltip when you hover, using the <code>title</code> attribute. <code>&lt;address&gt;</code> marks contact information for the page author — typically shown in italic. These are all <strong>semantic</strong> tags that add meaning for browsers, search engines and screen readers.</p>
-    </div>
-    <div class="code-wrap">
-  <div class="code-bar">
-    <span class="code-dot r"></span><span class="code-dot y"></span><span class="code-dot g"></span>
-    <span class="code-filename">index.html</span>
-  </div>
-  <div class="code-body"><pre>&lt;!DOCTYPE html&gt;
-&lt;html lang="en"&gt;
-  &lt;head&gt;&lt;title&gt;Cite and Abbr&lt;/title&gt;&lt;/head&gt;
-  &lt;body&gt;
-
-    &lt;h1&gt;Books I Love&lt;/h1&gt;
-
-    &lt;p&gt;My favourite book is &lt;cite&gt;Things Fall Apart&lt;/cite&gt;
-       by Chinua Achebe.&lt;/p&gt;
-
-    &lt;p&gt;&lt;abbr title="HyperText Markup Language"&gt;HTML&lt;/abbr&gt;
-       was created by Tim Berners-Lee.&lt;/p&gt;
-
-    &lt;p&gt;&lt;abbr title="Cascading Style Sheets"&gt;CSS&lt;/abbr&gt;
-       makes HTML look beautiful.&lt;/p&gt;
-
-    &lt;address&gt;
-      Written by: Techbase Academy&lt;br&gt;
-      Ibadan, Oyo State, Nigeria&lt;br&gt;
-      Email: info@techbasengr.com.ng
-    &lt;/address&gt;
-
-  &lt;/body&gt;
-&lt;/html&gt;</pre></div>
-</div>
+    <p class="v2-p">Before diving in, let us quickly review two things you already know:</p>
+<p class="v2-p"><strong>HTML Tags</strong> — Every HTML element is written with an opening tag and a closing tag, like this:</p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;p&gt;This is a paragraph.&lt;/p&gt;</code></pre></div></div>
+<ul class="v2-ul"><li><code>&lt;p&gt;</code> is the <strong>opening tag</strong> — it tells the browser "start a paragraph here"</li><li><code>&lt;/p&gt;</code> is the <strong>closing tag</strong> — notice the forward slash <code>/</code> which means "end the paragraph here"</li><li>Everything in between is the <strong>content</strong> that appears on the page</li></ul>
+<p class="v2-p"><strong>HTML Attributes</strong> — Some tags can carry extra information called <em>attributes</em>, written inside the opening tag:</p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;p title=&quot;I am a tooltip&quot;&gt;Hover over me!&lt;/p&gt;</code></pre></div></div>
+<ul class="v2-ul"><li><code>title</code> is the <strong>attribute name</strong></li><li><code>"I am a tooltip"</code> is the <strong>attribute value</strong></li><li>Attributes always go inside the opening tag and always use quotation marks around the value</li></ul>
+<p class="v2-p">You will use both of these ideas throughout this lesson.</p>
+<hr class="v2-hr">
     <div class="task-box">
       <div class="task-label">✏️ Your Task</div>
-      <p>Add at least two <code>&lt;abbr&gt;</code> tags to your page for common acronyms used in your topic (e.g. <abbr title='National Basketball Association'>NBA</abbr>, <abbr title='Artificial Intelligence'>AI</abbr>). Hover over them in your browser to confirm the tooltip appears.</p>
+      <div class="task-body">Now practise what you just learned about <strong>Prerequisite Concepts</strong>. Open your editor, type the examples above by hand, then modify them — change values, rename variables, and observe what happens. Active experimentation is how code sticks.</div>
     </div>
-    <button class="next-btn" onclick="unlockNext(2)">
-      Build It! 🚀 <span>→</span>
+    <button class="unlock-btn" onclick="unlockNext(2)">Phase Complete — Unlock Next ✓</button>
+  </div>
+</div>
+<div class="phase locked" id="phase3">
+  <div class="phase-header">
+    <div class="phase-num">Phase 3 of 13</div>
+    <div class="phase-title">Conceptual Understanding</div>
+    <div class="phase-check" id="chk3"></div>
+  </div>
+  <div class="phase-body">
+    <h3 class="v2-h3">Why Do We Need Special Quotation Tags?</h3>
+<p class="v2-p">Think about a newspaper article. When a journalist quotes someone, they use specific formatting — quotation marks, indentation, or a special block of text — so readers know "these are not the journalist's own words."</p>
+<p class="v2-p">HTML works the same way. When you quote someone else's content on a webpage, you need to <strong>tell the browser</strong> (and search engines, and screen readers) that this text came from somewhere else. That is exactly what the quotation and citation elements do.</p>
+<blockquote class="v2-bq"><p class="v2-p"><strong>Analogy:</strong> Think of these tags like different types of labels you put on different items in a kitchen. A label that says "borrowed from neighbour" means something different from a label that says "short note." Each tag is a specific label for a specific type of content.</p></blockquote>
+<p class="v2-p">There is another important reason too: <strong>accessibility</strong>. Screen readers (software used by visually impaired people) read HTML tags and use them to understand the meaning of content. When you use <code>&lt;blockquote&gt;</code> for a long quote, the screen reader knows to announce it as a quotation. When you use <code>&lt;abbr&gt;</code>, the screen reader can speak out the full word.</p>
+<hr class="v2-hr">
+    <div class="task-box">
+      <div class="task-label">✏️ Your Task</div>
+      <div class="task-body">Now practise what you just learned about <strong>Conceptual Understanding</strong>. Open your editor, type the examples above by hand, then modify them — change values, rename variables, and observe what happens. Active experimentation is how code sticks.</div>
+    </div>
+    <button class="unlock-btn" onclick="unlockNext(3)">Phase Complete — Unlock Next ✓</button>
+  </div>
+</div>
+<div class="phase locked" id="phase4">
+  <div class="phase-header">
+    <div class="phase-num">Phase 4 of 13</div>
+    <div class="phase-title">Part 1 — The `&lt;blockquote&gt;` Element (Long Quotations)</div>
+    <div class="phase-check" id="chk4"></div>
+  </div>
+  <div class="phase-body">
+    <h3 class="v2-h3">What Is It?</h3>
+<p class="v2-p">The <code>&lt;blockquote&gt;</code> element is used when you want to show a <strong>long quotation</strong> taken from another source — like a paragraph from a book, a statement from a company's website, or a passage from a research article.</p>
+<p class="v2-p"><strong>What problem does it solve?</strong> Without it, readers cannot easily tell which text belongs to you and which text was copied from somewhere else. <code>&lt;blockquote&gt;</code> makes that separation clear.</p>
+<h3 class="v2-h3">How Does the Browser Display It?</h3>
+<p class="v2-p">Browsers automatically <strong>indent</strong> (push inward from the left) the content inside <code>&lt;blockquote&gt;</code>. This visual indentation is the traditional way books and articles show long quotes.</p>
+<h3 class="v2-h3">The <code>cite</code> Attribute</h3>
+<p class="v2-p">You can add a <code>cite</code> attribute inside <code>&lt;blockquote&gt;</code> to specify the <strong>URL (web address) of the original source</strong>. This does NOT display anything visible to the user — it is purely information for browsers and search engines. It is good practice to always include it when you know the source.</p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;blockquote cite=&quot;https://www.example.com/source&quot;&gt;
+  The quoted text goes here.
+&lt;/blockquote&gt;</code></pre></div></div>
+<h3 class="v2-h3">Simple Example</h3>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;body&gt;
+
+  &lt;p&gt;Here is a quote from WWF&#x27;s website:&lt;/p&gt;
+
+  &lt;blockquote cite=&quot;http://www.worldwildlife.org/who/index.html&quot;&gt;
+    For 60 years, WWF has worked to help people and nature thrive.
+    As the world&#x27;s leading conservation organization, WWF works in
+    nearly 100 countries.
+  &lt;/blockquote&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;</code></pre></div></div>
+<p class="v2-p"><strong>Expected Output (in browser):</strong></p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span></div><div class="v2-code-body"><pre><code>Here is a quote from WWF&#x27;s website:
+
+      For 60 years, WWF has worked to help people and nature thrive.
+      As the world&#x27;s leading conservation organization, WWF works in
+      nearly 100 countries.</code></pre></div></div>
+<p class="v2-p"><em>(Notice that the quoted text is indented — pushed inward — compared to the paragraph above it.)</em></p>
+<h3 class="v2-h3">Breaking Down This Code Line by Line</h3>
+<div class="v2-table-wrap"><table class="v2-table"><thead><tr><th>Line</th><th>Code</th><th>What It Does</th></tr></thead><tbody><tr><td>1</td><td><code>&lt;p&gt;Here is a quote from WWF's website:&lt;/p&gt;</code></td><td>A regular paragraph introducing the quote</td></tr><tr><td>2</td><td><code>&lt;blockquote cite="http://..."&gt;</code></td><td>Opens the blockquote; <code>cite</code> attribute holds the source URL</td></tr><tr><td>3</td><td><code>For 60 years...</code></td><td>The actual quoted text</td></tr><tr><td>4</td><td><code>&lt;/blockquote&gt;</code></td><td>Closes the blockquote element</td></tr></tbody></table></div>
+<h3 class="v2-h3">Second Example — A Science Quote</h3>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;p&gt;Albert Einstein once said:&lt;/p&gt;
+
+&lt;blockquote cite=&quot;https://www.brainyquote.com&quot;&gt;
+  Imagination is more important than knowledge.
+  For knowledge is limited, whereas imagination
+  embraces the entire world.
+&lt;/blockquote&gt;</code></pre></div></div>
+<p class="v2-p"><strong>Expected Output:</strong></p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span></div><div class="v2-code-body"><pre><code>Albert Einstein once said:
+
+      Imagination is more important than knowledge.
+      For knowledge is limited, whereas imagination
+      embraces the entire world.</code></pre></div></div>
+<blockquote class="v2-bq"><p class="v2-p">💡 <strong>Thinking Prompt:</strong> What happens if you remove the <code>&lt;blockquote&gt;</code> tags and just leave the text as a regular paragraph? Would the reader be able to tell it is a quote? This is why semantic tags matter.</p></blockquote>
+<h3 class="v2-h3">Real-World Use Case</h3>
+<p class="v2-p">On news websites, research portals, and educational platforms, <code>&lt;blockquote&gt;</code> is used everywhere — quoting experts, scientific papers, official statements, and more.</p>
+<hr class="v2-hr">
+    <div class="task-box">
+      <div class="task-label">✏️ Your Task</div>
+      <div class="task-body">`html
+<blockquote cite="https://www.example.com/source">
+  The quoted text goes here.
+</blockquote>
+`</div>
+    </div>
+    <button class="unlock-btn" onclick="unlockNext(4)">Phase Complete — Unlock Next ✓</button>
+  </div>
+</div>
+<div class="phase locked" id="phase5">
+  <div class="phase-header">
+    <div class="phase-num">Phase 5 of 13</div>
+    <div class="phase-title">Part 2 — The `&lt;q&gt;` Element (Short Inline Quotations)</div>
+    <div class="phase-check" id="chk5"></div>
+  </div>
+  <div class="phase-body">
+    <h3 class="v2-h3">What Is It?</h3>
+<p class="v2-p">The <code>&lt;q&gt;</code> element is used for <strong>short quotations</strong> that appear <em>within</em> (inline with) normal text. It is the difference between quoting an entire paragraph from a book versus quoting a short phrase mid-sentence.</p>
+<p class="v2-p"><strong>What problem does it solve?</strong> Sometimes you just want to quote a short phrase inside a sentence without creating a big indented block. <code>&lt;q&gt;</code> is the right tool for that.</p>
+<h3 class="v2-h3">How Does the Browser Display It?</h3>
+<p class="v2-p">Browsers automatically add <strong>quotation marks</strong> (<code>"..."</code>) around the content inside <code>&lt;q&gt;</code>. You do NOT need to type the quotation marks yourself — the browser adds them for you.</p>
+<h3 class="v2-h3">Simple Example</h3>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;body&gt;
+
+  &lt;p&gt;WWF&#x27;s goal is to: &lt;q&gt;Build a future where people live in harmony with nature.&lt;/q&gt;&lt;/p&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;</code></pre></div></div>
+<p class="v2-p"><strong>Expected Output:</strong></p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span></div><div class="v2-code-body"><pre><code>WWF&#x27;s goal is to: &quot;Build a future where people live in harmony with nature.&quot;</code></pre></div></div>
+<p class="v2-p"><em>(The browser automatically adds the quotation marks around the text inside <code>&lt;q&gt;</code>.)</em></p>
+<h3 class="v2-h3">Breaking Down This Code</h3>
+<ul class="v2-ul"><li><code>&lt;p&gt;</code> — opens a paragraph</li><li><code>WWF's goal is to:</code> — regular text before the quote</li><li><code>&lt;q&gt;</code> — opens the inline quotation; browser will add opening <code>"</code></li><li><code>Build a future where people live in harmony with nature.</code> — the quoted text</li><li><code>&lt;/q&gt;</code> — closes the inline quotation; browser will add closing <code>"</code></li><li><code>&lt;/p&gt;</code> — closes the paragraph</li></ul>
+<h3 class="v2-h3">Second Example — A Scientist's Short Quote</h3>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;p&gt;Marie Curie believed that &lt;q&gt;nothing in life is to be feared, it is only to be understood.&lt;/q&gt;&lt;/p&gt;</code></pre></div></div>
+<p class="v2-p"><strong>Expected Output:</strong></p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span></div><div class="v2-code-body"><pre><code>Marie Curie believed that &quot;nothing in life is to be feared, it is only to be understood.&quot;</code></pre></div></div>
+<h3 class="v2-h3"><code>&lt;blockquote&gt;</code> vs <code>&lt;q&gt;</code> — Quick Comparison</h3>
+<div class="v2-table-wrap"><table class="v2-table"><thead><tr><th>Feature</th><th><code>&lt;blockquote&gt;</code></th><th><code>&lt;q&gt;</code></th></tr></thead><tbody><tr><td>Quote length</td><td>Long (multiple sentences)</td><td>Short (a phrase or sentence)</td></tr><tr><td>Displayed as</td><td>Indented block</td><td>Inline with surrounding text</td></tr><tr><td>Quotation marks</td><td>Not added automatically</td><td>Added automatically by browser</td></tr><tr><td>Typical use</td><td>Paragraphs from articles, speeches</td><td>Short phrases inside sentences</td></tr></tbody></table></div>
+<blockquote class="v2-bq"><p class="v2-p">💡 <strong>Thinking Prompt:</strong> If someone said: "The scientist wrote an entire paragraph about climate change," would you use <code>&lt;q&gt;</code> or <code>&lt;blockquote&gt;</code>? Why?</p></blockquote>
+<hr class="v2-hr">
+    <div class="task-box">
+      <div class="task-label">✏️ Your Task</div>
+      <div class="task-body">Now practise what you just learned about <strong>The <code>&lt;q&gt;</code> Element (Short Inline Quotations)</strong>. Open your editor, type the examples above by hand, then modify them — change values, rename variables, and observe what happens. Active experimentation is how code sticks.</div>
+    </div>
+    <button class="unlock-btn" onclick="unlockNext(5)">Phase Complete — Unlock Next ✓</button>
+  </div>
+</div>
+<div class="phase locked" id="phase6">
+  <div class="phase-header">
+    <div class="phase-num">Phase 6 of 13</div>
+    <div class="phase-title">Part 3 — The `&lt;abbr&gt;` Element (Abbreviations and Acronyms)</div>
+    <div class="phase-check" id="chk6"></div>
+  </div>
+  <div class="phase-body">
+    <h3 class="v2-h3">What Is It?</h3>
+<p class="v2-p">The <code>&lt;abbr&gt;</code> element marks text that is an <strong>abbreviation</strong> or an <strong>acronym</strong>.</p>
+<ul class="v2-ul"><li>An <strong>abbreviation</strong> is a shortened form of a word, like "Dr." for "Doctor" or "Mr." for "Mister"</li><li>An <strong>acronym</strong> is formed from the first letters of a phrase, like "HTML" for "HyperText Markup Language" or "WHO" for "World Health Organization"</li></ul>
+<p class="v2-p"><strong>What problem does it solve?</strong> When a reader encounters an abbreviation they don't know, they have no way to find out what it means just by looking at it. The <code>&lt;abbr&gt;</code> element lets you attach the full meaning as a tooltip — when the user hovers their mouse over the abbreviation, the full form pops up.</p>
+<h3 class="v2-h3">The <code>title</code> Attribute</h3>
+<p class="v2-p">The <code>title</code> attribute is used with <code>&lt;abbr&gt;</code> to provide the full expanded form of the abbreviation. This is what shows up as a tooltip on hover.</p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;abbr title=&quot;World Health Organization&quot;&gt;WHO&lt;/abbr&gt;</code></pre></div></div>
+<h3 class="v2-h3">Simple Example</h3>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;body&gt;
+
+  &lt;p&gt;The &lt;abbr title=&quot;World Health Organization&quot;&gt;WHO&lt;/abbr&gt; was founded in 1948.&lt;/p&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;</code></pre></div></div>
+<p class="v2-p"><strong>Expected Output (what you see in browser):</strong></p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span></div><div class="v2-code-body"><pre><code>The WHO was founded in 1948.</code></pre></div></div>
+<p class="v2-p"><em>(When you hover your mouse over "WHO", a small tooltip pops up showing: "World Health Organization")</em></p>
+<h3 class="v2-h3">Breaking Down This Code</h3>
+<ul class="v2-ul"><li><code>&lt;p&gt;</code> — opens a paragraph</li><li><code>The</code> — normal text</li><li><code>&lt;abbr title="World Health Organization"&gt;</code> — opens the abbreviation element; <code>title</code> holds the full meaning</li><li><code>WHO</code> — the abbreviation as it appears on screen</li><li><code>&lt;/abbr&gt;</code> — closes the abbreviation element</li><li><code>was founded in 1948.</code> — continues the normal paragraph text</li><li><code>&lt;/p&gt;</code> — closes the paragraph</li></ul>
+<h3 class="v2-h3">Second Example — Using Multiple Abbreviations</h3>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;p&gt;
+  The &lt;abbr title=&quot;HyperText Markup Language&quot;&gt;HTML&lt;/abbr&gt; document was created by
+  &lt;abbr title=&quot;Doctor&quot;&gt;Dr.&lt;/abbr&gt; Smith at the university.
+&lt;/p&gt;</code></pre></div></div>
+<p class="v2-p"><strong>Expected Output:</strong></p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span></div><div class="v2-code-body"><pre><code>The HTML document was created by Dr. Smith at the university.</code></pre></div></div>
+<p class="v2-p"><em>(Hovering over "HTML" shows "HyperText Markup Language". Hovering over "Dr." shows "Doctor".)</em></p>
+<h3 class="v2-h3">Why This Matters in the Real World</h3>
+<ul class="v2-ul"><li><strong>Search engines</strong> (like Google) can better understand your content when they know what abbreviations mean</li><li><strong>Translation tools</strong> can more accurately translate your page</li><li><strong>Screen readers</strong> for visually impaired users can read out the full term</li><li><strong>Accessibility</strong> improves for all users, especially in technical, medical, or legal content</li></ul>
+<hr class="v2-hr">
+    <div class="task-box">
+      <div class="task-label">✏️ Your Task</div>
+      <div class="task-body">Now practise what you just learned about <strong>The <code>&lt;abbr&gt;</code> Element (Abbreviations and Acronyms)</strong>. Open your editor, type the examples above by hand, then modify them — change values, rename variables, and observe what happens. Active experimentation is how code sticks.</div>
+    </div>
+    <button class="unlock-btn" onclick="unlockNext(6)">Phase Complete — Unlock Next ✓</button>
+  </div>
+</div>
+<div class="phase locked" id="phase7">
+  <div class="phase-header">
+    <div class="phase-num">Phase 7 of 13</div>
+    <div class="phase-title">Part 4 — The `&lt;address&gt;` Element (Contact Information)</div>
+    <div class="phase-check" id="chk7"></div>
+  </div>
+  <div class="phase-body">
+    <h3 class="v2-h3">What Is It?</h3>
+<p class="v2-p">The <code>&lt;address&gt;</code> element is used to display <strong>contact information</strong> for the author or owner of a webpage or article. This could be an email address, a website URL, a physical address, a phone number, or a social media handle.</p>
+<p class="v2-p"><strong>What problem does it solve?</strong> If you just write contact details as regular text, browsers and search engines treat them like any other text. The <code>&lt;address&gt;</code> tag tells them: "This is contact information" — which allows search engines to index it correctly and display it in local search results.</p>
+<h3 class="v2-h3">How Does the Browser Display It?</h3>
+<p class="v2-p">Text inside <code>&lt;address&gt;</code> is usually displayed in <strong>italic</strong> (slanted text). The browser also automatically adds a <strong>line break</strong> (empty line) before and after the <code>&lt;address&gt;</code> element to separate it from surrounding content.</p>
+<h3 class="v2-h3">Simple Example</h3>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;body&gt;
+
+  &lt;address&gt;
+    Written by John Doe.&lt;br&gt;
+    Visit us at:&lt;br&gt;
+    Example.com&lt;br&gt;
+    Box 564, Disneyland&lt;br&gt;
+    USA
+  &lt;/address&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;</code></pre></div></div>
+<p class="v2-p"><strong>Expected Output (in browser):</strong></p>
+<p class="v2-p"><em>(Displayed in italic text)</em></p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span></div><div class="v2-code-body"><pre><code>Written by John Doe.
+Visit us at:
+Example.com
+Box 564, Disneyland
+USA</code></pre></div></div>
+<h3 class="v2-h3">Breaking Down This Code</h3>
+<ul class="v2-ul"><li><code>&lt;address&gt;</code> — opens the contact information block</li><li><code>Written by John Doe.</code> — first line of contact info</li><li><code>&lt;br&gt;</code> — a line break tag (forces the next content to start on a new line); there is no closing <code>&lt;/br&gt;</code> tag</li><li><code>Visit us at:</code> — second line</li><li><code>&lt;br&gt;</code> — another line break</li><li><code>Example.com</code> — the website</li><li><code>&lt;br&gt;</code> — another line break</li><li><code>Box 564, Disneyland</code> — physical address</li><li><code>&lt;br&gt;</code> — another line break</li><li><code>USA</code> — country</li><li><code>&lt;/address&gt;</code> — closes the contact information block</li></ul>
+<h3 class="v2-h3">Second Example — Email Contact</h3>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;address&gt;
+  Contact us at: admin@mywebsite.com&lt;br&gt;
+  Phone: +234 800 123 4567&lt;br&gt;
+  Lagos, Nigeria
+&lt;/address&gt;</code></pre></div></div>
+<p class="v2-p"><strong>Expected Output:</strong></p>
+<p class="v2-p"><em>(In italic)</em></p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span></div><div class="v2-code-body"><pre><code>Contact us at: admin@mywebsite.com
+Phone: +234 800 123 4567
+Lagos, Nigeria</code></pre></div></div>
+<blockquote class="v2-bq"><p class="v2-p">⚠️ <strong>Important Note:</strong> The <code>&lt;address&gt;</code> element is meant for the <strong>contact details of the author/owner</strong> of the page. It is NOT meant to be used for any random physical address in your content (like an address mentioned in a news story). Use it specifically for the person/organisation who wrote or owns the page.</p></blockquote>
+<hr class="v2-hr">
+    <div class="task-box">
+      <div class="task-label">✏️ Your Task</div>
+      <div class="task-body">Now practise what you just learned about <strong>The <code>&lt;address&gt;</code> Element (Contact Information)</strong>. Open your editor, type the examples above by hand, then modify them — change values, rename variables, and observe what happens. Active experimentation is how code sticks.</div>
+    </div>
+    <button class="unlock-btn" onclick="unlockNext(7)">Phase Complete — Unlock Next ✓</button>
+  </div>
+</div>
+<div class="phase locked" id="phase8">
+  <div class="phase-header">
+    <div class="phase-num">Phase 8 of 13</div>
+    <div class="phase-title">Part 5 — The `&lt;cite&gt;` Element (Title of a Creative Work)</div>
+    <div class="phase-check" id="chk8"></div>
+  </div>
+  <div class="phase-body">
+    <h3 class="v2-h3">What Is It?</h3>
+<p class="v2-p">The <code>&lt;cite&gt;</code> element is used to mark the <strong>title of a creative work</strong> — like a book, a painting, a movie, a poem, a song, a sculpture, a TV show, or any other piece of creative content.</p>
+<p class="v2-p"><strong>What problem does it solve?</strong> When you mention the name of a book or artwork in text, readers should be able to tell that it is a <em>title</em>, not just an ordinary word. The <code>&lt;cite&gt;</code> tag gives the title a distinct visual style and semantic meaning.</p>
+<h3 class="v2-h3">An Important Rule</h3>
+<p class="v2-p">A <strong>person's name is NOT the title of a work</strong>. For example:</p>
+<ul class="v2-ul"><li>✅ Correct: <code>&lt;cite&gt;The Scream&lt;/cite&gt;</code> (title of a painting)</li><li>❌ Wrong: <code>&lt;cite&gt;Edvard Munch&lt;/cite&gt;</code> (this is a person's name, not a title)</li></ul>
+<h3 class="v2-h3">How Does the Browser Display It?</h3>
+<p class="v2-p">Text inside <code>&lt;cite&gt;</code> is usually displayed in <strong>italic</strong> (slanted text).</p>
+<h3 class="v2-h3">Simple Example</h3>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;body&gt;
+
+  &lt;p&gt;&lt;cite&gt;The Scream&lt;/cite&gt; by Edvard Munch. Painted in 1893.&lt;/p&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;</code></pre></div></div>
+<p class="v2-p"><strong>Expected Output:</strong></p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span></div><div class="v2-code-body"><pre><code>The Scream by Edvard Munch. Painted in 1893.</code></pre></div></div>
+<p class="v2-p"><em>(Where "The Scream" appears in italic.)</em></p>
+<h3 class="v2-h3">Second Example — Citing a Book</h3>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;p&gt;I just finished reading &lt;cite&gt;Things Fall Apart&lt;/cite&gt; by Chinua Achebe.
+It is one of the most important African novels ever written.&lt;/p&gt;</code></pre></div></div>
+<p class="v2-p"><strong>Expected Output:</strong></p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span></div><div class="v2-code-body"><pre><code>I just finished reading Things Fall Apart by Chinua Achebe.
+It is one of the most important African novels ever written.</code></pre></div></div>
+<p class="v2-p"><em>(Where "Things Fall Apart" appears in italic.)</em></p>
+<h3 class="v2-h3"><code>&lt;cite&gt;</code> vs <code>&lt;blockquote cite="..."&gt;</code></h3>
+<p class="v2-p">These two look similar but are very different:</p>
+<div class="v2-table-wrap"><table class="v2-table"><thead><tr><th>Element</th><th>Purpose</th></tr></thead><tbody><tr><td><code>&lt;cite&gt;</code></td><td>Displays a <strong>title</strong> of a creative work as italic text on the page</td></tr><tr><td><code>cite</code> attribute in <code>&lt;blockquote&gt;</code></td><td>Provides the <strong>URL of the source</strong> — invisible to users, used by browsers and search engines</td></tr></tbody></table></div>
+<hr class="v2-hr">
+    <div class="task-box">
+      <div class="task-label">✏️ Your Task</div>
+      <div class="task-body">Now practise what you just learned about <strong>The <code>&lt;cite&gt;</code> Element (Title of a Creative Work)</strong>. Open your editor, type the examples above by hand, then modify them — change values, rename variables, and observe what happens. Active experimentation is how code sticks.</div>
+    </div>
+    <button class="unlock-btn" onclick="unlockNext(8)">Phase Complete — Unlock Next ✓</button>
+  </div>
+</div>
+<div class="phase locked" id="phase9">
+  <div class="phase-header">
+    <div class="phase-num">Phase 9 of 13</div>
+    <div class="phase-title">Part 6 — The `&lt;bdo&gt;` Element (Bi-Directional Override)</div>
+    <div class="phase-check" id="chk9"></div>
+  </div>
+  <div class="phase-body">
+    <h3 class="v2-h3">What Is It?</h3>
+<p class="v2-p"><code>&lt;bdo&gt;</code> stands for <strong>Bi-Directional Override</strong>. This element is used to <strong>override</strong> (change) the natural direction that text flows on screen.</p>
+<p class="v2-p">Normally in English (and most Western languages), text flows <strong>left to right</strong> — you start reading from the left side of the page and move right. But some languages, like Arabic and Hebrew, flow <strong>right to left</strong>.</p>
+<p class="v2-p">The <code>&lt;bdo&gt;</code> element lets you force text to display in a specific direction, regardless of the default direction.</p>
+<h3 class="v2-h3">The <code>dir</code> Attribute</h3>
+<p class="v2-p">The <code>&lt;bdo&gt;</code> element uses the <code>dir</code> attribute to specify the text direction:</p>
+<ul class="v2-ul"><li><code>dir="ltr"</code> — <strong>Left to Right</strong> (the normal direction for English)</li><li><code>dir="rtl"</code> — <strong>Right to Left</strong> (reverses the text direction)</li></ul>
+<h3 class="v2-h3">Simple Example — Reversing Text Direction</h3>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;body&gt;
+
+  &lt;bdo dir=&quot;rtl&quot;&gt;This text will be written from right to left&lt;/bdo&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;</code></pre></div></div>
+<p class="v2-p"><strong>Expected Output:</strong></p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span></div><div class="v2-code-body"><pre><code>tfel ot thgir morf nettirw eb lliw txet sihT</code></pre></div></div>
+<p class="v2-p"><em>(The words themselves are not reversed, but the entire text is displayed starting from the right side of the page, so it appears mirrored.)</em></p>
+<h3 class="v2-h3">Breaking Down This Code</h3>
+<ul class="v2-ul"><li><code>&lt;bdo</code> — opens the bi-directional override tag</li><li><code>dir="rtl"</code> — the <code>dir</code> attribute; <code>"rtl"</code> means "right to left"</li><li><code>&gt;</code> — closes the opening tag</li><li><code>This text will be written from right to left</code> — the content that will be reversed</li><li><code>&lt;/bdo&gt;</code> — closes the bdo element</li></ul>
+<h3 class="v2-h3">Second Example — Left to Right (Normal Direction)</h3>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;bdo dir=&quot;ltr&quot;&gt;This is the normal left-to-right direction.&lt;/bdo&gt;</code></pre></div></div>
+<p class="v2-p"><strong>Expected Output:</strong></p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span></div><div class="v2-code-body"><pre><code>This is the normal left-to-right direction.</code></pre></div></div>
+<p class="v2-p"><em>(No change — this just confirms the default direction explicitly.)</em></p>
+<h3 class="v2-h3">Real-World Use Case</h3>
+<p class="v2-p">If you are building a multilingual website that includes Arabic or Hebrew text, you would use <code>&lt;bdo dir="rtl"&gt;</code> or set the <code>dir</code> attribute on the HTML body to make those sections read correctly.</p>
+<hr class="v2-hr">
+    <div class="task-box">
+      <div class="task-label">✏️ Your Task</div>
+      <div class="task-body">Now practise what you just learned about <strong>The <code>&lt;bdo&gt;</code> Element (Bi-Directional Override)</strong>. Open your editor, type the examples above by hand, then modify them — change values, rename variables, and observe what happens. Active experimentation is how code sticks.</div>
+    </div>
+    <button class="unlock-btn" onclick="unlockNext(9)">Phase Complete — Unlock Next ✓</button>
+  </div>
+</div>
+<div class="phase locked" id="phase10">
+  <div class="phase-header">
+    <div class="phase-num">Phase 10 of 13</div>
+    <div class="phase-title">Complete Reference Table</div>
+    <div class="phase-check" id="chk10"></div>
+  </div>
+  <div class="phase-body">
+    <p class="v2-p">Here is a summary of all six elements covered in this lesson:</p>
+<div class="v2-table-wrap"><table class="v2-table"><thead><tr><th>Tag</th><th>Full Name</th><th>What It Does</th><th>Visual Style</th></tr></thead><tbody><tr><td><code>&lt;blockquote&gt;</code></td><td>Block Quotation</td><td>Defines a long section quoted from another source</td><td>Indented block</td></tr><tr><td><code>&lt;q&gt;</code></td><td>Inline Quotation</td><td>Defines a short inline quotation</td><td>Adds <code>"..."</code> around text</td></tr><tr><td><code>&lt;abbr&gt;</code></td><td>Abbreviation</td><td>Marks an abbreviation or acronym</td><td>Tooltip shows full meaning on hover</td></tr><tr><td><code>&lt;address&gt;</code></td><td>Address</td><td>Defines contact information</td><td>Italic + line breaks before/after</td></tr><tr><td><code>&lt;cite&gt;</code></td><td>Citation / Title</td><td>Marks the title of a creative work</td><td>Italic</td></tr><tr><td><code>&lt;bdo&gt;</code></td><td>Bi-Directional Override</td><td>Changes the direction of text</td><td>Reverses text direction</td></tr></tbody></table></div>
+<hr class="v2-hr">
+    <div class="task-box">
+      <div class="task-label">✏️ Your Task</div>
+      <div class="task-body">Now practise what you just learned about <strong>Complete Reference Table</strong>. Open your editor, type the examples above by hand, then modify them — change values, rename variables, and observe what happens. Active experimentation is how code sticks.</div>
+    </div>
+    <button class="unlock-btn" onclick="unlockNext(10)">Phase Complete — Unlock Next ✓</button>
+  </div>
+</div>
+<div class="phase locked" id="phase11">
+  <div class="phase-header">
+    <div class="phase-num">Phase 11 of 13</div>
+    <div class="phase-title">Guided Practice Exercises</div>
+    <div class="phase-check" id="chk11"></div>
+  </div>
+  <div class="phase-body">
+    <h3 class="v2-h3">Exercise 1 — Using <code>&lt;blockquote&gt;</code></h3>
+<p class="v2-p"><strong>Objective:</strong> Practice writing a long blockquote with a source citation.</p>
+<p class="v2-p"><strong>Scenario:</strong> You are building a science education webpage and want to include a famous statement from NASA.</p>
+<p class="v2-p"><strong>Steps:</strong></p>
+<ol class="v2-ol"><li>Open your code editor (or a plain text file saved as <code>.html</code>)</li><li>Create the HTML structure with <code>&lt;!DOCTYPE html&gt;</code>, <code>&lt;html&gt;</code>, and <code>&lt;body&gt;</code> tags</li><li>Write a short introductory sentence using <code>&lt;p&gt;</code></li><li>Add a <code>&lt;blockquote&gt;</code> with the <code>cite</code> attribute pointing to <code>https://www.nasa.gov</code></li><li>Place the following text inside the blockquote: <em>"NASA leads the nation on a great journey of discovery, seeking new knowledge and understanding of Earth, the solar system, and the universe."</em></li></ol>
+<p class="v2-p"><strong>Your code should look like this:</strong></p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;body&gt;
+
+  &lt;p&gt;From NASA&#x27;s official mission statement:&lt;/p&gt;
+
+  &lt;blockquote cite=&quot;https://www.nasa.gov&quot;&gt;
+    NASA leads the nation on a great journey of discovery, seeking new knowledge
+    and understanding of Earth, the solar system, and the universe.
+  &lt;/blockquote&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;</code></pre></div></div>
+<p class="v2-p"><strong>Expected Output:</strong></p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span></div><div class="v2-code-body"><pre><code>From NASA&#x27;s official mission statement:
+
+      NASA leads the nation on a great journey of discovery, seeking new knowledge
+      and understanding of Earth, the solar system, and the universe.</code></pre></div></div>
+<p class="v2-p"><strong>Self-Check Questions:</strong></p>
+<ul class="v2-ul"><li>Is the text visually indented compared to the paragraph above it?</li><li>Did you include the <code>cite</code> attribute with the URL?</li><li>Did you open AND close the <code>&lt;blockquote&gt;</code> tag?</li></ul>
+<hr class="v2-hr">
+<h3 class="v2-h3">Exercise 2 — Using <code>&lt;q&gt;</code> for Short Quotes</h3>
+<p class="v2-p"><strong>Objective:</strong> Practice embedding a short inline quotation inside a paragraph.</p>
+<p class="v2-p"><strong>Scenario:</strong> You are writing a webpage about motivational quotes for students.</p>
+<p class="v2-p"><strong>Your code:</strong></p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;body&gt;
+
+  &lt;p&gt;Nelson Mandela famously said: &lt;q&gt;Education is the most powerful weapon which you can use to change the world.&lt;/q&gt;&lt;/p&gt;
+
+  &lt;p&gt;Albert Einstein believed: &lt;q&gt;A person who never made a mistake never tried anything new.&lt;/q&gt;&lt;/p&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;</code></pre></div></div>
+<p class="v2-p"><strong>Expected Output:</strong></p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span></div><div class="v2-code-body"><pre><code>Nelson Mandela famously said: &quot;Education is the most powerful weapon which you can use to change the world.&quot;
+
+Albert Einstein believed: &quot;A person who never made a mistake never tried anything new.&quot;</code></pre></div></div>
+<p class="v2-p"><strong>Self-Check Questions:</strong></p>
+<ul class="v2-ul"><li>Does each quote appear with quotation marks around it?</li><li>Is the quote part of the same line as the surrounding paragraph text?</li></ul>
+<hr class="v2-hr">
+<h3 class="v2-h3">Exercise 3 — Using <code>&lt;abbr&gt;</code></h3>
+<p class="v2-p"><strong>Objective:</strong> Practice marking abbreviations with their full expanded forms.</p>
+<p class="v2-p"><strong>Scenario:</strong> You are writing a webpage about technology for a general audience.</p>
+<p class="v2-p"><strong>Your code:</strong></p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;body&gt;
+
+  &lt;p&gt;
+    The &lt;abbr title=&quot;HyperText Markup Language&quot;&gt;HTML&lt;/abbr&gt; standard is maintained by the
+    &lt;abbr title=&quot;World Wide Web Consortium&quot;&gt;W3C&lt;/abbr&gt;.
+    It is used alongside &lt;abbr title=&quot;Cascading Style Sheets&quot;&gt;CSS&lt;/abbr&gt; and
+    &lt;abbr title=&quot;JavaScript&quot;&gt;JS&lt;/abbr&gt; to build modern websites.
+  &lt;/p&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;</code></pre></div></div>
+<p class="v2-p"><strong>Expected Output (visible text):</strong></p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span></div><div class="v2-code-body"><pre><code>The HTML standard is maintained by the W3C. It is used alongside CSS and JS to build modern websites.</code></pre></div></div>
+<p class="v2-p"><em>(Hovering over "HTML" shows "HyperText Markup Language", hovering over "W3C" shows "World Wide Web Consortium", etc.)</em></p>
+<p class="v2-p"><strong>Self-Check Questions:</strong></p>
+<ul class="v2-ul"><li>Did each <code>&lt;abbr&gt;</code> tag have a <code>title</code> attribute?</li><li>Is the <code>title</code> attribute value the full expanded form of the abbreviation?</li></ul>
+<hr class="v2-hr">
+<h3 class="v2-h3">Exercise 4 — Using <code>&lt;address&gt;</code></h3>
+<p class="v2-p"><strong>Objective:</strong> Create a contact section for a fictional school website.</p>
+<p class="v2-p"><strong>Your code:</strong></p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;body&gt;
+
+  &lt;h2&gt;Contact Us&lt;/h2&gt;
+
+  &lt;address&gt;
+    Lagos STEM Academy&lt;br&gt;
+    15 Innovation Drive, Victoria Island&lt;br&gt;
+    Lagos, Nigeria&lt;br&gt;
+    Email: info@lagosstem.edu.ng&lt;br&gt;
+    Phone: +234 801 234 5678
+  &lt;/address&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;</code></pre></div></div>
+<p class="v2-p"><strong>Expected Output (in italic):</strong></p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span></div><div class="v2-code-body"><pre><code>Lagos STEM Academy
+15 Innovation Drive, Victoria Island
+Lagos, Nigeria
+Email: info@lagosstem.edu.ng
+Phone: +234 801 234 5678</code></pre></div></div>
+<hr class="v2-hr">
+<h3 class="v2-h3">Exercise 5 — Using <code>&lt;cite&gt;</code></h3>
+<p class="v2-p"><strong>Objective:</strong> Reference the titles of several creative works correctly.</p>
+<p class="v2-p"><strong>Your code:</strong></p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;body&gt;
+
+  &lt;p&gt;My favourite book is &lt;cite&gt;Purple Hibiscus&lt;/cite&gt; by Chimamanda Ngozi Adichie.&lt;/p&gt;
+  &lt;p&gt;The painting &lt;cite&gt;Starry Night&lt;/cite&gt; was created by Vincent van Gogh in 1889.&lt;/p&gt;
+  &lt;p&gt;The movie &lt;cite&gt;Black Panther&lt;/cite&gt; was released in 2018.&lt;/p&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;</code></pre></div></div>
+<p class="v2-p"><strong>Expected Output:</strong></p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span></div><div class="v2-code-body"><pre><code>My favourite book is Purple Hibiscus by Chimamanda Ngozi Adichie.
+The painting Starry Night was created by Vincent van Gogh in 1889.
+The movie Black Panther was released in 2018.</code></pre></div></div>
+<p class="v2-p"><em>(All three titles appear in italic.)</em></p>
+<hr class="v2-hr">
+<h3 class="v2-h3">Exercise 6 — Using <code>&lt;bdo&gt;</code></h3>
+<p class="v2-p"><strong>Objective:</strong> Experiment with text direction overrides.</p>
+<p class="v2-p"><strong>Your code:</strong></p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;body&gt;
+
+  &lt;p&gt;Normal direction: &lt;bdo dir=&quot;ltr&quot;&gt;Hello World&lt;/bdo&gt;&lt;/p&gt;
+  &lt;p&gt;Reversed direction: &lt;bdo dir=&quot;rtl&quot;&gt;Hello World&lt;/bdo&gt;&lt;/p&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;</code></pre></div></div>
+<p class="v2-p"><strong>Expected Output:</strong></p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span></div><div class="v2-code-body"><pre><code>Normal direction: Hello World
+Reversed direction: dlroW olleH</code></pre></div></div>
+<hr class="v2-hr">
+    <div class="task-box">
+      <div class="task-label">✏️ Your Task</div>
+      <div class="task-body">Objective: Experiment with text direction overrides.
+
+Your code:
+
+`html
+<!DOCTYPE html>
+<html>
+<body>
+
+  <p>Normal direction: <bdo dir="ltr">Hello World</bdo></p>
+  <p>Reversed direction: <bdo dir="rtl">Hello World</bdo></p>
+
+</body>
+</html>
+`
+
+Expected Output:
+
+`
+Normal direction: Hello World
+Reversed direction: dlroW olleH
+`
+
+---</div>
+    </div>
+    <button class="unlock-btn" onclick="unlockNext(11)">Phase Complete — Unlock Next ✓</button>
+  </div>
+</div>
+<div class="phase locked" id="phase12">
+  <div class="phase-header">
+    <div class="phase-num">Phase 12 of 13</div>
+    <div class="phase-title">Code Challenge — Quotations</div>
+    <div class="phase-check" id="chk12"></div>
+  </div>
+  <div class="phase-body">
+    <p class="v2-p">Based on the W3Schools code challenge for quotations, here are the types of tasks you should be able to complete confidently after this lesson:</p>
+<p class="v2-p"><strong>Challenge 1:</strong> Given a paragraph with a long quote from an external source, wrap the quoted text in the correct tag that visually indents it.</p>
+<p class="v2-p"><em>Answer: Use <code>&lt;blockquote&gt;</code></em></p>
+<p class="v2-p"><strong>Challenge 2:</strong> Given a paragraph containing the phrase <code>"Build a future where people live in harmony with nature"</code> as a short inline quote, use the correct tag so the browser automatically adds quotation marks.</p>
+<p class="v2-p"><em>Answer: Use <code>&lt;q&gt;</code></em></p>
+<p class="v2-p"><strong>Challenge 3:</strong> On a page showing "The WHO was founded in 1948", mark the abbreviation "WHO" so that hovering over it shows "World Health Organization".</p>
+<p class="v2-p"><em>Answer: Use <code>&lt;abbr title="World Health Organization"&gt;WHO&lt;/abbr&gt;</code></em></p>
+<p class="v2-p"><strong>Challenge 4:</strong> Add contact information to a webpage so it renders in italic with line breaks.</p>
+<p class="v2-p"><em>Answer: Use <code>&lt;address&gt;</code> with <code>&lt;br&gt;</code> tags between lines</em></p>
+<p class="v2-p"><strong>Challenge 5:</strong> Mark the title of a book in a sentence so it appears in italic.</p>
+<p class="v2-p"><em>Answer: Wrap the title in <code>&lt;cite&gt;</code></em></p>
+<p class="v2-p"><strong>Challenge 6:</strong> Force a line of text to display from right to left.</p>
+<p class="v2-p"><em>Answer: Use <code>&lt;bdo dir="rtl"&gt;text here&lt;/bdo&gt;</code></em></p>
+<hr class="v2-hr">
+    <div class="task-box">
+      <div class="task-label">✏️ Your Task</div>
+      <div class="task-body">Now practise what you just learned about <strong>Code Challenge — Quotations</strong>. Open your editor, type the examples above by hand, then modify them — change values, rename variables, and observe what happens. Active experimentation is how code sticks.</div>
+    </div>
+    <button class="unlock-btn" onclick="unlockNext(12)">Phase Complete — Unlock Next ✓</button>
+  </div>
+</div>
+<div class="phase locked" id="phase13">
+  <div class="phase-header">
+    <div class="phase-num">Phase 13 of 13</div>
+    <div class="phase-title">Common Beginner Mistakes</div>
+    <div class="phase-check" id="chk13"></div>
+  </div>
+  <div class="phase-body">
+    <h3 class="v2-h3">Mistake 1 — Adding quotation marks manually inside <code>&lt;q&gt;</code></h3>
+<p class="v2-p">❌ <strong>Wrong:</strong></p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;p&gt;She said: &lt;q&gt;&quot;Come and see the stars.&quot;&lt;/q&gt;&lt;/p&gt;</code></pre></div></div>
+<p class="v2-p"><strong>Output:</strong></p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span></div><div class="v2-code-body"><pre><code>She said: &quot;&quot;Come and see the stars.&quot;&quot;</code></pre></div></div>
+<p class="v2-p"><em>(Double quotation marks appear because the browser adds them AND you typed them.)</em></p>
+<p class="v2-p">✅ <strong>Correct:</strong></p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;p&gt;She said: &lt;q&gt;Come and see the stars.&lt;/q&gt;&lt;/p&gt;</code></pre></div></div>
+<p class="v2-p"><strong>Output:</strong></p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span></div><div class="v2-code-body"><pre><code>She said: &quot;Come and see the stars.&quot;</code></pre></div></div>
+<hr class="v2-hr">
+<h3 class="v2-h3">Mistake 2 — Using <code>&lt;cite&gt;</code> for a Person's Name</h3>
+<p class="v2-p">❌ <strong>Wrong:</strong></p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;p&gt;The painting was created by &lt;cite&gt;Leonardo da Vinci&lt;/cite&gt;.&lt;/p&gt;</code></pre></div></div>
+<p class="v2-p"><em>(Leonardo da Vinci is a person's name, not a work title.)</em></p>
+<p class="v2-p">✅ <strong>Correct:</strong></p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;p&gt;The painting &lt;cite&gt;Mona Lisa&lt;/cite&gt; was created by Leonardo da Vinci.&lt;/p&gt;</code></pre></div></div>
+<hr class="v2-hr">
+<h3 class="v2-h3">Mistake 3 — Forgetting to Close Tags</h3>
+<p class="v2-p">❌ <strong>Wrong:</strong></p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;blockquote cite=&quot;https://example.com&quot;&gt;
+  This is a long quote from a source.</code></pre></div></div>
+<p class="v2-p"><em>(The <code>&lt;/blockquote&gt;</code> closing tag is missing — this causes browser rendering problems.)</em></p>
+<p class="v2-p">✅ <strong>Correct:</strong></p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;blockquote cite=&quot;https://example.com&quot;&gt;
+  This is a long quote from a source.
+&lt;/blockquote&gt;</code></pre></div></div>
+<hr class="v2-hr">
+<h3 class="v2-h3">Mistake 4 — Forgetting the <code>title</code> Attribute on <code>&lt;abbr&gt;</code></h3>
+<p class="v2-p">❌ <strong>Wrong:</strong></p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;p&gt;The &lt;abbr&gt;WHO&lt;/abbr&gt; was founded in 1948.&lt;/p&gt;</code></pre></div></div>
+<p class="v2-p"><em>(Without <code>title</code>, the <code>&lt;abbr&gt;</code> tag does nothing visible or useful.)</em></p>
+<p class="v2-p">✅ <strong>Correct:</strong></p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;p&gt;The &lt;abbr title=&quot;World Health Organization&quot;&gt;WHO&lt;/abbr&gt; was founded in 1948.&lt;/p&gt;</code></pre></div></div>
+<hr class="v2-hr">
+<h3 class="v2-h3">Mistake 5 — Using <code>&lt;address&gt;</code> for Any Address (Not the Author's)</h3>
+<p class="v2-p">❌ <strong>Wrong:</strong></p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;p&gt;The conference took place at:
+&lt;address&gt;
+  15 Central Park, New York, NY
+&lt;/address&gt;
+&lt;/p&gt;</code></pre></div></div>
+<p class="v2-p"><em>(This is the address of an event, not the author of the page.)</em></p>
+<p class="v2-p">✅ <strong>Correct usage of <code>&lt;address&gt;</code>:</strong></p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;address&gt;
+  Written by John Smith.&lt;br&gt;
+  Contact: john@example.com
+&lt;/address&gt;</code></pre></div></div>
+<p class="v2-p">For a random address in content, just use a <code>&lt;p&gt;</code> tag instead.</p>
+<hr class="v2-hr">
+<h3 class="v2-h3">Mistake 6 — Confusing the <code>cite</code> Attribute with the <code>&lt;cite&gt;</code> Element</h3>
+<p class="v2-p">❌ <strong>Confused thinking:</strong> "They are both 'cite' so they must do the same thing."</p>
+<p class="v2-p">✅ <strong>Clear distinction:</strong></p>
+<ul class="v2-ul"><li><code>&lt;cite&gt;</code> is an <strong>element</strong> — it wraps the <em>title</em> of a creative work and displays it in italic on the screen</li><li><code>cite="..."</code> is an <strong>attribute</strong> used inside <code>&lt;blockquote&gt;</code> or <code>&lt;q&gt;</code> — it holds a URL pointing to the source; it is invisible to users</li></ul>
+<hr class="v2-hr">
+    <div class="task-box">
+      <div class="task-label">✏️ Your Task</div>
+      <div class="task-body">Now practise what you just learned about <strong>Common Beginner Mistakes</strong>. Open your editor, type the examples above by hand, then modify them — change values, rename variables, and observe what happens. Active experimentation is how code sticks.</div>
+    </div>
+    <button class="unlock-btn" onclick="unlockNext(13)">Phase Complete — Unlock Next ✓</button>
+  </div>
+</div>
+<div class="build-box" id="build-it">
+  <div class="build-label">🏗️ Build It</div>
+  <div class="build-name">Project Description</div>
+  <div class="build-desc">You will build a simple webpage for a fictional author named <strong>Amara Osei</strong>. The page will include a quote from her latest book, abbreviations, her contact details, and a reference to her published work.</div>
+  <div class="v2-code-wrap">
+    <div class="v2-code-bar">
+      <span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span>
+      <span class="v2-code-lang">starter.html</span>
+    </div>
+    <div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;title&gt;Amara Osei - Author&#x27;s Blog&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+  &lt;h1&gt;Amara Osei — Author &amp; Educator&lt;/h1&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;</code></pre></div>
+  </div>
+  <div style="display:flex;gap:.8rem;flex-wrap:wrap;margin-top:1.2rem">
+    <button class="unlock-btn" onclick="downloadStarter(`<!DOCTYPE html>
+<html>
+<head>
+  <title>Amara Osei - Author's Blog</title>
+</head>
+<body>
+
+  <h1>Amara Osei — Author & Educator</h1>
+
+</body>
+</html>`)"
+      style="background:#10b981;box-shadow:0 4px 14px rgba(16,185,129,.3)">
+      ⬇ Download starter.html
     </button>
-    <p class="next-tip">Try the task first, then click to continue!</p>
+    <button class="unlock-btn" onclick="showGithub()"
+      style="background:#0f172a;box-shadow:none">
+      🐙 Push to GitHub →
+    </button>
   </div>
 </div>
-
-<div class="project-box" id="build-it" style="display:none">
-  <div class="project-label">🏗️ Build It!</div>
-  <div class="project-name">My Quotations Page</div>
-  <p class="project-desc">Build an 'Inspirational Quotes' page using blockquote, q, cite, abbr and address tags.</p>
-  <div class="code-wrap">
-    <div class="code-bar">
-      <span class="code-dot r"></span><span class="code-dot y"></span><span class="code-dot g"></span>
-      <span class="code-filename">starter.html — copy this into a new file!</span>
-    </div>
-    <div class="code-body"><pre id="starter-code">&lt;!DOCTYPE html&gt;
-&lt;html lang="en"&gt;
-  &lt;head&gt;
-    &lt;title&gt;Quotes That Inspire Me&lt;/title&gt;
-  &lt;/head&gt;
-  &lt;body style="font-family: Arial, sans-serif; max-width: 650px;
-               margin: 0 auto; padding: 30px; background: #f8fafc;"&gt;
-
-    &lt;h1&gt;Quotes That Inspire Me&lt;/h1&gt;
-    &lt;p&gt;A collection of quotes I find meaningful, marked up with
-       proper &lt;abbr title="HyperText Markup Language"&gt;HTML&lt;/abbr&gt;.&lt;/p&gt;
-
-    &lt;hr&gt;
-
-    &lt;h2&gt;Quote 1&lt;/h2&gt;
-    &lt;blockquote cite="[Add source URL here]"
-                style="border-left: 4px solid #ea4f21;
-                       padding-left: 16px; color: #334155;"&gt;
-      &lt;p&gt;[Paste your first favourite quote here]&lt;/p&gt;
-    &lt;/blockquote&gt;
-    &lt;p&gt;— &lt;cite&gt;[Author Name], [Source or Book Title]&lt;/cite&gt;&lt;/p&gt;
-
-    &lt;h2&gt;Quote 2&lt;/h2&gt;
-    &lt;blockquote cite="[Add source URL here]"
-                style="border-left: 4px solid #0284c7;
-                       padding-left: 16px; color: #334155;"&gt;
-      &lt;p&gt;[Paste your second favourite quote here]&lt;/p&gt;
-    &lt;/blockquote&gt;
-    &lt;p&gt;— &lt;cite&gt;[Author Name]&lt;/cite&gt;&lt;/p&gt;
-
-    &lt;h2&gt;In My Own Words&lt;/h2&gt;
-    &lt;p&gt;As [someone you admire] once said,
-       &lt;q&gt;[A short quote that fits inside a sentence]&lt;/q&gt;.
-       This inspires me because [explain why].&lt;/p&gt;
-
-    &lt;hr&gt;
-    &lt;address&gt;
-      Compiled by: [Your Name]&lt;br&gt;
-      Techbase Academy, Ibadan&lt;br&gt;
-      Lesson 09 — HTML Quotations
-    &lt;/address&gt;
-
-  &lt;/body&gt;
-&lt;/html&gt;</pre></div>
+<div class="gh-acc" id="gh-steps" style="display:none">
+  <div class="gh-acc-head" onclick="toggleGh(this)">
+    🐙 Push Your Project to GitHub Pages &nbsp;<span>▼</span>
   </div>
-  <button class="next-btn" onclick="downloadStarter()" style="margin-right:.75rem">
-    ⬇️ Download starter.html
-  </button>
-  <button class="next-btn" onclick="showGithub()" style="background:#10b981;box-shadow:0 4px 12px rgba(16,185,129,.3)">
-    Show GitHub Steps →
-  </button>
-  <script>
-  const __code = `<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <title>Quotes That Inspire Me</title>
-  </head>
-  <body style="font-family: Arial, sans-serif; max-width: 650px;
-               margin: 0 auto; padding: 30px; background: #f8fafc;">
-
-    <h1>Quotes That Inspire Me</h1>
-    <p>A collection of quotes I find meaningful, marked up with
-       proper <abbr title="HyperText Markup Language">HTML</abbr>.</p>
-
-    <hr>
-
-    <h2>Quote 1</h2>
-    <blockquote cite="[Add source URL here]"
-                style="border-left: 4px solid #ea4f21;
-                       padding-left: 16px; color: #334155;">
-      <p>[Paste your first favourite quote here]</p>
-    </blockquote>
-    <p>— <cite>[Author Name], [Source or Book Title]</cite></p>
-
-    <h2>Quote 2</h2>
-    <blockquote cite="[Add source URL here]"
-                style="border-left: 4px solid #0284c7;
-                       padding-left: 16px; color: #334155;">
-      <p>[Paste your second favourite quote here]</p>
-    </blockquote>
-    <p>— <cite>[Author Name]</cite></p>
-
-    <h2>In My Own Words</h2>
-    <p>As [someone you admire] once said,
-       <q>[A short quote that fits inside a sentence]</q>.
-       This inspires me because [explain why].</p>
-
-    <hr>
-    <address>
-      Compiled by: [Your Name]<br>
-      Techbase Academy, Ibadan<br>
-      Lesson 09 — HTML Quotations
-    </address>
-
-  </body>
-</html>`;
-  function downloadStarter(){
-    const a=document.createElement('a');
-    a.href='data:text/html;charset=utf-8,'+encodeURIComponent(__code);
-    a.download='starter.html'; a.click();
-  }
-  </script>
-</div>
-
-
-
-<div class="github-acc" id="github-steps" style="display:none">
-  <div class="github-acc-head" onclick="this.nextElementSibling.classList.toggle('open')">
-    🐙 GitHub Setup — Push your project online &nbsp;<span>▼</span>
-  </div>
-  <div class="github-acc-body">
-    <div class="github-step"><div class="github-step-n">1</div><p>Go to <strong>github.com</strong> and sign in. Click the green <strong>New</strong> button to create a new repository. Name it <code>html-lesson-09-html_quotations</code>.</p></div>
-    <div class="github-step"><div class="github-step-n">2</div><p>Leave it <strong>Public</strong> and tick <strong>Add a README file</strong>. Click <strong>Create repository</strong>.</p></div>
-    <div class="github-step"><div class="github-step-n">3</div><p>Click <strong>Add file → Upload files</strong>. Drag your <code>starter.html</code> (and rename it <code>index.html</code> first!) into the upload box.</p></div>
-    <div class="github-step"><div class="github-step-n">4</div><p>Scroll down, add a commit message like <em>"Add lesson 09 project"</em> and click <strong>Commit changes</strong>.</p></div>
-    <div class="github-step"><div class="github-step-n">5</div><p>Go to <strong>Settings → Pages</strong>. Under <em>Branch</em>, select <strong>main</strong> and click <strong>Save</strong>. Your page will be live at <code>https://YOUR-USERNAME.github.io/html-lesson-09-html_quotations/</code> in about 1 minute! 🎉</p></div>
-    <button class="next-btn" onclick="showEnd()" style="margin-top:.5rem">I'm done! Finish session ✅</button>
+  <div class="gh-acc-body">
+    <div class="gh-step"><div class="gh-step-n">1</div>
+    <p>Go to <strong>github.com</strong> → click <strong>New repository</strong> → name it <code>html-lesson-09-project-description</code>.</p></div>
+    <div class="gh-step"><div class="gh-step-n">2</div>
+    <p>Set it to <strong>Public</strong>, tick <strong>Add a README</strong>, then click <strong>Create repository</strong>.</p></div>
+    <div class="gh-step"><div class="gh-step-n">3</div>
+    <p>Click <strong>Add file → Upload files</strong>. Upload your <code>starter.html</code> — rename it to <code>index.html</code> before uploading.</p></div>
+    <div class="gh-step"><div class="gh-step-n">4</div>
+    <p>Commit message: <em>"Add HTML lesson 09 project"</em> → click <strong>Commit changes</strong>.</p></div>
+    <div class="gh-step"><div class="gh-step-n">5</div>
+    <p>Go to <strong>Settings → Pages</strong> → branch <strong>main</strong> → <strong>Save</strong>. Your project goes live at <code>https://YOUR-NAME.github.io/html-lesson-09-project-description/</code> in about 1 minute! 🎉</p></div>
+    <button class="unlock-btn" onclick="showEnd()" style="margin-top:.5rem">I've pushed to GitHub — Finish Session ✅</button>
   </div>
 </div>
-
 <div class="session-end" id="session-end">
-  <h2>🎉 Great work! Lesson 09 complete!</h2>
-  <p style="margin-bottom:.8rem;font-size:.9rem;opacity:.9">Today you learned:</p>
-  <ul><li>✅ Blockquote and Inline Quotes</li><li>✅ Cite, Abbr, and Address</li></ul>
-  <div class="lesson-nav" style="margin-top:1.5rem;border-color:rgba(255,255,255,.2)">
-    <a href="lesson_08.html" class="ln-btn">← Lesson 08</a>
-    <a href="lesson_10.html" class="ln-btn primary">Lesson 10 →</a>
-  </div>
+  <h2>🎉 Lesson 09 complete!</h2>
+  <p style="margin-bottom:.8rem;font-size:.9rem;opacity:.9">You covered:</p>
+  <ul><li>✅ Lesson Introduction</li><li>✅ Prerequisite Concepts</li><li>✅ Conceptual Understanding</li><li>✅ Part 1 — The `<blockquote>` Element (Long Quotations)</li><li>✅ Part 2 — The `<q>` Element (Short Inline Quotations)</li><li>✅ Part 3 — The `<abbr>` Element (Abbreviations and Acronyms)</li><li>✅ Part 4 — The `<address>` Element (Contact Information)</li><li>✅ Part 5 — The `<cite>` Element (Title of a Creative Work)</li></ul>
+  <div class="lesson-nav"><a href="lesson_08.html" class="ln-btn">← Lesson 08</a><a href="lesson_10.html" class="ln-btn primary">Lesson 10 →</a></div>
 </div>
-
 </main>
 
-<!-- FOOTER -->
 <footer class="lesson-footer">
-  <p>Techbase Code Coach &nbsp;·&nbsp; HTML Course Lesson 09
-     &nbsp;·&nbsp; © 2025 Techbase Consultant Services, Ibadan</p>
+  Techbase Code Coach · HTML Course · Lesson 09 · © 2025 Techbase Consultant Services, Ibadan
 </footer>
-
 <script>
-const TOTAL=2, KEY='techbase_html_09_phase';
+const TOTAL=13,KEY='techbase_html_l09';
 let current=parseInt(localStorage.getItem(KEY)||'1');
-
 function init(){
-  for(let i=1;i<=current;i++) if(i>1) unlockPhase(i,false);
+  for(let i=2;i<=current;i++) unlockPhase(i,false);
   updateBar();
 }
-
 function unlockNext(n){
-  document.getElementById('check'+n).classList.add('done');
-  document.getElementById('check'+n).textContent='✓';
-  localStorage.setItem(KEY,n+1);
-  current=n+1;
+  const chk=document.getElementById('chk'+n);
+  if(chk){chk.classList.add('done');chk.textContent='✓';}
+  localStorage.setItem(KEY,n+1); current=n+1;
   if(n===TOTAL){
     document.getElementById('build-it').style.display='block';
-    const cap=document.getElementById('capstone');
-    if(cap) cap.style.display='block';
     updateBar(100);
     setTimeout(()=>document.getElementById('build-it').scrollIntoView({behavior:'smooth'}),200);
-  } else {
-    unlockPhase(n+1,true);
-    updateBar();
+  }else{
+    unlockPhase(n+1,true); updateBar();
   }
 }
-
 function unlockPhase(n,scroll){
   const el=document.getElementById('phase'+n);
-  if(el){ el.classList.remove('locked'); if(scroll) setTimeout(()=>el.scrollIntoView({behavior:'smooth',block:'start'}),150); }
+  if(el){el.classList.remove('locked');if(scroll)setTimeout(()=>el.scrollIntoView({behavior:'smooth',block:'start'}),150);}
 }
-
 function updateBar(pct){
-  const p=pct||Math.round((current-1)/TOTAL*95);
+  const p=pct!==undefined?pct:Math.round((current-1)/TOTAL*95);
   document.getElementById('pbar').style.width=p+'%';
 }
-
 function showGithub(){
-  const g=document.getElementById('github-steps');
-  if(g){ g.style.display='block'; setTimeout(()=>g.scrollIntoView({behavior:'smooth'}),150); }
+  const g=document.getElementById('gh-steps');
+  if(g){g.style.display='block';setTimeout(()=>g.scrollIntoView({behavior:'smooth'}),150);}
 }
-
 function showEnd(){
   const e=document.getElementById('session-end');
-  if(e){ e.classList.add('visible'); setTimeout(()=>e.scrollIntoView({behavior:'smooth'}),150); }
+  if(e){e.classList.add('visible');setTimeout(()=>e.scrollIntoView({behavior:'smooth'}),150);}
 }
-
+function toggleGh(el){el.nextElementSibling.classList.toggle('open');}
+function downloadStarter(code){
+  const a=document.createElement('a');
+  a.href='data:text/html;charset=utf-8,'+encodeURIComponent(code);
+  a.download='starter.html';a.click();
+}
 init();
 </script>
-
 </body>
 </html>

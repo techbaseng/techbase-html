@@ -2,576 +2,885 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Lesson 20: HTML Id — Techbase HTML Course</title>
-<meta name="description" content="Give elements unique identities with the id attribute for styling and navigation">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Lesson 20: HTML Buttons — Creating, Typing, Styling, Disabling, and Using Buttons — Techbase HTML</title>
+<meta name="description" content="HTML Buttons — Creating, Typing, Styling, Disabling, and Using Buttons">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-:root { 
-  --accent:#ea4f21;--accent-pale:#fff3ef;--accent-dark:#c23d15;
-  --accent-border:rgba(234,79,33,.3);--accent-shadow:rgba(234,79,33,.28);
-  --hero-bg:linear-gradient(160deg,#fff3ef 0%,#f8fafc 55%,#fef2e9 100%);
-  --s2:#f1f5f9;
- }
 :root{
+  --acc:#e34c26;--acc-d:#c0391a;--acc-pale:#fff5f2;
+  --acc-b:rgba(227,76,38,.25);--acc-sh:rgba(227,76,38,.25);
   --bg:#f8fafc;--surface:#fff;--border:#e2e8f0;--border2:#cbd5e1;
   --text:#0f172a;--t2:#334155;--muted:#64748b;
   --D:'Space Grotesk',sans-serif;--B:'Plus Jakarta Sans',sans-serif;--M:'JetBrains Mono',monospace;
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased}
-body{background:var(--bg);color:var(--text);font-family:var(--B);font-size:16px;line-height:1.7;overflow-x:hidden}
+body{background:var(--bg);color:var(--text);font-family:var(--B);font-size:16px;line-height:1.75;overflow-x:hidden}
+
 /* NAV */
-.l-nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(255,255,255,.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);height:58px;display:flex;align-items:center;padding:0 1.5rem;gap:1rem;justify-content:space-between}
-.l-nav-logo{font-family:var(--D);font-weight:700;font-size:.88rem;color:var(--text);text-decoration:none}
-.l-nav-logo em{font-style:normal}
+.l-nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(255,255,255,.95);
+  backdrop-filter:blur(12px);border-bottom:1px solid var(--border);height:58px;
+  display:flex;align-items:center;padding:0 1.5rem;gap:1rem;justify-content:space-between}
+.l-nav-logo{font-family:var(--D);font-weight:700;font-size:.9rem;color:var(--text);text-decoration:none}
 .l-nav-back{font-size:.8rem;color:var(--muted);text-decoration:none;font-weight:500;display:flex;align-items:center;gap:.3rem;transition:color .2s}
-.l-nav-back:hover{color:var(--accent)}
-.l-nav-lesson{font-family:var(--M);font-size:.68rem;color:var(--muted)}
-/* PROGRESS BAR */
+.l-nav-back:hover{color:var(--acc)}
+.l-nav-label{font-family:var(--M);font-size:.68rem;color:var(--muted)}
+
+/* PROGRESS */
 .progress-wrap{position:fixed;top:58px;left:0;right:0;z-index:199;height:4px;background:var(--border)}
-.progress-bar{height:100%;background:var(--accent);transition:width .4s ease;width:0%}
+.progress-bar{height:100%;background:var(--acc);transition:width .4s ease;width:0%}
+
 /* HERO */
-.l-hero{padding:88px 1.5rem 2rem;background:var(--hero-bg);border-bottom:1px solid var(--border)}
-.l-hero-inner{max-width:820px;margin:0 auto}
-.l-badge{display:inline-flex;align-items:center;gap:.4rem;border-radius:100px;padding:.2rem .8rem;font-family:var(--M);font-size:.62rem;letter-spacing:.08em;text-transform:uppercase;font-weight:600;border:1px solid;color:var(--accent);background:var(--accent-pale);border-color:var(--accent-border);margin-bottom:.8rem}
-.l-hero h1{font-family:var(--D);font-weight:700;font-size:clamp(1.6rem,4vw,2.4rem);letter-spacing:-.025em;line-height:1.15;margin-bottom:.5rem}
-.l-hero-tag{font-size:.95rem;color:var(--muted);margin-bottom:1.2rem}
-.l-hero-build{background:var(--surface);border:1.5px solid var(--border);border-radius:10px;padding:.9rem 1.2rem;display:flex;align-items:center;gap:.7rem;font-size:.88rem;max-width:520px}
-.l-hero-build strong{color:var(--accent)}
+.l-hero{padding:80px 1.5rem 2rem;background:linear-gradient(160deg,#fff5f2 0%,#f8fafc 55%,#ffe8e0 100%);border-bottom:1px solid var(--border)}
+.l-hero-inner{max-width:860px;margin:0 auto}
+.l-badge{display:inline-flex;align-items:center;gap:.4rem;border-radius:100px;padding:.2rem .85rem;
+  font-family:var(--M);font-size:.62rem;letter-spacing:.08em;text-transform:uppercase;font-weight:600;
+  color:var(--acc);background:var(--acc-pale);border:1px solid var(--acc-b);margin-bottom:.8rem}
+.l-hero h1{font-family:var(--D);font-weight:700;font-size:clamp(1.5rem,4vw,2.3rem);
+  letter-spacing:-.02em;line-height:1.15;margin-bottom:.5rem}
+.l-hero-sub{font-size:.95rem;color:var(--muted);margin-bottom:1rem}
+
 /* WELCOME BOX */
-.welcome-box{background:linear-gradient(135deg,var(--accent),var(--accent-dark));color:#fff;border-radius:16px;padding:1.5rem 1.8rem;max-width:820px;margin:2rem auto 0}
-.welcome-box h2{font-family:var(--D);font-weight:700;font-size:1.1rem;margin-bottom:.6rem}
-.welcome-box p{font-size:.9rem;line-height:1.75;opacity:.92}
-.welcome-meta{display:flex;gap:1.5rem;margin-top:1rem;flex-wrap:wrap}
-.welcome-meta span{background:rgba(255,255,255,.15);border-radius:6px;padding:.25rem .8rem;font-family:var(--M);font-size:.7rem;font-weight:500}
-/* MAIN CONTENT */
-main{max-width:820px;margin:0 auto;padding:2rem 1.5rem 5rem}
+.welcome-box{background:linear-gradient(135deg,var(--acc),var(--acc-d));color:#fff;
+  border-radius:16px;padding:1.5rem 1.8rem;max-width:860px;margin:1.5rem auto 0}
+.welcome-box h2{font-family:var(--D);font-weight:700;font-size:1.05rem;margin-bottom:.6rem}
+.welcome-box p,.welcome-box li{font-size:.9rem;line-height:1.8;opacity:.93}
+.welcome-box ul{margin-left:1.2rem;margin-top:.5rem}
+.welcome-meta{display:flex;gap:1rem;margin-top:1rem;flex-wrap:wrap}
+.welcome-meta span{background:rgba(255,255,255,.18);border-radius:6px;padding:.2rem .75rem;
+  font-family:var(--M);font-size:.68rem;font-weight:500}
+
 /* PHASE */
-.phase{background:var(--surface);border:1.5px solid var(--border);border-radius:16px;margin-bottom:1.5rem;overflow:hidden;transition:opacity .3s,transform .3s}
-.phase.locked{opacity:.4;pointer-events:none;filter:blur(1px)}
-.phase-header{padding:1rem 1.4rem;background:var(--s2,#f1f5f9);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;gap:1rem}
-.phase-num{font-family:var(--M);font-size:.7rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}
-.phase-title{font-family:var(--D);font-weight:700;font-size:1rem;color:var(--text)}
-.phase-check{width:24px;height:24px;border-radius:50%;background:var(--border);display:flex;align-items:center;justify-content:center;font-size:.75rem;flex-shrink:0;transition:background .3s}
+.phase{background:var(--surface);border:1.5px solid var(--border);border-radius:16px;
+  margin-bottom:1.5rem;overflow:hidden;transition:opacity .3s,transform .3s,filter .3s}
+.phase.locked{opacity:.35;pointer-events:none;filter:blur(1.5px)}
+.phase-header{padding:1rem 1.4rem;background:#fff8f5;
+  border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;gap:1rem;cursor:default}
+.phase-num{font-family:var(--M);font-size:.7rem;font-weight:600;letter-spacing:.08em;
+  text-transform:uppercase;color:var(--acc)}
+.phase-title{font-family:var(--D);font-weight:700;font-size:.95rem;color:var(--text);
+  flex:1;margin:0 .8rem}
+.phase-check{width:26px;height:26px;border-radius:50%;background:var(--border);
+  display:flex;align-items:center;justify-content:center;font-size:.8rem;flex-shrink:0;
+  transition:background .3s,color .3s}
 .phase-check.done{background:#10b981;color:#fff}
-.phase-body{padding:1.4rem}
-/* CONCEPT BOX */
-.concept-box{background:#f0f9ff;border-left:4px solid #0284c7;border-radius:0 10px 10px 0;padding:1rem 1.2rem;margin-bottom:1.2rem}
-.concept-label{font-family:var(--M);font-size:.65rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#0284c7;margin-bottom:.4rem}
-.concept-box p{font-size:.92rem;color:#0c4a6e;line-height:1.75}
-/* CODE BLOCK */
-.code-wrap{margin:1.2rem 0;border-radius:12px;overflow:hidden;border:1px solid #1e293b}
-.code-bar{background:#1e293b;padding:.6rem 1rem;display:flex;align-items:center;gap:.4rem}
-.code-dot{width:8px;height:8px;border-radius:50%}
-.code-dot.r{background:#ff5f57}.code-dot.y{background:#febc2e}.code-dot.g{background:#28c840}
-.code-filename{margin-left:.5rem;font-family:var(--M);font-size:.65rem;color:#64748b}
-.code-body{background:#0f172a;padding:1.2rem 1.4rem;overflow-x:auto}
-.code-body pre{font-family:var(--M);font-size:.78rem;line-height:1.9;color:#e2e8f0;margin:0;white-space:pre}
-.code-body pre .cm{color:#64748b} /* comment */
-.code-body pre .tg{color:#38bdf8} /* tag */
-.code-body pre .at{color:#c084fc} /* attribute */
-.code-body pre .vl{color:#86efac} /* value */
-.code-body pre .tx{color:#e2e8f0} /* text */
+.phase-body{padding:1.6rem 1.8rem}
+
+/* RICH CONTENT STYLES */
+.v2-p{margin-bottom:1rem;font-size:.95rem;color:var(--t2);line-height:1.85}
+.v2-h3{font-family:var(--D);font-weight:700;font-size:1.05rem;color:var(--text);
+  margin:1.6rem 0 .5rem;padding-top:.2rem;border-top:2px solid var(--acc-pale)}
+.v2-h4{font-family:var(--D);font-weight:600;font-size:.95rem;color:var(--t2);margin:1.1rem 0 .4rem}
+.v2-h5,.v2-h6{font-family:var(--D);font-weight:600;font-size:.9rem;color:var(--muted);margin:.8rem 0 .3rem}
+.v2-ul,.v2-ol{margin:.6rem 0 1rem 1.4rem;font-size:.93rem;color:var(--t2);line-height:1.9}
+.v2-ul li,.v2-ol li{margin-bottom:.3rem}
+.v2-bq{border-left:4px solid var(--acc);background:var(--acc-pale);border-radius:0 10px 10px 0;
+  padding:.9rem 1.2rem;margin:1rem 0;font-size:.92rem;color:#7b1c06;font-style:italic}
+.v2-bq p{margin:0;color:inherit}
+.v2-bq strong{font-style:normal}
+.v2-hr{border:none;border-top:1px solid var(--border);margin:1.2rem 0}
+.v2-table-wrap{overflow-x:auto;margin:1rem 0}
+.v2-table{width:100%;border-collapse:collapse;font-size:.87rem}
+.v2-table th{background:var(--acc-pale);color:#7b1c06;font-family:var(--D);
+  font-weight:700;padding:9px 12px;text-align:left;border:1px solid var(--acc-b)}
+.v2-table td{padding:8px 12px;border:1px solid var(--border);color:var(--t2);vertical-align:top}
+.v2-table tr:nth-child(even) td{background:#f8fafc}
+.v2-table code{background:var(--acc-pale);color:var(--acc);border-radius:4px;
+  padding:1px 5px;font-family:var(--M);font-size:.8em}
+.phase-body code{background:var(--acc-pale);color:var(--acc-d);border-radius:4px;
+  padding:1px 6px;font-family:var(--M);font-size:.82em}
+.phase-body a{color:var(--acc);text-decoration:underline;text-underline-offset:2px}
+.phase-body strong{color:var(--text)}
+
+/* CODE BLOCKS */
+.v2-code-wrap{margin:1.2rem 0;border-radius:12px;overflow:hidden;border:1px solid #1e293b;box-shadow:0 4px 16px rgba(0,0,0,.15)}
+.v2-code-bar{background:#1e293b;padding:.55rem 1rem;display:flex;align-items:center;gap:.4rem}
+.v2-dot{width:10px;height:10px;border-radius:50%}
+.v2-dot.r{background:#ff5f57}.v2-dot.y{background:#febc2e}.v2-dot.g{background:#28c840}
+.v2-code-lang{margin-left:.6rem;font-family:var(--M);font-size:.65rem;color:#64748b;text-transform:uppercase;letter-spacing:.08em}
+.v2-code-body{background:#0f172a;padding:1.3rem 1.5rem;overflow-x:auto}
+.v2-code-body pre{margin:0}
+.v2-code-body code{font-family:var(--M);font-size:.8rem;line-height:1.9;color:#e2e8f0;
+  white-space:pre;background:transparent;padding:0;border-radius:0}
+
 /* TASK BOX */
-.task-box{background:#fffbeb;border:1.5px dashed #d97706;border-radius:12px;padding:1rem 1.2rem;margin:1.2rem 0}
-.task-label{font-family:var(--M);font-size:.65rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#b45309;margin-bottom:.4rem}
-.task-box p{font-size:.92rem;color:#78350f;line-height:1.75}
-.task-box code{background:rgba(180,83,9,.1);border-radius:4px;padding:.1rem .4rem;font-family:var(--M);font-size:.82em}
-/* NEXT BUTTON */
-.next-btn{display:inline-flex;align-items:center;gap:.5rem;background:var(--accent);color:#fff;font-family:var(--D);font-weight:700;font-size:.88rem;padding:.75rem 1.5rem;border-radius:10px;border:none;cursor:pointer;transition:transform .2s,box-shadow .2s;box-shadow:0 4px 12px var(--accent-shadow);margin-top:1rem}
-.next-btn:hover{transform:translateY(-2px);box-shadow:0 8px 20px var(--accent-shadow)}
-.next-btn:disabled{opacity:.5;cursor:not-allowed;transform:none}
-.next-tip{font-family:var(--M);font-size:.72rem;color:var(--muted);margin-top:.6rem}
-/* PROJECT BOX */
-.project-box{background:#f0fdf4;border:2px solid #16a34a;border-radius:16px;padding:1.5rem;margin:2rem 0}
-.project-label{font-family:var(--M);font-size:.65rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#15803d;margin-bottom:.4rem}
-.project-name{font-family:var(--D);font-weight:700;font-size:1.1rem;color:#14532d;margin-bottom:.5rem}
-.project-desc{font-size:.9rem;color:#166534;margin-bottom:1.2rem;line-height:1.7}
-/* CAPSTONE BOX */
-.capstone-box{background:linear-gradient(135deg,#1e1b4b,#312e81);border-radius:16px;padding:1.5rem;margin:2rem 0;color:#fff}
-.capstone-label{font-family:var(--M);font-size:.65rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#a5b4fc;margin-bottom:.4rem}
-.capstone-name{font-family:var(--D);font-weight:700;font-size:1.2rem;margin-bottom:.5rem}
-.capstone-desc{font-size:.9rem;color:rgba(255,255,255,.8);margin-bottom:1.2rem;line-height:1.7}
-/* FILE TABS */
-.file-tabs{display:flex;gap:.5rem;margin-bottom:0;flex-wrap:wrap}
-.file-tab{font-family:var(--M);font-size:.72rem;padding:.35rem .8rem;background:#1e293b;color:#94a3b8;border-radius:6px 6px 0 0;cursor:pointer;border:1px solid #334155;border-bottom:none;transition:background .15s}
-.file-tab.active{background:#0f172a;color:#e2e8f0}
-.file-content{display:none}.file-content.active{display:block}
+.task-box{background:#fff0ec;border:2px dashed #e34c26;
+  border-radius:12px;padding:1rem 1.3rem;margin:1.4rem 0}
+.task-label{font-family:var(--M);font-size:.65rem;font-weight:700;letter-spacing:.1em;
+  text-transform:uppercase;color:#7b1c06;margin-bottom:.5rem;display:flex;align-items:center;gap:.4rem}
+.task-box p,.task-body{font-size:.92rem;color:#7b1c06;line-height:1.8}
+.task-box code{background:rgba(0,0,0,.08);border-radius:4px;padding:1px 6px;
+  font-family:var(--M);font-size:.82em}
+
+/* UNLOCK BUTTON */
+.unlock-btn{display:inline-flex;align-items:center;gap:.5rem;background:var(--acc);
+  color:#fff;font-family:var(--D);font-weight:700;font-size:.88rem;
+  padding:.75rem 1.6rem;border-radius:10px;border:none;cursor:pointer;
+  transition:transform .2s,box-shadow .2s;box-shadow:0 4px 14px var(--acc-sh);margin-top:1.2rem}
+.unlock-btn:hover{transform:translateY(-2px);box-shadow:0 8px 22px var(--acc-sh)}
+
+/* BUILD IT */
+.build-box{background:#f0fdf4;border:2px solid #16a34a;border-radius:16px;padding:1.6rem;margin:2rem 0;display:none}
+.build-label{font-family:var(--M);font-size:.65rem;font-weight:700;letter-spacing:.1em;
+  text-transform:uppercase;color:#15803d;margin-bottom:.4rem}
+.build-name{font-family:var(--D);font-weight:700;font-size:1.1rem;color:#14532d;margin-bottom:.5rem}
+.build-desc{font-size:.9rem;color:#166534;margin-bottom:1.2rem;line-height:1.75}
+.build-desc code{background:rgba(22,163,74,.12);border-radius:4px;padding:1px 6px;font-family:var(--M);font-size:.82em}
+.build-desc strong{color:#14532d}
+
 /* GITHUB ACCORDION */
-.github-acc{border:1.5px solid var(--border);border-radius:12px;overflow:hidden;margin:1.5rem 0}
-.github-acc-head{padding:1rem 1.2rem;background:#f8fafc;cursor:pointer;display:flex;align-items:center;justify-content:space-between;font-family:var(--D);font-weight:600;font-size:.9rem;user-select:none}
-.github-acc-body{display:none;padding:1.2rem;border-top:1px solid var(--border)}
-.github-acc-body.open{display:block}
-.github-step{display:flex;gap:.8rem;margin-bottom:1rem;align-items:flex-start}
-.github-step-n{width:24px;height:24px;border-radius:50%;background:var(--accent);color:#fff;font-family:var(--D);font-weight:700;font-size:.75rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px}
-.github-step p{font-size:.88rem;color:var(--t2);line-height:1.7}
+.gh-acc{border:1.5px solid var(--border);border-radius:12px;overflow:hidden;margin:1.5rem 0}
+.gh-acc-head{padding:1rem 1.2rem;background:#f8fafc;cursor:pointer;
+  display:flex;align-items:center;justify-content:space-between;
+  font-family:var(--D);font-weight:600;font-size:.9rem;user-select:none}
+.gh-acc-body{display:none;padding:1.2rem;border-top:1px solid var(--border)}
+.gh-acc-body.open{display:block}
+.gh-step{display:flex;gap:.8rem;margin-bottom:1rem;align-items:flex-start}
+.gh-step-n{width:26px;height:26px;border-radius:50%;background:var(--acc);color:#fff;
+  font-family:var(--D);font-weight:700;font-size:.75rem;display:flex;align-items:center;
+  justify-content:center;flex-shrink:0;margin-top:2px}
+.gh-step p{font-size:.88rem;color:var(--t2);line-height:1.7}
+.gh-step code{background:var(--acc-pale);color:var(--acc-d);border-radius:4px;
+  padding:1px 6px;font-family:var(--M);font-size:.82em}
+
 /* SESSION END */
-.session-end{background:linear-gradient(135deg,var(--accent),var(--accent-dark));color:#fff;border-radius:16px;padding:1.5rem 1.8rem;margin:2rem 0;display:none}
+.session-end{background:linear-gradient(135deg,var(--acc),var(--acc-d));color:#fff;
+  border-radius:16px;padding:1.6rem 1.8rem;margin:2rem 0;display:none}
 .session-end.visible{display:block}
 .session-end h2{font-family:var(--D);font-weight:700;font-size:1.1rem;margin-bottom:.8rem}
 .session-end ul{list-style:none;display:flex;flex-direction:column;gap:.4rem}
-.session-end li{font-size:.9rem;opacity:.92;display:flex;align-items:center;gap:.5rem}
-/* LESSON NAV */
-.lesson-nav{display:flex;align-items:center;justify-content:space-between;padding-top:2rem;border-top:1px solid var(--border);margin-top:2rem;flex-wrap:wrap;gap:.75rem}
-.ln-btn{display:inline-flex;align-items:center;gap:.4rem;background:var(--surface);color:var(--t2);font-family:var(--D);font-weight:600;font-size:.82rem;padding:.65rem 1.2rem;border-radius:8px;text-decoration:none;border:1.5px solid var(--border);transition:border-color .2s,color .2s}
-.ln-btn:hover{border-color:var(--accent);color:var(--accent)}
-.ln-btn.primary{background:var(--accent);color:#fff;border-color:var(--accent)}
+.session-end li{font-size:.9rem;opacity:.93;display:flex;align-items:center;gap:.5rem}
+.ln-btn{display:inline-flex;align-items:center;gap:.4rem;background:var(--surface);
+  color:var(--t2);font-family:var(--D);font-weight:600;font-size:.82rem;
+  padding:.65rem 1.2rem;border-radius:8px;text-decoration:none;
+  border:1.5px solid var(--border);transition:border-color .2s,color .2s}
+.ln-btn:hover{border-color:var(--acc);color:var(--acc)}
+.ln-btn.primary{background:var(--acc);color:#fff;border-color:var(--acc)}
 .ln-btn.primary:hover{opacity:.9}
-/* UTILS */
-code{font-family:var(--M);font-size:.85em;background:#f1f5f9;border-radius:4px;padding:.1rem .35rem;color:var(--accent)}
-.emoji{font-style:normal}
-@media(max-width:600px){.l-hero h1{font-size:1.5rem}.welcome-meta{gap:.75rem}}
+.lesson-nav{display:flex;align-items:center;justify-content:space-between;
+  padding-top:2rem;border-top:1px solid rgba(255,255,255,.25);margin-top:1.5rem;flex-wrap:wrap;gap:.75rem}
+.lesson-footer{text-align:center;padding:1.5rem;font-family:var(--M);font-size:.72rem;
+  color:var(--muted);border-top:1px solid var(--border);background:var(--surface)}
+</style>
+</head>
+<body>
+<nav class="l-nav">
+  <a href="../index.html" class="l-nav-logo">⚡ Techbase HTML</a>
+  <span class="l-nav-label">Lesson 20 of 34</span>
+  <a href="../index.html" class="l-nav-back">← All Lessons</a>
+</nav>
+<div class="progress-wrap"><div class="progress-bar" id="pbar"></div></div>
 
+<div class="l-hero">
+  <div class="l-hero-inner">
+    <div class="l-badge">HTML · Lesson 20</div>
+    <h1>HTML Buttons — Creating, Typing, Styling, Disabling, and Using Buttons</h1>
+    <div class="l-hero-sub">10 phases · Build: Stage 1 — Page Structure</div>
+  </div>
+</div>
+
+<section style="background:linear-gradient(160deg,#fff5f2 0%,#f8fafc 55%,#ffe8e0 100%);padding-bottom:1.5rem;border-bottom:1px solid var(--border)">
+  <div style="max-width:860px;margin:0 auto;padding:0 1.5rem"><div class="welcome-box">
+  <h2>👋 Welcome to Lesson 20</h2>
+  <div style="font-size:.9rem;line-height:1.85;opacity:.93"><p class="v2-p">Every website you have ever used is full of buttons. The "Sign Up" button on a registration page. The "Add to Cart" button on a shopping site. The "Submit" button on a contact form. The "Reset" button that clears all your typed information. Even a simple "Click Me" button that says hello.</p>
+<p class="v2-p">Buttons are the primary way users <strong>interact</strong> with a web page. Without them, a visitor can only read — they cannot act. Buttons are what turn a passive page into an interactive experience.</p>
+<p class="v2-p">In this lesson, you will learn everything about the HTML <code>&lt;button&gt;</code> element — what it is, how it works, the different types it can be, how to style it, how to disable it, and how to make it respond to a user's click. You will then practise with guided exercises and build a mini project that puts buttons to real use.</p>
+<p class="v2-p">By the end of this lesson you will be able to:</p>
+<ul class="v2-ul"><li>Create a basic clickable button using the <code>&lt;button&gt;</code> element.</li><li>Style a button with CSS to change its colour, size, and appearance.</li><li>Use the <code>disabled</code> attribute to make a button unclickable.</li><li>Understand and use the three button <code>type</code> values: <code>button</code>, <code>submit</code>, and <code>reset</code>.</li><li>Use the <code>onclick</code> attribute to trigger a simple JavaScript action when a button is clicked.</li><li>Use buttons correctly inside HTML forms.</li></ul>
+<hr class="v2-hr"></div>
+  <div class="welcome-meta">
+    <span>📚 10 phases</span>
+    <span>🏗️ Stage 1 — Page Structure</span>
+  </div>
+</div></div>
+</section>
+
+<main style="max-width:860px;margin:0 auto;padding:2rem 1.5rem 5rem">
+<div class="phase" id="phase1">
+  <div class="phase-header">
+    <div class="phase-num">Phase 1 of 10</div>
+    <div class="phase-title">Lesson Introduction</div>
+    <div class="phase-check" id="chk1"></div>
+  </div>
+  <div class="phase-body">
+    <p class="v2-p">Every website you have ever used is full of buttons. The "Sign Up" button on a registration page. The "Add to Cart" button on a shopping site. The "Submit" button on a contact form. The "Reset" button that clears all your typed information. Even a simple "Click Me" button that says hello.</p>
+<p class="v2-p">Buttons are the primary way users <strong>interact</strong> with a web page. Without them, a visitor can only read — they cannot act. Buttons are what turn a passive page into an interactive experience.</p>
+<p class="v2-p">In this lesson, you will learn everything about the HTML <code>&lt;button&gt;</code> element — what it is, how it works, the different types it can be, how to style it, how to disable it, and how to make it respond to a user's click. You will then practise with guided exercises and build a mini project that puts buttons to real use.</p>
+<p class="v2-p">By the end of this lesson you will be able to:</p>
+<ul class="v2-ul"><li>Create a basic clickable button using the <code>&lt;button&gt;</code> element.</li><li>Style a button with CSS to change its colour, size, and appearance.</li><li>Use the <code>disabled</code> attribute to make a button unclickable.</li><li>Understand and use the three button <code>type</code> values: <code>button</code>, <code>submit</code>, and <code>reset</code>.</li><li>Use the <code>onclick</code> attribute to trigger a simple JavaScript action when a button is clicked.</li><li>Use buttons correctly inside HTML forms.</li></ul>
+<hr class="v2-hr">
+    <div class="task-box">
+      <div class="task-label">✏️ Your Task</div>
+      <div class="task-body">Now practise what you just learned about <strong>Lesson Introduction</strong>. Open your editor, type the examples above by hand, then modify them — change values, rename variables, and observe what happens. Active experimentation is how code sticks.</div>
+    </div>
+    <button class="unlock-btn" onclick="unlockNext(1)">Start Lesson ✓</button>
+  </div>
+</div>
+<div class="phase locked" id="phase2">
+  <div class="phase-header">
+    <div class="phase-num">Phase 2 of 10</div>
+    <div class="phase-title">Prerequisite Concepts</div>
+    <div class="phase-check" id="chk2"></div>
+  </div>
+  <div class="phase-body">
+    <p class="v2-p">Before starting this lesson, you should be comfortable with the following ideas. If anything here feels unfamiliar, revisit the earlier lessons before continuing.</p>
+<p class="v2-p"><strong>HTML tags and elements</strong> — An HTML element is made of an opening tag, content, and a closing tag. For example: <code>&lt;p&gt;Hello&lt;/p&gt;</code>. The <code>&lt;button&gt;</code> tag works exactly the same way.</p>
+<p class="v2-p"><strong>HTML attributes</strong> — An attribute gives extra information to an HTML tag. Attributes are written inside the opening tag. For example: <code>&lt;button disabled&gt;</code>. Here, <code>disabled</code> is an attribute that modifies how the button behaves.</p>
+<p class="v2-p"><strong>CSS styling</strong> — CSS lets you change the appearance of HTML elements. You can apply CSS to a <code>&lt;button&gt;</code> tag using the <code>style</code> attribute directly on the element, or with a <code>&lt;style&gt;</code> block in the <code>&lt;head&gt;</code>. We will see both approaches.</p>
+<p class="v2-p"><strong>HTML forms (brief preview)</strong> — A form is an HTML structure that collects information from the user and can send it somewhere (like to a server). Buttons play an important role inside forms. We will introduce forms here just enough to understand button types — a dedicated Forms lesson will cover forms fully later.</p>
+<hr class="v2-hr">
+    <div class="task-box">
+      <div class="task-label">✏️ Your Task</div>
+      <div class="task-body">Now practise what you just learned about <strong>Prerequisite Concepts</strong>. Open your editor, type the examples above by hand, then modify them — change values, rename variables, and observe what happens. Active experimentation is how code sticks.</div>
+    </div>
+    <button class="unlock-btn" onclick="unlockNext(2)">Phase Complete — Unlock Next ✓</button>
+  </div>
+</div>
+<div class="phase locked" id="phase3">
+  <div class="phase-header">
+    <div class="phase-num">Phase 3 of 10</div>
+    <div class="phase-title">Part 1 — What Is the HTML Button?</div>
+    <div class="phase-check" id="chk3"></div>
+  </div>
+  <div class="phase-body">
+    <h3 class="v2-h3">Why Do Buttons Exist?</h3>
+<p class="v2-p">Imagine a web page as a wall poster. You can look at it, read it, admire it — but you cannot interact with it. Now imagine that same poster had a button you could press to do something useful: show more information, send a message, confirm a purchase. That is what the HTML <code>&lt;button&gt;</code> element does.</p>
+<blockquote class="v2-bq"><p class="v2-p"><strong>Analogy:</strong> A button in HTML is like a physical button on an ATM or a microwave. By itself it looks like a button and can be pressed, but it needs to be connected to some action to do anything useful. In HTML, that connection comes from the button's <code>type</code> attribute or a JavaScript <code>onclick</code> handler.</p></blockquote>
+<h3 class="v2-h3">The <code>&lt;button&gt;</code> Element</h3>
+<p class="v2-p">The HTML <code>&lt;button&gt;</code> element defines a clickable button on a web page. The text you put between the opening <code>&lt;button&gt;</code> and closing <code>&lt;/button&gt;</code> tags becomes the visible label on the button that the user sees and clicks.</p>
+<p class="v2-p"><strong>Basic syntax:</strong></p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;button&gt;Click Me&lt;/button&gt;</code></pre></div></div>
+<p class="v2-p"><strong>Expected output in the browser:</strong></p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span></div><div class="v2-code-body"><pre><code>[ Click Me ]</code></pre></div></div>
+<p class="v2-p">A raised, clickable box with the text "Click Me" inside it appears. The exact visual style depends on the browser, but it always looks like a button.</p>
+<blockquote class="v2-bq"><p class="v2-p"><strong>Important:</strong> By itself, this button does <strong>nothing</strong> when clicked. A bare <code>&lt;button&gt;</code> element has no built-in action. You must give it a <code>type</code> attribute, an <code>onclick</code> handler, or place it inside a form to make it actually do something. We will cover all three approaches in this lesson.</p></blockquote>
+<h3 class="v2-h3">Line-by-Line Anatomy</h3>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;button&gt;Click Me&lt;/button&gt;</code></pre></div></div>
+<ul class="v2-ul"><li><code>&lt;button&gt;</code> — The opening tag. This tells the browser to create a clickable button element.</li><li><code>Click Me</code> — The content. This is the text that appears as the button's label. It is what the user reads and clicks.</li><li><code>&lt;/button&gt;</code> — The closing tag. This marks the end of the button element.</li></ul>
+<hr class="v2-hr">
+    <div class="task-box">
+      <div class="task-label">✏️ Your Task</div>
+      <div class="task-body">Now practise what you just learned about <strong>What Is the HTML Button?</strong>. Open your editor, type the examples above by hand, then modify them — change values, rename variables, and observe what happens. Active experimentation is how code sticks.</div>
+    </div>
+    <button class="unlock-btn" onclick="unlockNext(3)">Phase Complete — Unlock Next ✓</button>
+  </div>
+</div>
+<div class="phase locked" id="phase4">
+  <div class="phase-header">
+    <div class="phase-num">Phase 4 of 10</div>
+    <div class="phase-title">Part 2 — Styling HTML Buttons with CSS</div>
+    <div class="phase-check" id="chk4"></div>
+  </div>
+  <div class="phase-body">
+    <h3 class="v2-h3">Why Style Buttons?</h3>
+<p class="v2-p">The default browser style for a button — a plain grey raised box — looks acceptable but very basic. In real professional websites, buttons are styled to match the brand, draw attention to actions, and make the page look polished and modern.</p>
+<p class="v2-p">You can apply CSS to a <code>&lt;button&gt;</code> element the same way you apply it to any other HTML element. You can use the <code>style</code> attribute for quick inline styles, or a CSS class in a <code>&lt;style&gt;</code> block for reusable, cleaner code.</p>
+<h3 class="v2-h3">Example 1 — Inline Style (Quick Method)</h3>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;button style=&quot;background-color: green; color: white; padding: 10px 20px; font-size: 16px;&quot;&gt;
+  Green Button
+&lt;/button&gt;</code></pre></div></div>
+<p class="v2-p"><strong>Expected output:</strong> A green button with white text, some padding around the label, and a readable font size.</p>
+<p class="v2-p"><strong>CSS property-by-property explanation:</strong></p>
+<ul class="v2-ul"><li><code>background-color: green</code> — Sets the button's background fill colour to green.</li><li><code>color: white</code> — Sets the text colour inside the button to white (so it's readable on the green background).</li><li><code>padding: 10px 20px</code> — Adds 10px of space above and below the text, and 20px on the left and right. This makes the button larger and more comfortable to click.</li><li><code>font-size: 16px</code> — Sets the size of the button label text to 16 pixels, making it easy to read.</li></ul>
+<h3 class="v2-h3">Example 2 — CSS Class (Reusable Method)</h3>
+<p class="v2-p">When you have multiple buttons on a page, it is much cleaner to define a CSS class once and apply it to each button, rather than typing inline styles repeatedly.</p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;style&gt;
+  .mybutton {
+    background-color: #4CAF50;  /* A medium green */
+    color: white;
+    padding: 12px 24px;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+
+  .mybutton:hover {
+    background-color: #45a049;  /* Slightly darker green on hover */
+  }
+&lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+  &lt;button class=&quot;mybutton&quot;&gt;Save&lt;/button&gt;
+  &lt;button class=&quot;mybutton&quot;&gt;Submit&lt;/button&gt;
+  &lt;button class=&quot;mybutton&quot;&gt;Continue&lt;/button&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;</code></pre></div></div>
+<p class="v2-p"><strong>Expected output:</strong> Three identical green buttons labelled "Save", "Submit", and "Continue". When you hover your mouse over any of them, the colour gets slightly darker, giving visual feedback that the button is interactive.</p>
+<p class="v2-p"><strong>New CSS properties explained:</strong></p>
+<ul class="v2-ul"><li><code>border: none</code> — Removes the default grey border/outline that browsers draw around buttons.</li><li><code>cursor: pointer</code> — Changes the mouse cursor to a hand (👆) when hovering over the button, which signals to users that it is clickable.</li><li><code>border-radius: 5px</code> — Rounds the corners of the button slightly, giving it a modern, friendly appearance.</li><li><code>.mybutton:hover</code> — The <code>:hover</code> part is a CSS "pseudo-class". It applies styles only when the user's mouse is hovering over the element. This creates an interactive visual response without any JavaScript.</li></ul>
+<blockquote class="v2-bq"><p class="v2-p"><strong>Real-world connection:</strong> The "hover effect" (button darkens on mouse-over) is one of the most universally used UI patterns on every website and app. Always include it when styling buttons, because it signals to users that the button is interactive.</p></blockquote>
+<hr class="v2-hr">
+    <div class="task-box">
+      <div class="task-label">✏️ Your Task</div>
+      <div class="task-body">Now practise what you just learned about <strong>Styling HTML Buttons with CSS</strong>. Open your editor, type the examples above by hand, then modify them — change values, rename variables, and observe what happens. Active experimentation is how code sticks.</div>
+    </div>
+    <button class="unlock-btn" onclick="unlockNext(4)">Phase Complete — Unlock Next ✓</button>
+  </div>
+</div>
+<div class="phase locked" id="phase5">
+  <div class="phase-header">
+    <div class="phase-num">Phase 5 of 10</div>
+    <div class="phase-title">Part 3 — The `disabled` Attribute</div>
+    <div class="phase-check" id="chk5"></div>
+  </div>
+  <div class="phase-body">
+    <h3 class="v2-h3">What Does "Disabled" Mean?</h3>
+<p class="v2-p">Sometimes you want a button to exist visually on the page but you do <strong>not</strong> want users to be able to click it. Common real-world situations for this:</p>
+<ul class="v2-ul"><li>A "Submit" button that should only be active after a user fills in a required field.</li><li>A "Pay Now" button that is locked until the user agrees to terms and conditions.</li><li>A feature that is not yet available (e.g., "Download — Coming Soon").</li></ul>
+<p class="v2-p">The <code>disabled</code> attribute achieves this. When applied to a <code>&lt;button&gt;</code>, it makes the button visually faded (greyed out) and completely unresponsive to clicks.</p>
+<h3 class="v2-h3">Syntax</h3>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;button disabled&gt;Disabled Button&lt;/button&gt;</code></pre></div></div>
+<p class="v2-p"><strong>Expected output:</strong> A greyed-out button labelled "Disabled Button". Clicking it does nothing — no action fires, no page changes.</p>
+<blockquote class="v2-bq"><p class="v2-p"><strong>Note:</strong> The <code>disabled</code> attribute is a <strong>boolean attribute</strong> — it has no value. You simply write the word <code>disabled</code> inside the opening tag. The browser reads its presence as "this button is disabled".</p></blockquote>
+<h3 class="v2-h3">Side-by-Side Comparison</h3>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;!-- Normal clickable button --&gt;
+&lt;button&gt;Active Button&lt;/button&gt;
+
+&lt;!-- Disabled, unclickable button --&gt;
+&lt;button disabled&gt;Disabled Button&lt;/button&gt;</code></pre></div></div>
+<p class="v2-p"><strong>Expected output:</strong></p>
+<ul class="v2-ul"><li>"Active Button" appears in the normal button style and responds to clicks.</li><li>"Disabled Button" appears faded/greyed out and does not respond to clicks.</li></ul>
+<blockquote class="v2-bq"><p class="v2-p"><strong>Thinking prompt:</strong> If you inspect a disabled button with browser developer tools, you will see its colour is typically a lighter grey. This is the browser's built-in visual cue to tell the user "this button is not available right now." Browsers do this automatically — you do not need to set the colour yourself.</p></blockquote>
+<hr class="v2-hr">
+    <div class="task-box">
+      <div class="task-label">✏️ Your Task</div>
+      <div class="task-body">Now practise what you just learned about <strong>The <code>disabled</code> Attribute</strong>. Open your editor, type the examples above by hand, then modify them — change values, rename variables, and observe what happens. Active experimentation is how code sticks.</div>
+    </div>
+    <button class="unlock-btn" onclick="unlockNext(5)">Phase Complete — Unlock Next ✓</button>
+  </div>
+</div>
+<div class="phase locked" id="phase6">
+  <div class="phase-header">
+    <div class="phase-num">Phase 6 of 10</div>
+    <div class="phase-title">Part 4 — Buttons with JavaScript (`onclick`)</div>
+    <div class="phase-check" id="chk6"></div>
+  </div>
+  <div class="phase-body">
+    <h3 class="v2-h3">What Is <code>onclick</code>?</h3>
+<p class="v2-p"><code>onclick</code> is an <strong>HTML event attribute</strong>. It lets you define a small piece of JavaScript that should run when the user clicks the button.</p>
+<blockquote class="v2-bq"><p class="v2-p"><strong>Analogy:</strong> Think of <code>onclick</code> as a set of instructions you tape to the button before handing it to someone. "When you press this button, do the following: show an alert message."</p></blockquote>
+<p class="v2-p">You do not need to know JavaScript to use this in a basic way — you just need to know one simple JavaScript function: <code>alert()</code>.</p>
+<h3 class="v2-h3">What Is <code>alert()</code>?</h3>
+<p class="v2-p"><code>alert()</code> is a built-in JavaScript function that pops up a small dialogue box in the browser with a message inside it. It is perfect for beginners learning buttons because it gives instant, visible feedback when a button is clicked.</p>
+<h3 class="v2-h3">Syntax</h3>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;button onclick=&quot;alert(&#x27;Hello!&#x27;)&quot;&gt;Click Me&lt;/button&gt;</code></pre></div></div>
+<p class="v2-p"><strong>Expected output:</strong> When you click the "Click Me" button, a pop-up dialogue box appears with the message "Hello!" inside it. There is an "OK" button in the dialogue to dismiss it.</p>
+<h3 class="v2-h3">Line-by-Line Explanation</h3>
+<ul class="v2-ul"><li><code>&lt;button</code> — Opens the button element.</li><li><code>onclick="alert('Hello!')"</code> — This is the event attribute. The value <code>"alert('Hello!')"</code> is JavaScript code that will execute when the button is clicked. <code>alert()</code> shows a pop-up message, and <code>'Hello!'</code> is the text to display inside it.</li><li><code>&gt;Click Me&lt;/button&gt;</code> — The button label and the closing tag.</li></ul>
+<blockquote class="v2-bq"><p class="v2-p"><strong>Notice the quotes:</strong> The <code>onclick</code> value uses double quotes on the outside (<code>onclick="..."</code>) and single quotes inside the JavaScript (<code>alert('Hello!')</code>). This is necessary because if you used double quotes inside, the browser would get confused about where the attribute value ends. Always use single quotes inside <code>onclick</code> when you have text.</p></blockquote>
+<h3 class="v2-h3">More Examples</h3>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;!-- Alert with a custom message --&gt;
+&lt;button onclick=&quot;alert(&#x27;Welcome to my website!&#x27;)&quot;&gt;Say Hello&lt;/button&gt;
+
+&lt;!-- Alert using a variable-like expression --&gt;
+&lt;button onclick=&quot;alert(&#x27;You clicked the button!&#x27;)&quot;&gt;Click Me&lt;/button&gt;</code></pre></div></div>
+<p class="v2-p"><strong>Expected outputs:</strong></p>
+<ul class="v2-ul"><li>Clicking "Say Hello" opens a pop-up saying: "Welcome to my website!"</li><li>Clicking "Click Me" opens a pop-up saying: "You clicked the button!"</li></ul>
+<blockquote class="v2-bq"><p class="v2-p"><strong>A note on JavaScript:</strong> <code>onclick</code> and <code>alert()</code> are just a small taste of JavaScript. In a full JavaScript course you will learn to do far more powerful things when buttons are clicked — things like changing the content of a page, validating form data, fetching data from a server, and much more. For now, mastering the HTML button structure and attributes is the goal.</p></blockquote>
+<hr class="v2-hr">
+    <div class="task-box">
+      <div class="task-label">✏️ Your Task</div>
+      <div class="task-body">Now practise what you just learned about <strong>Buttons with JavaScript (<code>onclick</code>)</strong>. Open your editor, type the examples above by hand, then modify them — change values, rename variables, and observe what happens. Active experimentation is how code sticks.</div>
+    </div>
+    <button class="unlock-btn" onclick="unlockNext(6)">Phase Complete — Unlock Next ✓</button>
+  </div>
+</div>
+<div class="phase locked" id="phase7">
+  <div class="phase-header">
+    <div class="phase-num">Phase 7 of 10</div>
+    <div class="phase-title">Part 5 — Button Types</div>
+    <div class="phase-check" id="chk7"></div>
+  </div>
+  <div class="phase-body">
+    <h3 class="v2-h3">Why Does Type Matter?</h3>
+<p class="v2-p">The <code>type</code> attribute tells the browser exactly <strong>what role</strong> the button plays. This is especially important when buttons are placed inside HTML forms, because without the correct <code>type</code>, the browser may behave in unexpected ways — for example, accidentally submitting a form when you only intended to run a script.</p>
+<p class="v2-p">There are exactly <strong>three</strong> valid values for the <code>type</code> attribute on a button:</p>
+<div class="v2-table-wrap"><table class="v2-table"><thead><tr><th><code>type</code> value</th><th>What it does</th></tr></thead><tbody><tr><td><code>type="button"</code></td><td>A normal clickable button. Does nothing by default. Used when you want to attach JavaScript or a custom action.</td></tr><tr><td><code>type="submit"</code></td><td>Submits the form it is inside. Sends all the form's input data to the server (or the URL defined in <code>action</code>).</td></tr><tr><td><code>type="reset"</code></td><td>Resets all form fields back to their original (empty or default) values.</td></tr></tbody></table></div>
+<h3 class="v2-h3">Example — All Three Button Types</h3>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;button type=&quot;button&quot;&gt;Normal Button&lt;/button&gt;
+&lt;button type=&quot;submit&quot;&gt;Submit&lt;/button&gt;
+&lt;button type=&quot;reset&quot;&gt;Reset&lt;/button&gt;</code></pre></div></div>
+<p class="v2-p"><strong>Expected output:</strong> Three buttons side by side. Clicking "Normal Button" does nothing (unless <code>onclick</code> is added). "Submit" and "Reset" work as described when placed inside a form.</p>
+<h3 class="v2-h3">Deep Dive: Buttons Inside a Form</h3>
+<p class="v2-p">This is where <code>type</code> matters most. Here is a working form example:</p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;form action=&quot;/action_page.php&quot;&gt;
+  First name: &lt;input type=&quot;text&quot; name=&quot;fname&quot;&gt;
+  &lt;button type=&quot;submit&quot;&gt;Submit&lt;/button&gt;
+  &lt;button type=&quot;reset&quot;&gt;Reset Form&lt;/button&gt;
+&lt;/form&gt;</code></pre></div></div>
+<p class="v2-p"><strong>What each part does:</strong></p>
+<ul class="v2-ul"><li><code>&lt;form action="/action_page.php"&gt;</code> — Opens a form. The <code>action</code> attribute specifies where the data goes when submitted (a server-side script at <code>/action_page.php</code>). You will learn forms fully in a later lesson.</li><li><code>&lt;input type="text" name="fname"&gt;</code> — A text box where the user types their first name.</li><li><code>&lt;button type="submit"&gt;Submit&lt;/button&gt;</code> — When clicked, takes all the data typed into the form and sends it to <code>/action_page.php</code>. The page will then navigate to that URL with the form data attached.</li><li><code>&lt;button type="reset"&gt;Reset Form&lt;/button&gt;</code> — When clicked, clears the text box back to empty, as if the user had not typed anything.</li></ul>
+<blockquote class="v2-bq"><p class="v2-p"><strong>Important rule:</strong> Always specify <code>type</code> on your buttons. If a button is inside a form and you forget to set <code>type</code>, most browsers will default it to <code>type="submit"</code>, which means clicking any button in the form will accidentally submit it. This is a very common beginner bug.</p></blockquote>
+<h3 class="v2-h3">Why Use <code>type="button"</code> Outside a Form?</h3>
+<p class="v2-p">When a button is <strong>not</strong> inside a form, using <code>type="button"</code> is still best practice for clarity. It signals to anyone reading your code — including your future self — that this button is meant to trigger a JavaScript action rather than submit any data.</p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;!-- Best practice: explicit type even outside a form --&gt;
+&lt;button type=&quot;button&quot; onclick=&quot;alert(&#x27;Saved!&#x27;)&quot;&gt;Save Progress&lt;/button&gt;</code></pre></div></div>
+<hr class="v2-hr">
+    <div class="task-box">
+      <div class="task-label">✏️ Your Task</div>
+      <div class="task-body">`html
+<!-- Best practice: explicit type even outside a form -->
+<button type="button" onclick="alert('Saved!')">Save Progress</button>
+`
+
+---</div>
+    </div>
+    <button class="unlock-btn" onclick="unlockNext(7)">Phase Complete — Unlock Next ✓</button>
+  </div>
+</div>
+<div class="phase locked" id="phase8">
+  <div class="phase-header">
+    <div class="phase-num">Phase 8 of 10</div>
+    <div class="phase-title">Part 6 — Putting It All Together: Button Attribute Summary</div>
+    <div class="phase-check" id="chk8"></div>
+  </div>
+  <div class="phase-body">
+    <p class="v2-p">Here is a complete summary of every <code>&lt;button&gt;</code> attribute covered in this lesson:</p>
+<div class="v2-table-wrap"><table class="v2-table"><thead><tr><th>Attribute</th><th>What It Does</th><th>Example</th></tr></thead><tbody><tr><td><em>(none)</em></td><td>Creates a basic button with a label</td><td><code>&lt;button&gt;Click&lt;/button&gt;</code></td></tr><tr><td><code>type="button"</code></td><td>Normal button — does nothing by default</td><td><code>&lt;button type="button"&gt;Click&lt;/button&gt;</code></td></tr><tr><td><code>type="submit"</code></td><td>Submits the surrounding form</td><td><code>&lt;button type="submit"&gt;Submit&lt;/button&gt;</code></td></tr><tr><td><code>type="reset"</code></td><td>Resets all form fields in the surrounding form</td><td><code>&lt;button type="reset"&gt;Reset&lt;/button&gt;</code></td></tr><tr><td><code>disabled</code></td><td>Makes the button unclickable and visually greyed out</td><td><code>&lt;button disabled&gt;Locked&lt;/button&gt;</code></td></tr><tr><td><code>onclick="..."</code></td><td>Runs JavaScript when the button is clicked</td><td><code>&lt;button onclick="alert('Hi')"&gt;Hi&lt;/button&gt;</code></td></tr><tr><td><code>class="..."</code></td><td>Assigns a CSS class name for styling</td><td><code>&lt;button class="mybtn"&gt;Click&lt;/button&gt;</code></td></tr></tbody></table></div>
+<hr class="v2-hr">
+    <div class="task-box">
+      <div class="task-label">✏️ Your Task</div>
+      <div class="task-body">Now practise what you just learned about <strong>Putting It All Together: Button Attribute Summary</strong>. Open your editor, type the examples above by hand, then modify them — change values, rename variables, and observe what happens. Active experimentation is how code sticks.</div>
+    </div>
+    <button class="unlock-btn" onclick="unlockNext(8)">Phase Complete — Unlock Next ✓</button>
+  </div>
+</div>
+<div class="phase locked" id="phase9">
+  <div class="phase-header">
+    <div class="phase-num">Phase 9 of 10</div>
+    <div class="phase-title">Part 7 — Guided Practice Exercises</div>
+    <div class="phase-check" id="chk9"></div>
+  </div>
+  <div class="phase-body">
+    <h3 class="v2-h3">Exercise 1 — Your First Button</h3>
+<p class="v2-p"><strong>Objective:</strong> Create a basic button and understand its default appearance.</p>
+<p class="v2-p"><strong>Steps:</strong></p>
+<ol class="v2-ol"><li>Create a new file called <code>button_test.html</code>.</li><li>Set up the basic HTML structure with <code>&lt;!DOCTYPE html&gt;</code>, <code>&lt;html&gt;</code>, <code>&lt;head&gt;</code>, and <code>&lt;body&gt;</code>.</li><li>Inside <code>&lt;body&gt;</code>, add a button with the label "Click Me".</li><li>Save and open in a browser.</li></ol>
+<p class="v2-p"><strong>Code:</strong></p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;body&gt;
+
+  &lt;button&gt;Click Me&lt;/button&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;</code></pre></div></div>
+<p class="v2-p"><strong>Expected output:</strong> A plain grey button labelled "Click Me" appears. Clicking it does nothing yet.</p>
+<p class="v2-p"><strong>Self-check questions:</strong></p>
+<ul class="v2-ul"><li>Does the button appear?</li><li>What happens when you click it?</li><li>What does it look like if you change "Click Me" to "Hello World"?</li></ul>
+<hr class="v2-hr">
+<h3 class="v2-h3">Exercise 2 — Add an Alert on Click</h3>
+<p class="v2-p"><strong>Objective:</strong> Use <code>onclick</code> to make a button show a message.</p>
+<p class="v2-p"><strong>Scenario:</strong> You are building a greeting card webpage. Add a button that, when clicked, says "Happy Birthday!" in a pop-up.</p>
+<p class="v2-p"><strong>Code:</strong></p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;body&gt;
+
+  &lt;h2&gt;Birthday Card&lt;/h2&gt;
+  &lt;p&gt;Click the button to reveal your message!&lt;/p&gt;
+  &lt;button type=&quot;button&quot; onclick=&quot;alert(&#x27;Happy Birthday! Wishing you all the best!&#x27;)&quot;&gt;
+    Reveal Message
+  &lt;/button&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;</code></pre></div></div>
+<p class="v2-p"><strong>Expected output:</strong> A page with a heading, a paragraph, and a "Reveal Message" button. Clicking the button opens a pop-up alert with the birthday message.</p>
+<p class="v2-p"><strong>What-if challenge:</strong> Change the alert message to say your own name. What do you need to change in the code?</p>
+<hr class="v2-hr">
+<h3 class="v2-h3">Exercise 3 — Styled Button Set</h3>
+<p class="v2-p"><strong>Objective:</strong> Apply CSS to create three visually distinct buttons.</p>
+<p class="v2-p"><strong>Scenario:</strong> You are building a simple dashboard. Create three buttons: one for confirming an action (green), one for cancelling (red), and one that is currently unavailable (disabled/grey).</p>
+<p class="v2-p"><strong>Code:</strong></p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;style&gt;
+  .btn-confirm {
+    background-color: #28a745;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 15px;
+    cursor: pointer;
+  }
+
+  .btn-cancel {
+    background-color: #dc3545;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 15px;
+    cursor: pointer;
+  }
+
+  .btn-confirm:hover { background-color: #218838; }
+  .btn-cancel:hover  { background-color: #c82333; }
+&lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+  &lt;h2&gt;Order Confirmation&lt;/h2&gt;
+  &lt;button class=&quot;btn-confirm&quot; type=&quot;button&quot; onclick=&quot;alert(&#x27;Order confirmed!&#x27;)&quot;&gt;Confirm Order&lt;/button&gt;
+  &lt;button class=&quot;btn-cancel&quot;  type=&quot;button&quot; onclick=&quot;alert(&#x27;Order cancelled.&#x27;)&quot;&gt;Cancel Order&lt;/button&gt;
+  &lt;button disabled&gt;Processing...&lt;/button&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;</code></pre></div></div>
+<p class="v2-p"><strong>Expected output:</strong></p>
+<ul class="v2-ul"><li>A green "Confirm Order" button. Clicking it shows "Order confirmed!"</li><li>A red "Cancel Order" button. Clicking it shows "Order cancelled."</li><li>A greyed-out "Processing..." button that cannot be clicked.</li></ul>
+<p class="v2-p"><strong>Self-check questions:</strong></p>
+<ul class="v2-ul"><li>What does <code>cursor: pointer</code> do and why is it important?</li><li>Why is the "Processing..." button disabled?</li><li>Can you change the green to blue (<code>#007bff</code>)?</li></ul>
+<hr class="v2-hr">
+<h3 class="v2-h3">Exercise 4 — Submit and Reset Buttons in a Form</h3>
+<p class="v2-p"><strong>Objective:</strong> Use button types correctly inside an HTML form.</p>
+<p class="v2-p"><strong>Scenario:</strong> Create a simple feedback form with a name field, a "Submit" button, and a "Reset" button.</p>
+<p class="v2-p"><strong>Code:</strong></p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;body&gt;
+
+  &lt;h2&gt;Feedback Form&lt;/h2&gt;
+
+  &lt;form action=&quot;#&quot;&gt;
+    &lt;label for=&quot;name&quot;&gt;Your Name:&lt;/label&gt;&lt;br&gt;
+    &lt;input type=&quot;text&quot; id=&quot;name&quot; name=&quot;name&quot; placeholder=&quot;Enter your name&quot;&gt;&lt;br&gt;&lt;br&gt;
+
+    &lt;label for=&quot;feedback&quot;&gt;Your Feedback:&lt;/label&gt;&lt;br&gt;
+    &lt;textarea id=&quot;feedback&quot; name=&quot;feedback&quot; rows=&quot;4&quot; cols=&quot;40&quot;
+      placeholder=&quot;Type your feedback here...&quot;&gt;&lt;/textarea&gt;&lt;br&gt;&lt;br&gt;
+
+    &lt;button type=&quot;submit&quot;&gt;Submit Feedback&lt;/button&gt;
+    &lt;button type=&quot;reset&quot;&gt;Clear Form&lt;/button&gt;
+  &lt;/form&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;</code></pre></div></div>
+<p class="v2-p"><strong>Expected output:</strong> A form with a name field and a feedback text area. Clicking "Submit Feedback" submits the form (in this case to <code>#</code>, which means the same page). Clicking "Clear Form" erases everything the user typed.</p>
+<p class="v2-p"><strong>Self-check questions:</strong></p>
+<ul class="v2-ul"><li>What does <code>type="reset"</code> actually do when you click it? Try typing something and then clicking it.</li><li>What would happen if you removed <code>type="submit"</code> from the submit button?</li><li>Why is <code>action="#"</code> used here instead of a real URL?</li></ul>
+<hr class="v2-hr">
+    <div class="task-box">
+      <div class="task-label">✏️ Your Task</div>
+      <div class="task-body">Now practise what you just learned about <strong>Guided Practice Exercises</strong>. Open your editor, type the examples above by hand, then modify them — change values, rename variables, and observe what happens. Active experimentation is how code sticks.</div>
+    </div>
+    <button class="unlock-btn" onclick="unlockNext(9)">Phase Complete — Unlock Next ✓</button>
+  </div>
+</div>
+<div class="phase locked" id="phase10">
+  <div class="phase-header">
+    <div class="phase-num">Phase 10 of 10</div>
+    <div class="phase-title">Part 9 — Common Beginner Mistakes</div>
+    <div class="phase-check" id="chk10"></div>
+  </div>
+  <div class="phase-body">
+    <h3 class="v2-h3">Mistake 1 — Forgetting the Closing <code>&lt;/button&gt;</code> Tag</h3>
+<p class="v2-p"><strong>Wrong:</strong></p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;button&gt;Click Me</code></pre></div></div>
+<p class="v2-p"><strong>Why it is wrong:</strong> Without the closing tag, the browser's HTML parser may treat everything after the button as still being inside the button, leading to bizarre visual results where your entire page appears to be one giant button.</p>
+<p class="v2-p"><strong>Correct:</strong></p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;button&gt;Click Me&lt;/button&gt;</code></pre></div></div>
+<hr class="v2-hr">
+<h3 class="v2-h3">Mistake 2 — Using Double Quotes Inside <code>onclick</code></h3>
+<p class="v2-p"><strong>Wrong:</strong></p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;button onclick=&quot;alert(&quot;Hello!&quot;)&quot;&gt;Click Me&lt;/button&gt;</code></pre></div></div>
+<p class="v2-p"><strong>Why it is wrong:</strong> The double quotes around <code>"Hello!"</code> end the <code>onclick</code> attribute early. The browser reads <code>onclick="alert("</code> as the full attribute, then gets confused by <code>Hello!</code> floating in the middle of the tag. This causes a syntax error and the button will not work.</p>
+<p class="v2-p"><strong>Correct — use single quotes inside the double quotes:</strong></p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;button onclick=&quot;alert(&#x27;Hello!&#x27;)&quot;&gt;Click Me&lt;/button&gt;</code></pre></div></div>
+<hr class="v2-hr">
+<h3 class="v2-h3">Mistake 3 — Not Specifying <code>type</code> Inside a Form</h3>
+<p class="v2-p"><strong>Wrong:</strong></p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;form action=&quot;/submit&quot;&gt;
+  &lt;input type=&quot;text&quot; name=&quot;email&quot;&gt;
+  &lt;button&gt;Click for help&lt;/button&gt;  &lt;!-- No type! --&gt;
+  &lt;button type=&quot;submit&quot;&gt;Submit&lt;/button&gt;
+&lt;/form&gt;</code></pre></div></div>
+<p class="v2-p"><strong>Why it is wrong:</strong> The first button has no <code>type</code>. Inside a form, the default button type is <code>submit</code>. So clicking "Click for help" will accidentally submit the form — not what you wanted at all.</p>
+<p class="v2-p"><strong>Correct:</strong></p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;form action=&quot;/submit&quot;&gt;
+  &lt;input type=&quot;text&quot; name=&quot;email&quot;&gt;
+  &lt;button type=&quot;button&quot; onclick=&quot;alert(&#x27;Help: Enter your email address.&#x27;)&quot;&gt;Click for help&lt;/button&gt;
+  &lt;button type=&quot;submit&quot;&gt;Submit&lt;/button&gt;
+&lt;/form&gt;</code></pre></div></div>
+<hr class="v2-hr">
+<h3 class="v2-h3">Mistake 4 — Putting Interactive Content Inside a Disabled Button</h3>
+<p class="v2-p"><strong>Wrong:</strong></p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;button disabled onclick=&quot;alert(&#x27;Hi&#x27;)&quot;&gt;Click Me&lt;/button&gt;</code></pre></div></div>
+<p class="v2-p"><strong>Why it is confusing:</strong> The <code>disabled</code> attribute prevents the button from firing any event, including <code>onclick</code>. Adding <code>onclick</code> to a disabled button is pointless — nothing will happen. It also misleads anyone reading your code into thinking the button does something.</p>
+<p class="v2-p"><strong>Correct:</strong> If a button should eventually be enabled, keep it disabled and only add <code>onclick</code> when you remove <code>disabled</code> (which is done in JavaScript).</p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;!-- While waiting: --&gt;
+&lt;button disabled&gt;Please wait...&lt;/button&gt;
+
+&lt;!-- After an action completes (JavaScript would remove disabled): --&gt;
+&lt;button type=&quot;button&quot; onclick=&quot;alert(&#x27;Ready!&#x27;)&quot;&gt;Continue&lt;/button&gt;</code></pre></div></div>
+<hr class="v2-hr">
+<h3 class="v2-h3">Mistake 5 — Using a <code>&lt;div&gt;</code> or <code>&lt;a&gt;</code> Tag as a Fake Button</h3>
+<p class="v2-p">Some beginners try to style a <code>&lt;div&gt;</code> or <code>&lt;a&gt;</code> to look like a button instead of using the actual <code>&lt;button&gt;</code> element.</p>
+<p class="v2-p"><strong>Wrong:</strong></p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;div style=&quot;background: blue; color: white; padding: 10px;&quot; onclick=&quot;alert(&#x27;Hi&#x27;)&quot;&gt;
+  Click Me
+&lt;/div&gt;</code></pre></div></div>
+<p class="v2-p"><strong>Why it is wrong:</strong> A <code>&lt;div&gt;</code> is not semantically a button. It is not keyboard-accessible (you cannot Tab to it and press Enter), it is not announced as a button to screen readers, and it does not behave like a button in all browsers.</p>
+<p class="v2-p"><strong>Correct:</strong></p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;button type=&quot;button&quot; style=&quot;background: blue; color: white; padding: 10px;&quot;
+  onclick=&quot;alert(&#x27;Hi&#x27;)&quot;&gt;
+  Click Me
+&lt;/button&gt;</code></pre></div></div>
+<p class="v2-p">Always use <code>&lt;button&gt;</code> for clickable actions. Use <code>&lt;a&gt;</code> only for navigation to a URL.</p>
+<hr class="v2-hr">
+<h3 class="v2-h3">Mistake 6 — Adding <code>type="submit"</code> to a Button Outside a Form</h3>
+<p class="v2-p"><strong>Wrong (conceptually confusing):</strong></p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;!-- There is no form here --&gt;
+&lt;button type=&quot;submit&quot; onclick=&quot;alert(&#x27;Done!&#x27;)&quot;&gt;Save&lt;/button&gt;</code></pre></div></div>
+<p class="v2-p"><strong>Why it is confusing:</strong> <code>type="submit"</code> is only meaningful inside a <code>&lt;form&gt;</code>. Outside a form, it is equivalent to <code>type="button"</code> in most browsers, but it misleads anyone reading the code into thinking there is a form being submitted.</p>
+<p class="v2-p"><strong>Correct:</strong></p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;button type=&quot;button&quot; onclick=&quot;alert(&#x27;Done!&#x27;)&quot;&gt;Save&lt;/button&gt;</code></pre></div></div>
+<hr class="v2-hr">
+    <div class="task-box">
+      <div class="task-label">✏️ Your Task</div>
+      <div class="task-body">Now practise what you just learned about <strong>Common Beginner Mistakes</strong>. Open your editor, type the examples above by hand, then modify them — change values, rename variables, and observe what happens. Active experimentation is how code sticks.</div>
+    </div>
+    <button class="unlock-btn" onclick="unlockNext(10)">Phase Complete — Unlock Next ✓</button>
+  </div>
+</div>
+<div class="build-box" id="build-it">
+  <div class="build-label">🏗️ Build It</div>
+  <div class="build-name">Stage 1 — Page Structure</div>
+  <div class="build-desc">Create a new file called <code>quiz.html</code> and build the basic page:</div>
+  <div class="v2-code-wrap">
+    <div class="v2-code-bar">
+      <span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span>
+      <span class="v2-code-lang">starter.html</span>
+    </div>
+    <div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;title&gt;Quick Quiz&lt;/title&gt;
+&lt;style&gt;
+  body {
+    font-family: Arial, sans-serif;
+    max-width: 500px;
+    margin: 40px auto;
+    padding: 20px;
+  }
+
+  h1 { color: #333; }
+
+  .question {
+    background-color: #f4f4f4;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+  }
+
+  .answer-btn {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    margin: 8px 0;
+    font-size: 15px;
+    border: 2px solid #ccc;
+    border-radius: 6px;
+    background-color: white;
+    cursor: pointer;
+    text-align: left;
+  }
+
+  .answer-btn:hover {
+    background-color: #e8f0fe;
+    border-color: #4285f4;
+  }
+
+  .btn-submit {
+    background-color: #4285f4;
+    color: white;
+    padding: 12px 30px;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 10px;
+  }
+
+  .btn-submit:hover { background-color: #3367d6; }
+
+  .btn-restart {
+    background-color: #f1f1f1;
+    padding: 10px 20px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 14px;
+    cursor: pointer;
+    margin-top: 5px;
+  }
+&lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+  &lt;h1&gt;Quick Quiz 🧠&lt;/h1&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;</code></pre></div>
+  </div>
+  <div style="display:flex;gap:.8rem;flex-wrap:wrap;margin-top:1.2rem">
+    <button class="unlock-btn" onclick="downloadStarter(`<!DOCTYPE html>
+<html>
+<head>
+  <title>Quick Quiz</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    max-width: 500px;
+    margin: 40px auto;
+    padding: 20px;
+  }
+
+  h1 { color: #333; }
+
+  .question {
+    background-color: #f4f4f4;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+  }
+
+  .answer-btn {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    margin: 8px 0;
+    font-size: 15px;
+    border: 2px solid #ccc;
+    border-radius: 6px;
+    background-color: white;
+    cursor: pointer;
+    text-align: left;
+  }
+
+  .answer-btn:hover {
+    background-color: #e8f0fe;
+    border-color: #4285f4;
+  }
+
+  .btn-submit {
+    background-color: #4285f4;
+    color: white;
+    padding: 12px 30px;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 10px;
+  }
+
+  .btn-submit:hover { background-color: #3367d6; }
+
+  .btn-restart {
+    background-color: #f1f1f1;
+    padding: 10px 20px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 14px;
+    cursor: pointer;
+    margin-top: 5px;
+  }
 </style>
 </head>
 <body>
 
-<!-- FIXED NAV -->
-<nav class="lesson-nav-bar">
-  <a href="../index.html" class="nav-back">← HTML Course</a>
-  <span class="nav-lesson">Lesson 20 of 34 &nbsp;·&nbsp; HTML Id</span>
-  <div class="nav-actions">
-    <a href="lesson_19.html" class="ln-btn">← Lesson 19</a>
-    <a href="lesson_21.html" class="ln-btn primary">Lesson 21 →</a>
-  </div>
-</nav>
+  <h1>Quick Quiz 🧠</h1>
 
-<!-- PROGRESS BAR -->
-<div id="progress-wrap">
-  <div id="pbar" style="width:5%;background:var(--accent);height:4px;
-       border-radius:2px;transition:width .4s ease;"></div>
-</div>
-
-<!-- HERO -->
-<section class="lesson-hero">
-  <div class="hero-inner">
-    <div class="lesson-num-badge">Lesson 20</div>
-    <h1>HTML Id</h1>
-    <p class="lesson-tagline">Give elements unique identities with the id attribute for styling and navigation</p>
-    <div class="lesson-meta">
-      <span>📚 2 phases</span>
-      <span>🏗️ Build: My Single-Page App</span>
-      
-    </div>
-  </div>
-</section>
-
-<!-- MAIN CONTENT -->
-<main class="lesson-main">
-
-<div class="welcome-box">
-  <div class="welcome-label">👋 Welcome to Lesson 20!</div>
-  <h2>HTML Id</h2>
-  <p>Give elements unique identities with the id attribute for styling and navigation. In this lesson you will work through
-     <strong>2 phases</strong>.
-     Complete each phase task before clicking <em>Next Phase</em>.
-     
-  </p>
-</div>
-
-<div class="phase " id="phase1" data-phase="1">
-  <div class="phase-header">
-    <div><div class="phase-num">Phase 1</div><div class="phase-title">The id Attribute — Unique Identity</div></div>
-    <div class="phase-check" id="check1"></div>
-  </div>
-  <div class="phase-body">
-    <div class="concept-box">
-      <div class="concept-label">💡 Concept</div>
-      <p>The <code>id</code> attribute gives an element a <strong>unique name</strong> on the page. Unlike <code>class</code> (which can be reused on many elements), each <code>id</code> must be used <em>only once</em> per page. In CSS you target it with a hash: <code>#header</code>. In HTML you can link directly to an id with <code>href="#header"</code>. In JavaScript you can find the element with <code>document.getElementById("header")</code>.</p>
-    </div>
-    <div class="code-wrap">
-  <div class="code-bar">
-    <span class="code-dot r"></span><span class="code-dot y"></span><span class="code-dot g"></span>
-    <span class="code-filename">index.html</span>
-  </div>
-  <div class="code-body"><pre>&lt;!DOCTYPE html&gt;
-&lt;html lang="en"&gt;
-  &lt;head&gt;
-    &lt;title&gt;Id Attribute&lt;/title&gt;
-    &lt;style&gt;
-      /* Target an id with # in CSS */
-      #header {
-        background: #ea4f21;
-        color: white;
-        padding: 20px;
-        text-align: center;
-      }
-      #main-content {
-        max-width: 700px;
-        margin: 0 auto;
-        padding: 20px;
-      }
-      #footer {
-        background: #0f172a;
-        color: #94a3b8;
-        text-align: center;
-        padding: 16px;
-        margin-top: 40px;
-      }
-    &lt;/style&gt;
-  &lt;/head&gt;
-  &lt;body&gt;
-    &lt;div id="header"&gt;
-      &lt;h1&gt;My Page Header&lt;/h1&gt;
-      &lt;p&gt;Styled with #header CSS rule&lt;/p&gt;
-    &lt;/div&gt;
-
-    &lt;div id="main-content"&gt;
-      &lt;h2&gt;Main Content&lt;/h2&gt;
-      &lt;p&gt;Styled with #main-content CSS rule.&lt;/p&gt;
-      &lt;a href="#footer"&gt;Jump to footer&lt;/a&gt;
-    &lt;/div&gt;
-
-    &lt;div id="footer"&gt;
-      &lt;p&gt;Footer — linked here from above!&lt;/p&gt;
-    &lt;/div&gt;
-  &lt;/body&gt;
-&lt;/html&gt;</pre></div>
-</div>
-    <div class="task-box">
-      <div class="task-label">✏️ Your Task</div>
-      <p>Add unique IDs to four sections of your page: <code>id="header"</code>, <code>id="about"</code>, <code>id="projects"</code>, <code>id="contact"</code>. Style each with CSS using the <code>#id</code> selector. Then add a navigation bar with links that jump to each section using <code>href="#about"</code> etc.</p>
-    </div>
-    <button class="next-btn" onclick="unlockNext(1)">
-      Next Phase → <span>→</span>
+</body>
+</html>`)"
+      style="background:#10b981;box-shadow:0 4px 14px rgba(16,185,129,.3)">
+      ⬇ Download starter.html
     </button>
-    <p class="next-tip">Try the task first, then click to continue!</p>
-  </div>
-</div><div class="phase locked" id="phase2" data-phase="2">
-  <div class="phase-header">
-    <div><div class="phase-num">Phase 2</div><div class="phase-title">Id for Navigation and JavaScript</div></div>
-    <div class="phase-check" id="check2"></div>
-  </div>
-  <div class="phase-body">
-    <div class="concept-box">
-      <div class="concept-label">💡 Concept</div>
-      <p>The <code>id</code> attribute is used very heavily in <strong>single-page apps</strong> — where you click a menu item and the page scrolls to that section without loading a new page. It is also how JavaScript changes page content — <code>document.getElementById('myId').style.color = 'red'</code> finds the element by its id and changes its style. You will use this a LOT when you learn JavaScript!</p>
-    </div>
-    <div class="code-wrap">
-  <div class="code-bar">
-    <span class="code-dot r"></span><span class="code-dot y"></span><span class="code-dot g"></span>
-    <span class="code-filename">index.html</span>
-  </div>
-  <div class="code-body"><pre>&lt;!DOCTYPE html&gt;
-&lt;html lang="en"&gt;
-  &lt;head&gt;
-    &lt;title&gt;Id and JavaScript&lt;/title&gt;
-    &lt;style&gt;
-      #demo-box {
-        background: #f0f9ff;
-        border: 2px solid #0284c7;
-        border-radius: 12px;
-        padding: 20px;
-        margin: 20px 0;
-        text-align: center;
-        font-size: 1.1rem;
-        transition: background 0.3s;
-      }
-    &lt;/style&gt;
-  &lt;/head&gt;
-  &lt;body&gt;
-    &lt;h1&gt;Id and JavaScript&lt;/h1&gt;
-
-    &lt;div id="demo-box"&gt;
-      Click a button to change me!
-    &lt;/div&gt;
-
-    &lt;!-- Buttons that use JavaScript + id to change the box --&gt;
-    &lt;button onclick="document.getElementById('demo-box').style.background='#fff3ef'"&gt;
-      Orange tint
-    &lt;/button&gt;
-    &lt;button onclick="document.getElementById('demo-box').style.background='#dcfce7'"&gt;
-      Green tint
-    &lt;/button&gt;
-    &lt;button onclick="document.getElementById('demo-box').innerHTML='&lt;strong&gt;You changed my content!&lt;/strong&gt;'"&gt;
-      Change text
-    &lt;/button&gt;
-  &lt;/body&gt;
-&lt;/html&gt;</pre></div>
-</div>
-    <div class="task-box">
-      <div class="task-label">✏️ Your Task</div>
-      <p>Add a <code>&lt;div id="message"&gt;</code> to your page. Add three buttons that each change the div's background colour using <code>document.getElementById('message').style.background = '...'</code>. This is your first taste of JavaScript + id working together!</p>
-    </div>
-    <button class="next-btn" onclick="unlockNext(2)">
-      Build It! 🚀 <span>→</span>
+    <button class="unlock-btn" onclick="showGithub()"
+      style="background:#0f172a;box-shadow:none">
+      🐙 Push to GitHub →
     </button>
-    <p class="next-tip">Try the task first, then click to continue!</p>
   </div>
 </div>
-
-<div class="project-box" id="build-it" style="display:none">
-  <div class="project-label">🏗️ Build It!</div>
-  <div class="project-name">My Single-Page App</div>
-  <p class="project-desc">Build a single-page portfolio with a sticky nav that uses id-based jump links to all sections.</p>
-  <div class="code-wrap">
-    <div class="code-bar">
-      <span class="code-dot r"></span><span class="code-dot y"></span><span class="code-dot g"></span>
-      <span class="code-filename">starter.html — copy this into a new file!</span>
-    </div>
-    <div class="code-body"><pre id="starter-code">&lt;!DOCTYPE html&gt;
-&lt;html lang="en"&gt;
-  &lt;head&gt;
-    &lt;title&gt;[Your Name] — Portfolio&lt;/title&gt;
-    &lt;style&gt;
-      * { box-sizing: border-box; scroll-behavior: smooth; }
-      body { font-family: Arial, sans-serif; margin: 0;
-             background: #f8fafc; color: #0f172a; }
-      /* Sticky nav */
-      #nav {
-        position: sticky; top: 0; z-index: 100;
-        background: #ea4f21; padding: 14px 24px;
-        display: flex; gap: 20px; align-items: center;
-        box-shadow: 0 2px 8px rgba(234,79,33,.3);
-      }
-      #nav a { color: white; text-decoration: none;
-               font-weight: bold; font-size: 14px; }
-      #nav a:hover { text-decoration: underline; }
-      /* Sections */
-      section { padding: 60px 30px; max-width: 800px; margin: 0 auto; }
-      section h2 { font-size: 1.8rem; color: #ea4f21;
-                   border-bottom: 3px solid #ea4f21;
-                   padding-bottom: 8px; margin-bottom: 20px; }
-      #hero {
-        background: linear-gradient(135deg, #fff3ef, #f8fafc);
-        text-align: center; padding: 80px 30px;
-      }
-      #hero h1 { font-size: 2.5rem; color: #ea4f21; }
-      #contact a { color: #ea4f21; font-weight: bold; }
-    &lt;/style&gt;
-  &lt;/head&gt;
-  &lt;body&gt;
-
-    &lt;!-- STICKY NAVIGATION using id links --&gt;
-    &lt;div id="nav"&gt;
-      &lt;strong style="font-size:16px;"&gt;⚡ [Your Name]&lt;/strong&gt;
-      &lt;a href="#about"&gt;About&lt;/a&gt;
-      &lt;a href="#skills"&gt;Skills&lt;/a&gt;
-      &lt;a href="#projects"&gt;Projects&lt;/a&gt;
-      &lt;a href="#contact"&gt;Contact&lt;/a&gt;
-    &lt;/div&gt;
-
-    &lt;!-- HERO with id for jumping back to top --&gt;
-    &lt;div id="hero"&gt;
-      &lt;h1&gt;Hi, I'm [Your Name]!&lt;/h1&gt;
-      &lt;p&gt;HTML learner · Future web developer · Techbase Academy&lt;/p&gt;
-    &lt;/div&gt;
-
-    &lt;!-- ABOUT --&gt;
-    &lt;section id="about"&gt;
-      &lt;h2&gt;About Me&lt;/h2&gt;
-      &lt;p&gt;Write about yourself here — where you're from, what you love,
-         and why you're learning to code.&lt;/p&gt;
-    &lt;/section&gt;
-
-    &lt;!-- SKILLS --&gt;
-    &lt;section id="skills"&gt;
-      &lt;h2&gt;My Skills&lt;/h2&gt;
-      &lt;p&gt;✅ HTML &amp;nbsp;|&amp;nbsp; 🔄 CSS (learning) &amp;nbsp;|&amp;nbsp;
-         🔜 JavaScript (coming soon)&lt;/p&gt;
-    &lt;/section&gt;
-
-    &lt;!-- PROJECTS --&gt;
-    &lt;section id="projects"&gt;
-      &lt;h2&gt;My Projects&lt;/h2&gt;
-      &lt;p&gt;I have built these pages during my Techbase HTML course:&lt;/p&gt;
-      &lt;ul&gt;
-        &lt;li&gt;Lesson 01 — My First Web Page&lt;/li&gt;
-        &lt;li&gt;Lesson 07 — My Styled Info Card&lt;/li&gt;
-        &lt;li&gt;Lesson 14 — My Photo Gallery&lt;/li&gt;
-      &lt;/ul&gt;
-    &lt;/section&gt;
-
-    &lt;!-- CONTACT --&gt;
-    &lt;section id="contact"&gt;
-      &lt;h2&gt;Contact&lt;/h2&gt;
-      &lt;p&gt;Email: &lt;a href="mailto:you@example.com"&gt;you@example.com&lt;/a&gt;&lt;/p&gt;
-      &lt;p&gt;&lt;a href="#hero"&gt;↑ Back to top&lt;/a&gt;&lt;/p&gt;
-    &lt;/section&gt;
-
-  &lt;/body&gt;
-&lt;/html&gt;</pre></div>
+<div class="gh-acc" id="gh-steps" style="display:none">
+  <div class="gh-acc-head" onclick="toggleGh(this)">
+    🐙 Push Your Project to GitHub Pages &nbsp;<span>▼</span>
   </div>
-  <button class="next-btn" onclick="downloadStarter()" style="margin-right:.75rem">
-    ⬇️ Download starter.html
-  </button>
-  <button class="next-btn" onclick="showGithub()" style="background:#10b981;box-shadow:0 4px 12px rgba(16,185,129,.3)">
-    Show GitHub Steps →
-  </button>
-  <script>
-  const __code = `<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <title>[Your Name] — Portfolio</title>
-    <style>
-      * { box-sizing: border-box; scroll-behavior: smooth; }
-      body { font-family: Arial, sans-serif; margin: 0;
-             background: #f8fafc; color: #0f172a; }
-      /* Sticky nav */
-      #nav {
-        position: sticky; top: 0; z-index: 100;
-        background: #ea4f21; padding: 14px 24px;
-        display: flex; gap: 20px; align-items: center;
-        box-shadow: 0 2px 8px rgba(234,79,33,.3);
-      }
-      #nav a { color: white; text-decoration: none;
-               font-weight: bold; font-size: 14px; }
-      #nav a:hover { text-decoration: underline; }
-      /* Sections */
-      section { padding: 60px 30px; max-width: 800px; margin: 0 auto; }
-      section h2 { font-size: 1.8rem; color: #ea4f21;
-                   border-bottom: 3px solid #ea4f21;
-                   padding-bottom: 8px; margin-bottom: 20px; }
-      #hero {
-        background: linear-gradient(135deg, #fff3ef, #f8fafc);
-        text-align: center; padding: 80px 30px;
-      }
-      #hero h1 { font-size: 2.5rem; color: #ea4f21; }
-      #contact a { color: #ea4f21; font-weight: bold; }
-    </style>
-  </head>
-  <body>
-
-    <!-- STICKY NAVIGATION using id links -->
-    <div id="nav">
-      <strong style="font-size:16px;">⚡ [Your Name]</strong>
-      <a href="#about">About</a>
-      <a href="#skills">Skills</a>
-      <a href="#projects">Projects</a>
-      <a href="#contact">Contact</a>
-    </div>
-
-    <!-- HERO with id for jumping back to top -->
-    <div id="hero">
-      <h1>Hi, I'm [Your Name]!</h1>
-      <p>HTML learner · Future web developer · Techbase Academy</p>
-    </div>
-
-    <!-- ABOUT -->
-    <section id="about">
-      <h2>About Me</h2>
-      <p>Write about yourself here — where you're from, what you love,
-         and why you're learning to code.</p>
-    </section>
-
-    <!-- SKILLS -->
-    <section id="skills">
-      <h2>My Skills</h2>
-      <p>✅ HTML &nbsp;|&nbsp; 🔄 CSS (learning) &nbsp;|&nbsp;
-         🔜 JavaScript (coming soon)</p>
-    </section>
-
-    <!-- PROJECTS -->
-    <section id="projects">
-      <h2>My Projects</h2>
-      <p>I have built these pages during my Techbase HTML course:</p>
-      <ul>
-        <li>Lesson 01 — My First Web Page</li>
-        <li>Lesson 07 — My Styled Info Card</li>
-        <li>Lesson 14 — My Photo Gallery</li>
-      </ul>
-    </section>
-
-    <!-- CONTACT -->
-    <section id="contact">
-      <h2>Contact</h2>
-      <p>Email: <a href="mailto:you@example.com">you@example.com</a></p>
-      <p><a href="#hero">↑ Back to top</a></p>
-    </section>
-
-  </body>
-</html>`;
-  function downloadStarter(){
-    const a=document.createElement('a');
-    a.href='data:text/html;charset=utf-8,'+encodeURIComponent(__code);
-    a.download='starter.html'; a.click();
-  }
-  </script>
-</div>
-
-
-
-<div class="github-acc" id="github-steps" style="display:none">
-  <div class="github-acc-head" onclick="this.nextElementSibling.classList.toggle('open')">
-    🐙 GitHub Setup — Push your project online &nbsp;<span>▼</span>
-  </div>
-  <div class="github-acc-body">
-    <div class="github-step"><div class="github-step-n">1</div><p>Go to <strong>github.com</strong> and sign in. Click the green <strong>New</strong> button to create a new repository. Name it <code>html-lesson-20-html_id</code>.</p></div>
-    <div class="github-step"><div class="github-step-n">2</div><p>Leave it <strong>Public</strong> and tick <strong>Add a README file</strong>. Click <strong>Create repository</strong>.</p></div>
-    <div class="github-step"><div class="github-step-n">3</div><p>Click <strong>Add file → Upload files</strong>. Drag your <code>starter.html</code> (and rename it <code>index.html</code> first!) into the upload box.</p></div>
-    <div class="github-step"><div class="github-step-n">4</div><p>Scroll down, add a commit message like <em>"Add lesson 20 project"</em> and click <strong>Commit changes</strong>.</p></div>
-    <div class="github-step"><div class="github-step-n">5</div><p>Go to <strong>Settings → Pages</strong>. Under <em>Branch</em>, select <strong>main</strong> and click <strong>Save</strong>. Your page will be live at <code>https://YOUR-USERNAME.github.io/html-lesson-20-html_id/</code> in about 1 minute! 🎉</p></div>
-    <button class="next-btn" onclick="showEnd()" style="margin-top:.5rem">I'm done! Finish session ✅</button>
+  <div class="gh-acc-body">
+    <div class="gh-step"><div class="gh-step-n">1</div>
+    <p>Go to <strong>github.com</strong> → click <strong>New repository</strong> → name it <code>html-lesson-20-stage-1-page-structure</code>.</p></div>
+    <div class="gh-step"><div class="gh-step-n">2</div>
+    <p>Set it to <strong>Public</strong>, tick <strong>Add a README</strong>, then click <strong>Create repository</strong>.</p></div>
+    <div class="gh-step"><div class="gh-step-n">3</div>
+    <p>Click <strong>Add file → Upload files</strong>. Upload your <code>starter.html</code> — rename it to <code>index.html</code> before uploading.</p></div>
+    <div class="gh-step"><div class="gh-step-n">4</div>
+    <p>Commit message: <em>"Add HTML lesson 20 project"</em> → click <strong>Commit changes</strong>.</p></div>
+    <div class="gh-step"><div class="gh-step-n">5</div>
+    <p>Go to <strong>Settings → Pages</strong> → branch <strong>main</strong> → <strong>Save</strong>. Your project goes live at <code>https://YOUR-NAME.github.io/html-lesson-20-stage-1-page-structure/</code> in about 1 minute! 🎉</p></div>
+    <button class="unlock-btn" onclick="showEnd()" style="margin-top:.5rem">I've pushed to GitHub — Finish Session ✅</button>
   </div>
 </div>
-
 <div class="session-end" id="session-end">
-  <h2>🎉 Great work! Lesson 20 complete!</h2>
-  <p style="margin-bottom:.8rem;font-size:.9rem;opacity:.9">Today you learned:</p>
-  <ul><li>✅ The id Attribute — Unique Identity</li><li>✅ Id for Navigation and JavaScript</li></ul>
-  <div class="lesson-nav" style="margin-top:1.5rem;border-color:rgba(255,255,255,.2)">
-    <a href="lesson_19.html" class="ln-btn">← Lesson 19</a>
-    <a href="lesson_21.html" class="ln-btn primary">Lesson 21 →</a>
-  </div>
+  <h2>🎉 Lesson 20 complete!</h2>
+  <p style="margin-bottom:.8rem;font-size:.9rem;opacity:.9">You covered:</p>
+  <ul><li>✅ Lesson Introduction</li><li>✅ Prerequisite Concepts</li><li>✅ Part 1 — What Is the HTML Button?</li><li>✅ Part 2 — Styling HTML Buttons with CSS</li><li>✅ Part 3 — The `disabled` Attribute</li><li>✅ Part 4 — Buttons with JavaScript (`onclick`)</li><li>✅ Part 5 — Button Types</li><li>✅ Part 6 — Putting It All Together: Button Attribute Summary</li></ul>
+  <div class="lesson-nav"><a href="lesson_19.html" class="ln-btn">← Lesson 19</a><a href="lesson_21.html" class="ln-btn primary">Lesson 21 →</a></div>
 </div>
-
 </main>
 
-<!-- FOOTER -->
 <footer class="lesson-footer">
-  <p>Techbase Code Coach &nbsp;·&nbsp; HTML Course Lesson 20
-     &nbsp;·&nbsp; © 2025 Techbase Consultant Services, Ibadan</p>
+  Techbase Code Coach · HTML Course · Lesson 20 · © 2025 Techbase Consultant Services, Ibadan
 </footer>
-
 <script>
-const TOTAL=2, KEY='techbase_html_20_phase';
+const TOTAL=10,KEY='techbase_html_l20';
 let current=parseInt(localStorage.getItem(KEY)||'1');
-
 function init(){
-  for(let i=1;i<=current;i++) if(i>1) unlockPhase(i,false);
+  for(let i=2;i<=current;i++) unlockPhase(i,false);
   updateBar();
 }
-
 function unlockNext(n){
-  document.getElementById('check'+n).classList.add('done');
-  document.getElementById('check'+n).textContent='✓';
-  localStorage.setItem(KEY,n+1);
-  current=n+1;
+  const chk=document.getElementById('chk'+n);
+  if(chk){chk.classList.add('done');chk.textContent='✓';}
+  localStorage.setItem(KEY,n+1); current=n+1;
   if(n===TOTAL){
     document.getElementById('build-it').style.display='block';
-    const cap=document.getElementById('capstone');
-    if(cap) cap.style.display='block';
     updateBar(100);
     setTimeout(()=>document.getElementById('build-it').scrollIntoView({behavior:'smooth'}),200);
-  } else {
-    unlockPhase(n+1,true);
-    updateBar();
+  }else{
+    unlockPhase(n+1,true); updateBar();
   }
 }
-
 function unlockPhase(n,scroll){
   const el=document.getElementById('phase'+n);
-  if(el){ el.classList.remove('locked'); if(scroll) setTimeout(()=>el.scrollIntoView({behavior:'smooth',block:'start'}),150); }
+  if(el){el.classList.remove('locked');if(scroll)setTimeout(()=>el.scrollIntoView({behavior:'smooth',block:'start'}),150);}
 }
-
 function updateBar(pct){
-  const p=pct||Math.round((current-1)/TOTAL*95);
+  const p=pct!==undefined?pct:Math.round((current-1)/TOTAL*95);
   document.getElementById('pbar').style.width=p+'%';
 }
-
 function showGithub(){
-  const g=document.getElementById('github-steps');
-  if(g){ g.style.display='block'; setTimeout(()=>g.scrollIntoView({behavior:'smooth'}),150); }
+  const g=document.getElementById('gh-steps');
+  if(g){g.style.display='block';setTimeout(()=>g.scrollIntoView({behavior:'smooth'}),150);}
 }
-
 function showEnd(){
   const e=document.getElementById('session-end');
-  if(e){ e.classList.add('visible'); setTimeout(()=>e.scrollIntoView({behavior:'smooth'}),150); }
+  if(e){e.classList.add('visible');setTimeout(()=>e.scrollIntoView({behavior:'smooth'}),150);}
 }
-
+function toggleGh(el){el.nextElementSibling.classList.toggle('open');}
+function downloadStarter(code){
+  const a=document.createElement('a');
+  a.href='data:text/html;charset=utf-8,'+encodeURIComponent(code);
+  a.download='starter.html';a.click();
+}
 init();
 </script>
-
 </body>
 </html>

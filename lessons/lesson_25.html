@@ -2,766 +2,1370 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Lesson 25: HTML Layout — Techbase HTML Course</title>
-<meta name="description" content="Structure pages professionally using semantic layout elements: header, nav, main, aside and footer">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Lesson 25: HTML Layout Elements and Techniques — Techbase HTML</title>
+<meta name="description" content="HTML Layout Elements and Techniques">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-:root { 
-  --accent:#ea4f21;--accent-pale:#fff3ef;--accent-dark:#c23d15;
-  --accent-border:rgba(234,79,33,.3);--accent-shadow:rgba(234,79,33,.28);
-  --hero-bg:linear-gradient(160deg,#fff3ef 0%,#f8fafc 55%,#fef2e9 100%);
-  --s2:#f1f5f9;
- }
 :root{
+  --acc:#e34c26;--acc-d:#c0391a;--acc-pale:#fff5f2;
+  --acc-b:rgba(227,76,38,.25);--acc-sh:rgba(227,76,38,.25);
   --bg:#f8fafc;--surface:#fff;--border:#e2e8f0;--border2:#cbd5e1;
   --text:#0f172a;--t2:#334155;--muted:#64748b;
   --D:'Space Grotesk',sans-serif;--B:'Plus Jakarta Sans',sans-serif;--M:'JetBrains Mono',monospace;
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased}
-body{background:var(--bg);color:var(--text);font-family:var(--B);font-size:16px;line-height:1.7;overflow-x:hidden}
+body{background:var(--bg);color:var(--text);font-family:var(--B);font-size:16px;line-height:1.75;overflow-x:hidden}
+
 /* NAV */
-.l-nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(255,255,255,.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);height:58px;display:flex;align-items:center;padding:0 1.5rem;gap:1rem;justify-content:space-between}
-.l-nav-logo{font-family:var(--D);font-weight:700;font-size:.88rem;color:var(--text);text-decoration:none}
-.l-nav-logo em{font-style:normal}
+.l-nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(255,255,255,.95);
+  backdrop-filter:blur(12px);border-bottom:1px solid var(--border);height:58px;
+  display:flex;align-items:center;padding:0 1.5rem;gap:1rem;justify-content:space-between}
+.l-nav-logo{font-family:var(--D);font-weight:700;font-size:.9rem;color:var(--text);text-decoration:none}
 .l-nav-back{font-size:.8rem;color:var(--muted);text-decoration:none;font-weight:500;display:flex;align-items:center;gap:.3rem;transition:color .2s}
-.l-nav-back:hover{color:var(--accent)}
-.l-nav-lesson{font-family:var(--M);font-size:.68rem;color:var(--muted)}
-/* PROGRESS BAR */
+.l-nav-back:hover{color:var(--acc)}
+.l-nav-label{font-family:var(--M);font-size:.68rem;color:var(--muted)}
+
+/* PROGRESS */
 .progress-wrap{position:fixed;top:58px;left:0;right:0;z-index:199;height:4px;background:var(--border)}
-.progress-bar{height:100%;background:var(--accent);transition:width .4s ease;width:0%}
+.progress-bar{height:100%;background:var(--acc);transition:width .4s ease;width:0%}
+
 /* HERO */
-.l-hero{padding:88px 1.5rem 2rem;background:var(--hero-bg);border-bottom:1px solid var(--border)}
-.l-hero-inner{max-width:820px;margin:0 auto}
-.l-badge{display:inline-flex;align-items:center;gap:.4rem;border-radius:100px;padding:.2rem .8rem;font-family:var(--M);font-size:.62rem;letter-spacing:.08em;text-transform:uppercase;font-weight:600;border:1px solid;color:var(--accent);background:var(--accent-pale);border-color:var(--accent-border);margin-bottom:.8rem}
-.l-hero h1{font-family:var(--D);font-weight:700;font-size:clamp(1.6rem,4vw,2.4rem);letter-spacing:-.025em;line-height:1.15;margin-bottom:.5rem}
-.l-hero-tag{font-size:.95rem;color:var(--muted);margin-bottom:1.2rem}
-.l-hero-build{background:var(--surface);border:1.5px solid var(--border);border-radius:10px;padding:.9rem 1.2rem;display:flex;align-items:center;gap:.7rem;font-size:.88rem;max-width:520px}
-.l-hero-build strong{color:var(--accent)}
+.l-hero{padding:80px 1.5rem 2rem;background:linear-gradient(160deg,#fff5f2 0%,#f8fafc 55%,#ffe8e0 100%);border-bottom:1px solid var(--border)}
+.l-hero-inner{max-width:860px;margin:0 auto}
+.l-badge{display:inline-flex;align-items:center;gap:.4rem;border-radius:100px;padding:.2rem .85rem;
+  font-family:var(--M);font-size:.62rem;letter-spacing:.08em;text-transform:uppercase;font-weight:600;
+  color:var(--acc);background:var(--acc-pale);border:1px solid var(--acc-b);margin-bottom:.8rem}
+.l-hero h1{font-family:var(--D);font-weight:700;font-size:clamp(1.5rem,4vw,2.3rem);
+  letter-spacing:-.02em;line-height:1.15;margin-bottom:.5rem}
+.l-hero-sub{font-size:.95rem;color:var(--muted);margin-bottom:1rem}
+
 /* WELCOME BOX */
-.welcome-box{background:linear-gradient(135deg,var(--accent),var(--accent-dark));color:#fff;border-radius:16px;padding:1.5rem 1.8rem;max-width:820px;margin:2rem auto 0}
-.welcome-box h2{font-family:var(--D);font-weight:700;font-size:1.1rem;margin-bottom:.6rem}
-.welcome-box p{font-size:.9rem;line-height:1.75;opacity:.92}
-.welcome-meta{display:flex;gap:1.5rem;margin-top:1rem;flex-wrap:wrap}
-.welcome-meta span{background:rgba(255,255,255,.15);border-radius:6px;padding:.25rem .8rem;font-family:var(--M);font-size:.7rem;font-weight:500}
-/* MAIN CONTENT */
-main{max-width:820px;margin:0 auto;padding:2rem 1.5rem 5rem}
+.welcome-box{background:linear-gradient(135deg,var(--acc),var(--acc-d));color:#fff;
+  border-radius:16px;padding:1.5rem 1.8rem;max-width:860px;margin:1.5rem auto 0}
+.welcome-box h2{font-family:var(--D);font-weight:700;font-size:1.05rem;margin-bottom:.6rem}
+.welcome-box p,.welcome-box li{font-size:.9rem;line-height:1.8;opacity:.93}
+.welcome-box ul{margin-left:1.2rem;margin-top:.5rem}
+.welcome-meta{display:flex;gap:1rem;margin-top:1rem;flex-wrap:wrap}
+.welcome-meta span{background:rgba(255,255,255,.18);border-radius:6px;padding:.2rem .75rem;
+  font-family:var(--M);font-size:.68rem;font-weight:500}
+
 /* PHASE */
-.phase{background:var(--surface);border:1.5px solid var(--border);border-radius:16px;margin-bottom:1.5rem;overflow:hidden;transition:opacity .3s,transform .3s}
-.phase.locked{opacity:.4;pointer-events:none;filter:blur(1px)}
-.phase-header{padding:1rem 1.4rem;background:var(--s2,#f1f5f9);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;gap:1rem}
-.phase-num{font-family:var(--M);font-size:.7rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}
-.phase-title{font-family:var(--D);font-weight:700;font-size:1rem;color:var(--text)}
-.phase-check{width:24px;height:24px;border-radius:50%;background:var(--border);display:flex;align-items:center;justify-content:center;font-size:.75rem;flex-shrink:0;transition:background .3s}
+.phase{background:var(--surface);border:1.5px solid var(--border);border-radius:16px;
+  margin-bottom:1.5rem;overflow:hidden;transition:opacity .3s,transform .3s,filter .3s}
+.phase.locked{opacity:.35;pointer-events:none;filter:blur(1.5px)}
+.phase-header{padding:1rem 1.4rem;background:#fff8f5;
+  border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;gap:1rem;cursor:default}
+.phase-num{font-family:var(--M);font-size:.7rem;font-weight:600;letter-spacing:.08em;
+  text-transform:uppercase;color:var(--acc)}
+.phase-title{font-family:var(--D);font-weight:700;font-size:.95rem;color:var(--text);
+  flex:1;margin:0 .8rem}
+.phase-check{width:26px;height:26px;border-radius:50%;background:var(--border);
+  display:flex;align-items:center;justify-content:center;font-size:.8rem;flex-shrink:0;
+  transition:background .3s,color .3s}
 .phase-check.done{background:#10b981;color:#fff}
-.phase-body{padding:1.4rem}
-/* CONCEPT BOX */
-.concept-box{background:#f0f9ff;border-left:4px solid #0284c7;border-radius:0 10px 10px 0;padding:1rem 1.2rem;margin-bottom:1.2rem}
-.concept-label{font-family:var(--M);font-size:.65rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#0284c7;margin-bottom:.4rem}
-.concept-box p{font-size:.92rem;color:#0c4a6e;line-height:1.75}
-/* CODE BLOCK */
-.code-wrap{margin:1.2rem 0;border-radius:12px;overflow:hidden;border:1px solid #1e293b}
-.code-bar{background:#1e293b;padding:.6rem 1rem;display:flex;align-items:center;gap:.4rem}
-.code-dot{width:8px;height:8px;border-radius:50%}
-.code-dot.r{background:#ff5f57}.code-dot.y{background:#febc2e}.code-dot.g{background:#28c840}
-.code-filename{margin-left:.5rem;font-family:var(--M);font-size:.65rem;color:#64748b}
-.code-body{background:#0f172a;padding:1.2rem 1.4rem;overflow-x:auto}
-.code-body pre{font-family:var(--M);font-size:.78rem;line-height:1.9;color:#e2e8f0;margin:0;white-space:pre}
-.code-body pre .cm{color:#64748b} /* comment */
-.code-body pre .tg{color:#38bdf8} /* tag */
-.code-body pre .at{color:#c084fc} /* attribute */
-.code-body pre .vl{color:#86efac} /* value */
-.code-body pre .tx{color:#e2e8f0} /* text */
+.phase-body{padding:1.6rem 1.8rem}
+
+/* RICH CONTENT STYLES */
+.v2-p{margin-bottom:1rem;font-size:.95rem;color:var(--t2);line-height:1.85}
+.v2-h3{font-family:var(--D);font-weight:700;font-size:1.05rem;color:var(--text);
+  margin:1.6rem 0 .5rem;padding-top:.2rem;border-top:2px solid var(--acc-pale)}
+.v2-h4{font-family:var(--D);font-weight:600;font-size:.95rem;color:var(--t2);margin:1.1rem 0 .4rem}
+.v2-h5,.v2-h6{font-family:var(--D);font-weight:600;font-size:.9rem;color:var(--muted);margin:.8rem 0 .3rem}
+.v2-ul,.v2-ol{margin:.6rem 0 1rem 1.4rem;font-size:.93rem;color:var(--t2);line-height:1.9}
+.v2-ul li,.v2-ol li{margin-bottom:.3rem}
+.v2-bq{border-left:4px solid var(--acc);background:var(--acc-pale);border-radius:0 10px 10px 0;
+  padding:.9rem 1.2rem;margin:1rem 0;font-size:.92rem;color:#7b1c06;font-style:italic}
+.v2-bq p{margin:0;color:inherit}
+.v2-bq strong{font-style:normal}
+.v2-hr{border:none;border-top:1px solid var(--border);margin:1.2rem 0}
+.v2-table-wrap{overflow-x:auto;margin:1rem 0}
+.v2-table{width:100%;border-collapse:collapse;font-size:.87rem}
+.v2-table th{background:var(--acc-pale);color:#7b1c06;font-family:var(--D);
+  font-weight:700;padding:9px 12px;text-align:left;border:1px solid var(--acc-b)}
+.v2-table td{padding:8px 12px;border:1px solid var(--border);color:var(--t2);vertical-align:top}
+.v2-table tr:nth-child(even) td{background:#f8fafc}
+.v2-table code{background:var(--acc-pale);color:var(--acc);border-radius:4px;
+  padding:1px 5px;font-family:var(--M);font-size:.8em}
+.phase-body code{background:var(--acc-pale);color:var(--acc-d);border-radius:4px;
+  padding:1px 6px;font-family:var(--M);font-size:.82em}
+.phase-body a{color:var(--acc);text-decoration:underline;text-underline-offset:2px}
+.phase-body strong{color:var(--text)}
+
+/* CODE BLOCKS */
+.v2-code-wrap{margin:1.2rem 0;border-radius:12px;overflow:hidden;border:1px solid #1e293b;box-shadow:0 4px 16px rgba(0,0,0,.15)}
+.v2-code-bar{background:#1e293b;padding:.55rem 1rem;display:flex;align-items:center;gap:.4rem}
+.v2-dot{width:10px;height:10px;border-radius:50%}
+.v2-dot.r{background:#ff5f57}.v2-dot.y{background:#febc2e}.v2-dot.g{background:#28c840}
+.v2-code-lang{margin-left:.6rem;font-family:var(--M);font-size:.65rem;color:#64748b;text-transform:uppercase;letter-spacing:.08em}
+.v2-code-body{background:#0f172a;padding:1.3rem 1.5rem;overflow-x:auto}
+.v2-code-body pre{margin:0}
+.v2-code-body code{font-family:var(--M);font-size:.8rem;line-height:1.9;color:#e2e8f0;
+  white-space:pre;background:transparent;padding:0;border-radius:0}
+
 /* TASK BOX */
-.task-box{background:#fffbeb;border:1.5px dashed #d97706;border-radius:12px;padding:1rem 1.2rem;margin:1.2rem 0}
-.task-label{font-family:var(--M);font-size:.65rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#b45309;margin-bottom:.4rem}
-.task-box p{font-size:.92rem;color:#78350f;line-height:1.75}
-.task-box code{background:rgba(180,83,9,.1);border-radius:4px;padding:.1rem .4rem;font-family:var(--M);font-size:.82em}
-/* NEXT BUTTON */
-.next-btn{display:inline-flex;align-items:center;gap:.5rem;background:var(--accent);color:#fff;font-family:var(--D);font-weight:700;font-size:.88rem;padding:.75rem 1.5rem;border-radius:10px;border:none;cursor:pointer;transition:transform .2s,box-shadow .2s;box-shadow:0 4px 12px var(--accent-shadow);margin-top:1rem}
-.next-btn:hover{transform:translateY(-2px);box-shadow:0 8px 20px var(--accent-shadow)}
-.next-btn:disabled{opacity:.5;cursor:not-allowed;transform:none}
-.next-tip{font-family:var(--M);font-size:.72rem;color:var(--muted);margin-top:.6rem}
-/* PROJECT BOX */
-.project-box{background:#f0fdf4;border:2px solid #16a34a;border-radius:16px;padding:1.5rem;margin:2rem 0}
-.project-label{font-family:var(--M);font-size:.65rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#15803d;margin-bottom:.4rem}
-.project-name{font-family:var(--D);font-weight:700;font-size:1.1rem;color:#14532d;margin-bottom:.5rem}
-.project-desc{font-size:.9rem;color:#166534;margin-bottom:1.2rem;line-height:1.7}
-/* CAPSTONE BOX */
-.capstone-box{background:linear-gradient(135deg,#1e1b4b,#312e81);border-radius:16px;padding:1.5rem;margin:2rem 0;color:#fff}
-.capstone-label{font-family:var(--M);font-size:.65rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#a5b4fc;margin-bottom:.4rem}
-.capstone-name{font-family:var(--D);font-weight:700;font-size:1.2rem;margin-bottom:.5rem}
-.capstone-desc{font-size:.9rem;color:rgba(255,255,255,.8);margin-bottom:1.2rem;line-height:1.7}
-/* FILE TABS */
-.file-tabs{display:flex;gap:.5rem;margin-bottom:0;flex-wrap:wrap}
-.file-tab{font-family:var(--M);font-size:.72rem;padding:.35rem .8rem;background:#1e293b;color:#94a3b8;border-radius:6px 6px 0 0;cursor:pointer;border:1px solid #334155;border-bottom:none;transition:background .15s}
-.file-tab.active{background:#0f172a;color:#e2e8f0}
-.file-content{display:none}.file-content.active{display:block}
+.task-box{background:#fff0ec;border:2px dashed #e34c26;
+  border-radius:12px;padding:1rem 1.3rem;margin:1.4rem 0}
+.task-label{font-family:var(--M);font-size:.65rem;font-weight:700;letter-spacing:.1em;
+  text-transform:uppercase;color:#7b1c06;margin-bottom:.5rem;display:flex;align-items:center;gap:.4rem}
+.task-box p,.task-body{font-size:.92rem;color:#7b1c06;line-height:1.8}
+.task-box code{background:rgba(0,0,0,.08);border-radius:4px;padding:1px 6px;
+  font-family:var(--M);font-size:.82em}
+
+/* UNLOCK BUTTON */
+.unlock-btn{display:inline-flex;align-items:center;gap:.5rem;background:var(--acc);
+  color:#fff;font-family:var(--D);font-weight:700;font-size:.88rem;
+  padding:.75rem 1.6rem;border-radius:10px;border:none;cursor:pointer;
+  transition:transform .2s,box-shadow .2s;box-shadow:0 4px 14px var(--acc-sh);margin-top:1.2rem}
+.unlock-btn:hover{transform:translateY(-2px);box-shadow:0 8px 22px var(--acc-sh)}
+
+/* BUILD IT */
+.build-box{background:#f0fdf4;border:2px solid #16a34a;border-radius:16px;padding:1.6rem;margin:2rem 0;display:none}
+.build-label{font-family:var(--M);font-size:.65rem;font-weight:700;letter-spacing:.1em;
+  text-transform:uppercase;color:#15803d;margin-bottom:.4rem}
+.build-name{font-family:var(--D);font-weight:700;font-size:1.1rem;color:#14532d;margin-bottom:.5rem}
+.build-desc{font-size:.9rem;color:#166534;margin-bottom:1.2rem;line-height:1.75}
+.build-desc code{background:rgba(22,163,74,.12);border-radius:4px;padding:1px 6px;font-family:var(--M);font-size:.82em}
+.build-desc strong{color:#14532d}
+
 /* GITHUB ACCORDION */
-.github-acc{border:1.5px solid var(--border);border-radius:12px;overflow:hidden;margin:1.5rem 0}
-.github-acc-head{padding:1rem 1.2rem;background:#f8fafc;cursor:pointer;display:flex;align-items:center;justify-content:space-between;font-family:var(--D);font-weight:600;font-size:.9rem;user-select:none}
-.github-acc-body{display:none;padding:1.2rem;border-top:1px solid var(--border)}
-.github-acc-body.open{display:block}
-.github-step{display:flex;gap:.8rem;margin-bottom:1rem;align-items:flex-start}
-.github-step-n{width:24px;height:24px;border-radius:50%;background:var(--accent);color:#fff;font-family:var(--D);font-weight:700;font-size:.75rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px}
-.github-step p{font-size:.88rem;color:var(--t2);line-height:1.7}
+.gh-acc{border:1.5px solid var(--border);border-radius:12px;overflow:hidden;margin:1.5rem 0}
+.gh-acc-head{padding:1rem 1.2rem;background:#f8fafc;cursor:pointer;
+  display:flex;align-items:center;justify-content:space-between;
+  font-family:var(--D);font-weight:600;font-size:.9rem;user-select:none}
+.gh-acc-body{display:none;padding:1.2rem;border-top:1px solid var(--border)}
+.gh-acc-body.open{display:block}
+.gh-step{display:flex;gap:.8rem;margin-bottom:1rem;align-items:flex-start}
+.gh-step-n{width:26px;height:26px;border-radius:50%;background:var(--acc);color:#fff;
+  font-family:var(--D);font-weight:700;font-size:.75rem;display:flex;align-items:center;
+  justify-content:center;flex-shrink:0;margin-top:2px}
+.gh-step p{font-size:.88rem;color:var(--t2);line-height:1.7}
+.gh-step code{background:var(--acc-pale);color:var(--acc-d);border-radius:4px;
+  padding:1px 6px;font-family:var(--M);font-size:.82em}
+
 /* SESSION END */
-.session-end{background:linear-gradient(135deg,var(--accent),var(--accent-dark));color:#fff;border-radius:16px;padding:1.5rem 1.8rem;margin:2rem 0;display:none}
+.session-end{background:linear-gradient(135deg,var(--acc),var(--acc-d));color:#fff;
+  border-radius:16px;padding:1.6rem 1.8rem;margin:2rem 0;display:none}
 .session-end.visible{display:block}
 .session-end h2{font-family:var(--D);font-weight:700;font-size:1.1rem;margin-bottom:.8rem}
 .session-end ul{list-style:none;display:flex;flex-direction:column;gap:.4rem}
-.session-end li{font-size:.9rem;opacity:.92;display:flex;align-items:center;gap:.5rem}
-/* LESSON NAV */
-.lesson-nav{display:flex;align-items:center;justify-content:space-between;padding-top:2rem;border-top:1px solid var(--border);margin-top:2rem;flex-wrap:wrap;gap:.75rem}
-.ln-btn{display:inline-flex;align-items:center;gap:.4rem;background:var(--surface);color:var(--t2);font-family:var(--D);font-weight:600;font-size:.82rem;padding:.65rem 1.2rem;border-radius:8px;text-decoration:none;border:1.5px solid var(--border);transition:border-color .2s,color .2s}
-.ln-btn:hover{border-color:var(--accent);color:var(--accent)}
-.ln-btn.primary{background:var(--accent);color:#fff;border-color:var(--accent)}
+.session-end li{font-size:.9rem;opacity:.93;display:flex;align-items:center;gap:.5rem}
+.ln-btn{display:inline-flex;align-items:center;gap:.4rem;background:var(--surface);
+  color:var(--t2);font-family:var(--D);font-weight:600;font-size:.82rem;
+  padding:.65rem 1.2rem;border-radius:8px;text-decoration:none;
+  border:1.5px solid var(--border);transition:border-color .2s,color .2s}
+.ln-btn:hover{border-color:var(--acc);color:var(--acc)}
+.ln-btn.primary{background:var(--acc);color:#fff;border-color:var(--acc)}
 .ln-btn.primary:hover{opacity:.9}
-/* UTILS */
-code{font-family:var(--M);font-size:.85em;background:#f1f5f9;border-radius:4px;padding:.1rem .35rem;color:var(--accent)}
-.emoji{font-style:normal}
-@media(max-width:600px){.l-hero h1{font-size:1.5rem}.welcome-meta{gap:.75rem}}
-
+.lesson-nav{display:flex;align-items:center;justify-content:space-between;
+  padding-top:2rem;border-top:1px solid rgba(255,255,255,.25);margin-top:1.5rem;flex-wrap:wrap;gap:.75rem}
+.lesson-footer{text-align:center;padding:1.5rem;font-family:var(--M);font-size:.72rem;
+  color:var(--muted);border-top:1px solid var(--border);background:var(--surface)}
 </style>
 </head>
 <body>
-
-<!-- FIXED NAV -->
-<nav class="lesson-nav-bar">
-  <a href="../index.html" class="nav-back">← HTML Course</a>
-  <span class="nav-lesson">Lesson 25 of 34 &nbsp;·&nbsp; HTML Layout</span>
-  <div class="nav-actions">
-    <a href="lesson_24.html" class="ln-btn">← Lesson 24</a>
-    <a href="lesson_26.html" class="ln-btn primary">Lesson 26 →</a>
-  </div>
+<nav class="l-nav">
+  <a href="../index.html" class="l-nav-logo">⚡ Techbase HTML</a>
+  <span class="l-nav-label">Lesson 25 of 34</span>
+  <a href="../index.html" class="l-nav-back">← All Lessons</a>
 </nav>
+<div class="progress-wrap"><div class="progress-bar" id="pbar"></div></div>
 
-<!-- PROGRESS BAR -->
-<div id="progress-wrap">
-  <div id="pbar" style="width:5%;background:var(--accent);height:4px;
-       border-radius:2px;transition:width .4s ease;"></div>
+<div class="l-hero">
+  <div class="l-hero-inner">
+    <div class="l-badge">HTML · Lesson 25</div>
+    <h1>HTML Layout Elements and Techniques</h1>
+    <div class="l-hero-sub">7 phases · Build: Stage 1 — Setup the HTML Structure</div>
+  </div>
 </div>
 
-<!-- HERO -->
-<section class="lesson-hero">
-  <div class="hero-inner">
-    <div class="lesson-num-badge">Lesson 25</div>
-    <h1>HTML Layout</h1>
-    <p class="lesson-tagline">Structure pages professionally using semantic layout elements: header, nav, main, aside and footer</p>
-    <div class="lesson-meta">
-      <span>📚 3 phases</span>
-      <span>🏗️ Build: My Full-Layout Page</span>
-      
-    </div>
+<section style="background:linear-gradient(160deg,#fff5f2 0%,#f8fafc 55%,#ffe8e0 100%);padding-bottom:1.5rem;border-bottom:1px solid var(--border)">
+  <div style="max-width:860px;margin:0 auto;padding:0 1.5rem"><div class="welcome-box">
+  <h2>👋 Welcome to Lesson 25</h2>
+  <div style="font-size:.9rem;line-height:1.85;opacity:.93"><p class="v2-p">Have you ever looked at a website like a newspaper or a magazine? You notice that the page is divided into neat zones — a big title at the top, a navigation menu on the side, articles in the middle, and a bar at the bottom. That organised arrangement is called a <strong>page layout</strong>.</p>
+<p class="v2-p">In this lesson, you will learn:</p>
+<ul class="v2-ul"><li>What HTML layout elements are and why they exist</li><li>The eight key semantic layout elements used by every professional web developer</li><li>Four different techniques to create multi-column page layouts</li><li>How to build a complete structured web page from scratch</li></ul>
+<p class="v2-p">By the end of this lesson, you will be able to look at any website and immediately identify its layout structure — and you will be able to build one yourself.</p>
+<blockquote class="v2-bq"><p class="v2-p"><strong>Real-World Connection:</strong> Every website you visit — Google, BBC, Amazon, Facebook — uses HTML layout elements. Understanding layout is the skill that transforms a simple webpage into a professional-looking website.</p></blockquote>
+<hr class="v2-hr"></div>
+  <div class="welcome-meta">
+    <span>📚 7 phases</span>
+    <span>🏗️ Stage 1 — Setup the HTML Structure</span>
   </div>
+</div></div>
 </section>
 
-<!-- MAIN CONTENT -->
-<main class="lesson-main">
-
-<div class="welcome-box">
-  <div class="welcome-label">👋 Welcome to Lesson 25!</div>
-  <h2>HTML Layout</h2>
-  <p>Structure pages professionally using semantic layout elements: header, nav, main, aside and footer. In this lesson you will work through
-     <strong>3 phases</strong>.
-     Complete each phase task before clicking <em>Next Phase</em>.
-     
-  </p>
-</div>
-
-<div class="phase " id="phase1" data-phase="1">
+<main style="max-width:860px;margin:0 auto;padding:2rem 1.5rem 5rem">
+<div class="phase" id="phase1">
   <div class="phase-header">
-    <div><div class="phase-num">Phase 1</div><div class="phase-title">Semantic Layout Elements</div></div>
-    <div class="phase-check" id="check1"></div>
+    <div class="phase-num">Phase 1 of 7</div>
+    <div class="phase-title">Lesson Introduction</div>
+    <div class="phase-check" id="chk1"></div>
   </div>
   <div class="phase-body">
-    <div class="concept-box">
-      <div class="concept-label">💡 Concept</div>
-      <p>HTML5 introduced <strong>semantic layout elements</strong> that describe the PURPOSE of each section. <code>&lt;header&gt;</code> — the top section (logo, site name, tagline). <code>&lt;nav&gt;</code> — navigation links. <code>&lt;main&gt;</code> — the main unique content of the page (only ONE per page). <code>&lt;article&gt;</code> — a self-contained piece of content (blog post, news story). <code>&lt;aside&gt;</code> — sidebar content. <code>&lt;footer&gt;</code> — the bottom section (copyright, links). Using these instead of plain <code>&lt;div&gt;</code> helps search engines and screen readers understand your page.</p>
-    </div>
-    <div class="code-wrap">
-  <div class="code-bar">
-    <span class="code-dot r"></span><span class="code-dot y"></span><span class="code-dot g"></span>
-    <span class="code-filename">index.html</span>
-  </div>
-  <div class="code-body"><pre>&lt;!DOCTYPE html&gt;
-&lt;html lang="en"&gt;
-  &lt;head&gt;
-    &lt;title&gt;Semantic Layout&lt;/title&gt;
-    &lt;style&gt;
-      * { box-sizing: border-box; }
-      body { margin: 0; font-family: Arial, sans-serif; }
-      header { background: #ea4f21; color: white; padding: 20px 30px; }
-      nav    { background: #0f172a; padding: 12px 30px; }
-      nav a  { color: white; text-decoration: none; margin-right: 20px; }
-      .page-wrap { display: flex; max-width: 960px; margin: 0 auto; gap: 24px; padding: 24px; }
-      main   { flex: 3; }
-      aside  { flex: 1; background: #f8fafc; padding: 20px; border-radius: 10px; }
-      footer { background: #0f172a; color: #94a3b8; text-align: center; padding: 20px; }
-    &lt;/style&gt;
-  &lt;/head&gt;
-  &lt;body&gt;
-    &lt;header&gt;
-      &lt;h1&gt;My Website&lt;/h1&gt;
-      &lt;p&gt;A tagline goes here&lt;/p&gt;
-    &lt;/header&gt;
-
-    &lt;nav&gt;
-      &lt;a href="#home"&gt;Home&lt;/a&gt;
-      &lt;a href="#about"&gt;About&lt;/a&gt;
-      &lt;a href="#contact"&gt;Contact&lt;/a&gt;
-    &lt;/nav&gt;
-
-    &lt;div class="page-wrap"&gt;
-      &lt;main&gt;
-        &lt;h2&gt;Main Content&lt;/h2&gt;
-        &lt;p&gt;This is the main article area — the most important content.&lt;/p&gt;
-      &lt;/main&gt;
-
-      &lt;aside&gt;
-        &lt;h3&gt;Sidebar&lt;/h3&gt;
-        &lt;p&gt;Extra info, ads, or related links.&lt;/p&gt;
-      &lt;/aside&gt;
-    &lt;/div&gt;
-
-    &lt;footer&gt;
-      &lt;p&gt;© 2025 My Website | Ibadan, Nigeria&lt;/p&gt;
-    &lt;/footer&gt;
-  &lt;/body&gt;
-&lt;/html&gt;</pre></div>
-</div>
+    <p class="v2-p">Have you ever looked at a website like a newspaper or a magazine? You notice that the page is divided into neat zones — a big title at the top, a navigation menu on the side, articles in the middle, and a bar at the bottom. That organised arrangement is called a <strong>page layout</strong>.</p>
+<p class="v2-p">In this lesson, you will learn:</p>
+<ul class="v2-ul"><li>What HTML layout elements are and why they exist</li><li>The eight key semantic layout elements used by every professional web developer</li><li>Four different techniques to create multi-column page layouts</li><li>How to build a complete structured web page from scratch</li></ul>
+<p class="v2-p">By the end of this lesson, you will be able to look at any website and immediately identify its layout structure — and you will be able to build one yourself.</p>
+<blockquote class="v2-bq"><p class="v2-p"><strong>Real-World Connection:</strong> Every website you visit — Google, BBC, Amazon, Facebook — uses HTML layout elements. Understanding layout is the skill that transforms a simple webpage into a professional-looking website.</p></blockquote>
+<hr class="v2-hr">
     <div class="task-box">
       <div class="task-label">✏️ Your Task</div>
-      <p>Build this layout in your own file. Change the header colour, add real navigation links, write some content in main, and add your own sidebar content. Check in DevTools that the layout uses the correct semantic tags.</p>
+      <div class="task-body">Now practise what you just learned about <strong>Lesson Introduction</strong>. Open your editor, type the examples above by hand, then modify them — change values, rename variables, and observe what happens. Active experimentation is how code sticks.</div>
     </div>
-    <button class="next-btn" onclick="unlockNext(1)">
-      Next Phase → <span>→</span>
-    </button>
-    <p class="next-tip">Try the task first, then click to continue!</p>
+    <button class="unlock-btn" onclick="unlockNext(1)">Start Lesson ✓</button>
   </div>
-</div><div class="phase locked" id="phase2" data-phase="2">
+</div>
+<div class="phase locked" id="phase2">
   <div class="phase-header">
-    <div><div class="phase-num">Phase 2</div><div class="phase-title">Article and Section</div></div>
-    <div class="phase-check" id="check2"></div>
+    <div class="phase-num">Phase 2 of 7</div>
+    <div class="phase-title">Prerequisite Concepts</div>
+    <div class="phase-check" id="chk2"></div>
   </div>
   <div class="phase-body">
-    <div class="concept-box">
-      <div class="concept-label">💡 Concept</div>
-      <p><code>&lt;article&gt;</code> wraps content that makes sense <em>on its own</em> — if you copied it to another website, it would still make sense (blog post, news article, forum post). <code>&lt;section&gt;</code> groups related content within a page — it should always have a heading. The rule: <code>&lt;article&gt;</code> can contain <code>&lt;section&gt;</code>s, and <code>&lt;section&gt;</code>s can contain <code>&lt;article&gt;</code>s. Both help search engines and screen readers understand the structure.</p>
-    </div>
-    <div class="code-wrap">
-  <div class="code-bar">
-    <span class="code-dot r"></span><span class="code-dot y"></span><span class="code-dot g"></span>
-    <span class="code-filename">index.html</span>
-  </div>
-  <div class="code-body"><pre>&lt;!DOCTYPE html&gt;
-&lt;html lang="en"&gt;
-  &lt;head&gt;
-    &lt;title&gt;Article and Section&lt;/title&gt;
-    &lt;style&gt;
-      article {
-        background: white; border: 1.5px solid #e2e8f0;
-        border-radius: 12px; padding: 24px; margin: 20px 0;
-      }
-      article header h2 { color: #ea4f21; margin: 0 0 8px; }
-      article header p  { color: #64748b; font-size: 13px; margin: 0 0 16px; }
-      section { margin-top: 20px; padding-top: 16px; border-top: 1px solid #f1f5f9; }
-      section h3 { color: #0284c7; }
-    &lt;/style&gt;
-  &lt;/head&gt;
-  &lt;body&gt;
-    &lt;main&gt;
-      &lt;article&gt;
-        &lt;header&gt;
-          &lt;h2&gt;My First Blog Post&lt;/h2&gt;
-          &lt;p&gt;Published: 1 January 2025 | By: Techbase Student&lt;/p&gt;
-        &lt;/header&gt;
-
-        &lt;p&gt;This is the introduction to my blog post...&lt;/p&gt;
-
-        &lt;section&gt;
-          &lt;h3&gt;Section 1 — What I Learned&lt;/h3&gt;
-          &lt;p&gt;Today I learned about semantic HTML elements.&lt;/p&gt;
-        &lt;/section&gt;
-
-        &lt;section&gt;
-          &lt;h3&gt;Section 2 — What's Next&lt;/h3&gt;
-          &lt;p&gt;Next I will learn about CSS layouts.&lt;/p&gt;
-        &lt;/section&gt;
-      &lt;/article&gt;
-    &lt;/main&gt;
-  &lt;/body&gt;
-&lt;/html&gt;</pre></div>
-</div>
+    <p class="v2-p">Before we dive in, let's make sure you understand a few foundational ideas. If you already know these, you can skim this section quickly.</p>
+<h3 class="v2-h3">What is HTML?</h3>
+<p class="v2-p">HTML stands for <strong>HyperText Markup Language</strong>. It is the language we use to describe the structure of a webpage. Think of HTML as the skeleton of your website — it tells the browser "here is a heading, here is a paragraph, here is an image."</p>
+<h3 class="v2-h3">What is a Tag?</h3>
+<p class="v2-p">A <strong>tag</strong> is a special keyword wrapped inside angle brackets <code>&lt; &gt;</code>. Most HTML tags come in pairs: an <strong>opening tag</strong> and a <strong>closing tag</strong>.</p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;p&gt;This is a paragraph.&lt;/p&gt;</code></pre></div></div>
+<ul class="v2-ul"><li><code>&lt;p&gt;</code> → opening tag (start of the paragraph)</li><li><code>This is a paragraph.</code> → the content</li><li><code>&lt;/p&gt;</code> → closing tag (end of the paragraph, note the forward slash <code>/</code>)</li></ul>
+<h3 class="v2-h3">What is an Element?</h3>
+<p class="v2-p">An <strong>element</strong> is the complete combination of opening tag + content + closing tag.</p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;h1&gt;Welcome to My Website&lt;/h1&gt;</code></pre></div></div>
+<p class="v2-p">This entire line is one element.</p>
+<h3 class="v2-h3">What is CSS?</h3>
+<p class="v2-p"><strong>CSS</strong> stands for <strong>Cascading Style Sheets</strong>. While HTML creates the structure of your page, CSS controls how it <em>looks</em> — colours, sizes, positions, and spacing. In this lesson, we will use a little CSS to arrange our layout elements side by side.</p>
+<h3 class="v2-h3">What is a Semantic Element?</h3>
+<p class="v2-p">A <strong>semantic element</strong> is an HTML tag that clearly <em>describes its own meaning</em>. For example, <code>&lt;nav&gt;</code> tells both the browser and any human reading the code: "this is the navigation area." This is different from a <code>&lt;div&gt;</code>, which says nothing about what is inside it.</p>
+<p class="v2-p">Semantic elements make your code easier to read, easier to maintain, and better for accessibility (for example, screen readers used by visually impaired users can understand the structure better).</p>
+<hr class="v2-hr">
     <div class="task-box">
       <div class="task-label">✏️ Your Task</div>
-      <p>Write a short blog post using <code>&lt;article&gt;</code>. Inside it, create three <code>&lt;section&gt;</code>s: introduction, main points, and conclusion. Give each section an <code>&lt;h3&gt;</code> heading. Notice how this is much more meaningful than using only <code>&lt;div&gt;</code> everywhere.</p>
+      <div class="task-body">Now practise what you just learned about <strong>Prerequisite Concepts</strong>. Open your editor, type the examples above by hand, then modify them — change values, rename variables, and observe what happens. Active experimentation is how code sticks.</div>
     </div>
-    <button class="next-btn" onclick="unlockNext(2)">
-      Next Phase → <span>→</span>
-    </button>
-    <p class="next-tip">Try the task first, then click to continue!</p>
+    <button class="unlock-btn" onclick="unlockNext(2)">Phase Complete — Unlock Next ✓</button>
   </div>
-</div><div class="phase locked" id="phase3" data-phase="3">
+</div>
+<div class="phase locked" id="phase3">
   <div class="phase-header">
-    <div><div class="phase-num">Phase 3</div><div class="phase-title">CSS Flexbox for Layout</div></div>
-    <div class="phase-check" id="check3"></div>
+    <div class="phase-num">Phase 3 of 7</div>
+    <div class="phase-title">Part 1: Conceptual Understanding — What Is a Web Page Layout?</div>
+    <div class="phase-check" id="chk3"></div>
   </div>
   <div class="phase-body">
-    <div class="concept-box">
-      <div class="concept-label">💡 Concept</div>
-      <p>The most modern way to create multi-column layouts is <strong>CSS Flexbox</strong>. Add <code>display: flex</code> to a container and its children line up in a row by default. <code>flex: 2</code> on one child and <code>flex: 1</code> on another makes the first one twice as wide. <code>gap</code> adds spacing between them. <code>flex-wrap: wrap</code> lets items wrap to a new row on small screens. Flexbox is much better than old-style table or float layouts!</p>
-    </div>
-    <div class="code-wrap">
-  <div class="code-bar">
-    <span class="code-dot r"></span><span class="code-dot y"></span><span class="code-dot g"></span>
-    <span class="code-filename">index.html</span>
-  </div>
-  <div class="code-body"><pre>&lt;!DOCTYPE html&gt;
-&lt;html lang="en"&gt;
-  &lt;head&gt;
-    &lt;title&gt;Flexbox Layout&lt;/title&gt;
-    &lt;style&gt;
-      * { box-sizing: border-box; }
-      body { margin: 0; font-family: Arial; }
-      header { background: #ea4f21; color: white; padding: 20px 30px; }
-      .flex-wrap {
-        display: flex; gap: 24px;
-        padding: 24px; max-width: 1000px; margin: 0 auto;
-      }
-      main  { flex: 3; background: white; padding: 20px; border-radius: 12px; }
-      aside { flex: 1; background: #f8fafc; padding: 16px; border-radius: 12px; }
-      footer { background: #0f172a; color: white; text-align: center; padding: 20px; }
-
-      /* Make it stack on small screens */
-      @media (max-width: 600px) {
-        .flex-wrap { flex-direction: column; }
-      }
-    &lt;/style&gt;
-  &lt;/head&gt;
-  &lt;body&gt;
-    &lt;header&gt;&lt;h1&gt;Flex Layout Demo&lt;/h1&gt;&lt;/header&gt;
-
-    &lt;div class="flex-wrap"&gt;
-      &lt;main&gt;
-        &lt;h2&gt;Main (flex: 3)&lt;/h2&gt;
-        &lt;p&gt;This takes up 3/4 of the available width because flex: 3.&lt;/p&gt;
-      &lt;/main&gt;
-      &lt;aside&gt;
-        &lt;h3&gt;Aside (flex: 1)&lt;/h3&gt;
-        &lt;p&gt;Takes up 1/4 — flex: 1.&lt;/p&gt;
-      &lt;/aside&gt;
-    &lt;/div&gt;
-
-    &lt;footer&gt;&lt;p&gt;Footer always at the bottom&lt;/p&gt;&lt;/footer&gt;
-  &lt;/body&gt;
-&lt;/html&gt;</pre></div>
-</div>
+    <h3 class="v2-h3">The Newspaper Analogy</h3>
+<p class="v2-p">Imagine a printed newspaper. It has:</p>
+<ul class="v2-ul"><li>A <strong>masthead</strong> at the top with the newspaper's name</li><li>A <strong>navigation</strong> strip showing section names (Sports, Finance, World)</li><li><strong>Main articles</strong> in the centre</li><li><strong>Sidebar</strong> content on the side (advertisements, related stories)</li><li>A <strong>footer</strong> at the bottom with contact information</li></ul>
+<p class="v2-p">A webpage is exactly the same idea, just on a screen. Instead of cutting paper into sections, we use HTML elements to define those zones.</p>
+<h3 class="v2-h3">Visual Representation of a Web Layout</h3>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span></div><div class="v2-code-body"><pre><code>+------------------------------------------+
+|            &lt;header&gt;                      |
+|      Website Name / Logo / Banner        |
++------------------------------------------+
+|   &lt;nav&gt;                                  |
+|   Home | About | Services | Contact      |
++------------------------------------------+
+|   &lt;section&gt; or &lt;article&gt;  |  &lt;aside&gt;    |
+|                            |             |
+|   Main content goes here   |  Sidebar   |
+|   Articles, text, images   |  Extra     |
+|   go in this larger area   |  content   |
+|                            |             |
++------------------------------------------+
+|            &lt;footer&gt;                      |
+|      Copyright | Contact | Links         |
++------------------------------------------+</code></pre></div></div>
+<p class="v2-p">This is the standard layout you will see on most professional websites.</p>
+<hr class="v2-hr">
     <div class="task-box">
       <div class="task-label">✏️ Your Task</div>
-      <p>Add a <code>@media (max-width: 600px)</code> rule that changes your flex layout from row to column on small screens. Resize your browser window to phone width — the sidebar should now appear BELOW the main content instead of beside it.</p>
+      <div class="task-body">Now practise what you just learned about <strong>: Conceptual Understanding — What Is a Web Page Layout?</strong>. Open your editor, type the examples above by hand, then modify them — change values, rename variables, and observe what happens. Active experimentation is how code sticks.</div>
     </div>
-    <button class="next-btn" onclick="unlockNext(3)">
-      Build It! 🚀 <span>→</span>
-    </button>
-    <p class="next-tip">Try the task first, then click to continue!</p>
+    <button class="unlock-btn" onclick="unlockNext(3)">Phase Complete — Unlock Next ✓</button>
   </div>
 </div>
-
-<div class="project-box" id="build-it" style="display:none">
-  <div class="project-label">🏗️ Build It!</div>
-  <div class="project-name">My Full-Layout Page</div>
-  <p class="project-desc">Build a complete page using header, nav, main, aside, article, section, and footer with flexbox.</p>
-  <div class="code-wrap">
-    <div class="code-bar">
-      <span class="code-dot r"></span><span class="code-dot y"></span><span class="code-dot g"></span>
-      <span class="code-filename">starter.html — copy this into a new file!</span>
-    </div>
-    <div class="code-body"><pre id="starter-code">&lt;!DOCTYPE html&gt;
-&lt;html lang="en"&gt;
-  &lt;head&gt;
-    &lt;meta charset="UTF-8"&gt;
-    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
-    &lt;title&gt;My Tech Blog | [Your Name]&lt;/title&gt;
-    &lt;style&gt;
-      * { box-sizing: border-box; margin: 0; padding: 0; }
-      body { font-family: Arial, sans-serif; background: #f1f5f9; color: #0f172a; }
-
-      header {
-        background: linear-gradient(135deg, #ea4f21, #c23d15);
-        color: white; padding: 28px 30px;
-      }
-      header h1 { font-size: 1.8rem; }
-      header p  { opacity: .8; font-size: .9rem; margin-top: 4px; }
-
-      nav {
-        background: #0f172a; padding: 0 30px;
-        display: flex; gap: 0;
-      }
-      nav a {
-        color: rgba(255,255,255,.7); text-decoration: none;
-        padding: 14px 20px; font-size: 14px; font-weight: 600;
-        display: inline-block; transition: color .2s;
-      }
-      nav a:hover { color: white; background: rgba(255,255,255,.05); }
-
-      .page-wrap {
-        display: flex; gap: 24px;
-        max-width: 1000px; margin: 28px auto; padding: 0 24px;
-      }
-
-      main  { flex: 3; }
-      aside { flex: 1; }
-
-      article {
-        background: white; border-radius: 14px;
-        padding: 28px; margin-bottom: 20px;
-        box-shadow: 0 2px 8px rgba(0,0,0,.06);
-      }
-      article h2 { color: #ea4f21; margin-bottom: 6px; }
-      .meta { color: #94a3b8; font-size: 13px; margin-bottom: 16px; }
-
-      section { margin-top: 20px; padding-top: 16px; border-top: 1px solid #f1f5f9; }
-      section h3 { color: #0284c7; margin-bottom: 8px; }
-
-      .widget {
-        background: white; border-radius: 14px;
-        padding: 20px; margin-bottom: 16px;
-        box-shadow: 0 2px 8px rgba(0,0,0,.06);
-      }
-      .widget h4 { color: #ea4f21; margin-bottom: 12px; }
-      .widget ul { list-style: none; padding: 0; }
-      .widget li { padding: 6px 0; border-bottom: 1px solid #f1f5f9;
-                   font-size: 14px; color: #475569; }
-
-      footer {
-        background: #0f172a; color: rgba(255,255,255,.5);
-        text-align: center; padding: 24px; font-size: 13px;
-      }
-      footer a { color: rgba(255,255,255,.7); text-decoration: none; }
-
-      @media (max-width: 640px) {
-        .page-wrap { flex-direction: column; }
-      }
-    &lt;/style&gt;
-  &lt;/head&gt;
-  &lt;body&gt;
-
-    &lt;header&gt;
-      &lt;h1&gt;📝 [Your Name]'s Tech Blog&lt;/h1&gt;
-      &lt;p&gt;Documenting my HTML journey at Techbase Academy, Ibadan&lt;/p&gt;
-    &lt;/header&gt;
-
-    &lt;nav&gt;
-      &lt;a href="#home"&gt;Home&lt;/a&gt;
-      &lt;a href="#posts"&gt;Posts&lt;/a&gt;
-      &lt;a href="#about"&gt;About&lt;/a&gt;
-      &lt;a href="#contact"&gt;Contact&lt;/a&gt;
-    &lt;/nav&gt;
-
-    &lt;div class="page-wrap"&gt;
-      &lt;main id="posts"&gt;
-        &lt;article&gt;
-          &lt;h2&gt;What I Learned in HTML Lesson 25&lt;/h2&gt;
-          &lt;p class="meta"&gt;📅 [Today's Date] · ✍️ [Your Name] · 🏷️ HTML, Layout&lt;/p&gt;
-
-          &lt;p&gt;Today I learned about semantic HTML layout elements...&lt;/p&gt;
-
-          &lt;section&gt;
-            &lt;h3&gt;🔷 Semantic vs Non-Semantic&lt;/h3&gt;
-            &lt;p&gt;Using header, nav, main, aside and footer instead of divs everywhere
-               helps search engines AND screen readers understand the page structure.&lt;/p&gt;
-          &lt;/section&gt;
-
-          &lt;section&gt;
-            &lt;h3&gt;🔷 Flexbox Layout&lt;/h3&gt;
-            &lt;p&gt;I used display: flex to create a two-column layout with a main content
-               area and a sidebar. On mobile it stacks into a single column.&lt;/p&gt;
-          &lt;/section&gt;
-
-          &lt;section&gt;
-            &lt;h3&gt;🔷 What's Next&lt;/h3&gt;
-            &lt;p&gt;In Lesson 26 I will learn about responsive web design and media queries!&lt;/p&gt;
-          &lt;/section&gt;
-        &lt;/article&gt;
-
-        &lt;article&gt;
-          &lt;h2&gt;My HTML Journey So Far&lt;/h2&gt;
-          &lt;p class="meta"&gt;📅 [Earlier Date] · ✍️ [Your Name]&lt;/p&gt;
-          &lt;p&gt;I have now completed 25 HTML lessons at Techbase Academy...&lt;/p&gt;
-        &lt;/article&gt;
-      &lt;/main&gt;
-
-      &lt;aside&gt;
-        &lt;div class="widget"&gt;
-          &lt;h4&gt;📚 Lessons Completed&lt;/h4&gt;
-          &lt;ul&gt;
-            &lt;li&gt;01 — Introduction ✅&lt;/li&gt;
-            &lt;li&gt;10 — Comments (Capstone 1) ✅&lt;/li&gt;
-            &lt;li&gt;22 — Iframes (Capstone 2) ✅&lt;/li&gt;
-            &lt;li&gt;25 — Layout ✅ (just now!)&lt;/li&gt;
-          &lt;/ul&gt;
-        &lt;/div&gt;
-        &lt;div class="widget"&gt;
-          &lt;h4&gt;🔗 Useful Links&lt;/h4&gt;
-          &lt;ul&gt;
-            &lt;li&gt;&lt;a href="https://techbasengr.com.ng"&gt;Techbase Academy&lt;/a&gt;&lt;/li&gt;
-            &lt;li&gt;&lt;a href="https://w3schools.com"&gt;W3Schools&lt;/a&gt;&lt;/li&gt;
-            &lt;li&gt;&lt;a href="https://fonts.google.com"&gt;Google Fonts&lt;/a&gt;&lt;/li&gt;
-          &lt;/ul&gt;
-        &lt;/div&gt;
-      &lt;/aside&gt;
-    &lt;/div&gt;
-
-    &lt;footer&gt;
-      &lt;p&gt;© 2025 [Your Name] | Techbase Academy, Ibadan, Nigeria&lt;/p&gt;
-      &lt;p&gt;&lt;a href="#home"&gt;↑ Back to top&lt;/a&gt;&lt;/p&gt;
-    &lt;/footer&gt;
-
-  &lt;/body&gt;
-&lt;/html&gt;</pre></div>
+<div class="phase locked" id="phase4">
+  <div class="phase-header">
+    <div class="phase-num">Phase 4 of 7</div>
+    <div class="phase-title">Part 2: The Eight HTML Semantic Layout Elements</div>
+    <div class="phase-check" id="chk4"></div>
   </div>
-  <button class="next-btn" onclick="downloadStarter()" style="margin-right:.75rem">
-    ⬇️ Download starter.html
-  </button>
-  <button class="next-btn" onclick="showGithub()" style="background:#10b981;box-shadow:0 4px 12px rgba(16,185,129,.3)">
-    Show GitHub Steps →
-  </button>
-  <script>
-  const __code = `<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Tech Blog | [Your Name]</title>
-    <style>
-      * { box-sizing: border-box; margin: 0; padding: 0; }
-      body { font-family: Arial, sans-serif; background: #f1f5f9; color: #0f172a; }
+  <div class="phase-body">
+    <p class="v2-p">HTML5 introduced a set of <strong>semantic layout elements</strong> — special tags that each represent a different zone of a webpage. Let's study each one individually.</p>
+<hr class="v2-hr">
+<h3 class="v2-h3">2.1 <code>&lt;header&gt;</code> — The Top Section</h3>
+<p class="v2-p"><strong>What is it?</strong> The <code>&lt;header&gt;</code> element defines the top area of a page or section. It usually contains the website's name (logo), a tagline, and sometimes navigation links.</p>
+<p class="v2-p"><strong>Why does it exist?</strong> Before HTML5, developers used <code>&lt;div id="header"&gt;</code> and had to guess what was inside. The <code>&lt;header&gt;</code> tag makes it instantly obvious.</p>
+<p class="v2-p"><strong>Simple Example:</strong></p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;body&gt;
 
-      header {
-        background: linear-gradient(135deg, #ea4f21, #c23d15);
-        color: white; padding: 28px 30px;
-      }
-      header h1 { font-size: 1.8rem; }
-      header p  { opacity: .8; font-size: .9rem; margin-top: 4px; }
+  &lt;header&gt;
+    &lt;h1&gt;My Awesome Website&lt;/h1&gt;
+    &lt;p&gt;Your daily source of awesome content&lt;/p&gt;
+  &lt;/header&gt;
 
-      nav {
-        background: #0f172a; padding: 0 30px;
-        display: flex; gap: 0;
-      }
-      nav a {
-        color: rgba(255,255,255,.7); text-decoration: none;
-        padding: 14px 20px; font-size: 14px; font-weight: 600;
-        display: inline-block; transition: color .2s;
-      }
-      nav a:hover { color: white; background: rgba(255,255,255,.05); }
+&lt;/body&gt;
+&lt;/html&gt;</code></pre></div></div>
+<p class="v2-p"><strong>Expected Output in browser:</strong></p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span></div><div class="v2-code-body"><pre><code>My Awesome Website
+Your daily source of awesome content</code></pre></div></div>
+<p class="v2-p">The text appears at the top of the page in a heading style.</p>
+<blockquote class="v2-bq"><p class="v2-p"><strong>Tip:</strong> You can have multiple <code>&lt;header&gt;</code> elements on a page — one for the whole page AND one inside each <code>&lt;article&gt;</code> or <code>&lt;section&gt;</code>.</p></blockquote>
+<hr class="v2-hr">
+<h3 class="v2-h3">2.2 <code>&lt;nav&gt;</code> — The Navigation Menu</h3>
+<p class="v2-p"><strong>What is it?</strong> The <code>&lt;nav&gt;</code> element contains a set of navigation links — buttons or links that help the user move around the website.</p>
+<p class="v2-p"><strong>Why does it exist?</strong> Screen readers and search engines use <code>&lt;nav&gt;</code> to understand "these links are for navigating the site." This improves accessibility and SEO (Search Engine Optimisation).</p>
+<p class="v2-p"><strong>Simple Example:</strong></p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;nav&gt;
+  &lt;a href=&quot;/home&quot;&gt;Home&lt;/a&gt;
+  &lt;a href=&quot;/about&quot;&gt;About&lt;/a&gt;
+  &lt;a href=&quot;/contact&quot;&gt;Contact&lt;/a&gt;
+&lt;/nav&gt;</code></pre></div></div>
+<p class="v2-p"><strong>Expected Output in browser:</strong></p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span></div><div class="v2-code-body"><pre><code>Home   About   Contact</code></pre></div></div>
+<p class="v2-p">Three clickable links appear side by side (browsers render links inline by default).</p>
+<hr class="v2-hr">
+<h3 class="v2-h3">2.3 <code>&lt;section&gt;</code> — A Thematic Group of Content</h3>
+<p class="v2-p"><strong>What is it?</strong> The <code>&lt;section&gt;</code> element defines a standalone thematic grouping of content. Think of it as a "chapter" in a book.</p>
+<p class="v2-p"><strong>Why does it exist?</strong> When your page has multiple topics, you can wrap each topic in a <code>&lt;section&gt;</code> to keep them organised and separated.</p>
+<p class="v2-p"><strong>Simple Example:</strong></p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;section&gt;
+  &lt;h2&gt;About Us&lt;/h2&gt;
+  &lt;p&gt;We are a company that builds amazing websites.&lt;/p&gt;
+&lt;/section&gt;
 
-      .page-wrap {
-        display: flex; gap: 24px;
-        max-width: 1000px; margin: 28px auto; padding: 0 24px;
-      }
+&lt;section&gt;
+  &lt;h2&gt;Our Services&lt;/h2&gt;
+  &lt;p&gt;We offer design, development, and hosting.&lt;/p&gt;
+&lt;/section&gt;</code></pre></div></div>
+<p class="v2-p"><strong>Expected Output in browser:</strong></p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span></div><div class="v2-code-body"><pre><code>About Us
+We are a company that builds amazing websites.
 
-      main  { flex: 3; }
-      aside { flex: 1; }
+Our Services
+We offer design, development, and hosting.</code></pre></div></div>
+<p class="v2-p">Two clearly separated sections of content.</p>
+<blockquote class="v2-bq"><p class="v2-p"><strong>Thinking Prompt:</strong> What happens if you put both sections inside a single <code>&lt;div&gt;</code> instead? The content would look the same visually, but the meaning would be lost to machines reading the code.</p></blockquote>
+<hr class="v2-hr">
+<h3 class="v2-h3">2.4 <code>&lt;article&gt;</code> — Independent, Self-Contained Content</h3>
+<p class="v2-p"><strong>What is it?</strong> The <code>&lt;article&gt;</code> element defines content that is complete and self-contained — meaning you could take it out of the page, and it would still make sense on its own.</p>
+<p class="v2-p"><strong>Why does it exist?</strong> Think about a blog post, a news story, or a product review. These can stand alone. If you copied a blog post and sent it in an email, it still makes sense. That's an <code>&lt;article&gt;</code>.</p>
+<p class="v2-p"><strong>Key Difference from <code>&lt;section&gt;</code>:</strong></p>
+<div class="v2-table-wrap"><table class="v2-table"><thead><tr><th><code>&lt;section&gt;</code></th><th><code>&lt;article&gt;</code></th></tr></thead><tbody><tr><td>Groups related content</td><td>Contains self-contained content</td></tr><tr><td>Part of a bigger whole</td><td>Makes sense on its own</td></tr><tr><td>Like a chapter</td><td>Like a newspaper story</td></tr></tbody></table></div>
+<p class="v2-p"><strong>Simple Example:</strong></p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;article&gt;
+  &lt;h2&gt;10 Tips for Better HTML&lt;/h2&gt;
+  &lt;p&gt;Published on April 19, 2026&lt;/p&gt;
+  &lt;p&gt;HTML is the backbone of the web. Here are ten tips to write it better...&lt;/p&gt;
+&lt;/article&gt;</code></pre></div></div>
+<p class="v2-p"><strong>Expected Output in browser:</strong></p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span></div><div class="v2-code-body"><pre><code>10 Tips for Better HTML
+Published on April 19, 2026
+HTML is the backbone of the web. Here are ten tips to write it better...</code></pre></div></div>
+<hr class="v2-hr">
+<h3 class="v2-h3">2.5 <code>&lt;aside&gt;</code> — Sidebar Content</h3>
+<p class="v2-p"><strong>What is it?</strong> The <code>&lt;aside&gt;</code> element contains content that is related to, but not part of, the main content. It is typically displayed as a sidebar.</p>
+<p class="v2-p"><strong>Why does it exist?</strong> On a news website, the main area has the article, while the sidebar has "related articles," "trending topics," or advertisements. The <code>&lt;aside&gt;</code> element holds that sidebar content.</p>
+<p class="v2-p"><strong>Simple Example:</strong></p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;article&gt;
+  &lt;h2&gt;The History of HTML&lt;/h2&gt;
+  &lt;p&gt;HTML was created by Tim Berners-Lee in 1991...&lt;/p&gt;
+&lt;/article&gt;
 
-      article {
-        background: white; border-radius: 14px;
-        padding: 28px; margin-bottom: 20px;
-        box-shadow: 0 2px 8px rgba(0,0,0,.06);
-      }
-      article h2 { color: #ea4f21; margin-bottom: 6px; }
-      .meta { color: #94a3b8; font-size: 13px; margin-bottom: 16px; }
+&lt;aside&gt;
+  &lt;h3&gt;Related Articles&lt;/h3&gt;
+  &lt;ul&gt;
+    &lt;li&gt;What is CSS?&lt;/li&gt;
+    &lt;li&gt;Introduction to JavaScript&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/aside&gt;</code></pre></div></div>
+<p class="v2-p"><strong>Expected Output in browser:</strong></p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span></div><div class="v2-code-body"><pre><code>The History of HTML
+HTML was created by Tim Berners-Lee in 1991...
 
-      section { margin-top: 20px; padding-top: 16px; border-top: 1px solid #f1f5f9; }
-      section h3 { color: #0284c7; margin-bottom: 8px; }
-
-      .widget {
-        background: white; border-radius: 14px;
-        padding: 20px; margin-bottom: 16px;
-        box-shadow: 0 2px 8px rgba(0,0,0,.06);
-      }
-      .widget h4 { color: #ea4f21; margin-bottom: 12px; }
-      .widget ul { list-style: none; padding: 0; }
-      .widget li { padding: 6px 0; border-bottom: 1px solid #f1f5f9;
-                   font-size: 14px; color: #475569; }
-
-      footer {
-        background: #0f172a; color: rgba(255,255,255,.5);
-        text-align: center; padding: 24px; font-size: 13px;
-      }
-      footer a { color: rgba(255,255,255,.7); text-decoration: none; }
-
-      @media (max-width: 640px) {
-        .page-wrap { flex-direction: column; }
-      }
-    </style>
-  </head>
-  <body>
-
-    <header>
-      <h1>📝 [Your Name]'s Tech Blog</h1>
-      <p>Documenting my HTML journey at Techbase Academy, Ibadan</p>
-    </header>
-
-    <nav>
-      <a href="#home">Home</a>
-      <a href="#posts">Posts</a>
-      <a href="#about">About</a>
-      <a href="#contact">Contact</a>
-    </nav>
-
-    <div class="page-wrap">
-      <main id="posts">
-        <article>
-          <h2>What I Learned in HTML Lesson 25</h2>
-          <p class="meta">📅 [Today's Date] · ✍️ [Your Name] · 🏷️ HTML, Layout</p>
-
-          <p>Today I learned about semantic HTML layout elements...</p>
-
-          <section>
-            <h3>🔷 Semantic vs Non-Semantic</h3>
-            <p>Using header, nav, main, aside and footer instead of divs everywhere
-               helps search engines AND screen readers understand the page structure.</p>
-          </section>
-
-          <section>
-            <h3>🔷 Flexbox Layout</h3>
-            <p>I used display: flex to create a two-column layout with a main content
-               area and a sidebar. On mobile it stacks into a single column.</p>
-          </section>
-
-          <section>
-            <h3>🔷 What's Next</h3>
-            <p>In Lesson 26 I will learn about responsive web design and media queries!</p>
-          </section>
-        </article>
-
-        <article>
-          <h2>My HTML Journey So Far</h2>
-          <p class="meta">📅 [Earlier Date] · ✍️ [Your Name]</p>
-          <p>I have now completed 25 HTML lessons at Techbase Academy...</p>
-        </article>
-      </main>
-
-      <aside>
-        <div class="widget">
-          <h4>📚 Lessons Completed</h4>
-          <ul>
-            <li>01 — Introduction ✅</li>
-            <li>10 — Comments (Capstone 1) ✅</li>
-            <li>22 — Iframes (Capstone 2) ✅</li>
-            <li>25 — Layout ✅ (just now!)</li>
-          </ul>
-        </div>
-        <div class="widget">
-          <h4>🔗 Useful Links</h4>
-          <ul>
-            <li><a href="https://techbasengr.com.ng">Techbase Academy</a></li>
-            <li><a href="https://w3schools.com">W3Schools</a></li>
-            <li><a href="https://fonts.google.com">Google Fonts</a></li>
-          </ul>
-        </div>
-      </aside>
+Related Articles
+• What is CSS?
+• Introduction to JavaScript</code></pre></div></div>
+<p class="v2-p">(Without CSS, these will stack vertically. We'll position them side by side later with CSS.)</p>
+<hr class="v2-hr">
+<h3 class="v2-h3">2.6 <code>&lt;footer&gt;</code> — The Bottom Section</h3>
+<p class="v2-p"><strong>What is it?</strong> The <code>&lt;footer&gt;</code> element defines the bottom area of a page or section. It usually contains copyright information, contact details, and links to privacy policies.</p>
+<p class="v2-p"><strong>Why does it exist?</strong> Just like <code>&lt;header&gt;</code>, <code>&lt;footer&gt;</code> makes the bottom section of your page clearly labelled and easy to style.</p>
+<p class="v2-p"><strong>Simple Example:</strong></p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;footer&gt;
+  &lt;p&gt;&amp;copy; 2026 My Awesome Website. All rights reserved.&lt;/p&gt;
+  &lt;p&gt;Contact: info@mywebsite.com&lt;/p&gt;
+&lt;/footer&gt;</code></pre></div></div>
+<p class="v2-p"><strong>Expected Output in browser:</strong></p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span></div><div class="v2-code-body"><pre><code>© 2026 My Awesome Website. All rights reserved.
+Contact: info@mywebsite.com</code></pre></div></div>
+<blockquote class="v2-bq"><p class="v2-p"><strong>Note:</strong> <code>&amp;copy;</code> is the HTML entity for the copyright symbol ©.</p></blockquote>
+<hr class="v2-hr">
+<h3 class="v2-h3">2.7 <code>&lt;details&gt;</code> — Collapsible Content</h3>
+<p class="v2-p"><strong>What is it?</strong> The <code>&lt;details&gt;</code> element creates a collapsible widget — a block of content that is hidden by default and can be shown when the user clicks on it.</p>
+<p class="v2-p"><strong>Why does it exist?</strong> When you have a FAQ (Frequently Asked Questions) section, you don't want to show all answers at once. <code>&lt;details&gt;</code> lets users click to expand only the answer they need.</p>
+<p class="v2-p"><strong>Simple Example:</strong></p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;details&gt;
+  &lt;summary&gt;What is HTML?&lt;/summary&gt;
+  &lt;p&gt;HTML stands for HyperText Markup Language. It is the standard language for creating webpages.&lt;/p&gt;
+&lt;/details&gt;</code></pre></div></div>
+<p class="v2-p"><strong>Expected Output in browser (before click):</strong></p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span></div><div class="v2-code-body"><pre><code>▶ What is HTML?</code></pre></div></div>
+<p class="v2-p"><strong>Expected Output in browser (after clicking):</strong></p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span></div><div class="v2-code-body"><pre><code>▼ What is HTML?
+  HTML stands for HyperText Markup Language. It is the standard language for creating webpages.</code></pre></div></div>
+<p class="v2-p">The browser automatically adds a triangle (▶/▼) to show the toggle state.</p>
+<hr class="v2-hr">
+<h3 class="v2-h3">2.8 <code>&lt;summary&gt;</code> — The Visible Label for <code>&lt;details&gt;</code></h3>
+<p class="v2-p"><strong>What is it?</strong> The <code>&lt;summary&gt;</code> element works inside <code>&lt;details&gt;</code>. It defines the clickable label that the user sees before expanding.</p>
+<p class="v2-p"><strong>Why does it exist?</strong> Without <code>&lt;summary&gt;</code>, the browser shows a default label like "Details". Using <code>&lt;summary&gt;</code> lets you write your own custom label.</p>
+<p class="v2-p"><strong>Simple Example:</strong></p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;details&gt;
+  &lt;summary&gt;Click to see the answer&lt;/summary&gt;
+  &lt;p&gt;The answer is: 42.&lt;/p&gt;
+&lt;/details&gt;</code></pre></div></div>
+<p class="v2-p"><strong>Expected Output (before click):</strong></p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span></div><div class="v2-code-body"><pre><code>▶ Click to see the answer</code></pre></div></div>
+<p class="v2-p"><strong>Expected Output (after click):</strong></p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span></div><div class="v2-code-body"><pre><code>▼ Click to see the answer
+  The answer is: 42.</code></pre></div></div>
+<hr class="v2-hr">
+<h3 class="v2-h3">Quick Reference — All 8 Layout Elements</h3>
+<div class="v2-table-wrap"><table class="v2-table"><thead><tr><th>Element</th><th>Purpose</th><th>Real-World Example</th></tr></thead><tbody><tr><td><code>&lt;header&gt;</code></td><td>Top zone of page/section</td><td>Website logo and tagline</td></tr><tr><td><code>&lt;nav&gt;</code></td><td>Navigation links</td><td>Menu bar with Home, About, Contact</td></tr><tr><td><code>&lt;section&gt;</code></td><td>Grouped thematic content</td><td>"Our Services" section</td></tr><tr><td><code>&lt;article&gt;</code></td><td>Self-contained content</td><td>A blog post or news story</td></tr><tr><td><code>&lt;aside&gt;</code></td><td>Sidebar / related content</td><td>Trending topics sidebar</td></tr><tr><td><code>&lt;footer&gt;</code></td><td>Bottom zone of page/section</td><td>Copyright and contact info</td></tr><tr><td><code>&lt;details&gt;</code></td><td>Collapsible hidden content</td><td>FAQ accordion</td></tr><tr><td><code>&lt;summary&gt;</code></td><td>Label for <code>&lt;details&gt;</code></td><td>"Click to expand" text</td></tr></tbody></table></div>
+<hr class="v2-hr">
+    <div class="task-box">
+      <div class="task-label">✏️ Your Task</div>
+      <div class="task-body">Now practise what you just learned about <strong>: The Eight HTML Semantic Layout Elements</strong>. Open your editor, type the examples above by hand, then modify them — change values, rename variables, and observe what happens. Active experimentation is how code sticks.</div>
     </div>
+    <button class="unlock-btn" onclick="unlockNext(4)">Phase Complete — Unlock Next ✓</button>
+  </div>
+</div>
+<div class="phase locked" id="phase5">
+  <div class="phase-header">
+    <div class="phase-num">Phase 5 of 7</div>
+    <div class="phase-title">Part 3: HTML Layout Techniques</div>
+    <div class="phase-check" id="chk5"></div>
+  </div>
+  <div class="phase-body">
+    <p class="v2-p">Now that you know what the semantic elements are, the next question is: <strong>How do we arrange them visually on the screen?</strong></p>
+<p class="v2-p">Without any CSS, all HTML elements stack vertically — one on top of another, like a stack of boxes. But websites show content side by side (like a main article column next to a sidebar). To achieve this, we need CSS layout techniques.</p>
+<p class="v2-p">There are <strong>four main techniques</strong> for creating multi-column HTML layouts:</p>
+<ol class="v2-ol"><li>CSS Frameworks</li><li>CSS Float Layout</li><li>CSS Flexbox Layout</li><li>CSS Grid Layout</li></ol>
+<p class="v2-p">Let's study each one.</p>
+<hr class="v2-hr">
+<h3 class="v2-h3">Technique 1: CSS Frameworks</h3>
+<p class="v2-p"><strong>What is it?</strong> A CSS Framework is a pre-written collection of CSS code that someone else has already built. Instead of writing all your layout CSS from scratch, you include the framework and use its ready-made classes.</p>
+<p class="v2-p"><strong>Why use it?</strong> If you want to create a professional layout quickly — without deep CSS knowledge — a framework lets you do it in minutes.</p>
+<p class="v2-p"><strong>Popular frameworks include:</strong></p>
+<ul class="v2-ul"><li><strong>Bootstrap</strong> — the most widely used; great for responsive designs</li><li><strong>W3.CSS</strong> — a lightweight framework by W3Schools; simple and clean</li><li><strong>Tailwind CSS</strong> — a utility-first framework popular with modern developers</li></ul>
+<p class="v2-p"><strong>Simple Example using W3.CSS:</strong></p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;link rel=&quot;stylesheet&quot; href=&quot;https://www.w3schools.com/w3css/4/w3.css&quot;&gt;
+&lt;/head&gt;
+&lt;body&gt;
 
-    <footer>
-      <p>© 2025 [Your Name] | Techbase Academy, Ibadan, Nigeria</p>
-      <p><a href="#home">↑ Back to top</a></p>
-    </footer>
+  &lt;div class=&quot;w3-container w3-blue&quot;&gt;
+    &lt;h1&gt;Header&lt;/h1&gt;
+  &lt;/div&gt;
 
-  </body>
-</html>`;
-  function downloadStarter(){
-    const a=document.createElement('a');
-    a.href='data:text/html;charset=utf-8,'+encodeURIComponent(__code);
-    a.download='starter.html'; a.click();
+  &lt;div class=&quot;w3-row&quot;&gt;
+    &lt;div class=&quot;w3-col m8&quot;&gt;
+      &lt;p&gt;Main Content Area (8/12 width)&lt;/p&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;w3-col m4&quot;&gt;
+      &lt;p&gt;Sidebar (4/12 width)&lt;/p&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;div class=&quot;w3-container w3-dark-grey&quot;&gt;
+    &lt;p&gt;Footer&lt;/p&gt;
+  &lt;/div&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;</code></pre></div></div>
+<p class="v2-p"><strong>Expected Output:</strong></p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span></div><div class="v2-code-body"><pre><code>[Blue Header Bar]
+[Main Content (wide)] [Sidebar (narrow)]
+[Dark Grey Footer]</code></pre></div></div>
+<p class="v2-p">The <code>w3-row</code> class creates a horizontal row. <code>w3-col m8</code> means "take 8 out of 12 columns of width." This is the 12-column grid system most frameworks use.</p>
+<p class="v2-p"><strong>Pros:</strong></p>
+<ul class="v2-ul"><li>Very fast to build layouts</li><li>Looks professional with little effort</li><li>Built-in responsive design (adapts to mobile)</li></ul>
+<p class="v2-p"><strong>Cons:</strong></p>
+<ul class="v2-ul"><li>You depend on someone else's CSS</li><li>May include features you don't need (larger file size)</li><li>Less control over fine details</li></ul>
+<hr class="v2-hr">
+<h3 class="v2-h3">Technique 2: CSS Float Layout</h3>
+<p class="v2-p"><strong>What is it?</strong> The <code>float</code> CSS property was originally designed to wrap text around images (like in a magazine). Web developers discovered they could also use it to create side-by-side columns.</p>
+<p class="v2-p"><strong>How does it work?</strong> When you <code>float</code> an element to the left or right, it is removed from the normal document flow and moved to that side. Other content wraps around it.</p>
+<p class="v2-p"><strong>Key CSS Properties:</strong></p>
+<ul class="v2-ul"><li><code>float: left;</code> — moves the element to the left</li><li><code>float: right;</code> — moves the element to the right</li><li><code>clear: both;</code> — stops the floating effect (used on the footer to prevent it from wrapping around floated columns)</li></ul>
+<p class="v2-p"><strong>Simple Example — Two Columns:</strong></p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;style&gt;
+  * {
+    box-sizing: border-box; /* Makes width calculations easier */
   }
-  </script>
-</div>
 
+  nav {
+    float: left;
+    width: 25%;
+    background-color: #f0f0f0;
+    padding: 10px;
+  }
 
+  article {
+    float: left;
+    width: 75%;
+    padding: 10px;
+  }
 
-<div class="github-acc" id="github-steps" style="display:none">
-  <div class="github-acc-head" onclick="this.nextElementSibling.classList.toggle('open')">
-    🐙 GitHub Setup — Push your project online &nbsp;<span>▼</span>
+  footer {
+    clear: both; /* Stop the float — footer goes below both columns */
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 10px;
+  }
+&lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+  &lt;header&gt;
+    &lt;h1&gt;My City Blog&lt;/h1&gt;
+  &lt;/header&gt;
+
+  &lt;nav&gt;
+    &lt;ul&gt;
+      &lt;li&gt;London&lt;/li&gt;
+      &lt;li&gt;Paris&lt;/li&gt;
+      &lt;li&gt;Tokyo&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/nav&gt;
+
+  &lt;article&gt;
+    &lt;h2&gt;London&lt;/h2&gt;
+    &lt;p&gt;London is the capital city of England. It is the most populous city
+       in the United Kingdom, with a metropolitan area of over 13 million inhabitants.&lt;/p&gt;
+  &lt;/article&gt;
+
+  &lt;footer&gt;
+    &lt;p&gt;Footer — Copyright 2026&lt;/p&gt;
+  &lt;/footer&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;</code></pre></div></div>
+<p class="v2-p"><strong>Expected Output in browser:</strong></p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span></div><div class="v2-code-body"><pre><code>My City Blog
++------------------+----------------------------------+
+| • London         | London                           |
+| • Paris          | London is the capital city of    |
+| • Tokyo          | England. It is the most          |
+|                  | populous city in the UK...       |
++------------------+----------------------------------+
+           Footer — Copyright 2026</code></pre></div></div>
+<p class="v2-p"><strong>Line-by-line CSS explanation:</strong></p>
+<ul class="v2-ul"><li><code><em> { box-sizing: border-box; }</code> — The <code></em></code> targets ALL elements. <code>box-sizing: border-box</code> means the padding is included inside the element's width, so <code>25% + 75% = 100%</code> exactly (without this, padding would push them to 100%+, breaking the layout).</li><li><code>float: left;</code> — moves the element to the left side</li><li><code>width: 25%;</code> — nav takes 25% of the page width</li><li><code>width: 75%;</code> — article takes 75% (25% + 75% = 100%)</li><li><code>clear: both;</code> — the footer clears the float, forcing it below both columns</li></ul>
+<p class="v2-p"><strong>Pros:</strong></p>
+<ul class="v2-ul"><li>Works in all browsers, even very old ones</li><li>Simple to understand for beginners</li></ul>
+<p class="v2-p"><strong>Cons:</strong></p>
+<ul class="v2-ul"><li>Floated elements are "out of flow" — positioning can be unpredictable</li><li>You must manually clear floats or the layout breaks</li><li>Less flexible than modern techniques</li></ul>
+<hr class="v2-hr">
+<h3 class="v2-h3">Technique 3: CSS Flexbox Layout</h3>
+<p class="v2-p"><strong>What is it?</strong> <strong>Flexbox</strong> (short for "Flexible Box Layout") is a modern CSS layout system that makes it easy to arrange elements in a row or column, distribute space between them, and align them precisely.</p>
+<p class="v2-p"><strong>Why is it better than Float?</strong> Flexbox was designed specifically for layout. It handles equal-height columns, centring, and distribution automatically — things that Float struggles with.</p>
+<p class="v2-p"><strong>Key CSS Properties:</strong></p>
+<div class="v2-table-wrap"><table class="v2-table"><thead><tr><th>Property</th><th>What it does</th></tr></thead><tbody><tr><td><code>display: flex;</code></td><td>Activates Flexbox on a container</td></tr><tr><td><code>flex-direction: row;</code></td><td>Children go left to right (default)</td></tr><tr><td><code>flex-direction: column;</code></td><td>Children go top to bottom</td></tr><tr><td><code>flex: 1;</code></td><td>This child takes equal share of remaining space</td></tr><tr><td><code>flex: 3;</code></td><td>This child takes 3x more space than flex: 1</td></tr></tbody></table></div>
+<p class="v2-p"><strong>Simple Example — Two Columns with Flexbox:</strong></p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;style&gt;
+  body {
+    font-family: Arial, sans-serif;
+  }
+
+  header {
+    background-color: #2c3e50;
+    color: white;
+    padding: 15px;
+  }
+
+  nav {
+    background-color: #ecf0f1;
+    padding: 15px;
+  }
+
+  .content-wrapper {
+    display: flex; /* Activate Flexbox on this container */
+  }
+
+  article {
+    flex: 3; /* Takes 3 parts of available space */
+    padding: 15px;
+  }
+
+  aside {
+    flex: 1; /* Takes 1 part of available space */
+    background-color: #f9f9f9;
+    padding: 15px;
+  }
+
+  footer {
+    background-color: #2c3e50;
+    color: white;
+    text-align: center;
+    padding: 10px;
+  }
+&lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+  &lt;header&gt;
+    &lt;h1&gt;My City Blog&lt;/h1&gt;
+  &lt;/header&gt;
+
+  &lt;nav&gt;
+    &lt;a href=&quot;#&quot;&gt;London&lt;/a&gt; |
+    &lt;a href=&quot;#&quot;&gt;Paris&lt;/a&gt; |
+    &lt;a href=&quot;#&quot;&gt;Tokyo&lt;/a&gt;
+  &lt;/nav&gt;
+
+  &lt;div class=&quot;content-wrapper&quot;&gt;
+
+    &lt;article&gt;
+      &lt;h2&gt;London&lt;/h2&gt;
+      &lt;p&gt;London is the capital city of England, home to over 9 million people.
+         It sits along the River Thames and has been settled for over 2,000 years.&lt;/p&gt;
+    &lt;/article&gt;
+
+    &lt;aside&gt;
+      &lt;h3&gt;Quick Facts&lt;/h3&gt;
+      &lt;p&gt;Country: England&lt;/p&gt;
+      &lt;p&gt;Founded: 43 AD&lt;/p&gt;
+    &lt;/aside&gt;
+
+  &lt;/div&gt;
+
+  &lt;footer&gt;
+    &lt;p&gt;&amp;copy; 2026 City Blog&lt;/p&gt;
+  &lt;/footer&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;</code></pre></div></div>
+<p class="v2-p"><strong>Expected Output in browser:</strong></p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span></div><div class="v2-code-body"><pre><code>My City Blog (dark header)
+London | Paris | Tokyo  (nav bar)
++------------------------------+----------+
+|  London                      | Quick    |
+|  London is the capital city  | Facts    |
+|  of England, home to over    | Country: |
+|  9 million people...         | England  |
++------------------------------+----------+
+       © 2026 City Blog (dark footer)</code></pre></div></div>
+<p class="v2-p"><strong>Line-by-line explanation:</strong></p>
+<ul class="v2-ul"><li><code>display: flex;</code> on <code>.content-wrapper</code> — tells the browser: "arrange the children of this div using Flexbox rules"</li><li><code>flex: 3;</code> on <code>article</code> — the article takes 3 "shares" of the available horizontal space</li><li><code>flex: 1;</code> on <code>aside</code> — the aside takes 1 "share"; so article:aside = 3:1 (article is 3× wider)</li></ul>
+<blockquote class="v2-bq"><p class="v2-p"><strong>Thinking Prompt:</strong> What would happen if you changed <code>flex: 3</code> to <code>flex: 1</code>? Both columns would become equal width. Try it!</p></blockquote>
+<p class="v2-p"><strong>Pros:</strong></p>
+<ul class="v2-ul"><li>Elements behave predictably</li><li>Equal-height columns happen automatically</li><li>Centring is easy</li><li>Great for one-dimensional layouts (either row OR column)</li></ul>
+<p class="v2-p"><strong>Cons:</strong></p>
+<ul class="v2-ul"><li>Slightly more to learn than float</li><li>Not ideal for complex two-dimensional grid designs</li></ul>
+<hr class="v2-hr">
+<h3 class="v2-h3">Technique 4: CSS Grid Layout</h3>
+<p class="v2-p"><strong>What is it?</strong> CSS Grid is the most powerful layout system in CSS. It lets you define a <strong>two-dimensional grid</strong> — with both rows AND columns — and place elements precisely within that grid.</p>
+<p class="v2-p"><strong>Analogy:</strong> Think of CSS Grid like a spreadsheet. You define the rows and columns, then place your content into specific cells.</p>
+<p class="v2-p"><strong>Key CSS Properties:</strong></p>
+<div class="v2-table-wrap"><table class="v2-table"><thead><tr><th>Property</th><th>What it does</th></tr></thead><tbody><tr><td><code>display: grid;</code></td><td>Activates Grid on a container</td></tr><tr><td><code>grid-template-columns: ...</code></td><td>Defines column widths</td></tr><tr><td><code>grid-template-rows: ...</code></td><td>Defines row heights</td></tr><tr><td><code>grid-column: span 2;</code></td><td>This element spans 2 columns</td></tr><tr><td><code>fr</code></td><td>"fraction" unit — divides remaining space</td></tr></tbody></table></div>
+<p class="v2-p"><strong>Simple Example — Full Page Grid:</strong></p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;style&gt;
+  .page-container {
+    display: grid; /* Activate Grid */
+    grid-template-columns: 1fr 3fr; /* 2 columns: sidebar (1 part), main (3 parts) */
+    grid-template-rows: auto auto auto; /* 3 rows: header, content, footer */
+    gap: 10px; /* Space between grid cells */
+    min-height: 100vh;
+  }
+
+  header {
+    grid-column: 1 / 3; /* Header spans BOTH columns (column 1 to column 3) */
+    background-color: #3498db;
+    color: white;
+    padding: 15px;
+  }
+
+  nav {
+    background-color: #ecf0f1;
+    padding: 15px;
+  }
+
+  article {
+    padding: 15px;
+  }
+
+  footer {
+    grid-column: 1 / 3; /* Footer also spans both columns */
+    background-color: #2c3e50;
+    color: white;
+    text-align: center;
+    padding: 10px;
+  }
+&lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+  &lt;div class=&quot;page-container&quot;&gt;
+
+    &lt;header&gt;
+      &lt;h1&gt;My City Blog&lt;/h1&gt;
+    &lt;/header&gt;
+
+    &lt;nav&gt;
+      &lt;ul&gt;
+        &lt;li&gt;&lt;a href=&quot;#&quot;&gt;London&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href=&quot;#&quot;&gt;Paris&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href=&quot;#&quot;&gt;Tokyo&lt;/a&gt;&lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/nav&gt;
+
+    &lt;article&gt;
+      &lt;h2&gt;London&lt;/h2&gt;
+      &lt;p&gt;London is the capital city of England. Standing on the River Thames,
+         London has been a major settlement for two millennia, going back to
+         its founding by the Romans, who named it Londinium.&lt;/p&gt;
+    &lt;/article&gt;
+
+    &lt;footer&gt;
+      &lt;p&gt;&amp;copy; 2026 City Blog. All Rights Reserved.&lt;/p&gt;
+    &lt;/footer&gt;
+
+  &lt;/div&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;</code></pre></div></div>
+<p class="v2-p"><strong>Expected Output in browser:</strong></p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span></div><div class="v2-code-body"><pre><code>+-----------------------------------------------+
+|  My City Blog (blue header — full width)      |
++---------------+-------------------------------+
+|  • London     |  London                       |
+|  • Paris      |  London is the capital city   |
+|  • Tokyo      |  of England. Standing on the  |
+|               |  River Thames...              |
++---------------+-------------------------------+
+|  © 2026 City Blog (dark footer — full width)  |
++-----------------------------------------------+</code></pre></div></div>
+<p class="v2-p"><strong>Line-by-line explanation:</strong></p>
+<ul class="v2-ul"><li><code>display: grid;</code> — activates the Grid system</li><li><code>grid-template-columns: 1fr 3fr;</code> — creates 2 columns. <code>1fr</code> means 1 fraction of the space, <code>3fr</code> means 3 fractions. So the nav is 1/4 the width, the article is 3/4.</li><li><code>gap: 10px;</code> — adds 10 pixels of space between grid cells</li><li><code>grid-column: 1 / 3;</code> — makes the header start at column line 1 and end at column line 3 (i.e., span both columns)</li></ul>
+<p class="v2-p"><strong>Pros:</strong></p>
+<ul class="v2-ul"><li>Most powerful and flexible layout tool</li><li>Perfect for complex two-dimensional layouts</li><li>Clean, readable code</li><li>Modern browsers support it fully</li></ul>
+<p class="v2-p"><strong>Cons:</strong></p>
+<ul class="v2-ul"><li>More to learn upfront than Float or Flexbox</li><li>Slightly newer (very old browsers may not fully support it)</li></ul>
+<hr class="v2-hr">
+<h3 class="v2-h3">Comparison Table: Which Technique to Use?</h3>
+<div class="v2-table-wrap"><table class="v2-table"><thead><tr><th>Technique</th><th>Best For</th><th>Difficulty</th><th>Browser Support</th></tr></thead><tbody><tr><td>CSS Framework</td><td>Quick prototypes, beginners</td><td>Easy</td><td>Excellent</td></tr><tr><td>CSS Float</td><td>Simple two-column layouts</td><td>Easy</td><td>Excellent (including old browsers)</td></tr><tr><td>CSS Flexbox</td><td>One-direction layouts, nav bars</td><td>Medium</td><td>Excellent</td></tr><tr><td>CSS Grid</td><td>Complex page layouts</td><td>Medium–Advanced</td><td>Very good</td></tr></tbody></table></div>
+<blockquote class="v2-bq"><p class="v2-p"><strong>Real-World Note:</strong> Modern professional projects almost always use <strong>Flexbox for components</strong> (like navigation bars and card rows) and <strong>CSS Grid for full page layout</strong>. CSS Frameworks like Bootstrap are common in business applications. Float is considered "old school" and is used less in new projects.</p></blockquote>
+<hr class="v2-hr">
+    <div class="task-box">
+      <div class="task-label">✏️ Your Task</div>
+      <div class="task-body">Pros:
+- Elements behave predictably
+- Equal-height columns happen automatically
+- Centring is easy
+- Great for one-dimensional layouts (either row OR column)
+
+Cons:
+- Slightly more to learn than float
+- Not ideal for complex two-dimensional grid designs
+
+---</div>
+    </div>
+    <button class="unlock-btn" onclick="unlockNext(5)">Phase Complete — Unlock Next ✓</button>
   </div>
-  <div class="github-acc-body">
-    <div class="github-step"><div class="github-step-n">1</div><p>Go to <strong>github.com</strong> and sign in. Click the green <strong>New</strong> button to create a new repository. Name it <code>html-lesson-25-html_layout</code>.</p></div>
-    <div class="github-step"><div class="github-step-n">2</div><p>Leave it <strong>Public</strong> and tick <strong>Add a README file</strong>. Click <strong>Create repository</strong>.</p></div>
-    <div class="github-step"><div class="github-step-n">3</div><p>Click <strong>Add file → Upload files</strong>. Drag your <code>starter.html</code> (and rename it <code>index.html</code> first!) into the upload box.</p></div>
-    <div class="github-step"><div class="github-step-n">4</div><p>Scroll down, add a commit message like <em>"Add lesson 25 project"</em> and click <strong>Commit changes</strong>.</p></div>
-    <div class="github-step"><div class="github-step-n">5</div><p>Go to <strong>Settings → Pages</strong>. Under <em>Branch</em>, select <strong>main</strong> and click <strong>Save</strong>. Your page will be live at <code>https://YOUR-USERNAME.github.io/html-lesson-25-html_layout/</code> in about 1 minute! 🎉</p></div>
-    <button class="next-btn" onclick="showEnd()" style="margin-top:.5rem">I'm done! Finish session ✅</button>
+</div>
+<div class="phase locked" id="phase6">
+  <div class="phase-header">
+    <div class="phase-num">Phase 6 of 7</div>
+    <div class="phase-title">Part 4: Guided Practice Exercises</div>
+    <div class="phase-check" id="chk6"></div>
+  </div>
+  <div class="phase-body">
+    <p class="v2-p">Now let's practice what we've learned with structured exercises. Start each one, complete the steps, then check your output.</p>
+<hr class="v2-hr">
+<h3 class="v2-h3">Exercise 1 — Identify the Layout Elements</h3>
+<p class="v2-p"><strong>Objective:</strong> Recognise semantic layout elements in existing code.</p>
+<p class="v2-p"><strong>Scenario:</strong> Your friend sent you this HTML. Identify what each layout element does.</p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;body&gt;
+
+  &lt;header&gt;
+    &lt;h1&gt;Fresh Food Blog&lt;/h1&gt;
+  &lt;/header&gt;
+
+  &lt;nav&gt;
+    &lt;a href=&quot;#&quot;&gt;Recipes&lt;/a&gt;
+    &lt;a href=&quot;#&quot;&gt;Tips&lt;/a&gt;
+    &lt;a href=&quot;#&quot;&gt;About&lt;/a&gt;
+  &lt;/nav&gt;
+
+  &lt;section&gt;
+    &lt;article&gt;
+      &lt;h2&gt;How to Make Perfect Rice&lt;/h2&gt;
+      &lt;p&gt;Rice is a staple in millions of households worldwide...&lt;/p&gt;
+    &lt;/article&gt;
+
+    &lt;aside&gt;
+      &lt;h3&gt;Most Popular&lt;/h3&gt;
+      &lt;p&gt;1. Jollof Rice&lt;/p&gt;
+      &lt;p&gt;2. Fried Rice&lt;/p&gt;
+    &lt;/aside&gt;
+  &lt;/section&gt;
+
+  &lt;footer&gt;
+    &lt;p&gt;Fresh Food Blog &amp;copy; 2026&lt;/p&gt;
+  &lt;/footer&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;</code></pre></div></div>
+<p class="v2-p"><strong>Steps:</strong></p>
+<ol class="v2-ol"><li>Copy this code into a <code>.html</code> file on your computer.</li><li>Open it in a browser.</li><li>Answer these questions:</li></ol>
+<p class="v2-p"><strong>Self-Check Questions:</strong></p>
+<ul class="v2-ul"><li>Which element contains "Fresh Food Blog"? _______________</li><li>Which element contains the links "Recipes | Tips | About"? _______________</li><li>Which element wraps both the <code>&lt;article&gt;</code> and <code>&lt;aside&gt;</code>? _______________</li><li>Which element contains "How to Make Perfect Rice"? _______________</li><li>Which element contains "Most Popular"? _______________</li><li>Which element contains the copyright notice? _______________</li></ul>
+<p class="v2-p"><strong>Answers:</strong> header, nav, section, article, aside, footer.</p>
+<hr class="v2-hr">
+<h3 class="v2-h3">Exercise 2 — Build a Two-Column Layout with Flexbox</h3>
+<p class="v2-p"><strong>Objective:</strong> Create a simple two-column layout using Flexbox.</p>
+<p class="v2-p"><strong>Scenario:</strong> You are building a simple personal portfolio page. It needs a left sidebar with your name and links, and a right main area with your content.</p>
+<p class="v2-p"><strong>Steps:</strong></p>
+<ol class="v2-ol"><li>Create a new file called <code>portfolio.html</code></li><li>Add the structure below</li><li>Add the CSS styles</li><li>Open in browser and verify the output</li></ol>
+<p class="v2-p"><strong>Starter Code:</strong></p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;title&gt;My Portfolio&lt;/title&gt;
+  &lt;style&gt;
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      background-color: #1a1a2e;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .main-content {
+      display: flex;           /* Step 1: Activate Flexbox */
+    }
+
+    nav {
+      flex: 1;                 /* Step 2: Sidebar takes 1 share */
+      background-color: #16213e;
+      color: white;
+      padding: 20px;
+      min-height: 400px;
+    }
+
+    nav a {
+      display: block;          /* Each link on its own line */
+      color: #a8dadc;
+      margin-bottom: 10px;
+      text-decoration: none;
+    }
+
+    section {
+      flex: 3;                 /* Step 3: Main area takes 3 shares */
+      padding: 20px;
+    }
+
+    footer {
+      background-color: #1a1a2e;
+      color: white;
+      text-align: center;
+      padding: 15px;
+    }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+  &lt;header&gt;
+    &lt;h1&gt;Jane Doe — Web Developer&lt;/h1&gt;
+  &lt;/header&gt;
+
+  &lt;div class=&quot;main-content&quot;&gt;
+
+    &lt;nav&gt;
+      &lt;h3&gt;Menu&lt;/h3&gt;
+      &lt;a href=&quot;#&quot;&gt;About Me&lt;/a&gt;
+      &lt;a href=&quot;#&quot;&gt;Projects&lt;/a&gt;
+      &lt;a href=&quot;#&quot;&gt;Skills&lt;/a&gt;
+      &lt;a href=&quot;#&quot;&gt;Contact&lt;/a&gt;
+    &lt;/nav&gt;
+
+    &lt;section&gt;
+      &lt;h2&gt;About Me&lt;/h2&gt;
+      &lt;p&gt;Hello! I am Jane, a passionate web developer from Lagos, Nigeria.
+         I love building clean, fast websites that help businesses grow online.&lt;/p&gt;
+
+      &lt;h2&gt;Featured Project&lt;/h2&gt;
+      &lt;p&gt;I recently built a school management system for a local secondary school,
+         helping them digitise their student records.&lt;/p&gt;
+    &lt;/section&gt;
+
+  &lt;/div&gt;
+
+  &lt;footer&gt;
+    &lt;p&gt;&amp;copy; 2026 Jane Doe. Built with HTML and CSS.&lt;/p&gt;
+  &lt;/footer&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;</code></pre></div></div>
+<p class="v2-p"><strong>Expected Output:</strong></p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span></div><div class="v2-code-body"><pre><code>+--------------------------------------------------+
+|    Jane Doe — Web Developer (dark blue header)   |
++------------------+-------------------------------+
+|  Menu            |  About Me                     |
+|  About Me        |  Hello! I am Jane, a          |
+|  Projects        |  passionate web developer...  |
+|  Skills          |                               |
+|  Contact         |  Featured Project             |
+|                  |  I recently built a school... |
++------------------+-------------------------------+
+|  © 2026 Jane Doe. Built with HTML and CSS.       |
++--------------------------------------------------+</code></pre></div></div>
+<p class="v2-p"><strong>Self-Check Questions:</strong></p>
+<ul class="v2-ul"><li>What does <code>display: flex;</code> on <code>.main-content</code> do?</li><li>Why is <code>flex: 3;</code> on <code>section</code> and <code>flex: 1;</code> on <code>nav</code>? What ratio does that create?</li><li>What would happen if you removed <code>display: block;</code> from <code>nav a</code>?</li></ul>
+<p class="v2-p"><strong>What-If Challenges:</strong></p>
+<ul class="v2-ul"><li>Change <code>flex: 3</code> on section to <code>flex: 1</code>. What happens to the layout?</li><li>Add a second <code>&lt;nav&gt;</code> link for "Blog." Where does it appear?</li><li>Change the header background to <code>#e63946</code>. What colour appears?</li></ul>
+<hr class="v2-hr">
+<h3 class="v2-h3">Exercise 3 — Add a <code>&lt;details&gt;</code> FAQ Section</h3>
+<p class="v2-p"><strong>Objective:</strong> Use <code>&lt;details&gt;</code> and <code>&lt;summary&gt;</code> to create a collapsible FAQ.</p>
+<p class="v2-p"><strong>Scenario:</strong> Add a Frequently Asked Questions section to a webpage.</p>
+<p class="v2-p"><strong>Code:</strong></p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;title&gt;FAQ Page&lt;/title&gt;
+  &lt;style&gt;
+    body { font-family: Arial; padding: 20px; }
+    details {
+      margin-bottom: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      padding: 10px;
+    }
+    summary {
+      font-weight: bold;
+      cursor: pointer;    /* Changes mouse cursor to hand on hover */
+      color: #2c3e50;
+    }
+    details p {
+      margin-top: 10px;
+      color: #555;
+    }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+  &lt;h1&gt;Frequently Asked Questions&lt;/h1&gt;
+
+  &lt;details&gt;
+    &lt;summary&gt;What is HTML?&lt;/summary&gt;
+    &lt;p&gt;HTML stands for HyperText Markup Language. It is the standard
+       language for creating the structure of web pages.&lt;/p&gt;
+  &lt;/details&gt;
+
+  &lt;details&gt;
+    &lt;summary&gt;What is CSS?&lt;/summary&gt;
+    &lt;p&gt;CSS stands for Cascading Style Sheets. It controls how HTML
+       elements look — their colours, sizes, and positions.&lt;/p&gt;
+  &lt;/details&gt;
+
+  &lt;details&gt;
+    &lt;summary&gt;Do I need to buy software to code HTML?&lt;/summary&gt;
+    &lt;p&gt;No! You only need a free text editor (like VS Code or Notepad++)
+       and a web browser. Both are free to download.&lt;/p&gt;
+  &lt;/details&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;</code></pre></div></div>
+<p class="v2-p"><strong>Expected Output (before clicking):</strong></p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span></div><div class="v2-code-body"><pre><code>Frequently Asked Questions
+▶ What is HTML?
+▶ What is CSS?
+▶ Do I need to buy software to code HTML?</code></pre></div></div>
+<p class="v2-p"><strong>Expected Output (after clicking "What is HTML?"):</strong></p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span></div><div class="v2-code-body"><pre><code>Frequently Asked Questions
+▼ What is HTML?
+  HTML stands for HyperText Markup Language. It is the standard
+  language for creating the structure of web pages.
+▶ What is CSS?
+▶ Do I need to buy software to code HTML?</code></pre></div></div>
+<p class="v2-p"><strong>Self-Check Questions:</strong></p>
+<ul class="v2-ul"><li>What tag creates the clickable label?</li><li>What happens to the triangle (▶) when you click to expand?</li><li>Can you have multiple <code>&lt;details&gt;</code> elements on the same page?</li></ul>
+<hr class="v2-hr">
+    <div class="task-box">
+      <div class="task-label">✏️ Your Task</div>
+      <div class="task-body">Now practise what you just learned about <strong>: Guided Practice Exercises</strong>. Open your editor, type the examples above by hand, then modify them — change values, rename variables, and observe what happens. Active experimentation is how code sticks.</div>
+    </div>
+    <button class="unlock-btn" onclick="unlockNext(6)">Phase Complete — Unlock Next ✓</button>
   </div>
 </div>
+<div class="phase locked" id="phase7">
+  <div class="phase-header">
+    <div class="phase-num">Phase 7 of 7</div>
+    <div class="phase-title">Part 6: Common Beginner Mistakes</div>
+    <div class="phase-check" id="chk7"></div>
+  </div>
+  <div class="phase-body">
+    <p class="v2-p">Here are the most common mistakes beginners make with HTML layout — and how to fix them.</p>
+<hr class="v2-hr">
+<h3 class="v2-h3">Mistake 1 — Forgetting <code>clear: both</code> When Using Float</h3>
+<p class="v2-p"><strong>Broken Code:</strong></p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;style&gt;
+  nav   { float: left; width: 30%; }
+  article { float: left; width: 70%; }
+  /* No clear on footer! */
+&lt;/style&gt;
 
+&lt;nav&gt;Sidebar&lt;/nav&gt;
+&lt;article&gt;Main Content&lt;/article&gt;
+&lt;footer&gt;Footer&lt;/footer&gt;  &lt;!-- Footer tries to wrap alongside floated elements! --&gt;</code></pre></div></div>
+<p class="v2-p"><strong>Problem:</strong> The footer floats up next to the sidebar instead of appearing below both columns.</p>
+<p class="v2-p"><strong>Fixed Code:</strong></p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;style&gt;
+  nav     { float: left; width: 30%; }
+  article { float: left; width: 70%; }
+  footer  { clear: both; }  /* ← This fixes it! */
+&lt;/style&gt;</code></pre></div></div>
+<hr class="v2-hr">
+<h3 class="v2-h3">Mistake 2 — Forgetting <code>display: flex</code> on the Container</h3>
+<p class="v2-p"><strong>Broken Code:</strong></p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;style&gt;
+  nav     { flex: 1; }   /* This has no effect! */
+  article { flex: 3; }   /* This has no effect! */
+&lt;/style&gt;
+
+&lt;div class=&quot;wrapper&quot;&gt;
+  &lt;nav&gt;Sidebar&lt;/nav&gt;
+  &lt;article&gt;Main Content&lt;/article&gt;
+&lt;/div&gt;</code></pre></div></div>
+<p class="v2-p"><strong>Problem:</strong> The <code>flex</code> property on children has NO effect unless the <em>parent container</em> has <code>display: flex</code>.</p>
+<p class="v2-p"><strong>Fixed Code:</strong></p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;style&gt;
+  .wrapper { display: flex; }   /* ← Add this to the PARENT */
+  nav      { flex: 1; }
+  article  { flex: 3; }
+&lt;/style&gt;</code></pre></div></div>
+<hr class="v2-hr">
+<h3 class="v2-h3">Mistake 3 — Float Percentages Adding Up to More Than 100%</h3>
+<p class="v2-p"><strong>Broken Code:</strong></p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;style&gt;
+  nav     { float: left; width: 30%; padding: 20px; }
+  article { float: left; width: 70%; padding: 20px; }
+&lt;/style&gt;</code></pre></div></div>
+<p class="v2-p"><strong>Problem:</strong> With <code>padding: 20px</code>, the actual total width becomes more than 100%, so <code>article</code> wraps below <code>nav</code>.</p>
+<p class="v2-p"><strong>Fixed Code:</strong></p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;style&gt;
+  * { box-sizing: border-box; }  /* ← Padding is now included in width */
+  nav     { float: left; width: 30%; padding: 20px; }
+  article { float: left; width: 70%; padding: 20px; }
+&lt;/style&gt;</code></pre></div></div>
+<hr class="v2-hr">
+<h3 class="v2-h3">Mistake 4 — Using <code>&lt;div&gt;</code> When a Semantic Element Exists</h3>
+<p class="v2-p"><strong>Incorrect (but works visually):</strong></p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;div id=&quot;header&quot;&gt;
+  &lt;h1&gt;My Website&lt;/h1&gt;
+&lt;/div&gt;
+
+&lt;div id=&quot;nav&quot;&gt;
+  &lt;a href=&quot;#&quot;&gt;Home&lt;/a&gt;
+&lt;/div&gt;</code></pre></div></div>
+<p class="v2-p"><strong>Better (semantic):</strong></p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;header&gt;
+  &lt;h1&gt;My Website&lt;/h1&gt;
+&lt;/header&gt;
+
+&lt;nav&gt;
+  &lt;a href=&quot;#&quot;&gt;Home&lt;/a&gt;
+&lt;/nav&gt;</code></pre></div></div>
+<p class="v2-p">Both look the same in the browser, but the semantic version is better for accessibility, SEO, and code readability.</p>
+<hr class="v2-hr">
+<h3 class="v2-h3">Mistake 5 — Putting <code>&lt;summary&gt;</code> Outside <code>&lt;details&gt;</code></h3>
+<p class="v2-p"><strong>Broken Code:</strong></p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;summary&gt;Click Me&lt;/summary&gt;   &lt;!-- WRONG — summary must be inside details --&gt;
+&lt;details&gt;
+  &lt;p&gt;Hidden content here.&lt;/p&gt;
+&lt;/details&gt;</code></pre></div></div>
+<p class="v2-p"><strong>Fixed Code:</strong></p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;details&gt;
+  &lt;summary&gt;Click Me&lt;/summary&gt;   &lt;!-- CORRECT — summary is the FIRST child of details --&gt;
+  &lt;p&gt;Hidden content here.&lt;/p&gt;
+&lt;/details&gt;</code></pre></div></div>
+<hr class="v2-hr">
+    <div class="task-box">
+      <div class="task-label">✏️ Your Task</div>
+      <div class="task-body">Now practise what you just learned about <strong>: Common Beginner Mistakes</strong>. Open your editor, type the examples above by hand, then modify them — change values, rename variables, and observe what happens. Active experimentation is how code sticks.</div>
+    </div>
+    <button class="unlock-btn" onclick="unlockNext(7)">Phase Complete — Unlock Next ✓</button>
+  </div>
+</div>
+<div class="build-box" id="build-it">
+  <div class="build-label">🏗️ Build It</div>
+  <div class="build-name">Stage 1 — Setup the HTML Structure</div>
+  <div class="build-desc"><strong>Project Title:</strong> Lagos City Guide</div>
+  <div class="v2-code-wrap">
+    <div class="v2-code-bar">
+      <span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span>
+      <span class="v2-code-lang">starter.html</span>
+    </div>
+    <div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;UTF-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
+  &lt;title&gt;Lagos City Guide&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+  &lt;!-- HEADER --&gt;
+  &lt;header&gt;
+    &lt;h1&gt;Lagos City Guide&lt;/h1&gt;
+    &lt;p&gt;Your complete guide to the heart of Nigeria&lt;/p&gt;
+  &lt;/header&gt;
+
+  &lt;!-- NAVIGATION --&gt;
+  &lt;nav&gt;
+    &lt;a href=&quot;#&quot;&gt;About Lagos&lt;/a&gt;
+    &lt;a href=&quot;#&quot;&gt;Things to Do&lt;/a&gt;
+    &lt;a href=&quot;#&quot;&gt;Food&lt;/a&gt;
+    &lt;a href=&quot;#&quot;&gt;Transport&lt;/a&gt;
+  &lt;/nav&gt;
+
+  &lt;!-- MAIN CONTENT AREA --&gt;
+  &lt;div class=&quot;content-area&quot;&gt;
+
+    &lt;!-- ARTICLE --&gt;
+    &lt;article&gt;
+      &lt;h2&gt;About Lagos&lt;/h2&gt;
+      &lt;p&gt;Lagos is the largest city in Nigeria and one of the most populous cities
+         in Africa. It is a vibrant, fast-moving metropolis known for its music,
+         food, fashion, and entrepreneurial spirit.&lt;/p&gt;
+
+      &lt;h3&gt;History&lt;/h3&gt;
+      &lt;p&gt;Lagos was originally a collection of islands settled by the Awori people.
+         The Portuguese arrived in the 15th century, naming it &quot;Lagos&quot; after a city
+         in Portugal. It later became a major centre during the colonial era.&lt;/p&gt;
+
+      &lt;h3&gt;Fun Facts&lt;/h3&gt;
+      &lt;details&gt;
+        &lt;summary&gt;Click to reveal Lagos facts&lt;/summary&gt;
+        &lt;ul&gt;
+          &lt;li&gt;Lagos has a population of over 15 million people.&lt;/li&gt;
+          &lt;li&gt;It was Nigeria&#x27;s capital until 1991 when Abuja took over.&lt;/li&gt;
+          &lt;li&gt;Lagos State has the largest economy of any Nigerian state.&lt;/li&gt;
+          &lt;li&gt;Nollywood, Nigeria&#x27;s film industry, is based in Lagos.&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/details&gt;
+    &lt;/article&gt;
+
+    &lt;!-- SIDEBAR --&gt;
+    &lt;aside&gt;
+      &lt;h3&gt;Quick Info&lt;/h3&gt;
+      &lt;p&gt;&lt;strong&gt;Country:&lt;/strong&gt; Nigeria&lt;/p&gt;
+      &lt;p&gt;&lt;strong&gt;State:&lt;/strong&gt; Lagos State&lt;/p&gt;
+      &lt;p&gt;&lt;strong&gt;Language:&lt;/strong&gt; Yoruba, English&lt;/p&gt;
+      &lt;p&gt;&lt;strong&gt;Currency:&lt;/strong&gt; Naira (₦)&lt;/p&gt;
+      &lt;p&gt;&lt;strong&gt;Climate:&lt;/strong&gt; Tropical&lt;/p&gt;
+
+      &lt;h3&gt;Must Visit&lt;/h3&gt;
+      &lt;ul&gt;
+        &lt;li&gt;Lekki Conservation Centre&lt;/li&gt;
+        &lt;li&gt;National Museum Lagos&lt;/li&gt;
+        &lt;li&gt;Tarkwa Bay Beach&lt;/li&gt;
+        &lt;li&gt;Nike Art Gallery&lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/aside&gt;
+
+  &lt;/div&gt;
+
+  &lt;!-- FOOTER --&gt;
+  &lt;footer&gt;
+    &lt;p&gt;&amp;copy; 2026 Lagos City Guide. Made with HTML &amp;amp; CSS.&lt;/p&gt;
+  &lt;/footer&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;</code></pre></div>
+  </div>
+  <div style="display:flex;gap:.8rem;flex-wrap:wrap;margin-top:1.2rem">
+    <button class="unlock-btn" onclick="downloadStarter(`<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lagos City Guide</title>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <h1>Lagos City Guide</h1>
+    <p>Your complete guide to the heart of Nigeria</p>
+  </header>
+
+  <!-- NAVIGATION -->
+  <nav>
+    <a href="#">About Lagos</a>
+    <a href="#">Things to Do</a>
+    <a href="#">Food</a>
+    <a href="#">Transport</a>
+  </nav>
+
+  <!-- MAIN CONTENT AREA -->
+  <div class="content-area">
+
+    <!-- ARTICLE -->
+    <article>
+      <h2>About Lagos</h2>
+      <p>Lagos is the largest city in Nigeria and one of the most populous cities
+         in Africa. It is a vibrant, fast-moving metropolis known for its music,
+         food, fashion, and entrepreneurial spirit.</p>
+
+      <h3>History</h3>
+      <p>Lagos was originally a collection of islands settled by the Awori people.
+         The Portuguese arrived in the 15th century, naming it "Lagos" after a city
+         in Portugal. It later became a major centre during the colonial era.</p>
+
+      <h3>Fun Facts</h3>
+      <details>
+        <summary>Click to reveal Lagos facts</summary>
+        <ul>
+          <li>Lagos has a population of over 15 million people.</li>
+          <li>It was Nigeria's capital until 1991 when Abuja took over.</li>
+          <li>Lagos State has the largest economy of any Nigerian state.</li>
+          <li>Nollywood, Nigeria's film industry, is based in Lagos.</li>
+        </ul>
+      </details>
+    </article>
+
+    <!-- SIDEBAR -->
+    <aside>
+      <h3>Quick Info</h3>
+      <p><strong>Country:</strong> Nigeria</p>
+      <p><strong>State:</strong> Lagos State</p>
+      <p><strong>Language:</strong> Yoruba, English</p>
+      <p><strong>Currency:</strong> Naira (₦)</p>
+      <p><strong>Climate:</strong> Tropical</p>
+
+      <h3>Must Visit</h3>
+      <ul>
+        <li>Lekki Conservation Centre</li>
+        <li>National Museum Lagos</li>
+        <li>Tarkwa Bay Beach</li>
+        <li>Nike Art Gallery</li>
+      </ul>
+    </aside>
+
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>&copy; 2026 Lagos City Guide. Made with HTML &amp; CSS.</p>
+  </footer>
+
+</body>
+</html>`)"
+      style="background:#10b981;box-shadow:0 4px 14px rgba(16,185,129,.3)">
+      ⬇ Download starter.html
+    </button>
+    <button class="unlock-btn" onclick="showGithub()"
+      style="background:#0f172a;box-shadow:none">
+      🐙 Push to GitHub →
+    </button>
+  </div>
+</div>
+<div class="gh-acc" id="gh-steps" style="display:none">
+  <div class="gh-acc-head" onclick="toggleGh(this)">
+    🐙 Push Your Project to GitHub Pages &nbsp;<span>▼</span>
+  </div>
+  <div class="gh-acc-body">
+    <div class="gh-step"><div class="gh-step-n">1</div>
+    <p>Go to <strong>github.com</strong> → click <strong>New repository</strong> → name it <code>html-lesson-25-stage-1-setup-the-html-structure</code>.</p></div>
+    <div class="gh-step"><div class="gh-step-n">2</div>
+    <p>Set it to <strong>Public</strong>, tick <strong>Add a README</strong>, then click <strong>Create repository</strong>.</p></div>
+    <div class="gh-step"><div class="gh-step-n">3</div>
+    <p>Click <strong>Add file → Upload files</strong>. Upload your <code>starter.html</code> — rename it to <code>index.html</code> before uploading.</p></div>
+    <div class="gh-step"><div class="gh-step-n">4</div>
+    <p>Commit message: <em>"Add HTML lesson 25 project"</em> → click <strong>Commit changes</strong>.</p></div>
+    <div class="gh-step"><div class="gh-step-n">5</div>
+    <p>Go to <strong>Settings → Pages</strong> → branch <strong>main</strong> → <strong>Save</strong>. Your project goes live at <code>https://YOUR-NAME.github.io/html-lesson-25-stage-1-setup-the-html-structure/</code> in about 1 minute! 🎉</p></div>
+    <button class="unlock-btn" onclick="showEnd()" style="margin-top:.5rem">I've pushed to GitHub — Finish Session ✅</button>
+  </div>
+</div>
 <div class="session-end" id="session-end">
-  <h2>🎉 Great work! Lesson 25 complete!</h2>
-  <p style="margin-bottom:.8rem;font-size:.9rem;opacity:.9">Today you learned:</p>
-  <ul><li>✅ Semantic Layout Elements</li><li>✅ Article and Section</li><li>✅ CSS Flexbox for Layout</li></ul>
-  <div class="lesson-nav" style="margin-top:1.5rem;border-color:rgba(255,255,255,.2)">
-    <a href="lesson_24.html" class="ln-btn">← Lesson 24</a>
-    <a href="lesson_26.html" class="ln-btn primary">Lesson 26 →</a>
-  </div>
+  <h2>🎉 Lesson 25 complete!</h2>
+  <p style="margin-bottom:.8rem;font-size:.9rem;opacity:.9">You covered:</p>
+  <ul><li>✅ Lesson Introduction</li><li>✅ Prerequisite Concepts</li><li>✅ Part 1: Conceptual Understanding — What Is a Web Page Layout?</li><li>✅ Part 2: The Eight HTML Semantic Layout Elements</li><li>✅ Part 3: HTML Layout Techniques</li><li>✅ Part 4: Guided Practice Exercises</li><li>✅ Part 6: Common Beginner Mistakes</li></ul>
+  <div class="lesson-nav"><a href="lesson_24.html" class="ln-btn">← Lesson 24</a><a href="lesson_26.html" class="ln-btn primary">Lesson 26 →</a></div>
 </div>
-
 </main>
 
-<!-- FOOTER -->
 <footer class="lesson-footer">
-  <p>Techbase Code Coach &nbsp;·&nbsp; HTML Course Lesson 25
-     &nbsp;·&nbsp; © 2025 Techbase Consultant Services, Ibadan</p>
+  Techbase Code Coach · HTML Course · Lesson 25 · © 2025 Techbase Consultant Services, Ibadan
 </footer>
-
 <script>
-const TOTAL=3, KEY='techbase_html_25_phase';
+const TOTAL=7,KEY='techbase_html_l25';
 let current=parseInt(localStorage.getItem(KEY)||'1');
-
 function init(){
-  for(let i=1;i<=current;i++) if(i>1) unlockPhase(i,false);
+  for(let i=2;i<=current;i++) unlockPhase(i,false);
   updateBar();
 }
-
 function unlockNext(n){
-  document.getElementById('check'+n).classList.add('done');
-  document.getElementById('check'+n).textContent='✓';
-  localStorage.setItem(KEY,n+1);
-  current=n+1;
+  const chk=document.getElementById('chk'+n);
+  if(chk){chk.classList.add('done');chk.textContent='✓';}
+  localStorage.setItem(KEY,n+1); current=n+1;
   if(n===TOTAL){
     document.getElementById('build-it').style.display='block';
-    const cap=document.getElementById('capstone');
-    if(cap) cap.style.display='block';
     updateBar(100);
     setTimeout(()=>document.getElementById('build-it').scrollIntoView({behavior:'smooth'}),200);
-  } else {
-    unlockPhase(n+1,true);
-    updateBar();
+  }else{
+    unlockPhase(n+1,true); updateBar();
   }
 }
-
 function unlockPhase(n,scroll){
   const el=document.getElementById('phase'+n);
-  if(el){ el.classList.remove('locked'); if(scroll) setTimeout(()=>el.scrollIntoView({behavior:'smooth',block:'start'}),150); }
+  if(el){el.classList.remove('locked');if(scroll)setTimeout(()=>el.scrollIntoView({behavior:'smooth',block:'start'}),150);}
 }
-
 function updateBar(pct){
-  const p=pct||Math.round((current-1)/TOTAL*95);
+  const p=pct!==undefined?pct:Math.round((current-1)/TOTAL*95);
   document.getElementById('pbar').style.width=p+'%';
 }
-
 function showGithub(){
-  const g=document.getElementById('github-steps');
-  if(g){ g.style.display='block'; setTimeout(()=>g.scrollIntoView({behavior:'smooth'}),150); }
+  const g=document.getElementById('gh-steps');
+  if(g){g.style.display='block';setTimeout(()=>g.scrollIntoView({behavior:'smooth'}),150);}
 }
-
 function showEnd(){
   const e=document.getElementById('session-end');
-  if(e){ e.classList.add('visible'); setTimeout(()=>e.scrollIntoView({behavior:'smooth'}),150); }
+  if(e){e.classList.add('visible');setTimeout(()=>e.scrollIntoView({behavior:'smooth'}),150);}
 }
-
+function toggleGh(el){el.nextElementSibling.classList.toggle('open');}
+function downloadStarter(code){
+  const a=document.createElement('a');
+  a.href='data:text/html;charset=utf-8,'+encodeURIComponent(code);
+  a.download='starter.html';a.click();
+}
 init();
 </script>
-
 </body>
 </html>

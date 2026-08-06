@@ -2,548 +2,1041 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Lesson 26: HTML Responsive Web Design — Techbase HTML Course</title>
-<meta name="description" content="Make your pages look great on phones, tablets and desktops using responsive techniques">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Lesson 26: HTML Responsive Web Design — Techbase HTML</title>
+<meta name="description" content="HTML Responsive Web Design">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-:root { 
-  --accent:#ea4f21;--accent-pale:#fff3ef;--accent-dark:#c23d15;
-  --accent-border:rgba(234,79,33,.3);--accent-shadow:rgba(234,79,33,.28);
-  --hero-bg:linear-gradient(160deg,#fff3ef 0%,#f8fafc 55%,#fef2e9 100%);
-  --s2:#f1f5f9;
- }
 :root{
+  --acc:#e34c26;--acc-d:#c0391a;--acc-pale:#fff5f2;
+  --acc-b:rgba(227,76,38,.25);--acc-sh:rgba(227,76,38,.25);
   --bg:#f8fafc;--surface:#fff;--border:#e2e8f0;--border2:#cbd5e1;
   --text:#0f172a;--t2:#334155;--muted:#64748b;
   --D:'Space Grotesk',sans-serif;--B:'Plus Jakarta Sans',sans-serif;--M:'JetBrains Mono',monospace;
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased}
-body{background:var(--bg);color:var(--text);font-family:var(--B);font-size:16px;line-height:1.7;overflow-x:hidden}
+body{background:var(--bg);color:var(--text);font-family:var(--B);font-size:16px;line-height:1.75;overflow-x:hidden}
+
 /* NAV */
-.l-nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(255,255,255,.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);height:58px;display:flex;align-items:center;padding:0 1.5rem;gap:1rem;justify-content:space-between}
-.l-nav-logo{font-family:var(--D);font-weight:700;font-size:.88rem;color:var(--text);text-decoration:none}
-.l-nav-logo em{font-style:normal}
+.l-nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(255,255,255,.95);
+  backdrop-filter:blur(12px);border-bottom:1px solid var(--border);height:58px;
+  display:flex;align-items:center;padding:0 1.5rem;gap:1rem;justify-content:space-between}
+.l-nav-logo{font-family:var(--D);font-weight:700;font-size:.9rem;color:var(--text);text-decoration:none}
 .l-nav-back{font-size:.8rem;color:var(--muted);text-decoration:none;font-weight:500;display:flex;align-items:center;gap:.3rem;transition:color .2s}
-.l-nav-back:hover{color:var(--accent)}
-.l-nav-lesson{font-family:var(--M);font-size:.68rem;color:var(--muted)}
-/* PROGRESS BAR */
+.l-nav-back:hover{color:var(--acc)}
+.l-nav-label{font-family:var(--M);font-size:.68rem;color:var(--muted)}
+
+/* PROGRESS */
 .progress-wrap{position:fixed;top:58px;left:0;right:0;z-index:199;height:4px;background:var(--border)}
-.progress-bar{height:100%;background:var(--accent);transition:width .4s ease;width:0%}
+.progress-bar{height:100%;background:var(--acc);transition:width .4s ease;width:0%}
+
 /* HERO */
-.l-hero{padding:88px 1.5rem 2rem;background:var(--hero-bg);border-bottom:1px solid var(--border)}
-.l-hero-inner{max-width:820px;margin:0 auto}
-.l-badge{display:inline-flex;align-items:center;gap:.4rem;border-radius:100px;padding:.2rem .8rem;font-family:var(--M);font-size:.62rem;letter-spacing:.08em;text-transform:uppercase;font-weight:600;border:1px solid;color:var(--accent);background:var(--accent-pale);border-color:var(--accent-border);margin-bottom:.8rem}
-.l-hero h1{font-family:var(--D);font-weight:700;font-size:clamp(1.6rem,4vw,2.4rem);letter-spacing:-.025em;line-height:1.15;margin-bottom:.5rem}
-.l-hero-tag{font-size:.95rem;color:var(--muted);margin-bottom:1.2rem}
-.l-hero-build{background:var(--surface);border:1.5px solid var(--border);border-radius:10px;padding:.9rem 1.2rem;display:flex;align-items:center;gap:.7rem;font-size:.88rem;max-width:520px}
-.l-hero-build strong{color:var(--accent)}
+.l-hero{padding:80px 1.5rem 2rem;background:linear-gradient(160deg,#fff5f2 0%,#f8fafc 55%,#ffe8e0 100%);border-bottom:1px solid var(--border)}
+.l-hero-inner{max-width:860px;margin:0 auto}
+.l-badge{display:inline-flex;align-items:center;gap:.4rem;border-radius:100px;padding:.2rem .85rem;
+  font-family:var(--M);font-size:.62rem;letter-spacing:.08em;text-transform:uppercase;font-weight:600;
+  color:var(--acc);background:var(--acc-pale);border:1px solid var(--acc-b);margin-bottom:.8rem}
+.l-hero h1{font-family:var(--D);font-weight:700;font-size:clamp(1.5rem,4vw,2.3rem);
+  letter-spacing:-.02em;line-height:1.15;margin-bottom:.5rem}
+.l-hero-sub{font-size:.95rem;color:var(--muted);margin-bottom:1rem}
+
 /* WELCOME BOX */
-.welcome-box{background:linear-gradient(135deg,var(--accent),var(--accent-dark));color:#fff;border-radius:16px;padding:1.5rem 1.8rem;max-width:820px;margin:2rem auto 0}
-.welcome-box h2{font-family:var(--D);font-weight:700;font-size:1.1rem;margin-bottom:.6rem}
-.welcome-box p{font-size:.9rem;line-height:1.75;opacity:.92}
-.welcome-meta{display:flex;gap:1.5rem;margin-top:1rem;flex-wrap:wrap}
-.welcome-meta span{background:rgba(255,255,255,.15);border-radius:6px;padding:.25rem .8rem;font-family:var(--M);font-size:.7rem;font-weight:500}
-/* MAIN CONTENT */
-main{max-width:820px;margin:0 auto;padding:2rem 1.5rem 5rem}
+.welcome-box{background:linear-gradient(135deg,var(--acc),var(--acc-d));color:#fff;
+  border-radius:16px;padding:1.5rem 1.8rem;max-width:860px;margin:1.5rem auto 0}
+.welcome-box h2{font-family:var(--D);font-weight:700;font-size:1.05rem;margin-bottom:.6rem}
+.welcome-box p,.welcome-box li{font-size:.9rem;line-height:1.8;opacity:.93}
+.welcome-box ul{margin-left:1.2rem;margin-top:.5rem}
+.welcome-meta{display:flex;gap:1rem;margin-top:1rem;flex-wrap:wrap}
+.welcome-meta span{background:rgba(255,255,255,.18);border-radius:6px;padding:.2rem .75rem;
+  font-family:var(--M);font-size:.68rem;font-weight:500}
+
 /* PHASE */
-.phase{background:var(--surface);border:1.5px solid var(--border);border-radius:16px;margin-bottom:1.5rem;overflow:hidden;transition:opacity .3s,transform .3s}
-.phase.locked{opacity:.4;pointer-events:none;filter:blur(1px)}
-.phase-header{padding:1rem 1.4rem;background:var(--s2,#f1f5f9);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;gap:1rem}
-.phase-num{font-family:var(--M);font-size:.7rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}
-.phase-title{font-family:var(--D);font-weight:700;font-size:1rem;color:var(--text)}
-.phase-check{width:24px;height:24px;border-radius:50%;background:var(--border);display:flex;align-items:center;justify-content:center;font-size:.75rem;flex-shrink:0;transition:background .3s}
+.phase{background:var(--surface);border:1.5px solid var(--border);border-radius:16px;
+  margin-bottom:1.5rem;overflow:hidden;transition:opacity .3s,transform .3s,filter .3s}
+.phase.locked{opacity:.35;pointer-events:none;filter:blur(1.5px)}
+.phase-header{padding:1rem 1.4rem;background:#fff8f5;
+  border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;gap:1rem;cursor:default}
+.phase-num{font-family:var(--M);font-size:.7rem;font-weight:600;letter-spacing:.08em;
+  text-transform:uppercase;color:var(--acc)}
+.phase-title{font-family:var(--D);font-weight:700;font-size:.95rem;color:var(--text);
+  flex:1;margin:0 .8rem}
+.phase-check{width:26px;height:26px;border-radius:50%;background:var(--border);
+  display:flex;align-items:center;justify-content:center;font-size:.8rem;flex-shrink:0;
+  transition:background .3s,color .3s}
 .phase-check.done{background:#10b981;color:#fff}
-.phase-body{padding:1.4rem}
-/* CONCEPT BOX */
-.concept-box{background:#f0f9ff;border-left:4px solid #0284c7;border-radius:0 10px 10px 0;padding:1rem 1.2rem;margin-bottom:1.2rem}
-.concept-label{font-family:var(--M);font-size:.65rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#0284c7;margin-bottom:.4rem}
-.concept-box p{font-size:.92rem;color:#0c4a6e;line-height:1.75}
-/* CODE BLOCK */
-.code-wrap{margin:1.2rem 0;border-radius:12px;overflow:hidden;border:1px solid #1e293b}
-.code-bar{background:#1e293b;padding:.6rem 1rem;display:flex;align-items:center;gap:.4rem}
-.code-dot{width:8px;height:8px;border-radius:50%}
-.code-dot.r{background:#ff5f57}.code-dot.y{background:#febc2e}.code-dot.g{background:#28c840}
-.code-filename{margin-left:.5rem;font-family:var(--M);font-size:.65rem;color:#64748b}
-.code-body{background:#0f172a;padding:1.2rem 1.4rem;overflow-x:auto}
-.code-body pre{font-family:var(--M);font-size:.78rem;line-height:1.9;color:#e2e8f0;margin:0;white-space:pre}
-.code-body pre .cm{color:#64748b} /* comment */
-.code-body pre .tg{color:#38bdf8} /* tag */
-.code-body pre .at{color:#c084fc} /* attribute */
-.code-body pre .vl{color:#86efac} /* value */
-.code-body pre .tx{color:#e2e8f0} /* text */
+.phase-body{padding:1.6rem 1.8rem}
+
+/* RICH CONTENT STYLES */
+.v2-p{margin-bottom:1rem;font-size:.95rem;color:var(--t2);line-height:1.85}
+.v2-h3{font-family:var(--D);font-weight:700;font-size:1.05rem;color:var(--text);
+  margin:1.6rem 0 .5rem;padding-top:.2rem;border-top:2px solid var(--acc-pale)}
+.v2-h4{font-family:var(--D);font-weight:600;font-size:.95rem;color:var(--t2);margin:1.1rem 0 .4rem}
+.v2-h5,.v2-h6{font-family:var(--D);font-weight:600;font-size:.9rem;color:var(--muted);margin:.8rem 0 .3rem}
+.v2-ul,.v2-ol{margin:.6rem 0 1rem 1.4rem;font-size:.93rem;color:var(--t2);line-height:1.9}
+.v2-ul li,.v2-ol li{margin-bottom:.3rem}
+.v2-bq{border-left:4px solid var(--acc);background:var(--acc-pale);border-radius:0 10px 10px 0;
+  padding:.9rem 1.2rem;margin:1rem 0;font-size:.92rem;color:#7b1c06;font-style:italic}
+.v2-bq p{margin:0;color:inherit}
+.v2-bq strong{font-style:normal}
+.v2-hr{border:none;border-top:1px solid var(--border);margin:1.2rem 0}
+.v2-table-wrap{overflow-x:auto;margin:1rem 0}
+.v2-table{width:100%;border-collapse:collapse;font-size:.87rem}
+.v2-table th{background:var(--acc-pale);color:#7b1c06;font-family:var(--D);
+  font-weight:700;padding:9px 12px;text-align:left;border:1px solid var(--acc-b)}
+.v2-table td{padding:8px 12px;border:1px solid var(--border);color:var(--t2);vertical-align:top}
+.v2-table tr:nth-child(even) td{background:#f8fafc}
+.v2-table code{background:var(--acc-pale);color:var(--acc);border-radius:4px;
+  padding:1px 5px;font-family:var(--M);font-size:.8em}
+.phase-body code{background:var(--acc-pale);color:var(--acc-d);border-radius:4px;
+  padding:1px 6px;font-family:var(--M);font-size:.82em}
+.phase-body a{color:var(--acc);text-decoration:underline;text-underline-offset:2px}
+.phase-body strong{color:var(--text)}
+
+/* CODE BLOCKS */
+.v2-code-wrap{margin:1.2rem 0;border-radius:12px;overflow:hidden;border:1px solid #1e293b;box-shadow:0 4px 16px rgba(0,0,0,.15)}
+.v2-code-bar{background:#1e293b;padding:.55rem 1rem;display:flex;align-items:center;gap:.4rem}
+.v2-dot{width:10px;height:10px;border-radius:50%}
+.v2-dot.r{background:#ff5f57}.v2-dot.y{background:#febc2e}.v2-dot.g{background:#28c840}
+.v2-code-lang{margin-left:.6rem;font-family:var(--M);font-size:.65rem;color:#64748b;text-transform:uppercase;letter-spacing:.08em}
+.v2-code-body{background:#0f172a;padding:1.3rem 1.5rem;overflow-x:auto}
+.v2-code-body pre{margin:0}
+.v2-code-body code{font-family:var(--M);font-size:.8rem;line-height:1.9;color:#e2e8f0;
+  white-space:pre;background:transparent;padding:0;border-radius:0}
+
 /* TASK BOX */
-.task-box{background:#fffbeb;border:1.5px dashed #d97706;border-radius:12px;padding:1rem 1.2rem;margin:1.2rem 0}
-.task-label{font-family:var(--M);font-size:.65rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#b45309;margin-bottom:.4rem}
-.task-box p{font-size:.92rem;color:#78350f;line-height:1.75}
-.task-box code{background:rgba(180,83,9,.1);border-radius:4px;padding:.1rem .4rem;font-family:var(--M);font-size:.82em}
-/* NEXT BUTTON */
-.next-btn{display:inline-flex;align-items:center;gap:.5rem;background:var(--accent);color:#fff;font-family:var(--D);font-weight:700;font-size:.88rem;padding:.75rem 1.5rem;border-radius:10px;border:none;cursor:pointer;transition:transform .2s,box-shadow .2s;box-shadow:0 4px 12px var(--accent-shadow);margin-top:1rem}
-.next-btn:hover{transform:translateY(-2px);box-shadow:0 8px 20px var(--accent-shadow)}
-.next-btn:disabled{opacity:.5;cursor:not-allowed;transform:none}
-.next-tip{font-family:var(--M);font-size:.72rem;color:var(--muted);margin-top:.6rem}
-/* PROJECT BOX */
-.project-box{background:#f0fdf4;border:2px solid #16a34a;border-radius:16px;padding:1.5rem;margin:2rem 0}
-.project-label{font-family:var(--M);font-size:.65rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#15803d;margin-bottom:.4rem}
-.project-name{font-family:var(--D);font-weight:700;font-size:1.1rem;color:#14532d;margin-bottom:.5rem}
-.project-desc{font-size:.9rem;color:#166534;margin-bottom:1.2rem;line-height:1.7}
-/* CAPSTONE BOX */
-.capstone-box{background:linear-gradient(135deg,#1e1b4b,#312e81);border-radius:16px;padding:1.5rem;margin:2rem 0;color:#fff}
-.capstone-label{font-family:var(--M);font-size:.65rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#a5b4fc;margin-bottom:.4rem}
-.capstone-name{font-family:var(--D);font-weight:700;font-size:1.2rem;margin-bottom:.5rem}
-.capstone-desc{font-size:.9rem;color:rgba(255,255,255,.8);margin-bottom:1.2rem;line-height:1.7}
-/* FILE TABS */
-.file-tabs{display:flex;gap:.5rem;margin-bottom:0;flex-wrap:wrap}
-.file-tab{font-family:var(--M);font-size:.72rem;padding:.35rem .8rem;background:#1e293b;color:#94a3b8;border-radius:6px 6px 0 0;cursor:pointer;border:1px solid #334155;border-bottom:none;transition:background .15s}
-.file-tab.active{background:#0f172a;color:#e2e8f0}
-.file-content{display:none}.file-content.active{display:block}
+.task-box{background:#fff0ec;border:2px dashed #e34c26;
+  border-radius:12px;padding:1rem 1.3rem;margin:1.4rem 0}
+.task-label{font-family:var(--M);font-size:.65rem;font-weight:700;letter-spacing:.1em;
+  text-transform:uppercase;color:#7b1c06;margin-bottom:.5rem;display:flex;align-items:center;gap:.4rem}
+.task-box p,.task-body{font-size:.92rem;color:#7b1c06;line-height:1.8}
+.task-box code{background:rgba(0,0,0,.08);border-radius:4px;padding:1px 6px;
+  font-family:var(--M);font-size:.82em}
+
+/* UNLOCK BUTTON */
+.unlock-btn{display:inline-flex;align-items:center;gap:.5rem;background:var(--acc);
+  color:#fff;font-family:var(--D);font-weight:700;font-size:.88rem;
+  padding:.75rem 1.6rem;border-radius:10px;border:none;cursor:pointer;
+  transition:transform .2s,box-shadow .2s;box-shadow:0 4px 14px var(--acc-sh);margin-top:1.2rem}
+.unlock-btn:hover{transform:translateY(-2px);box-shadow:0 8px 22px var(--acc-sh)}
+
+/* BUILD IT */
+.build-box{background:#f0fdf4;border:2px solid #16a34a;border-radius:16px;padding:1.6rem;margin:2rem 0;display:none}
+.build-label{font-family:var(--M);font-size:.65rem;font-weight:700;letter-spacing:.1em;
+  text-transform:uppercase;color:#15803d;margin-bottom:.4rem}
+.build-name{font-family:var(--D);font-weight:700;font-size:1.1rem;color:#14532d;margin-bottom:.5rem}
+.build-desc{font-size:.9rem;color:#166534;margin-bottom:1.2rem;line-height:1.75}
+.build-desc code{background:rgba(22,163,74,.12);border-radius:4px;padding:1px 6px;font-family:var(--M);font-size:.82em}
+.build-desc strong{color:#14532d}
+
 /* GITHUB ACCORDION */
-.github-acc{border:1.5px solid var(--border);border-radius:12px;overflow:hidden;margin:1.5rem 0}
-.github-acc-head{padding:1rem 1.2rem;background:#f8fafc;cursor:pointer;display:flex;align-items:center;justify-content:space-between;font-family:var(--D);font-weight:600;font-size:.9rem;user-select:none}
-.github-acc-body{display:none;padding:1.2rem;border-top:1px solid var(--border)}
-.github-acc-body.open{display:block}
-.github-step{display:flex;gap:.8rem;margin-bottom:1rem;align-items:flex-start}
-.github-step-n{width:24px;height:24px;border-radius:50%;background:var(--accent);color:#fff;font-family:var(--D);font-weight:700;font-size:.75rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px}
-.github-step p{font-size:.88rem;color:var(--t2);line-height:1.7}
+.gh-acc{border:1.5px solid var(--border);border-radius:12px;overflow:hidden;margin:1.5rem 0}
+.gh-acc-head{padding:1rem 1.2rem;background:#f8fafc;cursor:pointer;
+  display:flex;align-items:center;justify-content:space-between;
+  font-family:var(--D);font-weight:600;font-size:.9rem;user-select:none}
+.gh-acc-body{display:none;padding:1.2rem;border-top:1px solid var(--border)}
+.gh-acc-body.open{display:block}
+.gh-step{display:flex;gap:.8rem;margin-bottom:1rem;align-items:flex-start}
+.gh-step-n{width:26px;height:26px;border-radius:50%;background:var(--acc);color:#fff;
+  font-family:var(--D);font-weight:700;font-size:.75rem;display:flex;align-items:center;
+  justify-content:center;flex-shrink:0;margin-top:2px}
+.gh-step p{font-size:.88rem;color:var(--t2);line-height:1.7}
+.gh-step code{background:var(--acc-pale);color:var(--acc-d);border-radius:4px;
+  padding:1px 6px;font-family:var(--M);font-size:.82em}
+
 /* SESSION END */
-.session-end{background:linear-gradient(135deg,var(--accent),var(--accent-dark));color:#fff;border-radius:16px;padding:1.5rem 1.8rem;margin:2rem 0;display:none}
+.session-end{background:linear-gradient(135deg,var(--acc),var(--acc-d));color:#fff;
+  border-radius:16px;padding:1.6rem 1.8rem;margin:2rem 0;display:none}
 .session-end.visible{display:block}
 .session-end h2{font-family:var(--D);font-weight:700;font-size:1.1rem;margin-bottom:.8rem}
 .session-end ul{list-style:none;display:flex;flex-direction:column;gap:.4rem}
-.session-end li{font-size:.9rem;opacity:.92;display:flex;align-items:center;gap:.5rem}
-/* LESSON NAV */
-.lesson-nav{display:flex;align-items:center;justify-content:space-between;padding-top:2rem;border-top:1px solid var(--border);margin-top:2rem;flex-wrap:wrap;gap:.75rem}
-.ln-btn{display:inline-flex;align-items:center;gap:.4rem;background:var(--surface);color:var(--t2);font-family:var(--D);font-weight:600;font-size:.82rem;padding:.65rem 1.2rem;border-radius:8px;text-decoration:none;border:1.5px solid var(--border);transition:border-color .2s,color .2s}
-.ln-btn:hover{border-color:var(--accent);color:var(--accent)}
-.ln-btn.primary{background:var(--accent);color:#fff;border-color:var(--accent)}
+.session-end li{font-size:.9rem;opacity:.93;display:flex;align-items:center;gap:.5rem}
+.ln-btn{display:inline-flex;align-items:center;gap:.4rem;background:var(--surface);
+  color:var(--t2);font-family:var(--D);font-weight:600;font-size:.82rem;
+  padding:.65rem 1.2rem;border-radius:8px;text-decoration:none;
+  border:1.5px solid var(--border);transition:border-color .2s,color .2s}
+.ln-btn:hover{border-color:var(--acc);color:var(--acc)}
+.ln-btn.primary{background:var(--acc);color:#fff;border-color:var(--acc)}
 .ln-btn.primary:hover{opacity:.9}
-/* UTILS */
-code{font-family:var(--M);font-size:.85em;background:#f1f5f9;border-radius:4px;padding:.1rem .35rem;color:var(--accent)}
-.emoji{font-style:normal}
-@media(max-width:600px){.l-hero h1{font-size:1.5rem}.welcome-meta{gap:.75rem}}
-
+.lesson-nav{display:flex;align-items:center;justify-content:space-between;
+  padding-top:2rem;border-top:1px solid rgba(255,255,255,.25);margin-top:1.5rem;flex-wrap:wrap;gap:.75rem}
+.lesson-footer{text-align:center;padding:1.5rem;font-family:var(--M);font-size:.72rem;
+  color:var(--muted);border-top:1px solid var(--border);background:var(--surface)}
 </style>
 </head>
 <body>
-
-<!-- FIXED NAV -->
-<nav class="lesson-nav-bar">
-  <a href="../index.html" class="nav-back">← HTML Course</a>
-  <span class="nav-lesson">Lesson 26 of 34 &nbsp;·&nbsp; HTML Responsive Web Design</span>
-  <div class="nav-actions">
-    <a href="lesson_25.html" class="ln-btn">← Lesson 25</a>
-    <a href="lesson_27.html" class="ln-btn primary">Lesson 27 →</a>
-  </div>
+<nav class="l-nav">
+  <a href="../index.html" class="l-nav-logo">⚡ Techbase HTML</a>
+  <span class="l-nav-label">Lesson 26 of 34</span>
+  <a href="../index.html" class="l-nav-back">← All Lessons</a>
 </nav>
+<div class="progress-wrap"><div class="progress-bar" id="pbar"></div></div>
 
-<!-- PROGRESS BAR -->
-<div id="progress-wrap">
-  <div id="pbar" style="width:5%;background:var(--accent);height:4px;
-       border-radius:2px;transition:width .4s ease;"></div>
+<div class="l-hero">
+  <div class="l-hero-inner">
+    <div class="l-badge">HTML · Lesson 26</div>
+    <h1>HTML Responsive Web Design</h1>
+    <div class="l-hero-sub">11 phases · Build: Project Description</div>
+  </div>
 </div>
 
-<!-- HERO -->
-<section class="lesson-hero">
-  <div class="hero-inner">
-    <div class="lesson-num-badge">Lesson 26</div>
-    <h1>HTML Responsive Web Design</h1>
-    <p class="lesson-tagline">Make your pages look great on phones, tablets and desktops using responsive techniques</p>
-    <div class="lesson-meta">
-      <span>📚 3 phases</span>
-      <span>🏗️ Build: My Responsive Page</span>
-      
-    </div>
+<section style="background:linear-gradient(160deg,#fff5f2 0%,#f8fafc 55%,#ffe8e0 100%);padding-bottom:1.5rem;border-bottom:1px solid var(--border)">
+  <div style="max-width:860px;margin:0 auto;padding:0 1.5rem"><div class="welcome-box">
+  <h2>👋 Welcome to Lesson 26</h2>
+  <div style="font-size:.9rem;line-height:1.85;opacity:.93"><p class="v2-p">Have you ever visited a website on your phone and everything looked tiny, crowded, or broken — and you had to zoom in and scroll sideways just to read it? That is what happens when a website is <strong>not responsive</strong>.</p>
+<p class="v2-p">In this lesson, you will learn how to build web pages that <strong>automatically look great on every device</strong> — whether someone is using a giant desktop monitor, a laptop, a tablet, or a small smartphone screen.</p>
+<p class="v2-p">This skill is one of the most important things a web developer can learn today. Think about it: most people in Nigeria and across the world now browse the internet mostly on their phones. If your website only looks good on a computer, you are losing a huge number of visitors.</p>
+<p class="v2-p">By the end of this lesson, you will understand exactly what Responsive Web Design means, the tools and techniques used to achieve it, and you will build a complete responsive webpage yourself.</p>
+<hr class="v2-hr"></div>
+  <div class="welcome-meta">
+    <span>📚 11 phases</span>
+    <span>🏗️ Project Description</span>
   </div>
+</div></div>
 </section>
 
-<!-- MAIN CONTENT -->
-<main class="lesson-main">
-
-<div class="welcome-box">
-  <div class="welcome-label">👋 Welcome to Lesson 26!</div>
-  <h2>HTML Responsive Web Design</h2>
-  <p>Make your pages look great on phones, tablets and desktops using responsive techniques. In this lesson you will work through
-     <strong>3 phases</strong>.
-     Complete each phase task before clicking <em>Next Phase</em>.
-     
-  </p>
-</div>
-
-<div class="phase " id="phase1" data-phase="1">
+<main style="max-width:860px;margin:0 auto;padding:2rem 1.5rem 5rem">
+<div class="phase" id="phase1">
   <div class="phase-header">
-    <div><div class="phase-num">Phase 1</div><div class="phase-title">The Viewport and Fluid Widths</div></div>
-    <div class="phase-check" id="check1"></div>
+    <div class="phase-num">Phase 1 of 11</div>
+    <div class="phase-title">Lesson Introduction</div>
+    <div class="phase-check" id="chk1"></div>
   </div>
   <div class="phase-body">
-    <div class="concept-box">
-      <div class="concept-label">💡 Concept</div>
-      <p>A <strong>responsive</strong> website looks good on every screen. The first step is the viewport meta tag: <code>&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</code>. Then use <strong>percentage widths</strong> instead of fixed pixels — <code>width: 100%</code> fills the container. Use <code>max-width</code> to stop content stretching too wide on large screens.</p>
-    </div>
-    <div class="code-wrap">
-  <div class="code-bar">
-    <span class="code-dot r"></span><span class="code-dot y"></span><span class="code-dot g"></span>
-    <span class="code-filename">index.html</span>
-  </div>
-  <div class="code-body"><pre>&lt;!DOCTYPE html&gt;
-&lt;html lang="en"&gt;
-  &lt;head&gt;
-    &lt;meta charset="UTF-8"&gt;
-    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
-    &lt;title&gt;Responsive Basics&lt;/title&gt;
-    &lt;style&gt;
-      * { box-sizing: border-box; }
-      body { font-family: Arial; margin: 0; padding: 16px; }
-      .container { max-width: 800px; margin: 0 auto; }
-      img { width: 100%; height: auto; border-radius: 10px; }
-      h1 { font-size: clamp(1.5rem, 5vw, 2.5rem); }
-    &lt;/style&gt;
-  &lt;/head&gt;
-  &lt;body&gt;
-    &lt;div class="container"&gt;
-      &lt;h1&gt;This Heading is Fluid!&lt;/h1&gt;
-      &lt;p&gt;Resize the browser and watch this heading change size with clamp().&lt;/p&gt;
-      &lt;img src="https://via.placeholder.com/800x300" alt="Responsive image"&gt;
-    &lt;/div&gt;
-  &lt;/body&gt;
-&lt;/html&gt;</pre></div>
-</div>
+    <p class="v2-p">Have you ever visited a website on your phone and everything looked tiny, crowded, or broken — and you had to zoom in and scroll sideways just to read it? That is what happens when a website is <strong>not responsive</strong>.</p>
+<p class="v2-p">In this lesson, you will learn how to build web pages that <strong>automatically look great on every device</strong> — whether someone is using a giant desktop monitor, a laptop, a tablet, or a small smartphone screen.</p>
+<p class="v2-p">This skill is one of the most important things a web developer can learn today. Think about it: most people in Nigeria and across the world now browse the internet mostly on their phones. If your website only looks good on a computer, you are losing a huge number of visitors.</p>
+<p class="v2-p">By the end of this lesson, you will understand exactly what Responsive Web Design means, the tools and techniques used to achieve it, and you will build a complete responsive webpage yourself.</p>
+<hr class="v2-hr">
     <div class="task-box">
       <div class="task-label">✏️ Your Task</div>
-      <p>Set all images to <code>width: 100%; height: auto;</code> and wrap all content in a <code>.container</code> div with <code>max-width: 900px; margin: 0 auto;</code>. Resize the browser — content should shrink without a scrollbar.</p>
+      <div class="task-body">Now practise what you just learned about <strong>Lesson Introduction</strong>. Open your editor, type the examples above by hand, then modify them — change values, rename variables, and observe what happens. Active experimentation is how code sticks.</div>
     </div>
-    <button class="next-btn" onclick="unlockNext(1)">
-      Next Phase → <span>→</span>
-    </button>
-    <p class="next-tip">Try the task first, then click to continue!</p>
+    <button class="unlock-btn" onclick="unlockNext(1)">Start Lesson ✓</button>
   </div>
-</div><div class="phase locked" id="phase2" data-phase="2">
+</div>
+<div class="phase locked" id="phase2">
   <div class="phase-header">
-    <div><div class="phase-num">Phase 2</div><div class="phase-title">CSS Media Queries</div></div>
-    <div class="phase-check" id="check2"></div>
+    <div class="phase-num">Phase 2 of 11</div>
+    <div class="phase-title">Prerequisite Concepts</div>
+    <div class="phase-check" id="chk2"></div>
   </div>
   <div class="phase-body">
-    <div class="concept-box">
-      <div class="concept-label">💡 Concept</div>
-      <p><strong>Media queries</strong> apply different CSS at different screen sizes. Syntax: <code>@media (max-width: 768px) { ... }</code>. Common breakpoints: 480px (phones), 768px (tablets), 1024px (laptops). Mobile-first approach: write mobile CSS first, then add <code>min-width</code> queries for larger screens.</p>
-    </div>
-    <div class="code-wrap">
-  <div class="code-bar">
-    <span class="code-dot r"></span><span class="code-dot y"></span><span class="code-dot g"></span>
-    <span class="code-filename">index.html</span>
-  </div>
-  <div class="code-body"><pre>&lt;!DOCTYPE html&gt;
-&lt;html lang="en"&gt;
-  &lt;head&gt;
-    &lt;meta charset="UTF-8"&gt;
-    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
-    &lt;title&gt;Media Queries&lt;/title&gt;
-    &lt;style&gt;
-      * { box-sizing: border-box; }
-      .cards { display:flex; flex-wrap:wrap; gap:16px; padding:20px; }
-      .card  { background:white; border-radius:12px; padding:20px;
-               border:1.5px solid #e2e8f0; width:100%; }
-      @media (min-width: 600px) { .card { width: calc(50% - 8px); } }
-      @media (min-width: 900px) { .card { width: calc(33.33% - 11px); } }
-    &lt;/style&gt;
-  &lt;/head&gt;
-  &lt;body style="background:#f8fafc;"&gt;
-    &lt;div class="cards"&gt;
-      &lt;div class="card"&gt;&lt;h3 style="color:#ea4f21"&gt;Card 1&lt;/h3&gt;
-        &lt;p&gt;1 column → 2 → 3. Resize to see!&lt;/p&gt;&lt;/div&gt;
-      &lt;div class="card"&gt;&lt;h3 style="color:#0284c7"&gt;Card 2&lt;/h3&gt;
-        &lt;p&gt;Pure CSS media queries — no JavaScript.&lt;/p&gt;&lt;/div&gt;
-      &lt;div class="card"&gt;&lt;h3 style="color:#10b981"&gt;Card 3&lt;/h3&gt;
-        &lt;p&gt;Mobile-first design approach.&lt;/p&gt;&lt;/div&gt;
-    &lt;/div&gt;
-  &lt;/body&gt;
-&lt;/html&gt;</pre></div>
-</div>
+    <p class="v2-p">Before we dive in, let's make sure we understand a few words and ideas that will appear throughout this lesson. Do not worry — they are all very simple once explained.</p>
+<h3 class="v2-h3">What is a "Screen" or "Viewport"?</h3>
+<p class="v2-p">A <strong>viewport</strong> is the visible area of a webpage inside your browser window. Think of it like a picture frame — the frame size changes depending on what device you are using.</p>
+<ul class="v2-ul"><li>On a desktop computer, the viewport might be 1400 pixels wide.</li><li>On a tablet, it might be 768 pixels wide.</li><li>On a phone, it might be 375 pixels wide.</li></ul>
+<p class="v2-p"><strong>Pixel</strong> — A pixel (shortened to <code>px</code>) is one tiny dot of colour on your screen. Your screen is made up of millions of these tiny dots. When we say a screen is "1920 x 1080 pixels," we mean it is 1920 dots wide and 1080 dots tall.</p>
+<h3 class="v2-h3">What is CSS?</h3>
+<p class="v2-p">CSS stands for <strong>Cascading Style Sheets</strong>. It is the language we use to style HTML — controlling colours, sizes, fonts, spacing, and layout. In this lesson, we will use a small amount of CSS to make things responsive. Do not worry; every CSS line will be explained carefully.</p>
+<h3 class="v2-h3">What is a <code>&lt;meta&gt;</code> tag?</h3>
+<p class="v2-p">A <code>&lt;meta&gt;</code> tag goes inside the <code>&lt;head&gt;</code> section of your HTML and gives the browser <strong>invisible instructions</strong> about the page. You do not see <code>&lt;meta&gt;</code> tags on the page — they work behind the scenes. We will use one special <code>&lt;meta&gt;</code> tag in this lesson to tell the browser how to handle screen sizes.</p>
+<hr class="v2-hr">
     <div class="task-box">
       <div class="task-label">✏️ Your Task</div>
-      <p>Add media queries to your Lesson 25 layout so: below 600px the sidebar stacks below main content, font size is smaller, and nav links display as a column. Test by slowly resizing your browser.</p>
+      <div class="task-body">Now practise what you just learned about <strong>Prerequisite Concepts</strong>. Open your editor, type the examples above by hand, then modify them — change values, rename variables, and observe what happens. Active experimentation is how code sticks.</div>
     </div>
-    <button class="next-btn" onclick="unlockNext(2)">
-      Next Phase → <span>→</span>
-    </button>
-    <p class="next-tip">Try the task first, then click to continue!</p>
+    <button class="unlock-btn" onclick="unlockNext(2)">Phase Complete — Unlock Next ✓</button>
   </div>
-</div><div class="phase locked" id="phase3" data-phase="3">
+</div>
+<div class="phase locked" id="phase3">
   <div class="phase-header">
-    <div><div class="phase-num">Phase 3</div><div class="phase-title">Responsive Images with picture</div></div>
-    <div class="phase-check" id="check3"></div>
+    <div class="phase-num">Phase 3 of 11</div>
+    <div class="phase-title">Conceptual Understanding</div>
+    <div class="phase-check" id="chk3"></div>
   </div>
   <div class="phase-body">
-    <div class="concept-box">
-      <div class="concept-label">💡 Concept</div>
-      <p>The <code>&lt;picture&gt;</code> element serves different images at different screen sizes — a smaller image on mobile saves data and loads faster. <code>&lt;source media="(max-width:600px)" srcset="small.jpg"&gt;</code> for mobile. The <code>&lt;img&gt;</code> inside is the fallback. Always set <code>width:100%</code> on images for fluid scaling.</p>
-    </div>
-    <div class="code-wrap">
-  <div class="code-bar">
-    <span class="code-dot r"></span><span class="code-dot y"></span><span class="code-dot g"></span>
-    <span class="code-filename">index.html</span>
-  </div>
-  <div class="code-body"><pre>&lt;!DOCTYPE html&gt;
-&lt;html lang="en"&gt;
-  &lt;head&gt;
-    &lt;meta charset="UTF-8"&gt;
-    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
-    &lt;title&gt;Responsive Images&lt;/title&gt;
-    &lt;style&gt;
-      picture img { width:100%; height:auto; border-radius:10px; }
-      .container { max-width:700px; margin:0 auto; padding:20px; }
-    &lt;/style&gt;
-  &lt;/head&gt;
-  &lt;body&gt;
-    &lt;div class="container"&gt;
-      &lt;h1&gt;Responsive Images&lt;/h1&gt;
-      &lt;picture&gt;
-        &lt;source media="(max-width: 600px)"
-                srcset="https://via.placeholder.com/400x300/ea4f21/fff?text=Mobile"&gt;
-        &lt;img src="https://via.placeholder.com/700x250/0284c7/fff?text=Desktop"
-             alt="Responsive image — changes with screen width"&gt;
-      &lt;/picture&gt;
-      &lt;p&gt;Shrink browser below 600px — image switches to orange mobile version!&lt;/p&gt;
-    &lt;/div&gt;
-  &lt;/body&gt;
-&lt;/html&gt;</pre></div>
-</div>
+    <h3 class="v2-h3">What is Responsive Web Design?</h3>
+<p class="v2-p"><strong>Responsive Web Design (RWD)</strong> is the practice of writing HTML and CSS so that a webpage automatically adjusts — resizing, reorganising, hiding, or enlarging its content — to look good on any screen size.</p>
+<p class="v2-p">Think of it like water in a container. Water takes the shape of whatever container it is poured into. A responsive webpage does the same — it flows and reshapes itself to fit the size of the device displaying it.</p>
+<p class="v2-p">The three main things we make responsive are:</p>
+<ol class="v2-ol"><li><strong>Layout</strong> — How columns and sections are arranged (side by side on a big screen, stacked on a small screen)</li><li><strong>Images</strong> — Images should resize and never overflow outside the page</li><li><strong>Text</strong> — Text size should scale nicely so it is always readable</li></ol>
+<h3 class="v2-h3">Why Does Responsive Design Matter?</h3>
+<p class="v2-p">In the real world, this matters enormously. Consider:</p>
+<ul class="v2-ul"><li>A business website that is not responsive will look terrible on mobile phones. Customers will leave immediately.</li><li>A school portal that is not responsive will frustrate students trying to submit assignments on their phones.</li><li>A news website that is not responsive will have tiny, unreadable text on tablets.</li></ul>
+<p class="v2-p">According to global web traffic data, over 60% of all web visits happen on mobile devices. Responsive design is not optional — it is essential.</p>
+<hr class="v2-hr">
     <div class="task-box">
       <div class="task-label">✏️ Your Task</div>
-      <p>Add a <code>&lt;picture&gt;</code> element to your gallery page with two sources. Test in browser DevTools → toggle device toolbar → switch between phone and desktop widths.</p>
+      <div class="task-body">Now practise what you just learned about <strong>Conceptual Understanding</strong>. Open your editor, type the examples above by hand, then modify them — change values, rename variables, and observe what happens. Active experimentation is how code sticks.</div>
     </div>
-    <button class="next-btn" onclick="unlockNext(3)">
-      Build It! 🚀 <span>→</span>
-    </button>
-    <p class="next-tip">Try the task first, then click to continue!</p>
+    <button class="unlock-btn" onclick="unlockNext(3)">Phase Complete — Unlock Next ✓</button>
   </div>
 </div>
+<div class="phase locked" id="phase4">
+  <div class="phase-header">
+    <div class="phase-num">Phase 4 of 11</div>
+    <div class="phase-title">Part 1: Setting the Viewport</div>
+    <div class="phase-check" id="chk4"></div>
+  </div>
+  <div class="phase-body">
+    <h3 class="v2-h3">The Problem Without a Viewport Meta Tag</h3>
+<p class="v2-p">When you open an ordinary HTML file on a phone, the phone's browser tries to pretend it is a full desktop screen. It zooms out to fit the entire page into the small screen, making everything look tiny.</p>
+<p class="v2-p">This is the wrong behaviour. We want the page to adapt naturally — not zoom out.</p>
+<h3 class="v2-h3">The Solution: The Viewport Meta Tag</h3>
+<p class="v2-p">We fix this by adding one very important <code>&lt;meta&gt;</code> tag inside the <code>&lt;head&gt;</code> section of every webpage we want to be responsive.</p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;</code></pre></div></div>
+<p class="v2-p">Let's break this line down word by word:</p>
+<div class="v2-table-wrap"><table class="v2-table"><thead><tr><th>Part</th><th>Meaning</th></tr></thead><tbody><tr><td><code>&lt;meta</code></td><td>Opens a meta tag</td></tr><tr><td><code>name="viewport"</code></td><td>This meta tag is about the viewport (the visible screen area)</td></tr><tr><td><code>content="..."</code></td><td>The instructions we are giving the browser</td></tr><tr><td><code>width=device-width</code></td><td>Make the page width equal to the width of the device's screen</td></tr><tr><td><code>initial-scale=1.0</code></td><td>Start zoomed in at 100% (no zoom in or out at the beginning)</td></tr><tr><td><code>&gt;</code></td><td>Closes the meta tag</td></tr></tbody></table></div>
+<p class="v2-p"><strong>Analogy:</strong> Imagine you are printing a poster. Without the viewport tag, the printer shrinks a huge poster to fit onto a tiny page. With the viewport tag, you are telling the printer: "This page is for a small screen — format it for that size from the start."</p>
+<h3 class="v2-h3">Example 1 — A Minimal Page With the Viewport Tag</h3>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
+  &lt;title&gt;My Responsive Page&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;h1&gt;Hello, World!&lt;/h1&gt;
+  &lt;p&gt;This page is set up to be responsive.&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre></div></div>
+<p class="v2-p"><strong>Expected Result:</strong> When viewed on a phone, the text will appear at a normal, readable size — not zoomed out tiny.</p>
+<blockquote class="v2-bq"><p class="v2-p"><strong>Tip:</strong> Always include the viewport meta tag on every single page you build. It is the first and most important step in making a page responsive. Without it, none of the other responsive techniques will work correctly on mobile devices.</p></blockquote>
+<h3 class="v2-h3">What Happens Without This Tag?</h3>
+<p class="v2-p">Without the viewport tag:</p>
+<ul class="v2-ul"><li>The browser assumes the page is 980 pixels wide (a typical desktop width).</li><li>It shrinks everything down to fit the phone's small screen.</li><li>Text becomes tiny and unreadable.</li><li>Users must pinch-zoom and scroll sideways.</li></ul>
+<p class="v2-p">With the viewport tag:</p>
+<ul class="v2-ul"><li>The browser knows: "This page is designed for this device's actual screen width."</li><li>Text, images, and layout all start at the right size.</li><li>No horizontal scrolling needed.</li></ul>
+<hr class="v2-hr">
+    <div class="task-box">
+      <div class="task-label">✏️ Your Task</div>
+      <div class="task-body">Now practise what you just learned about <strong>: Setting the Viewport</strong>. Open your editor, type the examples above by hand, then modify them — change values, rename variables, and observe what happens. Active experimentation is how code sticks.</div>
+    </div>
+    <button class="unlock-btn" onclick="unlockNext(4)">Phase Complete — Unlock Next ✓</button>
+  </div>
+</div>
+<div class="phase locked" id="phase5">
+  <div class="phase-header">
+    <div class="phase-num">Phase 5 of 11</div>
+    <div class="phase-title">Part 2: Responsive Images</div>
+    <div class="phase-check" id="chk5"></div>
+  </div>
+  <div class="phase-body">
+    <p class="v2-p">Images are one of the trickiest parts of responsive design. If you put a large image on your page without thinking about responsiveness, it might:</p>
+<ul class="v2-ul"><li>Overflow outside the page on small screens (causing an ugly horizontal scrollbar), or</li><li>Stay very small even on large screens.</li></ul>
+<p class="v2-p">We have two main ways to handle this.</p>
+<h3 class="v2-h3">Method 1: Using <code>width: 100%</code></h3>
+<p class="v2-p">If you set an image's width to <code>100%</code>, it will always stretch to fill whatever container it is inside. This means on a phone it fills the phone's width, and on a large monitor it fills the monitor's width.</p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
+  &lt;title&gt;Responsive Image Example&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;h2&gt;This image always fills the full width:&lt;/h2&gt;
+  &lt;img src=&quot;photo.jpg&quot; style=&quot;width:100%;&quot;&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre></div></div>
+<p class="v2-p"><strong>Expected Result:</strong> The image stretches to fill the full width of the screen on any device. On a tiny phone it fills the phone width. On a large monitor it fills the monitor width — and if the image is smaller than the monitor, it will get stretched and may look blurry.</p>
+<p class="v2-p"><strong>⚠️ Warning:</strong> The problem with <code>width: 100%</code> is that it can stretch an image <strong>larger than its original size</strong>, which makes it look blurry and pixelated. For example, if you have a small 300px image and the screen is 1200px wide, the image will be stretched to 1200px — 4 times bigger. It will look bad.</p>
+<h3 class="v2-h3">Method 2: Using <code>max-width: 100%</code> (Better Solution)</h3>
+<p class="v2-p"><code>max-width: 100%</code> is usually a better choice. It says: "The image can shrink down as small as needed (so it never overflows), but it will never grow larger than its original size."</p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
+  &lt;title&gt;Responsive Image - max-width&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;h2&gt;This image scales down but never scales up beyond its original size:&lt;/h2&gt;
+  &lt;img src=&quot;photo.jpg&quot; style=&quot;max-width:100%; height:auto;&quot;&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre></div></div>
+<p class="v2-p"><strong>Expected Result:</strong></p>
+<ul class="v2-ul"><li>On a screen smaller than the image: the image shrinks to fit.</li><li>On a screen larger than the image: the image stays at its original size (it does not get stretched and blurry).</li></ul>
+<p class="v2-p">Let's understand the two CSS properties:</p>
+<div class="v2-table-wrap"><table class="v2-table"><thead><tr><th>CSS Property</th><th>Meaning</th></tr></thead><tbody><tr><td><code>max-width: 100%</code></td><td>The image's width can be at most 100% of its container — but no more. It will shrink if needed, but never grow bigger than 100%.</td></tr><tr><td><code>height: auto</code></td><td>Automatically calculate the height to keep the original proportions (so the image does not look squished)</td></tr></tbody></table></div>
+<p class="v2-p"><strong>Thinking Prompt:</strong> What would happen if you used <code>height: auto</code> but forgot <code>max-width: 100%</code>? The image would overflow on small screens and cause a horizontal scrollbar. Try it mentally!</p>
+<h3 class="v2-h3">Quick Comparison</h3>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span></div><div class="v2-code-body"><pre><code>width:100%       → Image ALWAYS fills full width (can get blurry on large screens)
+max-width:100%   → Image NEVER overflows, but stays original size on large screens</code></pre></div></div>
+<hr class="v2-hr">
+    <div class="task-box">
+      <div class="task-label">✏️ Your Task</div>
+      <div class="task-body">### Quick Comparison
 
-<div class="project-box" id="build-it" style="display:none">
-  <div class="project-label">🏗️ Build It!</div>
-  <div class="project-name">My Responsive Page</div>
-  <p class="project-desc">Build a fully responsive page: fluid layout, 3-breakpoint media queries, and a responsive picture element.</p>
-  <div class="code-wrap">
-    <div class="code-bar">
-      <span class="code-dot r"></span><span class="code-dot y"></span><span class="code-dot g"></span>
-      <span class="code-filename">starter.html — copy this into a new file!</span>
+`
+width:100%       → Image ALWAYS fills full width (can get blurry on large screens)
+max-width:100%   → Image NEVER overflows, but stays original size on large screens
+`
+
+---</div>
     </div>
-    <div class="code-body"><pre id="starter-code">&lt;!DOCTYPE html&gt;
-&lt;html lang="en"&gt;
-  &lt;head&gt;
-    &lt;meta charset="UTF-8"&gt;
-    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
-    &lt;title&gt;My Responsive Page&lt;/title&gt;
-    &lt;style&gt;
-      * { box-sizing:border-box; margin:0; padding:0; }
-      body { font-family:Arial,sans-serif; background:#f1f5f9; }
-      header { background:#ea4f21; color:white; padding:20px 24px; }
-      header h1 { font-size:clamp(1.4rem,4vw,2rem); }
-      nav { background:#0f172a; display:flex; flex-wrap:wrap; padding:8px 16px; }
-      nav a { color:rgba(255,255,255,.75); text-decoration:none; font-size:14px;
-              font-weight:600; padding:8px 12px; }
-      picture img { width:100%; height:auto; display:block; }
-      .container { max-width:960px; margin:24px auto; padding:0 20px; }
-      .grid { display:flex; flex-wrap:wrap; gap:16px; }
-      .card { background:white; border-radius:14px; padding:22px;
-              box-shadow:0 2px 8px rgba(0,0,0,.06); width:100%; }
-      .card h3 { color:#ea4f21; margin-bottom:8px; }
-      .card p  { color:#475569; font-size:.9rem; line-height:1.7; }
-      footer { background:#0f172a; color:rgba(255,255,255,.5);
-               text-align:center; padding:20px; font-size:13px; margin-top:30px; }
-      @media (min-width:600px)  { .card { width:calc(50% - 8px); } }
-      @media (min-width:900px)  { .card { width:calc(33.33% - 11px); } }
-    &lt;/style&gt;
-  &lt;/head&gt;
-  &lt;body&gt;
-    &lt;header&gt;&lt;h1&gt;📱 My Responsive Website&lt;/h1&gt;&lt;/header&gt;
-    &lt;nav&gt;
-      &lt;a href="#cards"&gt;Cards&lt;/a&gt;
-      &lt;a href="#about"&gt;About&lt;/a&gt;
-    &lt;/nav&gt;
-    &lt;picture&gt;
-      &lt;source media="(max-width:600px)"
-              srcset="https://via.placeholder.com/600x300/ea4f21/fff?text=Mobile+View"&gt;
-      &lt;img src="https://via.placeholder.com/1200x300/ea4f21/fff?text=Desktop+View"
-           alt="Hero — changes with screen size"&gt;
-    &lt;/picture&gt;
-    &lt;div class="container" id="cards"&gt;
-      &lt;h2 style="margin:24px 0 16px;"&gt;What I Learned&lt;/h2&gt;
-      &lt;div class="grid"&gt;
-        &lt;div class="card"&gt;&lt;h3&gt;📐 Fluid Widths&lt;/h3&gt;
-          &lt;p&gt;% widths and max-width instead of fixed pixels.&lt;/p&gt;&lt;/div&gt;
-        &lt;div class="card"&gt;&lt;h3&gt;📱 Media Queries&lt;/h3&gt;
-          &lt;p&gt;@media rules change layout at 600px and 900px.&lt;/p&gt;&lt;/div&gt;
-        &lt;div class="card"&gt;&lt;h3&gt;🖼️ Responsive Images&lt;/h3&gt;
-          &lt;p&gt;picture element serves the right image per screen.&lt;/p&gt;&lt;/div&gt;
-        &lt;div class="card"&gt;&lt;h3&gt;✍️ Fluid Typography&lt;/h3&gt;
-          &lt;p&gt;clamp() scales font size between min and max.&lt;/p&gt;&lt;/div&gt;
-        &lt;div class="card"&gt;&lt;h3&gt;📦 Flexbox Grid&lt;/h3&gt;
-          &lt;p&gt;flex-wrap turns a row into a responsive grid.&lt;/p&gt;&lt;/div&gt;
-        &lt;div class="card"&gt;&lt;h3&gt;📏 Viewport Meta&lt;/h3&gt;
-          &lt;p&gt;Without this, mobile browsers ignore all our CSS.&lt;/p&gt;&lt;/div&gt;
+    <button class="unlock-btn" onclick="unlockNext(5)">Phase Complete — Unlock Next ✓</button>
+  </div>
+</div>
+<div class="phase locked" id="phase6">
+  <div class="phase-header">
+    <div class="phase-num">Phase 6 of 11</div>
+    <div class="phase-title">Part 3: Showing Different Images for Different Screen Sizes</div>
+    <div class="phase-check" id="chk6"></div>
+  </div>
+  <div class="phase-body">
+    <p class="v2-p">Sometimes you want to show a <strong>completely different image</strong> depending on the device. For example:</p>
+<ul class="v2-ul"><li>On a phone: a small, close-up image that fits the small screen clearly.</li><li>On a big desktop: a wide landscape image that looks great on the large screen.</li></ul>
+<p class="v2-p">HTML has a special element for this: <code>&lt;picture&gt;</code>.</p>
+<h3 class="v2-h3">The <code>&lt;picture&gt;</code> Element</h3>
+<p class="v2-p">The <code>&lt;picture&gt;</code> element is a container that holds multiple <code>&lt;source&gt;</code> elements, each pointing to a different image for different screen sizes. The browser picks the best one automatically.</p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
+  &lt;title&gt;Picture Element Example&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+  &lt;picture&gt;
+    &lt;source srcset=&quot;small-image.jpg&quot; media=&quot;(max-width: 600px)&quot;&gt;
+    &lt;source srcset=&quot;medium-image.jpg&quot; media=&quot;(max-width: 1500px)&quot;&gt;
+    &lt;source srcset=&quot;large-image.jpg&quot;&gt;
+    &lt;img src=&quot;small-image.jpg&quot; alt=&quot;A beautiful scene&quot;&gt;
+  &lt;/picture&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;</code></pre></div></div>
+<p class="v2-p"><strong>Expected Result:</strong></p>
+<ul class="v2-ul"><li>On a phone (screen ≤ 600px wide): <code>small-image.jpg</code> is displayed.</li><li>On a tablet (600px–1500px wide): <code>medium-image.jpg</code> is displayed.</li><li>On a large desktop (&gt;1500px wide): <code>large-image.jpg</code> is displayed.</li></ul>
+<p class="v2-p">Let's break down the HTML carefully:</p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;picture&gt;</code></pre></div></div>
+<p class="v2-p">Opens the picture container. Everything inside is a set of options for the browser.</p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;source srcset=&quot;small-image.jpg&quot; media=&quot;(max-width: 600px)&quot;&gt;</code></pre></div></div>
+<ul class="v2-ul"><li><code>&lt;source&gt;</code> — Defines one image option.</li><li><code>srcset="small-image.jpg"</code> — The path to the image file to use.</li><li><code>media="(max-width: 600px)"</code> — Use this image <strong>only when the screen is 600px wide or smaller</strong>.</li></ul>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;img src=&quot;small-image.jpg&quot; alt=&quot;A beautiful scene&quot;&gt;</code></pre></div></div>
+<p class="v2-p">This is the <strong>fallback</strong> — the image shown if the browser does not support <code>&lt;picture&gt;</code>, or if none of the <code>&lt;source&gt;</code> conditions are met. Always include this <code>&lt;img&gt;</code> inside <code>&lt;picture&gt;</code>.</p>
+<blockquote class="v2-bq"><p class="v2-p"><strong>Real-world use case:</strong> An e-commerce website might show a product close-up on mobile (where detail matters) and a lifestyle photo showing the product in use on a wide desktop screen. This makes the site feel more natural and professional on every device.</p></blockquote>
+<p class="v2-p"><strong>Thinking Prompt:</strong> Why would we want different images for different devices, instead of just one image that scales? Because a wide landscape photo looks great on a big screen, but when shrunk to phone size, important details might become too small to see. A close-up photo works better on a small screen.</p>
+<hr class="v2-hr">
+    <div class="task-box">
+      <div class="task-label">✏️ Your Task</div>
+      <div class="task-body">Now practise what you just learned about <strong>: Showing Different Images for Different Screen Sizes</strong>. Open your editor, type the examples above by hand, then modify them — change values, rename variables, and observe what happens. Active experimentation is how code sticks.</div>
+    </div>
+    <button class="unlock-btn" onclick="unlockNext(6)">Phase Complete — Unlock Next ✓</button>
+  </div>
+</div>
+<div class="phase locked" id="phase7">
+  <div class="phase-header">
+    <div class="phase-num">Phase 7 of 11</div>
+    <div class="phase-title">Part 4: Responsive Text Size with `vw` Units</div>
+    <div class="phase-check" id="chk7"></div>
+  </div>
+  <div class="phase-body">
+    <p class="v2-p">We know we can set text size using <code>px</code> (pixels) or <code>em</code> or <code>%</code>. But there is a special unit called <code>vw</code> that is perfect for responsive text.</p>
+<h3 class="v2-h3">What is <code>vw</code>?</h3>
+<p class="v2-p"><code>vw</code> stands for <strong>viewport width</strong>. One <code>vw</code> equals <strong>1% of the browser window's current width</strong>.</p>
+<p class="v2-p">So if your browser window is 1000px wide, then <code>1vw = 10px</code>. If the browser is 500px wide, then <code>1vw = 5px</code>.</p>
+<p class="v2-p">This means text set in <code>vw</code> automatically scales up on big screens and scales down on small screens — without you writing any extra code!</p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
+  &lt;title&gt;Responsive Text&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+  &lt;h1 style=&quot;font-size: 10vw;&quot;&gt;Hello World&lt;/h1&gt;
+  &lt;p style=&quot;font-size: 3vw;&quot;&gt;This text also scales with the screen.&lt;/p&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;</code></pre></div></div>
+<p class="v2-p"><strong>Expected Result:</strong></p>
+<ul class="v2-ul"><li>On a wide 1000px screen: <code>10vw = 100px</code> for the heading (very large).</li><li>On a narrow 400px phone: <code>10vw = 40px</code> for the heading (smaller, but still proportional).</li><li>The text always looks balanced relative to the screen size.</li></ul>
+<p class="v2-p"><strong>Analogy:</strong> Think of <code>vw</code> like a percentage of the window. If the window is a room, <code>10vw</code> is "10% of the room's width." Whether the room is a tiny cupboard or a large hall, the text always takes up 10% of the room's width and scales automatically.</p>
+<h3 class="v2-h3">Comparing Size Units</h3>
+<div class="v2-table-wrap"><table class="v2-table"><thead><tr><th>Unit</th><th>What it means</th><th>Responsive?</th></tr></thead><tbody><tr><td><code>px</code></td><td>Fixed number of pixels</td><td>No — stays the same on every screen</td></tr><tr><td><code>%</code></td><td>Percentage of parent element</td><td>Partly — depends on parent's size</td></tr><tr><td><code>vw</code></td><td>Percentage of viewport (browser window) width</td><td>Yes — scales with screen width</td></tr><tr><td><code>em</code></td><td>Relative to parent font size</td><td>Partly</td></tr></tbody></table></div>
+<blockquote class="v2-bq"><p class="v2-p"><strong>Tip:</strong> Use <code>vw</code> for big display headings and banners. For body text (regular paragraphs), <code>px</code> or <code>em</code> is usually fine since paragraphs wrap naturally anyway.</p></blockquote>
+<hr class="v2-hr">
+    <div class="task-box">
+      <div class="task-label">✏️ Your Task</div>
+      <div class="task-body">Now practise what you just learned about <strong>: Responsive Text Size with <code>vw</code> Units</strong>. Open your editor, type the examples above by hand, then modify them — change values, rename variables, and observe what happens. Active experimentation is how code sticks.</div>
+    </div>
+    <button class="unlock-btn" onclick="unlockNext(7)">Phase Complete — Unlock Next ✓</button>
+  </div>
+</div>
+<div class="phase locked" id="phase8">
+  <div class="phase-header">
+    <div class="phase-num">Phase 8 of 11</div>
+    <div class="phase-title">Part 5: Media Queries — The Heart of Responsive Design</div>
+    <div class="phase-check" id="chk8"></div>
+  </div>
+  <div class="phase-body">
+    <p class="v2-p">So far we have seen individual responsive techniques. But what if you want to <strong>completely change the layout</strong> of a page depending on the screen size? For example, display 3 columns side by side on a large screen, but stack them one on top of the other on a small screen?</p>
+<p class="v2-p">This is done with <strong>CSS Media Queries</strong>.</p>
+<h3 class="v2-h3">What is a Media Query?</h3>
+<p class="v2-p">A media query is a CSS rule that says: <strong>"Apply these styles ONLY when the screen matches this condition."</strong></p>
+<p class="v2-p">Think of it like an if-statement in coding: <em>"IF the screen is small, THEN use this layout."</em></p>
+<h3 class="v2-h3">Basic Media Query Syntax</h3>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">css</span></div><div class="v2-code-body"><pre><code>@media screen and (max-width: 800px) {
+  /* CSS rules here only apply when screen width is 800px or less */
+}</code></pre></div></div>
+<p class="v2-p">Breaking it down:</p>
+<ul class="v2-ul"><li><code>@media</code> — Starts a media query block.</li><li><code>screen</code> — We are targeting screens (as opposed to printers, etc.).</li><li><code>and</code> — Combines conditions.</li><li><code>(max-width: 800px)</code> — The condition: only apply these styles when the screen is 800px wide or narrower.</li><li><code>{ ... }</code> — The CSS styles to apply when the condition is true.</li></ul>
+<p class="v2-p">The <code>800px</code> value is called a <strong>breakpoint</strong> — the point at which the layout "breaks" and changes to a different design.</p>
+<h3 class="v2-h3">Example: Three Columns That Stack on Small Screens</h3>
+<p class="v2-p">This is one of the most classic and useful patterns in responsive design.</p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
+  &lt;title&gt;Responsive Columns&lt;/title&gt;
+  &lt;style&gt;
+    /* Default layout: three columns side by side */
+    .left {
+      float: left;
+      width: 20%;
+      background-color: lightblue;
+      padding: 10px;
+    }
+
+    .main {
+      float: left;
+      width: 60%;
+      background-color: lightyellow;
+      padding: 10px;
+    }
+
+    .right {
+      float: left;
+      width: 20%;
+      background-color: lightgreen;
+      padding: 10px;
+    }
+
+    /* Media query: when screen is 800px or smaller, stack everything */
+    @media screen and (max-width: 800px) {
+      .left, .main, .right {
+        width: 100%;  /* Each column takes full width - stacks vertically */
+        float: none;  /* Remove the side-by-side floating */
+      }
+    }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+  &lt;div class=&quot;left&quot;&gt;Left Sidebar&lt;/div&gt;
+  &lt;div class=&quot;main&quot;&gt;Main Content&lt;/div&gt;
+  &lt;div class=&quot;right&quot;&gt;Right Sidebar&lt;/div&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;</code></pre></div></div>
+<p class="v2-p"><strong>Expected Result:</strong></p>
+<ul class="v2-ul"><li>On a large screen (&gt;800px): Three columns appear side by side. Left column is 20% wide, main content is 60% wide, right column is 20% wide.</li><li>On a small screen (≤800px): All three sections stack one on top of the other, each taking the full 100% width. No horizontal scrolling needed.</li></ul>
+<p class="v2-p">Let's trace through the CSS carefully:</p>
+<p class="v2-p"><strong>Default styles (always apply):</strong></p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">css</span></div><div class="v2-code-body"><pre><code>float: left;    /* Makes elements float next to each other (side by side) */
+width: 20%;     /* The left and right columns take 20% of the screen each */
+width: 60%;     /* The main column takes 60% (total: 20+60+20 = 100%) */</code></pre></div></div>
+<p class="v2-p"><strong>Inside the media query (only when screen ≤ 800px):</strong></p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">css</span></div><div class="v2-code-body"><pre><code>width: 100%;    /* Each column now takes the full width */
+float: none;    /* Remove the floating so they stack top to bottom */</code></pre></div></div>
+<blockquote class="v2-bq"><p class="v2-p"><strong>Tip:</strong> The most common breakpoints used by professional web developers are around 480px (phones), 768px (tablets), and 1024px (small laptops). You can use as many <code>@media</code> breakpoints as you need.</p></blockquote>
+<h3 class="v2-h3">Example 2: Different Background Colours Per Screen Size</h3>
+<p class="v2-p">Here is a simpler example to help you see exactly how media queries switch styles on and off:</p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
+  &lt;style&gt;
+    body {
+      background-color: lightgreen;  /* Default: green background */
+    }
+
+    @media screen and (max-width: 600px) {
+      body {
+        background-color: lightcoral;  /* On small screens: red background */
+      }
+    }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;h1&gt;Resize me!&lt;/h1&gt;
+  &lt;p&gt;The background changes colour when the window is small.&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre></div></div>
+<p class="v2-p"><strong>Expected Result:</strong></p>
+<ul class="v2-ul"><li>On a wide screen: background is light green.</li><li>On a screen 600px or less: background changes to light coral (pinkish-red).</li></ul>
+<p class="v2-p"><strong>Thinking Prompt:</strong> What happens when the screen is exactly 600px wide? The media query condition <code>max-width: 600px</code> includes 600px, so at exactly 600px the red background applies. What if you change it to <code>max-width: 599px</code>? Then at 600px the green background would still show.</p>
+<hr class="v2-hr">
+    <div class="task-box">
+      <div class="task-label">✏️ Your Task</div>
+      <div class="task-body">Now practise what you just learned about <strong>: Media Queries — The Heart of Responsive Design</strong>. Open your editor, type the examples above by hand, then modify them — change values, rename variables, and observe what happens. Active experimentation is how code sticks.</div>
+    </div>
+    <button class="unlock-btn" onclick="unlockNext(8)">Phase Complete — Unlock Next ✓</button>
+  </div>
+</div>
+<div class="phase locked" id="phase9">
+  <div class="phase-header">
+    <div class="phase-num">Phase 9 of 11</div>
+    <div class="phase-title">Part 6: Using CSS Frameworks for Responsive Design</div>
+    <div class="phase-check" id="chk9"></div>
+  </div>
+  <div class="phase-body">
+    <p class="v2-p">Building responsive layouts from scratch requires writing a lot of CSS. Professional developers often speed this up by using <strong>CSS Frameworks</strong> — pre-written collections of CSS that handle responsiveness for you.</p>
+<p class="v2-p">Two of the most popular frameworks are <strong>W3.CSS</strong> and <strong>Bootstrap</strong>.</p>
+<h3 class="v2-h3">What is a CSS Framework?</h3>
+<p class="v2-p">A CSS framework is a ready-made stylesheet full of CSS classes you can apply to your HTML. Instead of writing all the responsive CSS yourself, you just add the right class names to your elements and the framework handles the rest.</p>
+<p class="v2-p"><strong>Analogy:</strong> A CSS framework is like a set of pre-made Lego pieces. Instead of carving each brick yourself, you use the pre-made bricks and assemble them into whatever you need.</p>
+<h3 class="v2-h3">W3.CSS Framework</h3>
+<p class="v2-p">W3.CSS is a lightweight, modern CSS framework. You link it to your page using a single <code>&lt;link&gt;</code> tag.</p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;title&gt;W3.CSS Example&lt;/title&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;link rel=&quot;stylesheet&quot; href=&quot;https://www.w3schools.com/w3css/4/w3.css&quot;&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+  &lt;div class=&quot;w3-container w3-green&quot;&gt;
+    &lt;h1&gt;W3Schools Demo&lt;/h1&gt;
+    &lt;p&gt;Resize this responsive page!&lt;/p&gt;
+  &lt;/div&gt;
+
+  &lt;div class=&quot;w3-row-padding&quot;&gt;
+
+    &lt;div class=&quot;w3-third&quot;&gt;
+      &lt;h2&gt;Lagos&lt;/h2&gt;
+      &lt;p&gt;Lagos is the largest city in Nigeria.&lt;/p&gt;
+      &lt;p&gt;It is one of the fastest-growing cities in Africa.&lt;/p&gt;
+    &lt;/div&gt;
+
+    &lt;div class=&quot;w3-third&quot;&gt;
+      &lt;h2&gt;Abuja&lt;/h2&gt;
+      &lt;p&gt;Abuja is the capital city of Nigeria.&lt;/p&gt;
+      &lt;p&gt;It is located in the centre of the country.&lt;/p&gt;
+    &lt;/div&gt;
+
+    &lt;div class=&quot;w3-third&quot;&gt;
+      &lt;h2&gt;Kano&lt;/h2&gt;
+      &lt;p&gt;Kano is one of Nigeria&#x27;s oldest cities.&lt;/p&gt;
+      &lt;p&gt;It is known for its ancient walls and trade history.&lt;/p&gt;
+    &lt;/div&gt;
+
+  &lt;/div&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;</code></pre></div></div>
+<p class="v2-p"><strong>Expected Result:</strong></p>
+<ul class="v2-ul"><li>On a large screen: Three sections (Lagos, Abuja, Kano) appear side by side in three equal columns.</li><li>On a small screen: The sections stack vertically — one on top of the other.</li></ul>
+<p class="v2-p">All of this responsive behaviour happens automatically because of the W3.CSS classes!</p>
+<p class="v2-p">Let's understand the key class names used:</p>
+<div class="v2-table-wrap"><table class="v2-table"><thead><tr><th>Class</th><th>What it does</th></tr></thead><tbody><tr><td><code>w3-container</code></td><td>Adds standard horizontal padding to a section</td></tr><tr><td><code>w3-green</code></td><td>Sets the background colour to green</td></tr><tr><td><code>w3-row-padding</code></td><td>Creates a row where child elements sit side by side with padding between them</td></tr><tr><td><code>w3-third</code></td><td>Makes an element take up exactly one-third of the row width</td></tr></tbody></table></div>
+<h3 class="v2-h3">Bootstrap Framework</h3>
+<p class="v2-p">Bootstrap is the world's most widely used CSS framework. It provides a powerful grid system and a huge range of responsive components.</p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;title&gt;Bootstrap 5 Example&lt;/title&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;link href=&quot;https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css&quot; rel=&quot;stylesheet&quot;&gt;
+  &lt;script src=&quot;https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js&quot;&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+  &lt;div class=&quot;container-fluid p-5 bg-primary text-white text-center&quot;&gt;
+    &lt;h1&gt;My Bootstrap Page&lt;/h1&gt;
+    &lt;p&gt;Resize this page to see the responsive layout change!&lt;/p&gt;
+  &lt;/div&gt;
+
+  &lt;div class=&quot;container mt-5&quot;&gt;
+    &lt;div class=&quot;row&quot;&gt;
+
+      &lt;div class=&quot;col-sm-4&quot;&gt;
+        &lt;h3&gt;Column 1&lt;/h3&gt;
+        &lt;p&gt;This is the first column. On small screens it stacks.&lt;/p&gt;
       &lt;/div&gt;
+
+      &lt;div class=&quot;col-sm-4&quot;&gt;
+        &lt;h3&gt;Column 2&lt;/h3&gt;
+        &lt;p&gt;This is the second column.&lt;/p&gt;
+      &lt;/div&gt;
+
+      &lt;div class=&quot;col-sm-4&quot;&gt;
+        &lt;h3&gt;Column 3&lt;/h3&gt;
+        &lt;p&gt;This is the third column.&lt;/p&gt;
+      &lt;/div&gt;
+
     &lt;/div&gt;
-    &lt;footer&gt;© 2025 [Your Name] | Resize me to see responsive magic!&lt;/footer&gt;
-  &lt;/body&gt;
-&lt;/html&gt;</pre></div>
-  </div>
-  <button class="next-btn" onclick="downloadStarter()" style="margin-right:.75rem">
-    ⬇️ Download starter.html
-  </button>
-  <button class="next-btn" onclick="showGithub()" style="background:#10b981;box-shadow:0 4px 12px rgba(16,185,129,.3)">
-    Show GitHub Steps →
-  </button>
-  <script>
-  const __code = `<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Responsive Page</title>
-    <style>
-      * { box-sizing:border-box; margin:0; padding:0; }
-      body { font-family:Arial,sans-serif; background:#f1f5f9; }
-      header { background:#ea4f21; color:white; padding:20px 24px; }
-      header h1 { font-size:clamp(1.4rem,4vw,2rem); }
-      nav { background:#0f172a; display:flex; flex-wrap:wrap; padding:8px 16px; }
-      nav a { color:rgba(255,255,255,.75); text-decoration:none; font-size:14px;
-              font-weight:600; padding:8px 12px; }
-      picture img { width:100%; height:auto; display:block; }
-      .container { max-width:960px; margin:24px auto; padding:0 20px; }
-      .grid { display:flex; flex-wrap:wrap; gap:16px; }
-      .card { background:white; border-radius:14px; padding:22px;
-              box-shadow:0 2px 8px rgba(0,0,0,.06); width:100%; }
-      .card h3 { color:#ea4f21; margin-bottom:8px; }
-      .card p  { color:#475569; font-size:.9rem; line-height:1.7; }
-      footer { background:#0f172a; color:rgba(255,255,255,.5);
-               text-align:center; padding:20px; font-size:13px; margin-top:30px; }
-      @media (min-width:600px)  { .card { width:calc(50% - 8px); } }
-      @media (min-width:900px)  { .card { width:calc(33.33% - 11px); } }
-    </style>
-  </head>
-  <body>
-    <header><h1>📱 My Responsive Website</h1></header>
-    <nav>
-      <a href="#cards">Cards</a>
-      <a href="#about">About</a>
-    </nav>
-    <picture>
-      <source media="(max-width:600px)"
-              srcset="https://via.placeholder.com/600x300/ea4f21/fff?text=Mobile+View">
-      <img src="https://via.placeholder.com/1200x300/ea4f21/fff?text=Desktop+View"
-           alt="Hero — changes with screen size">
-    </picture>
-    <div class="container" id="cards">
-      <h2 style="margin:24px 0 16px;">What I Learned</h2>
-      <div class="grid">
-        <div class="card"><h3>📐 Fluid Widths</h3>
-          <p>% widths and max-width instead of fixed pixels.</p></div>
-        <div class="card"><h3>📱 Media Queries</h3>
-          <p>@media rules change layout at 600px and 900px.</p></div>
-        <div class="card"><h3>🖼️ Responsive Images</h3>
-          <p>picture element serves the right image per screen.</p></div>
-        <div class="card"><h3>✍️ Fluid Typography</h3>
-          <p>clamp() scales font size between min and max.</p></div>
-        <div class="card"><h3>📦 Flexbox Grid</h3>
-          <p>flex-wrap turns a row into a responsive grid.</p></div>
-        <div class="card"><h3>📏 Viewport Meta</h3>
-          <p>Without this, mobile browsers ignore all our CSS.</p></div>
-      </div>
+  &lt;/div&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;</code></pre></div></div>
+<p class="v2-p"><strong>Expected Result:</strong></p>
+<ul class="v2-ul"><li>On a screen 576px or wider: Three columns appear side by side.</li><li>On a very small screen: All three columns stack vertically.</li></ul>
+<p class="v2-p">Key Bootstrap class names explained:</p>
+<div class="v2-table-wrap"><table class="v2-table"><thead><tr><th>Class</th><th>What it does</th></tr></thead><tbody><tr><td><code>container</code></td><td>Creates a centred, fixed-width container</td></tr><tr><td><code>container-fluid</code></td><td>Creates a full-width container (always 100% wide)</td></tr><tr><td><code>row</code></td><td>Creates a horizontal row for columns</td></tr><tr><td><code>col-sm-4</code></td><td>Each column takes 4 out of 12 units of width (4+4+4 = 12 = full row) on small screens and above</td></tr><tr><td><code>bg-primary</code></td><td>Blue background colour</td></tr><tr><td><code>text-white</code></td><td>White text</td></tr><tr><td><code>text-center</code></td><td>Centred text</td></tr><tr><td><code>mt-5</code></td><td>Margin (space) at the top</td></tr><tr><td><code>p-5</code></td><td>Padding (space inside the box)</td></tr></tbody></table></div>
+<blockquote class="v2-bq"><p class="v2-p"><strong>Tip:</strong> Bootstrap uses a 12-column grid system. When you say <code>col-sm-4</code>, you are saying "this element takes up 4 of the 12 available columns." Three elements each taking 4 columns fit perfectly in one row (4 + 4 + 4 = 12).</p></blockquote>
+<hr class="v2-hr">
+    <div class="task-box">
+      <div class="task-label">✏️ Your Task</div>
+      <div class="task-body">Now practise what you just learned about <strong>: Using CSS Frameworks for Responsive Design</strong>. Open your editor, type the examples above by hand, then modify them — change values, rename variables, and observe what happens. Active experimentation is how code sticks.</div>
     </div>
-    <footer>© 2025 [Your Name] | Resize me to see responsive magic!</footer>
-  </body>
-</html>`;
-  function downloadStarter(){
-    const a=document.createElement('a');
-    a.href='data:text/html;charset=utf-8,'+encodeURIComponent(__code);
-    a.download='starter.html'; a.click();
-  }
-  </script>
-</div>
-
-
-
-<div class="github-acc" id="github-steps" style="display:none">
-  <div class="github-acc-head" onclick="this.nextElementSibling.classList.toggle('open')">
-    🐙 GitHub Setup — Push your project online &nbsp;<span>▼</span>
-  </div>
-  <div class="github-acc-body">
-    <div class="github-step"><div class="github-step-n">1</div><p>Go to <strong>github.com</strong> and sign in. Click the green <strong>New</strong> button to create a new repository. Name it <code>html-lesson-26-html_responsive_web_design</code>.</p></div>
-    <div class="github-step"><div class="github-step-n">2</div><p>Leave it <strong>Public</strong> and tick <strong>Add a README file</strong>. Click <strong>Create repository</strong>.</p></div>
-    <div class="github-step"><div class="github-step-n">3</div><p>Click <strong>Add file → Upload files</strong>. Drag your <code>starter.html</code> (and rename it <code>index.html</code> first!) into the upload box.</p></div>
-    <div class="github-step"><div class="github-step-n">4</div><p>Scroll down, add a commit message like <em>"Add lesson 26 project"</em> and click <strong>Commit changes</strong>.</p></div>
-    <div class="github-step"><div class="github-step-n">5</div><p>Go to <strong>Settings → Pages</strong>. Under <em>Branch</em>, select <strong>main</strong> and click <strong>Save</strong>. Your page will be live at <code>https://YOUR-USERNAME.github.io/html-lesson-26-html_responsive_web_design/</code> in about 1 minute! 🎉</p></div>
-    <button class="next-btn" onclick="showEnd()" style="margin-top:.5rem">I'm done! Finish session ✅</button>
+    <button class="unlock-btn" onclick="unlockNext(9)">Phase Complete — Unlock Next ✓</button>
   </div>
 </div>
+<div class="phase locked" id="phase10">
+  <div class="phase-header">
+    <div class="phase-num">Phase 10 of 11</div>
+    <div class="phase-title">Guided Practice Exercises</div>
+    <div class="phase-check" id="chk10"></div>
+  </div>
+  <div class="phase-body">
+    <h3 class="v2-h3">Exercise 1: Add the Viewport Meta Tag</h3>
+<p class="v2-p"><strong>Objective:</strong> Understand the difference the viewport meta tag makes.</p>
+<p class="v2-p"><strong>Scenario:</strong> You are building a simple news page. A friend tells you the page looks tiny on their phone.</p>
+<p class="v2-p"><strong>Steps:</strong></p>
+<ol class="v2-ol"><li>Create a new file called <code>news.html</code>.</li><li>Write the following code <strong>without</strong> the viewport meta tag first:</li></ol>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;title&gt;Daily News&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;h1&gt;Breaking News&lt;/h1&gt;
+  &lt;p&gt;The annual technology fair opens today in Lagos. Thousands of visitors are expected to attend over the three-day event, which showcases innovations in software, hardware, and digital services.&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre></div></div>
+<ol class="v2-ol"><li>Open it in your browser and shrink the browser window to simulate a phone (or use browser developer tools to simulate a mobile screen).</li><li>Notice how the text looks and if there is any scrolling.</li><li>Now add the viewport tag inside <code>&lt;head&gt;</code>:</li></ol>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;</code></pre></div></div>
+<ol class="v2-ol"><li>Refresh and compare.</li></ol>
+<p class="v2-p"><strong>Expected Output (with viewport tag):</strong> Text fills the width of the phone screen naturally. No zooming out. No horizontal scrolling.</p>
+<p class="v2-p"><strong>Self-check Questions:</strong></p>
+<ul class="v2-ul"><li>What does <code>initial-scale=1.0</code> mean?</li><li>What would happen if <code>initial-scale</code> was set to <code>2.0</code>?</li><li>Why must the viewport tag go inside <code>&lt;head&gt;</code> and not <code>&lt;body&gt;</code>?</li></ul>
+<p class="v2-p"><strong>Hint:</strong> <code>initial-scale=2.0</code> would start the page zoomed in to 200% — text would appear very large initially.</p>
+<hr class="v2-hr">
+<h3 class="v2-h3">Exercise 2: Responsive Image</h3>
+<p class="v2-p"><strong>Objective:</strong> Make an image resize gracefully on different screens.</p>
+<p class="v2-p"><strong>Scenario:</strong> You are building a portfolio page and want your profile photo to look good on any device.</p>
+<p class="v2-p"><strong>Steps:</strong></p>
+<ol class="v2-ol"><li>Create a file called <code>portfolio.html</code>.</li><li>First, try a fixed-size image:</li></ol>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
+  &lt;title&gt;Portfolio&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;h1&gt;My Portfolio&lt;/h1&gt;
+  &lt;!-- Fixed size - NOT responsive --&gt;
+  &lt;img src=&quot;https://via.placeholder.com/800x400&quot; style=&quot;width: 800px;&quot;&gt;
+  &lt;p&gt;Welcome to my portfolio website.&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre></div></div>
+<ol class="v2-ol"><li>Resize the browser window. Notice the image overflows and creates a horizontal scrollbar.</li><li>Now change the image to be responsive:</li></ol>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;img src=&quot;https://via.placeholder.com/800x400&quot; style=&quot;max-width: 100%; height: auto;&quot;&gt;</code></pre></div></div>
+<p class="v2-p"><strong>Expected Output:</strong> The image shrinks gracefully when the window is small, and never causes a horizontal scrollbar.</p>
+<p class="v2-p"><strong>Self-check Questions:</strong></p>
+<ul class="v2-ul"><li>What is the difference between <code>width: 100%</code> and <code>max-width: 100%</code>?</li><li>When would <code>width: 100%</code> cause a problem?</li><li>What does <code>height: auto</code> do?</li></ul>
+<hr class="v2-hr">
+<h3 class="v2-h3">Exercise 3: Responsive Text with <code>vw</code></h3>
+<p class="v2-p"><strong>Objective:</strong> Create a heading whose text size scales with the screen width.</p>
+<p class="v2-p"><strong>Steps:</strong></p>
+<ol class="v2-ol"><li>Create <code>text-demo.html</code>:</li></ol>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
+  &lt;title&gt;Responsive Text&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
 
+  &lt;h1 style=&quot;font-size: 8vw; color: navy;&quot;&gt;Welcome to My Site&lt;/h1&gt;
+  &lt;h2 style=&quot;font-size: 5vw; color: darkgreen;&quot;&gt;Built with Responsive Design&lt;/h2&gt;
+  &lt;p style=&quot;font-size: 2vw;&quot;&gt;This paragraph also scales with the viewport width.&lt;/p&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;</code></pre></div></div>
+<ol class="v2-ol"><li>Open in your browser. Slowly resize the window from very wide to very narrow.</li></ol>
+<p class="v2-p"><strong>Expected Output:</strong> All three text sizes shrink and grow proportionally as you resize the window. Nothing overflows. Nothing becomes unreadably small or excessively large.</p>
+<p class="v2-p"><strong>Self-check Questions:</strong></p>
+<ul class="v2-ul"><li>If the screen is 500px wide, what will <code>8vw</code> equal in pixels?</li><li>Why might <code>2vw</code> be too small for body text on a mobile phone?</li><li>What unit might be safer for body paragraph text?</li></ul>
+<p class="v2-p"><strong>Hint Answer:</strong> 8vw on a 500px screen = 0.08 × 500 = 40px. And 2vw on a 375px phone = 7.5px — yes, that is quite small! For body text, <code>px</code> or <code>em</code> units are safer.</p>
+<hr class="v2-hr">
+<h3 class="v2-h3">Exercise 4: Media Query Layout Change</h3>
+<p class="v2-p"><strong>Objective:</strong> Build a two-column layout that stacks on small screens.</p>
+<p class="v2-p"><strong>Scenario:</strong> You are building a blog. On desktop, the blog post is on the left and a sidebar is on the right. On phones, they should stack vertically.</p>
+<p class="v2-p"><strong>Steps:</strong></p>
+<ol class="v2-ol"><li>Create <code>blog.html</code>:</li></ol>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
+  &lt;title&gt;My Blog&lt;/title&gt;
+  &lt;style&gt;
+
+    /* Default (large screen): two columns side by side */
+    .blog-post {
+      float: left;
+      width: 70%;
+      background-color: #f9f9f9;
+      padding: 20px;
+    }
+
+    .sidebar {
+      float: left;
+      width: 30%;
+      background-color: #e0f0ff;
+      padding: 20px;
+    }
+
+    /* Small screen (700px or less): stack them */
+    @media screen and (max-width: 700px) {
+      .blog-post, .sidebar {
+        width: 100%;
+        float: none;
+      }
+    }
+
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+  &lt;h1&gt;My Blog&lt;/h1&gt;
+
+  &lt;div class=&quot;blog-post&quot;&gt;
+    &lt;h2&gt;My First Blog Post&lt;/h2&gt;
+    &lt;p&gt;Today I learned about responsive web design. It is amazing how a few lines of CSS can make a website work beautifully on every device.&lt;/p&gt;
+    &lt;p&gt;I used the viewport meta tag, max-width for images, and media queries for layout changes.&lt;/p&gt;
+  &lt;/div&gt;
+
+  &lt;div class=&quot;sidebar&quot;&gt;
+    &lt;h3&gt;About Me&lt;/h3&gt;
+    &lt;p&gt;I am learning HTML and building my first website.&lt;/p&gt;
+    &lt;h3&gt;Categories&lt;/h3&gt;
+    &lt;p&gt;HTML, CSS, Web Design&lt;/p&gt;
+  &lt;/div&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;</code></pre></div></div>
+<ol class="v2-ol"><li>Open in your browser.</li><li>Slowly shrink the window width.</li><li>At 700px, watch the layout change from two columns to stacked.</li></ol>
+<p class="v2-p"><strong>Expected Output:</strong></p>
+<ul class="v2-ul"><li>Wide window: Blog post (70% width) and sidebar (30% width) side by side.</li><li>Narrow window (≤700px): Blog post above, sidebar below, both 100% width.</li></ul>
+<p class="v2-p"><strong>What-if Challenge:</strong> What would happen if you changed <code>max-width: 700px</code> to <code>min-width: 700px</code>? The logic would flip — the stacked layout would apply on large screens, and the two-column layout on small screens! Try it.</p>
+<hr class="v2-hr">
+    <div class="task-box">
+      <div class="task-label">✏️ Your Task</div>
+      <div class="task-body">Now practise what you just learned about <strong>Guided Practice Exercises</strong>. Open your editor, type the examples above by hand, then modify them — change values, rename variables, and observe what happens. Active experimentation is how code sticks.</div>
+    </div>
+    <button class="unlock-btn" onclick="unlockNext(10)">Phase Complete — Unlock Next ✓</button>
+  </div>
+</div>
+<div class="phase locked" id="phase11">
+  <div class="phase-header">
+    <div class="phase-num">Phase 11 of 11</div>
+    <div class="phase-title">Common Beginner Mistakes</div>
+    <div class="phase-check" id="chk11"></div>
+  </div>
+  <div class="phase-body">
+    <h3 class="v2-h3">Mistake 1: Forgetting the Viewport Meta Tag</h3>
+<p class="v2-p"><strong>What happens:</strong> Even if you write perfect responsive CSS, the page will still look zoomed out on phones because the browser does not know to respect your CSS at phone size.</p>
+<p class="v2-p"><strong>Wrong:</strong></p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;head&gt;
+  &lt;title&gt;My Page&lt;/title&gt;
+  &lt;!-- Viewport tag missing! --&gt;
+&lt;/head&gt;</code></pre></div></div>
+<p class="v2-p"><strong>Correct:</strong></p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;head&gt;
+  &lt;title&gt;My Page&lt;/title&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
+&lt;/head&gt;</code></pre></div></div>
+<hr class="v2-hr">
+<h3 class="v2-h3">Mistake 2: Using <code>width: 100%</code> Instead of <code>max-width: 100%</code> for Images</h3>
+<p class="v2-p"><strong>What happens:</strong> Images stretch larger than their original size and become blurry on big screens.</p>
+<p class="v2-p"><strong>Wrong:</strong></p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;img src=&quot;small-photo.jpg&quot; style=&quot;width: 100%;&quot;&gt;</code></pre></div></div>
+<p class="v2-p"><strong>Correct:</strong></p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;img src=&quot;small-photo.jpg&quot; style=&quot;max-width: 100%; height: auto;&quot;&gt;</code></pre></div></div>
+<hr class="v2-hr">
+<h3 class="v2-h3">Mistake 3: Forgetting <code>height: auto</code> with <code>max-width: 100%</code></h3>
+<p class="v2-p"><strong>What happens:</strong> The image width shrinks responsively but the height stays fixed, making the image look squished and distorted.</p>
+<p class="v2-p"><strong>Wrong:</strong></p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;img src=&quot;photo.jpg&quot; style=&quot;max-width: 100%; height: 300px;&quot;&gt;</code></pre></div></div>
+<p class="v2-p"><strong>Correct:</strong></p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;img src=&quot;photo.jpg&quot; style=&quot;max-width: 100%; height: auto;&quot;&gt;</code></pre></div></div>
+<p class="v2-p"><code>height: auto</code> tells the browser to calculate the height automatically to preserve the image's original proportions.</p>
+<hr class="v2-hr">
+<h3 class="v2-h3">Mistake 4: Writing Media Queries Without <code>screen</code></h3>
+<p class="v2-p"><strong>What happens:</strong> Usually still works, but is not best practice. It is better to specify <code>screen</code> to target screen displays explicitly.</p>
+<p class="v2-p"><strong>Less precise:</strong></p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">css</span></div><div class="v2-code-body"><pre><code>@media (max-width: 600px) {
+  /* works, but not explicit */
+}</code></pre></div></div>
+<p class="v2-p"><strong>Best practice:</strong></p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">css</span></div><div class="v2-code-body"><pre><code>@media screen and (max-width: 600px) {
+  /* explicitly targeting screens */
+}</code></pre></div></div>
+<hr class="v2-hr">
+<h3 class="v2-h3">Mistake 5: Mixing Up <code>max-width</code> and <code>min-width</code> in Media Queries</h3>
+<p class="v2-p"><strong>What happens:</strong> The layout applies on the wrong screens — exactly the opposite of what you wanted.</p>
+<ul class="v2-ul"><li><code>max-width: 600px</code> means: "Apply this CSS when the screen is <strong>600px or smaller</strong> (i.e., small/phone screens)."</li><li><code>min-width: 600px</code> means: "Apply this CSS when the screen is <strong>600px or larger</strong> (i.e., larger screens)."</li></ul>
+<p class="v2-p"><strong>Wrong (applying phone styles to desktops):</strong></p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">css</span></div><div class="v2-code-body"><pre><code>@media screen and (min-width: 600px) {
+  .columns { width: 100%; float: none; }  /* This wrongly stacks on desktop! */
+}</code></pre></div></div>
+<p class="v2-p"><strong>Correct (applying phone styles to phones):</strong></p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">css</span></div><div class="v2-code-body"><pre><code>@media screen and (max-width: 600px) {
+  .columns { width: 100%; float: none; }  /* Correctly stacks on small screens */
+}</code></pre></div></div>
+<hr class="v2-hr">
+<h3 class="v2-h3">Mistake 6: Not Using <code>clear: both</code> After Floated Elements</h3>
+<p class="v2-p"><strong>What happens:</strong> The footer or next section "climbs up" and overlaps with your floated columns, causing a messy, broken layout.</p>
+<p class="v2-p"><strong>Wrong:</strong></p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;div class=&quot;left-col&quot;&gt;...&lt;/div&gt;
+&lt;div class=&quot;right-col&quot;&gt;...&lt;/div&gt;
+&lt;footer&gt;...&lt;/footer&gt;  &lt;!-- Footer overlaps with columns! --&gt;</code></pre></div></div>
+<p class="v2-p"><strong>Correct — add <code>clear: both</code> to the footer:</strong></p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;div class=&quot;left-col&quot;&gt;...&lt;/div&gt;
+&lt;div class=&quot;right-col&quot;&gt;...&lt;/div&gt;
+&lt;footer style=&quot;clear: both;&quot;&gt;...&lt;/footer&gt;  &lt;!-- Footer correctly appears below columns --&gt;</code></pre></div></div>
+<hr class="v2-hr">
+    <div class="task-box">
+      <div class="task-label">✏️ Your Task</div>
+      <div class="task-body">Less precise:
+`css
+@media (max-width: 600px) {
+  /* works, but not explicit */
+}
+`
+
+Best practice:
+`css
+@media screen and (max-width: 600px) {
+  /* explicitly targeting screens */
+}
+`
+
+---</div>
+    </div>
+    <button class="unlock-btn" onclick="unlockNext(11)">Phase Complete — Unlock Next ✓</button>
+  </div>
+</div>
+<div class="build-box" id="build-it">
+  <div class="build-label">🏗️ Build It</div>
+  <div class="build-name">Project Description</div>
+  <div class="build-desc">You will build a personal profile page that:</div>
+  <div class="v2-code-wrap">
+    <div class="v2-code-bar">
+      <span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span>
+      <span class="v2-code-lang">starter.html</span>
+    </div>
+    <div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;UTF-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
+  &lt;title&gt;My Profile Page&lt;/title&gt;
+  &lt;style&gt;
+    /* We will add styles here in the next stages */
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+  &lt;!-- Stage 1 Milestone: Check that the page opens with a title --&gt;
+  &lt;p&gt;Building my responsive profile page...&lt;/p&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;</code></pre></div>
+  </div>
+  <div style="display:flex;gap:.8rem;flex-wrap:wrap;margin-top:1.2rem">
+    <button class="unlock-btn" onclick="downloadStarter(`<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Profile Page</title>
+  <style>
+    /* We will add styles here in the next stages */
+  </style>
+</head>
+<body>
+
+  <!-- Stage 1 Milestone: Check that the page opens with a title -->
+  <p>Building my responsive profile page...</p>
+
+</body>
+</html>`)"
+      style="background:#10b981;box-shadow:0 4px 14px rgba(16,185,129,.3)">
+      ⬇ Download starter.html
+    </button>
+    <button class="unlock-btn" onclick="showGithub()"
+      style="background:#0f172a;box-shadow:none">
+      🐙 Push to GitHub →
+    </button>
+  </div>
+</div>
+<div class="gh-acc" id="gh-steps" style="display:none">
+  <div class="gh-acc-head" onclick="toggleGh(this)">
+    🐙 Push Your Project to GitHub Pages &nbsp;<span>▼</span>
+  </div>
+  <div class="gh-acc-body">
+    <div class="gh-step"><div class="gh-step-n">1</div>
+    <p>Go to <strong>github.com</strong> → click <strong>New repository</strong> → name it <code>html-lesson-26-project-description</code>.</p></div>
+    <div class="gh-step"><div class="gh-step-n">2</div>
+    <p>Set it to <strong>Public</strong>, tick <strong>Add a README</strong>, then click <strong>Create repository</strong>.</p></div>
+    <div class="gh-step"><div class="gh-step-n">3</div>
+    <p>Click <strong>Add file → Upload files</strong>. Upload your <code>starter.html</code> — rename it to <code>index.html</code> before uploading.</p></div>
+    <div class="gh-step"><div class="gh-step-n">4</div>
+    <p>Commit message: <em>"Add HTML lesson 26 project"</em> → click <strong>Commit changes</strong>.</p></div>
+    <div class="gh-step"><div class="gh-step-n">5</div>
+    <p>Go to <strong>Settings → Pages</strong> → branch <strong>main</strong> → <strong>Save</strong>. Your project goes live at <code>https://YOUR-NAME.github.io/html-lesson-26-project-description/</code> in about 1 minute! 🎉</p></div>
+    <button class="unlock-btn" onclick="showEnd()" style="margin-top:.5rem">I've pushed to GitHub — Finish Session ✅</button>
+  </div>
+</div>
 <div class="session-end" id="session-end">
-  <h2>🎉 Great work! Lesson 26 complete!</h2>
-  <p style="margin-bottom:.8rem;font-size:.9rem;opacity:.9">Today you learned:</p>
-  <ul><li>✅ The Viewport and Fluid Widths</li><li>✅ CSS Media Queries</li><li>✅ Responsive Images with picture</li></ul>
-  <div class="lesson-nav" style="margin-top:1.5rem;border-color:rgba(255,255,255,.2)">
-    <a href="lesson_25.html" class="ln-btn">← Lesson 25</a>
-    <a href="lesson_27.html" class="ln-btn primary">Lesson 27 →</a>
-  </div>
+  <h2>🎉 Lesson 26 complete!</h2>
+  <p style="margin-bottom:.8rem;font-size:.9rem;opacity:.9">You covered:</p>
+  <ul><li>✅ Lesson Introduction</li><li>✅ Prerequisite Concepts</li><li>✅ Conceptual Understanding</li><li>✅ Part 1: Setting the Viewport</li><li>✅ Part 2: Responsive Images</li><li>✅ Part 3: Showing Different Images for Different Screen Sizes</li><li>✅ Part 4: Responsive Text Size with `vw` Units</li><li>✅ Part 5: Media Queries — The Heart of Responsive Design</li></ul>
+  <div class="lesson-nav"><a href="lesson_25.html" class="ln-btn">← Lesson 25</a><a href="lesson_27.html" class="ln-btn primary">Lesson 27 →</a></div>
 </div>
-
 </main>
 
-<!-- FOOTER -->
 <footer class="lesson-footer">
-  <p>Techbase Code Coach &nbsp;·&nbsp; HTML Course Lesson 26
-     &nbsp;·&nbsp; © 2025 Techbase Consultant Services, Ibadan</p>
+  Techbase Code Coach · HTML Course · Lesson 26 · © 2025 Techbase Consultant Services, Ibadan
 </footer>
-
 <script>
-const TOTAL=3, KEY='techbase_html_26_phase';
+const TOTAL=11,KEY='techbase_html_l26';
 let current=parseInt(localStorage.getItem(KEY)||'1');
-
 function init(){
-  for(let i=1;i<=current;i++) if(i>1) unlockPhase(i,false);
+  for(let i=2;i<=current;i++) unlockPhase(i,false);
   updateBar();
 }
-
 function unlockNext(n){
-  document.getElementById('check'+n).classList.add('done');
-  document.getElementById('check'+n).textContent='✓';
-  localStorage.setItem(KEY,n+1);
-  current=n+1;
+  const chk=document.getElementById('chk'+n);
+  if(chk){chk.classList.add('done');chk.textContent='✓';}
+  localStorage.setItem(KEY,n+1); current=n+1;
   if(n===TOTAL){
     document.getElementById('build-it').style.display='block';
-    const cap=document.getElementById('capstone');
-    if(cap) cap.style.display='block';
     updateBar(100);
     setTimeout(()=>document.getElementById('build-it').scrollIntoView({behavior:'smooth'}),200);
-  } else {
-    unlockPhase(n+1,true);
-    updateBar();
+  }else{
+    unlockPhase(n+1,true); updateBar();
   }
 }
-
 function unlockPhase(n,scroll){
   const el=document.getElementById('phase'+n);
-  if(el){ el.classList.remove('locked'); if(scroll) setTimeout(()=>el.scrollIntoView({behavior:'smooth',block:'start'}),150); }
+  if(el){el.classList.remove('locked');if(scroll)setTimeout(()=>el.scrollIntoView({behavior:'smooth',block:'start'}),150);}
 }
-
 function updateBar(pct){
-  const p=pct||Math.round((current-1)/TOTAL*95);
+  const p=pct!==undefined?pct:Math.round((current-1)/TOTAL*95);
   document.getElementById('pbar').style.width=p+'%';
 }
-
 function showGithub(){
-  const g=document.getElementById('github-steps');
-  if(g){ g.style.display='block'; setTimeout(()=>g.scrollIntoView({behavior:'smooth'}),150); }
+  const g=document.getElementById('gh-steps');
+  if(g){g.style.display='block';setTimeout(()=>g.scrollIntoView({behavior:'smooth'}),150);}
 }
-
 function showEnd(){
   const e=document.getElementById('session-end');
-  if(e){ e.classList.add('visible'); setTimeout(()=>e.scrollIntoView({behavior:'smooth'}),150); }
+  if(e){e.classList.add('visible');setTimeout(()=>e.scrollIntoView({behavior:'smooth'}),150);}
 }
-
+function toggleGh(el){el.nextElementSibling.classList.toggle('open');}
+function downloadStarter(code){
+  const a=document.createElement('a');
+  a.href='data:text/html;charset=utf-8,'+encodeURIComponent(code);
+  a.download='starter.html';a.click();
+}
 init();
 </script>
-
 </body>
 </html>

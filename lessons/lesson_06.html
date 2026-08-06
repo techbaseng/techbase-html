@@ -2,456 +2,510 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Lesson 06: HTML Paragraphs — Techbase HTML Course</title>
-<meta name="description" content="Control text flow with paragraphs, line breaks, and horizontal rules">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Lesson 06: HTML Paragraphs: Your First Steps to Structuring Text — Techbase HTML</title>
+<meta name="description" content="HTML Paragraphs: Your First Steps to Structuring Text">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-:root { 
-  --accent:#ea4f21;--accent-pale:#fff3ef;--accent-dark:#c23d15;
-  --accent-border:rgba(234,79,33,.3);--accent-shadow:rgba(234,79,33,.28);
-  --hero-bg:linear-gradient(160deg,#fff3ef 0%,#f8fafc 55%,#fef2e9 100%);
-  --s2:#f1f5f9;
- }
 :root{
+  --acc:#e34c26;--acc-d:#c0391a;--acc-pale:#fff5f2;
+  --acc-b:rgba(227,76,38,.25);--acc-sh:rgba(227,76,38,.25);
   --bg:#f8fafc;--surface:#fff;--border:#e2e8f0;--border2:#cbd5e1;
   --text:#0f172a;--t2:#334155;--muted:#64748b;
   --D:'Space Grotesk',sans-serif;--B:'Plus Jakarta Sans',sans-serif;--M:'JetBrains Mono',monospace;
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased}
-body{background:var(--bg);color:var(--text);font-family:var(--B);font-size:16px;line-height:1.7;overflow-x:hidden}
+body{background:var(--bg);color:var(--text);font-family:var(--B);font-size:16px;line-height:1.75;overflow-x:hidden}
+
 /* NAV */
-.l-nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(255,255,255,.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);height:58px;display:flex;align-items:center;padding:0 1.5rem;gap:1rem;justify-content:space-between}
-.l-nav-logo{font-family:var(--D);font-weight:700;font-size:.88rem;color:var(--text);text-decoration:none}
-.l-nav-logo em{font-style:normal}
+.l-nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(255,255,255,.95);
+  backdrop-filter:blur(12px);border-bottom:1px solid var(--border);height:58px;
+  display:flex;align-items:center;padding:0 1.5rem;gap:1rem;justify-content:space-between}
+.l-nav-logo{font-family:var(--D);font-weight:700;font-size:.9rem;color:var(--text);text-decoration:none}
 .l-nav-back{font-size:.8rem;color:var(--muted);text-decoration:none;font-weight:500;display:flex;align-items:center;gap:.3rem;transition:color .2s}
-.l-nav-back:hover{color:var(--accent)}
-.l-nav-lesson{font-family:var(--M);font-size:.68rem;color:var(--muted)}
-/* PROGRESS BAR */
+.l-nav-back:hover{color:var(--acc)}
+.l-nav-label{font-family:var(--M);font-size:.68rem;color:var(--muted)}
+
+/* PROGRESS */
 .progress-wrap{position:fixed;top:58px;left:0;right:0;z-index:199;height:4px;background:var(--border)}
-.progress-bar{height:100%;background:var(--accent);transition:width .4s ease;width:0%}
+.progress-bar{height:100%;background:var(--acc);transition:width .4s ease;width:0%}
+
 /* HERO */
-.l-hero{padding:88px 1.5rem 2rem;background:var(--hero-bg);border-bottom:1px solid var(--border)}
-.l-hero-inner{max-width:820px;margin:0 auto}
-.l-badge{display:inline-flex;align-items:center;gap:.4rem;border-radius:100px;padding:.2rem .8rem;font-family:var(--M);font-size:.62rem;letter-spacing:.08em;text-transform:uppercase;font-weight:600;border:1px solid;color:var(--accent);background:var(--accent-pale);border-color:var(--accent-border);margin-bottom:.8rem}
-.l-hero h1{font-family:var(--D);font-weight:700;font-size:clamp(1.6rem,4vw,2.4rem);letter-spacing:-.025em;line-height:1.15;margin-bottom:.5rem}
-.l-hero-tag{font-size:.95rem;color:var(--muted);margin-bottom:1.2rem}
-.l-hero-build{background:var(--surface);border:1.5px solid var(--border);border-radius:10px;padding:.9rem 1.2rem;display:flex;align-items:center;gap:.7rem;font-size:.88rem;max-width:520px}
-.l-hero-build strong{color:var(--accent)}
+.l-hero{padding:80px 1.5rem 2rem;background:linear-gradient(160deg,#fff5f2 0%,#f8fafc 55%,#ffe8e0 100%);border-bottom:1px solid var(--border)}
+.l-hero-inner{max-width:860px;margin:0 auto}
+.l-badge{display:inline-flex;align-items:center;gap:.4rem;border-radius:100px;padding:.2rem .85rem;
+  font-family:var(--M);font-size:.62rem;letter-spacing:.08em;text-transform:uppercase;font-weight:600;
+  color:var(--acc);background:var(--acc-pale);border:1px solid var(--acc-b);margin-bottom:.8rem}
+.l-hero h1{font-family:var(--D);font-weight:700;font-size:clamp(1.5rem,4vw,2.3rem);
+  letter-spacing:-.02em;line-height:1.15;margin-bottom:.5rem}
+.l-hero-sub{font-size:.95rem;color:var(--muted);margin-bottom:1rem}
+
 /* WELCOME BOX */
-.welcome-box{background:linear-gradient(135deg,var(--accent),var(--accent-dark));color:#fff;border-radius:16px;padding:1.5rem 1.8rem;max-width:820px;margin:2rem auto 0}
-.welcome-box h2{font-family:var(--D);font-weight:700;font-size:1.1rem;margin-bottom:.6rem}
-.welcome-box p{font-size:.9rem;line-height:1.75;opacity:.92}
-.welcome-meta{display:flex;gap:1.5rem;margin-top:1rem;flex-wrap:wrap}
-.welcome-meta span{background:rgba(255,255,255,.15);border-radius:6px;padding:.25rem .8rem;font-family:var(--M);font-size:.7rem;font-weight:500}
-/* MAIN CONTENT */
-main{max-width:820px;margin:0 auto;padding:2rem 1.5rem 5rem}
+.welcome-box{background:linear-gradient(135deg,var(--acc),var(--acc-d));color:#fff;
+  border-radius:16px;padding:1.5rem 1.8rem;max-width:860px;margin:1.5rem auto 0}
+.welcome-box h2{font-family:var(--D);font-weight:700;font-size:1.05rem;margin-bottom:.6rem}
+.welcome-box p,.welcome-box li{font-size:.9rem;line-height:1.8;opacity:.93}
+.welcome-box ul{margin-left:1.2rem;margin-top:.5rem}
+.welcome-meta{display:flex;gap:1rem;margin-top:1rem;flex-wrap:wrap}
+.welcome-meta span{background:rgba(255,255,255,.18);border-radius:6px;padding:.2rem .75rem;
+  font-family:var(--M);font-size:.68rem;font-weight:500}
+
 /* PHASE */
-.phase{background:var(--surface);border:1.5px solid var(--border);border-radius:16px;margin-bottom:1.5rem;overflow:hidden;transition:opacity .3s,transform .3s}
-.phase.locked{opacity:.4;pointer-events:none;filter:blur(1px)}
-.phase-header{padding:1rem 1.4rem;background:var(--s2,#f1f5f9);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;gap:1rem}
-.phase-num{font-family:var(--M);font-size:.7rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}
-.phase-title{font-family:var(--D);font-weight:700;font-size:1rem;color:var(--text)}
-.phase-check{width:24px;height:24px;border-radius:50%;background:var(--border);display:flex;align-items:center;justify-content:center;font-size:.75rem;flex-shrink:0;transition:background .3s}
+.phase{background:var(--surface);border:1.5px solid var(--border);border-radius:16px;
+  margin-bottom:1.5rem;overflow:hidden;transition:opacity .3s,transform .3s,filter .3s}
+.phase.locked{opacity:.35;pointer-events:none;filter:blur(1.5px)}
+.phase-header{padding:1rem 1.4rem;background:#fff8f5;
+  border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;gap:1rem;cursor:default}
+.phase-num{font-family:var(--M);font-size:.7rem;font-weight:600;letter-spacing:.08em;
+  text-transform:uppercase;color:var(--acc)}
+.phase-title{font-family:var(--D);font-weight:700;font-size:.95rem;color:var(--text);
+  flex:1;margin:0 .8rem}
+.phase-check{width:26px;height:26px;border-radius:50%;background:var(--border);
+  display:flex;align-items:center;justify-content:center;font-size:.8rem;flex-shrink:0;
+  transition:background .3s,color .3s}
 .phase-check.done{background:#10b981;color:#fff}
-.phase-body{padding:1.4rem}
-/* CONCEPT BOX */
-.concept-box{background:#f0f9ff;border-left:4px solid #0284c7;border-radius:0 10px 10px 0;padding:1rem 1.2rem;margin-bottom:1.2rem}
-.concept-label{font-family:var(--M);font-size:.65rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#0284c7;margin-bottom:.4rem}
-.concept-box p{font-size:.92rem;color:#0c4a6e;line-height:1.75}
-/* CODE BLOCK */
-.code-wrap{margin:1.2rem 0;border-radius:12px;overflow:hidden;border:1px solid #1e293b}
-.code-bar{background:#1e293b;padding:.6rem 1rem;display:flex;align-items:center;gap:.4rem}
-.code-dot{width:8px;height:8px;border-radius:50%}
-.code-dot.r{background:#ff5f57}.code-dot.y{background:#febc2e}.code-dot.g{background:#28c840}
-.code-filename{margin-left:.5rem;font-family:var(--M);font-size:.65rem;color:#64748b}
-.code-body{background:#0f172a;padding:1.2rem 1.4rem;overflow-x:auto}
-.code-body pre{font-family:var(--M);font-size:.78rem;line-height:1.9;color:#e2e8f0;margin:0;white-space:pre}
-.code-body pre .cm{color:#64748b} /* comment */
-.code-body pre .tg{color:#38bdf8} /* tag */
-.code-body pre .at{color:#c084fc} /* attribute */
-.code-body pre .vl{color:#86efac} /* value */
-.code-body pre .tx{color:#e2e8f0} /* text */
+.phase-body{padding:1.6rem 1.8rem}
+
+/* RICH CONTENT STYLES */
+.v2-p{margin-bottom:1rem;font-size:.95rem;color:var(--t2);line-height:1.85}
+.v2-h3{font-family:var(--D);font-weight:700;font-size:1.05rem;color:var(--text);
+  margin:1.6rem 0 .5rem;padding-top:.2rem;border-top:2px solid var(--acc-pale)}
+.v2-h4{font-family:var(--D);font-weight:600;font-size:.95rem;color:var(--t2);margin:1.1rem 0 .4rem}
+.v2-h5,.v2-h6{font-family:var(--D);font-weight:600;font-size:.9rem;color:var(--muted);margin:.8rem 0 .3rem}
+.v2-ul,.v2-ol{margin:.6rem 0 1rem 1.4rem;font-size:.93rem;color:var(--t2);line-height:1.9}
+.v2-ul li,.v2-ol li{margin-bottom:.3rem}
+.v2-bq{border-left:4px solid var(--acc);background:var(--acc-pale);border-radius:0 10px 10px 0;
+  padding:.9rem 1.2rem;margin:1rem 0;font-size:.92rem;color:#7b1c06;font-style:italic}
+.v2-bq p{margin:0;color:inherit}
+.v2-bq strong{font-style:normal}
+.v2-hr{border:none;border-top:1px solid var(--border);margin:1.2rem 0}
+.v2-table-wrap{overflow-x:auto;margin:1rem 0}
+.v2-table{width:100%;border-collapse:collapse;font-size:.87rem}
+.v2-table th{background:var(--acc-pale);color:#7b1c06;font-family:var(--D);
+  font-weight:700;padding:9px 12px;text-align:left;border:1px solid var(--acc-b)}
+.v2-table td{padding:8px 12px;border:1px solid var(--border);color:var(--t2);vertical-align:top}
+.v2-table tr:nth-child(even) td{background:#f8fafc}
+.v2-table code{background:var(--acc-pale);color:var(--acc);border-radius:4px;
+  padding:1px 5px;font-family:var(--M);font-size:.8em}
+.phase-body code{background:var(--acc-pale);color:var(--acc-d);border-radius:4px;
+  padding:1px 6px;font-family:var(--M);font-size:.82em}
+.phase-body a{color:var(--acc);text-decoration:underline;text-underline-offset:2px}
+.phase-body strong{color:var(--text)}
+
+/* CODE BLOCKS */
+.v2-code-wrap{margin:1.2rem 0;border-radius:12px;overflow:hidden;border:1px solid #1e293b;box-shadow:0 4px 16px rgba(0,0,0,.15)}
+.v2-code-bar{background:#1e293b;padding:.55rem 1rem;display:flex;align-items:center;gap:.4rem}
+.v2-dot{width:10px;height:10px;border-radius:50%}
+.v2-dot.r{background:#ff5f57}.v2-dot.y{background:#febc2e}.v2-dot.g{background:#28c840}
+.v2-code-lang{margin-left:.6rem;font-family:var(--M);font-size:.65rem;color:#64748b;text-transform:uppercase;letter-spacing:.08em}
+.v2-code-body{background:#0f172a;padding:1.3rem 1.5rem;overflow-x:auto}
+.v2-code-body pre{margin:0}
+.v2-code-body code{font-family:var(--M);font-size:.8rem;line-height:1.9;color:#e2e8f0;
+  white-space:pre;background:transparent;padding:0;border-radius:0}
+
 /* TASK BOX */
-.task-box{background:#fffbeb;border:1.5px dashed #d97706;border-radius:12px;padding:1rem 1.2rem;margin:1.2rem 0}
-.task-label{font-family:var(--M);font-size:.65rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#b45309;margin-bottom:.4rem}
-.task-box p{font-size:.92rem;color:#78350f;line-height:1.75}
-.task-box code{background:rgba(180,83,9,.1);border-radius:4px;padding:.1rem .4rem;font-family:var(--M);font-size:.82em}
-/* NEXT BUTTON */
-.next-btn{display:inline-flex;align-items:center;gap:.5rem;background:var(--accent);color:#fff;font-family:var(--D);font-weight:700;font-size:.88rem;padding:.75rem 1.5rem;border-radius:10px;border:none;cursor:pointer;transition:transform .2s,box-shadow .2s;box-shadow:0 4px 12px var(--accent-shadow);margin-top:1rem}
-.next-btn:hover{transform:translateY(-2px);box-shadow:0 8px 20px var(--accent-shadow)}
-.next-btn:disabled{opacity:.5;cursor:not-allowed;transform:none}
-.next-tip{font-family:var(--M);font-size:.72rem;color:var(--muted);margin-top:.6rem}
-/* PROJECT BOX */
-.project-box{background:#f0fdf4;border:2px solid #16a34a;border-radius:16px;padding:1.5rem;margin:2rem 0}
-.project-label{font-family:var(--M);font-size:.65rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#15803d;margin-bottom:.4rem}
-.project-name{font-family:var(--D);font-weight:700;font-size:1.1rem;color:#14532d;margin-bottom:.5rem}
-.project-desc{font-size:.9rem;color:#166534;margin-bottom:1.2rem;line-height:1.7}
-/* CAPSTONE BOX */
-.capstone-box{background:linear-gradient(135deg,#1e1b4b,#312e81);border-radius:16px;padding:1.5rem;margin:2rem 0;color:#fff}
-.capstone-label{font-family:var(--M);font-size:.65rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#a5b4fc;margin-bottom:.4rem}
-.capstone-name{font-family:var(--D);font-weight:700;font-size:1.2rem;margin-bottom:.5rem}
-.capstone-desc{font-size:.9rem;color:rgba(255,255,255,.8);margin-bottom:1.2rem;line-height:1.7}
-/* FILE TABS */
-.file-tabs{display:flex;gap:.5rem;margin-bottom:0;flex-wrap:wrap}
-.file-tab{font-family:var(--M);font-size:.72rem;padding:.35rem .8rem;background:#1e293b;color:#94a3b8;border-radius:6px 6px 0 0;cursor:pointer;border:1px solid #334155;border-bottom:none;transition:background .15s}
-.file-tab.active{background:#0f172a;color:#e2e8f0}
-.file-content{display:none}.file-content.active{display:block}
+.task-box{background:#fff0ec;border:2px dashed #e34c26;
+  border-radius:12px;padding:1rem 1.3rem;margin:1.4rem 0}
+.task-label{font-family:var(--M);font-size:.65rem;font-weight:700;letter-spacing:.1em;
+  text-transform:uppercase;color:#7b1c06;margin-bottom:.5rem;display:flex;align-items:center;gap:.4rem}
+.task-box p,.task-body{font-size:.92rem;color:#7b1c06;line-height:1.8}
+.task-box code{background:rgba(0,0,0,.08);border-radius:4px;padding:1px 6px;
+  font-family:var(--M);font-size:.82em}
+
+/* UNLOCK BUTTON */
+.unlock-btn{display:inline-flex;align-items:center;gap:.5rem;background:var(--acc);
+  color:#fff;font-family:var(--D);font-weight:700;font-size:.88rem;
+  padding:.75rem 1.6rem;border-radius:10px;border:none;cursor:pointer;
+  transition:transform .2s,box-shadow .2s;box-shadow:0 4px 14px var(--acc-sh);margin-top:1.2rem}
+.unlock-btn:hover{transform:translateY(-2px);box-shadow:0 8px 22px var(--acc-sh)}
+
+/* BUILD IT */
+.build-box{background:#f0fdf4;border:2px solid #16a34a;border-radius:16px;padding:1.6rem;margin:2rem 0;display:none}
+.build-label{font-family:var(--M);font-size:.65rem;font-weight:700;letter-spacing:.1em;
+  text-transform:uppercase;color:#15803d;margin-bottom:.4rem}
+.build-name{font-family:var(--D);font-weight:700;font-size:1.1rem;color:#14532d;margin-bottom:.5rem}
+.build-desc{font-size:.9rem;color:#166534;margin-bottom:1.2rem;line-height:1.75}
+.build-desc code{background:rgba(22,163,74,.12);border-radius:4px;padding:1px 6px;font-family:var(--M);font-size:.82em}
+.build-desc strong{color:#14532d}
+
 /* GITHUB ACCORDION */
-.github-acc{border:1.5px solid var(--border);border-radius:12px;overflow:hidden;margin:1.5rem 0}
-.github-acc-head{padding:1rem 1.2rem;background:#f8fafc;cursor:pointer;display:flex;align-items:center;justify-content:space-between;font-family:var(--D);font-weight:600;font-size:.9rem;user-select:none}
-.github-acc-body{display:none;padding:1.2rem;border-top:1px solid var(--border)}
-.github-acc-body.open{display:block}
-.github-step{display:flex;gap:.8rem;margin-bottom:1rem;align-items:flex-start}
-.github-step-n{width:24px;height:24px;border-radius:50%;background:var(--accent);color:#fff;font-family:var(--D);font-weight:700;font-size:.75rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px}
-.github-step p{font-size:.88rem;color:var(--t2);line-height:1.7}
+.gh-acc{border:1.5px solid var(--border);border-radius:12px;overflow:hidden;margin:1.5rem 0}
+.gh-acc-head{padding:1rem 1.2rem;background:#f8fafc;cursor:pointer;
+  display:flex;align-items:center;justify-content:space-between;
+  font-family:var(--D);font-weight:600;font-size:.9rem;user-select:none}
+.gh-acc-body{display:none;padding:1.2rem;border-top:1px solid var(--border)}
+.gh-acc-body.open{display:block}
+.gh-step{display:flex;gap:.8rem;margin-bottom:1rem;align-items:flex-start}
+.gh-step-n{width:26px;height:26px;border-radius:50%;background:var(--acc);color:#fff;
+  font-family:var(--D);font-weight:700;font-size:.75rem;display:flex;align-items:center;
+  justify-content:center;flex-shrink:0;margin-top:2px}
+.gh-step p{font-size:.88rem;color:var(--t2);line-height:1.7}
+.gh-step code{background:var(--acc-pale);color:var(--acc-d);border-radius:4px;
+  padding:1px 6px;font-family:var(--M);font-size:.82em}
+
 /* SESSION END */
-.session-end{background:linear-gradient(135deg,var(--accent),var(--accent-dark));color:#fff;border-radius:16px;padding:1.5rem 1.8rem;margin:2rem 0;display:none}
+.session-end{background:linear-gradient(135deg,var(--acc),var(--acc-d));color:#fff;
+  border-radius:16px;padding:1.6rem 1.8rem;margin:2rem 0;display:none}
 .session-end.visible{display:block}
 .session-end h2{font-family:var(--D);font-weight:700;font-size:1.1rem;margin-bottom:.8rem}
 .session-end ul{list-style:none;display:flex;flex-direction:column;gap:.4rem}
-.session-end li{font-size:.9rem;opacity:.92;display:flex;align-items:center;gap:.5rem}
-/* LESSON NAV */
-.lesson-nav{display:flex;align-items:center;justify-content:space-between;padding-top:2rem;border-top:1px solid var(--border);margin-top:2rem;flex-wrap:wrap;gap:.75rem}
-.ln-btn{display:inline-flex;align-items:center;gap:.4rem;background:var(--surface);color:var(--t2);font-family:var(--D);font-weight:600;font-size:.82rem;padding:.65rem 1.2rem;border-radius:8px;text-decoration:none;border:1.5px solid var(--border);transition:border-color .2s,color .2s}
-.ln-btn:hover{border-color:var(--accent);color:var(--accent)}
-.ln-btn.primary{background:var(--accent);color:#fff;border-color:var(--accent)}
+.session-end li{font-size:.9rem;opacity:.93;display:flex;align-items:center;gap:.5rem}
+.ln-btn{display:inline-flex;align-items:center;gap:.4rem;background:var(--surface);
+  color:var(--t2);font-family:var(--D);font-weight:600;font-size:.82rem;
+  padding:.65rem 1.2rem;border-radius:8px;text-decoration:none;
+  border:1.5px solid var(--border);transition:border-color .2s,color .2s}
+.ln-btn:hover{border-color:var(--acc);color:var(--acc)}
+.ln-btn.primary{background:var(--acc);color:#fff;border-color:var(--acc)}
 .ln-btn.primary:hover{opacity:.9}
-/* UTILS */
-code{font-family:var(--M);font-size:.85em;background:#f1f5f9;border-radius:4px;padding:.1rem .35rem;color:var(--accent)}
-.emoji{font-style:normal}
-@media(max-width:600px){.l-hero h1{font-size:1.5rem}.welcome-meta{gap:.75rem}}
-
+.lesson-nav{display:flex;align-items:center;justify-content:space-between;
+  padding-top:2rem;border-top:1px solid rgba(255,255,255,.25);margin-top:1.5rem;flex-wrap:wrap;gap:.75rem}
+.lesson-footer{text-align:center;padding:1.5rem;font-family:var(--M);font-size:.72rem;
+  color:var(--muted);border-top:1px solid var(--border);background:var(--surface)}
 </style>
 </head>
 <body>
-
-<!-- FIXED NAV -->
-<nav class="lesson-nav-bar">
-  <a href="../index.html" class="nav-back">← HTML Course</a>
-  <span class="nav-lesson">Lesson 06 of 34 &nbsp;·&nbsp; HTML Paragraphs</span>
-  <div class="nav-actions">
-    <a href="lesson_05.html" class="ln-btn">← Lesson 05</a>
-    <a href="lesson_07.html" class="ln-btn primary">Lesson 07 →</a>
-  </div>
+<nav class="l-nav">
+  <a href="../index.html" class="l-nav-logo">⚡ Techbase HTML</a>
+  <span class="l-nav-label">Lesson 06 of 34</span>
+  <a href="../index.html" class="l-nav-back">← All Lessons</a>
 </nav>
+<div class="progress-wrap"><div class="progress-bar" id="pbar"></div></div>
 
-<!-- PROGRESS BAR -->
-<div id="progress-wrap">
-  <div id="pbar" style="width:5%;background:var(--accent);height:4px;
-       border-radius:2px;transition:width .4s ease;"></div>
+<div class="l-hero">
+  <div class="l-hero-inner">
+    <div class="l-badge">HTML · Lesson 06</div>
+    <h1>HTML Paragraphs: Your First Steps to Structuring Text</h1>
+    <div class="l-hero-sub">6 phases · Build: &quot;A Short Poem&quot; Webpage</div>
+  </div>
 </div>
 
-<!-- HERO -->
-<section class="lesson-hero">
-  <div class="hero-inner">
-    <div class="lesson-num-badge">Lesson 06</div>
-    <h1>HTML Paragraphs</h1>
-    <p class="lesson-tagline">Control text flow with paragraphs, line breaks, and horizontal rules</p>
-    <div class="lesson-meta">
-      <span>📚 2 phases</span>
-      <span>🏗️ Build: My Story Page</span>
-      
-    </div>
+<section style="background:linear-gradient(160deg,#fff5f2 0%,#f8fafc 55%,#ffe8e0 100%);padding-bottom:1.5rem;border-bottom:1px solid var(--border)">
+  <div style="max-width:860px;margin:0 auto;padding:0 1.5rem"><div class="welcome-box">
+  <h2>👋 Welcome to Lesson 06</h2>
+  <div style="font-size:.9rem;line-height:1.85;opacity:.93"><p class="v2-p">Welcome! Have you ever written a document in a word processor like Microsoft Word or Google Docs? When you press "Enter," you create a new paragraph. That's exactly what we're going to learn how to do on a webpage.</p>
+<p class="v2-p">In this lesson, you will move beyond the headings from our previous lesson and learn how to add the <strong>main content</strong>—the actual sentences and words that tell your story. By the end of this lesson, you will be able to take any block of text, like a poem, a news article, or a story, and make it look clean and organized on a real website.</p>
+<p class="v2-p"><strong>What you'll learn today:</strong></p>
+<ol class="v2-ol"><li> How to create basic paragraphs.</li><li> Why the web browser ignores your "Enter" key (and how to fix it).</li><li> How to draw a line across the page to separate topics.</li><li> How to make text keep its exact spacing (crucial for poems and code).</li></ol>
+<p class="v2-p">Let's get started!</p></div>
+  <div class="welcome-meta">
+    <span>📚 6 phases</span>
+    <span>🏗️ &quot;A Short Poem&quot; Webpage</span>
   </div>
+</div></div>
 </section>
 
-<!-- MAIN CONTENT -->
-<main class="lesson-main">
-
-<div class="welcome-box">
-  <div class="welcome-label">👋 Welcome to Lesson 06!</div>
-  <h2>HTML Paragraphs</h2>
-  <p>Control text flow with paragraphs, line breaks, and horizontal rules. In this lesson you will work through
-     <strong>2 phases</strong>.
-     Complete each phase task before clicking <em>Next Phase</em>.
-     
-  </p>
-</div>
-
-<div class="phase " id="phase1" data-phase="1">
+<main style="max-width:860px;margin:0 auto;padding:2rem 1.5rem 5rem">
+<div class="phase" id="phase1">
   <div class="phase-header">
-    <div><div class="phase-num">Phase 1</div><div class="phase-title">The Paragraph Element</div></div>
-    <div class="phase-check" id="check1"></div>
+    <div class="phase-num">Phase 1 of 6</div>
+    <div class="phase-title">Lesson Introduction</div>
+    <div class="phase-check" id="chk1"></div>
   </div>
   <div class="phase-body">
-    <div class="concept-box">
-      <div class="concept-label">💡 Concept</div>
-      <p>The <code>&lt;p&gt;</code> tag creates a paragraph. Browsers automatically add some space above and below each paragraph. An important rule: the browser ignores extra spaces and line breaks that you type inside your HTML code — it only adds spaces where you use HTML tags. So if you press Enter 10 times inside a <code>&lt;p&gt;</code> tag, the browser will treat all that text as ONE line.</p>
-    </div>
-    <div class="code-wrap">
-  <div class="code-bar">
-    <span class="code-dot r"></span><span class="code-dot y"></span><span class="code-dot g"></span>
-    <span class="code-filename">index.html</span>
-  </div>
-  <div class="code-body"><pre>&lt;!DOCTYPE html&gt;
-&lt;html lang="en"&gt;
-  &lt;head&gt;&lt;title&gt;Paragraphs&lt;/title&gt;&lt;/head&gt;
-  &lt;body&gt;
-
-    &lt;h1&gt;My Story&lt;/h1&gt;
-
-    &lt;p&gt;This is the first paragraph. Browsers add space
-    above and below each paragraph automatically.&lt;/p&gt;
-
-    &lt;p&gt;This is the second paragraph. Even if I write
-    lots of extra        spaces    here, the browser
-    will only show one space between words.&lt;/p&gt;
-
-    &lt;p&gt;Each new &amp;lt;p&amp;gt; tag starts a new paragraph.&lt;/p&gt;
-
-  &lt;/body&gt;
-&lt;/html&gt;</pre></div>
-</div>
+    <p class="v2-p">Welcome! Have you ever written a document in a word processor like Microsoft Word or Google Docs? When you press "Enter," you create a new paragraph. That's exactly what we're going to learn how to do on a webpage.</p>
+<p class="v2-p">In this lesson, you will move beyond the headings from our previous lesson and learn how to add the <strong>main content</strong>—the actual sentences and words that tell your story. By the end of this lesson, you will be able to take any block of text, like a poem, a news article, or a story, and make it look clean and organized on a real website.</p>
+<p class="v2-p"><strong>What you'll learn today:</strong></p>
+<ol class="v2-ol"><li> How to create basic paragraphs.</li><li> Why the web browser ignores your "Enter" key (and how to fix it).</li><li> How to draw a line across the page to separate topics.</li><li> How to make text keep its exact spacing (crucial for poems and code).</li></ol>
+<p class="v2-p">Let's get started!</p>
     <div class="task-box">
       <div class="task-label">✏️ Your Task</div>
-      <p>Write three paragraphs about your school day. Notice that pressing Enter in your code does NOT create a new paragraph in the browser — you must use a <code>&lt;p&gt;</code> tag each time!</p>
+      <div class="task-body">Now practise what you just learned about <strong>Lesson Introduction</strong>. Open your editor, type the examples above by hand, then modify them — change values, rename variables, and observe what happens. Active experimentation is how code sticks.</div>
     </div>
-    <button class="next-btn" onclick="unlockNext(1)">
-      Next Phase → <span>→</span>
-    </button>
-    <p class="next-tip">Try the task first, then click to continue!</p>
+    <button class="unlock-btn" onclick="unlockNext(1)">Start Lesson ✓</button>
   </div>
-</div><div class="phase locked" id="phase2" data-phase="2">
+</div>
+<div class="phase locked" id="phase2">
   <div class="phase-header">
-    <div><div class="phase-num">Phase 2</div><div class="phase-title">Line Breaks and Horizontal Rules</div></div>
-    <div class="phase-check" id="check2"></div>
+    <div class="phase-num">Phase 2 of 6</div>
+    <div class="phase-title">Prerequisite Concepts</div>
+    <div class="phase-check" id="chk2"></div>
   </div>
   <div class="phase-body">
-    <div class="concept-box">
-      <div class="concept-label">💡 Concept</div>
-      <p>To force a new line WITHOUT starting a new paragraph, use <code>&lt;br&gt;</code> (break). This is useful for poems and addresses. To draw a horizontal line across the page, use <code>&lt;hr&gt;</code>. Both are <strong>empty elements</strong> — no closing tag. Also, if you want to show a space in a special way, use <code>&amp;nbsp;</code> (a non-breaking space — a special HTML code called an entity).</p>
-    </div>
-    <div class="code-wrap">
-  <div class="code-bar">
-    <span class="code-dot r"></span><span class="code-dot y"></span><span class="code-dot g"></span>
-    <span class="code-filename">index.html</span>
-  </div>
-  <div class="code-body"><pre>&lt;!DOCTYPE html&gt;
-&lt;html lang="en"&gt;
-  &lt;head&gt;&lt;title&gt;Breaks and Rules&lt;/title&gt;&lt;/head&gt;
-  &lt;body&gt;
-
-    &lt;h1&gt;My Address&lt;/h1&gt;
-    &lt;p&gt;
-      Techbase Academy&lt;br&gt;
-      123 Coding Street&lt;br&gt;
-      Ibadan, Oyo State&lt;br&gt;
-      Nigeria
-    &lt;/p&gt;
-
-    &lt;hr&gt;
-
-    &lt;h2&gt;A Short Poem&lt;/h2&gt;
-    &lt;p&gt;
-      Roses are red,&lt;br&gt;
-      Violets are blue,&lt;br&gt;
-      HTML is fun,&lt;br&gt;
-      And I love it too!
-    &lt;/p&gt;
-
-    &lt;hr&gt;
-
-    &lt;p&gt;Price:&amp;nbsp;&amp;nbsp;&amp;nbsp;₦5,000&lt;/p&gt;
-
-  &lt;/body&gt;
-&lt;/html&gt;</pre></div>
-</div>
+    <p class="v2-p">Before we start building with text, we need to make sure we know three tiny building blocks. If you've seen the previous lesson on Headings, you're already familiar with these. If not, here is a 30-second refresher.</p>
+<p class="v2-p"><strong>1. What is an HTML Tag?</strong> Think of a tag as a <strong>container instruction</strong>. It's a word wrapped in angle brackets <code>&lt; &gt;</code>. It tells the browser: <em>"Hey, I'm starting a piece of content here."</em></p>
+<p class="v2-p"><strong>2. What is an HTML Element?</strong> This is the <strong>container with the stuff inside</strong>. It has three parts:</p>
+<ul class="v2-ul"><li><strong>Opening Tag:</strong> <code>&lt;p&gt;</code></li><li><strong>Content:</strong> <code>This is my text.</code></li><li><strong>Closing Tag:</strong> <code>&lt;/p&gt;</code></li></ul>
+<p class="v2-p">All together: <code>&lt;p&gt;This is my text.&lt;/p&gt;</code></p>
+<p class="v2-p"><strong>3. Why do we need these tags?</strong> Computers are not smart like humans. We see a space between blocks of text and understand it's a new section. A browser only sees a long string of letters. <strong>Tags are the only way we can tell the browser what each piece of text is supposed to be.</strong></p>
+<hr class="v2-hr">
     <div class="task-box">
       <div class="task-label">✏️ Your Task</div>
-      <p>Write a short poem or address using <code>&lt;br&gt;</code> tags to control where lines break. Use <code>&lt;hr&gt;</code> between sections. Notice that <code>&lt;br&gt;</code> moves to a new line but stays INSIDE the same paragraph.</p>
+      <div class="task-body">Now practise what you just learned about <strong>Prerequisite Concepts</strong>. Open your editor, type the examples above by hand, then modify them — change values, rename variables, and observe what happens. Active experimentation is how code sticks.</div>
     </div>
-    <button class="next-btn" onclick="unlockNext(2)">
-      Build It! 🚀 <span>→</span>
+    <button class="unlock-btn" onclick="unlockNext(2)">Phase Complete — Unlock Next ✓</button>
+  </div>
+</div>
+<div class="phase locked" id="phase3">
+  <div class="phase-header">
+    <div class="phase-num">Phase 3 of 6</div>
+    <div class="phase-title">Conceptual Understanding: The Four Tools for Text Layout</div>
+    <div class="phase-check" id="chk3"></div>
+  </div>
+  <div class="phase-body">
+    <p class="v2-p">We are going to learn about <strong>four specific tools</strong> today. Let's understand <em>why</em> they exist before we <em>use</em> them.</p>
+<h3 class="v2-h3">1. The <code>&lt;p&gt;</code> Tag: The Paragraph Block</h3>
+<ul class="v2-ul"><li><strong>What it is:</strong> A block of related sentences.</li><li><strong>Real-world Analogy:</strong> A standard paragraph in a book or essay.</li><li><strong>What it does:</strong> It automatically puts a blank line (margin) above and below the text to separate it from other content. It also forces the text to start on a new line.</li></ul>
+<h3 class="v2-h3">2. The <code>&lt;br&gt;</code> Tag: The Line Break</h3>
+<ul class="v2-ul"><li><strong>What it is:</strong> A single "Enter" key press inside a paragraph.</li><li><strong>Real-world Analogy:</strong> Pressing <code>Shift + Enter</code> in Microsoft Word. It drops you to the next line but stays in the <em>same</em> paragraph.</li><li><strong>Important Note:</strong> This tag is <strong>empty</strong>. It doesn't have a closing tag. It just sits there like a marker: <code>&lt;br&gt;</code>.</li></ul>
+<h3 class="v2-h3">3. The <code>&lt;hr&gt;</code> Tag: The Thematic Break</h3>
+<ul class="v2-ul"><li><strong>What it is:</strong> A visual separator (usually a gray line).</li><li><strong>Real-world Analogy:</strong> The three asterisks <code><em> </em> *</code> you sometimes see in a novel when the scene changes or time passes.</li><li><strong>Important Note:</strong> This is also an <strong>empty</strong> tag. You write it as <code>&lt;hr&gt;</code>.</li></ul>
+<h3 class="v2-h3">4. The <code>&lt;pre&gt;</code> Tag: The Keeper of Formatting</h3>
+<ul class="v2-ul"><li><strong>What it is:</strong> Preformatted text.</li><li><strong>The Problem it Solves:</strong> Normally, the browser is a neat freak. It ignores your extra spaces and "Enter" presses. It collapses everything into one flowing paragraph.</li><li><strong>The Solution:</strong> The <code>&lt;pre&gt;</code> tag tells the browser: <em>"Stop cleaning up! Show this text <strong>exactly</strong> as I typed it."</em></li><li><strong>Visual Cue:</strong> Text inside <code>&lt;pre&gt;</code> looks different—it usually uses a font where every letter is the same width (like a typewriter font called <code>Courier</code>).</li></ul>
+<hr class="v2-hr">
+    <div class="task-box">
+      <div class="task-label">✏️ Your Task</div>
+      <div class="task-body">Now practise what you just learned about <strong>Conceptual Understanding: The Four Tools for Text Layout</strong>. Open your editor, type the examples above by hand, then modify them — change values, rename variables, and observe what happens. Active experimentation is how code sticks.</div>
+    </div>
+    <button class="unlock-btn" onclick="unlockNext(3)">Phase Complete — Unlock Next ✓</button>
+  </div>
+</div>
+<div class="phase locked" id="phase4">
+  <div class="phase-header">
+    <div class="phase-num">Phase 4 of 6</div>
+    <div class="phase-title">Simple Standalone Examples</div>
+    <div class="phase-check" id="chk4"></div>
+  </div>
+  <div class="phase-body">
+    <p class="v2-p">Let's look at each tool in isolation. For every example, imagine this is the code you put inside the <code>&lt;body&gt;</code> of your HTML page.</p>
+<h3 class="v2-h3">1. Basic Paragraphs (<code>&lt;p&gt;</code>)</h3>
+<p class="v2-p"><strong>Input (Code):</strong></p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;p&gt;Hello. My name is Alex. I am learning to build websites.&lt;/p&gt;
+&lt;p&gt;This is my second paragraph. Notice how it is separated from the first one.&lt;/p&gt;</code></pre></div></div>
+<p class="v2-p"><strong>Expected Output (How it looks in browser):</strong></p>
+<blockquote class="v2-bq"><p class="v2-p">Hello. My name is Alex. I am learning to build websites.</p>
+<p class="v2-p">This is my second paragraph. Notice how it is separated from the first one.</p></blockquote>
+<p class="v2-p"><strong>Explanation:</strong></p>
+<ul class="v2-ul"><li><strong>Line 1:</strong> <code>&lt;p&gt;</code> opens the container. <code>&lt;/p&gt;</code> closes it.</li><li><strong>Line 2:</strong> A new <code>&lt;p&gt;</code> tag forces a new block with space above it.</li></ul>
+<h3 class="v2-h3">2. The Browser Ignoring You (The Collapse Problem)</h3>
+<p class="v2-p"><strong>Input (Code):</strong></p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;p&gt;
+This is line one in the code.
+This is line two in the code.
+This is line three in the code.
+&lt;/p&gt;</code></pre></div></div>
+<p class="v2-p"><strong>Expected Output (How it looks in browser):</strong></p>
+<blockquote class="v2-bq"><p class="v2-p">This is line one in the code. This is line two in the code. This is line three in the code.</p></blockquote>
+<p class="v2-p"><strong>Why did this happen?</strong> Even though you pressed "Enter" in the code, the browser said: <em>"Nope, you didn't use a <code>&lt;br&gt;</code> tag, so I'm going to smoosh all these words into one long sentence."</em></p>
+<h3 class="v2-h3">3. Forcing a Break (<code>&lt;br&gt;</code>)</h3>
+<p class="v2-p">Let's fix the problem from Example 2.</p>
+<p class="v2-p"><strong>Input (Code):</strong></p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;p&gt;
+This is line one in the code.&lt;br&gt;
+This is line two in the code.&lt;br&gt;
+This is line three in the code.
+&lt;/p&gt;</code></pre></div></div>
+<p class="v2-p"><strong>Expected Output (How it looks in browser):</strong></p>
+<blockquote class="v2-bq"><p class="v2-p">This is line one in the code. This is line two in the code. This is line three in the code.</p></blockquote>
+<p class="v2-p"><strong>Line-by-Line Teaching:</strong></p>
+<ul class="v2-ul"><li><code>This is line one...</code> : We write the text.</li><li><code>&lt;br&gt;</code> : <strong>Break!</strong> Go to the next line immediately.</li><li><code>This is line two...</code> : This text now appears directly under line one.</li><li><code>&lt;br&gt;</code> : <strong>Break again!</strong></li><li><code>This is line three...</code> : Appears under line two.</li></ul>
+<p class="v2-p"><strong>Think about it:</strong> <em>What would happen if we put TWO <code>&lt;br&gt;</code> tags next to each other?</em> <code>&lt;br&gt;&lt;br&gt;</code> (You would get a blank line between the text!)</p>
+<h3 class="v2-h3">4. Drawing a Line (<code>&lt;hr&gt;</code>)</h3>
+<p class="v2-p"><strong>Input (Code):</strong></p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;p&gt;Section 1: Introduction to Cats.&lt;/p&gt;
+&lt;p&gt;Cats are fuzzy and independent.&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;Section 2: Introduction to Dogs.&lt;/p&gt;
+&lt;p&gt;Dogs are loyal and energetic.&lt;/p&gt;</code></pre></div></div>
+<p class="v2-p"><strong>Expected Output (How it looks in browser):</strong></p>
+<blockquote class="v2-bq"><p class="v2-p">Section 1: Introduction to Cats. Cats are fuzzy and independent. --- (This is a horizontal gray line across the page) Section 2: Introduction to Dogs. Dogs are loyal and energetic.</p></blockquote>
+<p class="v2-p"><strong>Why use <code>&lt;hr&gt;</code>?</strong> It tells the reader: <em>"We are changing the subject now."</em> It's much cleaner than typing <code>-------------</code> yourself, because the line will automatically stretch to fit any screen size.</p>
+<h3 class="v2-h3">5. The Poem Fix (<code>&lt;pre&gt;</code>)</h3>
+<p class="v2-p">Remember the "Poem Problem"? We want to write a poem with specific spaces.</p>
+<p class="v2-p"><strong>Input (Code - The Wrong Way):</strong></p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;p&gt;
+  My Bonnie lies over the ocean.
+  My Bonnie lies over the sea.
+&lt;/p&gt;</code></pre></div></div>
+<p class="v2-p"><strong>Output:</strong> <em>My Bonnie lies over the ocean. My Bonnie lies over the sea.</em> (Spaces and lines vanished.)</p>
+<p class="v2-p"><strong>Input (Code - The Correct Way with <code>&lt;pre&gt;</code>):</strong></p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;pre&gt;
+  My Bonnie lies over the ocean.
+  My Bonnie lies over the sea.
+  My Bonnie lies over the ocean.
+  Oh, bring back my Bonnie to me.
+&lt;/pre&gt;</code></pre></div></div>
+<p class="v2-p"><strong>Expected Output (How it looks in browser):</strong></p>
+<blockquote class="v2-bq"><p class="v2-p">My Bonnie lies over the ocean. My Bonnie lies over the sea. My Bonnie lies over the ocean. Oh, bring back my Bonnie to me.</p></blockquote>
+<p class="v2-p"><strong>Key Detail:</strong> Notice the spaces before "My" are preserved! And the font looks like a typewriter. That's <code>&lt;pre&gt;</code> doing its job.</p>
+<hr class="v2-hr">
+    <div class="task-box">
+      <div class="task-label">✏️ Your Task</div>
+      <div class="task-body">Now practise what you just learned about <strong>Simple Standalone Examples</strong>. Open your editor, type the examples above by hand, then modify them — change values, rename variables, and observe what happens. Active experimentation is how code sticks.</div>
+    </div>
+    <button class="unlock-btn" onclick="unlockNext(4)">Phase Complete — Unlock Next ✓</button>
+  </div>
+</div>
+<div class="phase locked" id="phase5">
+  <div class="phase-header">
+    <div class="phase-num">Phase 5 of 6</div>
+    <div class="phase-title">Guided Practice Exercises</div>
+    <div class="phase-check" id="chk5"></div>
+  </div>
+  <div class="phase-body">
+    <p class="v2-p"><strong>Scenario:</strong> You are creating a simple webpage for a school poetry club. You need to display the club rules and a short poem.</p>
+<p class="v2-p"><strong>Exercise 1: The Announcement Board</strong></p>
+<p class="v2-p"><strong>Objective:</strong> Use <code>&lt;p&gt;</code> and <code>&lt;hr&gt;</code> to structure information.</p>
+<p class="v2-p"><strong>Steps:</strong></p>
+<ol class="v2-ol"><li> Open your HTML editor (or use the TryIt Editor on W3Schools).</li><li> Create a main heading: <code>&lt;h2&gt;Poetry Club Rules&lt;/h2&gt;</code></li><li> Write a paragraph explaining the first rule: <code>No talking while someone is reciting.</code></li><li> Write a second paragraph explaining the second rule: <code>Always bring a pencil.</code></li><li> After the rules section, add a <code>&lt;hr&gt;</code>.</li><li> Add a new heading: <code>&lt;h3&gt;Poem of the Week&lt;/h3&gt;</code></li></ol>
+<p class="v2-p"><strong>Expected Code:</strong></p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;h2&gt;Poetry Club Rules&lt;/h2&gt;
+&lt;p&gt;Rule 1: No talking while someone is reciting. It disturbs the rhythm.&lt;/p&gt;
+&lt;p&gt;Rule 2: Always bring a pencil. You might want to write down a beautiful line.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3&gt;Poem of the Week&lt;/h3&gt;</code></pre></div></div>
+<p class="v2-p"><strong>Expected Output:</strong> You should see the heading "Poetry Club Rules", two separated paragraphs, a solid line across the screen, and then "Poem of the Week".</p>
+<p class="v2-p"><strong>Self-Check Question:</strong> <em>Did you remember to close the <code>&lt;p&gt;</code> tags?</em> (If you forget <code>&lt;/p&gt;</code>, the browser might think the rest of the page is part of that paragraph!)</p>
+<hr class="v2-hr">
+<p class="v2-p"><strong>Exercise 2: Formatting a Quote</strong></p>
+<p class="v2-p"><strong>Scenario:</strong> You want to quote a famous speech exactly as it was said, with specific line breaks for dramatic effect.</p>
+<p class="v2-p"><strong>Quote Text:</strong> "I have a dream that one day this nation will rise up."</p>
+<p class="v2-p"><strong>Objective:</strong> Use <code>&lt;p&gt;</code> and <code>&lt;br&gt;</code> to control the flow.</p>
+<p class="v2-p"><strong>Steps:</strong></p>
+<ol class="v2-ol"><li> Wrap the entire quote in a <code>&lt;p&gt;</code> tag.</li><li> After "I have a dream", insert <code>&lt;br&gt;</code>.</li><li> After "that one day", insert <code>&lt;br&gt;</code>.</li></ol>
+<p class="v2-p"><strong>Expected Code:</strong></p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;p&gt;I have a dream&lt;br&gt;
+that one day&lt;br&gt;
+this nation will rise up.&lt;/p&gt;</code></pre></div></div>
+<p class="v2-p"><strong>Why not three separate <code>&lt;p&gt;</code> tags?</strong> If you used three <code>&lt;p&gt;</code> tags:</p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;p&gt;I have a dream&lt;/p&gt;
+&lt;p&gt;that one day&lt;/p&gt;
+&lt;p&gt;this nation will rise up.&lt;/p&gt;</code></pre></div></div>
+<p class="v2-p">You would get <strong>big gaps</strong> between the lines, like separate blocks. That ruins the flow of the speech. <code>&lt;br&gt;</code> keeps the lines close together, like lines in a poem.</p>
+<hr class="v2-hr">
+    <div class="task-box">
+      <div class="task-label">✏️ Your Task</div>
+      <div class="task-body">Now practise what you just learned about <strong>Guided Practice Exercises</strong>. Open your editor, type the examples above by hand, then modify them — change values, rename variables, and observe what happens. Active experimentation is how code sticks.</div>
+    </div>
+    <button class="unlock-btn" onclick="unlockNext(5)">Phase Complete — Unlock Next ✓</button>
+  </div>
+</div>
+<div class="phase locked" id="phase6">
+  <div class="phase-header">
+    <div class="phase-num">Phase 6 of 6</div>
+    <div class="phase-title">Common Beginner Mistakes (and How to Fix Them)</div>
+    <div class="phase-check" id="chk6"></div>
+  </div>
+  <div class="phase-body">
+    <p class="v2-p"><strong>Mistake #1: The Missing Semicolon Illusion</strong> <em>The Wrong Code:</em> <code>&lt;p&gt;Hello World&lt;p&gt;</code> <em>The Problem:</em> You forgot the slash <code>/</code> in the closing tag. <em>The Result:</em> The browser thinks you are starting a <strong>new</strong> paragraph <em>inside</em> the first one, which can create weird, unpredictable spacing. <em>The Fix:</em> Always check for the <code>/</code>. <code>&lt;p&gt;Hello World&lt;/p&gt;</code></p>
+<p class="v2-p"><strong>Mistake #2: Using <code>&lt;br&gt;</code> for Big Spaces</strong> <em>The Wrong Code:</em> <code>&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;</code> <em>The Problem:</em> You want to push content down the page, so you spam line breaks. <em>Why it's bad:</em> It works on <em>your</em> screen, but on a mobile phone screen, the spacing will look completely different and messy. <em>The Fix:</em> Use <strong>Margins</strong> (we will learn this in CSS later). For now, just use one <code>&lt;br&gt;</code> if you need one line break inside text.</p>
+<p class="v2-p"><strong>Mistake #3: Thinking <code>&lt;hr&gt;</code> Needs a Closing Tag</strong> <em>The Wrong Code:</em> <code>&lt;hr&gt;Content&lt;/hr&gt;</code> <em>The Problem:</em> <code>&lt;hr&gt;</code> is an <strong>empty element</strong>. It doesn't wrap around content; it just stands alone. <em>The Fix:</em> Use it by itself. <code>&lt;p&gt;Top Section&lt;/p&gt; &lt;hr&gt; &lt;p&gt;Bottom Section&lt;/p&gt;</code></p>
+<p class="v2-p"><strong>Mistake #4: Forgetting <code>&lt;pre&gt;</code> Changes the Font</strong> <em>The Problem:</em> Beginners use <code>&lt;pre&gt;</code> to fix spacing but then panic because the text looks like old computer code. <em>Why it happens:</em> That is the <strong>default style</strong> of <code>&lt;pre&gt;</code>. <em>The Fix:</em> Understand that <code>&lt;pre&gt;</code> means "Preserve Formatting." For now, that includes a special font. It's not broken; it's working as intended.</p>
+<hr class="v2-hr">
+    <div class="task-box">
+      <div class="task-label">✏️ Your Task</div>
+      <div class="task-body">Now practise what you just learned about <strong>Common Beginner Mistakes (and How to Fix Them)</strong>. Open your editor, type the examples above by hand, then modify them — change values, rename variables, and observe what happens. Active experimentation is how code sticks.</div>
+    </div>
+    <button class="unlock-btn" onclick="unlockNext(6)">Phase Complete — Unlock Next ✓</button>
+  </div>
+</div>
+<div class="build-box" id="build-it">
+  <div class="build-label">🏗️ Build It</div>
+  <div class="build-name">&quot;A Short Poem&quot; Webpage</div>
+  <div class="build-desc"><h1>A Short Poem</h1></div>
+  <div class="v2-code-wrap">
+    <div class="v2-code-bar">
+      <span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span>
+      <span class="v2-code-lang">starter.html</span>
+    </div>
+    <div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;body&gt;
+
+&lt;h1&gt;A Short Poem&lt;/h1&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;</code></pre></div>
+  </div>
+  <div style="display:flex;gap:.8rem;flex-wrap:wrap;margin-top:1.2rem">
+    <button class="unlock-btn" onclick="downloadStarter(`<!DOCTYPE html>
+<html>
+<body>
+
+<h1>A Short Poem</h1>
+
+</body>
+</html>`)"
+      style="background:#10b981;box-shadow:0 4px 14px rgba(16,185,129,.3)">
+      ⬇ Download starter.html
     </button>
-    <p class="next-tip">Try the task first, then click to continue!</p>
+    <button class="unlock-btn" onclick="showGithub()"
+      style="background:#0f172a;box-shadow:none">
+      🐙 Push to GitHub →
+    </button>
   </div>
 </div>
-
-<div class="project-box" id="build-it" style="display:none">
-  <div class="project-label">🏗️ Build It!</div>
-  <div class="project-name">My Story Page</div>
-  <p class="project-desc">Write a 3-paragraph story using proper paragraphs, line breaks, and horizontal rules to separate sections.</p>
-  <div class="code-wrap">
-    <div class="code-bar">
-      <span class="code-dot r"></span><span class="code-dot y"></span><span class="code-dot g"></span>
-      <span class="code-filename">starter.html — copy this into a new file!</span>
-    </div>
-    <div class="code-body"><pre id="starter-code">&lt;!DOCTYPE html&gt;
-&lt;html lang="en"&gt;
-  &lt;head&gt;
-    &lt;title&gt;My Story&lt;/title&gt;
-  &lt;/head&gt;
-  &lt;body&gt;
-
-    &lt;h1&gt;The Day I Learned to Code&lt;/h1&gt;
-
-    &lt;h2&gt;How It Started&lt;/h2&gt;
-    &lt;p&gt;
-      Write your first paragraph here. Tell the reader how your
-      coding journey began. Use this whole paragraph to set the scene.
-    &lt;/p&gt;
-
-    &lt;hr&gt;
-
-    &lt;h2&gt;The Challenge&lt;/h2&gt;
-    &lt;p&gt;
-      Write what was difficult at first.&lt;br&gt;
-      You can use line breaks inside paragraphs&lt;br&gt;
-      to control exactly where each line ends —&lt;br&gt;
-      great for dramatic effect in a story!
-    &lt;/p&gt;
-
-    &lt;hr&gt;
-
-    &lt;h2&gt;What I Discovered&lt;/h2&gt;
-    &lt;p&gt;
-      Write your final paragraph here. What did you learn?
-      How do you feel about coding now?
-    &lt;/p&gt;
-
-    &lt;hr&gt;
-    &lt;p&gt;Written by [Your Name] | Techbase HTML Course — Lesson 06&lt;/p&gt;
-
-  &lt;/body&gt;
-&lt;/html&gt;</pre></div>
+<div class="gh-acc" id="gh-steps" style="display:none">
+  <div class="gh-acc-head" onclick="toggleGh(this)">
+    🐙 Push Your Project to GitHub Pages &nbsp;<span>▼</span>
   </div>
-  <button class="next-btn" onclick="downloadStarter()" style="margin-right:.75rem">
-    ⬇️ Download starter.html
-  </button>
-  <button class="next-btn" onclick="showGithub()" style="background:#10b981;box-shadow:0 4px 12px rgba(16,185,129,.3)">
-    Show GitHub Steps →
-  </button>
-  <script>
-  const __code = `<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <title>My Story</title>
-  </head>
-  <body>
-
-    <h1>The Day I Learned to Code</h1>
-
-    <h2>How It Started</h2>
-    <p>
-      Write your first paragraph here. Tell the reader how your
-      coding journey began. Use this whole paragraph to set the scene.
-    </p>
-
-    <hr>
-
-    <h2>The Challenge</h2>
-    <p>
-      Write what was difficult at first.<br>
-      You can use line breaks inside paragraphs<br>
-      to control exactly where each line ends —<br>
-      great for dramatic effect in a story!
-    </p>
-
-    <hr>
-
-    <h2>What I Discovered</h2>
-    <p>
-      Write your final paragraph here. What did you learn?
-      How do you feel about coding now?
-    </p>
-
-    <hr>
-    <p>Written by [Your Name] | Techbase HTML Course — Lesson 06</p>
-
-  </body>
-</html>`;
-  function downloadStarter(){
-    const a=document.createElement('a');
-    a.href='data:text/html;charset=utf-8,'+encodeURIComponent(__code);
-    a.download='starter.html'; a.click();
-  }
-  </script>
-</div>
-
-
-
-<div class="github-acc" id="github-steps" style="display:none">
-  <div class="github-acc-head" onclick="this.nextElementSibling.classList.toggle('open')">
-    🐙 GitHub Setup — Push your project online &nbsp;<span>▼</span>
-  </div>
-  <div class="github-acc-body">
-    <div class="github-step"><div class="github-step-n">1</div><p>Go to <strong>github.com</strong> and sign in. Click the green <strong>New</strong> button to create a new repository. Name it <code>html-lesson-06-html_paragraphs</code>.</p></div>
-    <div class="github-step"><div class="github-step-n">2</div><p>Leave it <strong>Public</strong> and tick <strong>Add a README file</strong>. Click <strong>Create repository</strong>.</p></div>
-    <div class="github-step"><div class="github-step-n">3</div><p>Click <strong>Add file → Upload files</strong>. Drag your <code>starter.html</code> (and rename it <code>index.html</code> first!) into the upload box.</p></div>
-    <div class="github-step"><div class="github-step-n">4</div><p>Scroll down, add a commit message like <em>"Add lesson 06 project"</em> and click <strong>Commit changes</strong>.</p></div>
-    <div class="github-step"><div class="github-step-n">5</div><p>Go to <strong>Settings → Pages</strong>. Under <em>Branch</em>, select <strong>main</strong> and click <strong>Save</strong>. Your page will be live at <code>https://YOUR-USERNAME.github.io/html-lesson-06-html_paragraphs/</code> in about 1 minute! 🎉</p></div>
-    <button class="next-btn" onclick="showEnd()" style="margin-top:.5rem">I'm done! Finish session ✅</button>
+  <div class="gh-acc-body">
+    <div class="gh-step"><div class="gh-step-n">1</div>
+    <p>Go to <strong>github.com</strong> → click <strong>New repository</strong> → name it <code>html-lesson-06-a-short-poem-webpage</code>.</p></div>
+    <div class="gh-step"><div class="gh-step-n">2</div>
+    <p>Set it to <strong>Public</strong>, tick <strong>Add a README</strong>, then click <strong>Create repository</strong>.</p></div>
+    <div class="gh-step"><div class="gh-step-n">3</div>
+    <p>Click <strong>Add file → Upload files</strong>. Upload your <code>starter.html</code> — rename it to <code>index.html</code> before uploading.</p></div>
+    <div class="gh-step"><div class="gh-step-n">4</div>
+    <p>Commit message: <em>"Add HTML lesson 06 project"</em> → click <strong>Commit changes</strong>.</p></div>
+    <div class="gh-step"><div class="gh-step-n">5</div>
+    <p>Go to <strong>Settings → Pages</strong> → branch <strong>main</strong> → <strong>Save</strong>. Your project goes live at <code>https://YOUR-NAME.github.io/html-lesson-06-a-short-poem-webpage/</code> in about 1 minute! 🎉</p></div>
+    <button class="unlock-btn" onclick="showEnd()" style="margin-top:.5rem">I've pushed to GitHub — Finish Session ✅</button>
   </div>
 </div>
-
 <div class="session-end" id="session-end">
-  <h2>🎉 Great work! Lesson 06 complete!</h2>
-  <p style="margin-bottom:.8rem;font-size:.9rem;opacity:.9">Today you learned:</p>
-  <ul><li>✅ The Paragraph Element</li><li>✅ Line Breaks and Horizontal Rules</li></ul>
-  <div class="lesson-nav" style="margin-top:1.5rem;border-color:rgba(255,255,255,.2)">
-    <a href="lesson_05.html" class="ln-btn">← Lesson 05</a>
-    <a href="lesson_07.html" class="ln-btn primary">Lesson 07 →</a>
-  </div>
+  <h2>🎉 Lesson 06 complete!</h2>
+  <p style="margin-bottom:.8rem;font-size:.9rem;opacity:.9">You covered:</p>
+  <ul><li>✅ Lesson Introduction</li><li>✅ Prerequisite Concepts</li><li>✅ Conceptual Understanding: The Four Tools for Text Layout</li><li>✅ Simple Standalone Examples</li><li>✅ Guided Practice Exercises</li><li>✅ Common Beginner Mistakes (and How to Fix Them)</li></ul>
+  <div class="lesson-nav"><a href="lesson_05.html" class="ln-btn">← Lesson 05</a><a href="lesson_07.html" class="ln-btn primary">Lesson 07 →</a></div>
 </div>
-
 </main>
 
-<!-- FOOTER -->
 <footer class="lesson-footer">
-  <p>Techbase Code Coach &nbsp;·&nbsp; HTML Course Lesson 06
-     &nbsp;·&nbsp; © 2025 Techbase Consultant Services, Ibadan</p>
+  Techbase Code Coach · HTML Course · Lesson 06 · © 2025 Techbase Consultant Services, Ibadan
 </footer>
-
 <script>
-const TOTAL=2, KEY='techbase_html_06_phase';
+const TOTAL=6,KEY='techbase_html_l06';
 let current=parseInt(localStorage.getItem(KEY)||'1');
-
 function init(){
-  for(let i=1;i<=current;i++) if(i>1) unlockPhase(i,false);
+  for(let i=2;i<=current;i++) unlockPhase(i,false);
   updateBar();
 }
-
 function unlockNext(n){
-  document.getElementById('check'+n).classList.add('done');
-  document.getElementById('check'+n).textContent='✓';
-  localStorage.setItem(KEY,n+1);
-  current=n+1;
+  const chk=document.getElementById('chk'+n);
+  if(chk){chk.classList.add('done');chk.textContent='✓';}
+  localStorage.setItem(KEY,n+1); current=n+1;
   if(n===TOTAL){
     document.getElementById('build-it').style.display='block';
-    const cap=document.getElementById('capstone');
-    if(cap) cap.style.display='block';
     updateBar(100);
     setTimeout(()=>document.getElementById('build-it').scrollIntoView({behavior:'smooth'}),200);
-  } else {
-    unlockPhase(n+1,true);
-    updateBar();
+  }else{
+    unlockPhase(n+1,true); updateBar();
   }
 }
-
 function unlockPhase(n,scroll){
   const el=document.getElementById('phase'+n);
-  if(el){ el.classList.remove('locked'); if(scroll) setTimeout(()=>el.scrollIntoView({behavior:'smooth',block:'start'}),150); }
+  if(el){el.classList.remove('locked');if(scroll)setTimeout(()=>el.scrollIntoView({behavior:'smooth',block:'start'}),150);}
 }
-
 function updateBar(pct){
-  const p=pct||Math.round((current-1)/TOTAL*95);
+  const p=pct!==undefined?pct:Math.round((current-1)/TOTAL*95);
   document.getElementById('pbar').style.width=p+'%';
 }
-
 function showGithub(){
-  const g=document.getElementById('github-steps');
-  if(g){ g.style.display='block'; setTimeout(()=>g.scrollIntoView({behavior:'smooth'}),150); }
+  const g=document.getElementById('gh-steps');
+  if(g){g.style.display='block';setTimeout(()=>g.scrollIntoView({behavior:'smooth'}),150);}
 }
-
 function showEnd(){
   const e=document.getElementById('session-end');
-  if(e){ e.classList.add('visible'); setTimeout(()=>e.scrollIntoView({behavior:'smooth'}),150); }
+  if(e){e.classList.add('visible');setTimeout(()=>e.scrollIntoView({behavior:'smooth'}),150);}
 }
-
+function toggleGh(el){el.nextElementSibling.classList.toggle('open');}
+function downloadStarter(code){
+  const a=document.createElement('a');
+  a.href='data:text/html;charset=utf-8,'+encodeURIComponent(code);
+  a.download='starter.html';a.click();
+}
 init();
 </script>
-
 </body>
 </html>

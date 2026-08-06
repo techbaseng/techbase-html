@@ -2,531 +2,867 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Lesson 21: HTML Buttons — Techbase HTML Course</title>
-<meta name="description" content="Create clickable buttons that trigger actions using the button element and onclick">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Lesson 21: HTML Iframes — Embedding Web Pages Inside Web Pages — Techbase HTML</title>
+<meta name="description" content="HTML Iframes — Embedding Web Pages Inside Web Pages">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-:root { 
-  --accent:#ea4f21;--accent-pale:#fff3ef;--accent-dark:#c23d15;
-  --accent-border:rgba(234,79,33,.3);--accent-shadow:rgba(234,79,33,.28);
-  --hero-bg:linear-gradient(160deg,#fff3ef 0%,#f8fafc 55%,#fef2e9 100%);
-  --s2:#f1f5f9;
- }
 :root{
+  --acc:#e34c26;--acc-d:#c0391a;--acc-pale:#fff5f2;
+  --acc-b:rgba(227,76,38,.25);--acc-sh:rgba(227,76,38,.25);
   --bg:#f8fafc;--surface:#fff;--border:#e2e8f0;--border2:#cbd5e1;
   --text:#0f172a;--t2:#334155;--muted:#64748b;
   --D:'Space Grotesk',sans-serif;--B:'Plus Jakarta Sans',sans-serif;--M:'JetBrains Mono',monospace;
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased}
-body{background:var(--bg);color:var(--text);font-family:var(--B);font-size:16px;line-height:1.7;overflow-x:hidden}
+body{background:var(--bg);color:var(--text);font-family:var(--B);font-size:16px;line-height:1.75;overflow-x:hidden}
+
 /* NAV */
-.l-nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(255,255,255,.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);height:58px;display:flex;align-items:center;padding:0 1.5rem;gap:1rem;justify-content:space-between}
-.l-nav-logo{font-family:var(--D);font-weight:700;font-size:.88rem;color:var(--text);text-decoration:none}
-.l-nav-logo em{font-style:normal}
+.l-nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(255,255,255,.95);
+  backdrop-filter:blur(12px);border-bottom:1px solid var(--border);height:58px;
+  display:flex;align-items:center;padding:0 1.5rem;gap:1rem;justify-content:space-between}
+.l-nav-logo{font-family:var(--D);font-weight:700;font-size:.9rem;color:var(--text);text-decoration:none}
 .l-nav-back{font-size:.8rem;color:var(--muted);text-decoration:none;font-weight:500;display:flex;align-items:center;gap:.3rem;transition:color .2s}
-.l-nav-back:hover{color:var(--accent)}
-.l-nav-lesson{font-family:var(--M);font-size:.68rem;color:var(--muted)}
-/* PROGRESS BAR */
+.l-nav-back:hover{color:var(--acc)}
+.l-nav-label{font-family:var(--M);font-size:.68rem;color:var(--muted)}
+
+/* PROGRESS */
 .progress-wrap{position:fixed;top:58px;left:0;right:0;z-index:199;height:4px;background:var(--border)}
-.progress-bar{height:100%;background:var(--accent);transition:width .4s ease;width:0%}
+.progress-bar{height:100%;background:var(--acc);transition:width .4s ease;width:0%}
+
 /* HERO */
-.l-hero{padding:88px 1.5rem 2rem;background:var(--hero-bg);border-bottom:1px solid var(--border)}
-.l-hero-inner{max-width:820px;margin:0 auto}
-.l-badge{display:inline-flex;align-items:center;gap:.4rem;border-radius:100px;padding:.2rem .8rem;font-family:var(--M);font-size:.62rem;letter-spacing:.08em;text-transform:uppercase;font-weight:600;border:1px solid;color:var(--accent);background:var(--accent-pale);border-color:var(--accent-border);margin-bottom:.8rem}
-.l-hero h1{font-family:var(--D);font-weight:700;font-size:clamp(1.6rem,4vw,2.4rem);letter-spacing:-.025em;line-height:1.15;margin-bottom:.5rem}
-.l-hero-tag{font-size:.95rem;color:var(--muted);margin-bottom:1.2rem}
-.l-hero-build{background:var(--surface);border:1.5px solid var(--border);border-radius:10px;padding:.9rem 1.2rem;display:flex;align-items:center;gap:.7rem;font-size:.88rem;max-width:520px}
-.l-hero-build strong{color:var(--accent)}
+.l-hero{padding:80px 1.5rem 2rem;background:linear-gradient(160deg,#fff5f2 0%,#f8fafc 55%,#ffe8e0 100%);border-bottom:1px solid var(--border)}
+.l-hero-inner{max-width:860px;margin:0 auto}
+.l-badge{display:inline-flex;align-items:center;gap:.4rem;border-radius:100px;padding:.2rem .85rem;
+  font-family:var(--M);font-size:.62rem;letter-spacing:.08em;text-transform:uppercase;font-weight:600;
+  color:var(--acc);background:var(--acc-pale);border:1px solid var(--acc-b);margin-bottom:.8rem}
+.l-hero h1{font-family:var(--D);font-weight:700;font-size:clamp(1.5rem,4vw,2.3rem);
+  letter-spacing:-.02em;line-height:1.15;margin-bottom:.5rem}
+.l-hero-sub{font-size:.95rem;color:var(--muted);margin-bottom:1rem}
+
 /* WELCOME BOX */
-.welcome-box{background:linear-gradient(135deg,var(--accent),var(--accent-dark));color:#fff;border-radius:16px;padding:1.5rem 1.8rem;max-width:820px;margin:2rem auto 0}
-.welcome-box h2{font-family:var(--D);font-weight:700;font-size:1.1rem;margin-bottom:.6rem}
-.welcome-box p{font-size:.9rem;line-height:1.75;opacity:.92}
-.welcome-meta{display:flex;gap:1.5rem;margin-top:1rem;flex-wrap:wrap}
-.welcome-meta span{background:rgba(255,255,255,.15);border-radius:6px;padding:.25rem .8rem;font-family:var(--M);font-size:.7rem;font-weight:500}
-/* MAIN CONTENT */
-main{max-width:820px;margin:0 auto;padding:2rem 1.5rem 5rem}
+.welcome-box{background:linear-gradient(135deg,var(--acc),var(--acc-d));color:#fff;
+  border-radius:16px;padding:1.5rem 1.8rem;max-width:860px;margin:1.5rem auto 0}
+.welcome-box h2{font-family:var(--D);font-weight:700;font-size:1.05rem;margin-bottom:.6rem}
+.welcome-box p,.welcome-box li{font-size:.9rem;line-height:1.8;opacity:.93}
+.welcome-box ul{margin-left:1.2rem;margin-top:.5rem}
+.welcome-meta{display:flex;gap:1rem;margin-top:1rem;flex-wrap:wrap}
+.welcome-meta span{background:rgba(255,255,255,.18);border-radius:6px;padding:.2rem .75rem;
+  font-family:var(--M);font-size:.68rem;font-weight:500}
+
 /* PHASE */
-.phase{background:var(--surface);border:1.5px solid var(--border);border-radius:16px;margin-bottom:1.5rem;overflow:hidden;transition:opacity .3s,transform .3s}
-.phase.locked{opacity:.4;pointer-events:none;filter:blur(1px)}
-.phase-header{padding:1rem 1.4rem;background:var(--s2,#f1f5f9);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;gap:1rem}
-.phase-num{font-family:var(--M);font-size:.7rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}
-.phase-title{font-family:var(--D);font-weight:700;font-size:1rem;color:var(--text)}
-.phase-check{width:24px;height:24px;border-radius:50%;background:var(--border);display:flex;align-items:center;justify-content:center;font-size:.75rem;flex-shrink:0;transition:background .3s}
+.phase{background:var(--surface);border:1.5px solid var(--border);border-radius:16px;
+  margin-bottom:1.5rem;overflow:hidden;transition:opacity .3s,transform .3s,filter .3s}
+.phase.locked{opacity:.35;pointer-events:none;filter:blur(1.5px)}
+.phase-header{padding:1rem 1.4rem;background:#fff8f5;
+  border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;gap:1rem;cursor:default}
+.phase-num{font-family:var(--M);font-size:.7rem;font-weight:600;letter-spacing:.08em;
+  text-transform:uppercase;color:var(--acc)}
+.phase-title{font-family:var(--D);font-weight:700;font-size:.95rem;color:var(--text);
+  flex:1;margin:0 .8rem}
+.phase-check{width:26px;height:26px;border-radius:50%;background:var(--border);
+  display:flex;align-items:center;justify-content:center;font-size:.8rem;flex-shrink:0;
+  transition:background .3s,color .3s}
 .phase-check.done{background:#10b981;color:#fff}
-.phase-body{padding:1.4rem}
-/* CONCEPT BOX */
-.concept-box{background:#f0f9ff;border-left:4px solid #0284c7;border-radius:0 10px 10px 0;padding:1rem 1.2rem;margin-bottom:1.2rem}
-.concept-label{font-family:var(--M);font-size:.65rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#0284c7;margin-bottom:.4rem}
-.concept-box p{font-size:.92rem;color:#0c4a6e;line-height:1.75}
-/* CODE BLOCK */
-.code-wrap{margin:1.2rem 0;border-radius:12px;overflow:hidden;border:1px solid #1e293b}
-.code-bar{background:#1e293b;padding:.6rem 1rem;display:flex;align-items:center;gap:.4rem}
-.code-dot{width:8px;height:8px;border-radius:50%}
-.code-dot.r{background:#ff5f57}.code-dot.y{background:#febc2e}.code-dot.g{background:#28c840}
-.code-filename{margin-left:.5rem;font-family:var(--M);font-size:.65rem;color:#64748b}
-.code-body{background:#0f172a;padding:1.2rem 1.4rem;overflow-x:auto}
-.code-body pre{font-family:var(--M);font-size:.78rem;line-height:1.9;color:#e2e8f0;margin:0;white-space:pre}
-.code-body pre .cm{color:#64748b} /* comment */
-.code-body pre .tg{color:#38bdf8} /* tag */
-.code-body pre .at{color:#c084fc} /* attribute */
-.code-body pre .vl{color:#86efac} /* value */
-.code-body pre .tx{color:#e2e8f0} /* text */
+.phase-body{padding:1.6rem 1.8rem}
+
+/* RICH CONTENT STYLES */
+.v2-p{margin-bottom:1rem;font-size:.95rem;color:var(--t2);line-height:1.85}
+.v2-h3{font-family:var(--D);font-weight:700;font-size:1.05rem;color:var(--text);
+  margin:1.6rem 0 .5rem;padding-top:.2rem;border-top:2px solid var(--acc-pale)}
+.v2-h4{font-family:var(--D);font-weight:600;font-size:.95rem;color:var(--t2);margin:1.1rem 0 .4rem}
+.v2-h5,.v2-h6{font-family:var(--D);font-weight:600;font-size:.9rem;color:var(--muted);margin:.8rem 0 .3rem}
+.v2-ul,.v2-ol{margin:.6rem 0 1rem 1.4rem;font-size:.93rem;color:var(--t2);line-height:1.9}
+.v2-ul li,.v2-ol li{margin-bottom:.3rem}
+.v2-bq{border-left:4px solid var(--acc);background:var(--acc-pale);border-radius:0 10px 10px 0;
+  padding:.9rem 1.2rem;margin:1rem 0;font-size:.92rem;color:#7b1c06;font-style:italic}
+.v2-bq p{margin:0;color:inherit}
+.v2-bq strong{font-style:normal}
+.v2-hr{border:none;border-top:1px solid var(--border);margin:1.2rem 0}
+.v2-table-wrap{overflow-x:auto;margin:1rem 0}
+.v2-table{width:100%;border-collapse:collapse;font-size:.87rem}
+.v2-table th{background:var(--acc-pale);color:#7b1c06;font-family:var(--D);
+  font-weight:700;padding:9px 12px;text-align:left;border:1px solid var(--acc-b)}
+.v2-table td{padding:8px 12px;border:1px solid var(--border);color:var(--t2);vertical-align:top}
+.v2-table tr:nth-child(even) td{background:#f8fafc}
+.v2-table code{background:var(--acc-pale);color:var(--acc);border-radius:4px;
+  padding:1px 5px;font-family:var(--M);font-size:.8em}
+.phase-body code{background:var(--acc-pale);color:var(--acc-d);border-radius:4px;
+  padding:1px 6px;font-family:var(--M);font-size:.82em}
+.phase-body a{color:var(--acc);text-decoration:underline;text-underline-offset:2px}
+.phase-body strong{color:var(--text)}
+
+/* CODE BLOCKS */
+.v2-code-wrap{margin:1.2rem 0;border-radius:12px;overflow:hidden;border:1px solid #1e293b;box-shadow:0 4px 16px rgba(0,0,0,.15)}
+.v2-code-bar{background:#1e293b;padding:.55rem 1rem;display:flex;align-items:center;gap:.4rem}
+.v2-dot{width:10px;height:10px;border-radius:50%}
+.v2-dot.r{background:#ff5f57}.v2-dot.y{background:#febc2e}.v2-dot.g{background:#28c840}
+.v2-code-lang{margin-left:.6rem;font-family:var(--M);font-size:.65rem;color:#64748b;text-transform:uppercase;letter-spacing:.08em}
+.v2-code-body{background:#0f172a;padding:1.3rem 1.5rem;overflow-x:auto}
+.v2-code-body pre{margin:0}
+.v2-code-body code{font-family:var(--M);font-size:.8rem;line-height:1.9;color:#e2e8f0;
+  white-space:pre;background:transparent;padding:0;border-radius:0}
+
 /* TASK BOX */
-.task-box{background:#fffbeb;border:1.5px dashed #d97706;border-radius:12px;padding:1rem 1.2rem;margin:1.2rem 0}
-.task-label{font-family:var(--M);font-size:.65rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#b45309;margin-bottom:.4rem}
-.task-box p{font-size:.92rem;color:#78350f;line-height:1.75}
-.task-box code{background:rgba(180,83,9,.1);border-radius:4px;padding:.1rem .4rem;font-family:var(--M);font-size:.82em}
-/* NEXT BUTTON */
-.next-btn{display:inline-flex;align-items:center;gap:.5rem;background:var(--accent);color:#fff;font-family:var(--D);font-weight:700;font-size:.88rem;padding:.75rem 1.5rem;border-radius:10px;border:none;cursor:pointer;transition:transform .2s,box-shadow .2s;box-shadow:0 4px 12px var(--accent-shadow);margin-top:1rem}
-.next-btn:hover{transform:translateY(-2px);box-shadow:0 8px 20px var(--accent-shadow)}
-.next-btn:disabled{opacity:.5;cursor:not-allowed;transform:none}
-.next-tip{font-family:var(--M);font-size:.72rem;color:var(--muted);margin-top:.6rem}
-/* PROJECT BOX */
-.project-box{background:#f0fdf4;border:2px solid #16a34a;border-radius:16px;padding:1.5rem;margin:2rem 0}
-.project-label{font-family:var(--M);font-size:.65rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#15803d;margin-bottom:.4rem}
-.project-name{font-family:var(--D);font-weight:700;font-size:1.1rem;color:#14532d;margin-bottom:.5rem}
-.project-desc{font-size:.9rem;color:#166534;margin-bottom:1.2rem;line-height:1.7}
-/* CAPSTONE BOX */
-.capstone-box{background:linear-gradient(135deg,#1e1b4b,#312e81);border-radius:16px;padding:1.5rem;margin:2rem 0;color:#fff}
-.capstone-label{font-family:var(--M);font-size:.65rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#a5b4fc;margin-bottom:.4rem}
-.capstone-name{font-family:var(--D);font-weight:700;font-size:1.2rem;margin-bottom:.5rem}
-.capstone-desc{font-size:.9rem;color:rgba(255,255,255,.8);margin-bottom:1.2rem;line-height:1.7}
-/* FILE TABS */
-.file-tabs{display:flex;gap:.5rem;margin-bottom:0;flex-wrap:wrap}
-.file-tab{font-family:var(--M);font-size:.72rem;padding:.35rem .8rem;background:#1e293b;color:#94a3b8;border-radius:6px 6px 0 0;cursor:pointer;border:1px solid #334155;border-bottom:none;transition:background .15s}
-.file-tab.active{background:#0f172a;color:#e2e8f0}
-.file-content{display:none}.file-content.active{display:block}
+.task-box{background:#fff0ec;border:2px dashed #e34c26;
+  border-radius:12px;padding:1rem 1.3rem;margin:1.4rem 0}
+.task-label{font-family:var(--M);font-size:.65rem;font-weight:700;letter-spacing:.1em;
+  text-transform:uppercase;color:#7b1c06;margin-bottom:.5rem;display:flex;align-items:center;gap:.4rem}
+.task-box p,.task-body{font-size:.92rem;color:#7b1c06;line-height:1.8}
+.task-box code{background:rgba(0,0,0,.08);border-radius:4px;padding:1px 6px;
+  font-family:var(--M);font-size:.82em}
+
+/* UNLOCK BUTTON */
+.unlock-btn{display:inline-flex;align-items:center;gap:.5rem;background:var(--acc);
+  color:#fff;font-family:var(--D);font-weight:700;font-size:.88rem;
+  padding:.75rem 1.6rem;border-radius:10px;border:none;cursor:pointer;
+  transition:transform .2s,box-shadow .2s;box-shadow:0 4px 14px var(--acc-sh);margin-top:1.2rem}
+.unlock-btn:hover{transform:translateY(-2px);box-shadow:0 8px 22px var(--acc-sh)}
+
+/* BUILD IT */
+.build-box{background:#f0fdf4;border:2px solid #16a34a;border-radius:16px;padding:1.6rem;margin:2rem 0;display:none}
+.build-label{font-family:var(--M);font-size:.65rem;font-weight:700;letter-spacing:.1em;
+  text-transform:uppercase;color:#15803d;margin-bottom:.4rem}
+.build-name{font-family:var(--D);font-weight:700;font-size:1.1rem;color:#14532d;margin-bottom:.5rem}
+.build-desc{font-size:.9rem;color:#166534;margin-bottom:1.2rem;line-height:1.75}
+.build-desc code{background:rgba(22,163,74,.12);border-radius:4px;padding:1px 6px;font-family:var(--M);font-size:.82em}
+.build-desc strong{color:#14532d}
+
 /* GITHUB ACCORDION */
-.github-acc{border:1.5px solid var(--border);border-radius:12px;overflow:hidden;margin:1.5rem 0}
-.github-acc-head{padding:1rem 1.2rem;background:#f8fafc;cursor:pointer;display:flex;align-items:center;justify-content:space-between;font-family:var(--D);font-weight:600;font-size:.9rem;user-select:none}
-.github-acc-body{display:none;padding:1.2rem;border-top:1px solid var(--border)}
-.github-acc-body.open{display:block}
-.github-step{display:flex;gap:.8rem;margin-bottom:1rem;align-items:flex-start}
-.github-step-n{width:24px;height:24px;border-radius:50%;background:var(--accent);color:#fff;font-family:var(--D);font-weight:700;font-size:.75rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px}
-.github-step p{font-size:.88rem;color:var(--t2);line-height:1.7}
+.gh-acc{border:1.5px solid var(--border);border-radius:12px;overflow:hidden;margin:1.5rem 0}
+.gh-acc-head{padding:1rem 1.2rem;background:#f8fafc;cursor:pointer;
+  display:flex;align-items:center;justify-content:space-between;
+  font-family:var(--D);font-weight:600;font-size:.9rem;user-select:none}
+.gh-acc-body{display:none;padding:1.2rem;border-top:1px solid var(--border)}
+.gh-acc-body.open{display:block}
+.gh-step{display:flex;gap:.8rem;margin-bottom:1rem;align-items:flex-start}
+.gh-step-n{width:26px;height:26px;border-radius:50%;background:var(--acc);color:#fff;
+  font-family:var(--D);font-weight:700;font-size:.75rem;display:flex;align-items:center;
+  justify-content:center;flex-shrink:0;margin-top:2px}
+.gh-step p{font-size:.88rem;color:var(--t2);line-height:1.7}
+.gh-step code{background:var(--acc-pale);color:var(--acc-d);border-radius:4px;
+  padding:1px 6px;font-family:var(--M);font-size:.82em}
+
 /* SESSION END */
-.session-end{background:linear-gradient(135deg,var(--accent),var(--accent-dark));color:#fff;border-radius:16px;padding:1.5rem 1.8rem;margin:2rem 0;display:none}
+.session-end{background:linear-gradient(135deg,var(--acc),var(--acc-d));color:#fff;
+  border-radius:16px;padding:1.6rem 1.8rem;margin:2rem 0;display:none}
 .session-end.visible{display:block}
 .session-end h2{font-family:var(--D);font-weight:700;font-size:1.1rem;margin-bottom:.8rem}
 .session-end ul{list-style:none;display:flex;flex-direction:column;gap:.4rem}
-.session-end li{font-size:.9rem;opacity:.92;display:flex;align-items:center;gap:.5rem}
-/* LESSON NAV */
-.lesson-nav{display:flex;align-items:center;justify-content:space-between;padding-top:2rem;border-top:1px solid var(--border);margin-top:2rem;flex-wrap:wrap;gap:.75rem}
-.ln-btn{display:inline-flex;align-items:center;gap:.4rem;background:var(--surface);color:var(--t2);font-family:var(--D);font-weight:600;font-size:.82rem;padding:.65rem 1.2rem;border-radius:8px;text-decoration:none;border:1.5px solid var(--border);transition:border-color .2s,color .2s}
-.ln-btn:hover{border-color:var(--accent);color:var(--accent)}
-.ln-btn.primary{background:var(--accent);color:#fff;border-color:var(--accent)}
+.session-end li{font-size:.9rem;opacity:.93;display:flex;align-items:center;gap:.5rem}
+.ln-btn{display:inline-flex;align-items:center;gap:.4rem;background:var(--surface);
+  color:var(--t2);font-family:var(--D);font-weight:600;font-size:.82rem;
+  padding:.65rem 1.2rem;border-radius:8px;text-decoration:none;
+  border:1.5px solid var(--border);transition:border-color .2s,color .2s}
+.ln-btn:hover{border-color:var(--acc);color:var(--acc)}
+.ln-btn.primary{background:var(--acc);color:#fff;border-color:var(--acc)}
 .ln-btn.primary:hover{opacity:.9}
-/* UTILS */
-code{font-family:var(--M);font-size:.85em;background:#f1f5f9;border-radius:4px;padding:.1rem .35rem;color:var(--accent)}
-.emoji{font-style:normal}
-@media(max-width:600px){.l-hero h1{font-size:1.5rem}.welcome-meta{gap:.75rem}}
-
+.lesson-nav{display:flex;align-items:center;justify-content:space-between;
+  padding-top:2rem;border-top:1px solid rgba(255,255,255,.25);margin-top:1.5rem;flex-wrap:wrap;gap:.75rem}
+.lesson-footer{text-align:center;padding:1.5rem;font-family:var(--M);font-size:.72rem;
+  color:var(--muted);border-top:1px solid var(--border);background:var(--surface)}
 </style>
 </head>
 <body>
-
-<!-- FIXED NAV -->
-<nav class="lesson-nav-bar">
-  <a href="../index.html" class="nav-back">← HTML Course</a>
-  <span class="nav-lesson">Lesson 21 of 34 &nbsp;·&nbsp; HTML Buttons</span>
-  <div class="nav-actions">
-    <a href="lesson_20.html" class="ln-btn">← Lesson 20</a>
-    <a href="lesson_22.html" class="ln-btn primary">Lesson 22 →</a>
-  </div>
+<nav class="l-nav">
+  <a href="../index.html" class="l-nav-logo">⚡ Techbase HTML</a>
+  <span class="l-nav-label">Lesson 21 of 34</span>
+  <a href="../index.html" class="l-nav-back">← All Lessons</a>
 </nav>
+<div class="progress-wrap"><div class="progress-bar" id="pbar"></div></div>
 
-<!-- PROGRESS BAR -->
-<div id="progress-wrap">
-  <div id="pbar" style="width:5%;background:var(--accent);height:4px;
-       border-radius:2px;transition:width .4s ease;"></div>
+<div class="l-hero">
+  <div class="l-hero-inner">
+    <div class="l-badge">HTML · Lesson 21</div>
+    <h1>HTML Iframes — Embedding Web Pages Inside Web Pages</h1>
+    <div class="l-hero-sub">12 phases · Build: Project Overview</div>
+  </div>
 </div>
 
-<!-- HERO -->
-<section class="lesson-hero">
-  <div class="hero-inner">
-    <div class="lesson-num-badge">Lesson 21</div>
-    <h1>HTML Buttons</h1>
-    <p class="lesson-tagline">Create clickable buttons that trigger actions using the button element and onclick</p>
-    <div class="lesson-meta">
-      <span>📚 2 phases</span>
-      <span>🏗️ Build: My Interactive Button Board</span>
-      
-    </div>
+<section style="background:linear-gradient(160deg,#fff5f2 0%,#f8fafc 55%,#ffe8e0 100%);padding-bottom:1.5rem;border-bottom:1px solid var(--border)">
+  <div style="max-width:860px;margin:0 auto;padding:0 1.5rem"><div class="welcome-box">
+  <h2>👋 Welcome to Lesson 21</h2>
+  <div style="font-size:.9rem;line-height:1.85;opacity:.93"><p class="v2-p">Have you ever visited a website and noticed a <strong>map embedded right on the page</strong>, or a <strong>YouTube video playing without leaving the site</strong>, or a <strong>live weather widget</strong> tucked into a corner? These are all powered by something called an <strong>iframe</strong>.</p>
+<p class="v2-p">In this lesson, you will learn exactly what an iframe is, how to create one, how to control its size and appearance, and how to use it as a target for links. By the end, you will be able to embed another web page — or even a live website — directly inside your own HTML page.</p>
+<p class="v2-p">Think of it this way: imagine you are reading a textbook, and one of the pages has a clear plastic window that shows another book underneath. You can read both at the same time, without leaving your textbook. That plastic window is your iframe.</p>
+<hr class="v2-hr"></div>
+  <div class="welcome-meta">
+    <span>📚 12 phases</span>
+    <span>🏗️ Project Overview</span>
   </div>
+</div></div>
 </section>
 
-<!-- MAIN CONTENT -->
-<main class="lesson-main">
-
-<div class="welcome-box">
-  <div class="welcome-label">👋 Welcome to Lesson 21!</div>
-  <h2>HTML Buttons</h2>
-  <p>Create clickable buttons that trigger actions using the button element and onclick. In this lesson you will work through
-     <strong>2 phases</strong>.
-     Complete each phase task before clicking <em>Next Phase</em>.
-     
-  </p>
-</div>
-
-<div class="phase " id="phase1" data-phase="1">
+<main style="max-width:860px;margin:0 auto;padding:2rem 1.5rem 5rem">
+<div class="phase" id="phase1">
   <div class="phase-header">
-    <div><div class="phase-num">Phase 1</div><div class="phase-title">The Button Element</div></div>
-    <div class="phase-check" id="check1"></div>
+    <div class="phase-num">Phase 1 of 12</div>
+    <div class="phase-title">Lesson Introduction</div>
+    <div class="phase-check" id="chk1"></div>
   </div>
   <div class="phase-body">
-    <div class="concept-box">
-      <div class="concept-label">💡 Concept</div>
-      <p>The <code>&lt;button&gt;</code> element creates a clickable button. Unlike a link (<code>&lt;a&gt;</code>), a button is designed to <em>trigger an action</em> on the page rather than navigate somewhere. You can put text, icons or images inside a button. Buttons have a <code>type</code> attribute: <code>type="button"</code> (general purpose), <code>type="submit"</code> (submits a form), and <code>type="reset"</code> (resets a form). Always specify the type!</p>
-    </div>
-    <div class="code-wrap">
-  <div class="code-bar">
-    <span class="code-dot r"></span><span class="code-dot y"></span><span class="code-dot g"></span>
-    <span class="code-filename">index.html</span>
-  </div>
-  <div class="code-body"><pre>&lt;!DOCTYPE html&gt;
-&lt;html lang="en"&gt;
-  &lt;head&gt;
-    &lt;title&gt;Buttons&lt;/title&gt;
-    &lt;style&gt;
-      .btn {
-        padding: 10px 22px; border: none; border-radius: 8px;
-        font-size: 15px; font-weight: bold; cursor: pointer;
-        margin: 6px; transition: opacity .2s;
-      }
-      .btn:hover { opacity: .85; }
-      .btn-orange { background: #ea4f21; color: white; }
-      .btn-blue   { background: #0284c7; color: white; }
-      .btn-outline {
-        background: transparent; color: #ea4f21;
-        border: 2px solid #ea4f21;
-      }
-    &lt;/style&gt;
-  &lt;/head&gt;
-  &lt;body&gt;
-    &lt;h1&gt;Button Styles&lt;/h1&gt;
-
-    &lt;button type="button" class="btn btn-orange"&gt;Orange Button&lt;/button&gt;
-    &lt;button type="button" class="btn btn-blue"&gt;Blue Button&lt;/button&gt;
-    &lt;button type="button" class="btn btn-outline"&gt;Outline Button&lt;/button&gt;
-    &lt;button type="button" class="btn btn-orange" disabled&gt;Disabled&lt;/button&gt;
-  &lt;/body&gt;
-&lt;/html&gt;</pre></div>
-</div>
+    <p class="v2-p">Have you ever visited a website and noticed a <strong>map embedded right on the page</strong>, or a <strong>YouTube video playing without leaving the site</strong>, or a <strong>live weather widget</strong> tucked into a corner? These are all powered by something called an <strong>iframe</strong>.</p>
+<p class="v2-p">In this lesson, you will learn exactly what an iframe is, how to create one, how to control its size and appearance, and how to use it as a target for links. By the end, you will be able to embed another web page — or even a live website — directly inside your own HTML page.</p>
+<p class="v2-p">Think of it this way: imagine you are reading a textbook, and one of the pages has a clear plastic window that shows another book underneath. You can read both at the same time, without leaving your textbook. That plastic window is your iframe.</p>
+<hr class="v2-hr">
     <div class="task-box">
       <div class="task-label">✏️ Your Task</div>
-      <p>Style four buttons: a solid primary button, a solid secondary button, an outline button, and a disabled button. Use CSS classes rather than inline styles. Notice how the <code>disabled</code> attribute greys out the button automatically.</p>
+      <div class="task-body">Now practise what you just learned about <strong>Lesson Introduction</strong>. Open your editor, type the examples above by hand, then modify them — change values, rename variables, and observe what happens. Active experimentation is how code sticks.</div>
     </div>
-    <button class="next-btn" onclick="unlockNext(1)">
-      Next Phase → <span>→</span>
-    </button>
-    <p class="next-tip">Try the task first, then click to continue!</p>
+    <button class="unlock-btn" onclick="unlockNext(1)">Start Lesson ✓</button>
   </div>
-</div><div class="phase locked" id="phase2" data-phase="2">
+</div>
+<div class="phase locked" id="phase2">
   <div class="phase-header">
-    <div><div class="phase-num">Phase 2</div><div class="phase-title">Buttons with onclick and JavaScript</div></div>
-    <div class="phase-check" id="check2"></div>
+    <div class="phase-num">Phase 2 of 12</div>
+    <div class="phase-title">Prerequisite Concepts</div>
+    <div class="phase-check" id="chk2"></div>
   </div>
   <div class="phase-body">
-    <div class="concept-box">
-      <div class="concept-label">💡 Concept</div>
-      <p>Buttons become truly powerful when paired with the <code>onclick</code> attribute, which runs JavaScript when the button is clicked. You can show alerts, change text, toggle colours, count clicks, and more — all from a simple button click. This is the gateway between HTML and JavaScript!</p>
-    </div>
-    <div class="code-wrap">
-  <div class="code-bar">
-    <span class="code-dot r"></span><span class="code-dot y"></span><span class="code-dot g"></span>
-    <span class="code-filename">index.html</span>
-  </div>
-  <div class="code-body"><pre>&lt;!DOCTYPE html&gt;
-&lt;html lang="en"&gt;
-  &lt;head&gt;
-    &lt;title&gt;Interactive Buttons&lt;/title&gt;
-    &lt;style&gt;
-      .btn { padding:10px 22px; border:none; border-radius:8px;
-             font-size:15px; font-weight:bold; cursor:pointer;
-             background:#ea4f21; color:white; margin:6px; }
-      .btn:hover { background: #c23d15; }
-      #output {
-        margin-top: 20px; padding: 16px;
-        background: #f8fafc; border: 1.5px solid #e2e8f0;
-        border-radius: 10px; font-size: 1rem;
-        min-height: 50px;
-      }
-    &lt;/style&gt;
-  &lt;/head&gt;
-  &lt;body&gt;
-    &lt;h1&gt;Interactive Buttons&lt;/h1&gt;
-
-    &lt;button class="btn"
-            onclick="document.getElementById('output').textContent='Hello World!'"&gt;
-      Say Hello
-    &lt;/button&gt;
-
-    &lt;button class="btn" style="background:#0284c7;"
-            onclick="document.getElementById('output').style.background='#dbeafe'"&gt;
-      Change Colour
-    &lt;/button&gt;
-
-    &lt;button class="btn" style="background:#10b981;"
-            onclick="document.getElementById('output').textContent=new Date().toLocaleTimeString()"&gt;
-      Show Time
-    &lt;/button&gt;
-
-    &lt;div id="output"&gt;Click a button above to see something happen!&lt;/div&gt;
-  &lt;/body&gt;
-&lt;/html&gt;</pre></div>
-</div>
+    <blockquote class="v2-bq"><p class="v2-p">Before we begin, let us quickly review two concepts you already know from earlier lessons that will make iframes easier to understand.</p></blockquote>
+<h3 class="v2-h3">What is an HTML attribute?</h3>
+<p class="v2-p">An <strong>attribute</strong> gives extra information to an HTML tag. It is written <strong>inside the opening tag</strong>, like this:</p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;img src=&quot;photo.jpg&quot; alt=&quot;A cat&quot;&gt;</code></pre></div></div>
+<p class="v2-p">Here, <code>src</code> and <code>alt</code> are attributes. They tell the <code>&lt;img&gt;</code> tag where the image file is and what it describes.</p>
+<p class="v2-p">Iframes also use attributes — most importantly <code>src</code>, <code>title</code>, <code>height</code>, <code>width</code>, and <code>name</code>.</p>
+<h3 class="v2-h3">What is CSS <code>style</code>?</h3>
+<p class="v2-p">CSS (Cascading Style Sheets) controls the <strong>visual appearance</strong> of HTML elements — their size, colour, border, spacing, and more. You can apply CSS directly to an HTML element using the <code>style</code> attribute:</p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;p style=&quot;color: red;&quot;&gt;This text is red.&lt;/p&gt;</code></pre></div></div>
+<p class="v2-p">You will use the <code>style</code> attribute throughout this lesson to control how your iframe looks.</p>
+<hr class="v2-hr">
     <div class="task-box">
       <div class="task-label">✏️ Your Task</div>
-      <p>Add a counter button: each time it is clicked, a number goes up by 1 and shows in a div. You'll need a JavaScript variable <code>let count = 0;</code> in a <code>&lt;script&gt;</code> tag, and a button with <code>onclick="count++; document.getElementById('counter').textContent=count"</code>.</p>
+      <div class="task-body">Now practise what you just learned about <strong>Prerequisite Concepts</strong>. Open your editor, type the examples above by hand, then modify them — change values, rename variables, and observe what happens. Active experimentation is how code sticks.</div>
     </div>
-    <button class="next-btn" onclick="unlockNext(2)">
-      Build It! 🚀 <span>→</span>
-    </button>
-    <p class="next-tip">Try the task first, then click to continue!</p>
+    <button class="unlock-btn" onclick="unlockNext(2)">Phase Complete — Unlock Next ✓</button>
   </div>
 </div>
-
-<div class="project-box" id="build-it" style="display:none">
-  <div class="project-label">🏗️ Build It!</div>
-  <div class="project-name">My Interactive Button Board</div>
-  <p class="project-desc">Build an interactive button board with 6 buttons that each do something different when clicked.</p>
-  <div class="code-wrap">
-    <div class="code-bar">
-      <span class="code-dot r"></span><span class="code-dot y"></span><span class="code-dot g"></span>
-      <span class="code-filename">starter.html — copy this into a new file!</span>
+<div class="phase locked" id="phase3">
+  <div class="phase-header">
+    <div class="phase-num">Phase 3 of 12</div>
+    <div class="phase-title">Section 1 — What Is an iframe?</div>
+    <div class="phase-check" id="chk3"></div>
+  </div>
+  <div class="phase-body">
+    <h3 class="v2-h3">What does "iframe" mean?</h3>
+<p class="v2-p">The word <strong>iframe</strong> stands for <strong>inline frame</strong>.</p>
+<p class="v2-p">Let's break that down:</p>
+<ul class="v2-ul"><li><strong>Inline</strong> means "placed inside the normal flow of the page content," right alongside other text, images, and elements.</li><li><strong>Frame</strong> refers to a bordered container — like a picture frame — that holds something inside it.</li></ul>
+<p class="v2-p">So an <strong>inline frame is a bordered container embedded directly inside your web page that can display another web page (or document) inside it.</strong></p>
+<h3 class="v2-h3">Why does the iframe exist?</h3>
+<p class="v2-p">Before iframes, if you wanted to show content from another website on your page, you had to copy and paste it manually — and keep updating it. That was tedious and broke easily.</p>
+<p class="v2-p">The iframe solves this problem. It creates a live window into another URL. The browser fetches and renders that other page <strong>inside your page</strong>, automatically and in real time.</p>
+<h3 class="v2-h3">Real-world uses of iframes</h3>
+<p class="v2-p">Iframes are everywhere in modern web development. Here are common places you will see them:</p>
+<ul class="v2-ul"><li><strong>Google Maps</strong> embedded on a business website</li><li><strong>YouTube videos</strong> playing on a blog or news article</li><li><strong>Social media posts</strong> (tweets, Instagram posts) shown inside another site</li><li><strong>Payment forms</strong> from Stripe or PayPal embedded on an e-commerce page</li><li><strong>Live weather widgets</strong> on travel websites</li><li><strong>PDF document viewers</strong> embedded in educational platforms</li></ul>
+<hr class="v2-hr">
+    <div class="task-box">
+      <div class="task-label">✏️ Your Task</div>
+      <div class="task-body">Now practise what you just learned about <strong>What Is an iframe?</strong>. Open your editor, type the examples above by hand, then modify them — change values, rename variables, and observe what happens. Active experimentation is how code sticks.</div>
     </div>
-    <div class="code-body"><pre id="starter-code">&lt;!DOCTYPE html&gt;
-&lt;html lang="en"&gt;
+    <button class="unlock-btn" onclick="unlockNext(3)">Phase Complete — Unlock Next ✓</button>
+  </div>
+</div>
+<div class="phase locked" id="phase4">
+  <div class="phase-header">
+    <div class="phase-num">Phase 4 of 12</div>
+    <div class="phase-title">Section 2 — The Basic `&lt;iframe&gt;` Tag</div>
+    <div class="phase-check" id="chk4"></div>
+  </div>
+  <div class="phase-body">
+    <h3 class="v2-h3">Syntax</h3>
+<p class="v2-p">The most basic iframe looks like this:</p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;iframe src=&quot;URL&quot; title=&quot;description&quot;&gt;&lt;/iframe&gt;</code></pre></div></div>
+<p class="v2-p">Let's understand every single part of this:</p>
+<div class="v2-table-wrap"><table class="v2-table"><thead><tr><th>Part</th><th>What it is</th><th>What it does</th></tr></thead><tbody><tr><td><code>&lt;iframe</code></td><td>Opening of the iframe tag</td><td>Tells the browser "start an inline frame here"</td></tr><tr><td><code>src="URL"</code></td><td>The <code>src</code> attribute</td><td>Stands for <strong>source</strong> — the web address of the page you want to show inside the frame</td></tr><tr><td><code>title="description"</code></td><td>The <code>title</code> attribute</td><td>A short text description of what the iframe contains</td></tr><tr><td><code>&gt;&lt;/iframe&gt;</code></td><td>Closing of the tag</td><td>Ends the iframe element</td></tr></tbody></table></div>
+<blockquote class="v2-bq"><p class="v2-p">💡 <strong>Why is <code>title</code> important?</strong> Screen readers (tools used by visually impaired people) read the <code>title</code> attribute aloud so the user knows what the iframe contains. Always include it — it is a best practice for <strong>accessibility</strong>.</p></blockquote>
+<h3 class="v2-h3">Your First iframe Example</h3>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;body&gt;
+
+    &lt;h1&gt;My First Iframe&lt;/h1&gt;
+
+    &lt;iframe src=&quot;https://www.example.com&quot; title=&quot;Example Website&quot;&gt;&lt;/iframe&gt;
+
+  &lt;/body&gt;
+&lt;/html&gt;</code></pre></div></div>
+<p class="v2-p"><strong>What happens when a browser runs this code:</strong></p>
+<p class="v2-p">The browser loads your HTML page normally, displays the heading "My First Iframe", and then inside a small rectangular box — the iframe — it loads and displays the website at <code>https://www.example.com</code>.</p>
+<p class="v2-p"><strong>Expected visual output:</strong></p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span></div><div class="v2-code-body"><pre><code>[ My First Iframe ]
+
++------------------------------------+
+|  Example Domain                    |
+|  This domain is for use in...      |
+|  ...                               |
++------------------------------------+</code></pre></div></div>
+<blockquote class="v2-bq"><p class="v2-p">🤔 <strong>Thinking prompt:</strong> What do you think would happen if you changed the <code>src</code> value to a different website? Try imagining the result before you test it!</p></blockquote>
+<hr class="v2-hr">
+    <div class="task-box">
+      <div class="task-label">✏️ Your Task</div>
+      <div class="task-body">Now practise what you just learned about <strong>The Basic <code>&lt;iframe&gt;</code> Tag</strong>. Open your editor, type the examples above by hand, then modify them — change values, rename variables, and observe what happens. Active experimentation is how code sticks.</div>
+    </div>
+    <button class="unlock-btn" onclick="unlockNext(4)">Phase Complete — Unlock Next ✓</button>
+  </div>
+</div>
+<div class="phase locked" id="phase5">
+  <div class="phase-header">
+    <div class="phase-num">Phase 5 of 12</div>
+    <div class="phase-title">Section 3 — Setting Height and Width</div>
+    <div class="phase-check" id="chk5"></div>
+  </div>
+  <div class="phase-body">
+    <p class="v2-p">By default, a browser assigns a small default size to an iframe. In practice, you almost always want to control the exact size yourself.</p>
+<h3 class="v2-h3">Method 1 — Using <code>height</code> and <code>width</code> attributes (in pixels)</h3>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;iframe 
+  src=&quot;https://www.example.com&quot; 
+  height=&quot;200&quot; 
+  width=&quot;300&quot; 
+  title=&quot;Example Website&quot;&gt;
+&lt;/iframe&gt;</code></pre></div></div>
+<p class="v2-p"><strong>Line-by-line explanation:</strong></p>
+<ul class="v2-ul"><li><code>src="https://www.example.com"</code> — loads this URL inside the frame</li><li><code>height="200"</code> — makes the iframe <strong>200 pixels tall</strong></li><li><code>width="300"</code> — makes the iframe <strong>300 pixels wide</strong></li><li><code>title="Example Website"</code> — describes the content for screen readers</li></ul>
+<blockquote class="v2-bq"><p class="v2-p">📏 <strong>What is a pixel?</strong> A pixel (px) is one tiny dot on your screen. Your screen is made up of millions of these tiny dots. 200px tall and 300px wide creates a medium-sized box.</p></blockquote>
+<p class="v2-p"><strong>Expected visual output:</strong></p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span></div><div class="v2-code-body"><pre><code>+----------------------------------+  ← 300px wide
+|                                  |  ↑
+|   [Content of example.com]       |  | 200px tall
+|                                  |  ↓
++----------------------------------+</code></pre></div></div>
+<h3 class="v2-h3">Method 2 — Using the <code>style</code> attribute with CSS</h3>
+<p class="v2-p">You can also use CSS inside the <code>style</code> attribute to set size. This approach is more flexible and consistent with how professional developers write code today.</p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;iframe 
+  src=&quot;https://www.example.com&quot; 
+  style=&quot;height:200px; width:300px;&quot; 
+  title=&quot;Example Website&quot;&gt;
+&lt;/iframe&gt;</code></pre></div></div>
+<p class="v2-p"><strong>Line-by-line explanation:</strong></p>
+<ul class="v2-ul"><li><code>style="..."</code> — opens an inline CSS style block</li><li><code>height:200px;</code> — CSS property setting the height to 200 pixels (note the colon <code>:</code> and semicolon <code>;</code>)</li><li><code>width:300px;</code> — CSS property setting the width to 300 pixels</li></ul>
+<p class="v2-p"><strong>Expected visual output:</strong> Identical to Method 1 — a 300×200px frame.</p>
+<blockquote class="v2-bq"><p class="v2-p">💡 <strong>Which method is better?</strong> Both work. Professional developers generally prefer the <code>style</code> attribute (or a separate CSS file) because it keeps all styling in one consistent place. For learning, either is fine.</p></blockquote>
+<h3 class="v2-h3">Comparison of Both Methods</h3>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;!-- Method 1: HTML attributes --&gt;
+&lt;iframe src=&quot;page.html&quot; height=&quot;200&quot; width=&quot;300&quot; title=&quot;My Frame&quot;&gt;&lt;/iframe&gt;
+
+&lt;!-- Method 2: CSS via style attribute --&gt;
+&lt;iframe src=&quot;page.html&quot; style=&quot;height:200px; width:300px;&quot; title=&quot;My Frame&quot;&gt;&lt;/iframe&gt;</code></pre></div></div>
+<p class="v2-p">Both produce the exact same-sized iframe. The difference is <strong>where you define the size</strong> — as HTML attributes or as CSS properties.</p>
+<blockquote class="v2-bq"><p class="v2-p">🤔 <strong>Thinking prompt:</strong> What would happen if you changed <code>width:300px</code> to <code>width:600px</code>? The iframe would become twice as wide!</p></blockquote>
+<hr class="v2-hr">
+    <div class="task-box">
+      <div class="task-label">✏️ Your Task</div>
+      <div class="task-body">Now practise what you just learned about <strong>Setting Height and Width</strong>. Open your editor, type the examples above by hand, then modify them — change values, rename variables, and observe what happens. Active experimentation is how code sticks.</div>
+    </div>
+    <button class="unlock-btn" onclick="unlockNext(5)">Phase Complete — Unlock Next ✓</button>
+  </div>
+</div>
+<div class="phase locked" id="phase6">
+  <div class="phase-header">
+    <div class="phase-num">Phase 6 of 12</div>
+    <div class="phase-title">Section 4 — Removing the Iframe Border</div>
+    <div class="phase-check" id="chk6"></div>
+  </div>
+  <div class="phase-body">
+    <h3 class="v2-h3">Why does a border appear?</h3>
+<p class="v2-p">By default, every browser draws a <strong>visible rectangular border</strong> around an iframe. This border is a visual indicator showing the boundaries of the embedded frame.</p>
+<p class="v2-p">However, in many real projects, the border looks unprofessional or does not match the website's design. You will often want to remove it.</p>
+<h3 class="v2-h3">How to remove the border using CSS</h3>
+<p class="v2-p">Use the CSS <code>border</code> property with the value <code>none</code>:</p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;iframe 
+  src=&quot;https://www.example.com&quot; 
+  style=&quot;border:none;&quot; 
+  title=&quot;Example Website&quot;&gt;
+&lt;/iframe&gt;</code></pre></div></div>
+<p class="v2-p"><strong>Line-by-line explanation:</strong></p>
+<ul class="v2-ul"><li><code>style="border:none;"</code> — CSS instruction that says "draw no border around this iframe"</li><li><code>border</code> — the CSS property that controls the border appearance</li><li><code>none</code> — the value meaning "no border at all"</li></ul>
+<p class="v2-p"><strong>Expected visual output:</strong></p>
+<p class="v2-p">Without this style:</p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span></div><div class="v2-code-body"><pre><code>+----------------------------------+   ← visible border line
+|   [Content of example.com]       |
++----------------------------------+   ← visible border line</code></pre></div></div>
+<p class="v2-p">With <code>border:none;</code>:</p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span></div><div class="v2-code-body"><pre><code>   [Content of example.com]           ← no border visible</code></pre></div></div>
+<h3 class="v2-h3">How to add a custom border</h3>
+<p class="v2-p">You can also give the iframe a custom border instead of removing it entirely. CSS borders follow this pattern:</p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span></div><div class="v2-code-body"><pre><code>border: [thickness] [style] [color];</code></pre></div></div>
+<p class="v2-p">Example — a 2-pixel-thick solid red border:</p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;iframe 
+  src=&quot;https://www.example.com&quot; 
+  style=&quot;border:2px solid red;&quot; 
+  title=&quot;Example Website&quot;&gt;
+&lt;/iframe&gt;</code></pre></div></div>
+<p class="v2-p"><strong>Line-by-line explanation:</strong></p>
+<ul class="v2-ul"><li><code>border:2px solid red;</code> — draw a border that is...</li></ul>
+<p class="v2-p">- <code>2px</code> — 2 pixels thick   - <code>solid</code> — a continuous solid line (other options: <code>dashed</code>, <code>dotted</code>, <code>double</code>)   - <code>red</code> — the colour of the border line</p>
+<p class="v2-p"><strong>Expected visual output:</strong></p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span></div><div class="v2-code-body"><pre><code>🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥   ← 2px red border
+🟥 [Content of example.com] 🟥
+🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥   ← 2px red border</code></pre></div></div>
+<h3 class="v2-h3">More Custom Border Examples</h3>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;!-- Blue dotted border, 3px thick --&gt;
+&lt;iframe src=&quot;page.html&quot; style=&quot;border:3px dotted blue;&quot; title=&quot;My Frame&quot;&gt;&lt;/iframe&gt;
+
+&lt;!-- Green dashed border, 1px thick --&gt;
+&lt;iframe src=&quot;page.html&quot; style=&quot;border:1px dashed green;&quot; title=&quot;My Frame&quot;&gt;&lt;/iframe&gt;
+
+&lt;!-- No border (clean look) --&gt;
+&lt;iframe src=&quot;page.html&quot; style=&quot;border:none;&quot; title=&quot;My Frame&quot;&gt;&lt;/iframe&gt;</code></pre></div></div>
+<hr class="v2-hr">
+    <div class="task-box">
+      <div class="task-label">✏️ Your Task</div>
+      <div class="task-body">Now practise what you just learned about <strong>Removing the Iframe Border</strong>. Open your editor, type the examples above by hand, then modify them — change values, rename variables, and observe what happens. Active experimentation is how code sticks.</div>
+    </div>
+    <button class="unlock-btn" onclick="unlockNext(6)">Phase Complete — Unlock Next ✓</button>
+  </div>
+</div>
+<div class="phase locked" id="phase7">
+  <div class="phase-header">
+    <div class="phase-num">Phase 7 of 12</div>
+    <div class="phase-title">Section 5 — Using an iframe as a Link Target</div>
+    <div class="phase-check" id="chk7"></div>
+  </div>
+  <div class="phase-body">
+    <p class="v2-p">This is one of the most powerful and interesting things you can do with an iframe. You can make a link <strong>load its destination inside the iframe</strong> instead of navigating away from the page.</p>
+<h3 class="v2-h3">What does "link target" mean?</h3>
+<p class="v2-p">Normally, when you click a link (<code>&lt;a href="..."&gt;</code>) it opens the new page in the <strong>same tab</strong>, replacing your current page.</p>
+<p class="v2-p">But you can tell the link <strong>where</strong> to open — and one option is: inside a specific named iframe on the same page.</p>
+<p class="v2-p">Think of it like having a TV screen (the iframe) and a set of channel buttons (the links). When you click a button, the TV screen changes — but you never leave the room (the current page).</p>
+<h3 class="v2-h3">How it works — step by step</h3>
+<p class="v2-p"><strong>Step 1:</strong> Give the iframe a <code>name</code> attribute. <strong>Step 2:</strong> On each link, set <code>target</code> equal to that name. <strong>Step 3:</strong> When the user clicks the link, the linked page loads inside the iframe.</p>
+<h3 class="v2-h3">Full Example — iframe as Link Target</h3>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;body&gt;
+
+    &lt;h2&gt;My Resource Viewer&lt;/h2&gt;
+
+    &lt;!-- The iframe that will display linked pages --&gt;
+    &lt;iframe 
+      src=&quot;https://www.example.com&quot; 
+      name=&quot;iframe_a&quot; 
+      title=&quot;Resource Viewer&quot;
+      style=&quot;height:400px; width:600px; border:2px solid grey;&quot;&gt;
+    &lt;/iframe&gt;
+
+    &lt;!-- Links that load inside the iframe above --&gt;
+    &lt;p&gt;
+      &lt;a href=&quot;https://www.w3schools.com&quot; target=&quot;iframe_a&quot;&gt;
+        Open W3Schools
+      &lt;/a&gt;
+    &lt;/p&gt;
+
+    &lt;p&gt;
+      &lt;a href=&quot;https://www.wikipedia.org&quot; target=&quot;iframe_a&quot;&gt;
+        Open Wikipedia
+      &lt;/a&gt;
+    &lt;/p&gt;
+
+  &lt;/body&gt;
+&lt;/html&gt;</code></pre></div></div>
+<p class="v2-p"><strong>Line-by-line explanation:</strong></p>
+<p class="v2-p"><strong>The iframe:</strong></p>
+<ul class="v2-ul"><li><code>src="https://www.example.com"</code> — shows this page initially when the page first loads</li><li><code>name="iframe_a"</code> — gives this iframe the identifier "iframe\_a" (this is like giving it a name tag)</li><li><code>title="Resource Viewer"</code> — describes the frame for screen readers</li><li><code>style="height:400px; width:600px; border:2px solid grey;"</code> — makes it 400×600px with a grey border</li></ul>
+<p class="v2-p"><strong>The links:</strong></p>
+<ul class="v2-ul"><li><code>href="https://www.w3schools.com"</code> — the URL to open when clicked</li><li><code>target="iframe_a"</code> — instead of opening in a new tab, load this URL inside the iframe named "iframe\_a"</li></ul>
+<p class="v2-p"><strong>How it behaves:</strong></p>
+<p class="v2-p">When the page first loads → <code>example.com</code> appears in the iframe. User clicks "Open W3Schools" → <code>w3schools.com</code> loads inside the <strong>same iframe</strong>. User clicks "Open Wikipedia" → <code>wikipedia.org</code> loads inside the <strong>same iframe</strong>. The rest of the page (heading, links) never changes!</p>
+<p class="v2-p"><strong>Expected visual output flow:</strong></p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span></div><div class="v2-code-body"><pre><code>[ My Resource Viewer ]
+
++------------------------------------+
+|  [Initially shows example.com]     |  ← iframe starts here
++------------------------------------+
+
+Open W3Schools   ← click this
+Open Wikipedia   ← click this
+
+--- After clicking &quot;Open W3Schools&quot;: ---
+
++------------------------------------+
+|  [Now shows w3schools.com]         |  ← same iframe, new content!
++------------------------------------+
+
+Open W3Schools
+Open Wikipedia</code></pre></div></div>
+<blockquote class="v2-bq"><p class="v2-p">🤔 <strong>Thinking prompt:</strong> Can you imagine how this could be used on a real website? For example, a sidebar with links that load different sections into a main reading area — all without leaving the page.</p></blockquote>
+<hr class="v2-hr">
+    <div class="task-box">
+      <div class="task-label">✏️ Your Task</div>
+      <div class="task-body">Now practise what you just learned about <strong>Using an iframe as a Link Target</strong>. Open your editor, type the examples above by hand, then modify them — change values, rename variables, and observe what happens. Active experimentation is how code sticks.</div>
+    </div>
+    <button class="unlock-btn" onclick="unlockNext(7)">Phase Complete — Unlock Next ✓</button>
+  </div>
+</div>
+<div class="phase locked" id="phase8">
+  <div class="phase-header">
+    <div class="phase-num">Phase 8 of 12</div>
+    <div class="phase-title">Section 6 — Combining Everything Together</div>
+    <div class="phase-check" id="chk8"></div>
+  </div>
+  <div class="phase-body">
+    <p class="v2-p">Now let us see all the iframe features combined in one real example:</p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;body&gt;
+
+    &lt;h1&gt;Web Resource Centre&lt;/h1&gt;
+    &lt;p&gt;Click a link below to view the resource in the frame.&lt;/p&gt;
+
+    &lt;!-- Navigation links --&gt;
+    &lt;p&gt;
+      &lt;a href=&quot;https://www.w3schools.com&quot; target=&quot;viewer&quot;&gt;W3Schools&lt;/a&gt; |
+      &lt;a href=&quot;https://www.wikipedia.org&quot; target=&quot;viewer&quot;&gt;Wikipedia&lt;/a&gt; |
+      &lt;a href=&quot;https://www.bbc.com&quot; target=&quot;viewer&quot;&gt;BBC News&lt;/a&gt;
+    &lt;/p&gt;
+
+    &lt;!-- The viewing iframe --&gt;
+    &lt;iframe 
+      src=&quot;https://www.w3schools.com&quot; 
+      name=&quot;viewer&quot;
+      title=&quot;Resource Viewer&quot;
+      style=&quot;height:500px; width:100%; border:3px solid #333;&quot;&gt;
+    &lt;/iframe&gt;
+
+  &lt;/body&gt;
+&lt;/html&gt;</code></pre></div></div>
+<p class="v2-p"><strong>What is new here?</strong></p>
+<ul class="v2-ul"><li><code>width:100%</code> — instead of a fixed number of pixels, <code>100%</code> means the iframe stretches to fill the <strong>full width of its container</strong> (the browser window). This is great for responsive layouts.</li><li><code>border:3px solid #333;</code> — <code>#333</code> is a dark grey colour written in <strong>hex code</strong> (a 6-character colour code used in CSS)</li><li>Multiple links all using the <strong>same</strong> <code>target="viewer"</code> — they all load into the same iframe</li></ul>
+<p class="v2-p"><strong>Expected output:</strong></p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span></div><div class="v2-code-body"><pre><code>[ Web Resource Centre ]
+Click a link below to view the resource in the frame.
+
+W3Schools | Wikipedia | BBC News
+
++--------------------------------------------------+
+|                                                  |
+|          [W3Schools website loads here]          |
+|                                                  |
+|  (Clicking Wikipedia will replace this content)  |
+|                                                  |
++--------------------------------------------------+</code></pre></div></div>
+<hr class="v2-hr">
+    <div class="task-box">
+      <div class="task-label">✏️ Your Task</div>
+      <div class="task-body">Now practise what you just learned about <strong>Combining Everything Together</strong>. Open your editor, type the examples above by hand, then modify them — change values, rename variables, and observe what happens. Active experimentation is how code sticks.</div>
+    </div>
+    <button class="unlock-btn" onclick="unlockNext(8)">Phase Complete — Unlock Next ✓</button>
+  </div>
+</div>
+<div class="phase locked" id="phase9">
+  <div class="phase-header">
+    <div class="phase-num">Phase 9 of 12</div>
+    <div class="phase-title">Section 7 — Guided Practice Exercises</div>
+    <div class="phase-check" id="chk9"></div>
+  </div>
+  <div class="phase-body">
+    <h3 class="v2-h3">Exercise 1 — Basic Iframe</h3>
+<p class="v2-p"><strong>Objective:</strong> Create your first iframe that embeds a web page.</p>
+<p class="v2-p"><strong>Scenario:</strong> You are building a simple personal webpage and want to include a Wikipedia article about your favourite city.</p>
+<p class="v2-p"><strong>Steps:</strong></p>
+<ol class="v2-ol"><li>Create a new HTML file called <code>exercise1.html</code></li><li>Add the standard HTML structure (<code>&lt;!DOCTYPE html&gt;</code>, <code>&lt;html&gt;</code>, <code>&lt;body&gt;</code>)</li><li>Add a heading: "My Favourite City"</li><li>Add an iframe that loads <code>https://www.wikipedia.org</code></li><li>Give the iframe a <code>title</code> of "Wikipedia"</li><li>Set the height to 300 and width to 500</li></ol>
+<p class="v2-p"><strong>Your code should look like this:</strong></p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;body&gt;
+
+    &lt;h1&gt;My Favourite City&lt;/h1&gt;
+
+    &lt;iframe 
+      src=&quot;https://www.wikipedia.org&quot; 
+      height=&quot;300&quot; 
+      width=&quot;500&quot; 
+      title=&quot;Wikipedia&quot;&gt;
+    &lt;/iframe&gt;
+
+  &lt;/body&gt;
+&lt;/html&gt;</code></pre></div></div>
+<p class="v2-p"><strong>Expected output:</strong></p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span></div><div class="v2-code-body"><pre><code>[ My Favourite City ]
+
++----------------------------------------+
+|  [Wikipedia homepage loads here]       |
+|  500px wide, 300px tall                |
++----------------------------------------+</code></pre></div></div>
+<p class="v2-p"><strong>Self-check questions:</strong></p>
+<ul class="v2-ul"><li>Did the Wikipedia page load inside the small box?</li><li>Can you see the border around the iframe?</li><li>Is the rest of your heading still visible outside the iframe?</li></ul>
+<hr class="v2-hr">
+<h3 class="v2-h3">Exercise 2 — Customise the Border</h3>
+<p class="v2-p"><strong>Objective:</strong> Practice removing and customising the border.</p>
+<p class="v2-p"><strong>Scenario:</strong> Your manager asks you to show a company web page inside a page, but without the default ugly browser border.</p>
+<p class="v2-p"><strong>Steps:</strong></p>
+<ol class="v2-ol"><li>Take your code from Exercise 1</li><li>Remove the <code>height</code> and <code>width</code> attributes</li><li>Add a <code>style</code> attribute instead, setting height to 350px and width to 600px</li><li>Add <code>border:none;</code> to remove the border</li><li>Save and open in your browser</li></ol>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;body&gt;
+
+    &lt;h1&gt;My Favourite City&lt;/h1&gt;
+
+    &lt;iframe 
+      src=&quot;https://www.wikipedia.org&quot; 
+      style=&quot;height:350px; width:600px; border:none;&quot; 
+      title=&quot;Wikipedia&quot;&gt;
+    &lt;/iframe&gt;
+
+  &lt;/body&gt;
+&lt;/html&gt;</code></pre></div></div>
+<p class="v2-p"><strong>Expected output:</strong> Wikipedia appears in a clean borderless box.</p>
+<p class="v2-p"><strong>What-if challenge:</strong> Try changing <code>border:none;</code> to <code>border:4px dashed blue;</code>. What do you see?</p>
+<hr class="v2-hr">
+<h3 class="v2-h3">Exercise 3 — iframe as Link Target</h3>
+<p class="v2-p"><strong>Objective:</strong> Create a set of navigation links that load pages inside an iframe.</p>
+<p class="v2-p"><strong>Scenario:</strong> You are building a mini "learning portal" with three resource links. Clicking each link should load the page inside a frame below — without the user leaving your portal page.</p>
+<p class="v2-p"><strong>Steps:</strong></p>
+<ol class="v2-ol"><li>Create a new file <code>portal.html</code></li><li>Add a heading "Learning Portal"</li><li>Add three links (to any three websites you like)</li><li>Give all three links <code>target="content_frame"</code></li><li>Add an iframe below the links with <code>name="content_frame"</code></li><li>Set the iframe to 450px tall, 100% wide, with a 2px solid dark border</li></ol>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;body&gt;
+
+    &lt;h1&gt;Learning Portal&lt;/h1&gt;
+
+    &lt;p&gt;
+      &lt;a href=&quot;https://www.w3schools.com&quot; target=&quot;content_frame&quot;&gt;HTML Tutorials&lt;/a&gt; | 
+      &lt;a href=&quot;https://www.wikipedia.org&quot; target=&quot;content_frame&quot;&gt;Wikipedia&lt;/a&gt; | 
+      &lt;a href=&quot;https://www.bbc.com&quot; target=&quot;content_frame&quot;&gt;BBC News&lt;/a&gt;
+    &lt;/p&gt;
+
+    &lt;iframe 
+      src=&quot;https://www.w3schools.com&quot; 
+      name=&quot;content_frame&quot; 
+      title=&quot;Content Viewer&quot;
+      style=&quot;height:450px; width:100%; border:2px solid #444;&quot;&gt;
+    &lt;/iframe&gt;
+
+  &lt;/body&gt;
+&lt;/html&gt;</code></pre></div></div>
+<p class="v2-p"><strong>Expected output:</strong></p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span></div><div class="v2-code-body"><pre><code>[ Learning Portal ]
+HTML Tutorials | Wikipedia | BBC News
+
++----------------------------------------------------------+
+|  [W3Schools loads first by default]                       |
+|  Clicking any link above replaces this content            |
+|  without changing the rest of the page                    |
++----------------------------------------------------------+</code></pre></div></div>
+<p class="v2-p"><strong>Self-check questions:</strong></p>
+<ul class="v2-ul"><li>When you click "Wikipedia", does it load inside the frame — not in a new tab?</li><li>Does the heading and the set of links stay visible after clicking?</li><li>What happens if you click "BBC News" after Wikipedia is already loaded?</li></ul>
+<hr class="v2-hr">
+    <div class="task-box">
+      <div class="task-label">✏️ Your Task</div>
+      <div class="task-body">Now practise what you just learned about <strong>Guided Practice Exercises</strong>. Open your editor, type the examples above by hand, then modify them — change values, rename variables, and observe what happens. Active experimentation is how code sticks.</div>
+    </div>
+    <button class="unlock-btn" onclick="unlockNext(9)">Phase Complete — Unlock Next ✓</button>
+  </div>
+</div>
+<div class="phase locked" id="phase10">
+  <div class="phase-header">
+    <div class="phase-num">Phase 10 of 12</div>
+    <div class="phase-title">Section 9 — Common Beginner Mistakes</div>
+    <div class="phase-check" id="chk10"></div>
+  </div>
+  <div class="phase-body">
+    <h3 class="v2-h3">Mistake 1 — Forgetting the <code>title</code> attribute</h3>
+<p class="v2-p"><strong>Wrong:</strong></p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;iframe src=&quot;https://www.example.com&quot;&gt;&lt;/iframe&gt;</code></pre></div></div>
+<p class="v2-p"><strong>Problem:</strong> Screen readers cannot describe the iframe's content to visually impaired users. This is a basic accessibility error.</p>
+<p class="v2-p"><strong>Correct:</strong></p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;iframe src=&quot;https://www.example.com&quot; title=&quot;Example website&quot;&gt;&lt;/iframe&gt;</code></pre></div></div>
+<hr class="v2-hr">
+<h3 class="v2-h3">Mistake 2 — Using <code>name</code> instead of <code>target</code> on the link (or vice versa)</h3>
+<p class="v2-p"><strong>Wrong:</strong></p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;iframe src=&quot;page.html&quot; target=&quot;frame1&quot; title=&quot;My Frame&quot;&gt;&lt;/iframe&gt;
+&lt;a href=&quot;other.html&quot; name=&quot;frame1&quot;&gt;Click me&lt;/a&gt;</code></pre></div></div>
+<p class="v2-p"><strong>Problem:</strong> <code>name</code> goes on the <strong>iframe</strong>, not the link. <code>target</code> goes on the <strong>link</strong>, not the iframe.</p>
+<p class="v2-p"><strong>Correct:</strong></p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;iframe src=&quot;page.html&quot; name=&quot;frame1&quot; title=&quot;My Frame&quot;&gt;&lt;/iframe&gt;
+&lt;a href=&quot;other.html&quot; target=&quot;frame1&quot;&gt;Click me&lt;/a&gt;</code></pre></div></div>
+<hr class="v2-hr">
+<h3 class="v2-h3">Mistake 3 — Mixing px syntax with and without the "px" unit</h3>
+<p class="v2-p"><strong>Wrong (HTML attribute style):</strong></p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;iframe src=&quot;page.html&quot; style=&quot;height:200; width:300;&quot; title=&quot;Frame&quot;&gt;&lt;/iframe&gt;</code></pre></div></div>
+<p class="v2-p"><strong>Problem:</strong> In CSS, you must include the unit. <code>200</code> alone means nothing in CSS — it needs to be <code>200px</code>.</p>
+<p class="v2-p"><strong>Correct:</strong></p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;iframe src=&quot;page.html&quot; style=&quot;height:200px; width:300px;&quot; title=&quot;Frame&quot;&gt;&lt;/iframe&gt;</code></pre></div></div>
+<blockquote class="v2-bq"><p class="v2-p"><strong>Note:</strong> When using the HTML <code>height</code> and <code>width</code> attributes (not CSS), you write just the number: <code>height="200"</code>. The unit (pixels) is assumed. But in CSS (inside <code>style=""</code>), you must always write <code>200px</code>.</p></blockquote>
+<hr class="v2-hr">
+<h3 class="v2-h3">Mistake 4 — Embedding a site that blocks iframes</h3>
+<p class="v2-p"><strong>Example:</strong></p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;iframe src=&quot;https://www.google.com&quot; title=&quot;Google&quot;&gt;&lt;/iframe&gt;</code></pre></div></div>
+<p class="v2-p"><strong>Problem:</strong> Many websites — including Google, Facebook, and most major platforms — use security settings (<code>X-Frame-Options</code> header) that <strong>prevent</strong> their pages from being embedded in iframes. When you try, the iframe will appear blank or show an error message.</p>
+<p class="v2-p"><strong>Solution:</strong> Only embed pages that allow iframe embedding. Many websites provide official embed codes (like YouTube, Google Maps) that are specifically designed to work in iframes.</p>
+<hr class="v2-hr">
+<h3 class="v2-h3">Mistake 5 — Writing the border shorthand in the wrong order</h3>
+<p class="v2-p"><strong>Wrong:</strong></p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;iframe style=&quot;border: red solid 2px;&quot; ...&gt;&lt;/iframe&gt;</code></pre></div></div>
+<p class="v2-p"><strong>Problem:</strong> While browsers may sometimes accept different orders, the <strong>correct and reliable order</strong> for the CSS border shorthand is: <code>thickness style color</code>.</p>
+<p class="v2-p"><strong>Correct:</strong></p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;iframe style=&quot;border: 2px solid red;&quot; ...&gt;&lt;/iframe&gt;</code></pre></div></div>
+<hr class="v2-hr">
+    <div class="task-box">
+      <div class="task-label">✏️ Your Task</div>
+      <div class="task-body">Now practise what you just learned about <strong>Common Beginner Mistakes</strong>. Open your editor, type the examples above by hand, then modify them — change values, rename variables, and observe what happens. Active experimentation is how code sticks.</div>
+    </div>
+    <button class="unlock-btn" onclick="unlockNext(10)">Phase Complete — Unlock Next ✓</button>
+  </div>
+</div>
+<div class="phase locked" id="phase11">
+  <div class="phase-header">
+    <div class="phase-num">Phase 11 of 12</div>
+    <div class="phase-title">Section 10 — Chapter Summary</div>
+    <div class="phase-check" id="chk11"></div>
+  </div>
+  <div class="phase-body">
+    <p class="v2-p">Here is everything you learned in this lesson, summarised clearly:</p>
+<p class="v2-p">The <strong>HTML <code>&lt;iframe&gt;</code> tag</strong> creates an <strong>inline frame</strong> — a container that displays another web page inside your current page.</p>
+<p class="v2-p">The <strong><code>src</code> attribute</strong> specifies the URL of the page to embed inside the iframe.</p>
+<p class="v2-p">The <strong><code>title</code> attribute</strong> is always recommended for accessibility (screen readers).</p>
+<p class="v2-p">The <strong><code>height</code> and <code>width</code> attributes</strong> control the size of the iframe in pixels. You can also use the CSS <code>style</code> attribute with <code>height:Xpx;</code> and <code>width:Xpx;</code> for the same result.</p>
+<p class="v2-p">To <strong>remove the default border</strong>, use <code>style="border:none;"</code>. To add a <strong>custom border</strong>, use <code>style="border: 2px solid red;"</code> (or any thickness, style, and colour you choose).</p>
+<p class="v2-p">To use an <strong>iframe as a link target</strong>:</p>
+<ul class="v2-ul"><li>Give the iframe a <code>name</code> attribute (e.g., <code>name="viewer"</code>)</li><li>Give your links a <code>target</code> attribute that matches (e.g., <code>target="viewer"</code>)</li><li>Clicking the link loads the destination page inside the iframe instead of navigating away</li></ul>
+<hr class="v2-hr">
+    <div class="task-box">
+      <div class="task-label">✏️ Your Task</div>
+      <div class="task-body">Now practise what you just learned about <strong>Chapter Summary</strong>. Open your editor, type the examples above by hand, then modify them — change values, rename variables, and observe what happens. Active experimentation is how code sticks.</div>
+    </div>
+    <button class="unlock-btn" onclick="unlockNext(11)">Phase Complete — Unlock Next ✓</button>
+  </div>
+</div>
+<div class="phase locked" id="phase12">
+  <div class="phase-header">
+    <div class="phase-num">Phase 12 of 12</div>
+    <div class="phase-title">HTML iframe Quick Reference</div>
+    <div class="phase-check" id="chk12"></div>
+  </div>
+  <div class="phase-body">
+    <div class="v2-table-wrap"><table class="v2-table"><thead><tr><th>Attribute / Style</th><th>What it does</th><th>Example</th></tr></thead><tbody><tr><td><code>src="URL"</code></td><td>Sets the page to embed</td><td><code>src="https://www.example.com"</code></td></tr><tr><td><code>title="text"</code></td><td>Describes the iframe for accessibility</td><td><code>title="My Viewer"</code></td></tr><tr><td><code>height="200"</code></td><td>Height in pixels (HTML attribute)</td><td><code>height="400"</code></td></tr><tr><td><code>width="300"</code></td><td>Width in pixels (HTML attribute)</td><td><code>width="600"</code></td></tr><tr><td><code>style="height:200px;"</code></td><td>Height using CSS</td><td><code>style="height:400px;"</code></td></tr><tr><td><code>style="width:300px;"</code></td><td>Width using CSS</td><td><code>style="width:100%;"</code></td></tr><tr><td><code>style="border:none;"</code></td><td>Removes the border</td><td><code>style="border:none;"</code></td></tr><tr><td><code>style="border:2px solid red;"</code></td><td>Adds a custom border</td><td><code>style="border:3px dashed blue;"</code></td></tr><tr><td><code>name="framename"</code></td><td>Names the iframe for link targeting</td><td><code>name="viewer"</code></td></tr><tr><td><code>target="framename"</code></td><td>(on <code>&lt;a&gt;</code> tag) Opens link inside named iframe</td><td><code>target="viewer"</code></td></tr></tbody></table></div>
+<hr class="v2-hr">
+<p class="v2-p"><em>End of Lesson 21 — HTML Iframes</em></p>
+    <div class="task-box">
+      <div class="task-label">✏️ Your Task</div>
+      <div class="task-body">Now practise what you just learned about <strong>HTML iframe Quick Reference</strong>. Open your editor, type the examples above by hand, then modify them — change values, rename variables, and observe what happens. Active experimentation is how code sticks.</div>
+    </div>
+    <button class="unlock-btn" onclick="unlockNext(12)">Phase Complete — Unlock Next ✓</button>
+  </div>
+</div>
+<div class="build-box" id="build-it">
+  <div class="build-label">🏗️ Build It</div>
+  <div class="build-name">Project Overview</div>
+  <div class="build-desc">You will build a <strong>"My Study Hub"</strong> page — a simple one-page study tool that:</div>
+  <div class="v2-code-wrap">
+    <div class="v2-code-bar">
+      <span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span>
+      <span class="v2-code-lang">starter.html</span>
+    </div>
+    <div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
   &lt;head&gt;
-    &lt;title&gt;My Button Board&lt;/title&gt;
-    &lt;style&gt;
-      body { font-family: Arial, sans-serif; background: #f1f5f9;
-             padding: 30px; max-width: 700px; margin: 0 auto; }
-      h1 { color: #0f172a; text-align: center; }
-      .board { display: flex; flex-wrap: wrap; gap: 12px;
-               justify-content: center; margin: 24px 0; }
-      .btn { padding: 12px 24px; border: none; border-radius: 10px;
-             font-size: 15px; font-weight: bold; cursor: pointer;
-             transition: transform .15s, box-shadow .15s; }
-      .btn:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,.15); }
-      .btn:active { transform: translateY(0); }
-      #display {
-        background: white; border: 2px solid #e2e8f0; border-radius: 14px;
-        padding: 24px; text-align: center; font-size: 1.1rem;
-        min-height: 80px; color: #334155; margin-top: 10px;
-        transition: background .3s;
-      }
-    &lt;/style&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;title&gt;My Study Hub&lt;/title&gt;
   &lt;/head&gt;
   &lt;body&gt;
-    &lt;h1&gt;🎮 My Button Board&lt;/h1&gt;
 
-    &lt;div class="board"&gt;
-      &lt;button class="btn" style="background:#ea4f21;color:white;"
-        onclick="display.textContent='👋 Hello from HTML!'"&gt;
-        Say Hello
-      &lt;/button&gt;
+    &lt;h1&gt;📚 My Study Hub&lt;/h1&gt;
+    &lt;p&gt;Click any resource below to study it in the viewer.&lt;/p&gt;
 
-      &lt;button class="btn" style="background:#0284c7;color:white;"
-        onclick="display.style.background='#dbeafe'; display.textContent='💙 Blue!'"&gt;
-        Go Blue
-      &lt;/button&gt;
-
-      &lt;button class="btn" style="background:#10b981;color:white;"
-        onclick="display.style.background='#dcfce7'; display.textContent='💚 Green!'"&gt;
-        Go Green
-      &lt;/button&gt;
-
-      &lt;button class="btn" style="background:#7c3aed;color:white;"
-        onclick="display.innerHTML='&lt;strong&gt;⏰ ' + new Date().toLocaleTimeString() + '&lt;/strong&gt;'"&gt;
-        Show Time
-      &lt;/button&gt;
-
-      &lt;button class="btn" style="background:#d97706;color:white;"
-        onclick="count++; display.textContent='🖱️ Clicks: ' + count"&gt;
-        Count Clicks
-      &lt;/button&gt;
-
-      &lt;button class="btn" style="background:#0f172a;color:white;"
-        onclick="display.textContent=''; display.style.background='white'; count=0;"&gt;
-        Reset
-      &lt;/button&gt;
-    &lt;/div&gt;
-
-    &lt;div id="display"&gt;Click any button to see the magic! ✨&lt;/div&gt;
-
-    &lt;script&gt;
-      const display = document.getElementById('display');
-      let count = 0;
-    &lt;/script&gt;
   &lt;/body&gt;
-&lt;/html&gt;</pre></div>
+&lt;/html&gt;</code></pre></div>
   </div>
-  <button class="next-btn" onclick="downloadStarter()" style="margin-right:.75rem">
-    ⬇️ Download starter.html
-  </button>
-  <button class="next-btn" onclick="showGithub()" style="background:#10b981;box-shadow:0 4px 12px rgba(16,185,129,.3)">
-    Show GitHub Steps →
-  </button>
-  <script>
-  const __code = `<!DOCTYPE html>
+  <div style="display:flex;gap:.8rem;flex-wrap:wrap;margin-top:1.2rem">
+    <button class="unlock-btn" onclick="downloadStarter(`<!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>My Button Board</title>
-    <style>
-      body { font-family: Arial, sans-serif; background: #f1f5f9;
-             padding: 30px; max-width: 700px; margin: 0 auto; }
-      h1 { color: #0f172a; text-align: center; }
-      .board { display: flex; flex-wrap: wrap; gap: 12px;
-               justify-content: center; margin: 24px 0; }
-      .btn { padding: 12px 24px; border: none; border-radius: 10px;
-             font-size: 15px; font-weight: bold; cursor: pointer;
-             transition: transform .15s, box-shadow .15s; }
-      .btn:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,.15); }
-      .btn:active { transform: translateY(0); }
-      #display {
-        background: white; border: 2px solid #e2e8f0; border-radius: 14px;
-        padding: 24px; text-align: center; font-size: 1.1rem;
-        min-height: 80px; color: #334155; margin-top: 10px;
-        transition: background .3s;
-      }
-    </style>
+    <meta charset="UTF-8">
+    <title>My Study Hub</title>
   </head>
   <body>
-    <h1>🎮 My Button Board</h1>
 
-    <div class="board">
-      <button class="btn" style="background:#ea4f21;color:white;"
-        onclick="display.textContent='👋 Hello from HTML!'">
-        Say Hello
-      </button>
+    <h1>📚 My Study Hub</h1>
+    <p>Click any resource below to study it in the viewer.</p>
 
-      <button class="btn" style="background:#0284c7;color:white;"
-        onclick="display.style.background='#dbeafe'; display.textContent='💙 Blue!'">
-        Go Blue
-      </button>
-
-      <button class="btn" style="background:#10b981;color:white;"
-        onclick="display.style.background='#dcfce7'; display.textContent='💚 Green!'">
-        Go Green
-      </button>
-
-      <button class="btn" style="background:#7c3aed;color:white;"
-        onclick="display.innerHTML='<strong>⏰ ' + new Date().toLocaleTimeString() + '</strong>'">
-        Show Time
-      </button>
-
-      <button class="btn" style="background:#d97706;color:white;"
-        onclick="count++; display.textContent='🖱️ Clicks: ' + count">
-        Count Clicks
-      </button>
-
-      <button class="btn" style="background:#0f172a;color:white;"
-        onclick="display.textContent=''; display.style.background='white'; count=0;">
-        Reset
-      </button>
-    </div>
-
-    <div id="display">Click any button to see the magic! ✨</div>
-
-    <script>
-      const display = document.getElementById('display');
-      let count = 0;
-    </script>
   </body>
-</html>`;
-  function downloadStarter(){
-    const a=document.createElement('a');
-    a.href='data:text/html;charset=utf-8,'+encodeURIComponent(__code);
-    a.download='starter.html'; a.click();
-  }
-  </script>
-</div>
-
-
-
-<div class="github-acc" id="github-steps" style="display:none">
-  <div class="github-acc-head" onclick="this.nextElementSibling.classList.toggle('open')">
-    🐙 GitHub Setup — Push your project online &nbsp;<span>▼</span>
-  </div>
-  <div class="github-acc-body">
-    <div class="github-step"><div class="github-step-n">1</div><p>Go to <strong>github.com</strong> and sign in. Click the green <strong>New</strong> button to create a new repository. Name it <code>html-lesson-21-html_buttons</code>.</p></div>
-    <div class="github-step"><div class="github-step-n">2</div><p>Leave it <strong>Public</strong> and tick <strong>Add a README file</strong>. Click <strong>Create repository</strong>.</p></div>
-    <div class="github-step"><div class="github-step-n">3</div><p>Click <strong>Add file → Upload files</strong>. Drag your <code>starter.html</code> (and rename it <code>index.html</code> first!) into the upload box.</p></div>
-    <div class="github-step"><div class="github-step-n">4</div><p>Scroll down, add a commit message like <em>"Add lesson 21 project"</em> and click <strong>Commit changes</strong>.</p></div>
-    <div class="github-step"><div class="github-step-n">5</div><p>Go to <strong>Settings → Pages</strong>. Under <em>Branch</em>, select <strong>main</strong> and click <strong>Save</strong>. Your page will be live at <code>https://YOUR-USERNAME.github.io/html-lesson-21-html_buttons/</code> in about 1 minute! 🎉</p></div>
-    <button class="next-btn" onclick="showEnd()" style="margin-top:.5rem">I'm done! Finish session ✅</button>
+</html>`)"
+      style="background:#10b981;box-shadow:0 4px 14px rgba(16,185,129,.3)">
+      ⬇ Download starter.html
+    </button>
+    <button class="unlock-btn" onclick="showGithub()"
+      style="background:#0f172a;box-shadow:none">
+      🐙 Push to GitHub →
+    </button>
   </div>
 </div>
-
+<div class="gh-acc" id="gh-steps" style="display:none">
+  <div class="gh-acc-head" onclick="toggleGh(this)">
+    🐙 Push Your Project to GitHub Pages &nbsp;<span>▼</span>
+  </div>
+  <div class="gh-acc-body">
+    <div class="gh-step"><div class="gh-step-n">1</div>
+    <p>Go to <strong>github.com</strong> → click <strong>New repository</strong> → name it <code>html-lesson-21-project-overview</code>.</p></div>
+    <div class="gh-step"><div class="gh-step-n">2</div>
+    <p>Set it to <strong>Public</strong>, tick <strong>Add a README</strong>, then click <strong>Create repository</strong>.</p></div>
+    <div class="gh-step"><div class="gh-step-n">3</div>
+    <p>Click <strong>Add file → Upload files</strong>. Upload your <code>starter.html</code> — rename it to <code>index.html</code> before uploading.</p></div>
+    <div class="gh-step"><div class="gh-step-n">4</div>
+    <p>Commit message: <em>"Add HTML lesson 21 project"</em> → click <strong>Commit changes</strong>.</p></div>
+    <div class="gh-step"><div class="gh-step-n">5</div>
+    <p>Go to <strong>Settings → Pages</strong> → branch <strong>main</strong> → <strong>Save</strong>. Your project goes live at <code>https://YOUR-NAME.github.io/html-lesson-21-project-overview/</code> in about 1 minute! 🎉</p></div>
+    <button class="unlock-btn" onclick="showEnd()" style="margin-top:.5rem">I've pushed to GitHub — Finish Session ✅</button>
+  </div>
+</div>
 <div class="session-end" id="session-end">
-  <h2>🎉 Great work! Lesson 21 complete!</h2>
-  <p style="margin-bottom:.8rem;font-size:.9rem;opacity:.9">Today you learned:</p>
-  <ul><li>✅ The Button Element</li><li>✅ Buttons with onclick and JavaScript</li></ul>
-  <div class="lesson-nav" style="margin-top:1.5rem;border-color:rgba(255,255,255,.2)">
-    <a href="lesson_20.html" class="ln-btn">← Lesson 20</a>
-    <a href="lesson_22.html" class="ln-btn primary">Lesson 22 →</a>
-  </div>
+  <h2>🎉 Lesson 21 complete!</h2>
+  <p style="margin-bottom:.8rem;font-size:.9rem;opacity:.9">You covered:</p>
+  <ul><li>✅ Lesson Introduction</li><li>✅ Prerequisite Concepts</li><li>✅ Section 1 — What Is an iframe?</li><li>✅ Section 2 — The Basic `<iframe>` Tag</li><li>✅ Section 3 — Setting Height and Width</li><li>✅ Section 4 — Removing the Iframe Border</li><li>✅ Section 5 — Using an iframe as a Link Target</li><li>✅ Section 6 — Combining Everything Together</li></ul>
+  <div class="lesson-nav"><a href="lesson_20.html" class="ln-btn">← Lesson 20</a><a href="lesson_22.html" class="ln-btn primary">Lesson 22 →</a></div>
 </div>
-
 </main>
 
-<!-- FOOTER -->
 <footer class="lesson-footer">
-  <p>Techbase Code Coach &nbsp;·&nbsp; HTML Course Lesson 21
-     &nbsp;·&nbsp; © 2025 Techbase Consultant Services, Ibadan</p>
+  Techbase Code Coach · HTML Course · Lesson 21 · © 2025 Techbase Consultant Services, Ibadan
 </footer>
-
 <script>
-const TOTAL=2, KEY='techbase_html_21_phase';
+const TOTAL=12,KEY='techbase_html_l21';
 let current=parseInt(localStorage.getItem(KEY)||'1');
-
 function init(){
-  for(let i=1;i<=current;i++) if(i>1) unlockPhase(i,false);
+  for(let i=2;i<=current;i++) unlockPhase(i,false);
   updateBar();
 }
-
 function unlockNext(n){
-  document.getElementById('check'+n).classList.add('done');
-  document.getElementById('check'+n).textContent='✓';
-  localStorage.setItem(KEY,n+1);
-  current=n+1;
+  const chk=document.getElementById('chk'+n);
+  if(chk){chk.classList.add('done');chk.textContent='✓';}
+  localStorage.setItem(KEY,n+1); current=n+1;
   if(n===TOTAL){
     document.getElementById('build-it').style.display='block';
-    const cap=document.getElementById('capstone');
-    if(cap) cap.style.display='block';
     updateBar(100);
     setTimeout(()=>document.getElementById('build-it').scrollIntoView({behavior:'smooth'}),200);
-  } else {
-    unlockPhase(n+1,true);
-    updateBar();
+  }else{
+    unlockPhase(n+1,true); updateBar();
   }
 }
-
 function unlockPhase(n,scroll){
   const el=document.getElementById('phase'+n);
-  if(el){ el.classList.remove('locked'); if(scroll) setTimeout(()=>el.scrollIntoView({behavior:'smooth',block:'start'}),150); }
+  if(el){el.classList.remove('locked');if(scroll)setTimeout(()=>el.scrollIntoView({behavior:'smooth',block:'start'}),150);}
 }
-
 function updateBar(pct){
-  const p=pct||Math.round((current-1)/TOTAL*95);
+  const p=pct!==undefined?pct:Math.round((current-1)/TOTAL*95);
   document.getElementById('pbar').style.width=p+'%';
 }
-
 function showGithub(){
-  const g=document.getElementById('github-steps');
-  if(g){ g.style.display='block'; setTimeout(()=>g.scrollIntoView({behavior:'smooth'}),150); }
+  const g=document.getElementById('gh-steps');
+  if(g){g.style.display='block';setTimeout(()=>g.scrollIntoView({behavior:'smooth'}),150);}
 }
-
 function showEnd(){
   const e=document.getElementById('session-end');
-  if(e){ e.classList.add('visible'); setTimeout(()=>e.scrollIntoView({behavior:'smooth'}),150); }
+  if(e){e.classList.add('visible');setTimeout(()=>e.scrollIntoView({behavior:'smooth'}),150);}
 }
-
+function toggleGh(el){el.nextElementSibling.classList.toggle('open');}
+function downloadStarter(code){
+  const a=document.createElement('a');
+  a.href='data:text/html;charset=utf-8,'+encodeURIComponent(code);
+  a.download='starter.html';a.click();
+}
 init();
 </script>
-
 </body>
 </html>

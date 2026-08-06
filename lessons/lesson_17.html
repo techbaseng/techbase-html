@@ -2,558 +2,1032 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Lesson 17: HTML Lists — Techbase HTML Course</title>
-<meta name="description" content="Display information using unordered bullet lists, ordered numbered lists, and description lists">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Lesson 17: HTML Lists — Unordered, Ordered, Description, and Nested Lists — Techbase HTML</title>
+<meta name="description" content="HTML Lists — Unordered, Ordered, Description, and Nested Lists">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-:root { 
-  --accent:#ea4f21;--accent-pale:#fff3ef;--accent-dark:#c23d15;
-  --accent-border:rgba(234,79,33,.3);--accent-shadow:rgba(234,79,33,.28);
-  --hero-bg:linear-gradient(160deg,#fff3ef 0%,#f8fafc 55%,#fef2e9 100%);
-  --s2:#f1f5f9;
- }
 :root{
+  --acc:#e34c26;--acc-d:#c0391a;--acc-pale:#fff5f2;
+  --acc-b:rgba(227,76,38,.25);--acc-sh:rgba(227,76,38,.25);
   --bg:#f8fafc;--surface:#fff;--border:#e2e8f0;--border2:#cbd5e1;
   --text:#0f172a;--t2:#334155;--muted:#64748b;
   --D:'Space Grotesk',sans-serif;--B:'Plus Jakarta Sans',sans-serif;--M:'JetBrains Mono',monospace;
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased}
-body{background:var(--bg);color:var(--text);font-family:var(--B);font-size:16px;line-height:1.7;overflow-x:hidden}
+body{background:var(--bg);color:var(--text);font-family:var(--B);font-size:16px;line-height:1.75;overflow-x:hidden}
+
 /* NAV */
-.l-nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(255,255,255,.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);height:58px;display:flex;align-items:center;padding:0 1.5rem;gap:1rem;justify-content:space-between}
-.l-nav-logo{font-family:var(--D);font-weight:700;font-size:.88rem;color:var(--text);text-decoration:none}
-.l-nav-logo em{font-style:normal}
+.l-nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(255,255,255,.95);
+  backdrop-filter:blur(12px);border-bottom:1px solid var(--border);height:58px;
+  display:flex;align-items:center;padding:0 1.5rem;gap:1rem;justify-content:space-between}
+.l-nav-logo{font-family:var(--D);font-weight:700;font-size:.9rem;color:var(--text);text-decoration:none}
 .l-nav-back{font-size:.8rem;color:var(--muted);text-decoration:none;font-weight:500;display:flex;align-items:center;gap:.3rem;transition:color .2s}
-.l-nav-back:hover{color:var(--accent)}
-.l-nav-lesson{font-family:var(--M);font-size:.68rem;color:var(--muted)}
-/* PROGRESS BAR */
+.l-nav-back:hover{color:var(--acc)}
+.l-nav-label{font-family:var(--M);font-size:.68rem;color:var(--muted)}
+
+/* PROGRESS */
 .progress-wrap{position:fixed;top:58px;left:0;right:0;z-index:199;height:4px;background:var(--border)}
-.progress-bar{height:100%;background:var(--accent);transition:width .4s ease;width:0%}
+.progress-bar{height:100%;background:var(--acc);transition:width .4s ease;width:0%}
+
 /* HERO */
-.l-hero{padding:88px 1.5rem 2rem;background:var(--hero-bg);border-bottom:1px solid var(--border)}
-.l-hero-inner{max-width:820px;margin:0 auto}
-.l-badge{display:inline-flex;align-items:center;gap:.4rem;border-radius:100px;padding:.2rem .8rem;font-family:var(--M);font-size:.62rem;letter-spacing:.08em;text-transform:uppercase;font-weight:600;border:1px solid;color:var(--accent);background:var(--accent-pale);border-color:var(--accent-border);margin-bottom:.8rem}
-.l-hero h1{font-family:var(--D);font-weight:700;font-size:clamp(1.6rem,4vw,2.4rem);letter-spacing:-.025em;line-height:1.15;margin-bottom:.5rem}
-.l-hero-tag{font-size:.95rem;color:var(--muted);margin-bottom:1.2rem}
-.l-hero-build{background:var(--surface);border:1.5px solid var(--border);border-radius:10px;padding:.9rem 1.2rem;display:flex;align-items:center;gap:.7rem;font-size:.88rem;max-width:520px}
-.l-hero-build strong{color:var(--accent)}
+.l-hero{padding:80px 1.5rem 2rem;background:linear-gradient(160deg,#fff5f2 0%,#f8fafc 55%,#ffe8e0 100%);border-bottom:1px solid var(--border)}
+.l-hero-inner{max-width:860px;margin:0 auto}
+.l-badge{display:inline-flex;align-items:center;gap:.4rem;border-radius:100px;padding:.2rem .85rem;
+  font-family:var(--M);font-size:.62rem;letter-spacing:.08em;text-transform:uppercase;font-weight:600;
+  color:var(--acc);background:var(--acc-pale);border:1px solid var(--acc-b);margin-bottom:.8rem}
+.l-hero h1{font-family:var(--D);font-weight:700;font-size:clamp(1.5rem,4vw,2.3rem);
+  letter-spacing:-.02em;line-height:1.15;margin-bottom:.5rem}
+.l-hero-sub{font-size:.95rem;color:var(--muted);margin-bottom:1rem}
+
 /* WELCOME BOX */
-.welcome-box{background:linear-gradient(135deg,var(--accent),var(--accent-dark));color:#fff;border-radius:16px;padding:1.5rem 1.8rem;max-width:820px;margin:2rem auto 0}
-.welcome-box h2{font-family:var(--D);font-weight:700;font-size:1.1rem;margin-bottom:.6rem}
-.welcome-box p{font-size:.9rem;line-height:1.75;opacity:.92}
-.welcome-meta{display:flex;gap:1.5rem;margin-top:1rem;flex-wrap:wrap}
-.welcome-meta span{background:rgba(255,255,255,.15);border-radius:6px;padding:.25rem .8rem;font-family:var(--M);font-size:.7rem;font-weight:500}
-/* MAIN CONTENT */
-main{max-width:820px;margin:0 auto;padding:2rem 1.5rem 5rem}
+.welcome-box{background:linear-gradient(135deg,var(--acc),var(--acc-d));color:#fff;
+  border-radius:16px;padding:1.5rem 1.8rem;max-width:860px;margin:1.5rem auto 0}
+.welcome-box h2{font-family:var(--D);font-weight:700;font-size:1.05rem;margin-bottom:.6rem}
+.welcome-box p,.welcome-box li{font-size:.9rem;line-height:1.8;opacity:.93}
+.welcome-box ul{margin-left:1.2rem;margin-top:.5rem}
+.welcome-meta{display:flex;gap:1rem;margin-top:1rem;flex-wrap:wrap}
+.welcome-meta span{background:rgba(255,255,255,.18);border-radius:6px;padding:.2rem .75rem;
+  font-family:var(--M);font-size:.68rem;font-weight:500}
+
 /* PHASE */
-.phase{background:var(--surface);border:1.5px solid var(--border);border-radius:16px;margin-bottom:1.5rem;overflow:hidden;transition:opacity .3s,transform .3s}
-.phase.locked{opacity:.4;pointer-events:none;filter:blur(1px)}
-.phase-header{padding:1rem 1.4rem;background:var(--s2,#f1f5f9);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;gap:1rem}
-.phase-num{font-family:var(--M);font-size:.7rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}
-.phase-title{font-family:var(--D);font-weight:700;font-size:1rem;color:var(--text)}
-.phase-check{width:24px;height:24px;border-radius:50%;background:var(--border);display:flex;align-items:center;justify-content:center;font-size:.75rem;flex-shrink:0;transition:background .3s}
+.phase{background:var(--surface);border:1.5px solid var(--border);border-radius:16px;
+  margin-bottom:1.5rem;overflow:hidden;transition:opacity .3s,transform .3s,filter .3s}
+.phase.locked{opacity:.35;pointer-events:none;filter:blur(1.5px)}
+.phase-header{padding:1rem 1.4rem;background:#fff8f5;
+  border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;gap:1rem;cursor:default}
+.phase-num{font-family:var(--M);font-size:.7rem;font-weight:600;letter-spacing:.08em;
+  text-transform:uppercase;color:var(--acc)}
+.phase-title{font-family:var(--D);font-weight:700;font-size:.95rem;color:var(--text);
+  flex:1;margin:0 .8rem}
+.phase-check{width:26px;height:26px;border-radius:50%;background:var(--border);
+  display:flex;align-items:center;justify-content:center;font-size:.8rem;flex-shrink:0;
+  transition:background .3s,color .3s}
 .phase-check.done{background:#10b981;color:#fff}
-.phase-body{padding:1.4rem}
-/* CONCEPT BOX */
-.concept-box{background:#f0f9ff;border-left:4px solid #0284c7;border-radius:0 10px 10px 0;padding:1rem 1.2rem;margin-bottom:1.2rem}
-.concept-label{font-family:var(--M);font-size:.65rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#0284c7;margin-bottom:.4rem}
-.concept-box p{font-size:.92rem;color:#0c4a6e;line-height:1.75}
-/* CODE BLOCK */
-.code-wrap{margin:1.2rem 0;border-radius:12px;overflow:hidden;border:1px solid #1e293b}
-.code-bar{background:#1e293b;padding:.6rem 1rem;display:flex;align-items:center;gap:.4rem}
-.code-dot{width:8px;height:8px;border-radius:50%}
-.code-dot.r{background:#ff5f57}.code-dot.y{background:#febc2e}.code-dot.g{background:#28c840}
-.code-filename{margin-left:.5rem;font-family:var(--M);font-size:.65rem;color:#64748b}
-.code-body{background:#0f172a;padding:1.2rem 1.4rem;overflow-x:auto}
-.code-body pre{font-family:var(--M);font-size:.78rem;line-height:1.9;color:#e2e8f0;margin:0;white-space:pre}
-.code-body pre .cm{color:#64748b} /* comment */
-.code-body pre .tg{color:#38bdf8} /* tag */
-.code-body pre .at{color:#c084fc} /* attribute */
-.code-body pre .vl{color:#86efac} /* value */
-.code-body pre .tx{color:#e2e8f0} /* text */
+.phase-body{padding:1.6rem 1.8rem}
+
+/* RICH CONTENT STYLES */
+.v2-p{margin-bottom:1rem;font-size:.95rem;color:var(--t2);line-height:1.85}
+.v2-h3{font-family:var(--D);font-weight:700;font-size:1.05rem;color:var(--text);
+  margin:1.6rem 0 .5rem;padding-top:.2rem;border-top:2px solid var(--acc-pale)}
+.v2-h4{font-family:var(--D);font-weight:600;font-size:.95rem;color:var(--t2);margin:1.1rem 0 .4rem}
+.v2-h5,.v2-h6{font-family:var(--D);font-weight:600;font-size:.9rem;color:var(--muted);margin:.8rem 0 .3rem}
+.v2-ul,.v2-ol{margin:.6rem 0 1rem 1.4rem;font-size:.93rem;color:var(--t2);line-height:1.9}
+.v2-ul li,.v2-ol li{margin-bottom:.3rem}
+.v2-bq{border-left:4px solid var(--acc);background:var(--acc-pale);border-radius:0 10px 10px 0;
+  padding:.9rem 1.2rem;margin:1rem 0;font-size:.92rem;color:#7b1c06;font-style:italic}
+.v2-bq p{margin:0;color:inherit}
+.v2-bq strong{font-style:normal}
+.v2-hr{border:none;border-top:1px solid var(--border);margin:1.2rem 0}
+.v2-table-wrap{overflow-x:auto;margin:1rem 0}
+.v2-table{width:100%;border-collapse:collapse;font-size:.87rem}
+.v2-table th{background:var(--acc-pale);color:#7b1c06;font-family:var(--D);
+  font-weight:700;padding:9px 12px;text-align:left;border:1px solid var(--acc-b)}
+.v2-table td{padding:8px 12px;border:1px solid var(--border);color:var(--t2);vertical-align:top}
+.v2-table tr:nth-child(even) td{background:#f8fafc}
+.v2-table code{background:var(--acc-pale);color:var(--acc);border-radius:4px;
+  padding:1px 5px;font-family:var(--M);font-size:.8em}
+.phase-body code{background:var(--acc-pale);color:var(--acc-d);border-radius:4px;
+  padding:1px 6px;font-family:var(--M);font-size:.82em}
+.phase-body a{color:var(--acc);text-decoration:underline;text-underline-offset:2px}
+.phase-body strong{color:var(--text)}
+
+/* CODE BLOCKS */
+.v2-code-wrap{margin:1.2rem 0;border-radius:12px;overflow:hidden;border:1px solid #1e293b;box-shadow:0 4px 16px rgba(0,0,0,.15)}
+.v2-code-bar{background:#1e293b;padding:.55rem 1rem;display:flex;align-items:center;gap:.4rem}
+.v2-dot{width:10px;height:10px;border-radius:50%}
+.v2-dot.r{background:#ff5f57}.v2-dot.y{background:#febc2e}.v2-dot.g{background:#28c840}
+.v2-code-lang{margin-left:.6rem;font-family:var(--M);font-size:.65rem;color:#64748b;text-transform:uppercase;letter-spacing:.08em}
+.v2-code-body{background:#0f172a;padding:1.3rem 1.5rem;overflow-x:auto}
+.v2-code-body pre{margin:0}
+.v2-code-body code{font-family:var(--M);font-size:.8rem;line-height:1.9;color:#e2e8f0;
+  white-space:pre;background:transparent;padding:0;border-radius:0}
+
 /* TASK BOX */
-.task-box{background:#fffbeb;border:1.5px dashed #d97706;border-radius:12px;padding:1rem 1.2rem;margin:1.2rem 0}
-.task-label{font-family:var(--M);font-size:.65rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#b45309;margin-bottom:.4rem}
-.task-box p{font-size:.92rem;color:#78350f;line-height:1.75}
-.task-box code{background:rgba(180,83,9,.1);border-radius:4px;padding:.1rem .4rem;font-family:var(--M);font-size:.82em}
-/* NEXT BUTTON */
-.next-btn{display:inline-flex;align-items:center;gap:.5rem;background:var(--accent);color:#fff;font-family:var(--D);font-weight:700;font-size:.88rem;padding:.75rem 1.5rem;border-radius:10px;border:none;cursor:pointer;transition:transform .2s,box-shadow .2s;box-shadow:0 4px 12px var(--accent-shadow);margin-top:1rem}
-.next-btn:hover{transform:translateY(-2px);box-shadow:0 8px 20px var(--accent-shadow)}
-.next-btn:disabled{opacity:.5;cursor:not-allowed;transform:none}
-.next-tip{font-family:var(--M);font-size:.72rem;color:var(--muted);margin-top:.6rem}
-/* PROJECT BOX */
-.project-box{background:#f0fdf4;border:2px solid #16a34a;border-radius:16px;padding:1.5rem;margin:2rem 0}
-.project-label{font-family:var(--M);font-size:.65rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#15803d;margin-bottom:.4rem}
-.project-name{font-family:var(--D);font-weight:700;font-size:1.1rem;color:#14532d;margin-bottom:.5rem}
-.project-desc{font-size:.9rem;color:#166534;margin-bottom:1.2rem;line-height:1.7}
-/* CAPSTONE BOX */
-.capstone-box{background:linear-gradient(135deg,#1e1b4b,#312e81);border-radius:16px;padding:1.5rem;margin:2rem 0;color:#fff}
-.capstone-label{font-family:var(--M);font-size:.65rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#a5b4fc;margin-bottom:.4rem}
-.capstone-name{font-family:var(--D);font-weight:700;font-size:1.2rem;margin-bottom:.5rem}
-.capstone-desc{font-size:.9rem;color:rgba(255,255,255,.8);margin-bottom:1.2rem;line-height:1.7}
-/* FILE TABS */
-.file-tabs{display:flex;gap:.5rem;margin-bottom:0;flex-wrap:wrap}
-.file-tab{font-family:var(--M);font-size:.72rem;padding:.35rem .8rem;background:#1e293b;color:#94a3b8;border-radius:6px 6px 0 0;cursor:pointer;border:1px solid #334155;border-bottom:none;transition:background .15s}
-.file-tab.active{background:#0f172a;color:#e2e8f0}
-.file-content{display:none}.file-content.active{display:block}
+.task-box{background:#fff0ec;border:2px dashed #e34c26;
+  border-radius:12px;padding:1rem 1.3rem;margin:1.4rem 0}
+.task-label{font-family:var(--M);font-size:.65rem;font-weight:700;letter-spacing:.1em;
+  text-transform:uppercase;color:#7b1c06;margin-bottom:.5rem;display:flex;align-items:center;gap:.4rem}
+.task-box p,.task-body{font-size:.92rem;color:#7b1c06;line-height:1.8}
+.task-box code{background:rgba(0,0,0,.08);border-radius:4px;padding:1px 6px;
+  font-family:var(--M);font-size:.82em}
+
+/* UNLOCK BUTTON */
+.unlock-btn{display:inline-flex;align-items:center;gap:.5rem;background:var(--acc);
+  color:#fff;font-family:var(--D);font-weight:700;font-size:.88rem;
+  padding:.75rem 1.6rem;border-radius:10px;border:none;cursor:pointer;
+  transition:transform .2s,box-shadow .2s;box-shadow:0 4px 14px var(--acc-sh);margin-top:1.2rem}
+.unlock-btn:hover{transform:translateY(-2px);box-shadow:0 8px 22px var(--acc-sh)}
+
+/* BUILD IT */
+.build-box{background:#f0fdf4;border:2px solid #16a34a;border-radius:16px;padding:1.6rem;margin:2rem 0;display:none}
+.build-label{font-family:var(--M);font-size:.65rem;font-weight:700;letter-spacing:.1em;
+  text-transform:uppercase;color:#15803d;margin-bottom:.4rem}
+.build-name{font-family:var(--D);font-weight:700;font-size:1.1rem;color:#14532d;margin-bottom:.5rem}
+.build-desc{font-size:.9rem;color:#166534;margin-bottom:1.2rem;line-height:1.75}
+.build-desc code{background:rgba(22,163,74,.12);border-radius:4px;padding:1px 6px;font-family:var(--M);font-size:.82em}
+.build-desc strong{color:#14532d}
+
 /* GITHUB ACCORDION */
-.github-acc{border:1.5px solid var(--border);border-radius:12px;overflow:hidden;margin:1.5rem 0}
-.github-acc-head{padding:1rem 1.2rem;background:#f8fafc;cursor:pointer;display:flex;align-items:center;justify-content:space-between;font-family:var(--D);font-weight:600;font-size:.9rem;user-select:none}
-.github-acc-body{display:none;padding:1.2rem;border-top:1px solid var(--border)}
-.github-acc-body.open{display:block}
-.github-step{display:flex;gap:.8rem;margin-bottom:1rem;align-items:flex-start}
-.github-step-n{width:24px;height:24px;border-radius:50%;background:var(--accent);color:#fff;font-family:var(--D);font-weight:700;font-size:.75rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px}
-.github-step p{font-size:.88rem;color:var(--t2);line-height:1.7}
+.gh-acc{border:1.5px solid var(--border);border-radius:12px;overflow:hidden;margin:1.5rem 0}
+.gh-acc-head{padding:1rem 1.2rem;background:#f8fafc;cursor:pointer;
+  display:flex;align-items:center;justify-content:space-between;
+  font-family:var(--D);font-weight:600;font-size:.9rem;user-select:none}
+.gh-acc-body{display:none;padding:1.2rem;border-top:1px solid var(--border)}
+.gh-acc-body.open{display:block}
+.gh-step{display:flex;gap:.8rem;margin-bottom:1rem;align-items:flex-start}
+.gh-step-n{width:26px;height:26px;border-radius:50%;background:var(--acc);color:#fff;
+  font-family:var(--D);font-weight:700;font-size:.75rem;display:flex;align-items:center;
+  justify-content:center;flex-shrink:0;margin-top:2px}
+.gh-step p{font-size:.88rem;color:var(--t2);line-height:1.7}
+.gh-step code{background:var(--acc-pale);color:var(--acc-d);border-radius:4px;
+  padding:1px 6px;font-family:var(--M);font-size:.82em}
+
 /* SESSION END */
-.session-end{background:linear-gradient(135deg,var(--accent),var(--accent-dark));color:#fff;border-radius:16px;padding:1.5rem 1.8rem;margin:2rem 0;display:none}
+.session-end{background:linear-gradient(135deg,var(--acc),var(--acc-d));color:#fff;
+  border-radius:16px;padding:1.6rem 1.8rem;margin:2rem 0;display:none}
 .session-end.visible{display:block}
 .session-end h2{font-family:var(--D);font-weight:700;font-size:1.1rem;margin-bottom:.8rem}
 .session-end ul{list-style:none;display:flex;flex-direction:column;gap:.4rem}
-.session-end li{font-size:.9rem;opacity:.92;display:flex;align-items:center;gap:.5rem}
-/* LESSON NAV */
-.lesson-nav{display:flex;align-items:center;justify-content:space-between;padding-top:2rem;border-top:1px solid var(--border);margin-top:2rem;flex-wrap:wrap;gap:.75rem}
-.ln-btn{display:inline-flex;align-items:center;gap:.4rem;background:var(--surface);color:var(--t2);font-family:var(--D);font-weight:600;font-size:.82rem;padding:.65rem 1.2rem;border-radius:8px;text-decoration:none;border:1.5px solid var(--border);transition:border-color .2s,color .2s}
-.ln-btn:hover{border-color:var(--accent);color:var(--accent)}
-.ln-btn.primary{background:var(--accent);color:#fff;border-color:var(--accent)}
+.session-end li{font-size:.9rem;opacity:.93;display:flex;align-items:center;gap:.5rem}
+.ln-btn{display:inline-flex;align-items:center;gap:.4rem;background:var(--surface);
+  color:var(--t2);font-family:var(--D);font-weight:600;font-size:.82rem;
+  padding:.65rem 1.2rem;border-radius:8px;text-decoration:none;
+  border:1.5px solid var(--border);transition:border-color .2s,color .2s}
+.ln-btn:hover{border-color:var(--acc);color:var(--acc)}
+.ln-btn.primary{background:var(--acc);color:#fff;border-color:var(--acc)}
 .ln-btn.primary:hover{opacity:.9}
-/* UTILS */
-code{font-family:var(--M);font-size:.85em;background:#f1f5f9;border-radius:4px;padding:.1rem .35rem;color:var(--accent)}
-.emoji{font-style:normal}
-@media(max-width:600px){.l-hero h1{font-size:1.5rem}.welcome-meta{gap:.75rem}}
-
+.lesson-nav{display:flex;align-items:center;justify-content:space-between;
+  padding-top:2rem;border-top:1px solid rgba(255,255,255,.25);margin-top:1.5rem;flex-wrap:wrap;gap:.75rem}
+.lesson-footer{text-align:center;padding:1.5rem;font-family:var(--M);font-size:.72rem;
+  color:var(--muted);border-top:1px solid var(--border);background:var(--surface)}
 </style>
 </head>
 <body>
-
-<!-- FIXED NAV -->
-<nav class="lesson-nav-bar">
-  <a href="../index.html" class="nav-back">← HTML Course</a>
-  <span class="nav-lesson">Lesson 17 of 34 &nbsp;·&nbsp; HTML Lists</span>
-  <div class="nav-actions">
-    <a href="lesson_16.html" class="ln-btn">← Lesson 16</a>
-    <a href="lesson_18.html" class="ln-btn primary">Lesson 18 →</a>
-  </div>
+<nav class="l-nav">
+  <a href="../index.html" class="l-nav-logo">⚡ Techbase HTML</a>
+  <span class="l-nav-label">Lesson 17 of 34</span>
+  <a href="../index.html" class="l-nav-back">← All Lessons</a>
 </nav>
+<div class="progress-wrap"><div class="progress-bar" id="pbar"></div></div>
 
-<!-- PROGRESS BAR -->
-<div id="progress-wrap">
-  <div id="pbar" style="width:5%;background:var(--accent);height:4px;
-       border-radius:2px;transition:width .4s ease;"></div>
+<div class="l-hero">
+  <div class="l-hero-inner">
+    <div class="l-badge">HTML · Lesson 17</div>
+    <h1>HTML Lists — Unordered, Ordered, Description, and Nested Lists</h1>
+    <div class="l-hero-sub">10 phases · Build: Stage 1 — Set Up the Page Structure</div>
+  </div>
 </div>
 
-<!-- HERO -->
-<section class="lesson-hero">
-  <div class="hero-inner">
-    <div class="lesson-num-badge">Lesson 17</div>
-    <h1>HTML Lists</h1>
-    <p class="lesson-tagline">Display information using unordered bullet lists, ordered numbered lists, and description lists</p>
-    <div class="lesson-meta">
-      <span>📚 2 phases</span>
-      <span>🏗️ Build: My Lists Page</span>
-      
-    </div>
+<section style="background:linear-gradient(160deg,#fff5f2 0%,#f8fafc 55%,#ffe8e0 100%);padding-bottom:1.5rem;border-bottom:1px solid var(--border)">
+  <div style="max-width:860px;margin:0 auto;padding:0 1.5rem"><div class="welcome-box">
+  <h2>👋 Welcome to Lesson 17</h2>
+  <div style="font-size:.9rem;line-height:1.85;opacity:.93"><p class="v2-p">Imagine you are writing a recipe. You have a shopping list of ingredients (where order does not matter), and a set of cooking steps (where order absolutely matters). In HTML, we have exactly those two types of lists — plus a third special type called a <strong>description list</strong> for defining terms. Together, these three list types are among the most frequently used structures in every website, app, and document on the web.</p>
+<p class="v2-p">By the end of this lesson you will be able to:</p>
+<ul class="v2-ul"><li>Create <strong>unordered lists</strong> (bullet lists) for items where order does not matter.</li><li>Create <strong>ordered lists</strong> (numbered lists) for items where sequence matters.</li><li>Customise bullet markers and numbering styles.</li><li>Create <strong>description lists</strong> to pair terms with their definitions.</li><li><strong>Nest</strong> lists inside other lists.</li><li>Build a <strong>horizontal navigation menu</strong> from an unordered list using CSS.</li><li>Complete a <strong>mini project</strong> that combines all three list types in one realistic webpage.</li></ul>
+<hr class="v2-hr"></div>
+  <div class="welcome-meta">
+    <span>📚 10 phases</span>
+    <span>🏗️ Stage 1 — Set Up the Page Structure</span>
   </div>
+</div></div>
 </section>
 
-<!-- MAIN CONTENT -->
-<main class="lesson-main">
-
-<div class="welcome-box">
-  <div class="welcome-label">👋 Welcome to Lesson 17!</div>
-  <h2>HTML Lists</h2>
-  <p>Display information using unordered bullet lists, ordered numbered lists, and description lists. In this lesson you will work through
-     <strong>2 phases</strong>.
-     Complete each phase task before clicking <em>Next Phase</em>.
-     
-  </p>
-</div>
-
-<div class="phase " id="phase1" data-phase="1">
+<main style="max-width:860px;margin:0 auto;padding:2rem 1.5rem 5rem">
+<div class="phase" id="phase1">
   <div class="phase-header">
-    <div><div class="phase-num">Phase 1</div><div class="phase-title">Unordered and Ordered Lists</div></div>
-    <div class="phase-check" id="check1"></div>
+    <div class="phase-num">Phase 1 of 10</div>
+    <div class="phase-title">Lesson Introduction</div>
+    <div class="phase-check" id="chk1"></div>
   </div>
   <div class="phase-body">
-    <div class="concept-box">
-      <div class="concept-label">💡 Concept</div>
-      <p>An <strong>unordered list</strong> (<code>&lt;ul&gt;</code>) shows items with bullet points — use it when the order doesn't matter (e.g., ingredients). An <strong>ordered list</strong> (<code>&lt;ol&gt;</code>) shows items with numbers — use it when order matters (e.g., steps). Both use <code>&lt;li&gt;</code> (list item) tags for each item. You can change the bullet style with CSS <code>list-style-type</code> and the number type with the <code>type</code> attribute on <code>&lt;ol&gt;</code>.</p>
-    </div>
-    <div class="code-wrap">
-  <div class="code-bar">
-    <span class="code-dot r"></span><span class="code-dot y"></span><span class="code-dot g"></span>
-    <span class="code-filename">index.html</span>
-  </div>
-  <div class="code-body"><pre>&lt;!DOCTYPE html&gt;
-&lt;html lang="en"&gt;
-  &lt;head&gt;&lt;title&gt;Lists&lt;/title&gt;&lt;/head&gt;
-  &lt;body&gt;
-
-    &lt;h2&gt;My Favourite Foods (unordered — order doesn't matter)&lt;/h2&gt;
-    &lt;ul&gt;
-      &lt;li&gt;Jollof rice&lt;/li&gt;
-      &lt;li&gt;Suya&lt;/li&gt;
-      &lt;li&gt;Puff puff&lt;/li&gt;
-      &lt;li&gt;Fried plantain&lt;/li&gt;
-    &lt;/ul&gt;
-
-    &lt;h2&gt;How to Make Jollof Rice (ordered — steps matter!)&lt;/h2&gt;
-    &lt;ol&gt;
-      &lt;li&gt;Blend tomatoes and peppers&lt;/li&gt;
-      &lt;li&gt;Fry the blended mixture in oil&lt;/li&gt;
-      &lt;li&gt;Add rice and water&lt;/li&gt;
-      &lt;li&gt;Cook on low heat for 30 minutes&lt;/li&gt;
-    &lt;/ol&gt;
-
-    &lt;!-- Ordered list with letters instead of numbers --&gt;
-    &lt;ol type="A"&gt;
-      &lt;li&gt;Option A&lt;/li&gt;
-      &lt;li&gt;Option B&lt;/li&gt;
-      &lt;li&gt;Option C&lt;/li&gt;
-    &lt;/ol&gt;
-
-  &lt;/body&gt;
-&lt;/html&gt;</pre></div>
-</div>
+    <p class="v2-p">Imagine you are writing a recipe. You have a shopping list of ingredients (where order does not matter), and a set of cooking steps (where order absolutely matters). In HTML, we have exactly those two types of lists — plus a third special type called a <strong>description list</strong> for defining terms. Together, these three list types are among the most frequently used structures in every website, app, and document on the web.</p>
+<p class="v2-p">By the end of this lesson you will be able to:</p>
+<ul class="v2-ul"><li>Create <strong>unordered lists</strong> (bullet lists) for items where order does not matter.</li><li>Create <strong>ordered lists</strong> (numbered lists) for items where sequence matters.</li><li>Customise bullet markers and numbering styles.</li><li>Create <strong>description lists</strong> to pair terms with their definitions.</li><li><strong>Nest</strong> lists inside other lists.</li><li>Build a <strong>horizontal navigation menu</strong> from an unordered list using CSS.</li><li>Complete a <strong>mini project</strong> that combines all three list types in one realistic webpage.</li></ul>
+<hr class="v2-hr">
     <div class="task-box">
       <div class="task-label">✏️ Your Task</div>
-      <p>Create an unordered list of your 5 favourite things. Then create an ordered list with instructions for something you know how to do (make tea, play a sport, etc.). Add <code>type="A"</code> or <code>type="i"</code> to your <code>&lt;ol&gt;</code> to try different numbering styles.</p>
+      <div class="task-body">Now practise what you just learned about <strong>Lesson Introduction</strong>. Open your editor, type the examples above by hand, then modify them — change values, rename variables, and observe what happens. Active experimentation is how code sticks.</div>
     </div>
-    <button class="next-btn" onclick="unlockNext(1)">
-      Next Phase → <span>→</span>
-    </button>
-    <p class="next-tip">Try the task first, then click to continue!</p>
+    <button class="unlock-btn" onclick="unlockNext(1)">Start Lesson ✓</button>
   </div>
-</div><div class="phase locked" id="phase2" data-phase="2">
+</div>
+<div class="phase locked" id="phase2">
   <div class="phase-header">
-    <div><div class="phase-num">Phase 2</div><div class="phase-title">Nested Lists and Description Lists</div></div>
-    <div class="phase-check" id="check2"></div>
+    <div class="phase-num">Phase 2 of 10</div>
+    <div class="phase-title">Prerequisite Concepts</div>
+    <div class="phase-check" id="chk2"></div>
   </div>
   <div class="phase-body">
-    <div class="concept-box">
-      <div class="concept-label">💡 Concept</div>
-      <p>You can put a list inside a list item to create a <strong>nested list</strong> — great for outlines and menus. A <strong>description list</strong> (<code>&lt;dl&gt;</code>) pairs terms with their definitions. Use <code>&lt;dt&gt;</code> for the term and <code>&lt;dd&gt;</code> for the description. You can also style list bullets completely with CSS using <code>list-style: none</code> and custom bullet shapes.</p>
-    </div>
-    <div class="code-wrap">
-  <div class="code-bar">
-    <span class="code-dot r"></span><span class="code-dot y"></span><span class="code-dot g"></span>
-    <span class="code-filename">index.html</span>
-  </div>
-  <div class="code-body"><pre>&lt;!DOCTYPE html&gt;
-&lt;html lang="en"&gt;
-  &lt;head&gt;
-    &lt;title&gt;Nested Lists&lt;/title&gt;
-    &lt;style&gt;
-      /* Custom styled list */
-      ul.custom { list-style: none; padding: 0; }
-      ul.custom li { padding: 6px 0; padding-left: 24px; position: relative; }
-      ul.custom li::before {
-        content: "🔹";
-        position: absolute; left: 0;
-      }
-    &lt;/style&gt;
-  &lt;/head&gt;
-  &lt;body&gt;
-
-    &lt;h2&gt;Nested List — Tech Topics&lt;/h2&gt;
-    &lt;ul&gt;
-      &lt;li&gt;Frontend
-        &lt;ul&gt;
-          &lt;li&gt;HTML&lt;/li&gt;
-          &lt;li&gt;CSS&lt;/li&gt;
-          &lt;li&gt;JavaScript&lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-      &lt;li&gt;Backend
-        &lt;ul&gt;
-          &lt;li&gt;Python&lt;/li&gt;
-          &lt;li&gt;Node.js&lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-    &lt;/ul&gt;
-
-    &lt;h2&gt;Description List — HTML Terms&lt;/h2&gt;
-    &lt;dl&gt;
-      &lt;dt&gt;&lt;strong&gt;HTML&lt;/strong&gt;&lt;/dt&gt;
-      &lt;dd&gt;HyperText Markup Language — the structure of web pages&lt;/dd&gt;
-
-      &lt;dt&gt;&lt;strong&gt;Tag&lt;/strong&gt;&lt;/dt&gt;
-      &lt;dd&gt;An HTML keyword in angle brackets, like &amp;lt;p&amp;gt;&lt;/dd&gt;
-    &lt;/dl&gt;
-
-    &lt;h2&gt;Custom Styled List&lt;/h2&gt;
-    &lt;ul class="custom"&gt;
-      &lt;li&gt;Learn HTML first&lt;/li&gt;
-      &lt;li&gt;Then learn CSS&lt;/li&gt;
-      &lt;li&gt;Then JavaScript&lt;/li&gt;
-    &lt;/ul&gt;
-
-  &lt;/body&gt;
-&lt;/html&gt;</pre></div>
-</div>
+    <p class="v2-p">Before we begin, you need to feel comfortable with the following ideas. If any of these feel unfamiliar, re-read the relevant earlier lesson before continuing.</p>
+<p class="v2-p"><strong>HTML tags</strong> — An HTML tag is a keyword wrapped in angle brackets. Tags normally come in pairs: an <strong>opening tag</strong> like <code>&lt;p&gt;</code> and a <strong>closing tag</strong> like <code>&lt;/p&gt;</code>. Everything between the two tags is the content that tag controls.</p>
+<p class="v2-p"><strong>HTML elements</strong> — An HTML element is the complete unit of opening tag + content + closing tag:</p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;p&gt;This is a paragraph element.&lt;/p&gt;</code></pre></div></div>
+<p class="v2-p"><strong>Parent and child elements</strong> — When one element sits inside another element, the outer one is called the <strong>parent</strong> and the inner one is called the <strong>child</strong>. Lists use this relationship constantly: the list container (<code>&lt;ul&gt;</code> or <code>&lt;ol&gt;</code>) is the parent, and each list item (<code>&lt;li&gt;</code>) is a child.</p>
+<p class="v2-p"><strong>The <code>style</code> attribute</strong> — You can add CSS styling directly to any HTML tag using the <code>style</code> attribute, like this:</p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;p style=&quot;color: red;&quot;&gt;This text is red.&lt;/p&gt;</code></pre></div></div>
+<p class="v2-p">We will use this technique in a few list examples to change bullet styles.</p>
+<hr class="v2-hr">
     <div class="task-box">
       <div class="task-label">✏️ Your Task</div>
-      <p>Build a nested list showing categories and subcategories (e.g., Countries → Cities, or Sports → Teams). Then create a <code>&lt;dl&gt;</code> description list defining 5 HTML tags you've learned so far.</p>
+      <div class="task-body">Now practise what you just learned about <strong>Prerequisite Concepts</strong>. Open your editor, type the examples above by hand, then modify them — change values, rename variables, and observe what happens. Active experimentation is how code sticks.</div>
     </div>
-    <button class="next-btn" onclick="unlockNext(2)">
-      Build It! 🚀 <span>→</span>
-    </button>
-    <p class="next-tip">Try the task first, then click to continue!</p>
+    <button class="unlock-btn" onclick="unlockNext(2)">Phase Complete — Unlock Next ✓</button>
   </div>
 </div>
-
-<div class="project-box" id="build-it" style="display:none">
-  <div class="project-label">🏗️ Build It!</div>
-  <div class="project-name">My Lists Page</div>
-  <p class="project-desc">Build a styled 'My Top Lists' page with a custom-styled ul, a recipe ol, a nested list, and a dl glossary.</p>
-  <div class="code-wrap">
-    <div class="code-bar">
-      <span class="code-dot r"></span><span class="code-dot y"></span><span class="code-dot g"></span>
-      <span class="code-filename">starter.html — copy this into a new file!</span>
-    </div>
-    <div class="code-body"><pre id="starter-code">&lt;!DOCTYPE html&gt;
-&lt;html lang="en"&gt;
-  &lt;head&gt;
-    &lt;title&gt;My Top Lists&lt;/title&gt;
-    &lt;style&gt;
-      body { font-family: Arial, sans-serif; max-width:700px;
-             margin:0 auto; padding:30px; background:#f8fafc; }
-      h1 { color: #ea4f21; }
-      h2 { color: #0f172a; margin-top: 30px; border-bottom: 2px solid #e2e8f0;
-           padding-bottom: 6px; }
-      ul.fancy { list-style: none; padding: 0; }
-      ul.fancy li { padding: 8px 0 8px 30px; border-bottom: 1px solid #e2e8f0;
-                    position: relative; }
-      ul.fancy li::before { content: "⭐"; position: absolute; left: 0; }
-      ol.recipe li { margin-bottom: 10px; color: #334155; }
-      dl dt { font-weight: bold; color: #ea4f21; margin-top: 12px; }
-      dl dd { margin-left: 20px; color: #475569; }
-    &lt;/style&gt;
-  &lt;/head&gt;
-  &lt;body&gt;
-
-    &lt;h1&gt;My Top Lists 📋&lt;/h1&gt;
-
-    &lt;h2&gt;⭐ My Top 5 Favourite Things&lt;/h2&gt;
-    &lt;ul class="fancy"&gt;
-      &lt;li&gt;[Favourite thing 1]&lt;/li&gt;
-      &lt;li&gt;[Favourite thing 2]&lt;/li&gt;
-      &lt;li&gt;[Favourite thing 3]&lt;/li&gt;
-      &lt;li&gt;[Favourite thing 4]&lt;/li&gt;
-      &lt;li&gt;[Favourite thing 5]&lt;/li&gt;
-    &lt;/ul&gt;
-
-    &lt;h2&gt;🍳 Recipe: How to Make [Your Favourite Meal]&lt;/h2&gt;
-    &lt;ol class="recipe"&gt;
-      &lt;li&gt;[Step 1]&lt;/li&gt;
-      &lt;li&gt;[Step 2]&lt;/li&gt;
-      &lt;li&gt;[Step 3]&lt;/li&gt;
-      &lt;li&gt;[Step 4]&lt;/li&gt;
-      &lt;li&gt;[Step 5 — Enjoy!]&lt;/li&gt;
-    &lt;/ol&gt;
-
-    &lt;h2&gt;🌍 My Tech Learning Path&lt;/h2&gt;
-    &lt;ul&gt;
-      &lt;li&gt;Web Development
-        &lt;ul&gt;
-          &lt;li&gt;HTML ✅ (learning now!)&lt;/li&gt;
-          &lt;li&gt;CSS (coming next)&lt;/li&gt;
-          &lt;li&gt;JavaScript (after CSS)&lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-      &lt;li&gt;Programming
-        &lt;ul&gt;
-          &lt;li&gt;Python&lt;/li&gt;
-          &lt;li&gt;Scratch (already done!)&lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-    &lt;/ul&gt;
-
-    &lt;h2&gt;📖 My HTML Glossary&lt;/h2&gt;
-    &lt;dl&gt;
-      &lt;dt&gt;Tag&lt;/dt&gt;
-      &lt;dd&gt;An HTML keyword in angle brackets, e.g. &amp;lt;p&amp;gt;&lt;/dd&gt;
-      &lt;dt&gt;Element&lt;/dt&gt;
-      &lt;dd&gt;An opening tag + content + closing tag&lt;/dd&gt;
-      &lt;dt&gt;Attribute&lt;/dt&gt;
-      &lt;dd&gt;Extra information added inside an opening tag&lt;/dd&gt;
-      &lt;dt&gt;Heading&lt;/dt&gt;
-      &lt;dd&gt;A title tag from &amp;lt;h1&amp;gt; (biggest) to &amp;lt;h6&amp;gt; (smallest)&lt;/dd&gt;
-    &lt;/dl&gt;
-
-  &lt;/body&gt;
-&lt;/html&gt;</pre></div>
+<div class="phase locked" id="phase3">
+  <div class="phase-header">
+    <div class="phase-num">Phase 3 of 10</div>
+    <div class="phase-title">Part 1 — What Is an HTML List?</div>
+    <div class="phase-check" id="chk3"></div>
   </div>
-  <button class="next-btn" onclick="downloadStarter()" style="margin-right:.75rem">
-    ⬇️ Download starter.html
-  </button>
-  <button class="next-btn" onclick="showGithub()" style="background:#10b981;box-shadow:0 4px 12px rgba(16,185,129,.3)">
-    Show GitHub Steps →
-  </button>
-  <script>
-  const __code = `<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <title>My Top Lists</title>
-    <style>
-      body { font-family: Arial, sans-serif; max-width:700px;
-             margin:0 auto; padding:30px; background:#f8fafc; }
-      h1 { color: #ea4f21; }
-      h2 { color: #0f172a; margin-top: 30px; border-bottom: 2px solid #e2e8f0;
-           padding-bottom: 6px; }
-      ul.fancy { list-style: none; padding: 0; }
-      ul.fancy li { padding: 8px 0 8px 30px; border-bottom: 1px solid #e2e8f0;
-                    position: relative; }
-      ul.fancy li::before { content: "⭐"; position: absolute; left: 0; }
-      ol.recipe li { margin-bottom: 10px; color: #334155; }
-      dl dt { font-weight: bold; color: #ea4f21; margin-top: 12px; }
-      dl dd { margin-left: 20px; color: #475569; }
-    </style>
-  </head>
-  <body>
-
-    <h1>My Top Lists 📋</h1>
-
-    <h2>⭐ My Top 5 Favourite Things</h2>
-    <ul class="fancy">
-      <li>[Favourite thing 1]</li>
-      <li>[Favourite thing 2]</li>
-      <li>[Favourite thing 3]</li>
-      <li>[Favourite thing 4]</li>
-      <li>[Favourite thing 5]</li>
-    </ul>
-
-    <h2>🍳 Recipe: How to Make [Your Favourite Meal]</h2>
-    <ol class="recipe">
-      <li>[Step 1]</li>
-      <li>[Step 2]</li>
-      <li>[Step 3]</li>
-      <li>[Step 4]</li>
-      <li>[Step 5 — Enjoy!]</li>
-    </ol>
-
-    <h2>🌍 My Tech Learning Path</h2>
-    <ul>
-      <li>Web Development
-        <ul>
-          <li>HTML ✅ (learning now!)</li>
-          <li>CSS (coming next)</li>
-          <li>JavaScript (after CSS)</li>
-        </ul>
-      </li>
-      <li>Programming
-        <ul>
-          <li>Python</li>
-          <li>Scratch (already done!)</li>
-        </ul>
-      </li>
-    </ul>
-
-    <h2>📖 My HTML Glossary</h2>
-    <dl>
-      <dt>Tag</dt>
-      <dd>An HTML keyword in angle brackets, e.g. &lt;p&gt;</dd>
-      <dt>Element</dt>
-      <dd>An opening tag + content + closing tag</dd>
-      <dt>Attribute</dt>
-      <dd>Extra information added inside an opening tag</dd>
-      <dt>Heading</dt>
-      <dd>A title tag from &lt;h1&gt; (biggest) to &lt;h6&gt; (smallest)</dd>
-    </dl>
-
-  </body>
-</html>`;
-  function downloadStarter(){
-    const a=document.createElement('a');
-    a.href='data:text/html;charset=utf-8,'+encodeURIComponent(__code);
-    a.download='starter.html'; a.click();
+  <div class="phase-body">
+    <h3 class="v2-h3">Why Do Lists Exist?</h3>
+<p class="v2-p">Think of any real-world situation where you group related items together:</p>
+<ul class="v2-ul"><li>A shopping list</li><li>The steps to install an app</li><li>A glossary of terms</li><li>A navigation menu on a website</li><li>A table of contents</li></ul>
+<p class="v2-p">All of these are lists. Without proper list elements in HTML, you would have to fake a list with paragraphs or line breaks — and that would make your HTML harder to read, harder to style, and harder for screen readers (used by people with visual impairments) to understand.</p>
+<p class="v2-p">HTML provides <strong>dedicated list elements</strong> so that both browsers and assistive technology can correctly identify and present your content.</p>
+<h3 class="v2-h3">The Three Types of HTML Lists</h3>
+<p class="v2-p">HTML supports exactly three list types. Here is a plain-English summary before we dive into the code:</p>
+<div class="v2-table-wrap"><table class="v2-table"><thead><tr><th>List Type</th><th>HTML Tag</th><th>When to Use</th></tr></thead><tbody><tr><td><strong>Unordered list</strong></td><td><code>&lt;ul&gt;</code></td><td>Items where order does NOT matter (shopping items, features, options)</td></tr><tr><td><strong>Ordered list</strong></td><td><code>&lt;ol&gt;</code></td><td>Items where order DOES matter (steps, rankings, sequences)</td></tr><tr><td><strong>Description list</strong></td><td><code>&lt;dl&gt;</code></td><td>Term-and-definition pairs (glossaries, metadata, FAQ answers)</td></tr></tbody></table></div>
+<h3 class="v2-h3">The List Item Tag</h3>
+<p class="v2-p">All three list types share the same child tag for their items: <strong><code>&lt;li&gt;</code></strong> (which stands for "list item"). Think of <code>&lt;li&gt;</code> as one line in your list.</p>
+<blockquote class="v2-bq"><p class="v2-p"><strong>Analogy:</strong> If <code>&lt;ul&gt;</code> or <code>&lt;ol&gt;</code> is a shopping bag, then each <code>&lt;li&gt;</code> is one product inside the bag.</p></blockquote>
+<hr class="v2-hr">
+    <div class="task-box">
+      <div class="task-label">✏️ Your Task</div>
+      <div class="task-body">Now practise what you just learned about <strong>What Is an HTML List?</strong>. Open your editor, type the examples above by hand, then modify them — change values, rename variables, and observe what happens. Active experimentation is how code sticks.</div>
+    </div>
+    <button class="unlock-btn" onclick="unlockNext(3)">Phase Complete — Unlock Next ✓</button>
+  </div>
+</div>
+<div class="phase locked" id="phase4">
+  <div class="phase-header">
+    <div class="phase-num">Phase 4 of 10</div>
+    <div class="phase-title">Part 2 — Unordered Lists (`&lt;ul&gt;`)</div>
+    <div class="phase-check" id="chk4"></div>
+  </div>
+  <div class="phase-body">
+    <h3 class="v2-h3">What Is an Unordered List?</h3>
+<p class="v2-p">An <strong>unordered list</strong> is a collection of items where the order does not matter. Each item is typically displayed with a small bullet marker beside it. By default, the marker is a solid black circle (•).</p>
+<p class="v2-p"><strong>Real-world examples:</strong></p>
+<ul class="v2-ul"><li>A list of features on a product page ("Free shipping • 30-day returns • 24/7 support")</li><li>A set of ingredients in a recipe</li><li>Navigation links in a website header</li></ul>
+<h3 class="v2-h3">Basic Syntax</h3>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;ul&gt;
+  &lt;li&gt;Item one&lt;/li&gt;
+  &lt;li&gt;Item two&lt;/li&gt;
+  &lt;li&gt;Item three&lt;/li&gt;
+&lt;/ul&gt;</code></pre></div></div>
+<p class="v2-p"><strong>Let's read this line by line:</strong></p>
+<ul class="v2-ul"><li><code>&lt;ul&gt;</code> — Opens the unordered list container. This tells the browser "a bullet list starts here."</li><li><code>&lt;li&gt;Item one&lt;/li&gt;</code> — A single list item. Everything between <code>&lt;li&gt;</code> and <code>&lt;/li&gt;</code> is the text that appears beside the bullet.</li><li>The second and third <code>&lt;li&gt;</code> lines follow the same pattern.</li><li><code>&lt;/ul&gt;</code> — Closes the unordered list container. This tells the browser "the bullet list ends here."</li></ul>
+<h3 class="v2-h3">Simple Example — A Fruit List</h3>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;ul&gt;
+  &lt;li&gt;Apple&lt;/li&gt;
+  &lt;li&gt;Banana&lt;/li&gt;
+  &lt;li&gt;Mango&lt;/li&gt;
+&lt;/ul&gt;</code></pre></div></div>
+<p class="v2-p"><strong>Expected output in the browser:</strong></p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span></div><div class="v2-code-body"><pre><code>• Apple
+• Banana
+• Mango</code></pre></div></div>
+<blockquote class="v2-bq"><p class="v2-p"><strong>Thinking prompt:</strong> What if you swapped Banana and Mango — would the meaning of the list change? No! That is exactly why this is an <em>unordered</em> list. The sequence does not matter.</p></blockquote>
+<hr class="v2-hr">
+<h3 class="v2-h3">Choosing a Bullet Marker Style</h3>
+<p class="v2-p">By default the bullet is a solid disc. You can change the marker shape using the CSS property <code>list-style-type</code> on the <code>&lt;ul&gt;</code> tag. There are four options:</p>
+<div class="v2-table-wrap"><table class="v2-table"><thead><tr><th><code>list-style-type</code> value</th><th>What it looks like</th></tr></thead><tbody><tr><td><code>disc</code></td><td>● (solid filled circle — the default)</td></tr><tr><td><code>circle</code></td><td>○ (hollow circle)</td></tr><tr><td><code>square</code></td><td>■ (solid square)</td></tr><tr><td><code>none</code></td><td>No marker at all (invisible bullets)</td></tr></tbody></table></div>
+<h4 class="v2-h4">Example 1 — Disc (default)</h4>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;ul style=&quot;list-style-type: disc;&quot;&gt;
+  &lt;li&gt;Coffee&lt;/li&gt;
+  &lt;li&gt;Tea&lt;/li&gt;
+  &lt;li&gt;Milk&lt;/li&gt;
+&lt;/ul&gt;</code></pre></div></div>
+<p class="v2-p"><strong>Expected output:</strong></p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span></div><div class="v2-code-body"><pre><code>● Coffee
+● Tea
+● Milk</code></pre></div></div>
+<h4 class="v2-h4">Example 2 — Circle</h4>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;ul style=&quot;list-style-type: circle;&quot;&gt;
+  &lt;li&gt;Coffee&lt;/li&gt;
+  &lt;li&gt;Tea&lt;/li&gt;
+  &lt;li&gt;Milk&lt;/li&gt;
+&lt;/ul&gt;</code></pre></div></div>
+<p class="v2-p"><strong>Expected output:</strong></p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span></div><div class="v2-code-body"><pre><code>○ Coffee
+○ Tea
+○ Milk</code></pre></div></div>
+<h4 class="v2-h4">Example 3 — Square</h4>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;ul style=&quot;list-style-type: square;&quot;&gt;
+  &lt;li&gt;Coffee&lt;/li&gt;
+  &lt;li&gt;Tea&lt;/li&gt;
+  &lt;li&gt;Milk&lt;/li&gt;
+&lt;/ul&gt;</code></pre></div></div>
+<p class="v2-p"><strong>Expected output:</strong></p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span></div><div class="v2-code-body"><pre><code>■ Coffee
+■ Tea
+■ Milk</code></pre></div></div>
+<h4 class="v2-h4">Example 4 — None (no marker)</h4>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;ul style=&quot;list-style-type: none;&quot;&gt;
+  &lt;li&gt;Coffee&lt;/li&gt;
+  &lt;li&gt;Tea&lt;/li&gt;
+  &lt;li&gt;Milk&lt;/li&gt;
+&lt;/ul&gt;</code></pre></div></div>
+<p class="v2-p"><strong>Expected output:</strong></p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span></div><div class="v2-code-body"><pre><code>Coffee
+Tea
+Milk</code></pre></div></div>
+<blockquote class="v2-bq"><p class="v2-p"><strong>Why would you use <code>none</code>?</strong> When you want to build a navigation menu from a list but hide the bullets, or when you are creating a custom-styled list where you add your own icons in CSS.</p></blockquote>
+<blockquote class="v2-bq"><p class="v2-p"><strong>Thinking prompt:</strong> What happens if you remove the <code>style</code> attribute entirely? The browser will use <code>disc</code> as the default.</p></blockquote>
+<hr class="v2-hr">
+<h3 class="v2-h3">Nested Unordered Lists</h3>
+<p class="v2-p">You can place one list <strong>inside</strong> another list item. This creates a sub-list — also called a <strong>nested list</strong>.</p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;ul&gt;
+  &lt;li&gt;Coffee&lt;/li&gt;
+  &lt;li&gt;Tea
+    &lt;ul&gt;
+      &lt;li&gt;Black tea&lt;/li&gt;
+      &lt;li&gt;Green tea&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Milk&lt;/li&gt;
+&lt;/ul&gt;</code></pre></div></div>
+<p class="v2-p"><strong>Expected output:</strong></p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span></div><div class="v2-code-body"><pre><code>● Coffee
+● Tea
+    ○ Black tea
+    ○ Green tea
+● Milk</code></pre></div></div>
+<p class="v2-p"><strong>Line-by-line explanation:</strong></p>
+<ul class="v2-ul"><li>The outer <code>&lt;ul&gt;</code> holds the main list: Coffee, Tea, Milk.</li><li>The <code>&lt;li&gt;Tea</code> item does <strong>not</strong> have a closing <code>&lt;/li&gt;</code> right away. Instead, it opens a second <code>&lt;ul&gt;</code> inside itself.</li><li>That inner <code>&lt;ul&gt;</code> contains "Black tea" and "Green tea" as its own <code>&lt;li&gt;</code> items.</li><li>The inner <code>&lt;/ul&gt;</code> closes the sub-list, and then <code>&lt;/li&gt;</code> closes the "Tea" list item.</li></ul>
+<p class="v2-p">Notice that the browser automatically changes the bullet style for the inner list (from <code>disc</code> to <code>circle</code>) to help show the difference in levels visually.</p>
+<blockquote class="v2-bq"><p class="v2-p"><strong>Important rule:</strong> A <code>&lt;li&gt;</code> element can contain anything that a normal block of content can — other lists, images, links, paragraphs, etc.</p></blockquote>
+<hr class="v2-hr">
+<h3 class="v2-h3">Horizontal List — Building a Navigation Menu</h3>
+<p class="v2-p">One very practical use of <code>&lt;ul&gt;</code> is building a website <strong>navigation bar</strong> (the row of links at the top of a website). By default, list items stack vertically. But with a little CSS, you can make them float side by side horizontally.</p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;style&gt;
+  ul {
+    list-style-type: none;   /* Remove bullets */
+    margin: 0;               /* Remove default spacing */
+    padding: 0;              /* Remove default indent */
+    overflow: hidden;        /* Contain the floated items */
+    background-color: #333;  /* Dark background */
   }
-  </script>
-</div>
 
+  li {
+    float: left;             /* Put each item side-by-side */
+  }
 
+  li a {
+    display: block;          /* Make the whole box clickable */
+    color: white;            /* White text */
+    text-align: center;
+    padding: 16px;
+    text-decoration: none;   /* Remove underline */
+  }
 
-<div class="github-acc" id="github-steps" style="display:none">
-  <div class="github-acc-head" onclick="this.nextElementSibling.classList.toggle('open')">
-    🐙 GitHub Setup — Push your project online &nbsp;<span>▼</span>
+  li a:hover {
+    background-color: #111;  /* Darken on hover */
+  }
+&lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;#home&quot;&gt;Home&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#news&quot;&gt;News&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#contact&quot;&gt;Contact&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#about&quot;&gt;About&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;</code></pre></div></div>
+<p class="v2-p"><strong>Expected visual output:</strong> A dark horizontal bar reading: <code>Home  News  Contact  About</code> Hovering over any item makes it slightly darker.</p>
+<p class="v2-p"><strong>CSS explanation (each property explained):</strong></p>
+<ul class="v2-ul"><li><code>list-style-type: none</code> — Removes the bullet points so the menu looks clean.</li><li><code>margin: 0; padding: 0</code> — Removes the default browser indent/gap that appears around lists.</li><li><code>overflow: hidden</code> — Ensures the dark background stretches to contain all the floated items.</li><li><code>float: left</code> — Forces each <code>&lt;li&gt;</code> to sit to the right of the previous one instead of below it.</li><li><code>display: block</code> — Makes the link fill the entire <code>&lt;li&gt;</code> box, so clicking anywhere in the box works.</li><li><code>padding: 16px</code> — Adds comfortable click space around each link label.</li><li><code>text-decoration: none</code> — Removes the default blue underline from links.</li></ul>
+<blockquote class="v2-bq"><p class="v2-p"><strong>Real-world connection:</strong> Nearly every website navigation bar you have ever seen is built exactly this way — a <code>&lt;ul&gt;</code> with CSS making it horizontal.</p></blockquote>
+<hr class="v2-hr">
+    <div class="task-box">
+      <div class="task-label">✏️ Your Task</div>
+      <div class="task-body">Now practise what you just learned about <strong>Unordered Lists (<code>&lt;ul&gt;</code>)</strong>. Open your editor, type the examples above by hand, then modify them — change values, rename variables, and observe what happens. Active experimentation is how code sticks.</div>
+    </div>
+    <button class="unlock-btn" onclick="unlockNext(4)">Phase Complete — Unlock Next ✓</button>
   </div>
-  <div class="github-acc-body">
-    <div class="github-step"><div class="github-step-n">1</div><p>Go to <strong>github.com</strong> and sign in. Click the green <strong>New</strong> button to create a new repository. Name it <code>html-lesson-17-html_lists</code>.</p></div>
-    <div class="github-step"><div class="github-step-n">2</div><p>Leave it <strong>Public</strong> and tick <strong>Add a README file</strong>. Click <strong>Create repository</strong>.</p></div>
-    <div class="github-step"><div class="github-step-n">3</div><p>Click <strong>Add file → Upload files</strong>. Drag your <code>starter.html</code> (and rename it <code>index.html</code> first!) into the upload box.</p></div>
-    <div class="github-step"><div class="github-step-n">4</div><p>Scroll down, add a commit message like <em>"Add lesson 17 project"</em> and click <strong>Commit changes</strong>.</p></div>
-    <div class="github-step"><div class="github-step-n">5</div><p>Go to <strong>Settings → Pages</strong>. Under <em>Branch</em>, select <strong>main</strong> and click <strong>Save</strong>. Your page will be live at <code>https://YOUR-USERNAME.github.io/html-lesson-17-html_lists/</code> in about 1 minute! 🎉</p></div>
-    <button class="next-btn" onclick="showEnd()" style="margin-top:.5rem">I'm done! Finish session ✅</button>
+</div>
+<div class="phase locked" id="phase5">
+  <div class="phase-header">
+    <div class="phase-num">Phase 5 of 10</div>
+    <div class="phase-title">Part 3 — Ordered Lists (`&lt;ol&gt;`)</div>
+    <div class="phase-check" id="chk5"></div>
+  </div>
+  <div class="phase-body">
+    <h3 class="v2-h3">What Is an Ordered List?</h3>
+<p class="v2-p">An <strong>ordered list</strong> is a list where the sequence matters. Each item is automatically numbered by the browser. You do not type the numbers yourself — HTML does it for you.</p>
+<p class="v2-p"><strong>Real-world examples:</strong></p>
+<ul class="v2-ul"><li>Steps in a tutorial ("Step 1: Install Python, Step 2: Open the terminal…")</li><li>A ranked top-10 list</li><li>Cooking instructions in a recipe</li><li>Legal terms with clause numbers</li></ul>
+<h3 class="v2-h3">Basic Syntax</h3>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;ol&gt;
+  &lt;li&gt;First item&lt;/li&gt;
+  &lt;li&gt;Second item&lt;/li&gt;
+  &lt;li&gt;Third item&lt;/li&gt;
+&lt;/ol&gt;</code></pre></div></div>
+<p class="v2-p"><strong>Expected output:</strong></p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span></div><div class="v2-code-body"><pre><code>1. First item
+2. Second item
+3. Third item</code></pre></div></div>
+<p class="v2-p">The browser automatically adds "1.", "2.", "3." — you never type those numbers.</p>
+<blockquote class="v2-bq"><p class="v2-p"><strong>Thinking prompt:</strong> What if you deleted the second <code>&lt;li&gt;</code>? The list would still number correctly: 1, 2 — not 1, 3. HTML always renumbers automatically.</p></blockquote>
+<hr class="v2-hr">
+<h3 class="v2-h3">The <code>type</code> Attribute — Changing the Numbering Style</h3>
+<p class="v2-p">By default, ordered lists use Arabic numerals (1, 2, 3…). The <code>type</code> attribute on <code>&lt;ol&gt;</code> lets you change this:</p>
+<div class="v2-table-wrap"><table class="v2-table"><thead><tr><th><code>type</code> value</th><th>Example output</th></tr></thead><tbody><tr><td><code>"1"</code></td><td>1. 2. 3. (default)</td></tr><tr><td><code>"A"</code></td><td>A. B. C. (uppercase letters)</td></tr><tr><td><code>"a"</code></td><td>a. b. c. (lowercase letters)</td></tr><tr><td><code>"I"</code></td><td>I. II. III. (uppercase Roman numerals)</td></tr><tr><td><code>"i"</code></td><td>i. ii. iii. (lowercase Roman numerals)</td></tr></tbody></table></div>
+<h4 class="v2-h4">Example 1 — Default Numbers</h4>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;ol type=&quot;1&quot;&gt;
+  &lt;li&gt;Coffee&lt;/li&gt;
+  &lt;li&gt;Tea&lt;/li&gt;
+  &lt;li&gt;Milk&lt;/li&gt;
+&lt;/ol&gt;</code></pre></div></div>
+<p class="v2-p"><strong>Expected output:</strong></p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span></div><div class="v2-code-body"><pre><code>1. Coffee
+2. Tea
+3. Milk</code></pre></div></div>
+<h4 class="v2-h4">Example 2 — Uppercase Letters</h4>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;ol type=&quot;A&quot;&gt;
+  &lt;li&gt;Coffee&lt;/li&gt;
+  &lt;li&gt;Tea&lt;/li&gt;
+  &lt;li&gt;Milk&lt;/li&gt;
+&lt;/ol&gt;</code></pre></div></div>
+<p class="v2-p"><strong>Expected output:</strong></p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span></div><div class="v2-code-body"><pre><code>A. Coffee
+B. Tea
+C. Milk</code></pre></div></div>
+<h4 class="v2-h4">Example 3 — Lowercase Letters</h4>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;ol type=&quot;a&quot;&gt;
+  &lt;li&gt;Coffee&lt;/li&gt;
+  &lt;li&gt;Tea&lt;/li&gt;
+  &lt;li&gt;Milk&lt;/li&gt;
+&lt;/ol&gt;</code></pre></div></div>
+<p class="v2-p"><strong>Expected output:</strong></p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span></div><div class="v2-code-body"><pre><code>a. Coffee
+b. Tea
+c. Milk</code></pre></div></div>
+<h4 class="v2-h4">Example 4 — Uppercase Roman Numerals</h4>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;ol type=&quot;I&quot;&gt;
+  &lt;li&gt;Coffee&lt;/li&gt;
+  &lt;li&gt;Tea&lt;/li&gt;
+  &lt;li&gt;Milk&lt;/li&gt;
+&lt;/ol&gt;</code></pre></div></div>
+<p class="v2-p"><strong>Expected output:</strong></p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span></div><div class="v2-code-body"><pre><code>I.   Coffee
+II.  Tea
+III. Milk</code></pre></div></div>
+<h4 class="v2-h4">Example 5 — Lowercase Roman Numerals</h4>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;ol type=&quot;i&quot;&gt;
+  &lt;li&gt;Coffee&lt;/li&gt;
+  &lt;li&gt;Tea&lt;/li&gt;
+  &lt;li&gt;Milk&lt;/li&gt;
+&lt;/ol&gt;</code></pre></div></div>
+<p class="v2-p"><strong>Expected output:</strong></p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span></div><div class="v2-code-body"><pre><code>i.   Coffee
+ii.  Tea
+iii. Milk</code></pre></div></div>
+<blockquote class="v2-bq"><p class="v2-p"><strong>Real-world use case:</strong> Legal documents, academic papers, and formal outlines often use Roman numerals for section headings. Homework assignments sometimes use lowercase letters (a., b., c.) for sub-questions.</p></blockquote>
+<hr class="v2-hr">
+<h3 class="v2-h3">The <code>start</code> Attribute — Starting From a Custom Number</h3>
+<p class="v2-p">By default, an ordered list starts counting from 1. Sometimes you need to start from a different number — for example, when continuing a list that was split across two separate <code>&lt;ol&gt;</code> blocks on the page.</p>
+<p class="v2-p">The <code>start</code> attribute lets you set the starting number:</p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;ol start=&quot;50&quot;&gt;
+  &lt;li&gt;Coffee&lt;/li&gt;
+  &lt;li&gt;Tea&lt;/li&gt;
+  &lt;li&gt;Milk&lt;/li&gt;
+&lt;/ol&gt;</code></pre></div></div>
+<p class="v2-p"><strong>Expected output:</strong></p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span></div><div class="v2-code-body"><pre><code>50. Coffee
+51. Tea
+52. Milk</code></pre></div></div>
+<blockquote class="v2-bq"><p class="v2-p"><strong>Thinking prompt:</strong> What would happen if you wrote <code>start="5"</code> with <code>type="A"</code>? The list would start at the 5th letter: E, F, G…</p></blockquote>
+<hr class="v2-hr">
+<h3 class="v2-h3">Nested Ordered Lists</h3>
+<p class="v2-p">Just like unordered lists, ordered lists can be nested:</p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;ol&gt;
+  &lt;li&gt;Coffee&lt;/li&gt;
+  &lt;li&gt;Tea
+    &lt;ol&gt;
+      &lt;li&gt;Black tea&lt;/li&gt;
+      &lt;li&gt;Green tea&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Milk&lt;/li&gt;
+&lt;/ol&gt;</code></pre></div></div>
+<p class="v2-p"><strong>Expected output:</strong></p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span></div><div class="v2-code-body"><pre><code>1. Coffee
+2. Tea
+    1. Black tea
+    2. Green tea
+3. Milk</code></pre></div></div>
+<p class="v2-p">The inner ordered list restarts numbering from 1 automatically.</p>
+<hr class="v2-hr">
+    <div class="task-box">
+      <div class="task-label">✏️ Your Task</div>
+      <div class="task-body">Now practise what you just learned about <strong>Ordered Lists (<code>&lt;ol&gt;</code>)</strong>. Open your editor, type the examples above by hand, then modify them — change values, rename variables, and observe what happens. Active experimentation is how code sticks.</div>
+    </div>
+    <button class="unlock-btn" onclick="unlockNext(5)">Phase Complete — Unlock Next ✓</button>
   </div>
 </div>
+<div class="phase locked" id="phase6">
+  <div class="phase-header">
+    <div class="phase-num">Phase 6 of 10</div>
+    <div class="phase-title">Part 4 — Description Lists (`&lt;dl&gt;`)</div>
+    <div class="phase-check" id="chk6"></div>
+  </div>
+  <div class="phase-body">
+    <h3 class="v2-h3">What Is a Description List?</h3>
+<p class="v2-p">A <strong>description list</strong> is a specialised list designed for term-and-definition pairs — like a dictionary or a glossary. Instead of bullet points or numbers, each entry has two parts: a <strong>term</strong> and its <strong>description</strong> (or definition).</p>
+<p class="v2-p"><strong>Real-world examples:</strong></p>
+<ul class="v2-ul"><li>A glossary of technical terms on a documentation page</li><li>A product specification sheet ("Weight: 1.2kg, Battery: 4000mAh")</li><li>An FAQ section ("Question: ... Answer: ...")</li><li>A recipe's metadata ("Servings: 4, Cook time: 30 min")</li></ul>
+<h3 class="v2-h3">The Three Tags Used in Description Lists</h3>
+<div class="v2-table-wrap"><table class="v2-table"><thead><tr><th>Tag</th><th>Full name</th><th>What it does</th></tr></thead><tbody><tr><td><code>&lt;dl&gt;</code></td><td>Description List</td><td>The container for the entire list</td></tr><tr><td><code>&lt;dt&gt;</code></td><td>Description Term</td><td>The word or phrase being defined</td></tr><tr><td><code>&lt;dd&gt;</code></td><td>Description Details</td><td>The definition or description of the term</td></tr></tbody></table></div>
+<h3 class="v2-h3">Basic Syntax</h3>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;dl&gt;
+  &lt;dt&gt;Term 1&lt;/dt&gt;
+  &lt;dd&gt;Definition of term 1&lt;/dd&gt;
+  &lt;dt&gt;Term 2&lt;/dt&gt;
+  &lt;dd&gt;Definition of term 2&lt;/dd&gt;
+&lt;/dl&gt;</code></pre></div></div>
+<p class="v2-p"><strong>Line-by-line explanation:</strong></p>
+<ul class="v2-ul"><li><code>&lt;dl&gt;</code> — Opens the description list container.</li><li><code>&lt;dt&gt;Term 1&lt;/dt&gt;</code> — Defines the first <strong>term</strong> (displayed left-aligned, not indented).</li><li><code>&lt;dd&gt;Definition of term 1&lt;/dd&gt;</code> — Provides the <strong>description</strong> for that term (displayed indented below the term).</li><li>The pattern repeats for each term-description pair.</li><li><code>&lt;/dl&gt;</code> — Closes the description list.</li></ul>
+<h3 class="v2-h3">Simple Example — Drinks Glossary</h3>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;dl&gt;
+  &lt;dt&gt;Coffee&lt;/dt&gt;
+  &lt;dd&gt;- black hot drink&lt;/dd&gt;
 
+  &lt;dt&gt;Milk&lt;/dt&gt;
+  &lt;dd&gt;- white cold drink&lt;/dd&gt;
+&lt;/dl&gt;</code></pre></div></div>
+<p class="v2-p"><strong>Expected output:</strong></p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span></div><div class="v2-code-body"><pre><code>Coffee
+    - black hot drink
+Milk
+    - white cold drink</code></pre></div></div>
+<p class="v2-p">Notice that <code>&lt;dd&gt;</code> automatically indents its content. The browser does this by default to visually connect the description to its term.</p>
+<h3 class="v2-h3">Practical Example — Programming Glossary</h3>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;dl&gt;
+  &lt;dt&gt;HTML&lt;/dt&gt;
+  &lt;dd&gt;HyperText Markup Language — used to structure web content.&lt;/dd&gt;
+
+  &lt;dt&gt;CSS&lt;/dt&gt;
+  &lt;dd&gt;Cascading Style Sheets — used to style and layout web pages.&lt;/dd&gt;
+
+  &lt;dt&gt;JavaScript&lt;/dt&gt;
+  &lt;dd&gt;A programming language that makes web pages interactive.&lt;/dd&gt;
+&lt;/dl&gt;</code></pre></div></div>
+<p class="v2-p"><strong>Expected output:</strong></p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span></div><div class="v2-code-body"><pre><code>HTML
+    HyperText Markup Language — used to structure web content.
+CSS
+    Cascading Style Sheets — used to style and layout web pages.
+JavaScript
+    A programming language that makes web pages interactive.</code></pre></div></div>
+<blockquote class="v2-bq"><p class="v2-p"><strong>Thinking prompt:</strong> Could you use a <code>&lt;ul&gt;</code> or <code>&lt;ol&gt;</code> for this same content? Technically yes, but <code>&lt;dl&gt;</code> is semantically better — it clearly communicates to browsers and screen readers that these are paired term-definition relationships, not just a simple list of items.</p></blockquote>
+<hr class="v2-hr">
+    <div class="task-box">
+      <div class="task-label">✏️ Your Task</div>
+      <div class="task-body">Now practise what you just learned about <strong>Description Lists (<code>&lt;dl&gt;</code>)</strong>. Open your editor, type the examples above by hand, then modify them — change values, rename variables, and observe what happens. Active experimentation is how code sticks.</div>
+    </div>
+    <button class="unlock-btn" onclick="unlockNext(6)">Phase Complete — Unlock Next ✓</button>
+  </div>
+</div>
+<div class="phase locked" id="phase7">
+  <div class="phase-header">
+    <div class="phase-num">Phase 7 of 10</div>
+    <div class="phase-title">Part 5 — Mixing List Types (Nested Combinations)</div>
+    <div class="phase-check" id="chk7"></div>
+  </div>
+  <div class="phase-body">
+    <p class="v2-p">You can nest different list types inside each other. For example, you could have an ordered list of steps where each step has an unordered list of notes.</p>
+<h3 class="v2-h3">Example — Study Plan</h3>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;ol&gt;
+  &lt;li&gt;Morning Study
+    &lt;ul&gt;
+      &lt;li&gt;Read Chapter 3&lt;/li&gt;
+      &lt;li&gt;Make notes&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Afternoon Practice
+    &lt;ul&gt;
+      &lt;li&gt;Complete exercises 1–5&lt;/li&gt;
+      &lt;li&gt;Review answers&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Evening Review
+    &lt;ul&gt;
+      &lt;li&gt;Re-read notes&lt;/li&gt;
+      &lt;li&gt;Summarise key points&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;</code></pre></div></div>
+<p class="v2-p"><strong>Expected output:</strong></p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span></div><div class="v2-code-body"><pre><code>1. Morning Study
+     • Read Chapter 3
+     • Make notes
+2. Afternoon Practice
+     • Complete exercises 1–5
+     • Review answers
+3. Evening Review
+     • Re-read notes
+     • Summarise key points</code></pre></div></div>
+<p class="v2-p">This is one of the most realistic patterns you will see in real web content — numbered main steps with bulleted sub-notes.</p>
+<hr class="v2-hr">
+    <div class="task-box">
+      <div class="task-label">✏️ Your Task</div>
+      <div class="task-body">• Complete exercises 1–5
+     • Review answers
+3. Evening Review
+     • Re-read notes
+     • Summarise key points
+`
+
+This is one of the most realistic patterns you will see in real web content — numbered main steps with bulleted sub-notes.
+
+---</div>
+    </div>
+    <button class="unlock-btn" onclick="unlockNext(7)">Phase Complete — Unlock Next ✓</button>
+  </div>
+</div>
+<div class="phase locked" id="phase8">
+  <div class="phase-header">
+    <div class="phase-num">Phase 8 of 10</div>
+    <div class="phase-title">Part 6 — Complete HTML List Tags Reference</div>
+    <div class="phase-check" id="chk8"></div>
+  </div>
+  <div class="phase-body">
+    <p class="v2-p">Here is every tag used in HTML lists, with a clear description of each:</p>
+<div class="v2-table-wrap"><table class="v2-table"><thead><tr><th>Tag</th><th>Description</th></tr></thead><tbody><tr><td><code>&lt;ul&gt;</code></td><td>Defines an <strong>unordered</strong> (bulleted) list</td></tr><tr><td><code>&lt;ol&gt;</code></td><td>Defines an <strong>ordered</strong> (numbered) list</td></tr><tr><td><code>&lt;li&gt;</code></td><td>Defines a <strong>list item</strong> inside <code>&lt;ul&gt;</code> or <code>&lt;ol&gt;</code></td></tr><tr><td><code>&lt;dl&gt;</code></td><td>Defines a <strong>description list</strong></td></tr><tr><td><code>&lt;dt&gt;</code></td><td>Defines a <strong>term</strong> (title) in a description list</td></tr><tr><td><code>&lt;dd&gt;</code></td><td>Defines the <strong>description/definition</strong> of a term in a description list</td></tr></tbody></table></div>
+<hr class="v2-hr">
+    <div class="task-box">
+      <div class="task-label">✏️ Your Task</div>
+      <div class="task-body">Now practise what you just learned about <strong>Complete HTML List Tags Reference</strong>. Open your editor, type the examples above by hand, then modify them — change values, rename variables, and observe what happens. Active experimentation is how code sticks.</div>
+    </div>
+    <button class="unlock-btn" onclick="unlockNext(8)">Phase Complete — Unlock Next ✓</button>
+  </div>
+</div>
+<div class="phase locked" id="phase9">
+  <div class="phase-header">
+    <div class="phase-num">Phase 9 of 10</div>
+    <div class="phase-title">Part 7 — Guided Practice Exercises</div>
+    <div class="phase-check" id="chk9"></div>
+  </div>
+  <div class="phase-body">
+    <h3 class="v2-h3">Exercise 1 — Your Favourite Things (Unordered List)</h3>
+<p class="v2-p"><strong>Objective:</strong> Build a simple unordered list.</p>
+<p class="v2-p"><strong>Scenario:</strong> You are creating a personal page and want to list your three favourite subjects in school.</p>
+<p class="v2-p"><strong>Steps:</strong></p>
+<ol class="v2-ol"><li>Open your HTML file.</li><li>Add a heading: <code>&lt;h2&gt;My Favourite Subjects&lt;/h2&gt;</code></li><li>Below it, create a <code>&lt;ul&gt;</code> with three <code>&lt;li&gt;</code> items — your favourite subjects.</li><li>Save and open the file in a browser.</li></ol>
+<p class="v2-p"><strong>Starter code:</strong></p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;body&gt;
+
+&lt;h2&gt;My Favourite Subjects&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Mathematics&lt;/li&gt;
+  &lt;li&gt;Computer Science&lt;/li&gt;
+  &lt;li&gt;Physics&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;</code></pre></div></div>
+<p class="v2-p"><strong>Expected output:</strong></p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span></div><div class="v2-code-body"><pre><code>My Favourite Subjects
+
+• Mathematics
+• Computer Science
+• Physics</code></pre></div></div>
+<p class="v2-p"><strong>Self-check questions:</strong></p>
+<ul class="v2-ul"><li>Did the bullets appear?</li><li>Can you change the bullet style to <code>square</code>?</li><li>What happens when you add a fourth <code>&lt;li&gt;</code>?</li></ul>
+<hr class="v2-hr">
+<h3 class="v2-h3">Exercise 2 — Making Tea (Ordered List)</h3>
+<p class="v2-p"><strong>Objective:</strong> Use an ordered list to write step-by-step instructions.</p>
+<p class="v2-p"><strong>Scenario:</strong> A friend asks you how to make a cup of tea. Write the steps as a numbered list.</p>
+<p class="v2-p"><strong>Steps:</strong></p>
+<ol class="v2-ol"><li>Create an HTML file.</li><li>Add an <code>&lt;h2&gt;</code> heading: "How to Make Tea"</li><li>Create an <code>&lt;ol&gt;</code> with at least five steps.</li><li>Preview in the browser.</li></ol>
+<p class="v2-p"><strong>Example solution:</strong></p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;h2&gt;How to Make Tea&lt;/h2&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Boil water in a kettle.&lt;/li&gt;
+  &lt;li&gt;Place a tea bag in your mug.&lt;/li&gt;
+  &lt;li&gt;Pour the hot water into the mug.&lt;/li&gt;
+  &lt;li&gt;Wait 3 minutes for the tea to brew.&lt;/li&gt;
+  &lt;li&gt;Remove the tea bag and add milk if desired.&lt;/li&gt;
+&lt;/ol&gt;</code></pre></div></div>
+<p class="v2-p"><strong>Expected output:</strong></p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span></div><div class="v2-code-body"><pre><code>How to Make Tea
+
+1. Boil water in a kettle.
+2. Place a tea bag in your mug.
+3. Pour the hot water into the mug.
+4. Wait 3 minutes for the tea to brew.
+5. Remove the tea bag and add milk if desired.</code></pre></div></div>
+<p class="v2-p"><strong>What-if challenge:</strong> What happens if you change <code>&lt;ol&gt;</code> to <code>type="A"</code>? Try it!</p>
+<hr class="v2-hr">
+<h3 class="v2-h3">Exercise 3 — School Subjects and Topics (Nested List)</h3>
+<p class="v2-p"><strong>Objective:</strong> Build a nested list combining <code>&lt;ul&gt;</code> inside <code>&lt;ul&gt;</code>.</p>
+<p class="v2-p"><strong>Scenario:</strong> Create a list of school subjects, and under each subject, list two topics covered.</p>
+<p class="v2-p"><strong>Example solution:</strong></p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;h2&gt;School Curriculum&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Mathematics
+    &lt;ul&gt;
+      &lt;li&gt;Algebra&lt;/li&gt;
+      &lt;li&gt;Geometry&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Science
+    &lt;ul&gt;
+      &lt;li&gt;Physics&lt;/li&gt;
+      &lt;li&gt;Chemistry&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Languages
+    &lt;ul&gt;
+      &lt;li&gt;English&lt;/li&gt;
+      &lt;li&gt;French&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;</code></pre></div></div>
+<p class="v2-p"><strong>Expected output:</strong></p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span></div><div class="v2-code-body"><pre><code>• Mathematics
+    ○ Algebra
+    ○ Geometry
+• Science
+    ○ Physics
+    ○ Chemistry
+• Languages
+    ○ English
+    ○ French</code></pre></div></div>
+<p class="v2-p"><strong>Self-check:</strong> Notice the inner bullets automatically changed from ● to ○? That is the browser helping you see the indentation levels visually.</p>
+<hr class="v2-hr">
+<h3 class="v2-h3">Exercise 4 — HTML Glossary (Description List)</h3>
+<p class="v2-p"><strong>Objective:</strong> Build a description list to explain HTML terms.</p>
+<p class="v2-p"><strong>Scenario:</strong> You are writing a beginner's HTML cheat sheet. Add four terms and their definitions.</p>
+<p class="v2-p"><strong>Example solution:</strong></p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;h2&gt;HTML Glossary&lt;/h2&gt;
+
+&lt;dl&gt;
+  &lt;dt&gt;Tag&lt;/dt&gt;
+  &lt;dd&gt;A keyword wrapped in angle brackets that tells the browser what to do, e.g. &amp;lt;p&amp;gt;.&lt;/dd&gt;
+
+  &lt;dt&gt;Element&lt;/dt&gt;
+  &lt;dd&gt;An opening tag, its content, and its closing tag together.&lt;/dd&gt;
+
+  &lt;dt&gt;Attribute&lt;/dt&gt;
+  &lt;dd&gt;Extra information added inside an opening tag to modify its behaviour, e.g. style=&quot;color:red&quot;.&lt;/dd&gt;
+
+  &lt;dt&gt;Nesting&lt;/dt&gt;
+  &lt;dd&gt;Placing one HTML element inside another element.&lt;/dd&gt;
+&lt;/dl&gt;</code></pre></div></div>
+<p class="v2-p"><strong>Expected output:</strong></p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span></div><div class="v2-code-body"><pre><code>HTML Glossary
+
+Tag
+    A keyword wrapped in angle brackets that tells the browser what to do, e.g. &lt;p&gt;.
+Element
+    An opening tag, its content, and its closing tag together.
+Attribute
+    Extra information added inside an opening tag to modify its behaviour.
+Nesting
+    Placing one HTML element inside another element.</code></pre></div></div>
+<hr class="v2-hr">
+    <div class="task-box">
+      <div class="task-label">✏️ Your Task</div>
+      <div class="task-body">Now practise what you just learned about <strong>Guided Practice Exercises</strong>. Open your editor, type the examples above by hand, then modify them — change values, rename variables, and observe what happens. Active experimentation is how code sticks.</div>
+    </div>
+    <button class="unlock-btn" onclick="unlockNext(9)">Phase Complete — Unlock Next ✓</button>
+  </div>
+</div>
+<div class="phase locked" id="phase10">
+  <div class="phase-header">
+    <div class="phase-num">Phase 10 of 10</div>
+    <div class="phase-title">Part 9 — Common Beginner Mistakes</div>
+    <div class="phase-check" id="chk10"></div>
+  </div>
+  <div class="phase-body">
+    <h3 class="v2-h3">Mistake 1 — Putting <code>&lt;li&gt;</code> Outside a List Container</h3>
+<p class="v2-p"><strong>Wrong:</strong></p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;li&gt;Item one&lt;/li&gt;
+&lt;li&gt;Item two&lt;/li&gt;</code></pre></div></div>
+<p class="v2-p"><strong>Why it is wrong:</strong> <code>&lt;li&gt;</code> items must always live inside a <code>&lt;ul&gt;</code> or <code>&lt;ol&gt;</code> parent. Without the container, the browser may still try to display them, but the HTML is invalid and will behave unpredictably.</p>
+<p class="v2-p"><strong>Correct:</strong></p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;ul&gt;
+  &lt;li&gt;Item one&lt;/li&gt;
+  &lt;li&gt;Item two&lt;/li&gt;
+&lt;/ul&gt;</code></pre></div></div>
+<hr class="v2-hr">
+<h3 class="v2-h3">Mistake 2 — Forgetting to Close <code>&lt;/li&gt;</code> Before the Next Item</h3>
+<p class="v2-p"><strong>Wrong:</strong></p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;ul&gt;
+  &lt;li&gt;Apple
+  &lt;li&gt;Banana
+  &lt;li&gt;Mango
+&lt;/ul&gt;</code></pre></div></div>
+<p class="v2-p"><strong>Why it is risky:</strong> Modern browsers are forgiving and often guess what you meant, but this is technically invalid HTML. When you add nested lists, missing <code>&lt;/li&gt;</code> tags cause the nesting to break completely.</p>
+<p class="v2-p"><strong>Correct:</strong></p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;ul&gt;
+  &lt;li&gt;Apple&lt;/li&gt;
+  &lt;li&gt;Banana&lt;/li&gt;
+  &lt;li&gt;Mango&lt;/li&gt;
+&lt;/ul&gt;</code></pre></div></div>
+<hr class="v2-hr">
+<h3 class="v2-h3">Mistake 3 — Using <code>&lt;br&gt;</code> Tags Instead of List Items</h3>
+<p class="v2-p"><strong>Wrong:</strong></p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;p&gt;
+  Apple&lt;br&gt;
+  Banana&lt;br&gt;
+  Mango
+&lt;/p&gt;</code></pre></div></div>
+<p class="v2-p"><strong>Why it is wrong:</strong> This looks like a list visually, but it is not semantically a list. Browsers, search engines, and screen readers cannot identify this as a list. Users relying on screen readers will not hear it announced as a list.</p>
+<p class="v2-p"><strong>Correct:</strong></p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;ul&gt;
+  &lt;li&gt;Apple&lt;/li&gt;
+  &lt;li&gt;Banana&lt;/li&gt;
+  &lt;li&gt;Mango&lt;/li&gt;
+&lt;/ul&gt;</code></pre></div></div>
+<hr class="v2-hr">
+<h3 class="v2-h3">Mistake 4 — Confusing <code>&lt;ul&gt;</code> and <code>&lt;ol&gt;</code></h3>
+<p class="v2-p"><strong>Wrong example:</strong> Using <code>&lt;ul&gt;</code> for cooking steps where order matters.</p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;!-- Wrong! Steps must be in order --&gt;
+&lt;ul&gt;
+  &lt;li&gt;Serve the food&lt;/li&gt;
+  &lt;li&gt;Cook the food&lt;/li&gt;
+  &lt;li&gt;Prepare the ingredients&lt;/li&gt;
+&lt;/ul&gt;</code></pre></div></div>
+<p class="v2-p"><strong>Correct:</strong></p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;!-- Right! Use &lt;ol&gt; when sequence matters --&gt;
+&lt;ol&gt;
+  &lt;li&gt;Prepare the ingredients&lt;/li&gt;
+  &lt;li&gt;Cook the food&lt;/li&gt;
+  &lt;li&gt;Serve the food&lt;/li&gt;
+&lt;/ol&gt;</code></pre></div></div>
+<p class="v2-p"><strong>Rule of thumb:</strong> Ask yourself: "Does the order of these items matter?" If yes → <code>&lt;ol&gt;</code>. If no → <code>&lt;ul&gt;</code>.</p>
+<hr class="v2-hr">
+<h3 class="v2-h3">Mistake 5 — Putting Block Content Directly Inside <code>&lt;dl&gt;</code> Without <code>&lt;dt&gt;</code> or <code>&lt;dd&gt;</code></h3>
+<p class="v2-p"><strong>Wrong:</strong></p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;dl&gt;
+  Coffee
+  A hot black drink
+&lt;/dl&gt;</code></pre></div></div>
+<p class="v2-p"><strong>Why it is wrong:</strong> Content must be wrapped in <code>&lt;dt&gt;</code> or <code>&lt;dd&gt;</code> tags. Bare text inside <code>&lt;dl&gt;</code> is invalid HTML.</p>
+<p class="v2-p"><strong>Correct:</strong></p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;dl&gt;
+  &lt;dt&gt;Coffee&lt;/dt&gt;
+  &lt;dd&gt;A hot black drink&lt;/dd&gt;
+&lt;/dl&gt;</code></pre></div></div>
+<hr class="v2-hr">
+<h3 class="v2-h3">Mistake 6 — Closing the Outer List Too Early When Nesting</h3>
+<p class="v2-p"><strong>Wrong:</strong></p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;ul&gt;
+  &lt;li&gt;Tea&lt;/li&gt;
+&lt;/ul&gt;
+  &lt;ul&gt;  &lt;!-- This starts a SECOND separate list, not a nested one! --&gt;
+    &lt;li&gt;Black tea&lt;/li&gt;
+    &lt;li&gt;Green tea&lt;/li&gt;
+  &lt;/ul&gt;</code></pre></div></div>
+<p class="v2-p"><strong>Correct:</strong></p>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;ul&gt;
+  &lt;li&gt;Tea
+    &lt;ul&gt;   &lt;!-- Inner list is INSIDE the &lt;li&gt;, before &lt;/li&gt; --&gt;
+      &lt;li&gt;Black tea&lt;/li&gt;
+      &lt;li&gt;Green tea&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;</code></pre></div></div>
+<p class="v2-p">The inner <code>&lt;ul&gt;</code> must be placed <strong>inside</strong> the <code>&lt;li&gt;</code> tag of its parent item, before that <code>&lt;li&gt;</code> is closed.</p>
+<hr class="v2-hr">
+    <div class="task-box">
+      <div class="task-label">✏️ Your Task</div>
+      <div class="task-body">Now practise what you just learned about <strong>Common Beginner Mistakes</strong>. Open your editor, type the examples above by hand, then modify them — change values, rename variables, and observe what happens. Active experimentation is how code sticks.</div>
+    </div>
+    <button class="unlock-btn" onclick="unlockNext(10)">Phase Complete — Unlock Next ✓</button>
+  </div>
+</div>
+<div class="build-box" id="build-it">
+  <div class="build-label">🏗️ Build It</div>
+  <div class="build-name">Stage 1 — Set Up the Page Structure</div>
+  <div class="build-desc">Create a new file called <code>my_life.html</code> and add the basic HTML structure:</div>
+  <div class="v2-code-wrap">
+    <div class="v2-code-bar">
+      <span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span>
+      <span class="v2-code-lang">starter.html</span>
+    </div>
+    <div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;title&gt;My Life&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+  &lt;h1&gt;About Me&lt;/h1&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;</code></pre></div>
+  </div>
+  <div style="display:flex;gap:.8rem;flex-wrap:wrap;margin-top:1.2rem">
+    <button class="unlock-btn" onclick="downloadStarter(`<!DOCTYPE html>
+<html>
+<head>
+  <title>My Life</title>
+</head>
+<body>
+
+  <h1>About Me</h1>
+
+</body>
+</html>`)"
+      style="background:#10b981;box-shadow:0 4px 14px rgba(16,185,129,.3)">
+      ⬇ Download starter.html
+    </button>
+    <button class="unlock-btn" onclick="showGithub()"
+      style="background:#0f172a;box-shadow:none">
+      🐙 Push to GitHub →
+    </button>
+  </div>
+</div>
+<div class="gh-acc" id="gh-steps" style="display:none">
+  <div class="gh-acc-head" onclick="toggleGh(this)">
+    🐙 Push Your Project to GitHub Pages &nbsp;<span>▼</span>
+  </div>
+  <div class="gh-acc-body">
+    <div class="gh-step"><div class="gh-step-n">1</div>
+    <p>Go to <strong>github.com</strong> → click <strong>New repository</strong> → name it <code>html-lesson-17-stage-1-set-up-the-page-structure</code>.</p></div>
+    <div class="gh-step"><div class="gh-step-n">2</div>
+    <p>Set it to <strong>Public</strong>, tick <strong>Add a README</strong>, then click <strong>Create repository</strong>.</p></div>
+    <div class="gh-step"><div class="gh-step-n">3</div>
+    <p>Click <strong>Add file → Upload files</strong>. Upload your <code>starter.html</code> — rename it to <code>index.html</code> before uploading.</p></div>
+    <div class="gh-step"><div class="gh-step-n">4</div>
+    <p>Commit message: <em>"Add HTML lesson 17 project"</em> → click <strong>Commit changes</strong>.</p></div>
+    <div class="gh-step"><div class="gh-step-n">5</div>
+    <p>Go to <strong>Settings → Pages</strong> → branch <strong>main</strong> → <strong>Save</strong>. Your project goes live at <code>https://YOUR-NAME.github.io/html-lesson-17-stage-1-set-up-the-page-structure/</code> in about 1 minute! 🎉</p></div>
+    <button class="unlock-btn" onclick="showEnd()" style="margin-top:.5rem">I've pushed to GitHub — Finish Session ✅</button>
+  </div>
+</div>
 <div class="session-end" id="session-end">
-  <h2>🎉 Great work! Lesson 17 complete!</h2>
-  <p style="margin-bottom:.8rem;font-size:.9rem;opacity:.9">Today you learned:</p>
-  <ul><li>✅ Unordered and Ordered Lists</li><li>✅ Nested Lists and Description Lists</li></ul>
-  <div class="lesson-nav" style="margin-top:1.5rem;border-color:rgba(255,255,255,.2)">
-    <a href="lesson_16.html" class="ln-btn">← Lesson 16</a>
-    <a href="lesson_18.html" class="ln-btn primary">Lesson 18 →</a>
-  </div>
+  <h2>🎉 Lesson 17 complete!</h2>
+  <p style="margin-bottom:.8rem;font-size:.9rem;opacity:.9">You covered:</p>
+  <ul><li>✅ Lesson Introduction</li><li>✅ Prerequisite Concepts</li><li>✅ Part 1 — What Is an HTML List?</li><li>✅ Part 2 — Unordered Lists (`<ul>`)</li><li>✅ Part 3 — Ordered Lists (`<ol>`)</li><li>✅ Part 4 — Description Lists (`<dl>`)</li><li>✅ Part 5 — Mixing List Types (Nested Combinations)</li><li>✅ Part 6 — Complete HTML List Tags Reference</li></ul>
+  <div class="lesson-nav"><a href="lesson_16.html" class="ln-btn">← Lesson 16</a><a href="lesson_18.html" class="ln-btn primary">Lesson 18 →</a></div>
 </div>
-
 </main>
 
-<!-- FOOTER -->
 <footer class="lesson-footer">
-  <p>Techbase Code Coach &nbsp;·&nbsp; HTML Course Lesson 17
-     &nbsp;·&nbsp; © 2025 Techbase Consultant Services, Ibadan</p>
+  Techbase Code Coach · HTML Course · Lesson 17 · © 2025 Techbase Consultant Services, Ibadan
 </footer>
-
 <script>
-const TOTAL=2, KEY='techbase_html_17_phase';
+const TOTAL=10,KEY='techbase_html_l17';
 let current=parseInt(localStorage.getItem(KEY)||'1');
-
 function init(){
-  for(let i=1;i<=current;i++) if(i>1) unlockPhase(i,false);
+  for(let i=2;i<=current;i++) unlockPhase(i,false);
   updateBar();
 }
-
 function unlockNext(n){
-  document.getElementById('check'+n).classList.add('done');
-  document.getElementById('check'+n).textContent='✓';
-  localStorage.setItem(KEY,n+1);
-  current=n+1;
+  const chk=document.getElementById('chk'+n);
+  if(chk){chk.classList.add('done');chk.textContent='✓';}
+  localStorage.setItem(KEY,n+1); current=n+1;
   if(n===TOTAL){
     document.getElementById('build-it').style.display='block';
-    const cap=document.getElementById('capstone');
-    if(cap) cap.style.display='block';
     updateBar(100);
     setTimeout(()=>document.getElementById('build-it').scrollIntoView({behavior:'smooth'}),200);
-  } else {
-    unlockPhase(n+1,true);
-    updateBar();
+  }else{
+    unlockPhase(n+1,true); updateBar();
   }
 }
-
 function unlockPhase(n,scroll){
   const el=document.getElementById('phase'+n);
-  if(el){ el.classList.remove('locked'); if(scroll) setTimeout(()=>el.scrollIntoView({behavior:'smooth',block:'start'}),150); }
+  if(el){el.classList.remove('locked');if(scroll)setTimeout(()=>el.scrollIntoView({behavior:'smooth',block:'start'}),150);}
 }
-
 function updateBar(pct){
-  const p=pct||Math.round((current-1)/TOTAL*95);
+  const p=pct!==undefined?pct:Math.round((current-1)/TOTAL*95);
   document.getElementById('pbar').style.width=p+'%';
 }
-
 function showGithub(){
-  const g=document.getElementById('github-steps');
-  if(g){ g.style.display='block'; setTimeout(()=>g.scrollIntoView({behavior:'smooth'}),150); }
+  const g=document.getElementById('gh-steps');
+  if(g){g.style.display='block';setTimeout(()=>g.scrollIntoView({behavior:'smooth'}),150);}
 }
-
 function showEnd(){
   const e=document.getElementById('session-end');
-  if(e){ e.classList.add('visible'); setTimeout(()=>e.scrollIntoView({behavior:'smooth'}),150); }
+  if(e){e.classList.add('visible');setTimeout(()=>e.scrollIntoView({behavior:'smooth'}),150);}
 }
-
+function toggleGh(el){el.nextElementSibling.classList.toggle('open');}
+function downloadStarter(code){
+  const a=document.createElement('a');
+  a.href='data:text/html;charset=utf-8,'+encodeURIComponent(code);
+  a.download='starter.html';a.click();
+}
 init();
 </script>
-
 </body>
 </html>
