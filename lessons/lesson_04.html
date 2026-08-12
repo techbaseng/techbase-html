@@ -1,272 +1,178 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>Lesson 04: HTML Attributes: Syntax, Key Attributes, Quoting Rules &amp; Best Practices — Techbase HTML</title>
-<meta name="description" content="HTML Attributes: Syntax, Key Attributes, Quoting Rules &amp; Best Practices">
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<style>
-:root{
-  --acc:#e34c26;--acc-d:#c0391a;--acc-pale:#fff5f2;
-  --acc-b:rgba(227,76,38,.25);--acc-sh:rgba(227,76,38,.25);
-  --bg:#f8fafc;--surface:#fff;--border:#e2e8f0;--border2:#cbd5e1;
-  --text:#0f172a;--t2:#334155;--muted:#64748b;
-  --D:'Space Grotesk',sans-serif;--B:'Plus Jakarta Sans',sans-serif;--M:'JetBrains Mono',monospace;
-}
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"><style>
+:root{--acc:#e34c26;--acd:#c0391a;--acp:#fff5f2;--acb:rgba(227,76,38,.22);--acs:rgba(227,76,38,.28);--bg:#f8fafc;--sf:#fff;--br:#e2e8f0;--tx:#0f172a;--t2:#334155;--mu:#64748b;--D:'Space Grotesk',sans-serif;--B:'Plus Jakarta Sans',sans-serif;--M:'JetBrains Mono',monospace}
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased}
-body{background:var(--bg);color:var(--text);font-family:var(--B);font-size:16px;line-height:1.75;overflow-x:hidden}
-
-/* NAV */
-.l-nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(255,255,255,.95);
-  backdrop-filter:blur(12px);border-bottom:1px solid var(--border);height:58px;
-  display:flex;align-items:center;padding:0 1.5rem;gap:1rem;justify-content:space-between}
-.l-nav-logo{font-family:var(--D);font-weight:700;font-size:.9rem;color:var(--text);text-decoration:none}
-.l-nav-back{font-size:.8rem;color:var(--muted);text-decoration:none;font-weight:500;display:flex;align-items:center;gap:.3rem;transition:color .2s}
+body{background:var(--bg);color:var(--tx);font-family:var(--B);font-size:16px;line-height:1.75;overflow-x:hidden}
+.l-nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(255,255,255,.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--br);height:58px;display:flex;align-items:center;padding:0 1.5rem;justify-content:space-between}
+.l-nav-logo{font-family:var(--D);font-weight:700;font-size:.9rem;color:var(--tx);text-decoration:none}
+.l-nav-back{font-size:.8rem;color:var(--mu);text-decoration:none;font-weight:500;transition:color .2s}
 .l-nav-back:hover{color:var(--acc)}
-.l-nav-label{font-family:var(--M);font-size:.68rem;color:var(--muted)}
-
-/* PROGRESS */
-.progress-wrap{position:fixed;top:58px;left:0;right:0;z-index:199;height:4px;background:var(--border)}
-.progress-bar{height:100%;background:var(--acc);transition:width .4s ease;width:0%}
-
-/* HERO */
-.l-hero{padding:80px 1.5rem 2rem;background:linear-gradient(160deg,#fff5f2 0%,#f8fafc 55%,#ffe8e0 100%);border-bottom:1px solid var(--border)}
-.l-hero-inner{max-width:860px;margin:0 auto}
-.l-badge{display:inline-flex;align-items:center;gap:.4rem;border-radius:100px;padding:.2rem .85rem;
-  font-family:var(--M);font-size:.62rem;letter-spacing:.08em;text-transform:uppercase;font-weight:600;
-  color:var(--acc);background:var(--acc-pale);border:1px solid var(--acc-b);margin-bottom:.8rem}
-.l-hero h1{font-family:var(--D);font-weight:700;font-size:clamp(1.5rem,4vw,2.3rem);
-  letter-spacing:-.02em;line-height:1.15;margin-bottom:.5rem}
-.l-hero-sub{font-size:.95rem;color:var(--muted);margin-bottom:1rem}
-
-/* WELCOME BOX */
-.welcome-box{background:linear-gradient(135deg,var(--acc),var(--acc-d));color:#fff;
-  border-radius:16px;padding:1.5rem 1.8rem;max-width:860px;margin:1.5rem auto 0}
-.welcome-box h2{font-family:var(--D);font-weight:700;font-size:1.05rem;margin-bottom:.6rem}
-.welcome-box p,.welcome-box li{font-size:.9rem;line-height:1.8;opacity:.93}
-.welcome-box ul{margin-left:1.2rem;margin-top:.5rem}
-.welcome-meta{display:flex;gap:1rem;margin-top:1rem;flex-wrap:wrap}
-.welcome-meta span{background:rgba(255,255,255,.18);border-radius:6px;padding:.2rem .75rem;
-  font-family:var(--M);font-size:.68rem;font-weight:500}
-
-/* PHASE */
-.phase{background:var(--surface);border:1.5px solid var(--border);border-radius:16px;
-  margin-bottom:1.5rem;overflow:hidden;transition:opacity .3s,transform .3s,filter .3s}
-.phase.locked{opacity:.35;pointer-events:none;filter:blur(1.5px)}
-.phase-header{padding:1rem 1.4rem;background:#fff8f5;
-  border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;gap:1rem;cursor:default}
-.phase-num{font-family:var(--M);font-size:.7rem;font-weight:600;letter-spacing:.08em;
-  text-transform:uppercase;color:var(--acc)}
-.phase-title{font-family:var(--D);font-weight:700;font-size:.95rem;color:var(--text);
-  flex:1;margin:0 .8rem}
-.phase-check{width:26px;height:26px;border-radius:50%;background:var(--border);
-  display:flex;align-items:center;justify-content:center;font-size:.8rem;flex-shrink:0;
-  transition:background .3s,color .3s}
-.phase-check.done{background:#10b981;color:#fff}
-.phase-body{padding:1.6rem 1.8rem}
-
-/* RICH CONTENT STYLES */
+.l-nav-lbl{font-family:var(--M);font-size:.68rem;color:var(--mu)}
+.pw{position:fixed;top:58px;left:0;right:0;z-index:199;height:4px;background:var(--br)}
+.pb{height:100%;background:linear-gradient(90deg,var(--acc),var(--acd));transition:width .5s cubic-bezier(.4,0,.2,1);width:0%;position:relative}
+.pb::after{content:'';position:absolute;right:0;top:0;bottom:0;width:20px;background:inherit;filter:brightness(1.4);animation:pg 1.5s ease-in-out infinite}
+@keyframes pg{0%,100%{opacity:1}50%{opacity:.35}}
+.l-hero{padding:80px 1.5rem 2rem;background:linear-gradient(160deg,#fff5f2 0%,#f8fafc 55%,#ffe8e0 100%);border-bottom:1px solid var(--br)}
+.l-hero-in{max-width:860px;margin:0 auto}
+.badge{display:inline-flex;align-items:center;border-radius:100px;padding:.22rem .9rem;font-family:var(--M);font-size:.62rem;letter-spacing:.08em;text-transform:uppercase;font-weight:700;color:var(--acc);background:var(--acp);border:1.5px solid var(--acb);margin-bottom:.85rem}
+.l-hero h1{font-family:var(--D);font-weight:700;font-size:clamp(1.5rem,4vw,2.3rem);letter-spacing:-.02em;line-height:1.15;margin-bottom:.5rem}
+.l-hero-sub{font-size:.9rem;color:var(--mu)}
+.wb{background:#fff;border:1.5px solid var(--acb);border-left:5px solid var(--acc);border-radius:14px;padding:1.4rem 1.6rem;max-width:860px;margin:1.5rem auto 0;box-shadow:0 2px 12px var(--acs)}
+.wb h2{font-family:var(--D);font-weight:700;font-size:1.05rem;color:var(--acd);margin-bottom:.6rem}
+.wb p,.wb li{font-size:.92rem;line-height:1.85;color:var(--t2)}
+.wb ul{margin-left:1.2rem;margin-top:.4rem}
+.wm{display:flex;gap:.65rem;margin-top:1rem;flex-wrap:wrap}
+.wm span{background:var(--acp);color:var(--acd);border:1px solid var(--acb);border-radius:7px;padding:.22rem .7rem;font-family:var(--M);font-size:.68rem;font-weight:600}
+.phase{background:var(--sf);border:1.5px solid var(--br);border-radius:16px;margin-bottom:1.5rem;overflow:hidden;transition:opacity .35s,filter .35s,transform .35s}
+.phase.locked{opacity:.28;pointer-events:none;filter:blur(2px);transform:scale(.99)}
+.ph{padding:1rem 1.4rem;background:#fff8f5;border-bottom:1px solid var(--br);display:flex;align-items:center;gap:.8rem}
+.pn{font-family:var(--M);font-size:.65rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--acc);white-space:nowrap}
+.pt{font-family:var(--D);font-weight:700;font-size:.95rem;color:var(--tx);flex:1}
+.pc{width:26px;height:26px;border-radius:50%;background:var(--br);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:.8rem;transition:background .3s,transform .4s}
+.pc.done{background:#10b981;color:#fff;transform:scale(1.15) rotate(360deg)}
+.pb2{padding:1.6rem 1.8rem}
 .v2-p{margin-bottom:1rem;font-size:.95rem;color:var(--t2);line-height:1.85}
-.v2-h3{font-family:var(--D);font-weight:700;font-size:1.05rem;color:var(--text);
-  margin:1.6rem 0 .5rem;padding-top:.2rem;border-top:2px solid var(--acc-pale)}
-.v2-h4{font-family:var(--D);font-weight:600;font-size:.95rem;color:var(--t2);margin:1.1rem 0 .4rem}
-.v2-h5,.v2-h6{font-family:var(--D);font-weight:600;font-size:.9rem;color:var(--muted);margin:.8rem 0 .3rem}
+.v2-h3{font-family:var(--D);font-weight:700;font-size:1.05rem;color:var(--tx);margin:1.6rem 0 .5rem;border-top:2px solid var(--acp);padding-top:.4rem}
+.v2-h4{font-family:var(--D);font-weight:600;font-size:.95rem;color:var(--t2);margin:1rem 0 .35rem}
+.v2-h5,.v2-h6{font-family:var(--D);font-weight:600;font-size:.88rem;color:var(--mu);margin:.7rem 0 .3rem}
 .v2-ul,.v2-ol{margin:.6rem 0 1rem 1.4rem;font-size:.93rem;color:var(--t2);line-height:1.9}
 .v2-ul li,.v2-ol li{margin-bottom:.3rem}
-.v2-bq{border-left:4px solid var(--acc);background:var(--acc-pale);border-radius:0 10px 10px 0;
-  padding:.9rem 1.2rem;margin:1rem 0;font-size:.92rem;color:#7b1c06;font-style:italic}
+.v2-bq{border-left:4px solid var(--acc);background:var(--acp);border-radius:0 10px 10px 0;padding:.9rem 1.2rem;margin:1rem 0;font-size:.92rem;color:#7b1c06;font-style:italic}
 .v2-bq p{margin:0;color:inherit}
-.v2-bq strong{font-style:normal}
-.v2-hr{border:none;border-top:1px solid var(--border);margin:1.2rem 0}
-.v2-table-wrap{overflow-x:auto;margin:1rem 0}
+.v2-hr{border:none;border-top:1px solid var(--br);margin:1.2rem 0}
+.v2-table-wrap{overflow-x:auto;margin:1rem 0;border-radius:10px;border:1px solid var(--br)}
 .v2-table{width:100%;border-collapse:collapse;font-size:.87rem}
-.v2-table th{background:var(--acc-pale);color:#7b1c06;font-family:var(--D);
-  font-weight:700;padding:9px 12px;text-align:left;border:1px solid var(--acc-b)}
-.v2-table td{padding:8px 12px;border:1px solid var(--border);color:var(--t2);vertical-align:top}
-.v2-table tr:nth-child(even) td{background:#f8fafc}
-.v2-table code{background:var(--acc-pale);color:var(--acc);border-radius:4px;
-  padding:1px 5px;font-family:var(--M);font-size:.8em}
-.phase-body code{background:var(--acc-pale);color:var(--acc-d);border-radius:4px;
-  padding:1px 6px;font-family:var(--M);font-size:.82em}
-.phase-body a{color:var(--acc);text-decoration:underline;text-underline-offset:2px}
-.phase-body strong{color:var(--text)}
-
-/* CODE BLOCKS */
-.v2-code-wrap{margin:1.2rem 0;border-radius:12px;overflow:hidden;border:1px solid #1e293b;box-shadow:0 4px 16px rgba(0,0,0,.15)}
+.v2-table th{background:var(--acp);color:#7b1c06;font-family:var(--D);font-weight:700;padding:10px 12px;text-align:left;border-bottom:2px solid var(--acb)}
+.v2-table td{padding:8px 12px;border-bottom:1px solid var(--br);color:var(--t2);vertical-align:top}
+.v2-table tr:last-child td{border:none}
+.v2-table tr:hover td{background:var(--acp)}
+.pb2 code{background:var(--acp);color:var(--acd);border-radius:4px;padding:1px 6px;font-family:var(--M);font-size:.82em}
+.pb2 a{color:var(--acc);text-decoration:underline;text-underline-offset:2px}
+.pb2 strong{color:var(--tx)}
+.v2-code-wrap{margin:1.2rem 0;border-radius:12px;overflow:hidden;border:1px solid #1e293b;box-shadow:0 4px 18px rgba(0,0,0,.18)}
 .v2-code-bar{background:#1e293b;padding:.55rem 1rem;display:flex;align-items:center;gap:.4rem}
 .v2-dot{width:10px;height:10px;border-radius:50%}
 .v2-dot.r{background:#ff5f57}.v2-dot.y{background:#febc2e}.v2-dot.g{background:#28c840}
-.v2-code-lang{margin-left:.6rem;font-family:var(--M);font-size:.65rem;color:#64748b;text-transform:uppercase;letter-spacing:.08em}
+.v2-code-lang{margin-left:.5rem;font-family:var(--M);font-size:.62rem;color:#64748b;text-transform:uppercase;letter-spacing:.08em;flex:1}
+.copy-btn{background:rgba(255,255,255,.08);color:#94a3b8;border:none;border-radius:6px;padding:.25rem .65rem;font-family:var(--M);font-size:.65rem;cursor:pointer;transition:background .2s,color .2s}
+.copy-btn:hover{background:rgba(255,255,255,.2);color:#fff}
+.copy-btn.copied{background:#10b981;color:#fff}
 .v2-code-body{background:#0f172a;padding:1.3rem 1.5rem;overflow-x:auto}
 .v2-code-body pre{margin:0}
-.v2-code-body code{font-family:var(--M);font-size:.8rem;line-height:1.9;color:#e2e8f0;
-  white-space:pre;background:transparent;padding:0;border-radius:0}
-
-/* TASK BOX */
-.task-box{background:#fff0ec;border:2px dashed #e34c26;
-  border-radius:12px;padding:1rem 1.3rem;margin:1.4rem 0}
-.task-label{font-family:var(--M);font-size:.65rem;font-weight:700;letter-spacing:.1em;
-  text-transform:uppercase;color:#7b1c06;margin-bottom:.5rem;display:flex;align-items:center;gap:.4rem}
-.task-box p,.task-body{font-size:.92rem;color:#7b1c06;line-height:1.8}
-.task-box code{background:rgba(0,0,0,.08);border-radius:4px;padding:1px 6px;
-  font-family:var(--M);font-size:.82em}
-
-/* UNLOCK BUTTON */
-.unlock-btn{display:inline-flex;align-items:center;gap:.5rem;background:var(--acc);
-  color:#fff;font-family:var(--D);font-weight:700;font-size:.88rem;
-  padding:.75rem 1.6rem;border-radius:10px;border:none;cursor:pointer;
-  transition:transform .2s,box-shadow .2s;box-shadow:0 4px 14px var(--acc-sh);margin-top:1.2rem}
-.unlock-btn:hover{transform:translateY(-2px);box-shadow:0 8px 22px var(--acc-sh)}
-
-/* BUILD IT */
+.v2-code-body code{font-family:var(--M);font-size:.8rem;line-height:1.95;color:#e2e8f0;white-space:pre;background:transparent;padding:0;border-radius:0}
+.task-box{background:#fff0ec;border:2px dashed #e34c26;border-radius:12px;padding:1.1rem 1.3rem;margin:1.4rem 0}
+.task-lbl{font-family:var(--M);font-size:.65rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#7b1c06;margin-bottom:.5rem;display:flex;align-items:center;gap:.4rem}
+.task-body{font-size:.93rem;color:#7b1c06;line-height:1.85}
+.task-body code{background:rgba(0,0,0,.1);border-radius:4px;padding:1px 6px;font-family:var(--M);font-size:.82em}
+.chal-box{background:linear-gradient(135deg,#fff5f2 0%,#fff 100%);border:2px solid var(--acc);border-radius:14px;padding:1.2rem 1.4rem;margin-bottom:1.2rem}
+.chal-lbl{font-family:var(--M);font-size:.65rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--acd);margin-bottom:.6rem}
+.chal-body{font-size:.95rem;color:var(--tx);line-height:1.85}
+.chal-body code{background:var(--acp);color:var(--acd);border-radius:4px;padding:1px 5px;font-family:var(--M);font-size:.82em}
+.reveal-btn{display:inline-flex;align-items:center;gap:.5rem;background:transparent;color:var(--acd);font-family:var(--D);font-weight:700;font-size:.85rem;padding:.6rem 1.2rem;border-radius:8px;border:2px solid var(--acc);cursor:pointer;transition:background .2s,color .2s;margin:.6rem 0}
+.reveal-btn:hover{background:var(--acc);color:#fff}
+.reveal-content{display:none;margin-top:.6rem;animation:fi .3s ease}
+.reveal-content.open{display:block}
+@keyframes fi{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
 .build-box{background:#f0fdf4;border:2px solid #16a34a;border-radius:16px;padding:1.6rem;margin:2rem 0;display:none}
-.build-label{font-family:var(--M);font-size:.65rem;font-weight:700;letter-spacing:.1em;
-  text-transform:uppercase;color:#15803d;margin-bottom:.4rem}
-.build-name{font-family:var(--D);font-weight:700;font-size:1.1rem;color:#14532d;margin-bottom:.5rem}
-.build-desc{font-size:.9rem;color:#166534;margin-bottom:1.2rem;line-height:1.75}
-.build-desc code{background:rgba(22,163,74,.12);border-radius:4px;padding:1px 6px;font-family:var(--M);font-size:.82em}
-.build-desc strong{color:#14532d}
-
-/* GITHUB ACCORDION */
-.gh-acc{border:1.5px solid var(--border);border-radius:12px;overflow:hidden;margin:1.5rem 0}
-.gh-acc-head{padding:1rem 1.2rem;background:#f8fafc;cursor:pointer;
-  display:flex;align-items:center;justify-content:space-between;
-  font-family:var(--D);font-weight:600;font-size:.9rem;user-select:none}
-.gh-acc-body{display:none;padding:1.2rem;border-top:1px solid var(--border)}
-.gh-acc-body.open{display:block}
-.gh-step{display:flex;gap:.8rem;margin-bottom:1rem;align-items:flex-start}
-.gh-step-n{width:26px;height:26px;border-radius:50%;background:var(--acc);color:#fff;
-  font-family:var(--D);font-weight:700;font-size:.75rem;display:flex;align-items:center;
-  justify-content:center;flex-shrink:0;margin-top:2px}
-.gh-step p{font-size:.88rem;color:var(--t2);line-height:1.7}
-.gh-step code{background:var(--acc-pale);color:var(--acc-d);border-radius:4px;
-  padding:1px 6px;font-family:var(--M);font-size:.82em}
-
-/* SESSION END */
-.session-end{background:linear-gradient(135deg,var(--acc),var(--acc-d));color:#fff;
-  border-radius:16px;padding:1.6rem 1.8rem;margin:2rem 0;display:none}
-.session-end.visible{display:block}
-.session-end h2{font-family:var(--D);font-weight:700;font-size:1.1rem;margin-bottom:.8rem}
-.session-end ul{list-style:none;display:flex;flex-direction:column;gap:.4rem}
-.session-end li{font-size:.9rem;opacity:.93;display:flex;align-items:center;gap:.5rem}
-.ln-btn{display:inline-flex;align-items:center;gap:.4rem;background:var(--surface);
-  color:var(--t2);font-family:var(--D);font-weight:600;font-size:.82rem;
-  padding:.65rem 1.2rem;border-radius:8px;text-decoration:none;
-  border:1.5px solid var(--border);transition:border-color .2s,color .2s}
+.build-box.visible{display:block;animation:fi .4s ease}
+.build-lbl{font-family:var(--M);font-size:.65rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#15803d;margin-bottom:.4rem}
+.build-name{font-family:var(--D);font-weight:700;font-size:1.15rem;color:#14532d;margin-bottom:.6rem}
+.build-req{font-size:.93rem;color:#166534;line-height:1.8;margin-bottom:.8rem}
+.build-req code{background:rgba(22,163,74,.12);border-radius:4px;padding:1px 6px;font-family:var(--M);font-size:.82em}
+.build-req strong{color:#14532d}
+.gh-acc{border:1.5px solid var(--br);border-radius:12px;overflow:hidden;margin:1.5rem 0}
+.gh-hd{padding:1rem 1.2rem;background:#f8fafc;cursor:pointer;display:flex;align-items:center;justify-content:space-between;font-family:var(--D);font-weight:600;font-size:.9rem;user-select:none;transition:background .2s}
+.gh-hd:hover{background:#f1f5f9}
+.gh-bd{display:none;padding:1.2rem;border-top:1px solid var(--br)}
+.gh-bd.open{display:block;animation:fi .25s ease}
+.gh-st{display:flex;gap:.8rem;margin-bottom:1rem;align-items:flex-start}
+.gh-n{width:26px;height:26px;border-radius:50%;background:var(--acc);color:#fff;font-family:var(--D);font-weight:700;font-size:.75rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px}
+.gh-st p{font-size:.88rem;color:var(--t2);line-height:1.7}
+.gh-st code{background:var(--acp);color:var(--acd);border-radius:4px;padding:1px 6px;font-family:var(--M);font-size:.82em}
+.gh-nop{background:#fef3c7;border:1.5px solid #fde68a;border-radius:10px;padding:1rem 1.2rem;font-size:.9rem;color:#78350f;line-height:1.75;margin-bottom:1rem}
+.se{background:linear-gradient(135deg,var(--acc),var(--acd));color:#fff;border-radius:16px;padding:1.6rem 1.8rem;margin:2rem 0;display:none}
+.se.visible{display:block;animation:fi .4s ease}
+.se h2{font-family:var(--D);font-weight:700;font-size:1.1rem;margin-bottom:.8rem}
+.se ul{list-style:none;display:flex;flex-direction:column;gap:.4rem}
+.se li{font-size:.9rem;opacity:.93;display:flex;align-items:center;gap:.5rem}
+.ln-btn{display:inline-flex;align-items:center;gap:.4rem;background:var(--sf);color:var(--t2);font-family:var(--D);font-weight:600;font-size:.82rem;padding:.65rem 1.2rem;border-radius:8px;text-decoration:none;border:1.5px solid var(--br);transition:border-color .2s,color .2s}
 .ln-btn:hover{border-color:var(--acc);color:var(--acc)}
 .ln-btn.primary{background:var(--acc);color:#fff;border-color:var(--acc)}
 .ln-btn.primary:hover{opacity:.9}
-.lesson-nav{display:flex;align-items:center;justify-content:space-between;
-  padding-top:2rem;border-top:1px solid rgba(255,255,255,.25);margin-top:1.5rem;flex-wrap:wrap;gap:.75rem}
-.lesson-footer{text-align:center;padding:1.5rem;font-family:var(--M);font-size:.72rem;
-  color:var(--muted);border-top:1px solid var(--border);background:var(--surface)}
+.ln{display:flex;align-items:center;justify-content:space-between;padding-top:1.5rem;border-top:1px solid rgba(255,255,255,.25);margin-top:1.5rem;flex-wrap:wrap;gap:.75rem}
+.ub{display:inline-flex;align-items:center;gap:.5rem;background:var(--acc);color:#fff;font-family:var(--D);font-weight:700;font-size:.88rem;padding:.75rem 1.6rem;border-radius:10px;border:none;cursor:pointer;transition:transform .2s,box-shadow .2s;box-shadow:0 4px 14px var(--acs);margin-top:1.2rem}
+.ub:hover{transform:translateY(-2px);box-shadow:0 8px 22px var(--acs)}
+.ub:active{transform:scale(.97)}
+#toast{position:fixed;bottom:90px;right:1.5rem;z-index:999;background:#1e293b;color:#fff;border-radius:10px;padding:.75rem 1.2rem;font-family:var(--D);font-size:.85rem;font-weight:600;box-shadow:0 8px 24px rgba(0,0,0,.25);transform:translateY(20px);opacity:0;transition:all .3s;pointer-events:none}
+#toast.show{transform:translateY(0);opacity:1}
+#go-top{position:fixed;bottom:1.5rem;right:1.5rem;z-index:300;width:44px;height:44px;border-radius:50%;background:var(--acc);color:#fff;border:none;cursor:pointer;font-size:1.15rem;box-shadow:0 4px 16px var(--acs);display:flex;align-items:center;justify-content:center;opacity:0;transform:translateY(10px);transition:opacity .3s,transform .3s,box-shadow .2s;pointer-events:none}
+#go-top.visible{opacity:1;transform:translateY(0);pointer-events:auto}
+#go-top:hover{box-shadow:0 8px 24px var(--acs);transform:translateY(-2px)}
+#cc{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:998;display:none}
+.lf{text-align:center;padding:1.5rem;font-family:var(--M);font-size:.72rem;color:var(--mu);border-top:1px solid var(--br);background:var(--sf)}
 </style>
 </head>
 <body>
 <nav class="l-nav">
   <a href="../index.html" class="l-nav-logo">⚡ Techbase HTML</a>
-  <span class="l-nav-label">Lesson 04 of 34</span>
+  <span class="l-nav-lbl">Lesson 04 of 34</span>
   <a href="../index.html" class="l-nav-back">← All Lessons</a>
 </nav>
-<div class="progress-wrap"><div class="progress-bar" id="pbar"></div></div>
-
-<div class="l-hero">
-  <div class="l-hero-inner">
-    <div class="l-badge">HTML · Lesson 04</div>
-    <h1>HTML Attributes: Syntax, Key Attributes, Quoting Rules &amp; Best Practices</h1>
-    <div class="l-hero-sub">16 phases · Build: Project Overview</div>
-  </div>
-</div>
-
-<section style="background:linear-gradient(160deg,#fff5f2 0%,#f8fafc 55%,#ffe8e0 100%);padding-bottom:1.5rem;border-bottom:1px solid var(--border)">
-  <div style="max-width:860px;margin:0 auto;padding:0 1.5rem"><div class="welcome-box">
-  <h2>👋 Welcome to Lesson 04</h2>
-  <div style="font-size:.9rem;line-height:1.85;opacity:.93"><p class="v2-p">Welcome to Lesson 4! Over the last three lessons you have built a solid foundation:</p>
-<ul class="v2-ul"><li>Lesson 2 — You wrote your first real HTML pages using core tags</li><li>Lesson 3 — You understood exactly what an HTML <em>element</em> is and how nesting works</li></ul>
-<p class="v2-p">Now it is time to fully master <strong>HTML attributes</strong> — the extra instructions you write <em>inside</em> opening tags to give elements more power, behaviour, and meaning.</p>
-<p class="v2-p">You have already <em>used</em> attributes. Every time you wrote <code>href="..."</code> in a link or <code>src="..."</code> in an image, you used an attribute. But in this lesson you will truly <em>understand</em> them — what they are, why they exist, all their rules, and how to use each major one with confidence.</p>
-<p class="v2-p">By the end of this lesson you will be able to:</p>
-<ul class="v2-ul"><li>Define what an HTML attribute is and explain its syntax precisely</li><li>Write attributes correctly using the <code>name="value"</code> format</li><li>Explain and use the seven most important HTML attributes: <code>href</code>, <code>src</code>, <code>width</code>, <code>height</code>, <code>alt</code>, <code>style</code>, <code>lang</code>, and <code>title</code></li><li>Understand the difference between absolute and relative URLs in the <code>src</code> attribute</li><li>Know the quoting rules for attribute values and when each applies</li><li>Follow professional best practices (lowercase, always quote)</li><li>Diagnose and fix all common attribute mistakes</li></ul>
-<blockquote class="v2-bq"><p class="v2-p"><strong>Real-world connection:</strong> Attributes are the knobs and dials of HTML. The tag says <em>what</em> the element is — the attributes control <em>how</em> it behaves. A link without <code>href</code> goes nowhere. An image without <code>src</code> shows nothing. A page without <code>lang</code> confuses search engines and accessibility tools. Mastering attributes means mastering control.</p></blockquote>
-<hr class="v2-hr"></div>
-  <div class="welcome-meta">
-    <span>📚 16 phases</span>
-    <span>🏗️ Project Overview</span>
-  </div>
+<div class="pw"><div class="pb" id="pbar"></div></div>
+<div class="l-hero"><div class="l-hero-in">
+  <div class="badge">HTML · Lesson 04</div>
+  <h1>HTML Attributes: Syntax, Key Attributes, Quoting Rules &amp; Best Practices</h1>
+  <div class="l-hero-sub">16 phases &nbsp;·&nbsp; Build: Project Overview</div>
 </div></div>
-</section>
-
-<main style="max-width:860px;margin:0 auto;padding:2rem 1.5rem 5rem">
-<div class="phase" id="phase1">
-  <div class="phase-header">
-    <div class="phase-num">Phase 1 of 16</div>
-    <div class="phase-title">Lesson Introduction</div>
-    <div class="phase-check" id="chk1"></div>
-  </div>
-  <div class="phase-body">
-    <p class="v2-p">Welcome to Lesson 4! Over the last three lessons you have built a solid foundation:</p>
+<section style="background:linear-gradient(160deg,#fff5f2 0%,#f8fafc 55%,#ffe8e0 100%);padding-bottom:1.5rem;border-bottom:1px solid var(--br)">
+  <div style="max-width:860px;margin:0 auto;padding:0 1.5rem"><div class="wb"><h2>👋 Welcome to Lesson 04</h2><div style="font-size:.92rem;line-height:1.85;color:var(--t2)"><p class="v2-p">Welcome to Lesson 4! Over the last three lessons you have built a solid foundation:</p>
 <ul class="v2-ul"><li>Lesson 2 — You wrote your first real HTML pages using core tags</li><li>Lesson 3 — You understood exactly what an HTML <em>element</em> is and how nesting works</li></ul>
 <p class="v2-p">Now it is time to fully master <strong>HTML attributes</strong> — the extra instructions you write <em>inside</em> opening tags to give elements more power, behaviour, and meaning.</p>
 <p class="v2-p">You have already <em>used</em> attributes. Every time you wrote <code>href="..."</code> in a link or <code>src="..."</code> in an image, you used an attribute. But in this lesson you will truly <em>understand</em> them — what they are, why they exist, all their rules, and how to use each major one with confidence.</p>
 <p class="v2-p">By the end of this lesson you will be able to:</p>
 <ul class="v2-ul"><li>Define what an HTML attribute is and explain its syntax precisely</li><li>Write attributes correctly using the <code>name="value"</code> format</li><li>Explain and use the seven most important HTML attributes: <code>href</code>, <code>src</code>, <code>width</code>, <code>height</code>, <code>alt</code>, <code>style</code>, <code>lang</code>, and <code>title</code></li><li>Understand the difference between absolute and relative URLs in the <code>src</code> attribute</li><li>Know the quoting rules for attribute values and when each applies</li><li>Follow professional best practices (lowercase, always quote)</li><li>Diagnose and fix all common attribute mistakes</li></ul>
 <blockquote class="v2-bq"><p class="v2-p"><strong>Real-world connection:</strong> Attributes are the knobs and dials of HTML. The tag says <em>what</em> the element is — the attributes control <em>how</em> it behaves. A link without <code>href</code> goes nowhere. An image without <code>src</code> shows nothing. A page without <code>lang</code> confuses search engines and accessibility tools. Mastering attributes means mastering control.</p></blockquote>
-<hr class="v2-hr">
-    <div class="task-box">
-      <div class="task-label">✏️ Your Task</div>
-      <div class="task-body">- Diagnose and fix all common attribute mistakes
+<hr class="v2-hr"></div><div class="wm"><span>📚 16 phases</span><span>🏗️ Project Overview</span><span>🌐 GitHub Pages</span></div></div></div>
+</section>
+<main style="max-width:860px;margin:0 auto;padding:2rem 1.5rem 5rem">
+<div class="phase" id="phase1"><div class="ph"><div class="pn">Phase 1/16</div><div class="pt">Lesson Introduction</div><div class="pc" id="chk1"></div></div><div class="pb2"><p class="v2-p">Welcome to Lesson 4! Over the last three lessons you have built a solid foundation:</p>
+<ul class="v2-ul"><li>Lesson 2 — You wrote your first real HTML pages using core tags</li><li>Lesson 3 — You understood exactly what an HTML <em>element</em> is and how nesting works</li></ul>
+<p class="v2-p">Now it is time to fully master <strong>HTML attributes</strong> — the extra instructions you write <em>inside</em> opening tags to give elements more power, behaviour, and meaning.</p>
+<p class="v2-p">You have already <em>used</em> attributes. Every time you wrote <code>href="..."</code> in a link or <code>src="..."</code> in an image, you used an attribute. But in this lesson you will truly <em>understand</em> them — what they are, why they exist, all their rules, and how to use each major one with confidence.</p>
+<p class="v2-p">By the end of this lesson you will be able to:</p>
+<ul class="v2-ul"><li>Define what an HTML attribute is and explain its syntax precisely</li><li>Write attributes correctly using the <code>name="value"</code> format</li><li>Explain and use the seven most important HTML attributes: <code>href</code>, <code>src</code>, <code>width</code>, <code>height</code>, <code>alt</code>, <code>style</code>, <code>lang</code>, and <code>title</code></li><li>Understand the difference between absolute and relative URLs in the <code>src</code> attribute</li><li>Know the quoting rules for attribute values and when each applies</li><li>Follow professional best practices (lowercase, always quote)</li><li>Diagnose and fix all common attribute mistakes</li></ul>
+<blockquote class="v2-bq"><p class="v2-p"><strong>Real-world connection:</strong> Attributes are the knobs and dials of HTML. The tag says <em>what</em> the element is — the attributes control <em>how</em> it behaves. A link without <code>href</code> goes nowhere. An image without <code>src</code> shows nothing. A page without <code>lang</code> confuses search engines and accessibility tools. Mastering attributes means mastering control.</p></blockquote>
+<hr class="v2-hr"><div class="task-box"><div class="task-lbl">✏️ Your Task</div><div class="task-body">- Diagnose and fix all common attribute mistakes
 
 > Real-world connection: Attributes are the knobs and dials of HTML. The tag says *what* the element is — the attributes control *how* it behaves. A link without href goes nowhere. An image without src shows nothing. A page without lang confuses search engines and accessibility tools. Mastering attributes means mastering control.
 
----</div>
-    </div>
-    <button class="unlock-btn" onclick="unlockNext(1)">Start Lesson ✓</button>
-  </div>
-</div>
-<div class="phase locked" id="phase2">
-  <div class="phase-header">
-    <div class="phase-num">Phase 2 of 16</div>
-    <div class="phase-title">Prerequisite Concepts</div>
-    <div class="phase-check" id="chk2"></div>
-  </div>
-  <div class="phase-body">
-    <h3 class="v2-h3">Quick Recap — What Is an Element? What Is a Tag?</h3>
+---</div></div><button class="ub" onclick="unlockNext(1)">Start Lesson ✓</button></div></div>
+<div class="phase locked" id="phase2"><div class="ph"><div class="pn">Phase 2/16</div><div class="pt">Prerequisite Concepts</div><div class="pc" id="chk2"></div></div><div class="pb2"><h3 class="v2-h3">Quick Recap — What Is an Element? What Is a Tag?</h3>
 <p class="v2-p">From Lesson 3:</p>
 <ul class="v2-ul"><li>A <strong>tag</strong> is just the label: <code>&lt;a&gt;</code> or <code>&lt;/a&gt;</code></li><li>An <strong>element</strong> is the full package: <code>&lt;a href="..."&gt;text&lt;/a&gt;</code></li><li>Attributes live <strong>inside the opening tag</strong> — never in the closing tag</li></ul>
 <p class="v2-p">You have already seen attributes used. This lesson explains every rule governing them.</p>
-<hr class="v2-hr">
-    <div class="task-box">
-      <div class="task-label">✏️ Your Task</div>
-      <div class="task-body">Now practise what you just learned about <strong>Prerequisite Concepts</strong>. Open your editor, type the examples above by hand, then modify them — change values, rename variables, and observe what happens. Active experimentation is how code sticks.</div>
-    </div>
-    <button class="unlock-btn" onclick="unlockNext(2)">Phase Complete — Unlock Next ✓</button>
-  </div>
-</div>
-<div class="phase locked" id="phase3">
-  <div class="phase-header">
-    <div class="phase-num">Phase 3 of 16</div>
-    <div class="phase-title">Part 1 — What Is an HTML Attribute?</div>
-    <div class="phase-check" id="chk3"></div>
-  </div>
-  <div class="phase-body">
-    <h3 class="v2-h3">The Definition</h3>
+<hr class="v2-hr"><div class="task-box"><div class="task-lbl">✏️ Your Task</div><div class="task-body">Practise what you just learned about <strong>Prerequisite Concepts</strong>. Open your editor, type the examples above by hand, modify them, and observe what changes.</div></div><button class="ub" onclick="unlockNext(2)">Phase Complete — Unlock Next ✓</button></div></div>
+<div class="phase locked" id="phase3"><div class="ph"><div class="pn">Phase 3/16</div><div class="pt">Part 1 — What Is an HTML Attribute?</div><div class="pc" id="chk3"></div></div><div class="pb2"><h3 class="v2-h3">The Definition</h3>
 <p class="v2-p">An <strong>HTML attribute</strong> is extra information added to an HTML element's <strong>opening tag</strong> that modifies or extends the element's behaviour, appearance, or meaning.</p>
 <p class="v2-p">Think of a tag as a basic instruction and its attributes as the settings for that instruction.</p>
 <blockquote class="v2-bq"><p class="v2-p"><strong>Analogy:</strong> Imagine ordering a coffee. The coffee type (<code>latte</code>, <code>espresso</code>) is like the tag — it names the thing. The customisations (<code>size: large</code>, <code>milk: oat</code>, <code>sugar: none</code>) are like attributes — they specify exactly <em>how</em> you want that thing to be. Without the customisations, you just get a default coffee. With them, you get exactly what you need.</p></blockquote>
 <hr class="v2-hr">
 <h3 class="v2-h3">The Syntax — Name/Value Pairs</h3>
 <p class="v2-p">Every attribute follows this exact structure:</p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span></div><div class="v2-code-body"><pre><code>name=&quot;value&quot;</code></pre></div></div>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>name=&quot;value&quot;</code></pre></div></div>
 <p class="v2-p">Where:</p>
 <ul class="v2-ul"><li><strong><code>name</code></strong> — the name of the attribute (what setting you are configuring)</li><li><strong><code>=</code></strong> — separates the name from the value</li><li><strong><code>"value"</code></strong> — the value of that setting, always wrapped in quotes</li></ul>
 <p class="v2-p">Attributes are placed <strong>inside the opening tag</strong>, after the tag name, separated by a space:</p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;tagname name=&quot;value&quot;&gt;Content&lt;/tagname&gt;</code></pre></div></div>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;tagname name=&quot;value&quot;&gt;Content&lt;/tagname&gt;</code></pre></div></div>
 <p class="v2-p">Here is a real example:</p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;a href=&quot;https://www.w3schools.com&quot;&gt;Visit W3Schools&lt;/a&gt;</code></pre></div></div>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;a href=&quot;https://www.w3schools.com&quot;&gt;Visit W3Schools&lt;/a&gt;</code></pre></div></div>
 <p class="v2-p">Breaking it down:</p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span></div><div class="v2-code-body"><pre><code>&lt;a   href=&quot;https://www.w3schools.com&quot;   &gt;Visit W3Schools&lt;/a&gt;
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;a   href=&quot;https://www.w3schools.com&quot;   &gt;Visit W3Schools&lt;/a&gt;
  │        │                      │      │
  │        attribute name         │      │
  │                               │      │
@@ -275,7 +181,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--B);font-size:16px;
 <hr class="v2-hr">
 <h3 class="v2-h3">Multiple Attributes on One Element</h3>
 <p class="v2-p">An element can have <strong>more than one attribute</strong>. Simply separate them with spaces inside the opening tag:</p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;img src=&quot;photo.jpg&quot; alt=&quot;A smiling student&quot; width=&quot;300&quot; height=&quot;200&quot;&gt;</code></pre></div></div>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;img src=&quot;photo.jpg&quot; alt=&quot;A smiling student&quot; width=&quot;300&quot; height=&quot;200&quot;&gt;</code></pre></div></div>
 <p class="v2-p">This <code>&lt;img&gt;</code> element has <strong>four attributes</strong>:</p>
 <ul class="v2-ul"><li><code>src="photo.jpg"</code> — the image file to display</li><li><code>alt="A smiling student"</code> — the text description</li><li><code>width="300"</code> — 300 pixels wide</li><li><code>height="200"</code> — 200 pixels tall</li></ul>
 <blockquote class="v2-bq"><p class="v2-p"><strong>Order does not matter.</strong> You can write attributes in any order within the opening tag and they will work identically. However, consistency and readability matter — develop a habit of writing attributes in a logical order (e.g., <code>src</code> before <code>alt</code> before sizing attributes).</p></blockquote>
@@ -284,28 +190,14 @@ body{background:var(--bg);color:var(--text);font-family:var(--B);font-size:16px;
 <p class="v2-p">Before learning individual attributes, memorise these four rules:</p>
 <ol class="v2-ol"><li><strong>Attributes always go in the opening tag</strong> — never in the closing tag</li><li><strong>Attributes are written as name/value pairs</strong> — <code>name="value"</code></li><li><strong>Attribute values must always be quoted</strong> — use <code>"double"</code> or <code>'single'</code> quotes</li><li><strong>Attribute names should always be lowercase</strong> — <code>href</code> not <code>HREF</code></li></ol>
 <p class="v2-p">We will look at the quoting and case rules in detail in Part 7.</p>
-<hr class="v2-hr">
-    <div class="task-box">
-      <div class="task-label">✏️ Your Task</div>
-      <div class="task-body">Now practise what you just learned about <strong>What Is an HTML Attribute?</strong>. Open your editor, type the examples above by hand, then modify them — change values, rename variables, and observe what happens. Active experimentation is how code sticks.</div>
-    </div>
-    <button class="unlock-btn" onclick="unlockNext(3)">Phase Complete — Unlock Next ✓</button>
-  </div>
-</div>
-<div class="phase locked" id="phase4">
-  <div class="phase-header">
-    <div class="phase-num">Phase 4 of 16</div>
-    <div class="phase-title">Part 2 — The `href` Attribute</div>
-    <div class="phase-check" id="chk4"></div>
-  </div>
-  <div class="phase-body">
-    <h3 class="v2-h3">What Is <code>href</code>?</h3>
+<hr class="v2-hr"><div class="task-box"><div class="task-lbl">✏️ Your Task</div><div class="task-body">Practise what you just learned about <strong>What Is an HTML Attribute?</strong>. Open your editor, type the examples above by hand, modify them, and observe what changes.</div></div><button class="ub" onclick="unlockNext(3)">Phase Complete — Unlock Next ✓</button></div></div>
+<div class="phase locked" id="phase4"><div class="ph"><div class="pn">Phase 4/16</div><div class="pt">Part 2 — The `href` Attribute</div><div class="pc" id="chk4"></div></div><div class="pb2"><h3 class="v2-h3">What Is <code>href</code>?</h3>
 <p class="v2-p">The <code>href</code> attribute belongs to the <code>&lt;a&gt;</code> (anchor) tag. It stands for <strong>Hypertext REFerence</strong> and holds the <strong>URL</strong> (web address) of the destination the link navigates to when clicked.</p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;a href=&quot;https://www.w3schools.com&quot;&gt;Visit W3Schools&lt;/a&gt;</code></pre></div></div>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;a href=&quot;https://www.w3schools.com&quot;&gt;Visit W3Schools&lt;/a&gt;</code></pre></div></div>
 <p class="v2-p">Without <code>href</code>, the <code>&lt;a&gt;</code> tag renders as styled text but does nothing when clicked. <code>href</code> is what makes a link actually <em>go somewhere</em>.</p>
 <hr class="v2-hr">
 <h3 class="v2-h3">Simple Example — A Basic Link</h3>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
 &lt;html&gt;
 &lt;body&gt;
 
@@ -315,12 +207,12 @@ body{background:var(--bg);color:var(--text);font-family:var(--B);font-size:16px;
 &lt;/body&gt;
 &lt;/html&gt;</code></pre></div></div>
 <p class="v2-p"><strong>Expected output in browser:</strong></p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span></div><div class="v2-code-body"><pre><code>My Favourite Resources
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>My Favourite Resources
 
 Visit W3Schools    ← blue, underlined, navigates to w3schools.com when clicked</code></pre></div></div>
 <hr class="v2-hr">
 <h3 class="v2-h3">Second Example — Links in Context</h3>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
 &lt;html&gt;
 &lt;body&gt;
 
@@ -332,7 +224,7 @@ Visit W3Schools    ← blue, underlined, navigates to w3schools.com when clicked
 &lt;/body&gt;
 &lt;/html&gt;</code></pre></div></div>
 <p class="v2-p"><strong>Expected output in browser:</strong></p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span></div><div class="v2-code-body"><pre><code>Learning Resources
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>Learning Resources
 
 Start with W3Schools for tutorials.
 Practice projects at GitHub.
@@ -341,7 +233,7 @@ Ask questions at Stack Overflow.</code></pre></div></div>
 <blockquote class="v2-bq"><p class="v2-p"><strong>Thinking prompt:</strong> What happens if you write <code>href=""</code> (an empty value)? The browser treats it as a link to the current page — clicking it just reloads the same page.</p></blockquote>
 <hr class="v2-hr">
 <h3 class="v2-h3">Common Beginner Mistakes with <code>href</code></h3>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;!-- WRONG 1: Missing https:// — browser looks for a local file --&gt;
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;!-- WRONG 1: Missing https:// — browser looks for a local file --&gt;
 &lt;a href=&quot;www.google.com&quot;&gt;Google&lt;/a&gt;
 
 &lt;!-- WRONG 2: href in the closing tag — attributes only go in opening tags --&gt;
@@ -352,10 +244,7 @@ Ask questions at Stack Overflow.</code></pre></div></div>
 
 &lt;!-- CORRECT: href in opening tag, no spaces around =, full URL --&gt;
 &lt;a href=&quot;https://www.google.com&quot;&gt;Google&lt;/a&gt;</code></pre></div></div>
-<hr class="v2-hr">
-    <div class="task-box">
-      <div class="task-label">✏️ Your Task</div>
-      <div class="task-body"><p>Ask questions at <a href="https://stackoverflow.com">Stack Overflow</a>.</p>
+<hr class="v2-hr"><div class="task-box"><div class="task-lbl">✏️ Your Task</div><div class="task-body"><p>Ask questions at <a href="https://stackoverflow.com">Stack Overflow</a>.</p>
 
 </body>
 </html>
@@ -366,52 +255,41 @@ Expected output in browser:
 `
 Learning Resources
 
-Start with W3Schools for tutorials.</div>
-    </div>
-    <button class="unlock-btn" onclick="unlockNext(4)">Phase Complete — Unlock Next ✓</button>
-  </div>
-</div>
-<div class="phase locked" id="phase5">
-  <div class="phase-header">
-    <div class="phase-num">Phase 5 of 16</div>
-    <div class="phase-title">Part 3 — The `src` Attribute</div>
-    <div class="phase-check" id="chk5"></div>
-  </div>
-  <div class="phase-body">
-    <h3 class="v2-h3">What Is <code>src</code>?</h3>
+Start with W3Schools for tutorials.</div></div><button class="ub" onclick="unlockNext(4)">Phase Complete — Unlock Next ✓</button></div></div>
+<div class="phase locked" id="phase5"><div class="ph"><div class="pn">Phase 5/16</div><div class="pt">Part 3 — The `src` Attribute</div><div class="pc" id="chk5"></div></div><div class="pb2"><h3 class="v2-h3">What Is <code>src</code>?</h3>
 <p class="v2-p">The <code>src</code> attribute belongs to the <code>&lt;img&gt;</code> tag. It stands for <strong>source</strong> and holds the <strong>path</strong> (file location or URL) of the image to display.</p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;img src=&quot;img_girl.jpg&quot;&gt;</code></pre></div></div>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;img src=&quot;img_girl.jpg&quot;&gt;</code></pre></div></div>
 <p class="v2-p">Without <code>src</code>, the browser has no idea which image to show. The result is a broken image icon.</p>
 <hr class="v2-hr">
 <h3 class="v2-h3">Absolute URLs vs Relative URLs</h3>
 <p class="v2-p">There are two ways to specify the path in <code>src</code> (and also in <code>href</code>). Understanding this is critical for all web development.</p>
 <h4 class="v2-h4">Absolute URL</h4>
 <p class="v2-p">An <strong>absolute URL</strong> is a complete, full web address — it includes the protocol (<code>https://</code>), the domain name, and the full path to the file.</p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;img src=&quot;https://www.w3schools.com/images/img_girl.jpg&quot; alt=&quot;Girl with a jacket&quot;&gt;</code></pre></div></div>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;img src=&quot;https://www.w3schools.com/images/img_girl.jpg&quot; alt=&quot;Girl with a jacket&quot;&gt;</code></pre></div></div>
 <p class="v2-p">Absolute URLs point to files on <strong>other websites</strong> (external). They always begin with <code>https://</code> or <code>http://</code>.</p>
 <p class="v2-p"><strong>Important warnings about external images:</strong></p>
 <ul class="v2-ul"><li>The image may be under <strong>copyright</strong> — you need permission to use it</li><li>You have no control over external images — the owner can delete or change the image at any time, breaking your page</li><li>Loading external images can be slower than loading local ones</li></ul>
 <h4 class="v2-h4">Relative URL</h4>
 <p class="v2-p">A <strong>relative URL</strong> points to a file on <strong>your own website</strong>. It does not include the domain name — it is described relative to the current file's location.</p>
 <p class="v2-p"><strong>Type 1 — Same folder as the HTML file:</strong></p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;img src=&quot;img_girl.jpg&quot; alt=&quot;Girl with a jacket&quot;&gt;</code></pre></div></div>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;img src=&quot;img_girl.jpg&quot; alt=&quot;Girl with a jacket&quot;&gt;</code></pre></div></div>
 <p class="v2-p">If your HTML file is at <code>mysite.com/index.html</code> and the image is also in the root folder, the browser looks for <code>mysite.com/img_girl.jpg</code>.</p>
 <p class="v2-p"><strong>Type 2 — File is in a subfolder:</strong></p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;img src=&quot;images/img_girl.jpg&quot; alt=&quot;Girl with a jacket&quot;&gt;</code></pre></div></div>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;img src=&quot;images/img_girl.jpg&quot; alt=&quot;Girl with a jacket&quot;&gt;</code></pre></div></div>
 <p class="v2-p">The browser looks one level deeper into an <code>images</code> folder.</p>
 <p class="v2-p"><strong>Type 3 — URL starts with a slash (relative to domain root):</strong></p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;img src=&quot;/images/img_girl.jpg&quot; alt=&quot;Girl with a jacket&quot;&gt;</code></pre></div></div>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;img src=&quot;/images/img_girl.jpg&quot; alt=&quot;Girl with a jacket&quot;&gt;</code></pre></div></div>
 <p class="v2-p">The <code>/</code> at the start means "start from the root of the domain". Regardless of which folder the HTML file is in, the browser looks for <code>images/img_girl.jpg</code> at the root of the website.</p>
 <blockquote class="v2-bq"><p class="v2-p"><strong>Best practice tip:</strong> Almost always use <strong>relative URLs</strong> for images and files on your own website. If you ever move your site to a different domain name, relative URLs keep working — absolute URLs to your old domain would break.</p></blockquote>
 <hr class="v2-hr">
 <h3 class="v2-h3">Simple Example — Relative URL Image</h3>
 <p class="v2-p">Imagine your project folder looks like this:</p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span></div><div class="v2-code-body"><pre><code>my-website/
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>my-website/
 ├── index.html
 ├── photo.jpg
 └── images/
     └── logo.png</code></pre></div></div>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
 &lt;html&gt;
 &lt;body&gt;
 
@@ -426,7 +304,7 @@ Start with W3Schools for tutorials.</div>
 <p class="v2-p"><strong>Expected output:</strong> Both images display, because the browser finds them by following the relative paths from the HTML file's location.</p>
 <hr class="v2-hr">
 <h3 class="v2-h3">Second Example — Absolute URL Image (from the web)</h3>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
 &lt;html&gt;
 &lt;body&gt;
 
@@ -440,30 +318,16 @@ Start with W3Schools for tutorials.</div>
 &lt;/body&gt;
 &lt;/html&gt;</code></pre></div></div>
 <p class="v2-p"><strong>Expected output:</strong></p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span></div><div class="v2-code-body"><pre><code>Planet Earth
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>Planet Earth
 
 [Photo of Earth from space — 320×320 pixels]
 
 This image is hosted on Wikipedia&#x27;s servers.</code></pre></div></div>
 <blockquote class="v2-bq"><p class="v2-p"><strong>Thinking prompt:</strong> What would happen to this page if Wikipedia deleted or renamed that image file? The image would show a broken icon, and your page would look incomplete. This is why hosting your own images and using relative URLs is safer.</p></blockquote>
-<hr class="v2-hr">
-    <div class="task-box">
-      <div class="task-label">✏️ Your Task</div>
-      <div class="task-body">Now practise what you just learned about <strong>The <code>src</code> Attribute</strong>. Open your editor, type the examples above by hand, then modify them — change values, rename variables, and observe what happens. Active experimentation is how code sticks.</div>
-    </div>
-    <button class="unlock-btn" onclick="unlockNext(5)">Phase Complete — Unlock Next ✓</button>
-  </div>
-</div>
-<div class="phase locked" id="phase6">
-  <div class="phase-header">
-    <div class="phase-num">Phase 6 of 16</div>
-    <div class="phase-title">Part 4 — The `width` and `height` Attributes</div>
-    <div class="phase-check" id="chk6"></div>
-  </div>
-  <div class="phase-body">
-    <h3 class="v2-h3">What Are They?</h3>
+<hr class="v2-hr"><div class="task-box"><div class="task-lbl">✏️ Your Task</div><div class="task-body">Practise what you just learned about <strong>The <code>src</code> Attribute</strong>. Open your editor, type the examples above by hand, modify them, and observe what changes.</div></div><button class="ub" onclick="unlockNext(5)">Phase Complete — Unlock Next ✓</button></div></div>
+<div class="phase locked" id="phase6"><div class="ph"><div class="pn">Phase 6/16</div><div class="pt">Part 4 — The `width` and `height` Attributes</div><div class="pc" id="chk6"></div></div><div class="pb2"><h3 class="v2-h3">What Are They?</h3>
 <p class="v2-p">The <code>width</code> and <code>height</code> attributes on <code>&lt;img&gt;</code> tags set the <strong>dimensions</strong> of an image in <strong>pixels</strong> (px).</p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;img src=&quot;img_girl.jpg&quot; width=&quot;500&quot; height=&quot;600&quot;&gt;</code></pre></div></div>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;img src=&quot;img_girl.jpg&quot; width=&quot;500&quot; height=&quot;600&quot;&gt;</code></pre></div></div>
 <p class="v2-p">This displays the image at 500 pixels wide and 600 pixels tall.</p>
 <hr class="v2-hr">
 <h3 class="v2-h3">Why Should You Always Include Them?</h3>
@@ -472,7 +336,7 @@ This image is hosted on Wikipedia&#x27;s servers.</code></pre></div></div>
 <p class="v2-p">By specifying <code>width</code> and <code>height</code>, the browser pre-allocates the correct space, so nothing jumps when the image loads.</p>
 <hr class="v2-hr">
 <h3 class="v2-h3">Simple Example — Image with Fixed Dimensions</h3>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
 &lt;html&gt;
 &lt;body&gt;
 
@@ -489,30 +353,16 @@ This image is hosted on Wikipedia&#x27;s servers.</code></pre></div></div>
 <blockquote class="v2-bq"><p class="v2-p"><strong>Thinking prompt:</strong> If you set <code>width="600"</code> but keep <code>height="200"</code> on an image that is naturally square (e.g., 400×400), what would happen? The image would appear stretched horizontally and squashed vertically. To avoid distortion when resizing, set only <code>width</code> — the browser will automatically scale <code>height</code> proportionally. Or set only <code>height</code> and let <code>width</code> scale.</p></blockquote>
 <hr class="v2-hr">
 <h3 class="v2-h3">Example — Resizing Without Distortion</h3>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;!-- Set only width — height scales automatically, no distortion --&gt;
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;!-- Set only width — height scales automatically, no distortion --&gt;
 &lt;img src=&quot;profile.jpg&quot; alt=&quot;My profile photo&quot; width=&quot;250&quot;&gt;
 
 &lt;!-- Set only height — width scales automatically, no distortion --&gt;
 &lt;img src=&quot;banner.jpg&quot; alt=&quot;Website banner&quot; height=&quot;80&quot;&gt;</code></pre></div></div>
-<hr class="v2-hr">
-    <div class="task-box">
-      <div class="task-label">✏️ Your Task</div>
-      <div class="task-body">Now practise what you just learned about <strong>The <code>width</code> and <code>height</code> Attributes</strong>. Open your editor, type the examples above by hand, then modify them — change values, rename variables, and observe what happens. Active experimentation is how code sticks.</div>
-    </div>
-    <button class="unlock-btn" onclick="unlockNext(6)">Phase Complete — Unlock Next ✓</button>
-  </div>
-</div>
-<div class="phase locked" id="phase7">
-  <div class="phase-header">
-    <div class="phase-num">Phase 7 of 16</div>
-    <div class="phase-title">Part 5 — The `alt` Attribute</div>
-    <div class="phase-check" id="chk7"></div>
-  </div>
-  <div class="phase-body">
-    <h3 class="v2-h3">What Is <code>alt</code>?</h3>
+<hr class="v2-hr"><div class="task-box"><div class="task-lbl">✏️ Your Task</div><div class="task-body">Practise what you just learned about <strong>The <code>width</code> and <code>height</code> Attributes</strong>. Open your editor, type the examples above by hand, modify them, and observe what changes.</div></div><button class="ub" onclick="unlockNext(6)">Phase Complete — Unlock Next ✓</button></div></div>
+<div class="phase locked" id="phase7"><div class="ph"><div class="pn">Phase 7/16</div><div class="pt">Part 5 — The `alt` Attribute</div><div class="pc" id="chk7"></div></div><div class="pb2"><h3 class="v2-h3">What Is <code>alt</code>?</h3>
 <p class="v2-p">The <code>alt</code> attribute on <code>&lt;img&gt;</code> provides <strong>alternative text</strong> — a written description of the image. It is displayed when:</p>
 <ol class="v2-ol"><li>The image file cannot be found (broken link, wrong filename)</li><li>The internet connection is too slow to load the image</li><li>The user is using a <strong>screen reader</strong> (assistive software for visually impaired users)</li></ol>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;img src=&quot;img_girl.jpg&quot; alt=&quot;Girl with a jacket&quot;&gt;</code></pre></div></div>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;img src=&quot;img_girl.jpg&quot; alt=&quot;Girl with a jacket&quot;&gt;</code></pre></div></div>
 <p class="v2-p">The <code>alt</code> attribute is described as <strong>required</strong> — while it is technically optional in the code, omitting it is considered a serious accessibility and quality failure.</p>
 <hr class="v2-hr">
 <h3 class="v2-h3">Why Is <code>alt</code> Text One of the Most Important Attributes in HTML?</h3>
@@ -524,7 +374,7 @@ This image is hosted on Wikipedia&#x27;s servers.</code></pre></div></div>
 <h3 class="v2-h3">How to Write Good <code>alt</code> Text</h3>
 <p class="v2-p">A good <code>alt</code> attribute:</p>
 <ul class="v2-ul"><li>Describes what is in the image specifically and concisely</li><li>Does not start with "Image of..." or "Picture of..." — screen readers already announce it is an image</li><li>Is meaningful to someone who cannot see the image</li></ul>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;!-- POOR alt text — too vague --&gt;
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;!-- POOR alt text — too vague --&gt;
 &lt;img src=&quot;product.jpg&quot; alt=&quot;image&quot;&gt;
 &lt;img src=&quot;team.jpg&quot; alt=&quot;photo&quot;&gt;
 
@@ -532,11 +382,11 @@ This image is hosted on Wikipedia&#x27;s servers.</code></pre></div></div>
 &lt;img src=&quot;product.jpg&quot; alt=&quot;Nike Air Max 270 running shoe in black and white&quot;&gt;
 &lt;img src=&quot;team.jpg&quot; alt=&quot;Our five-person development team at the Lagos Tech Hub&quot;&gt;</code></pre></div></div>
 <p class="v2-p">For <strong>decorative images</strong> (images that are purely visual decoration with no informational value), use an empty <code>alt=""</code>:</p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;!-- Empty alt tells screen readers to skip this decorative image entirely --&gt;
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;!-- Empty alt tells screen readers to skip this decorative image entirely --&gt;
 &lt;img src=&quot;divider-line.png&quot; alt=&quot;&quot;&gt;</code></pre></div></div>
 <hr class="v2-hr">
 <h3 class="v2-h3">Simple Example — Demonstrating alt in Action</h3>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
 &lt;html&gt;
 &lt;body&gt;
 
@@ -552,7 +402,7 @@ This image is hosted on Wikipedia&#x27;s servers.</code></pre></div></div>
 <p class="v2-p"><strong>Expected output — second image:</strong> A broken image icon and the text <code>Girl with a jacket</code> appears in its place — because the file <code>wrong_filename.jpg</code> does not exist.</p>
 <hr class="v2-hr">
 <h3 class="v2-h3">Second Example — Real-World Alt Text in a News Article</h3>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
 &lt;html&gt;
 &lt;body&gt;
 
@@ -569,39 +419,25 @@ This image is hosted on Wikipedia&#x27;s servers.</code></pre></div></div>
 &lt;/html&gt;</code></pre></div></div>
 <p class="v2-p">This <code>alt</code> text is excellent because it:</p>
 <ul class="v2-ul"><li>Describes the scene specifically</li><li>Gives context (the event name)</li><li>Describes what is visible on the background screen</li><li>Would be genuinely useful to a visually impaired person</li></ul>
-<hr class="v2-hr">
-    <div class="task-box">
-      <div class="task-label">✏️ Your Task</div>
-      <div class="task-body">Now practise what you just learned about <strong>The <code>alt</code> Attribute</strong>. Open your editor, type the examples above by hand, then modify them — change values, rename variables, and observe what happens. Active experimentation is how code sticks.</div>
-    </div>
-    <button class="unlock-btn" onclick="unlockNext(7)">Phase Complete — Unlock Next ✓</button>
-  </div>
-</div>
-<div class="phase locked" id="phase8">
-  <div class="phase-header">
-    <div class="phase-num">Phase 8 of 16</div>
-    <div class="phase-title">Part 6 — The `style` Attribute</div>
-    <div class="phase-check" id="chk8"></div>
-  </div>
-  <div class="phase-body">
-    <h3 class="v2-h3">What Is <code>style</code>?</h3>
+<hr class="v2-hr"><div class="task-box"><div class="task-lbl">✏️ Your Task</div><div class="task-body">Practise what you just learned about <strong>The <code>alt</code> Attribute</strong>. Open your editor, type the examples above by hand, modify them, and observe what changes.</div></div><button class="ub" onclick="unlockNext(7)">Phase Complete — Unlock Next ✓</button></div></div>
+<div class="phase locked" id="phase8"><div class="ph"><div class="pn">Phase 8/16</div><div class="pt">Part 6 — The `style` Attribute</div><div class="pc" id="chk8"></div></div><div class="pb2"><h3 class="v2-h3">What Is <code>style</code>?</h3>
 <p class="v2-p">The <code>style</code> attribute is used to add <strong>inline CSS styling</strong> directly to an individual HTML element. It controls visual properties like text colour, font size, background colour, margins, and much more.</p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;p style=&quot;color:red;&quot;&gt;This is a red paragraph.&lt;/p&gt;</code></pre></div></div>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;p style=&quot;color:red;&quot;&gt;This is a red paragraph.&lt;/p&gt;</code></pre></div></div>
 <p class="v2-p"><strong>Expected output:</strong></p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span></div><div class="v2-code-body"><pre><code>This is a red paragraph.    ← displayed in red text</code></pre></div></div>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>This is a red paragraph.    ← displayed in red text</code></pre></div></div>
 <hr class="v2-hr">
 <h3 class="v2-h3">How the <code>style</code> Attribute Works</h3>
 <p class="v2-p">The value of the <code>style</code> attribute is written as one or more <strong>CSS property:value</strong> pairs, separated by semicolons (<code>;</code>):</p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span></div><div class="v2-code-body"><pre><code>style=&quot;property:value;&quot;
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>style=&quot;property:value;&quot;
 style=&quot;property1:value1; property2:value2;&quot;</code></pre></div></div>
 <p class="v2-p">For example:</p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;p style=&quot;color:blue; font-size:20px; background-color:yellow;&quot;&gt;
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;p style=&quot;color:blue; font-size:20px; background-color:yellow;&quot;&gt;
   Styled paragraph
 &lt;/p&gt;</code></pre></div></div>
 <p class="v2-p"><strong>Expected output:</strong> Blue text, 20px font size, on a yellow background.</p>
 <hr class="v2-hr">
 <h3 class="v2-h3">Simple Example — Styling Different Elements</h3>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
 &lt;html&gt;
 &lt;body&gt;
 
@@ -613,13 +449,13 @@ style=&quot;property1:value1; property2:value2;&quot;</code></pre></div></div>
 &lt;/body&gt;
 &lt;/html&gt;</code></pre></div></div>
 <p class="v2-p"><strong>Expected output in browser:</strong></p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span></div><div class="v2-code-body"><pre><code>My Web Page          ← heading in navy blue
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>My Web Page          ← heading in navy blue
 This paragraph is green.   ← green text
 This paragraph is red and larger.   ← red text, bigger font
 This paragraph has a blue background.  ← text on light blue background</code></pre></div></div>
 <hr class="v2-hr">
 <h3 class="v2-h3">Second Example — Styling a Heading and an Image</h3>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
 &lt;html&gt;
 &lt;body&gt;
 
@@ -643,24 +479,10 @@ This paragraph has a blue background.  ← text on light blue background</code><
 <p class="v2-p">While <code>style</code> attributes work perfectly and are great for learning, professional developers use <strong>external CSS files</strong> for styling rather than inline <code>style</code> attributes on every element.</p>
 <p class="v2-p">The reason: imagine you have 100 paragraphs and you want them all green. With <code>style</code> attributes, you must add <code>style="color:green;"</code> to all 100. With an external CSS file, you write one rule that applies to all paragraphs at once.</p>
 <p class="v2-p">You will learn CSS in full in a separate course. For now, <code>style</code> attributes are the perfect way to see styling take effect immediately and understand how CSS properties work.</p>
-<hr class="v2-hr">
-    <div class="task-box">
-      <div class="task-label">✏️ Your Task</div>
-      <div class="task-body">Now practise what you just learned about <strong>The <code>style</code> Attribute</strong>. Open your editor, type the examples above by hand, then modify them — change values, rename variables, and observe what happens. Active experimentation is how code sticks.</div>
-    </div>
-    <button class="unlock-btn" onclick="unlockNext(8)">Phase Complete — Unlock Next ✓</button>
-  </div>
-</div>
-<div class="phase locked" id="phase9">
-  <div class="phase-header">
-    <div class="phase-num">Phase 9 of 16</div>
-    <div class="phase-title">Part 7 — The `lang` Attribute</div>
-    <div class="phase-check" id="chk9"></div>
-  </div>
-  <div class="phase-body">
-    <h3 class="v2-h3">What Is <code>lang</code>?</h3>
+<hr class="v2-hr"><div class="task-box"><div class="task-lbl">✏️ Your Task</div><div class="task-body">Practise what you just learned about <strong>The <code>style</code> Attribute</strong>. Open your editor, type the examples above by hand, modify them, and observe what changes.</div></div><button class="ub" onclick="unlockNext(8)">Phase Complete — Unlock Next ✓</button></div></div>
+<div class="phase locked" id="phase9"><div class="ph"><div class="pn">Phase 9/16</div><div class="pt">Part 7 — The `lang` Attribute</div><div class="pc" id="chk9"></div></div><div class="pb2"><h3 class="v2-h3">What Is <code>lang</code>?</h3>
 <p class="v2-p">The <code>lang</code> attribute is placed on the <code>&lt;html&gt;</code> element and declares the <strong>natural language</strong> of the web page's content.</p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;html lang=&quot;en&quot;&gt;</code></pre></div></div>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;html lang=&quot;en&quot;&gt;</code></pre></div></div>
 <p class="v2-p">This tells search engines, browsers, and accessibility tools: "The content of this page is written in English."</p>
 <hr class="v2-hr">
 <h3 class="v2-h3">Why Is <code>lang</code> Important?</h3>
@@ -675,7 +497,7 @@ This paragraph has a blue background.  ← text on light blue background</code><
 <p class="v2-p">The country code helps when the same language has regional variations (e.g., American English vs British English spellings).</p>
 <hr class="v2-hr">
 <h3 class="v2-h3">Simple Example — Setting Language to English (UK)</h3>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
 &lt;html lang=&quot;en-GB&quot;&gt;
 &lt;body&gt;
 
@@ -687,7 +509,7 @@ This paragraph has a blue background.  ← text on light blue background</code><
 <p class="v2-p"><strong>Expected output:</strong> Page looks identical to any other page — but browsers, screen readers, and search engines now know the language is British English.</p>
 <hr class="v2-hr">
 <h3 class="v2-h3">Second Example — A Multilingual Note</h3>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
 &lt;html lang=&quot;en-NG&quot;&gt;
 &lt;body&gt;
 
@@ -703,24 +525,10 @@ This paragraph has a blue background.  ← text on light blue background</code><
 <hr class="v2-hr">
 <h3 class="v2-h3">Language Code Quick Reference</h3>
 <div class="v2-table-wrap"><table class="v2-table"><thead><tr><th>Language</th><th>Code</th><th>With Region</th></tr></thead><tbody><tr><td>English</td><td><code>en</code></td><td><code>en-US</code>, <code>en-GB</code>, <code>en-NG</code></td></tr><tr><td>French</td><td><code>fr</code></td><td><code>fr-FR</code>, <code>fr-CA</code></td></tr><tr><td>Spanish</td><td><code>es</code></td><td><code>es-ES</code>, <code>es-MX</code></td></tr><tr><td>Arabic</td><td><code>ar</code></td><td><code>ar-EG</code>, <code>ar-SA</code></td></tr><tr><td>Portuguese</td><td><code>pt</code></td><td><code>pt-BR</code>, <code>pt-PT</code></td></tr><tr><td>Yoruba</td><td><code>yo</code></td><td>—</td></tr><tr><td>Hausa</td><td><code>ha</code></td><td>—</td></tr><tr><td>Igbo</td><td><code>ig</code></td><td>—</td></tr><tr><td>Swahili</td><td><code>sw</code></td><td>—</td></tr></tbody></table></div>
-<hr class="v2-hr">
-    <div class="task-box">
-      <div class="task-label">✏️ Your Task</div>
-      <div class="task-body">Now practise what you just learned about <strong>The <code>lang</code> Attribute</strong>. Open your editor, type the examples above by hand, then modify them — change values, rename variables, and observe what happens. Active experimentation is how code sticks.</div>
-    </div>
-    <button class="unlock-btn" onclick="unlockNext(9)">Phase Complete — Unlock Next ✓</button>
-  </div>
-</div>
-<div class="phase locked" id="phase10">
-  <div class="phase-header">
-    <div class="phase-num">Phase 10 of 16</div>
-    <div class="phase-title">Part 8 — The `title` Attribute</div>
-    <div class="phase-check" id="chk10"></div>
-  </div>
-  <div class="phase-body">
-    <h3 class="v2-h3">What Is <code>title</code>?</h3>
+<hr class="v2-hr"><div class="task-box"><div class="task-lbl">✏️ Your Task</div><div class="task-body">Practise what you just learned about <strong>The <code>lang</code> Attribute</strong>. Open your editor, type the examples above by hand, modify them, and observe what changes.</div></div><button class="ub" onclick="unlockNext(9)">Phase Complete — Unlock Next ✓</button></div></div>
+<div class="phase locked" id="phase10"><div class="ph"><div class="pn">Phase 10/16</div><div class="pt">Part 8 — The `title` Attribute</div><div class="pc" id="chk10"></div></div><div class="pb2"><h3 class="v2-h3">What Is <code>title</code>?</h3>
 <p class="v2-p">The <code>title</code> attribute adds <strong>extra descriptive information</strong> about an element. When a user hovers their mouse cursor over the element, the browser displays this text as a small pop-up tooltip.</p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;p title=&quot;I&#x27;m a tooltip&quot;&gt;This is a paragraph.&lt;/p&gt;</code></pre></div></div>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;p title=&quot;I&#x27;m a tooltip&quot;&gt;This is a paragraph.&lt;/p&gt;</code></pre></div></div>
 <p class="v2-p"><strong>Expected output:</strong> The paragraph text displays normally. When you hover the mouse over it, a small grey tooltip box appears showing <code>I'm a tooltip</code>.</p>
 <hr class="v2-hr">
 <h3 class="v2-h3">Why Use <code>title</code>?</h3>
@@ -729,7 +537,7 @@ This paragraph has a blue background.  ← text on light blue background</code><
 <ul class="v2-ul"><li>Explaining what an abbreviated term means</li><li>Providing extra detail about a link's destination</li><li>Adding a description to an image that already has <code>alt</code> text</li></ul>
 <hr class="v2-hr">
 <h3 class="v2-h3">Simple Example — Tooltip on a Link</h3>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
 &lt;html&gt;
 &lt;body&gt;
 
@@ -743,7 +551,7 @@ This paragraph has a blue background.  ← text on light blue background</code><
 <p class="v2-p"><strong>Expected output:</strong> "Visit W3Schools" appears as a clickable link. Hovering the mouse over it shows the tooltip text.</p>
 <hr class="v2-hr">
 <h3 class="v2-h3">Second Example — Tooltip on an Abbreviation</h3>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
 &lt;html&gt;
 &lt;body&gt;
 
@@ -764,33 +572,19 @@ This paragraph has a blue background.  ← text on light blue background</code><
 <h3 class="v2-h3"><code>title</code> vs <code>alt</code> — Know the Difference</h3>
 <p class="v2-p">These two attributes are frequently confused by beginners:</p>
 <div class="v2-table-wrap"><table class="v2-table"><thead><tr><th>Attribute</th><th>Element</th><th>Purpose</th><th>When shown</th></tr></thead><tbody><tr><td><code>alt</code></td><td><code>&lt;img&gt;</code> only</td><td>Describes the image — <strong>required</strong> for accessibility</td><td>When image fails to load; read by screen readers</td></tr><tr><td><code>title</code></td><td>Any element</td><td>Provides supplementary information — <strong>optional</strong></td><td>On mouse hover as a tooltip</td></tr></tbody></table></div>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;!-- This is correct: alt for accessibility, title for tooltip info --&gt;
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;!-- This is correct: alt for accessibility, title for tooltip info --&gt;
 &lt;img src=&quot;chart.png&quot;
      alt=&quot;Bar chart showing Q3 revenue by region&quot;
      title=&quot;Data source: 2025 Annual Report, page 14&quot;
      width=&quot;600&quot;
      height=&quot;400&quot;&gt;</code></pre></div></div>
 <p class="v2-p">The <code>alt</code> here helps visually impaired users understand the chart. The <code>title</code> provides a source citation that sighted users can see on hover.</p>
-<hr class="v2-hr">
-    <div class="task-box">
-      <div class="task-label">✏️ Your Task</div>
-      <div class="task-body">Now practise what you just learned about <strong>The <code>title</code> Attribute</strong>. Open your editor, type the examples above by hand, then modify them — change values, rename variables, and observe what happens. Active experimentation is how code sticks.</div>
-    </div>
-    <button class="unlock-btn" onclick="unlockNext(10)">Phase Complete — Unlock Next ✓</button>
-  </div>
-</div>
-<div class="phase locked" id="phase11">
-  <div class="phase-header">
-    <div class="phase-num">Phase 11 of 16</div>
-    <div class="phase-title">Part 9 — Always Use Lowercase Attribute Names</div>
-    <div class="phase-check" id="chk11"></div>
-  </div>
-  <div class="phase-body">
-    <h3 class="v2-h3">The Rule</h3>
+<hr class="v2-hr"><div class="task-box"><div class="task-lbl">✏️ Your Task</div><div class="task-body">Practise what you just learned about <strong>The <code>title</code> Attribute</strong>. Open your editor, type the examples above by hand, modify them, and observe what changes.</div></div><button class="ub" onclick="unlockNext(10)">Phase Complete — Unlock Next ✓</button></div></div>
+<div class="phase locked" id="phase11"><div class="ph"><div class="pn">Phase 11/16</div><div class="pt">Part 9 — Always Use Lowercase Attribute Names</div><div class="pc" id="chk11"></div></div><div class="pb2"><h3 class="v2-h3">The Rule</h3>
 <p class="v2-p">Just as with HTML tag names (Lesson 3), <strong>attribute names should always be written in lowercase</strong>.</p>
 <p class="v2-p">The HTML5 standard does not technically require it — <code>HREF</code>, <code>Href</code>, and <code>href</code> all work identically in a browser. But professional standards and the W3C recommendation require lowercase, and for the same reasons as with tags:</p>
 <ul class="v2-ul"><li><strong>Readability:</strong> All-lowercase code is much easier to scan</li><li><strong>Compatibility:</strong> Some stricter document types (XHTML) require lowercase</li><li><strong>Consistency:</strong> When mixed with CSS and JavaScript (which are case-sensitive), lowercase-everywhere prevents hard-to-spot bugs</li></ul>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;!-- WRONG: uppercase attribute names --&gt;
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;!-- WRONG: uppercase attribute names --&gt;
 &lt;a HREF=&quot;https://www.google.com&quot;&gt;Google&lt;/a&gt;
 &lt;img SRC=&quot;photo.jpg&quot; ALT=&quot;My photo&quot; WIDTH=&quot;200&quot; HEIGHT=&quot;200&quot;&gt;
 
@@ -801,24 +595,10 @@ This paragraph has a blue background.  ← text on light blue background</code><
 &lt;a href=&quot;https://www.google.com&quot;&gt;Google&lt;/a&gt;
 &lt;img src=&quot;photo.jpg&quot; alt=&quot;My photo&quot; width=&quot;200&quot; height=&quot;200&quot;&gt;</code></pre></div></div>
 <p class="v2-p"><strong>Expected output:</strong> Identical for all three — the browser does not care. But your code quality is far superior with the lowercase version.</p>
-<hr class="v2-hr">
-    <div class="task-box">
-      <div class="task-label">✏️ Your Task</div>
-      <div class="task-body">Now practise what you just learned about <strong>Always Use Lowercase Attribute Names</strong>. Open your editor, type the examples above by hand, then modify them — change values, rename variables, and observe what happens. Active experimentation is how code sticks.</div>
-    </div>
-    <button class="unlock-btn" onclick="unlockNext(11)">Phase Complete — Unlock Next ✓</button>
-  </div>
-</div>
-<div class="phase locked" id="phase12">
-  <div class="phase-header">
-    <div class="phase-num">Phase 12 of 16</div>
-    <div class="phase-title">Part 10 — Always Quote Attribute Values</div>
-    <div class="phase-check" id="chk12"></div>
-  </div>
-  <div class="phase-body">
-    <h3 class="v2-h3">The Rule</h3>
+<hr class="v2-hr"><div class="task-box"><div class="task-lbl">✏️ Your Task</div><div class="task-body">Practise what you just learned about <strong>Always Use Lowercase Attribute Names</strong>. Open your editor, type the examples above by hand, modify them, and observe what changes.</div></div><button class="ub" onclick="unlockNext(11)">Phase Complete — Unlock Next ✓</button></div></div>
+<div class="phase locked" id="phase12"><div class="ph"><div class="pn">Phase 12/16</div><div class="pt">Part 10 — Always Quote Attribute Values</div><div class="pc" id="chk12"></div></div><div class="pb2"><h3 class="v2-h3">The Rule</h3>
 <p class="v2-p">Attribute values should <strong>always</strong> be wrapped in quotes. The HTML5 standard technically allows some attribute values without quotes, but W3C strongly recommends always quoting, and demands quotes for XHTML.</p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;!-- &quot;Bad&quot; (technically works in some cases, but discouraged) --&gt;
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;!-- &quot;Bad&quot; (technically works in some cases, but discouraged) --&gt;
 &lt;a href=https://www.w3schools.com&gt;Visit W3Schools&lt;/a&gt;
 
 &lt;!-- &quot;Good&quot; (always correct) --&gt;
@@ -827,7 +607,7 @@ This paragraph has a blue background.  ← text on light blue background</code><
 <hr class="v2-hr">
 <h3 class="v2-h3">Why Quoting Is Mandatory — Not Just Recommended</h3>
 <p class="v2-p">There is one case where missing quotes <strong>always</strong> breaks the code: when the attribute value contains a <strong>space</strong>.</p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;!-- BROKEN: The title value has a space — browser only reads &quot;Description&quot; --&gt;
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;!-- BROKEN: The title value has a space — browser only reads &quot;Description&quot; --&gt;
 &lt;p title=Description of W3Schools&gt;
 
 &lt;!-- CORRECT: Quotes allow the full phrase including spaces --&gt;
@@ -837,70 +617,41 @@ This paragraph has a blue background.  ← text on light blue background</code><
 <hr class="v2-hr">
 <h3 class="v2-h3">Double Quotes vs Single Quotes</h3>
 <p class="v2-p">HTML supports both <code>"double"</code> and <code>'single'</code> quotes for attribute values. They are completely equivalent in the browser's eyes.</p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;!-- Both of these are valid and produce identical results --&gt;
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;!-- Both of these are valid and produce identical results --&gt;
 &lt;a href=&quot;https://www.google.com&quot;&gt;Google&lt;/a&gt;
 &lt;a href=&#x27;https://www.google.com&#x27;&gt;Google&lt;/a&gt;</code></pre></div></div>
 <p class="v2-p"><strong>When to use single quotes:</strong> When the attribute value itself <strong>contains double quotes</strong>, you must use single quotes as the outer wrapper to avoid confusion:</p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;!-- WRONG: double quotes inside double quotes breaks the attribute --&gt;
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;!-- WRONG: double quotes inside double quotes breaks the attribute --&gt;
 &lt;p title=&quot;John &quot;ShotGun&quot; Nelson&quot;&gt;
 
 &lt;!-- CORRECT: use single quotes when value contains double quotes --&gt;
 &lt;p title=&#x27;John &quot;ShotGun&quot; Nelson&#x27;&gt;</code></pre></div></div>
 <p class="v2-p"><strong>The reverse also applies:</strong> If your value contains single quotes, use double quotes as the outer wrapper:</p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;!-- CORRECT: double quotes when value contains single quotes/apostrophe --&gt;
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;!-- CORRECT: double quotes when value contains single quotes/apostrophe --&gt;
 &lt;p title=&quot;Nigeria&#x27;s largest city is Lagos&quot;&gt;</code></pre></div></div>
 <blockquote class="v2-bq"><p class="v2-p"><strong>Best practice:</strong> Default to <strong>double quotes</strong> for all attribute values (it is the overwhelming convention in HTML). Only switch to single quotes when the value itself contains double quotes.</p></blockquote>
 <hr class="v2-hr">
 <h3 class="v2-h3">Summary Table — Quoting Rules</h3>
 <div class="v2-table-wrap"><table class="v2-table"><thead><tr><th>Situation</th><th>Use</th><th>Example</th></tr></thead><tbody><tr><td>Normal value (no special characters)</td><td><code>"double"</code></td><td><code>href="https://google.com"</code></td></tr><tr><td>Value contains double quotes</td><td><code>'single'</code></td><td><code>title='He said "Hello"'</code></td></tr><tr><td>Value contains single quote/apostrophe</td><td><code>"double"</code></td><td><code>title="Nigeria's capital"</code></td></tr><tr><td>Value contains spaces</td><td>Either — but <strong>must use one</strong></td><td><code>alt="A blue car"</code></td></tr><tr><td>Value contains no spaces or special chars</td><td><code>"double"</code> (preferred)</td><td><code>width="300"</code></td></tr></tbody></table></div>
-<hr class="v2-hr">
-    <div class="task-box">
-      <div class="task-label">✏️ Your Task</div>
-      <div class="task-body">Now practise what you just learned about <strong>Always Quote Attribute Values</strong>. Open your editor, type the examples above by hand, then modify them — change values, rename variables, and observe what happens. Active experimentation is how code sticks.</div>
-    </div>
-    <button class="unlock-btn" onclick="unlockNext(12)">Phase Complete — Unlock Next ✓</button>
-  </div>
-</div>
-<div class="phase locked" id="phase13">
-  <div class="phase-header">
-    <div class="phase-num">Phase 13 of 16</div>
-    <div class="phase-title">Part 11 — All Key Attributes Quick Reference</div>
-    <div class="phase-check" id="chk13"></div>
-  </div>
-  <div class="phase-body">
-    <p class="v2-p">Here is a consolidated reference table for every attribute covered in this lesson:</p>
+<hr class="v2-hr"><div class="task-box"><div class="task-lbl">✏️ Your Task</div><div class="task-body">Practise what you just learned about <strong>Always Quote Attribute Values</strong>. Open your editor, type the examples above by hand, modify them, and observe what changes.</div></div><button class="ub" onclick="unlockNext(12)">Phase Complete — Unlock Next ✓</button></div></div>
+<div class="phase locked" id="phase13"><div class="ph"><div class="pn">Phase 13/16</div><div class="pt">Part 11 — All Key Attributes Quick Reference</div><div class="pc" id="chk13"></div></div><div class="pb2"><p class="v2-p">Here is a consolidated reference table for every attribute covered in this lesson:</p>
 <div class="v2-table-wrap"><table class="v2-table"><thead><tr><th>Attribute</th><th>Which Tag(s)</th><th>What It Does</th><th>Example</th></tr></thead><tbody><tr><td><code>href</code></td><td><code>&lt;a&gt;</code></td><td>URL the link navigates to</td><td><code>href="https://google.com"</code></td></tr><tr><td><code>src</code></td><td><code>&lt;img&gt;</code></td><td>Path or URL of image to display</td><td><code>src="photo.jpg"</code></td></tr><tr><td><code>width</code></td><td><code>&lt;img&gt;</code></td><td>Image width in pixels</td><td><code>width="300"</code></td></tr><tr><td><code>height</code></td><td><code>&lt;img&gt;</code></td><td>Image height in pixels</td><td><code>height="200"</code></td></tr><tr><td><code>alt</code></td><td><code>&lt;img&gt;</code></td><td>Text description of image</td><td><code>alt="A smiling student"</code></td></tr><tr><td><code>style</code></td><td>Any element</td><td>Inline CSS styling</td><td><code>style="color:red;"</code></td></tr><tr><td><code>lang</code></td><td><code>&lt;html&gt;</code></td><td>Language of the page</td><td><code>lang="en-NG"</code></td></tr><tr><td><code>title</code></td><td>Any element</td><td>Tooltip text on hover</td><td><code>title="More info here"</code></td></tr></tbody></table></div>
-<hr class="v2-hr">
-    <div class="task-box">
-      <div class="task-label">✏️ Your Task</div>
-      <div class="task-body">Now practise what you just learned about <strong>All Key Attributes Quick Reference</strong>. Open your editor, type the examples above by hand, then modify them — change values, rename variables, and observe what happens. Active experimentation is how code sticks.</div>
-    </div>
-    <button class="unlock-btn" onclick="unlockNext(13)">Phase Complete — Unlock Next ✓</button>
-  </div>
-</div>
-<div class="phase locked" id="phase14">
-  <div class="phase-header">
-    <div class="phase-num">Phase 14 of 16</div>
-    <div class="phase-title">Guided Practice Exercises</div>
-    <div class="phase-check" id="chk14"></div>
-  </div>
-  <div class="phase-body">
-    <p class="v2-p">Work through these in order. Each one builds confidence with a specific attribute concept.</p>
+<hr class="v2-hr"><div class="task-box"><div class="task-lbl">✏️ Your Task</div><div class="task-body">Practise what you just learned about <strong>All Key Attributes Quick Reference</strong>. Open your editor, type the examples above by hand, modify them, and observe what changes.</div></div><button class="ub" onclick="unlockNext(13)">Phase Complete — Unlock Next ✓</button></div></div>
+<div class="phase locked" id="phase14"><div class="ph"><div class="pn">Phase 14/16</div><div class="pt">Guided Practice Exercises</div><div class="pc" id="chk14"></div></div><div class="pb2"><div class="chal-box"><div class="chal-lbl">🎯 Your Challenge</div><div class="chal-body"><p class="v2-p">Work through these in order. Each one builds confidence with a specific attribute concept.</p>
 <hr class="v2-hr">
 <h3 class="v2-h3">Exercise 1 — Label Every Attribute</h3>
 <p class="v2-p">For each HTML line below, identify the element name, all attribute names, and all attribute values.</p>
-<p class="v2-p"><strong>Line 1:</strong></p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;a href=&quot;https://www.bbc.com&quot; title=&quot;Visit BBC News website&quot;&gt;BBC News&lt;/a&gt;</code></pre></div></div>
+<p class="v2-p"><strong>Line 1:</strong></p></div></div><div class="task-box"><div class="task-lbl">✏️ Task</div><div class="task-body">Practise what you just learned about <strong>Guided Practice Exercises</strong>. Open your editor, type the examples above by hand, modify them, and observe what changes.</div></div><button class="reveal-btn" onclick="toggleReveal(this)">👁️ Reveal Answer</button><div class="reveal-content"><div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;a href=&quot;https://www.bbc.com&quot; title=&quot;Visit BBC News website&quot;&gt;BBC News&lt;/a&gt;</code></pre></div></div>
 <p class="v2-p"><strong>Answers:</strong></p>
 <ul class="v2-ul"><li>Element: <code>&lt;a&gt;</code> (anchor/link)</li><li>Attribute 1 name: <code>href</code> | value: <code>"https://www.bbc.com"</code></li><li>Attribute 2 name: <code>title</code> | value: <code>"Visit BBC News website"</code></li><li>Content: <code>BBC News</code></li></ul>
 <hr class="v2-hr">
 <p class="v2-p"><strong>Line 2:</strong></p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;img src=&quot;team.jpg&quot; alt=&quot;Our five-person team at the office&quot; width=&quot;600&quot; height=&quot;400&quot;&gt;</code></pre></div></div>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;img src=&quot;team.jpg&quot; alt=&quot;Our five-person team at the office&quot; width=&quot;600&quot; height=&quot;400&quot;&gt;</code></pre></div></div>
 <p class="v2-p"><strong>Answers:</strong></p>
 <ul class="v2-ul"><li>Element: <code>&lt;img&gt;</code> (image, empty element)</li><li>Attribute 1 name: <code>src</code> | value: <code>"team.jpg"</code></li><li>Attribute 2 name: <code>alt</code> | value: <code>"Our five-person team at the office"</code></li><li>Attribute 3 name: <code>width</code> | value: <code>"600"</code></li><li>Attribute 4 name: <code>height</code> | value: <code>"400"</code></li><li>Content: <em>none (empty element)</em></li></ul>
 <hr class="v2-hr">
 <p class="v2-p"><strong>Line 3:</strong></p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;p style=&quot;color:purple; font-size:16px;&quot; title=&quot;Introduction paragraph&quot;&gt;
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;p style=&quot;color:purple; font-size:16px;&quot; title=&quot;Introduction paragraph&quot;&gt;
   Welcome to my website.
 &lt;/p&gt;</code></pre></div></div>
 <p class="v2-p"><strong>Answers:</strong></p>
@@ -909,7 +660,7 @@ This paragraph has a blue background.  ← text on light blue background</code><
 <h3 class="v2-h3">Exercise 2 — Fix Five Attribute Errors</h3>
 <p class="v2-p">The following code contains <strong>five separate attribute mistakes</strong>. Find them all and write the corrected version.</p>
 <p class="v2-p"><strong>Broken code:</strong></p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
 &lt;HTML lang=en&gt;
 &lt;body&gt;
 
@@ -922,7 +673,7 @@ This paragraph has a blue background.  ← text on light blue background</code><
 <p class="v2-p"><strong>Five errors:</strong></p>
 <ol class="v2-ol"><li><code>&lt;HTML&gt;</code> — tag name not lowercase (covered in Lesson 3)</li><li><code>lang=en</code> — attribute value not quoted</li><li><code>STYLE=</code> — attribute name not lowercase</li><li><code>HREF=</code> — attribute name not lowercase, and value not quoted</li><li><code>ALT=A laptop on a desk</code> — attribute name not lowercase AND value with spaces is not quoted, AND <code>height=300</code> is not quoted</li></ol>
 <p class="v2-p"><strong>Corrected code:</strong></p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
 &lt;html lang=&quot;en&quot;&gt;                                    &lt;!-- Fix 1: lowercase tag; Fix 2: lang value quoted --&gt;
 &lt;body&gt;
 
@@ -937,7 +688,7 @@ This paragraph has a blue background.  ← text on light blue background</code><
 &lt;/body&gt;
 &lt;/html&gt;</code></pre></div></div>
 <p class="v2-p"><strong>Expected output in browser:</strong></p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span></div><div class="v2-code-body"><pre><code>My Technology Blog    ← blue heading
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>My Technology Blog    ← blue heading
 
 Read the latest at TechCrunch.    ← &quot;TechCrunch&quot; is a clickable link
 
@@ -945,7 +696,7 @@ Read the latest at TechCrunch.    ← &quot;TechCrunch&quot; is a clickable link
 <hr class="v2-hr">
 <h3 class="v2-h3">Exercise 3 — Absolute vs Relative URLs</h3>
 <p class="v2-p">You are building a website with this folder structure:</p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span></div><div class="v2-code-body"><pre><code>my-portfolio/
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>my-portfolio/
 ├── index.html
 ├── about.html
 ├── images/
@@ -955,23 +706,23 @@ Read the latest at TechCrunch.    ← &quot;TechCrunch&quot; is a clickable link
     └── project-details.html</code></pre></div></div>
 <p class="v2-p">Write the correct <code>src</code> or <code>href</code> attribute value for each scenario:</p>
 <p class="v2-p"><strong>Scenario 1:</strong> You are in <code>index.html</code> and want to display <code>images/profile.jpg</code>.</p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;img src=&quot;images/profile.jpg&quot; alt=&quot;My profile photo&quot;&gt;</code></pre></div></div>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;img src=&quot;images/profile.jpg&quot; alt=&quot;My profile photo&quot;&gt;</code></pre></div></div>
 <p class="v2-p"><strong>Scenario 2:</strong> You are in <code>project-details.html</code> (inside the <code>projects/</code> folder) and want to display <code>images/project1.jpg</code> (which is up one level in the parent folder).</p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;img src=&quot;../images/project1.jpg&quot; alt=&quot;Project 1 screenshot&quot;&gt;</code></pre></div></div>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;img src=&quot;../images/project1.jpg&quot; alt=&quot;Project 1 screenshot&quot;&gt;</code></pre></div></div>
 <blockquote class="v2-bq"><p class="v2-p"><code>..</code> means "go up one folder level" — it is a standard file path convention.</p></blockquote>
 <p class="v2-p"><strong>Scenario 3:</strong> You are in <code>index.html</code> and want to link to <code>about.html</code> (same folder).</p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;a href=&quot;about.html&quot;&gt;About Me&lt;/a&gt;</code></pre></div></div>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;a href=&quot;about.html&quot;&gt;About Me&lt;/a&gt;</code></pre></div></div>
 <p class="v2-p"><strong>Scenario 4:</strong> You are in <code>index.html</code> and want to link to <code>project-details.html</code> (inside the <code>projects/</code> subfolder).</p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;a href=&quot;projects/project-details.html&quot;&gt;View Project Details&lt;/a&gt;</code></pre></div></div>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;a href=&quot;projects/project-details.html&quot;&gt;View Project Details&lt;/a&gt;</code></pre></div></div>
 <p class="v2-p"><strong>Scenario 5:</strong> You want to display an image from an external URL.</p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;img src=&quot;https://example.com/images/banner.jpg&quot; alt=&quot;External banner image&quot;&gt;</code></pre></div></div>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;img src=&quot;https://example.com/images/banner.jpg&quot; alt=&quot;External banner image&quot;&gt;</code></pre></div></div>
 <hr class="v2-hr">
 <h3 class="v2-h3">Exercise 4 — Build a Correctly Attributed Image Gallery</h3>
 <p class="v2-p"><strong>Objective:</strong> Create a simple photo gallery page that uses all the image-related attributes correctly.</p>
 <p class="v2-p"><strong>Requirements:</strong></p>
 <ul class="v2-ul"><li>Valid document structure with <code>lang</code> attribute on <code>&lt;html&gt;</code></li><li>A page <code>&lt;h1&gt;</code> title with a <code>style</code> attribute (any colour)</li><li>Three <code>&lt;img&gt;</code> elements, each with <code>src</code>, <code>alt</code>, <code>width</code>, and <code>height</code></li><li>A brief <code>&lt;p&gt;</code> caption under each image, using <code>title</code> attribute for extra info</li><li>All attributes in lowercase with values quoted</li></ul>
 <p class="v2-p"><strong>Solution:</strong></p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
 &lt;html lang=&quot;en-NG&quot;&gt;
 &lt;body&gt;
 
@@ -1006,43 +757,29 @@ Read the latest at TechCrunch.    ← &quot;TechCrunch&quot; is a clickable link
 &lt;/body&gt;
 &lt;/html&gt;</code></pre></div></div>
 <p class="v2-p"><strong>Expected output:</strong> Three images displayed with their captions. Hovering over each caption reveals its tooltip. Page heading is in dark green.</p>
-<hr class="v2-hr">
-    <div class="task-box">
-      <div class="task-label">✏️ Your Task</div>
-      <div class="task-body">Now practise what you just learned about <strong>Guided Practice Exercises</strong>. Open your editor, type the examples above by hand, then modify them — change values, rename variables, and observe what happens. Active experimentation is how code sticks.</div>
-    </div>
-    <button class="unlock-btn" onclick="unlockNext(14)">Phase Complete — Unlock Next ✓</button>
-  </div>
-</div>
-<div class="phase locked" id="phase15">
-  <div class="phase-header">
-    <div class="phase-num">Phase 15 of 16</div>
-    <div class="phase-title">HTML Attributes Code Challenges</div>
-    <div class="phase-check" id="chk15"></div>
-  </div>
-  <div class="phase-body">
-    <p class="v2-p">These challenges test everything from this lesson: attribute syntax, specific attributes, quoting rules, URL types, and best practices.</p>
+<hr class="v2-hr"></div><button class="ub" onclick="unlockNext(14)">Mark Complete — Unlock Next ✓</button></div></div>
+<div class="phase locked" id="phase15"><div class="ph"><div class="pn">Phase 15/16</div><div class="pt">HTML Attributes Code Challenges</div><div class="pc" id="chk15"></div></div><div class="pb2"><p class="v2-p">These challenges test everything from this lesson: attribute syntax, specific attributes, quoting rules, URL types, and best practices.</p>
 <hr class="v2-hr">
 <h3 class="v2-h3">Challenge 1 — Spot the Wrong Attributes</h3>
 <p class="v2-p">Study this element closely. There are <strong>three attribute mistakes</strong>. Name and fix all three.</p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;img SRC=banner.png ALT=&quot;Promotional banner for our summer sale 2025&quot; Width=&quot;800&quot; height=&quot;200&quot;&gt;</code></pre></div></div>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;img SRC=banner.png ALT=&quot;Promotional banner for our summer sale 2025&quot; Width=&quot;800&quot; height=&quot;200&quot;&gt;</code></pre></div></div>
 <p class="v2-p"><strong>Mistakes:</strong></p>
 <ol class="v2-ol"><li><code>SRC</code> — should be lowercase <code>src</code></li><li><code>SRC=banner.png</code> — the value <code>banner.png</code> has no quotes</li><li><code>Width</code> — should be lowercase <code>width</code></li></ol>
 <p class="v2-p"><strong>Corrected version:</strong></p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;img src=&quot;banner.png&quot; alt=&quot;Promotional banner for our summer sale 2025&quot; width=&quot;800&quot; height=&quot;200&quot;&gt;</code></pre></div></div>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;img src=&quot;banner.png&quot; alt=&quot;Promotional banner for our summer sale 2025&quot; width=&quot;800&quot; height=&quot;200&quot;&gt;</code></pre></div></div>
 <hr class="v2-hr">
 <h3 class="v2-h3">Challenge 2 — Write a Complete, Correct <code>&lt;html&gt;</code> Opening Tag</h3>
 <p class="v2-p"><strong>Task:</strong> Write the opening <code>&lt;html&gt;</code> tag for a web page written in Nigerian English.</p>
 <p class="v2-p"><strong>Solution:</strong></p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;html lang=&quot;en-NG&quot;&gt;</code></pre></div></div>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;html lang=&quot;en-NG&quot;&gt;</code></pre></div></div>
 <p class="v2-p"><strong>Bonus — for a French-Canadian page:</strong></p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;html lang=&quot;fr-CA&quot;&gt;</code></pre></div></div>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;html lang=&quot;fr-CA&quot;&gt;</code></pre></div></div>
 <hr class="v2-hr">
 <h3 class="v2-h3">Challenge 3 — Inline Style Practice</h3>
 <p class="v2-p"><strong>Task:</strong> Write a single <code>&lt;p&gt;</code> element that has ALL of the following style properties applied using the <code>style</code> attribute:</p>
 <ul class="v2-ul"><li>Text colour: <code>navy</code></li><li>Background colour: <code>lightyellow</code></li><li>Font size: <code>18px</code></li><li>Font family: <code>Georgia</code></li></ul>
 <p class="v2-p"><strong>Solution:</strong></p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;p style=&quot;color:navy; background-color:lightyellow; font-size:18px; font-family:Georgia;&quot;&gt;
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;p style=&quot;color:navy; background-color:lightyellow; font-size:18px; font-family:Georgia;&quot;&gt;
   This paragraph demonstrates multiple inline CSS properties applied via the style attribute.
 &lt;/p&gt;</code></pre></div></div>
 <p class="v2-p"><strong>Expected output:</strong> Navy text, on a light yellow background, in Georgia font at 18px size.</p>
@@ -1051,7 +788,7 @@ Read the latest at TechCrunch.    ← &quot;TechCrunch&quot; is a clickable link
 <p class="v2-p"><strong>Task:</strong> Write each of the following as a valid HTML attribute value, choosing the correct quote type:</p>
 <ol class="v2-ol"><li>A <code>title</code> value that reads: <code>John "The Eagle" Okafor</code></li><li>A <code>title</code> value that reads: <code>Nigeria's capital city is Abuja</code></li><li>An <code>alt</code> value that reads: <code>Chart showing Africa's GDP growth from 2020 to 2025</code></li><li>A <code>title</code> value that reads: He said: "It's a beautiful day in Lagos!"</li></ol>
 <p class="v2-p"><strong>Solutions:</strong></p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;!-- 1: Contains double quotes — use single quote wrapper --&gt;
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;!-- 1: Contains double quotes — use single quote wrapper --&gt;
 &lt;p title=&#x27;John &quot;The Eagle&quot; Okafor&#x27;&gt;Player Profile&lt;/p&gt;
 
 &lt;!-- 2: Contains apostrophe/single quote — use double quote wrapper --&gt;
@@ -1068,7 +805,7 @@ Read the latest at TechCrunch.    ← &quot;TechCrunch&quot; is a clickable link
 <p class="v2-p"><strong>Task:</strong> Build a single HTML page that demonstrates <strong>every attribute from this lesson at least once</strong>. The page should be a "Tech Tools" resource page.</p>
 <p class="v2-p"><strong>Requirements:</strong> <code>lang</code>, <code>href</code>, <code>src</code>, <code>alt</code>, <code>width</code>, <code>height</code>, <code>style</code>, <code>title</code></p>
 <p class="v2-p"><strong>Solution:</strong></p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
 &lt;html lang=&quot;en&quot;&gt;
 &lt;body&gt;
 
@@ -1121,7 +858,7 @@ Read the latest at TechCrunch.    ← &quot;TechCrunch&quot; is a clickable link
 &lt;/html&gt;</code></pre></div></div>
 <blockquote class="v2-bq"><p class="v2-p">The <code>&amp;amp;</code> you see above is the HTML entity for the <code>&amp;</code> character. Because <code>&amp;</code> has a special meaning in HTML, you must write it as <code>&amp;amp;</code> to display it literally. You will learn this fully in the HTML Entities lesson.</p></blockquote>
 <p class="v2-p"><strong>Expected output:</strong></p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span></div><div class="v2-code-body"><pre><code>         Essential Developer Tools        ← centred, dark blue
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>         Essential Developer Tools        ← centred, dark blue
 
 Below are some of the most useful tools...    ← normal text with tooltip on hover
 
@@ -1140,10 +877,9 @@ GitHub — store, share, and collaborate on code projects.
 Community &amp; Support
 
 Stack Overflow — the largest Q&amp;A community for developers.</code></pre></div></div>
-<hr class="v2-hr">
-    <div class="task-box">
-      <div class="task-label">✏️ Your Task</div>
-      <div class="task-body">Solution:
+<hr class="v2-hr"><div class="task-box"><div class="task-lbl">✏️ Your Task</div><div class="task-body">Task: Write the opening <html> tag for a web page written in Nigerian English.
+
+Solution:
 
 `html
 <html lang="en-NG">
@@ -1155,19 +891,8 @@ Bonus — for a French-Canadian page:
 <html lang="fr-CA">
 `
 
----</div>
-    </div>
-    <button class="unlock-btn" onclick="unlockNext(15)">Phase Complete — Unlock Next ✓</button>
-  </div>
-</div>
-<div class="phase locked" id="phase16">
-  <div class="phase-header">
-    <div class="phase-num">Phase 16 of 16</div>
-    <div class="phase-title">Common Beginner Mistakes — Full Summary for This Lesson</div>
-    <div class="phase-check" id="chk16"></div>
-  </div>
-  <div class="phase-body">
-    <p class="v2-p"><strong>Syntax Mistakes:</strong></p>
+---</div></div><button class="ub" onclick="unlockNext(15)">Phase Complete — Unlock Next ✓</button></div></div>
+<div class="phase locked" id="phase16"><div class="ph"><div class="pn">Phase 16/16</div><div class="pt">Common Beginner Mistakes — Full Summary for This Lesson</div><div class="pc" id="chk16"></div></div><div class="pb2"><p class="v2-p"><strong>Syntax Mistakes:</strong></p>
 <ul class="v2-ul"><li>Putting attributes in the <strong>closing tag</strong>: <code>&lt;/a href="#"&gt;</code> — never do this</li><li>Forgetting the <code>=</code> between name and value: <code>&lt;img src"photo.jpg"&gt;</code> — always include <code>=</code></li><li>Using spaces around <code>=</code>: <code>&lt;a href = "url"&gt;</code> — no spaces around the equals sign</li><li>Writing attribute names in uppercase: <code>SRC</code>, <code>ALT</code>, <code>HREF</code> — always lowercase</li></ul>
 <p class="v2-p"><strong>Quoting Mistakes:</strong></p>
 <ul class="v2-ul"><li>No quotes on values with spaces: <code>alt=A blue car</code> — always quote</li><li>Using no quotes at all: <code>href=https://google.com</code> — always quote</li><li>Starting with double but ending with single: <code>alt="My photo'</code> — must use the same quote type</li><li>Using double quotes inside double-quoted values: <code>title="John "Big" Smith"</code> — use single quotes outside</li></ul>
@@ -1181,121 +906,86 @@ Bonus — for a French-Canadian page:
 <ul class="v2-ul"><li>Forgetting <code>lang</code> entirely on <code>&lt;html&gt;</code> — always include it</li><li>Using the wrong code: <code>lang="english"</code> instead of <code>lang="en"</code> — codes are standardised</li><li>Putting <code>lang</code> on <code>&lt;body&gt;</code> instead of <code>&lt;html&gt;</code> — it belongs on <code>&lt;html&gt;</code></li></ul>
 <p class="v2-p"><strong><code>style</code> Mistakes:</strong></p>
 <ul class="v2-ul"><li>Missing the colon between property and value: <code>style="colorred"</code> — should be <code>style="color:red;"</code></li><li>Missing the semicolons between multiple properties: <code>style="color:red font-size:16px"</code> — needs <code>;</code> between them</li></ul>
+<hr class="v2-hr"><div class="task-box"><div class="task-lbl">✏️ Your Task</div><div class="task-body">Practise what you just learned about <strong>Common Beginner Mistakes — Full Summary for This Lesson</strong>. Open your editor, type the examples above by hand, modify them, and observe what changes.</div></div><button class="ub" onclick="unlockNext(16)">Phase Complete — Unlock Next ✓</button></div></div>
+<div class="build-box" id="build-it"><div class="build-lbl">🏗️ Build It — Mini Project</div><div class="build-name">Project Overview</div><div class="build-req"><p class="v2-p">Combine every concept from Lessons 2, 3, and 4 into one polished, complete, professionally structured team profile page.</p>
 <hr class="v2-hr">
-    <div class="task-box">
-      <div class="task-label">✏️ Your Task</div>
-      <div class="task-body">Now practise what you just learned about <strong>Common Beginner Mistakes — Full Summary for This Lesson</strong>. Open your editor, type the examples above by hand, then modify them — change values, rename variables, and observe what happens. Active experimentation is how code sticks.</div>
-    </div>
-    <button class="unlock-btn" onclick="unlockNext(16)">Phase Complete — Unlock Next ✓</button>
-  </div>
-</div>
-<div class="build-box" id="build-it">
-  <div class="build-label">🏗️ Build It</div>
-  <div class="build-name">Project Overview</div>
-  <div class="build-desc"><strong>Project name:</strong> Our Team</div>
-  <div class="v2-code-wrap">
-    <div class="v2-code-bar">
-      <span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span>
-      <span class="v2-code-lang">starter.html</span>
-    </div>
-    <div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
+<h3 class="v2-h3">Project Overview</h3>
+<p class="v2-p"><strong>Project name:</strong> Our Team <strong>Goal:</strong> A multi-section team profile page using all key attributes from this lesson alongside correct document structure and element nesting from previous lessons.</p>
+<hr class="v2-hr">
+<h3 class="v2-h3">Stage 1 — Skeleton with Language</h3></div><button class="reveal-btn" onclick="toggleCode(this)">💻 Reveal Starter Code</button><div class="reveal-content"><div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">starter.html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
 &lt;html lang=&quot;en-NG&quot;&gt;
 &lt;body&gt;
 
 &lt;!-- Content coming in next stages --&gt;
 
 &lt;/body&gt;
-&lt;/html&gt;</code></pre></div>
-  </div>
-  <div style="display:flex;gap:.8rem;flex-wrap:wrap;margin-top:1.2rem">
-    <button class="unlock-btn" onclick="downloadStarter(`<!DOCTYPE html>
+&lt;/html&gt;</code></pre></div></div><div style="display:flex;gap:.75rem;flex-wrap:wrap;margin-top:1rem"><button class="ub" onclick="downloadStarter(`<!DOCTYPE html>
 <html lang="en-NG">
 <body>
 
 <!-- Content coming in next stages -->
 
 </body>
-</html>`)"
-      style="background:#10b981;box-shadow:0 4px 14px rgba(16,185,129,.3)">
-      ⬇ Download starter.html
-    </button>
-    <button class="unlock-btn" onclick="showGithub()"
-      style="background:#0f172a;box-shadow:none">
-      🐙 Push to GitHub →
-    </button>
-  </div>
-</div>
+</html>`)" style="background:#10b981;box-shadow:0 4px 14px rgba(16,185,129,.3)">⬇ Download starter.html</button><button class="ub" onclick="showGithub()" style="background:#0f172a;box-shadow:none">🐙 Push to GitHub Pages →</button></div></div></div>
 <div class="gh-acc" id="gh-steps" style="display:none">
-  <div class="gh-acc-head" onclick="toggleGh(this)">
-    🐙 Push Your Project to GitHub Pages &nbsp;<span>▼</span>
-  </div>
-  <div class="gh-acc-body">
-    <div class="gh-step"><div class="gh-step-n">1</div>
-    <p>Go to <strong>github.com</strong> → click <strong>New repository</strong> → name it <code>html-lesson-04-project-overview</code>.</p></div>
-    <div class="gh-step"><div class="gh-step-n">2</div>
-    <p>Set it to <strong>Public</strong>, tick <strong>Add a README</strong>, then click <strong>Create repository</strong>.</p></div>
-    <div class="gh-step"><div class="gh-step-n">3</div>
-    <p>Click <strong>Add file → Upload files</strong>. Upload your <code>starter.html</code> — rename it to <code>index.html</code> before uploading.</p></div>
-    <div class="gh-step"><div class="gh-step-n">4</div>
-    <p>Commit message: <em>"Add HTML lesson 04 project"</em> → click <strong>Commit changes</strong>.</p></div>
-    <div class="gh-step"><div class="gh-step-n">5</div>
-    <p>Go to <strong>Settings → Pages</strong> → branch <strong>main</strong> → <strong>Save</strong>. Your project goes live at <code>https://YOUR-NAME.github.io/html-lesson-04-project-overview/</code> in about 1 minute! 🎉</p></div>
-    <button class="unlock-btn" onclick="showEnd()" style="margin-top:.5rem">I've pushed to GitHub — Finish Session ✅</button>
-  </div>
-</div>
-<div class="session-end" id="session-end">
-  <h2>🎉 Lesson 04 complete!</h2>
-  <p style="margin-bottom:.8rem;font-size:.9rem;opacity:.9">You covered:</p>
-  <ul><li>✅ Lesson Introduction</li><li>✅ Prerequisite Concepts</li><li>✅ Part 1 — What Is an HTML Attribute?</li><li>✅ Part 2 — The `href` Attribute</li><li>✅ Part 3 — The `src` Attribute</li><li>✅ Part 4 — The `width` and `height` Attributes</li><li>✅ Part 5 — The `alt` Attribute</li><li>✅ Part 6 — The `style` Attribute</li></ul>
-  <div class="lesson-nav"><a href="lesson_03.html" class="ln-btn">← Lesson 03</a><a href="lesson_05.html" class="ln-btn primary">Lesson 05 →</a></div>
-</div>
+<div class="gh-hd" onclick="toggleGh(this)">🐙 Push to GitHub Pages &nbsp;<span>▼</span></div>
+<div class="gh-bd">
+<div class="gh-st"><div class="gh-n">1</div><p>Go to <strong>github.com → New repository</strong> → name it <code>html-lesson-04-project-overview</code>. Set <strong>Public</strong>, tick <strong>Add README</strong>, click <strong>Create</strong>.</p></div>
+<div class="gh-st"><div class="gh-n">2</div><p>Click <strong>Add file → Upload files</strong>. Rename your file to <code>index.html</code> then upload it.</p></div>
+<div class="gh-st"><div class="gh-n">3</div><p>Commit message: <em>"Add HTML lesson 04 project"</em> → <strong>Commit changes</strong>.</p></div>
+<div class="gh-st"><div class="gh-n">4</div><p>Go to <strong>Settings → Pages</strong> → Source: <strong>main</strong> → <strong>Save</strong>. Live in ~1 min at <code>https://YOUR-NAME.github.io/html-lesson-04-project-overview/</code> 🎉</p></div>
+<button class="ub" onclick="showEnd()" style="margin-top:.5rem">Done — Finish Session ✅</button>
+</div></div>
+<div class="se" id="session-end"><h2>🎉 Lesson 04 complete!</h2><p style="margin-bottom:.8rem;font-size:.9rem;opacity:.9">You covered:</p><ul><li>✅ Lesson Introduction</li><li>✅ Prerequisite Concepts</li><li>✅ Part 1 — What Is an HTML Attribute?</li><li>✅ Part 2 — The `href` Attribute</li><li>✅ Part 3 — The `src` Attribute</li><li>✅ Part 4 — The `width` and `height` Attributes</li><li>✅ Part 5 — The `alt` Attribute</li><li>✅ Part 6 — The `style` Attribute</li></ul><div class="ln"><a href="lesson_03.html" class="ln-btn">← Lesson 03</a><a href="lesson_05.html" class="ln-btn primary">Lesson 05 →</a></div></div>
 </main>
-
-<footer class="lesson-footer">
-  Techbase Code Coach · HTML Course · Lesson 04 · © 2025 Techbase Consultant Services, Ibadan
-</footer>
+<footer class="lf">Techbase Code Coach &nbsp;·&nbsp; HTML Course &nbsp;·&nbsp; Lesson 04 &nbsp;·&nbsp; © 2025 Techbase Consultant Services, Ibadan</footer>
+<div id="toast"></div>
+<button id="go-top" title="Back to top">↑</button>
+<canvas id="cc"></canvas>
 <script>
 const TOTAL=16,KEY='techbase_html_l04';
-let current=parseInt(localStorage.getItem(KEY)||'1');
-function init(){
-  for(let i=2;i<=current;i++) unlockPhase(i,false);
-  updateBar();
-}
+let cur=parseInt(localStorage.getItem(KEY)||'1');
+function init(){for(let i=2;i<=cur;i++)unlock(i,false);bar();}
 function unlockNext(n){
-  const chk=document.getElementById('chk'+n);
-  if(chk){chk.classList.add('done');chk.textContent='✓';}
-  localStorage.setItem(KEY,n+1); current=n+1;
+  const c=document.getElementById('chk'+n);
+  if(c){c.classList.add('done');c.textContent='✓';}
+  localStorage.setItem(KEY,n+1);cur=n+1;
   if(n===TOTAL){
-    document.getElementById('build-it').style.display='block';
-    updateBar(100);
+    document.getElementById('build-it').classList.add('visible');
+    bar(100);toast('🏗️ Build It unlocked!');
     setTimeout(()=>document.getElementById('build-it').scrollIntoView({behavior:'smooth'}),200);
-  }else{
-    unlockPhase(n+1,true); updateBar();
-  }
+    setTimeout(confetti,600);
+  }else{unlock(n+1,true);bar();toast(['✅ Phase complete!','🎯 Keep going!','💡 Nice work!','🚀 Nailed it!'][n%4]);}
 }
-function unlockPhase(n,scroll){
-  const el=document.getElementById('phase'+n);
-  if(el){el.classList.remove('locked');if(scroll)setTimeout(()=>el.scrollIntoView({behavior:'smooth',block:'start'}),150);}
+function unlock(n,scroll){
+  const el=document.getElementById('phase'+n);if(!el)return;
+  el.classList.remove('locked');
+  if(scroll)setTimeout(()=>el.scrollIntoView({behavior:'smooth',block:'start'}),180);
 }
-function updateBar(pct){
-  const p=pct!==undefined?pct:Math.round((current-1)/TOTAL*95);
-  document.getElementById('pbar').style.width=p+'%';
+function bar(p){document.getElementById('pbar').style.width=(p!==undefined?p:Math.round((cur-1)/TOTAL*95))+'%';}
+function toggleReveal(btn){const w=btn.nextElementSibling;const o=w.classList.toggle('open');btn.textContent=o?'🙈 Hide Answer':'👁️ Reveal Answer';}
+function toggleCode(btn){const w=btn.nextElementSibling;const o=w.classList.toggle('open');btn.textContent=o?'🙈 Hide Starter Code':'💻 Reveal Starter Code';}
+function copyCode(btn){
+  const code=btn.closest('.v2-code-wrap').querySelector('code').innerText;
+  navigator.clipboard.writeText(code).then(()=>{btn.textContent='✓ Copied!';btn.classList.add('copied');setTimeout(()=>{btn.textContent='⎘ Copy';btn.classList.remove('copied');},1800);}).catch(()=>{});
 }
-function showGithub(){
-  const g=document.getElementById('gh-steps');
-  if(g){g.style.display='block';setTimeout(()=>g.scrollIntoView({behavior:'smooth'}),150);}
-}
-function showEnd(){
-  const e=document.getElementById('session-end');
-  if(e){e.classList.add('visible');setTimeout(()=>e.scrollIntoView({behavior:'smooth'}),150);}
-}
+const tEl=document.getElementById('toast');let tT;
+function toast(msg){tEl.innerHTML=msg;tEl.classList.add('show');clearTimeout(tT);tT=setTimeout(()=>tEl.classList.remove('show'),2400);}
+const gEl=document.getElementById('go-top');
+window.addEventListener('scroll',()=>gEl.classList.toggle('visible',scrollY>320),{passive:true});
+gEl.addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
 function toggleGh(el){el.nextElementSibling.classList.toggle('open');}
-function downloadStarter(code){
-  const a=document.createElement('a');
-  a.href='data:text/html;charset=utf-8,'+encodeURIComponent(code);
-  a.download='starter.html';a.click();
+function showGithub(){const g=document.getElementById('gh-steps');if(g){g.style.display='block';setTimeout(()=>g.scrollIntoView({behavior:'smooth'}),150);}}
+function showEnd(){const e=document.getElementById('session-end');if(e){e.classList.add('visible');setTimeout(()=>e.scrollIntoView({behavior:'smooth'}),150);}}
+function downloadStarter(code){const ext='html'==='python'?'py':'html';const a=document.createElement('a');a.href='data:text/'+(ext==='py'?'x-python':'html')+';charset=utf-8,'+encodeURIComponent(code);a.download='starter.'+ext;a.click();}
+function confetti(){
+  const cv=document.getElementById('cc');cv.style.display='block';const ctx=cv.getContext('2d');
+  cv.width=innerWidth;cv.height=innerHeight;
+  const ps=Array.from({length:130},()=>{return{x:Math.random()*cv.width,y:-10-Math.random()*120,r:4+Math.random()*6,d:2+Math.random()*3,c:['#e34c26','#0284c7','#d97706','#059669','#7c3aed','#ec4899'][Math.floor(Math.random()*6)],ta:0};}); 
+  let f=0;
+  function draw(){ctx.clearRect(0,0,cv.width,cv.height);ps.forEach(p=>{p.ta+=.1;p.y+=p.d;p.x+=Math.sin(f/20);ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fillStyle=p.c;ctx.fill();});f++;if(f<200)requestAnimationFrame(draw);else{ctx.clearRect(0,0,cv.width,cv.height);cv.style.display='none';}}
+  draw();toast('🎉 All phases done! Build It awaits!');
 }
 init();
 </script>
-</body>
-</html>
+</body></html>

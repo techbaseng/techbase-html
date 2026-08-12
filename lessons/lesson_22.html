@@ -1,260 +1,166 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>Lesson 22: HTML JavaScript — Making Web Pages Come Alive — Techbase HTML</title>
-<meta name="description" content="HTML JavaScript — Making Web Pages Come Alive">
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<style>
-:root{
-  --acc:#e34c26;--acc-d:#c0391a;--acc-pale:#fff5f2;
-  --acc-b:rgba(227,76,38,.25);--acc-sh:rgba(227,76,38,.25);
-  --bg:#f8fafc;--surface:#fff;--border:#e2e8f0;--border2:#cbd5e1;
-  --text:#0f172a;--t2:#334155;--muted:#64748b;
-  --D:'Space Grotesk',sans-serif;--B:'Plus Jakarta Sans',sans-serif;--M:'JetBrains Mono',monospace;
-}
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"><style>
+:root{--acc:#e34c26;--acd:#c0391a;--acp:#fff5f2;--acb:rgba(227,76,38,.22);--acs:rgba(227,76,38,.28);--bg:#f8fafc;--sf:#fff;--br:#e2e8f0;--tx:#0f172a;--t2:#334155;--mu:#64748b;--D:'Space Grotesk',sans-serif;--B:'Plus Jakarta Sans',sans-serif;--M:'JetBrains Mono',monospace}
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased}
-body{background:var(--bg);color:var(--text);font-family:var(--B);font-size:16px;line-height:1.75;overflow-x:hidden}
-
-/* NAV */
-.l-nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(255,255,255,.95);
-  backdrop-filter:blur(12px);border-bottom:1px solid var(--border);height:58px;
-  display:flex;align-items:center;padding:0 1.5rem;gap:1rem;justify-content:space-between}
-.l-nav-logo{font-family:var(--D);font-weight:700;font-size:.9rem;color:var(--text);text-decoration:none}
-.l-nav-back{font-size:.8rem;color:var(--muted);text-decoration:none;font-weight:500;display:flex;align-items:center;gap:.3rem;transition:color .2s}
+body{background:var(--bg);color:var(--tx);font-family:var(--B);font-size:16px;line-height:1.75;overflow-x:hidden}
+.l-nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(255,255,255,.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--br);height:58px;display:flex;align-items:center;padding:0 1.5rem;justify-content:space-between}
+.l-nav-logo{font-family:var(--D);font-weight:700;font-size:.9rem;color:var(--tx);text-decoration:none}
+.l-nav-back{font-size:.8rem;color:var(--mu);text-decoration:none;font-weight:500;transition:color .2s}
 .l-nav-back:hover{color:var(--acc)}
-.l-nav-label{font-family:var(--M);font-size:.68rem;color:var(--muted)}
-
-/* PROGRESS */
-.progress-wrap{position:fixed;top:58px;left:0;right:0;z-index:199;height:4px;background:var(--border)}
-.progress-bar{height:100%;background:var(--acc);transition:width .4s ease;width:0%}
-
-/* HERO */
-.l-hero{padding:80px 1.5rem 2rem;background:linear-gradient(160deg,#fff5f2 0%,#f8fafc 55%,#ffe8e0 100%);border-bottom:1px solid var(--border)}
-.l-hero-inner{max-width:860px;margin:0 auto}
-.l-badge{display:inline-flex;align-items:center;gap:.4rem;border-radius:100px;padding:.2rem .85rem;
-  font-family:var(--M);font-size:.62rem;letter-spacing:.08em;text-transform:uppercase;font-weight:600;
-  color:var(--acc);background:var(--acc-pale);border:1px solid var(--acc-b);margin-bottom:.8rem}
-.l-hero h1{font-family:var(--D);font-weight:700;font-size:clamp(1.5rem,4vw,2.3rem);
-  letter-spacing:-.02em;line-height:1.15;margin-bottom:.5rem}
-.l-hero-sub{font-size:.95rem;color:var(--muted);margin-bottom:1rem}
-
-/* WELCOME BOX */
-.welcome-box{background:linear-gradient(135deg,var(--acc),var(--acc-d));color:#fff;
-  border-radius:16px;padding:1.5rem 1.8rem;max-width:860px;margin:1.5rem auto 0}
-.welcome-box h2{font-family:var(--D);font-weight:700;font-size:1.05rem;margin-bottom:.6rem}
-.welcome-box p,.welcome-box li{font-size:.9rem;line-height:1.8;opacity:.93}
-.welcome-box ul{margin-left:1.2rem;margin-top:.5rem}
-.welcome-meta{display:flex;gap:1rem;margin-top:1rem;flex-wrap:wrap}
-.welcome-meta span{background:rgba(255,255,255,.18);border-radius:6px;padding:.2rem .75rem;
-  font-family:var(--M);font-size:.68rem;font-weight:500}
-
-/* PHASE */
-.phase{background:var(--surface);border:1.5px solid var(--border);border-radius:16px;
-  margin-bottom:1.5rem;overflow:hidden;transition:opacity .3s,transform .3s,filter .3s}
-.phase.locked{opacity:.35;pointer-events:none;filter:blur(1.5px)}
-.phase-header{padding:1rem 1.4rem;background:#fff8f5;
-  border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;gap:1rem;cursor:default}
-.phase-num{font-family:var(--M);font-size:.7rem;font-weight:600;letter-spacing:.08em;
-  text-transform:uppercase;color:var(--acc)}
-.phase-title{font-family:var(--D);font-weight:700;font-size:.95rem;color:var(--text);
-  flex:1;margin:0 .8rem}
-.phase-check{width:26px;height:26px;border-radius:50%;background:var(--border);
-  display:flex;align-items:center;justify-content:center;font-size:.8rem;flex-shrink:0;
-  transition:background .3s,color .3s}
-.phase-check.done{background:#10b981;color:#fff}
-.phase-body{padding:1.6rem 1.8rem}
-
-/* RICH CONTENT STYLES */
+.l-nav-lbl{font-family:var(--M);font-size:.68rem;color:var(--mu)}
+.pw{position:fixed;top:58px;left:0;right:0;z-index:199;height:4px;background:var(--br)}
+.pb{height:100%;background:linear-gradient(90deg,var(--acc),var(--acd));transition:width .5s cubic-bezier(.4,0,.2,1);width:0%;position:relative}
+.pb::after{content:'';position:absolute;right:0;top:0;bottom:0;width:20px;background:inherit;filter:brightness(1.4);animation:pg 1.5s ease-in-out infinite}
+@keyframes pg{0%,100%{opacity:1}50%{opacity:.35}}
+.l-hero{padding:80px 1.5rem 2rem;background:linear-gradient(160deg,#fff5f2 0%,#f8fafc 55%,#ffe8e0 100%);border-bottom:1px solid var(--br)}
+.l-hero-in{max-width:860px;margin:0 auto}
+.badge{display:inline-flex;align-items:center;border-radius:100px;padding:.22rem .9rem;font-family:var(--M);font-size:.62rem;letter-spacing:.08em;text-transform:uppercase;font-weight:700;color:var(--acc);background:var(--acp);border:1.5px solid var(--acb);margin-bottom:.85rem}
+.l-hero h1{font-family:var(--D);font-weight:700;font-size:clamp(1.5rem,4vw,2.3rem);letter-spacing:-.02em;line-height:1.15;margin-bottom:.5rem}
+.l-hero-sub{font-size:.9rem;color:var(--mu)}
+.wb{background:#fff;border:1.5px solid var(--acb);border-left:5px solid var(--acc);border-radius:14px;padding:1.4rem 1.6rem;max-width:860px;margin:1.5rem auto 0;box-shadow:0 2px 12px var(--acs)}
+.wb h2{font-family:var(--D);font-weight:700;font-size:1.05rem;color:var(--acd);margin-bottom:.6rem}
+.wb p,.wb li{font-size:.92rem;line-height:1.85;color:var(--t2)}
+.wb ul{margin-left:1.2rem;margin-top:.4rem}
+.wm{display:flex;gap:.65rem;margin-top:1rem;flex-wrap:wrap}
+.wm span{background:var(--acp);color:var(--acd);border:1px solid var(--acb);border-radius:7px;padding:.22rem .7rem;font-family:var(--M);font-size:.68rem;font-weight:600}
+.phase{background:var(--sf);border:1.5px solid var(--br);border-radius:16px;margin-bottom:1.5rem;overflow:hidden;transition:opacity .35s,filter .35s,transform .35s}
+.phase.locked{opacity:.28;pointer-events:none;filter:blur(2px);transform:scale(.99)}
+.ph{padding:1rem 1.4rem;background:#fff8f5;border-bottom:1px solid var(--br);display:flex;align-items:center;gap:.8rem}
+.pn{font-family:var(--M);font-size:.65rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--acc);white-space:nowrap}
+.pt{font-family:var(--D);font-weight:700;font-size:.95rem;color:var(--tx);flex:1}
+.pc{width:26px;height:26px;border-radius:50%;background:var(--br);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:.8rem;transition:background .3s,transform .4s}
+.pc.done{background:#10b981;color:#fff;transform:scale(1.15) rotate(360deg)}
+.pb2{padding:1.6rem 1.8rem}
 .v2-p{margin-bottom:1rem;font-size:.95rem;color:var(--t2);line-height:1.85}
-.v2-h3{font-family:var(--D);font-weight:700;font-size:1.05rem;color:var(--text);
-  margin:1.6rem 0 .5rem;padding-top:.2rem;border-top:2px solid var(--acc-pale)}
-.v2-h4{font-family:var(--D);font-weight:600;font-size:.95rem;color:var(--t2);margin:1.1rem 0 .4rem}
-.v2-h5,.v2-h6{font-family:var(--D);font-weight:600;font-size:.9rem;color:var(--muted);margin:.8rem 0 .3rem}
+.v2-h3{font-family:var(--D);font-weight:700;font-size:1.05rem;color:var(--tx);margin:1.6rem 0 .5rem;border-top:2px solid var(--acp);padding-top:.4rem}
+.v2-h4{font-family:var(--D);font-weight:600;font-size:.95rem;color:var(--t2);margin:1rem 0 .35rem}
+.v2-h5,.v2-h6{font-family:var(--D);font-weight:600;font-size:.88rem;color:var(--mu);margin:.7rem 0 .3rem}
 .v2-ul,.v2-ol{margin:.6rem 0 1rem 1.4rem;font-size:.93rem;color:var(--t2);line-height:1.9}
 .v2-ul li,.v2-ol li{margin-bottom:.3rem}
-.v2-bq{border-left:4px solid var(--acc);background:var(--acc-pale);border-radius:0 10px 10px 0;
-  padding:.9rem 1.2rem;margin:1rem 0;font-size:.92rem;color:#7b1c06;font-style:italic}
+.v2-bq{border-left:4px solid var(--acc);background:var(--acp);border-radius:0 10px 10px 0;padding:.9rem 1.2rem;margin:1rem 0;font-size:.92rem;color:#7b1c06;font-style:italic}
 .v2-bq p{margin:0;color:inherit}
-.v2-bq strong{font-style:normal}
-.v2-hr{border:none;border-top:1px solid var(--border);margin:1.2rem 0}
-.v2-table-wrap{overflow-x:auto;margin:1rem 0}
+.v2-hr{border:none;border-top:1px solid var(--br);margin:1.2rem 0}
+.v2-table-wrap{overflow-x:auto;margin:1rem 0;border-radius:10px;border:1px solid var(--br)}
 .v2-table{width:100%;border-collapse:collapse;font-size:.87rem}
-.v2-table th{background:var(--acc-pale);color:#7b1c06;font-family:var(--D);
-  font-weight:700;padding:9px 12px;text-align:left;border:1px solid var(--acc-b)}
-.v2-table td{padding:8px 12px;border:1px solid var(--border);color:var(--t2);vertical-align:top}
-.v2-table tr:nth-child(even) td{background:#f8fafc}
-.v2-table code{background:var(--acc-pale);color:var(--acc);border-radius:4px;
-  padding:1px 5px;font-family:var(--M);font-size:.8em}
-.phase-body code{background:var(--acc-pale);color:var(--acc-d);border-radius:4px;
-  padding:1px 6px;font-family:var(--M);font-size:.82em}
-.phase-body a{color:var(--acc);text-decoration:underline;text-underline-offset:2px}
-.phase-body strong{color:var(--text)}
-
-/* CODE BLOCKS */
-.v2-code-wrap{margin:1.2rem 0;border-radius:12px;overflow:hidden;border:1px solid #1e293b;box-shadow:0 4px 16px rgba(0,0,0,.15)}
+.v2-table th{background:var(--acp);color:#7b1c06;font-family:var(--D);font-weight:700;padding:10px 12px;text-align:left;border-bottom:2px solid var(--acb)}
+.v2-table td{padding:8px 12px;border-bottom:1px solid var(--br);color:var(--t2);vertical-align:top}
+.v2-table tr:last-child td{border:none}
+.v2-table tr:hover td{background:var(--acp)}
+.pb2 code{background:var(--acp);color:var(--acd);border-radius:4px;padding:1px 6px;font-family:var(--M);font-size:.82em}
+.pb2 a{color:var(--acc);text-decoration:underline;text-underline-offset:2px}
+.pb2 strong{color:var(--tx)}
+.v2-code-wrap{margin:1.2rem 0;border-radius:12px;overflow:hidden;border:1px solid #1e293b;box-shadow:0 4px 18px rgba(0,0,0,.18)}
 .v2-code-bar{background:#1e293b;padding:.55rem 1rem;display:flex;align-items:center;gap:.4rem}
 .v2-dot{width:10px;height:10px;border-radius:50%}
 .v2-dot.r{background:#ff5f57}.v2-dot.y{background:#febc2e}.v2-dot.g{background:#28c840}
-.v2-code-lang{margin-left:.6rem;font-family:var(--M);font-size:.65rem;color:#64748b;text-transform:uppercase;letter-spacing:.08em}
+.v2-code-lang{margin-left:.5rem;font-family:var(--M);font-size:.62rem;color:#64748b;text-transform:uppercase;letter-spacing:.08em;flex:1}
+.copy-btn{background:rgba(255,255,255,.08);color:#94a3b8;border:none;border-radius:6px;padding:.25rem .65rem;font-family:var(--M);font-size:.65rem;cursor:pointer;transition:background .2s,color .2s}
+.copy-btn:hover{background:rgba(255,255,255,.2);color:#fff}
+.copy-btn.copied{background:#10b981;color:#fff}
 .v2-code-body{background:#0f172a;padding:1.3rem 1.5rem;overflow-x:auto}
 .v2-code-body pre{margin:0}
-.v2-code-body code{font-family:var(--M);font-size:.8rem;line-height:1.9;color:#e2e8f0;
-  white-space:pre;background:transparent;padding:0;border-radius:0}
-
-/* TASK BOX */
-.task-box{background:#fff0ec;border:2px dashed #e34c26;
-  border-radius:12px;padding:1rem 1.3rem;margin:1.4rem 0}
-.task-label{font-family:var(--M);font-size:.65rem;font-weight:700;letter-spacing:.1em;
-  text-transform:uppercase;color:#7b1c06;margin-bottom:.5rem;display:flex;align-items:center;gap:.4rem}
-.task-box p,.task-body{font-size:.92rem;color:#7b1c06;line-height:1.8}
-.task-box code{background:rgba(0,0,0,.08);border-radius:4px;padding:1px 6px;
-  font-family:var(--M);font-size:.82em}
-
-/* UNLOCK BUTTON */
-.unlock-btn{display:inline-flex;align-items:center;gap:.5rem;background:var(--acc);
-  color:#fff;font-family:var(--D);font-weight:700;font-size:.88rem;
-  padding:.75rem 1.6rem;border-radius:10px;border:none;cursor:pointer;
-  transition:transform .2s,box-shadow .2s;box-shadow:0 4px 14px var(--acc-sh);margin-top:1.2rem}
-.unlock-btn:hover{transform:translateY(-2px);box-shadow:0 8px 22px var(--acc-sh)}
-
-/* BUILD IT */
+.v2-code-body code{font-family:var(--M);font-size:.8rem;line-height:1.95;color:#e2e8f0;white-space:pre;background:transparent;padding:0;border-radius:0}
+.task-box{background:#fff0ec;border:2px dashed #e34c26;border-radius:12px;padding:1.1rem 1.3rem;margin:1.4rem 0}
+.task-lbl{font-family:var(--M);font-size:.65rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#7b1c06;margin-bottom:.5rem;display:flex;align-items:center;gap:.4rem}
+.task-body{font-size:.93rem;color:#7b1c06;line-height:1.85}
+.task-body code{background:rgba(0,0,0,.1);border-radius:4px;padding:1px 6px;font-family:var(--M);font-size:.82em}
+.chal-box{background:linear-gradient(135deg,#fff5f2 0%,#fff 100%);border:2px solid var(--acc);border-radius:14px;padding:1.2rem 1.4rem;margin-bottom:1.2rem}
+.chal-lbl{font-family:var(--M);font-size:.65rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--acd);margin-bottom:.6rem}
+.chal-body{font-size:.95rem;color:var(--tx);line-height:1.85}
+.chal-body code{background:var(--acp);color:var(--acd);border-radius:4px;padding:1px 5px;font-family:var(--M);font-size:.82em}
+.reveal-btn{display:inline-flex;align-items:center;gap:.5rem;background:transparent;color:var(--acd);font-family:var(--D);font-weight:700;font-size:.85rem;padding:.6rem 1.2rem;border-radius:8px;border:2px solid var(--acc);cursor:pointer;transition:background .2s,color .2s;margin:.6rem 0}
+.reveal-btn:hover{background:var(--acc);color:#fff}
+.reveal-content{display:none;margin-top:.6rem;animation:fi .3s ease}
+.reveal-content.open{display:block}
+@keyframes fi{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
 .build-box{background:#f0fdf4;border:2px solid #16a34a;border-radius:16px;padding:1.6rem;margin:2rem 0;display:none}
-.build-label{font-family:var(--M);font-size:.65rem;font-weight:700;letter-spacing:.1em;
-  text-transform:uppercase;color:#15803d;margin-bottom:.4rem}
-.build-name{font-family:var(--D);font-weight:700;font-size:1.1rem;color:#14532d;margin-bottom:.5rem}
-.build-desc{font-size:.9rem;color:#166534;margin-bottom:1.2rem;line-height:1.75}
-.build-desc code{background:rgba(22,163,74,.12);border-radius:4px;padding:1px 6px;font-family:var(--M);font-size:.82em}
-.build-desc strong{color:#14532d}
-
-/* GITHUB ACCORDION */
-.gh-acc{border:1.5px solid var(--border);border-radius:12px;overflow:hidden;margin:1.5rem 0}
-.gh-acc-head{padding:1rem 1.2rem;background:#f8fafc;cursor:pointer;
-  display:flex;align-items:center;justify-content:space-between;
-  font-family:var(--D);font-weight:600;font-size:.9rem;user-select:none}
-.gh-acc-body{display:none;padding:1.2rem;border-top:1px solid var(--border)}
-.gh-acc-body.open{display:block}
-.gh-step{display:flex;gap:.8rem;margin-bottom:1rem;align-items:flex-start}
-.gh-step-n{width:26px;height:26px;border-radius:50%;background:var(--acc);color:#fff;
-  font-family:var(--D);font-weight:700;font-size:.75rem;display:flex;align-items:center;
-  justify-content:center;flex-shrink:0;margin-top:2px}
-.gh-step p{font-size:.88rem;color:var(--t2);line-height:1.7}
-.gh-step code{background:var(--acc-pale);color:var(--acc-d);border-radius:4px;
-  padding:1px 6px;font-family:var(--M);font-size:.82em}
-
-/* SESSION END */
-.session-end{background:linear-gradient(135deg,var(--acc),var(--acc-d));color:#fff;
-  border-radius:16px;padding:1.6rem 1.8rem;margin:2rem 0;display:none}
-.session-end.visible{display:block}
-.session-end h2{font-family:var(--D);font-weight:700;font-size:1.1rem;margin-bottom:.8rem}
-.session-end ul{list-style:none;display:flex;flex-direction:column;gap:.4rem}
-.session-end li{font-size:.9rem;opacity:.93;display:flex;align-items:center;gap:.5rem}
-.ln-btn{display:inline-flex;align-items:center;gap:.4rem;background:var(--surface);
-  color:var(--t2);font-family:var(--D);font-weight:600;font-size:.82rem;
-  padding:.65rem 1.2rem;border-radius:8px;text-decoration:none;
-  border:1.5px solid var(--border);transition:border-color .2s,color .2s}
+.build-box.visible{display:block;animation:fi .4s ease}
+.build-lbl{font-family:var(--M);font-size:.65rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#15803d;margin-bottom:.4rem}
+.build-name{font-family:var(--D);font-weight:700;font-size:1.15rem;color:#14532d;margin-bottom:.6rem}
+.build-req{font-size:.93rem;color:#166534;line-height:1.8;margin-bottom:.8rem}
+.build-req code{background:rgba(22,163,74,.12);border-radius:4px;padding:1px 6px;font-family:var(--M);font-size:.82em}
+.build-req strong{color:#14532d}
+.gh-acc{border:1.5px solid var(--br);border-radius:12px;overflow:hidden;margin:1.5rem 0}
+.gh-hd{padding:1rem 1.2rem;background:#f8fafc;cursor:pointer;display:flex;align-items:center;justify-content:space-between;font-family:var(--D);font-weight:600;font-size:.9rem;user-select:none;transition:background .2s}
+.gh-hd:hover{background:#f1f5f9}
+.gh-bd{display:none;padding:1.2rem;border-top:1px solid var(--br)}
+.gh-bd.open{display:block;animation:fi .25s ease}
+.gh-st{display:flex;gap:.8rem;margin-bottom:1rem;align-items:flex-start}
+.gh-n{width:26px;height:26px;border-radius:50%;background:var(--acc);color:#fff;font-family:var(--D);font-weight:700;font-size:.75rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px}
+.gh-st p{font-size:.88rem;color:var(--t2);line-height:1.7}
+.gh-st code{background:var(--acp);color:var(--acd);border-radius:4px;padding:1px 6px;font-family:var(--M);font-size:.82em}
+.gh-nop{background:#fef3c7;border:1.5px solid #fde68a;border-radius:10px;padding:1rem 1.2rem;font-size:.9rem;color:#78350f;line-height:1.75;margin-bottom:1rem}
+.se{background:linear-gradient(135deg,var(--acc),var(--acd));color:#fff;border-radius:16px;padding:1.6rem 1.8rem;margin:2rem 0;display:none}
+.se.visible{display:block;animation:fi .4s ease}
+.se h2{font-family:var(--D);font-weight:700;font-size:1.1rem;margin-bottom:.8rem}
+.se ul{list-style:none;display:flex;flex-direction:column;gap:.4rem}
+.se li{font-size:.9rem;opacity:.93;display:flex;align-items:center;gap:.5rem}
+.ln-btn{display:inline-flex;align-items:center;gap:.4rem;background:var(--sf);color:var(--t2);font-family:var(--D);font-weight:600;font-size:.82rem;padding:.65rem 1.2rem;border-radius:8px;text-decoration:none;border:1.5px solid var(--br);transition:border-color .2s,color .2s}
 .ln-btn:hover{border-color:var(--acc);color:var(--acc)}
 .ln-btn.primary{background:var(--acc);color:#fff;border-color:var(--acc)}
 .ln-btn.primary:hover{opacity:.9}
-.lesson-nav{display:flex;align-items:center;justify-content:space-between;
-  padding-top:2rem;border-top:1px solid rgba(255,255,255,.25);margin-top:1.5rem;flex-wrap:wrap;gap:.75rem}
-.lesson-footer{text-align:center;padding:1.5rem;font-family:var(--M);font-size:.72rem;
-  color:var(--muted);border-top:1px solid var(--border);background:var(--surface)}
+.ln{display:flex;align-items:center;justify-content:space-between;padding-top:1.5rem;border-top:1px solid rgba(255,255,255,.25);margin-top:1.5rem;flex-wrap:wrap;gap:.75rem}
+.ub{display:inline-flex;align-items:center;gap:.5rem;background:var(--acc);color:#fff;font-family:var(--D);font-weight:700;font-size:.88rem;padding:.75rem 1.6rem;border-radius:10px;border:none;cursor:pointer;transition:transform .2s,box-shadow .2s;box-shadow:0 4px 14px var(--acs);margin-top:1.2rem}
+.ub:hover{transform:translateY(-2px);box-shadow:0 8px 22px var(--acs)}
+.ub:active{transform:scale(.97)}
+#toast{position:fixed;bottom:90px;right:1.5rem;z-index:999;background:#1e293b;color:#fff;border-radius:10px;padding:.75rem 1.2rem;font-family:var(--D);font-size:.85rem;font-weight:600;box-shadow:0 8px 24px rgba(0,0,0,.25);transform:translateY(20px);opacity:0;transition:all .3s;pointer-events:none}
+#toast.show{transform:translateY(0);opacity:1}
+#go-top{position:fixed;bottom:1.5rem;right:1.5rem;z-index:300;width:44px;height:44px;border-radius:50%;background:var(--acc);color:#fff;border:none;cursor:pointer;font-size:1.15rem;box-shadow:0 4px 16px var(--acs);display:flex;align-items:center;justify-content:center;opacity:0;transform:translateY(10px);transition:opacity .3s,transform .3s,box-shadow .2s;pointer-events:none}
+#go-top.visible{opacity:1;transform:translateY(0);pointer-events:auto}
+#go-top:hover{box-shadow:0 8px 24px var(--acs);transform:translateY(-2px)}
+#cc{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:998;display:none}
+.lf{text-align:center;padding:1.5rem;font-family:var(--M);font-size:.72rem;color:var(--mu);border-top:1px solid var(--br);background:var(--sf)}
 </style>
 </head>
 <body>
 <nav class="l-nav">
   <a href="../index.html" class="l-nav-logo">⚡ Techbase HTML</a>
-  <span class="l-nav-label">Lesson 22 of 34</span>
+  <span class="l-nav-lbl">Lesson 22 of 34</span>
   <a href="../index.html" class="l-nav-back">← All Lessons</a>
 </nav>
-<div class="progress-wrap"><div class="progress-bar" id="pbar"></div></div>
-
-<div class="l-hero">
-  <div class="l-hero-inner">
-    <div class="l-badge">HTML · Lesson 22</div>
-    <h1>HTML JavaScript — Making Web Pages Come Alive</h1>
-    <div class="l-hero-sub">11 phases · Build: Stage 1: Setup — Build the HTML Structure</div>
-  </div>
-</div>
-
-<section style="background:linear-gradient(160deg,#fff5f2 0%,#f8fafc 55%,#ffe8e0 100%);padding-bottom:1.5rem;border-bottom:1px solid var(--border)">
-  <div style="max-width:860px;margin:0 auto;padding:0 1.5rem"><div class="welcome-box">
-  <h2>👋 Welcome to Lesson 22</h2>
-  <div style="font-size:.9rem;line-height:1.85;opacity:.93"><p class="v2-p">Up until this point in your HTML journey, every page you have built has been <strong>static</strong> — meaning once the page loads in the browser, nothing changes. The text stays the same. The colours stay the same. Nothing moves or responds to the user.</p>
-<p class="v2-p">This lesson is the moment everything changes.</p>
-<p class="v2-p">In this lesson, you are going to discover <strong>JavaScript</strong> — the programming language that brings HTML pages to <strong>life</strong>. JavaScript is what makes buttons actually do things, what makes content appear and disappear, what lets you click something and watch the page respond instantly without reloading.</p>
-<p class="v2-p">You will learn:</p>
-<ul class="v2-ul"><li>What JavaScript is and why it matters</li><li>How to embed JavaScript directly into your HTML page using the <code>&lt;script&gt;</code> tag</li><li>How JavaScript can <strong>find</strong> any element on your page using <code>document.getElementById()</code></li><li>How JavaScript can <strong>change the text content</strong> of an element</li><li>How JavaScript can <strong>change the CSS styles</strong> of an element</li><li>How JavaScript can <strong>change the attributes</strong> (like <code>src</code> on an image) of an element</li><li>What the <code>&lt;noscript&gt;</code> tag is and when to use it</li><li>How to trigger JavaScript with a button click using the <code>onclick</code> attribute</li></ul>
-<p class="v2-p">By the end of this lesson, you will have built your first truly interactive webpage — one that responds to the user's actions.</p>
-<blockquote class="v2-bq"><p class="v2-p"><strong>Important note:</strong> This lesson introduces JavaScript from an HTML perspective. You do not need to know JavaScript deeply yet. Think of this as your first handshake with a powerful new friend. A full JavaScript course is a separate journey — here, you are just learning how HTML and JavaScript connect.</p></blockquote>
-<hr class="v2-hr"></div>
-  <div class="welcome-meta">
-    <span>📚 11 phases</span>
-    <span>🏗️ Stage 1: Setup — Build the HTML Structure</span>
-  </div>
+<div class="pw"><div class="pb" id="pbar"></div></div>
+<div class="l-hero"><div class="l-hero-in">
+  <div class="badge">HTML · Lesson 22</div>
+  <h1>HTML JavaScript — Making Web Pages Come Alive</h1>
+  <div class="l-hero-sub">11 phases &nbsp;·&nbsp; Build: Stage 1: Setup — Build the HTML Structure</div>
 </div></div>
-</section>
-
-<main style="max-width:860px;margin:0 auto;padding:2rem 1.5rem 5rem">
-<div class="phase" id="phase1">
-  <div class="phase-header">
-    <div class="phase-num">Phase 1 of 11</div>
-    <div class="phase-title">Lesson Introduction</div>
-    <div class="phase-check" id="chk1"></div>
-  </div>
-  <div class="phase-body">
-    <p class="v2-p">Up until this point in your HTML journey, every page you have built has been <strong>static</strong> — meaning once the page loads in the browser, nothing changes. The text stays the same. The colours stay the same. Nothing moves or responds to the user.</p>
+<section style="background:linear-gradient(160deg,#fff5f2 0%,#f8fafc 55%,#ffe8e0 100%);padding-bottom:1.5rem;border-bottom:1px solid var(--br)">
+  <div style="max-width:860px;margin:0 auto;padding:0 1.5rem"><div class="wb"><h2>👋 Welcome to Lesson 22</h2><div style="font-size:.92rem;line-height:1.85;color:var(--t2)"><p class="v2-p">Up until this point in your HTML journey, every page you have built has been <strong>static</strong> — meaning once the page loads in the browser, nothing changes. The text stays the same. The colours stay the same. Nothing moves or responds to the user.</p>
 <p class="v2-p">This lesson is the moment everything changes.</p>
 <p class="v2-p">In this lesson, you are going to discover <strong>JavaScript</strong> — the programming language that brings HTML pages to <strong>life</strong>. JavaScript is what makes buttons actually do things, what makes content appear and disappear, what lets you click something and watch the page respond instantly without reloading.</p>
 <p class="v2-p">You will learn:</p>
 <ul class="v2-ul"><li>What JavaScript is and why it matters</li><li>How to embed JavaScript directly into your HTML page using the <code>&lt;script&gt;</code> tag</li><li>How JavaScript can <strong>find</strong> any element on your page using <code>document.getElementById()</code></li><li>How JavaScript can <strong>change the text content</strong> of an element</li><li>How JavaScript can <strong>change the CSS styles</strong> of an element</li><li>How JavaScript can <strong>change the attributes</strong> (like <code>src</code> on an image) of an element</li><li>What the <code>&lt;noscript&gt;</code> tag is and when to use it</li><li>How to trigger JavaScript with a button click using the <code>onclick</code> attribute</li></ul>
 <p class="v2-p">By the end of this lesson, you will have built your first truly interactive webpage — one that responds to the user's actions.</p>
 <blockquote class="v2-bq"><p class="v2-p"><strong>Important note:</strong> This lesson introduces JavaScript from an HTML perspective. You do not need to know JavaScript deeply yet. Think of this as your first handshake with a powerful new friend. A full JavaScript course is a separate journey — here, you are just learning how HTML and JavaScript connect.</p></blockquote>
-<hr class="v2-hr">
-    <div class="task-box">
-      <div class="task-label">✏️ Your Task</div>
-      <div class="task-body">Now practise what you just learned about <strong>Lesson Introduction</strong>. Open your editor, type the examples above by hand, then modify them — change values, rename variables, and observe what happens. Active experimentation is how code sticks.</div>
-    </div>
-    <button class="unlock-btn" onclick="unlockNext(1)">Start Lesson ✓</button>
-  </div>
-</div>
-<div class="phase locked" id="phase2">
-  <div class="phase-header">
-    <div class="phase-num">Phase 2 of 11</div>
-    <div class="phase-title">Prerequisite Concepts</div>
-    <div class="phase-check" id="chk2"></div>
-  </div>
-  <div class="phase-body">
-    <p class="v2-p">Before diving in, let us make sure you are comfortable with these ideas.</p>
+<hr class="v2-hr"></div><div class="wm"><span>📚 11 phases</span><span>🏗️ Stage 1: Setup — Build the HTML Structure</span><span>🌐 GitHub Pages</span></div></div></div>
+</section>
+<main style="max-width:860px;margin:0 auto;padding:2rem 1.5rem 5rem">
+<div class="phase" id="phase1"><div class="ph"><div class="pn">Phase 1/11</div><div class="pt">Lesson Introduction</div><div class="pc" id="chk1"></div></div><div class="pb2"><p class="v2-p">Up until this point in your HTML journey, every page you have built has been <strong>static</strong> — meaning once the page loads in the browser, nothing changes. The text stays the same. The colours stay the same. Nothing moves or responds to the user.</p>
+<p class="v2-p">This lesson is the moment everything changes.</p>
+<p class="v2-p">In this lesson, you are going to discover <strong>JavaScript</strong> — the programming language that brings HTML pages to <strong>life</strong>. JavaScript is what makes buttons actually do things, what makes content appear and disappear, what lets you click something and watch the page respond instantly without reloading.</p>
+<p class="v2-p">You will learn:</p>
+<ul class="v2-ul"><li>What JavaScript is and why it matters</li><li>How to embed JavaScript directly into your HTML page using the <code>&lt;script&gt;</code> tag</li><li>How JavaScript can <strong>find</strong> any element on your page using <code>document.getElementById()</code></li><li>How JavaScript can <strong>change the text content</strong> of an element</li><li>How JavaScript can <strong>change the CSS styles</strong> of an element</li><li>How JavaScript can <strong>change the attributes</strong> (like <code>src</code> on an image) of an element</li><li>What the <code>&lt;noscript&gt;</code> tag is and when to use it</li><li>How to trigger JavaScript with a button click using the <code>onclick</code> attribute</li></ul>
+<p class="v2-p">By the end of this lesson, you will have built your first truly interactive webpage — one that responds to the user's actions.</p>
+<blockquote class="v2-bq"><p class="v2-p"><strong>Important note:</strong> This lesson introduces JavaScript from an HTML perspective. You do not need to know JavaScript deeply yet. Think of this as your first handshake with a powerful new friend. A full JavaScript course is a separate journey — here, you are just learning how HTML and JavaScript connect.</p></blockquote>
+<hr class="v2-hr"><div class="task-box"><div class="task-lbl">✏️ Your Task</div><div class="task-body">Practise what you just learned about <strong>Lesson Introduction</strong>. Open your editor, type the examples above by hand, modify them, and observe what changes.</div></div><button class="ub" onclick="unlockNext(1)">Start Lesson ✓</button></div></div>
+<div class="phase locked" id="phase2"><div class="ph"><div class="pn">Phase 2/11</div><div class="pt">Prerequisite Concepts</div><div class="pc" id="chk2"></div></div><div class="pb2"><p class="v2-p">Before diving in, let us make sure you are comfortable with these ideas.</p>
 <h3 class="v2-h3">What is an HTML element?</h3>
 <p class="v2-p">An HTML element is content wrapped in opening and closing tags, like <code>&lt;p&gt;Hello&lt;/p&gt;</code>. Every element on your page is something the browser renders and displays.</p>
 <h3 class="v2-h3">What is an HTML attribute?</h3>
 <p class="v2-p">An attribute gives extra information to an HTML tag. For example, <code>&lt;img src="photo.jpg"&gt;</code> — here <code>src</code> is an attribute that tells the image element where to find the picture file.</p>
 <h3 class="v2-h3">What is the <code>id</code> attribute?</h3>
 <p class="v2-p">The <code>id</code> attribute gives a <strong>unique name</strong> to one specific HTML element. No two elements on the same page should share the same <code>id</code>. Think of it like a name badge — each person (element) has their own unique badge so you can find them individually.</p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;p id=&quot;message&quot;&gt;This is my special paragraph.&lt;/p&gt;</code></pre></div></div>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;p id=&quot;message&quot;&gt;This is my special paragraph.&lt;/p&gt;</code></pre></div></div>
 <p class="v2-p">Here, the paragraph has been given the unique ID of <code>"message"</code>. We can now use that name to find and change this exact paragraph using JavaScript.</p>
 <h3 class="v2-h3">What is a programming language?</h3>
 <p class="v2-p">A programming language is a set of instructions that a computer can understand and execute. HTML is a <strong>markup language</strong> (it describes content). JavaScript is a true <strong>programming language</strong> — it can perform logic, respond to events, make decisions, and change things dynamically.</p>
-<hr class="v2-hr">
-    <div class="task-box">
-      <div class="task-label">✏️ Your Task</div>
-      <div class="task-body">Now practise what you just learned about <strong>Prerequisite Concepts</strong>. Open your editor, type the examples above by hand, then modify them — change values, rename variables, and observe what happens. Active experimentation is how code sticks.</div>
-    </div>
-    <button class="unlock-btn" onclick="unlockNext(2)">Phase Complete — Unlock Next ✓</button>
-  </div>
-</div>
-<div class="phase locked" id="phase3">
-  <div class="phase-header">
-    <div class="phase-num">Phase 3 of 11</div>
-    <div class="phase-title">Part 1: What Is JavaScript and Why Does It Exist?</div>
-    <div class="phase-check" id="chk3"></div>
-  </div>
-  <div class="phase-body">
-    <h3 class="v2-h3">The Problem That JavaScript Solves</h3>
+<hr class="v2-hr"><div class="task-box"><div class="task-lbl">✏️ Your Task</div><div class="task-body">Practise what you just learned about <strong>Prerequisite Concepts</strong>. Open your editor, type the examples above by hand, modify them, and observe what changes.</div></div><button class="ub" onclick="unlockNext(2)">Phase Complete — Unlock Next ✓</button></div></div>
+<div class="phase locked" id="phase3"><div class="ph"><div class="pn">Phase 3/11</div><div class="pt">Part 1: What Is JavaScript and Why Does It Exist?</div><div class="pc" id="chk3"></div></div><div class="pb2"><h3 class="v2-h3">The Problem That JavaScript Solves</h3>
 <p class="v2-p">Imagine a webpage that shows the current time. If the page is built with only HTML, the time would be baked into the HTML when the page was built and would never update. A user visiting at 3pm would still see the time from when the developer last edited the file.</p>
 <p class="v2-p">JavaScript solves this. It runs <strong>inside the user's browser</strong>, right at the moment the page is being viewed, and can do things in real time — fetch the current time, react to a button click, show or hide content, validate a form, animate an element, and much more.</p>
 <h3 class="v2-h3">What is JavaScript?</h3>
@@ -264,25 +170,11 @@ body{background:var(--bg);color:var(--text);font-family:var(--B);font-size:16px;
 <h3 class="v2-h3">Real-World Uses of JavaScript</h3>
 <p class="v2-p">JavaScript is used everywhere in web development, data science dashboards, and software tools:</p>
 <ul class="v2-ul"><li><strong>Buttons that do things</strong> — clicking a button shows a popup or sends a form</li><li><strong>Form validation</strong> — checking that an email address looks correct before submitting</li><li><strong>Image sliders</strong> — the pictures that automatically scroll on a homepage</li><li><strong>Live clocks and countdown timers</strong> — a timer that counts down to an exam</li><li><strong>Interactive maps</strong> — clicking a location and seeing details appear</li><li><strong>Data visualisation</strong> — charts that update as new data comes in</li><li><strong>Shopping cart totals</strong> — updating the price when you change quantity</li><li><strong>Chat applications</strong> — messages appearing without refreshing the page</li></ul>
-<hr class="v2-hr">
-    <div class="task-box">
-      <div class="task-label">✏️ Your Task</div>
-      <div class="task-body">Now practise what you just learned about <strong>: What Is JavaScript and Why Does It Exist?</strong>. Open your editor, type the examples above by hand, then modify them — change values, rename variables, and observe what happens. Active experimentation is how code sticks.</div>
-    </div>
-    <button class="unlock-btn" onclick="unlockNext(3)">Phase Complete — Unlock Next ✓</button>
-  </div>
-</div>
-<div class="phase locked" id="phase4">
-  <div class="phase-header">
-    <div class="phase-num">Phase 4 of 11</div>
-    <div class="phase-title">Part 2: The `&lt;script&gt;` Tag — Where JavaScript Lives in HTML</div>
-    <div class="phase-check" id="chk4"></div>
-  </div>
-  <div class="phase-body">
-    <h3 class="v2-h3">What Is the <code>&lt;script&gt;</code> Tag?</h3>
+<hr class="v2-hr"><div class="task-box"><div class="task-lbl">✏️ Your Task</div><div class="task-body">Practise what you just learned about <strong>: What Is JavaScript and Why Does It Exist?</strong>. Open your editor, type the examples above by hand, modify them, and observe what changes.</div></div><button class="ub" onclick="unlockNext(3)">Phase Complete — Unlock Next ✓</button></div></div>
+<div class="phase locked" id="phase4"><div class="ph"><div class="pn">Phase 4/11</div><div class="pt">Part 2: The `&lt;script&gt;` Tag — Where JavaScript Lives in HTML</div><div class="pc" id="chk4"></div></div><div class="pb2"><h3 class="v2-h3">What Is the <code>&lt;script&gt;</code> Tag?</h3>
 <p class="v2-p">The <code>&lt;script&gt;</code> tag is the HTML element that tells the browser: <strong>"What follows is JavaScript code — please run it."</strong></p>
 <p class="v2-p">Everything written between <code>&lt;script&gt;</code> and <code>&lt;/script&gt;</code> is treated as JavaScript instructions, not HTML content.</p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;script&gt;
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;script&gt;
   /* Your JavaScript code goes here */
 &lt;/script&gt;</code></pre></div></div>
 <p class="v2-p">The <code>&lt;script&gt;</code> tag has <strong>no required attributes</strong> when you are writing JavaScript directly inside it. However, it can optionally point to an external JavaScript file using the <code>src</code> attribute (you will learn this in your dedicated JavaScript course).</p>
@@ -290,29 +182,15 @@ body{background:var(--bg);color:var(--text);font-family:var(--B);font-size:16px;
 <p class="v2-p">You can place <code>&lt;script&gt;</code> tags in two places in an HTML document:</p>
 <ol class="v2-ol"><li><strong>Inside the <code>&lt;head&gt;</code> section</strong> — the script loads before the page body is shown</li><li><strong>Inside the <code>&lt;body&gt;</code> section</strong> — the script runs as the browser reads that part of the page (most commonly placed at the <strong>bottom</strong> of <code>&lt;body&gt;</code> for best performance)</li></ol>
 <p class="v2-p">For this lesson, we will keep all our <code>&lt;script&gt;</code> tags inside <code>&lt;body&gt;</code> right where they are needed, so you can clearly see the connection between the HTML and the JavaScript.</p>
-<hr class="v2-hr">
-    <div class="task-box">
-      <div class="task-label">✏️ Your Task</div>
-      <div class="task-body">Now practise what you just learned about <strong>: The <code>&lt;script&gt;</code> Tag — Where JavaScript Lives in HTML</strong>. Open your editor, type the examples above by hand, then modify them — change values, rename variables, and observe what happens. Active experimentation is how code sticks.</div>
-    </div>
-    <button class="unlock-btn" onclick="unlockNext(4)">Phase Complete — Unlock Next ✓</button>
-  </div>
-</div>
-<div class="phase locked" id="phase5">
-  <div class="phase-header">
-    <div class="phase-num">Phase 5 of 11</div>
-    <div class="phase-title">Part 3: `document.getElementById()` — Finding Elements on Your Page</div>
-    <div class="phase-check" id="chk5"></div>
-  </div>
-  <div class="phase-body">
-    <h3 class="v2-h3">The Most Important JavaScript Method for HTML</h3>
+<hr class="v2-hr"><div class="task-box"><div class="task-lbl">✏️ Your Task</div><div class="task-body">Practise what you just learned about <strong>: The <code>&lt;script&gt;</code> Tag — Where JavaScript Lives in HTML</strong>. Open your editor, type the examples above by hand, modify them, and observe what changes.</div></div><button class="ub" onclick="unlockNext(4)">Phase Complete — Unlock Next ✓</button></div></div>
+<div class="phase locked" id="phase5"><div class="ph"><div class="pn">Phase 5/11</div><div class="pt">Part 3: `document.getElementById()` — Finding Elements on Your Page</div><div class="pc" id="chk5"></div></div><div class="pb2"><h3 class="v2-h3">The Most Important JavaScript Method for HTML</h3>
 <p class="v2-p">Before JavaScript can change anything on your page, it first needs to <strong>find</strong> the element it wants to change. The most common way to do this is:</p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">javascript</span></div><div class="v2-code-body"><pre><code>document.getElementById(&quot;someId&quot;)</code></pre></div></div>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">javascript</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>document.getElementById(&quot;someId&quot;)</code></pre></div></div>
 <p class="v2-p">Let us break this apart word by word:</p>
 <ul class="v2-ul"><li><code>document</code> — This refers to the entire HTML page. In JavaScript, <code>document</code> is a built-in object that represents your whole webpage. It is your gateway to everything on the page.</li><li><code>.</code> — The dot is used to access something that belongs to the <code>document</code>. Think of it like saying "the document's..."</li><li><code>getElementById</code> — This is a <strong>method</strong> (a built-in action/function) that searches the document for an element with a specific <code>id</code>. "Get element by ID" — find me the element that has this ID.</li><li><code>("someId")</code> — The parentheses <code>()</code> contain the argument — the specific <code>id</code> name you are searching for. It must be written in quotes because it is a text string.</li></ul>
 <p class="v2-p"><strong>Analogy:</strong> Imagine <code>document</code> is a huge school register. <code>getElementById("demo")</code> is like saying "look up the student named 'demo' in the register and bring me their file." Once you have the file, you can read it or change what is written in it.</p>
 <h3 class="v2-h3">Example 1 — Finding an Element by ID (Visualising the Connection)</h3>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
 &lt;html&gt;
   &lt;body&gt;
 
@@ -325,7 +203,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--B);font-size:16px;
   &lt;/body&gt;
 &lt;/html&gt;</code></pre></div></div>
 <p class="v2-p"><strong>Expected Output (in browser):</strong></p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span></div><div class="v2-code-body"><pre><code>Hello JavaScript!</code></pre></div></div>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>Hello JavaScript!</code></pre></div></div>
 <p class="v2-p">Even though the <code>&lt;p&gt;</code> tag originally said "I am the original text.", by the time the browser finishes loading the page, the JavaScript has already changed it to "Hello JavaScript!".</p>
 <p class="v2-p"><strong>Line by line breakdown:</strong></p>
 <p class="v2-p"><code>&lt;p id="demo"&gt;I am the original text.&lt;/p&gt;</code></p>
@@ -337,28 +215,14 @@ body{background:var(--bg);color:var(--text);font-family:var(--B);font-size:16px;
 <p class="v2-p"><code>= "Hello JavaScript!";</code></p>
 <ul class="v2-ul"><li>The <code>=</code> sign assigns a new value</li><li><code>"Hello JavaScript!"</code> is the new text content that replaces whatever was there before</li><li>The <code>;</code> at the end of a JavaScript statement signals the end of that instruction (like a full stop in a sentence)</li></ul>
 <blockquote class="v2-bq"><p class="v2-p"><strong>Thinking Prompt:</strong> What would happen if you changed <code>"demo"</code> in <code>getElementById("demo")</code> to an ID that does not exist on the page? Try it — what does the browser do?</p></blockquote>
-<hr class="v2-hr">
-    <div class="task-box">
-      <div class="task-label">✏️ Your Task</div>
-      <div class="task-body">Now practise what you just learned about <strong>: <code>document.getElementById()</code> — Finding Elements on Your Page</strong>. Open your editor, type the examples above by hand, then modify them — change values, rename variables, and observe what happens. Active experimentation is how code sticks.</div>
-    </div>
-    <button class="unlock-btn" onclick="unlockNext(5)">Phase Complete — Unlock Next ✓</button>
-  </div>
-</div>
-<div class="phase locked" id="phase6">
-  <div class="phase-header">
-    <div class="phase-num">Phase 6 of 11</div>
-    <div class="phase-title">Part 4: Three Things JavaScript Can Change on Your Page</div>
-    <div class="phase-check" id="chk6"></div>
-  </div>
-  <div class="phase-body">
-    <p class="v2-p">JavaScript can interact with your HTML in three major ways. Let us explore each one with clear, isolated examples.</p>
+<hr class="v2-hr"><div class="task-box"><div class="task-lbl">✏️ Your Task</div><div class="task-body">Practise what you just learned about <strong>: <code>document.getElementById()</code> — Finding Elements on Your Page</strong>. Open your editor, type the examples above by hand, modify them, and observe what changes.</div></div><button class="ub" onclick="unlockNext(5)">Phase Complete — Unlock Next ✓</button></div></div>
+<div class="phase locked" id="phase6"><div class="ph"><div class="pn">Phase 6/11</div><div class="pt">Part 4: Three Things JavaScript Can Change on Your Page</div><div class="pc" id="chk6"></div></div><div class="pb2"><p class="v2-p">JavaScript can interact with your HTML in three major ways. Let us explore each one with clear, isolated examples.</p>
 <hr class="v2-hr">
 <h3 class="v2-h3">4A: Changing Content (<code>innerHTML</code>)</h3>
 <p class="v2-p"><code>innerHTML</code> controls what text or HTML is <strong>inside</strong> an element. You can completely replace the content of any element.</p>
 <h4 class="v2-h4">Example 2 — Change Text Content with a Button</h4>
 <p class="v2-p">This is your first truly interactive example. A button, when clicked, will change the text in a paragraph.</p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
 &lt;html&gt;
   &lt;body&gt;
 
@@ -373,13 +237,13 @@ body{background:var(--bg);color:var(--text);font-family:var(--B);font-size:16px;
   &lt;/body&gt;
 &lt;/html&gt;</code></pre></div></div>
 <p class="v2-p"><strong>Before clicking the button:</strong></p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span></div><div class="v2-code-body"><pre><code>My First JavaScript
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>My First JavaScript
 
 This text will change when you click the button.
 
 [Click Me]</code></pre></div></div>
 <p class="v2-p"><strong>After clicking the button:</strong></p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span></div><div class="v2-code-body"><pre><code>My First JavaScript
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>My First JavaScript
 
 Text has been changed!
 
@@ -395,7 +259,7 @@ Text has been changed!
 <hr class="v2-hr">
 <h4 class="v2-h4">Example 3 — Showing the Date and Time</h4>
 <p class="v2-p">A classic JavaScript example — displaying the current date and time.</p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
 &lt;html&gt;
   &lt;body&gt;
 
@@ -410,13 +274,13 @@ Text has been changed!
   &lt;/body&gt;
 &lt;/html&gt;</code></pre></div></div>
 <p class="v2-p"><strong>Before clicking:</strong></p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span></div><div class="v2-code-body"><pre><code>What Is the Date and Time Right Now?
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>What Is the Date and Time Right Now?
 
 Click the button to find out!
 
 [Show Date &amp; Time]</code></pre></div></div>
 <p class="v2-p"><strong>After clicking:</strong></p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span></div><div class="v2-code-body"><pre><code>What Is the Date and Time Right Now?
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>What Is the Date and Time Right Now?
 
 Sat Apr 18 2026 14:32:07 GMT+0100 (West Africa Standard Time)
 
@@ -428,10 +292,10 @@ Sat Apr 18 2026 14:32:07 GMT+0100 (West Africa Standard Time)
 <h3 class="v2-h3">4B: Changing Styles (<code>style.property</code>)</h3>
 <p class="v2-p">JavaScript can also change the <strong>CSS styling</strong> of any element — its colour, font size, background colour, visibility, and much more.</p>
 <p class="v2-p">The pattern is:</p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">javascript</span></div><div class="v2-code-body"><pre><code>document.getElementById(&quot;someId&quot;).style.cssProperty = &quot;value&quot;;</code></pre></div></div>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">javascript</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>document.getElementById(&quot;someId&quot;).style.cssProperty = &quot;value&quot;;</code></pre></div></div>
 <ul class="v2-ul"><li><code>.style</code> — accesses the style object of the element</li><li><code>.cssProperty</code> — the specific CSS property you want to change. In JavaScript, CSS property names that use hyphens in CSS (like <code>font-size</code>) are written in <strong>camelCase</strong> in JavaScript (like <code>fontSize</code>). The hyphen is removed and the next word is capitalised.</li><li><code>= "value"</code> — the new value to set, always as a string in quotes</li></ul>
 <h4 class="v2-h4">Example 4 — Changing Font Size and Colour</h4>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
 &lt;html&gt;
   &lt;body&gt;
 
@@ -450,13 +314,13 @@ Sat Apr 18 2026 14:32:07 GMT+0100 (West Africa Standard Time)
   &lt;/body&gt;
 &lt;/html&gt;</code></pre></div></div>
 <p class="v2-p"><strong>Before clicking:</strong></p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span></div><div class="v2-code-body"><pre><code>Watch me change my style!
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>Watch me change my style!
 
 [Make Text Big and Red]</code></pre></div></div>
 <p class="v2-p"><strong>After clicking:</strong> The paragraph text becomes 36px tall, turns red, and gets a yellow background.</p>
 <p class="v2-p"><strong>New concept — <code>function</code>:</strong></p>
 <p class="v2-p">In this example, instead of writing JavaScript directly in <code>onclick</code>, we wrote a <strong>function</strong>. A function is a reusable block of named JavaScript code.</p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">javascript</span></div><div class="v2-code-body"><pre><code>function makeBig() {
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">javascript</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>function makeBig() {
     // code here
 }</code></pre></div></div>
 <ul class="v2-ul"><li><code>function</code> — the keyword that tells JavaScript "I am defining a reusable set of instructions"</li><li><code>makeBig</code> — the name we chose for this function (you can name it anything)</li><li><code>()</code> — the parentheses after the name (can hold inputs, but here we have none)</li><li><code>{ ... }</code> — the curly braces wrap all the code that belongs to this function</li></ul>
@@ -465,7 +329,7 @@ Sat Apr 18 2026 14:32:07 GMT+0100 (West Africa Standard Time)
 <div class="v2-table-wrap"><table class="v2-table"><thead><tr><th>In CSS</th><th>In JavaScript</th></tr></thead><tbody><tr><td><code>font-size</code></td><td><code>fontSize</code></td></tr><tr><td><code>background-color</code></td><td><code>backgroundColor</code></td></tr><tr><td><code>color</code></td><td><code>color</code> (no change needed — single word)</td></tr><tr><td><code>font-weight</code></td><td><code>fontWeight</code></td></tr><tr><td><code>text-align</code></td><td><code>textAlign</code></td></tr><tr><td><code>border-radius</code></td><td><code>borderRadius</code></td></tr></tbody></table></div>
 <p class="v2-p">Notice the pattern: <strong>remove the hyphen and capitalise the next letter</strong>.</p>
 <h4 class="v2-h4">Example 5 — Changing Styles with Multiple Lines in a Function</h4>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
 &lt;html&gt;
   &lt;body&gt;
 
@@ -496,9 +360,9 @@ Sat Apr 18 2026 14:32:07 GMT+0100 (West Africa Standard Time)
 <h3 class="v2-h3">4C: Changing Attributes (<code>attribute</code>)</h3>
 <p class="v2-p">JavaScript can also change <strong>HTML attributes</strong> of elements. For example, you can swap out the <code>src</code> attribute of an <code>&lt;img&gt;</code> element to make the image change. You can change the <code>href</code> of a link, the <code>value</code> of an input, and much more.</p>
 <p class="v2-p">The pattern is:</p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">javascript</span></div><div class="v2-code-body"><pre><code>document.getElementById(&quot;someId&quot;).attributeName = &quot;new value&quot;;</code></pre></div></div>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">javascript</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>document.getElementById(&quot;someId&quot;).attributeName = &quot;new value&quot;;</code></pre></div></div>
 <h4 class="v2-h4">Example 6 — Changing an Image's Source</h4>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
 &lt;html&gt;
   &lt;body&gt;
 
@@ -520,22 +384,8 @@ Sat Apr 18 2026 14:32:07 GMT+0100 (West Africa Standard Time)
 <p class="v2-p"><code>document.getElementById('myImage').src = 'landscape.jpg'</code></p>
 <ul class="v2-ul"><li>Finds the element with ID <code>"myImage"</code> (our image)</li><li>Directly sets the <code>.src</code> property to the new file <code>'landscape.jpg'</code></li><li>The browser immediately loads and displays the new image</li></ul>
 <blockquote class="v2-bq"><p class="v2-p"><strong>Thinking Prompt:</strong> Can you add a second button that changes the image <strong>back</strong> to <code>smiley.gif</code>? What would the JavaScript look like?</p></blockquote>
-<hr class="v2-hr">
-    <div class="task-box">
-      <div class="task-label">✏️ Your Task</div>
-      <div class="task-body">Now practise what you just learned about <strong>: Three Things JavaScript Can Change on Your Page</strong>. Open your editor, type the examples above by hand, then modify them — change values, rename variables, and observe what happens. Active experimentation is how code sticks.</div>
-    </div>
-    <button class="unlock-btn" onclick="unlockNext(6)">Phase Complete — Unlock Next ✓</button>
-  </div>
-</div>
-<div class="phase locked" id="phase7">
-  <div class="phase-header">
-    <div class="phase-num">Phase 7 of 11</div>
-    <div class="phase-title">Part 5: The `&lt;noscript&gt;` Tag — A Safety Net for Users Without JavaScript</div>
-    <div class="phase-check" id="chk7"></div>
-  </div>
-  <div class="phase-body">
-    <h3 class="v2-h3">What Is <code>&lt;noscript&gt;</code>?</h3>
+<hr class="v2-hr"><div class="task-box"><div class="task-lbl">✏️ Your Task</div><div class="task-body">Practise what you just learned about <strong>: Three Things JavaScript Can Change on Your Page</strong>. Open your editor, type the examples above by hand, modify them, and observe what changes.</div></div><button class="ub" onclick="unlockNext(6)">Phase Complete — Unlock Next ✓</button></div></div>
+<div class="phase locked" id="phase7"><div class="ph"><div class="pn">Phase 7/11</div><div class="pt">Part 5: The `&lt;noscript&gt;` Tag — A Safety Net for Users Without JavaScript</div><div class="pc" id="chk7"></div></div><div class="pb2"><h3 class="v2-h3">What Is <code>&lt;noscript&gt;</code>?</h3>
 <p class="v2-p">The <code>&lt;noscript&gt;</code> tag defines <strong>alternative content</strong> that is shown to users who have:</p>
 <ul class="v2-ul"><li>Disabled JavaScript in their browser settings</li><li>A very old or unusual browser that does not support JavaScript at all</li></ul>
 <p class="v2-p">This is extremely rare today — virtually all browsers support JavaScript — but it is good professional practice to include a fallback message for accessibility and robustness.</p>
@@ -543,7 +393,7 @@ Sat Apr 18 2026 14:32:07 GMT+0100 (West Africa Standard Time)
 <p class="v2-p">When a browser that supports and has JavaScript enabled encounters <code>&lt;noscript&gt;</code>, it <strong>ignores</strong> everything inside it. The <code>&lt;noscript&gt;</code> content is invisible.</p>
 <p class="v2-p">When a browser <strong>without</strong> JavaScript encounters <code>&lt;noscript&gt;</code>, it shows the content inside as a fallback message.</p>
 <h3 class="v2-h3">Example 7 — <code>&lt;script&gt;</code> with <code>&lt;noscript&gt;</code> Fallback</h3>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
 &lt;html&gt;
   &lt;body&gt;
 
@@ -561,10 +411,10 @@ Sat Apr 18 2026 14:32:07 GMT+0100 (West Africa Standard Time)
   &lt;/body&gt;
 &lt;/html&gt;</code></pre></div></div>
 <p class="v2-p"><strong>Expected Output (in a normal browser with JavaScript enabled):</strong></p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span></div><div class="v2-code-body"><pre><code>Hello JavaScript!</code></pre></div></div>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>Hello JavaScript!</code></pre></div></div>
 <p class="v2-p">(The <code>&lt;noscript&gt;</code> message is hidden entirely.)</p>
 <p class="v2-p"><strong>Expected Output (in a browser with JavaScript disabled):</strong></p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span></div><div class="v2-code-body"><pre><code>JavaScript will replace this text.
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>JavaScript will replace this text.
 Sorry, your browser does not support JavaScript! Please enable JavaScript
 or use a modern browser to see this page correctly.</code></pre></div></div>
 <p class="v2-p">(The script does not run, so the original paragraph text stays. The <code>&lt;noscript&gt;</code> message appears.)</p>
@@ -573,28 +423,14 @@ or use a modern browser to see this page correctly.</code></pre></div></div>
 <ul class="v2-ul"><li>Contains JavaScript that changes the paragraph text</li><li>Runs only if JavaScript is enabled</li></ul>
 <p class="v2-p"><code>&lt;noscript&gt;</code> ... <code>&lt;/noscript&gt;</code></p>
 <ul class="v2-ul"><li>Contains a plain message for users without JavaScript</li><li>The browser only shows this when scripts are disabled or unavailable</li></ul>
-<hr class="v2-hr">
-    <div class="task-box">
-      <div class="task-label">✏️ Your Task</div>
-      <div class="task-body">### How <noscript> Works
+<hr class="v2-hr"><div class="task-box"><div class="task-lbl">✏️ Your Task</div><div class="task-body">### How <noscript> Works
 
 When a browser that supports and has JavaScript enabled encounters <noscript>, it ignores everything inside it. The <noscript> content is invisible.
 
-When a browser without JavaScript encounters <noscript>, it shows the content inside as a fallback message.</div>
-    </div>
-    <button class="unlock-btn" onclick="unlockNext(7)">Phase Complete — Unlock Next ✓</button>
-  </div>
-</div>
-<div class="phase locked" id="phase8">
-  <div class="phase-header">
-    <div class="phase-num">Phase 8 of 11</div>
-    <div class="phase-title">Part 6: Putting It All Together — Full Working Examples</div>
-    <div class="phase-check" id="chk8"></div>
-  </div>
-  <div class="phase-body">
-    <p class="v2-p">Now let us combine everything into complete, realistic mini-pages.</p>
+When a browser without JavaScript encounters <noscript>, it shows the content inside as a fallback message.</div></div><button class="ub" onclick="unlockNext(7)">Phase Complete — Unlock Next ✓</button></div></div>
+<div class="phase locked" id="phase8"><div class="ph"><div class="pn">Phase 8/11</div><div class="pt">Part 6: Putting It All Together — Full Working Examples</div><div class="pc" id="chk8"></div></div><div class="pb2"><p class="v2-p">Now let us combine everything into complete, realistic mini-pages.</p>
 <h3 class="v2-h3">Example 8 — A Complete Interactive Page with All Three Types of Changes</h3>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
 &lt;html&gt;
   &lt;body&gt;
 
@@ -644,43 +480,14 @@ When a browser without JavaScript encounters <noscript>, it shows the content in
 &lt;/html&gt;</code></pre></div></div>
 <p class="v2-p"><strong>Expected Behaviour:</strong></p>
 <ul class="v2-ul"><li>Clicking "Change the Text" → The paragraph under Section 1 changes to "The content has been changed by JavaScript!"</li><li>Clicking "Change the Style" → The paragraph under Section 2 becomes blue, 28px, and bold</li><li>Clicking "Change Button Label" → The word "Submit" in Section 3 changes to "Send Message"</li></ul>
-<hr class="v2-hr">
-    <div class="task-box">
-      <div class="task-label">✏️ Your Task</div>
-      <div class="task-body">Now practise what you just learned about <strong>: Putting It All Together — Full Working Examples</strong>. Open your editor, type the examples above by hand, then modify them — change values, rename variables, and observe what happens. Active experimentation is how code sticks.</div>
-    </div>
-    <button class="unlock-btn" onclick="unlockNext(8)">Phase Complete — Unlock Next ✓</button>
-  </div>
-</div>
-<div class="phase locked" id="phase9">
-  <div class="phase-header">
-    <div class="phase-num">Phase 9 of 11</div>
-    <div class="phase-title">HTML Tags Reference for This Lesson</div>
-    <div class="phase-check" id="chk9"></div>
-  </div>
-  <div class="phase-body">
-    <div class="v2-table-wrap"><table class="v2-table"><thead><tr><th>Tag</th><th>Description</th></tr></thead><tbody><tr><td><code>&lt;script&gt;</code></td><td>Defines a client-side script (JavaScript) embedded in or linked from the HTML page</td></tr><tr><td><code>&lt;noscript&gt;</code></td><td>Defines alternative content to display when a browser does not support or has disabled JavaScript</td></tr></tbody></table></div>
-<hr class="v2-hr">
-    <div class="task-box">
-      <div class="task-label">✏️ Your Task</div>
-      <div class="task-body">Now practise what you just learned about <strong>HTML Tags Reference for This Lesson</strong>. Open your editor, type the examples above by hand, then modify them — change values, rename variables, and observe what happens. Active experimentation is how code sticks.</div>
-    </div>
-    <button class="unlock-btn" onclick="unlockNext(9)">Phase Complete — Unlock Next ✓</button>
-  </div>
-</div>
-<div class="phase locked" id="phase10">
-  <div class="phase-header">
-    <div class="phase-num">Phase 10 of 11</div>
-    <div class="phase-title">Guided Practice Exercises</div>
-    <div class="phase-check" id="chk10"></div>
-  </div>
-  <div class="phase-body">
-    <h3 class="v2-h3">Exercise 1: Your First Click-to-Change</h3>
+<hr class="v2-hr"><div class="task-box"><div class="task-lbl">✏️ Your Task</div><div class="task-body">Practise what you just learned about <strong>: Putting It All Together — Full Working Examples</strong>. Open your editor, type the examples above by hand, modify them, and observe what changes.</div></div><button class="ub" onclick="unlockNext(8)">Phase Complete — Unlock Next ✓</button></div></div>
+<div class="phase locked" id="phase9"><div class="ph"><div class="pn">Phase 9/11</div><div class="pt">HTML Tags Reference for This Lesson</div><div class="pc" id="chk9"></div></div><div class="pb2"><div class="v2-table-wrap"><table class="v2-table"><thead><tr><th>Tag</th><th>Description</th></tr></thead><tbody><tr><td><code>&lt;script&gt;</code></td><td>Defines a client-side script (JavaScript) embedded in or linked from the HTML page</td></tr><tr><td><code>&lt;noscript&gt;</code></td><td>Defines alternative content to display when a browser does not support or has disabled JavaScript</td></tr></tbody></table></div>
+<hr class="v2-hr"><div class="task-box"><div class="task-lbl">✏️ Your Task</div><div class="task-body">Practise what you just learned about <strong>HTML Tags Reference for This Lesson</strong>. Open your editor, type the examples above by hand, modify them, and observe what changes.</div></div><button class="ub" onclick="unlockNext(9)">Phase Complete — Unlock Next ✓</button></div></div>
+<div class="phase locked" id="phase10"><div class="ph"><div class="pn">Phase 10/11</div><div class="pt">Guided Practice Exercises</div><div class="pc" id="chk10"></div></div><div class="pb2"><div class="chal-box"><div class="chal-lbl">🎯 Your Challenge</div><div class="chal-body"><h3 class="v2-h3">Exercise 1: Your First Click-to-Change</h3>
 <p class="v2-p"><strong>Objective:</strong> Practice connecting a button click to a content change.</p>
 <p class="v2-p"><strong>Scenario:</strong> You are building a greeting card webpage that shows a hidden message when the user clicks a button.</p>
 <p class="v2-p"><strong>Steps:</strong></p>
-<ol class="v2-ol"><li>Create an HTML file called <code>greeting.html</code></li><li>Write the following code:</li></ol>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
+<ol class="v2-ol"><li>Create an HTML file called <code>greeting.html</code></li><li>Write the following code:</li></ol></div></div><div class="task-box"><div class="task-lbl">✏️ Task</div><div class="task-body">Practise what you just learned about <strong>Guided Practice Exercises</strong>. Open your editor, type the examples above by hand, modify them, and observe what changes.</div></div><button class="reveal-btn" onclick="toggleReveal(this)">👁️ Reveal Answer</button><div class="reveal-content"><div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
 &lt;html&gt;
   &lt;body&gt;
 
@@ -700,13 +507,13 @@ When a browser without JavaScript encounters <noscript>, it shows the content in
   &lt;/body&gt;
 &lt;/html&gt;</code></pre></div></div>
 <p class="v2-p"><strong>Expected Output before clicking:</strong></p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span></div><div class="v2-code-body"><pre><code>🎉 Happy Birthday!
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>🎉 Happy Birthday!
 
 Click the button to reveal your birthday message!
 
 [Reveal Message 🎁]</code></pre></div></div>
 <p class="v2-p"><strong>Expected Output after clicking:</strong></p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span></div><div class="v2-code-body"><pre><code>🎉 Happy Birthday!
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>🎉 Happy Birthday!
 
 Wishing you joy, laughter, and endless success. You deserve it all! 🎂
 
@@ -717,7 +524,7 @@ Wishing you joy, laughter, and endless success. You deserve it all! 🎂
 <h3 class="v2-h3">Exercise 2: Style Switcher</h3>
 <p class="v2-p"><strong>Objective:</strong> Use JavaScript to toggle the visual appearance of text.</p>
 <p class="v2-p"><strong>Scenario:</strong> You are building a simple "Night Mode" toggle for a webpage.</p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
 &lt;html&gt;
   &lt;body id=&quot;pageBody&quot; style=&quot;background-color: white; color: black; padding: 30px;&quot;&gt;
 
@@ -751,7 +558,7 @@ Wishing you joy, laughter, and endless success. You deserve it all! 🎂
 <h3 class="v2-h3">Exercise 3: Interactive Quiz Question</h3>
 <p class="v2-p"><strong>Objective:</strong> Build a simple question-and-answer interaction using JavaScript.</p>
 <p class="v2-p"><strong>Scenario:</strong> You are building a quiz page. When the user clicks an answer button, feedback appears.</p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
 &lt;html&gt;
   &lt;body&gt;
 
@@ -789,11 +596,11 @@ Wishing you joy, laughter, and endless success. You deserve it all! 🎂
   &lt;/body&gt;
 &lt;/html&gt;</code></pre></div></div>
 <p class="v2-p"><strong>Expected Output — if correct answer clicked:</strong></p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span></div><div class="v2-code-body"><pre><code>✅ Correct! Well done!     (in green text)</code></pre></div></div>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>✅ Correct! Well done!     (in green text)</code></pre></div></div>
 <p class="v2-p"><strong>Expected Output — if wrong answer clicked:</strong></p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span></div><div class="v2-code-body"><pre><code>❌ Not quite! Try again.    (in red text)</code></pre></div></div>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>❌ Not quite! Try again.    (in red text)</code></pre></div></div>
 <p class="v2-p"><strong>New concept — <code>if</code> statement:</strong> This is your first glimpse at a JavaScript decision:</p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">javascript</span></div><div class="v2-code-body"><pre><code>if (result === &#x27;correct&#x27;) {
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">javascript</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>if (result === &#x27;correct&#x27;) {
     // runs if result equals &#x27;correct&#x27;
 } else {
     // runs if result does NOT equal &#x27;correct&#x27;
@@ -802,24 +609,10 @@ Wishing you joy, laughter, and endless success. You deserve it all! 🎂
 <p class="v2-p">Notice how the three buttons all call <code>checkAnswer()</code> but with different arguments: <code>'correct'</code> or <code>'wrong'</code>. The function receives that value in its <code>result</code> parameter and acts accordingly.</p>
 <p class="v2-p"><strong>Self-Check Questions:</strong></p>
 <ul class="v2-ul"><li>What does <code>===</code> mean in JavaScript?</li><li>Why do the wrong-answer buttons both call the same function?</li><li>Can you add a fourth button (another wrong answer) to the quiz?</li></ul>
-<hr class="v2-hr">
-    <div class="task-box">
-      <div class="task-label">✏️ Your Task</div>
-      <div class="task-body">Now practise what you just learned about <strong>Guided Practice Exercises</strong>. Open your editor, type the examples above by hand, then modify them — change values, rename variables, and observe what happens. Active experimentation is how code sticks.</div>
-    </div>
-    <button class="unlock-btn" onclick="unlockNext(10)">Phase Complete — Unlock Next ✓</button>
-  </div>
-</div>
-<div class="phase locked" id="phase11">
-  <div class="phase-header">
-    <div class="phase-num">Phase 11 of 11</div>
-    <div class="phase-title">Common Beginner Mistakes</div>
-    <div class="phase-check" id="chk11"></div>
-  </div>
-  <div class="phase-body">
-    <h3 class="v2-h3">Mistake 1: Mismatching the <code>id</code> in HTML and JavaScript</h3>
+<hr class="v2-hr"></div><button class="ub" onclick="unlockNext(10)">Mark Complete — Unlock Next ✓</button></div></div>
+<div class="phase locked" id="phase11"><div class="ph"><div class="pn">Phase 11/11</div><div class="pt">Common Beginner Mistakes</div><div class="pc" id="chk11"></div></div><div class="pb2"><h3 class="v2-h3">Mistake 1: Mismatching the <code>id</code> in HTML and JavaScript</h3>
 <p class="v2-p"><strong>Wrong:</strong></p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;p id=&quot;myText&quot;&gt;Hello&lt;/p&gt;
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;p id=&quot;myText&quot;&gt;Hello&lt;/p&gt;
 
 &lt;script&gt;
   document.getElementById(&quot;mytext&quot;).innerHTML = &quot;Changed!&quot;;
@@ -827,7 +620,7 @@ Wishing you joy, laughter, and endless success. You deserve it all! 🎂
 &lt;/script&gt;</code></pre></div></div>
 <p class="v2-p"><strong>Why it fails:</strong> IDs are <strong>case-sensitive</strong>. <code>"myText"</code> and <code>"mytext"</code> are two completely different IDs. JavaScript will look for an element with ID <code>"mytext"</code>, not find it, and the change will silently fail.</p>
 <p class="v2-p"><strong>Correct:</strong></p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;p id=&quot;myText&quot;&gt;Hello&lt;/p&gt;
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;p id=&quot;myText&quot;&gt;Hello&lt;/p&gt;
 
 &lt;script&gt;
   document.getElementById(&quot;myText&quot;).innerHTML = &quot;Changed!&quot;;
@@ -836,34 +629,34 @@ Wishing you joy, laughter, and endless success. You deserve it all! 🎂
 <hr class="v2-hr">
 <h3 class="v2-h3">Mistake 2: Forgetting the Quotes Around the ID</h3>
 <p class="v2-p"><strong>Wrong:</strong></p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">javascript</span></div><div class="v2-code-body"><pre><code>document.getElementById(demo).innerHTML = &quot;Hello!&quot;;
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">javascript</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>document.getElementById(demo).innerHTML = &quot;Hello!&quot;;
 /* demo has no quotes */</code></pre></div></div>
 <p class="v2-p"><strong>Why it fails:</strong> Without quotes, JavaScript thinks <code>demo</code> is a variable name, not a text string. Since no variable called <code>demo</code> is defined, it throws an error.</p>
 <p class="v2-p"><strong>Correct:</strong></p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">javascript</span></div><div class="v2-code-body"><pre><code>document.getElementById(&quot;demo&quot;).innerHTML = &quot;Hello!&quot;;
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">javascript</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>document.getElementById(&quot;demo&quot;).innerHTML = &quot;Hello!&quot;;
 /* &quot;demo&quot; is in quotes — it is a string */</code></pre></div></div>
 <hr class="v2-hr">
 <h3 class="v2-h3">Mistake 3: Using Hyphens in JavaScript Style Property Names</h3>
 <p class="v2-p"><strong>Wrong:</strong></p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">javascript</span></div><div class="v2-code-body"><pre><code>document.getElementById(&quot;demo&quot;).style.font-size = &quot;20px&quot;;
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">javascript</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>document.getElementById(&quot;demo&quot;).style.font-size = &quot;20px&quot;;
 /* font-size uses a hyphen — invalid in JavaScript */</code></pre></div></div>
 <p class="v2-p"><strong>Why it fails:</strong> In JavaScript, the hyphen <code>-</code> is the <strong>subtraction operator</strong>. <code>style.font-size</code> means "style.font minus size", which is nonsense. JavaScript throws an error.</p>
 <p class="v2-p"><strong>Correct:</strong></p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">javascript</span></div><div class="v2-code-body"><pre><code>document.getElementById(&quot;demo&quot;).style.fontSize = &quot;20px&quot;;
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">javascript</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>document.getElementById(&quot;demo&quot;).style.fontSize = &quot;20px&quot;;
 /* fontSize uses camelCase — correct in JavaScript */</code></pre></div></div>
 <hr class="v2-hr">
 <h3 class="v2-h3">Mistake 4: Quote Conflicts Inside <code>onclick</code></h3>
 <p class="v2-p"><strong>Wrong:</strong></p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;button onclick=&quot;document.getElementById(&quot;demo&quot;).innerHTML = &quot;Changed!&quot;&quot;&gt;
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;button onclick=&quot;document.getElementById(&quot;demo&quot;).innerHTML = &quot;Changed!&quot;&quot;&gt;
   Click
 &lt;/button&gt;</code></pre></div></div>
 <p class="v2-p"><strong>Why it fails:</strong> The <code>onclick</code> attribute value starts with <code>"</code>, then the JavaScript uses <code>"</code> around <code>"demo"</code> and <code>"Changed!"</code>, which closes the <code>onclick</code> attribute prematurely. The browser gets confused.</p>
 <p class="v2-p"><strong>Correct — use single quotes inside the <code>onclick</code> attribute:</strong></p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;button onclick=&quot;document.getElementById(&#x27;demo&#x27;).innerHTML = &#x27;Changed!&#x27;&quot;&gt;
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;button onclick=&quot;document.getElementById(&#x27;demo&#x27;).innerHTML = &#x27;Changed!&#x27;&quot;&gt;
   Click
 &lt;/button&gt;</code></pre></div></div>
 <p class="v2-p">Or move the JavaScript to a separate function:</p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;button onclick=&quot;changeIt()&quot;&gt;Click&lt;/button&gt;
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;button onclick=&quot;changeIt()&quot;&gt;Click&lt;/button&gt;
 
 &lt;script&gt;
   function changeIt() {
@@ -873,7 +666,7 @@ Wishing you joy, laughter, and endless success. You deserve it all! 🎂
 <hr class="v2-hr">
 <h3 class="v2-h3">Mistake 5: Placing <code>&lt;script&gt;</code> Before the Element It Targets</h3>
 <p class="v2-p"><strong>Wrong:</strong></p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;script&gt;
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;script&gt;
   document.getElementById(&quot;demo&quot;).innerHTML = &quot;Hello!&quot;;
   /* The paragraph below doesn&#x27;t exist yet when this script runs! */
 &lt;/script&gt;
@@ -881,7 +674,7 @@ Wishing you joy, laughter, and endless success. You deserve it all! 🎂
 &lt;p id=&quot;demo&quot;&gt;Original text.&lt;/p&gt;</code></pre></div></div>
 <p class="v2-p"><strong>Why it fails:</strong> The browser reads HTML from top to bottom. When the <code>&lt;script&gt;</code> runs, it tries to find <code>id="demo"</code>, but the <code>&lt;p&gt;</code> element hasn't been read yet — so it does not exist. JavaScript finds nothing, and the change fails silently or throws an error.</p>
 <p class="v2-p"><strong>Correct — put <code>&lt;script&gt;</code> after the element it targets:</strong></p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;p id=&quot;demo&quot;&gt;Original text.&lt;/p&gt;
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;p id=&quot;demo&quot;&gt;Original text.&lt;/p&gt;
 
 &lt;script&gt;
   document.getElementById(&quot;demo&quot;).innerHTML = &quot;Hello!&quot;;
@@ -890,37 +683,22 @@ Wishing you joy, laughter, and endless success. You deserve it all! 🎂
 <hr class="v2-hr">
 <h3 class="v2-h3">Mistake 6: Forgetting the Semicolon at the End of JavaScript Statements</h3>
 <p class="v2-p"><strong>Technically not always an error, but bad practice:</strong></p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">javascript</span></div><div class="v2-code-body"><pre><code>document.getElementById(&quot;demo&quot;).innerHTML = &quot;Hello!&quot;
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">javascript</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>document.getElementById(&quot;demo&quot;).innerHTML = &quot;Hello!&quot;
 /* Missing semicolon */</code></pre></div></div>
 <p class="v2-p"><strong>Better practice:</strong></p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">javascript</span></div><div class="v2-code-body"><pre><code>document.getElementById(&quot;demo&quot;).innerHTML = &quot;Hello!&quot;;
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">javascript</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>document.getElementById(&quot;demo&quot;).innerHTML = &quot;Hello!&quot;;
 /* Semicolon marks the end of this statement clearly */</code></pre></div></div>
 <p class="v2-p">JavaScript is forgiving enough to often work without semicolons, but professional developers always include them. It prevents subtle bugs and makes code easier to read.</p>
-<hr class="v2-hr">
-    <div class="task-box">
-      <div class="task-label">✏️ Your Task</div>
-      <div class="task-body">`javascript
+<hr class="v2-hr"><div class="task-box"><div class="task-lbl">✏️ Your Task</div><div class="task-body">`javascript
 document.getElementById("demo").innerHTML = "Hello!";
 /* Semicolon marks the end of this statement clearly */
 `
 
 JavaScript is forgiving enough to often work without semicolons, but professional developers always include them. It prevents subtle bugs and makes code easier to read.
 
----</div>
-    </div>
-    <button class="unlock-btn" onclick="unlockNext(11)">Phase Complete — Unlock Next ✓</button>
-  </div>
-</div>
-<div class="build-box" id="build-it">
-  <div class="build-label">🏗️ Build It</div>
-  <div class="build-name">Stage 1: Setup — Build the HTML Structure</div>
-  <div class="build-desc"><h1>📋 Student Report Card</h1></div>
-  <div class="v2-code-wrap">
-    <div class="v2-code-bar">
-      <span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span>
-      <span class="v2-code-lang">starter.html</span>
-    </div>
-    <div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
+---</div></div><button class="ub" onclick="unlockNext(11)">Phase Complete — Unlock Next ✓</button></div></div>
+<div class="build-box" id="build-it"><div class="build-lbl">🏗️ Build It — Mini Project</div><div class="build-name">Stage 1: Setup — Build the HTML Structure</div><div class="build-req"><p class="v2-p">In this project, you will build an interactive student report card page. A teacher can click buttons to reveal the student's grade, highlight their score, and display a personalised message — all without reloading the page.</p>
+<h3 class="v2-h3">Stage 1: Setup — Build the HTML Structure</h3></div><button class="reveal-btn" onclick="toggleCode(this)">💻 Reveal Starter Code</button><div class="reveal-content"><div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">starter.html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
 &lt;html&gt;
   &lt;body style=&quot;font-family: Arial, sans-serif; padding: 30px;&quot;&gt;
 
@@ -938,10 +716,7 @@ JavaScript is forgiving enough to often work without semicolons, but professiona
     &lt;button onclick=&quot;revealReport()&quot;&gt;📊 Reveal Full Report&lt;/button&gt;
 
   &lt;/body&gt;
-&lt;/html&gt;</code></pre></div>
-  </div>
-  <div style="display:flex;gap:.8rem;flex-wrap:wrap;margin-top:1.2rem">
-    <button class="unlock-btn" onclick="downloadStarter(`<!DOCTYPE html>
+&lt;/html&gt;</code></pre></div></div><div style="display:flex;gap:.75rem;flex-wrap:wrap;margin-top:1rem"><button class="ub" onclick="downloadStarter(`<!DOCTYPE html>
 <html>
   <body style="font-family: Arial, sans-serif; padding: 30px;">
 
@@ -959,87 +734,66 @@ JavaScript is forgiving enough to often work without semicolons, but professiona
     <button onclick="revealReport()">📊 Reveal Full Report</button>
 
   </body>
-</html>`)"
-      style="background:#10b981;box-shadow:0 4px 14px rgba(16,185,129,.3)">
-      ⬇ Download starter.html
-    </button>
-    <button class="unlock-btn" onclick="showGithub()"
-      style="background:#0f172a;box-shadow:none">
-      🐙 Push to GitHub →
-    </button>
-  </div>
-</div>
+</html>`)" style="background:#10b981;box-shadow:0 4px 14px rgba(16,185,129,.3)">⬇ Download starter.html</button><button class="ub" onclick="showGithub()" style="background:#0f172a;box-shadow:none">🐙 Push to GitHub Pages →</button></div></div></div>
 <div class="gh-acc" id="gh-steps" style="display:none">
-  <div class="gh-acc-head" onclick="toggleGh(this)">
-    🐙 Push Your Project to GitHub Pages &nbsp;<span>▼</span>
-  </div>
-  <div class="gh-acc-body">
-    <div class="gh-step"><div class="gh-step-n">1</div>
-    <p>Go to <strong>github.com</strong> → click <strong>New repository</strong> → name it <code>html-lesson-22-stage-1-setup-build-the-html-structure</code>.</p></div>
-    <div class="gh-step"><div class="gh-step-n">2</div>
-    <p>Set it to <strong>Public</strong>, tick <strong>Add a README</strong>, then click <strong>Create repository</strong>.</p></div>
-    <div class="gh-step"><div class="gh-step-n">3</div>
-    <p>Click <strong>Add file → Upload files</strong>. Upload your <code>starter.html</code> — rename it to <code>index.html</code> before uploading.</p></div>
-    <div class="gh-step"><div class="gh-step-n">4</div>
-    <p>Commit message: <em>"Add HTML lesson 22 project"</em> → click <strong>Commit changes</strong>.</p></div>
-    <div class="gh-step"><div class="gh-step-n">5</div>
-    <p>Go to <strong>Settings → Pages</strong> → branch <strong>main</strong> → <strong>Save</strong>. Your project goes live at <code>https://YOUR-NAME.github.io/html-lesson-22-stage-1-setup-build-the-html-structure/</code> in about 1 minute! 🎉</p></div>
-    <button class="unlock-btn" onclick="showEnd()" style="margin-top:.5rem">I've pushed to GitHub — Finish Session ✅</button>
-  </div>
-</div>
-<div class="session-end" id="session-end">
-  <h2>🎉 Lesson 22 complete!</h2>
-  <p style="margin-bottom:.8rem;font-size:.9rem;opacity:.9">You covered:</p>
-  <ul><li>✅ Lesson Introduction</li><li>✅ Prerequisite Concepts</li><li>✅ Part 1: What Is JavaScript and Why Does It Exist?</li><li>✅ Part 2: The `<script>` Tag — Where JavaScript Lives in HTML</li><li>✅ Part 3: `document.getElementById()` — Finding Elements on Your Page</li><li>✅ Part 4: Three Things JavaScript Can Change on Your Page</li><li>✅ Part 5: The `<noscript>` Tag — A Safety Net for Users Without JavaScript</li><li>✅ Part 6: Putting It All Together — Full Working Examples</li></ul>
-  <div class="lesson-nav"><a href="lesson_21.html" class="ln-btn">← Lesson 21</a><a href="lesson_23.html" class="ln-btn primary">Lesson 23 →</a></div>
-</div>
+<div class="gh-hd" onclick="toggleGh(this)">🐙 Push to GitHub Pages &nbsp;<span>▼</span></div>
+<div class="gh-bd">
+<div class="gh-st"><div class="gh-n">1</div><p>Go to <strong>github.com → New repository</strong> → name it <code>html-lesson-22-stage-1-setup-build-the-html-structure</code>. Set <strong>Public</strong>, tick <strong>Add README</strong>, click <strong>Create</strong>.</p></div>
+<div class="gh-st"><div class="gh-n">2</div><p>Click <strong>Add file → Upload files</strong>. Rename your file to <code>index.html</code> then upload it.</p></div>
+<div class="gh-st"><div class="gh-n">3</div><p>Commit message: <em>"Add HTML lesson 22 project"</em> → <strong>Commit changes</strong>.</p></div>
+<div class="gh-st"><div class="gh-n">4</div><p>Go to <strong>Settings → Pages</strong> → Source: <strong>main</strong> → <strong>Save</strong>. Live in ~1 min at <code>https://YOUR-NAME.github.io/html-lesson-22-stage-1-setup-build-the-html-structure/</code> 🎉</p></div>
+<button class="ub" onclick="showEnd()" style="margin-top:.5rem">Done — Finish Session ✅</button>
+</div></div>
+<div class="se" id="session-end"><h2>🎉 Lesson 22 complete!</h2><p style="margin-bottom:.8rem;font-size:.9rem;opacity:.9">You covered:</p><ul><li>✅ Lesson Introduction</li><li>✅ Prerequisite Concepts</li><li>✅ Part 1: What Is JavaScript and Why Does It Exist?</li><li>✅ Part 2: The `<script>` Tag — Where JavaScript Lives in HTML</li><li>✅ Part 3: `document.getElementById()` — Finding Elements on Your Page</li><li>✅ Part 4: Three Things JavaScript Can Change on Your Page</li><li>✅ Part 5: The `<noscript>` Tag — A Safety Net for Users Without JavaScript</li><li>✅ Part 6: Putting It All Together — Full Working Examples</li></ul><div class="ln"><a href="lesson_21.html" class="ln-btn">← Lesson 21</a><a href="lesson_23.html" class="ln-btn primary">Lesson 23 →</a></div></div>
 </main>
-
-<footer class="lesson-footer">
-  Techbase Code Coach · HTML Course · Lesson 22 · © 2025 Techbase Consultant Services, Ibadan
-</footer>
+<footer class="lf">Techbase Code Coach &nbsp;·&nbsp; HTML Course &nbsp;·&nbsp; Lesson 22 &nbsp;·&nbsp; © 2025 Techbase Consultant Services, Ibadan</footer>
+<div id="toast"></div>
+<button id="go-top" title="Back to top">↑</button>
+<canvas id="cc"></canvas>
 <script>
 const TOTAL=11,KEY='techbase_html_l22';
-let current=parseInt(localStorage.getItem(KEY)||'1');
-function init(){
-  for(let i=2;i<=current;i++) unlockPhase(i,false);
-  updateBar();
-}
+let cur=parseInt(localStorage.getItem(KEY)||'1');
+function init(){for(let i=2;i<=cur;i++)unlock(i,false);bar();}
 function unlockNext(n){
-  const chk=document.getElementById('chk'+n);
-  if(chk){chk.classList.add('done');chk.textContent='✓';}
-  localStorage.setItem(KEY,n+1); current=n+1;
+  const c=document.getElementById('chk'+n);
+  if(c){c.classList.add('done');c.textContent='✓';}
+  localStorage.setItem(KEY,n+1);cur=n+1;
   if(n===TOTAL){
-    document.getElementById('build-it').style.display='block';
-    updateBar(100);
+    document.getElementById('build-it').classList.add('visible');
+    bar(100);toast('🏗️ Build It unlocked!');
     setTimeout(()=>document.getElementById('build-it').scrollIntoView({behavior:'smooth'}),200);
-  }else{
-    unlockPhase(n+1,true); updateBar();
-  }
+    setTimeout(confetti,600);
+  }else{unlock(n+1,true);bar();toast(['✅ Phase complete!','🎯 Keep going!','💡 Nice work!','🚀 Nailed it!'][n%4]);}
 }
-function unlockPhase(n,scroll){
-  const el=document.getElementById('phase'+n);
-  if(el){el.classList.remove('locked');if(scroll)setTimeout(()=>el.scrollIntoView({behavior:'smooth',block:'start'}),150);}
+function unlock(n,scroll){
+  const el=document.getElementById('phase'+n);if(!el)return;
+  el.classList.remove('locked');
+  if(scroll)setTimeout(()=>el.scrollIntoView({behavior:'smooth',block:'start'}),180);
 }
-function updateBar(pct){
-  const p=pct!==undefined?pct:Math.round((current-1)/TOTAL*95);
-  document.getElementById('pbar').style.width=p+'%';
+function bar(p){document.getElementById('pbar').style.width=(p!==undefined?p:Math.round((cur-1)/TOTAL*95))+'%';}
+function toggleReveal(btn){const w=btn.nextElementSibling;const o=w.classList.toggle('open');btn.textContent=o?'🙈 Hide Answer':'👁️ Reveal Answer';}
+function toggleCode(btn){const w=btn.nextElementSibling;const o=w.classList.toggle('open');btn.textContent=o?'🙈 Hide Starter Code':'💻 Reveal Starter Code';}
+function copyCode(btn){
+  const code=btn.closest('.v2-code-wrap').querySelector('code').innerText;
+  navigator.clipboard.writeText(code).then(()=>{btn.textContent='✓ Copied!';btn.classList.add('copied');setTimeout(()=>{btn.textContent='⎘ Copy';btn.classList.remove('copied');},1800);}).catch(()=>{});
 }
-function showGithub(){
-  const g=document.getElementById('gh-steps');
-  if(g){g.style.display='block';setTimeout(()=>g.scrollIntoView({behavior:'smooth'}),150);}
-}
-function showEnd(){
-  const e=document.getElementById('session-end');
-  if(e){e.classList.add('visible');setTimeout(()=>e.scrollIntoView({behavior:'smooth'}),150);}
-}
+const tEl=document.getElementById('toast');let tT;
+function toast(msg){tEl.innerHTML=msg;tEl.classList.add('show');clearTimeout(tT);tT=setTimeout(()=>tEl.classList.remove('show'),2400);}
+const gEl=document.getElementById('go-top');
+window.addEventListener('scroll',()=>gEl.classList.toggle('visible',scrollY>320),{passive:true});
+gEl.addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
 function toggleGh(el){el.nextElementSibling.classList.toggle('open');}
-function downloadStarter(code){
-  const a=document.createElement('a');
-  a.href='data:text/html;charset=utf-8,'+encodeURIComponent(code);
-  a.download='starter.html';a.click();
+function showGithub(){const g=document.getElementById('gh-steps');if(g){g.style.display='block';setTimeout(()=>g.scrollIntoView({behavior:'smooth'}),150);}}
+function showEnd(){const e=document.getElementById('session-end');if(e){e.classList.add('visible');setTimeout(()=>e.scrollIntoView({behavior:'smooth'}),150);}}
+function downloadStarter(code){const ext='html'==='python'?'py':'html';const a=document.createElement('a');a.href='data:text/'+(ext==='py'?'x-python':'html')+';charset=utf-8,'+encodeURIComponent(code);a.download='starter.'+ext;a.click();}
+function confetti(){
+  const cv=document.getElementById('cc');cv.style.display='block';const ctx=cv.getContext('2d');
+  cv.width=innerWidth;cv.height=innerHeight;
+  const ps=Array.from({length:130},()=>{return{x:Math.random()*cv.width,y:-10-Math.random()*120,r:4+Math.random()*6,d:2+Math.random()*3,c:['#e34c26','#0284c7','#d97706','#059669','#7c3aed','#ec4899'][Math.floor(Math.random()*6)],ta:0};}); 
+  let f=0;
+  function draw(){ctx.clearRect(0,0,cv.width,cv.height);ps.forEach(p=>{p.ta+=.1;p.y+=p.d;p.x+=Math.sin(f/20);ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fillStyle=p.c;ctx.fill();});f++;if(f<200)requestAnimationFrame(draw);else{ctx.clearRect(0,0,cv.width,cv.height);cv.style.display='none';}}
+  draw();toast('🎉 All phases done! Build It awaits!');
 }
 init();
 </script>
-</body>
-</html>
+</body></html>

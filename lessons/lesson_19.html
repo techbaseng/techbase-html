@@ -1,277 +1,183 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>Lesson 19: Lesson 19 – HTML class and id Attributes — Techbase HTML</title>
-<meta name="description" content="Lesson 19 – HTML class and id Attributes">
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<style>
-:root{
-  --acc:#e34c26;--acc-d:#c0391a;--acc-pale:#fff5f2;
-  --acc-b:rgba(227,76,38,.25);--acc-sh:rgba(227,76,38,.25);
-  --bg:#f8fafc;--surface:#fff;--border:#e2e8f0;--border2:#cbd5e1;
-  --text:#0f172a;--t2:#334155;--muted:#64748b;
-  --D:'Space Grotesk',sans-serif;--B:'Plus Jakarta Sans',sans-serif;--M:'JetBrains Mono',monospace;
-}
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"><style>
+:root{--acc:#e34c26;--acd:#c0391a;--acp:#fff5f2;--acb:rgba(227,76,38,.22);--acs:rgba(227,76,38,.28);--bg:#f8fafc;--sf:#fff;--br:#e2e8f0;--tx:#0f172a;--t2:#334155;--mu:#64748b;--D:'Space Grotesk',sans-serif;--B:'Plus Jakarta Sans',sans-serif;--M:'JetBrains Mono',monospace}
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased}
-body{background:var(--bg);color:var(--text);font-family:var(--B);font-size:16px;line-height:1.75;overflow-x:hidden}
-
-/* NAV */
-.l-nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(255,255,255,.95);
-  backdrop-filter:blur(12px);border-bottom:1px solid var(--border);height:58px;
-  display:flex;align-items:center;padding:0 1.5rem;gap:1rem;justify-content:space-between}
-.l-nav-logo{font-family:var(--D);font-weight:700;font-size:.9rem;color:var(--text);text-decoration:none}
-.l-nav-back{font-size:.8rem;color:var(--muted);text-decoration:none;font-weight:500;display:flex;align-items:center;gap:.3rem;transition:color .2s}
+body{background:var(--bg);color:var(--tx);font-family:var(--B);font-size:16px;line-height:1.75;overflow-x:hidden}
+.l-nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(255,255,255,.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--br);height:58px;display:flex;align-items:center;padding:0 1.5rem;justify-content:space-between}
+.l-nav-logo{font-family:var(--D);font-weight:700;font-size:.9rem;color:var(--tx);text-decoration:none}
+.l-nav-back{font-size:.8rem;color:var(--mu);text-decoration:none;font-weight:500;transition:color .2s}
 .l-nav-back:hover{color:var(--acc)}
-.l-nav-label{font-family:var(--M);font-size:.68rem;color:var(--muted)}
-
-/* PROGRESS */
-.progress-wrap{position:fixed;top:58px;left:0;right:0;z-index:199;height:4px;background:var(--border)}
-.progress-bar{height:100%;background:var(--acc);transition:width .4s ease;width:0%}
-
-/* HERO */
-.l-hero{padding:80px 1.5rem 2rem;background:linear-gradient(160deg,#fff5f2 0%,#f8fafc 55%,#ffe8e0 100%);border-bottom:1px solid var(--border)}
-.l-hero-inner{max-width:860px;margin:0 auto}
-.l-badge{display:inline-flex;align-items:center;gap:.4rem;border-radius:100px;padding:.2rem .85rem;
-  font-family:var(--M);font-size:.62rem;letter-spacing:.08em;text-transform:uppercase;font-weight:600;
-  color:var(--acc);background:var(--acc-pale);border:1px solid var(--acc-b);margin-bottom:.8rem}
-.l-hero h1{font-family:var(--D);font-weight:700;font-size:clamp(1.5rem,4vw,2.3rem);
-  letter-spacing:-.02em;line-height:1.15;margin-bottom:.5rem}
-.l-hero-sub{font-size:.95rem;color:var(--muted);margin-bottom:1rem}
-
-/* WELCOME BOX */
-.welcome-box{background:linear-gradient(135deg,var(--acc),var(--acc-d));color:#fff;
-  border-radius:16px;padding:1.5rem 1.8rem;max-width:860px;margin:1.5rem auto 0}
-.welcome-box h2{font-family:var(--D);font-weight:700;font-size:1.05rem;margin-bottom:.6rem}
-.welcome-box p,.welcome-box li{font-size:.9rem;line-height:1.8;opacity:.93}
-.welcome-box ul{margin-left:1.2rem;margin-top:.5rem}
-.welcome-meta{display:flex;gap:1rem;margin-top:1rem;flex-wrap:wrap}
-.welcome-meta span{background:rgba(255,255,255,.18);border-radius:6px;padding:.2rem .75rem;
-  font-family:var(--M);font-size:.68rem;font-weight:500}
-
-/* PHASE */
-.phase{background:var(--surface);border:1.5px solid var(--border);border-radius:16px;
-  margin-bottom:1.5rem;overflow:hidden;transition:opacity .3s,transform .3s,filter .3s}
-.phase.locked{opacity:.35;pointer-events:none;filter:blur(1.5px)}
-.phase-header{padding:1rem 1.4rem;background:#fff8f5;
-  border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;gap:1rem;cursor:default}
-.phase-num{font-family:var(--M);font-size:.7rem;font-weight:600;letter-spacing:.08em;
-  text-transform:uppercase;color:var(--acc)}
-.phase-title{font-family:var(--D);font-weight:700;font-size:.95rem;color:var(--text);
-  flex:1;margin:0 .8rem}
-.phase-check{width:26px;height:26px;border-radius:50%;background:var(--border);
-  display:flex;align-items:center;justify-content:center;font-size:.8rem;flex-shrink:0;
-  transition:background .3s,color .3s}
-.phase-check.done{background:#10b981;color:#fff}
-.phase-body{padding:1.6rem 1.8rem}
-
-/* RICH CONTENT STYLES */
+.l-nav-lbl{font-family:var(--M);font-size:.68rem;color:var(--mu)}
+.pw{position:fixed;top:58px;left:0;right:0;z-index:199;height:4px;background:var(--br)}
+.pb{height:100%;background:linear-gradient(90deg,var(--acc),var(--acd));transition:width .5s cubic-bezier(.4,0,.2,1);width:0%;position:relative}
+.pb::after{content:'';position:absolute;right:0;top:0;bottom:0;width:20px;background:inherit;filter:brightness(1.4);animation:pg 1.5s ease-in-out infinite}
+@keyframes pg{0%,100%{opacity:1}50%{opacity:.35}}
+.l-hero{padding:80px 1.5rem 2rem;background:linear-gradient(160deg,#fff5f2 0%,#f8fafc 55%,#ffe8e0 100%);border-bottom:1px solid var(--br)}
+.l-hero-in{max-width:860px;margin:0 auto}
+.badge{display:inline-flex;align-items:center;border-radius:100px;padding:.22rem .9rem;font-family:var(--M);font-size:.62rem;letter-spacing:.08em;text-transform:uppercase;font-weight:700;color:var(--acc);background:var(--acp);border:1.5px solid var(--acb);margin-bottom:.85rem}
+.l-hero h1{font-family:var(--D);font-weight:700;font-size:clamp(1.5rem,4vw,2.3rem);letter-spacing:-.02em;line-height:1.15;margin-bottom:.5rem}
+.l-hero-sub{font-size:.9rem;color:var(--mu)}
+.wb{background:#fff;border:1.5px solid var(--acb);border-left:5px solid var(--acc);border-radius:14px;padding:1.4rem 1.6rem;max-width:860px;margin:1.5rem auto 0;box-shadow:0 2px 12px var(--acs)}
+.wb h2{font-family:var(--D);font-weight:700;font-size:1.05rem;color:var(--acd);margin-bottom:.6rem}
+.wb p,.wb li{font-size:.92rem;line-height:1.85;color:var(--t2)}
+.wb ul{margin-left:1.2rem;margin-top:.4rem}
+.wm{display:flex;gap:.65rem;margin-top:1rem;flex-wrap:wrap}
+.wm span{background:var(--acp);color:var(--acd);border:1px solid var(--acb);border-radius:7px;padding:.22rem .7rem;font-family:var(--M);font-size:.68rem;font-weight:600}
+.phase{background:var(--sf);border:1.5px solid var(--br);border-radius:16px;margin-bottom:1.5rem;overflow:hidden;transition:opacity .35s,filter .35s,transform .35s}
+.phase.locked{opacity:.28;pointer-events:none;filter:blur(2px);transform:scale(.99)}
+.ph{padding:1rem 1.4rem;background:#fff8f5;border-bottom:1px solid var(--br);display:flex;align-items:center;gap:.8rem}
+.pn{font-family:var(--M);font-size:.65rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--acc);white-space:nowrap}
+.pt{font-family:var(--D);font-weight:700;font-size:.95rem;color:var(--tx);flex:1}
+.pc{width:26px;height:26px;border-radius:50%;background:var(--br);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:.8rem;transition:background .3s,transform .4s}
+.pc.done{background:#10b981;color:#fff;transform:scale(1.15) rotate(360deg)}
+.pb2{padding:1.6rem 1.8rem}
 .v2-p{margin-bottom:1rem;font-size:.95rem;color:var(--t2);line-height:1.85}
-.v2-h3{font-family:var(--D);font-weight:700;font-size:1.05rem;color:var(--text);
-  margin:1.6rem 0 .5rem;padding-top:.2rem;border-top:2px solid var(--acc-pale)}
-.v2-h4{font-family:var(--D);font-weight:600;font-size:.95rem;color:var(--t2);margin:1.1rem 0 .4rem}
-.v2-h5,.v2-h6{font-family:var(--D);font-weight:600;font-size:.9rem;color:var(--muted);margin:.8rem 0 .3rem}
+.v2-h3{font-family:var(--D);font-weight:700;font-size:1.05rem;color:var(--tx);margin:1.6rem 0 .5rem;border-top:2px solid var(--acp);padding-top:.4rem}
+.v2-h4{font-family:var(--D);font-weight:600;font-size:.95rem;color:var(--t2);margin:1rem 0 .35rem}
+.v2-h5,.v2-h6{font-family:var(--D);font-weight:600;font-size:.88rem;color:var(--mu);margin:.7rem 0 .3rem}
 .v2-ul,.v2-ol{margin:.6rem 0 1rem 1.4rem;font-size:.93rem;color:var(--t2);line-height:1.9}
 .v2-ul li,.v2-ol li{margin-bottom:.3rem}
-.v2-bq{border-left:4px solid var(--acc);background:var(--acc-pale);border-radius:0 10px 10px 0;
-  padding:.9rem 1.2rem;margin:1rem 0;font-size:.92rem;color:#7b1c06;font-style:italic}
+.v2-bq{border-left:4px solid var(--acc);background:var(--acp);border-radius:0 10px 10px 0;padding:.9rem 1.2rem;margin:1rem 0;font-size:.92rem;color:#7b1c06;font-style:italic}
 .v2-bq p{margin:0;color:inherit}
-.v2-bq strong{font-style:normal}
-.v2-hr{border:none;border-top:1px solid var(--border);margin:1.2rem 0}
-.v2-table-wrap{overflow-x:auto;margin:1rem 0}
+.v2-hr{border:none;border-top:1px solid var(--br);margin:1.2rem 0}
+.v2-table-wrap{overflow-x:auto;margin:1rem 0;border-radius:10px;border:1px solid var(--br)}
 .v2-table{width:100%;border-collapse:collapse;font-size:.87rem}
-.v2-table th{background:var(--acc-pale);color:#7b1c06;font-family:var(--D);
-  font-weight:700;padding:9px 12px;text-align:left;border:1px solid var(--acc-b)}
-.v2-table td{padding:8px 12px;border:1px solid var(--border);color:var(--t2);vertical-align:top}
-.v2-table tr:nth-child(even) td{background:#f8fafc}
-.v2-table code{background:var(--acc-pale);color:var(--acc);border-radius:4px;
-  padding:1px 5px;font-family:var(--M);font-size:.8em}
-.phase-body code{background:var(--acc-pale);color:var(--acc-d);border-radius:4px;
-  padding:1px 6px;font-family:var(--M);font-size:.82em}
-.phase-body a{color:var(--acc);text-decoration:underline;text-underline-offset:2px}
-.phase-body strong{color:var(--text)}
-
-/* CODE BLOCKS */
-.v2-code-wrap{margin:1.2rem 0;border-radius:12px;overflow:hidden;border:1px solid #1e293b;box-shadow:0 4px 16px rgba(0,0,0,.15)}
+.v2-table th{background:var(--acp);color:#7b1c06;font-family:var(--D);font-weight:700;padding:10px 12px;text-align:left;border-bottom:2px solid var(--acb)}
+.v2-table td{padding:8px 12px;border-bottom:1px solid var(--br);color:var(--t2);vertical-align:top}
+.v2-table tr:last-child td{border:none}
+.v2-table tr:hover td{background:var(--acp)}
+.pb2 code{background:var(--acp);color:var(--acd);border-radius:4px;padding:1px 6px;font-family:var(--M);font-size:.82em}
+.pb2 a{color:var(--acc);text-decoration:underline;text-underline-offset:2px}
+.pb2 strong{color:var(--tx)}
+.v2-code-wrap{margin:1.2rem 0;border-radius:12px;overflow:hidden;border:1px solid #1e293b;box-shadow:0 4px 18px rgba(0,0,0,.18)}
 .v2-code-bar{background:#1e293b;padding:.55rem 1rem;display:flex;align-items:center;gap:.4rem}
 .v2-dot{width:10px;height:10px;border-radius:50%}
 .v2-dot.r{background:#ff5f57}.v2-dot.y{background:#febc2e}.v2-dot.g{background:#28c840}
-.v2-code-lang{margin-left:.6rem;font-family:var(--M);font-size:.65rem;color:#64748b;text-transform:uppercase;letter-spacing:.08em}
+.v2-code-lang{margin-left:.5rem;font-family:var(--M);font-size:.62rem;color:#64748b;text-transform:uppercase;letter-spacing:.08em;flex:1}
+.copy-btn{background:rgba(255,255,255,.08);color:#94a3b8;border:none;border-radius:6px;padding:.25rem .65rem;font-family:var(--M);font-size:.65rem;cursor:pointer;transition:background .2s,color .2s}
+.copy-btn:hover{background:rgba(255,255,255,.2);color:#fff}
+.copy-btn.copied{background:#10b981;color:#fff}
 .v2-code-body{background:#0f172a;padding:1.3rem 1.5rem;overflow-x:auto}
 .v2-code-body pre{margin:0}
-.v2-code-body code{font-family:var(--M);font-size:.8rem;line-height:1.9;color:#e2e8f0;
-  white-space:pre;background:transparent;padding:0;border-radius:0}
-
-/* TASK BOX */
-.task-box{background:#fff0ec;border:2px dashed #e34c26;
-  border-radius:12px;padding:1rem 1.3rem;margin:1.4rem 0}
-.task-label{font-family:var(--M);font-size:.65rem;font-weight:700;letter-spacing:.1em;
-  text-transform:uppercase;color:#7b1c06;margin-bottom:.5rem;display:flex;align-items:center;gap:.4rem}
-.task-box p,.task-body{font-size:.92rem;color:#7b1c06;line-height:1.8}
-.task-box code{background:rgba(0,0,0,.08);border-radius:4px;padding:1px 6px;
-  font-family:var(--M);font-size:.82em}
-
-/* UNLOCK BUTTON */
-.unlock-btn{display:inline-flex;align-items:center;gap:.5rem;background:var(--acc);
-  color:#fff;font-family:var(--D);font-weight:700;font-size:.88rem;
-  padding:.75rem 1.6rem;border-radius:10px;border:none;cursor:pointer;
-  transition:transform .2s,box-shadow .2s;box-shadow:0 4px 14px var(--acc-sh);margin-top:1.2rem}
-.unlock-btn:hover{transform:translateY(-2px);box-shadow:0 8px 22px var(--acc-sh)}
-
-/* BUILD IT */
+.v2-code-body code{font-family:var(--M);font-size:.8rem;line-height:1.95;color:#e2e8f0;white-space:pre;background:transparent;padding:0;border-radius:0}
+.task-box{background:#fff0ec;border:2px dashed #e34c26;border-radius:12px;padding:1.1rem 1.3rem;margin:1.4rem 0}
+.task-lbl{font-family:var(--M);font-size:.65rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#7b1c06;margin-bottom:.5rem;display:flex;align-items:center;gap:.4rem}
+.task-body{font-size:.93rem;color:#7b1c06;line-height:1.85}
+.task-body code{background:rgba(0,0,0,.1);border-radius:4px;padding:1px 6px;font-family:var(--M);font-size:.82em}
+.chal-box{background:linear-gradient(135deg,#fff5f2 0%,#fff 100%);border:2px solid var(--acc);border-radius:14px;padding:1.2rem 1.4rem;margin-bottom:1.2rem}
+.chal-lbl{font-family:var(--M);font-size:.65rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--acd);margin-bottom:.6rem}
+.chal-body{font-size:.95rem;color:var(--tx);line-height:1.85}
+.chal-body code{background:var(--acp);color:var(--acd);border-radius:4px;padding:1px 5px;font-family:var(--M);font-size:.82em}
+.reveal-btn{display:inline-flex;align-items:center;gap:.5rem;background:transparent;color:var(--acd);font-family:var(--D);font-weight:700;font-size:.85rem;padding:.6rem 1.2rem;border-radius:8px;border:2px solid var(--acc);cursor:pointer;transition:background .2s,color .2s;margin:.6rem 0}
+.reveal-btn:hover{background:var(--acc);color:#fff}
+.reveal-content{display:none;margin-top:.6rem;animation:fi .3s ease}
+.reveal-content.open{display:block}
+@keyframes fi{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
 .build-box{background:#f0fdf4;border:2px solid #16a34a;border-radius:16px;padding:1.6rem;margin:2rem 0;display:none}
-.build-label{font-family:var(--M);font-size:.65rem;font-weight:700;letter-spacing:.1em;
-  text-transform:uppercase;color:#15803d;margin-bottom:.4rem}
-.build-name{font-family:var(--D);font-weight:700;font-size:1.1rem;color:#14532d;margin-bottom:.5rem}
-.build-desc{font-size:.9rem;color:#166534;margin-bottom:1.2rem;line-height:1.75}
-.build-desc code{background:rgba(22,163,74,.12);border-radius:4px;padding:1px 6px;font-family:var(--M);font-size:.82em}
-.build-desc strong{color:#14532d}
-
-/* GITHUB ACCORDION */
-.gh-acc{border:1.5px solid var(--border);border-radius:12px;overflow:hidden;margin:1.5rem 0}
-.gh-acc-head{padding:1rem 1.2rem;background:#f8fafc;cursor:pointer;
-  display:flex;align-items:center;justify-content:space-between;
-  font-family:var(--D);font-weight:600;font-size:.9rem;user-select:none}
-.gh-acc-body{display:none;padding:1.2rem;border-top:1px solid var(--border)}
-.gh-acc-body.open{display:block}
-.gh-step{display:flex;gap:.8rem;margin-bottom:1rem;align-items:flex-start}
-.gh-step-n{width:26px;height:26px;border-radius:50%;background:var(--acc);color:#fff;
-  font-family:var(--D);font-weight:700;font-size:.75rem;display:flex;align-items:center;
-  justify-content:center;flex-shrink:0;margin-top:2px}
-.gh-step p{font-size:.88rem;color:var(--t2);line-height:1.7}
-.gh-step code{background:var(--acc-pale);color:var(--acc-d);border-radius:4px;
-  padding:1px 6px;font-family:var(--M);font-size:.82em}
-
-/* SESSION END */
-.session-end{background:linear-gradient(135deg,var(--acc),var(--acc-d));color:#fff;
-  border-radius:16px;padding:1.6rem 1.8rem;margin:2rem 0;display:none}
-.session-end.visible{display:block}
-.session-end h2{font-family:var(--D);font-weight:700;font-size:1.1rem;margin-bottom:.8rem}
-.session-end ul{list-style:none;display:flex;flex-direction:column;gap:.4rem}
-.session-end li{font-size:.9rem;opacity:.93;display:flex;align-items:center;gap:.5rem}
-.ln-btn{display:inline-flex;align-items:center;gap:.4rem;background:var(--surface);
-  color:var(--t2);font-family:var(--D);font-weight:600;font-size:.82rem;
-  padding:.65rem 1.2rem;border-radius:8px;text-decoration:none;
-  border:1.5px solid var(--border);transition:border-color .2s,color .2s}
+.build-box.visible{display:block;animation:fi .4s ease}
+.build-lbl{font-family:var(--M);font-size:.65rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#15803d;margin-bottom:.4rem}
+.build-name{font-family:var(--D);font-weight:700;font-size:1.15rem;color:#14532d;margin-bottom:.6rem}
+.build-req{font-size:.93rem;color:#166534;line-height:1.8;margin-bottom:.8rem}
+.build-req code{background:rgba(22,163,74,.12);border-radius:4px;padding:1px 6px;font-family:var(--M);font-size:.82em}
+.build-req strong{color:#14532d}
+.gh-acc{border:1.5px solid var(--br);border-radius:12px;overflow:hidden;margin:1.5rem 0}
+.gh-hd{padding:1rem 1.2rem;background:#f8fafc;cursor:pointer;display:flex;align-items:center;justify-content:space-between;font-family:var(--D);font-weight:600;font-size:.9rem;user-select:none;transition:background .2s}
+.gh-hd:hover{background:#f1f5f9}
+.gh-bd{display:none;padding:1.2rem;border-top:1px solid var(--br)}
+.gh-bd.open{display:block;animation:fi .25s ease}
+.gh-st{display:flex;gap:.8rem;margin-bottom:1rem;align-items:flex-start}
+.gh-n{width:26px;height:26px;border-radius:50%;background:var(--acc);color:#fff;font-family:var(--D);font-weight:700;font-size:.75rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px}
+.gh-st p{font-size:.88rem;color:var(--t2);line-height:1.7}
+.gh-st code{background:var(--acp);color:var(--acd);border-radius:4px;padding:1px 6px;font-family:var(--M);font-size:.82em}
+.gh-nop{background:#fef3c7;border:1.5px solid #fde68a;border-radius:10px;padding:1rem 1.2rem;font-size:.9rem;color:#78350f;line-height:1.75;margin-bottom:1rem}
+.se{background:linear-gradient(135deg,var(--acc),var(--acd));color:#fff;border-radius:16px;padding:1.6rem 1.8rem;margin:2rem 0;display:none}
+.se.visible{display:block;animation:fi .4s ease}
+.se h2{font-family:var(--D);font-weight:700;font-size:1.1rem;margin-bottom:.8rem}
+.se ul{list-style:none;display:flex;flex-direction:column;gap:.4rem}
+.se li{font-size:.9rem;opacity:.93;display:flex;align-items:center;gap:.5rem}
+.ln-btn{display:inline-flex;align-items:center;gap:.4rem;background:var(--sf);color:var(--t2);font-family:var(--D);font-weight:600;font-size:.82rem;padding:.65rem 1.2rem;border-radius:8px;text-decoration:none;border:1.5px solid var(--br);transition:border-color .2s,color .2s}
 .ln-btn:hover{border-color:var(--acc);color:var(--acc)}
 .ln-btn.primary{background:var(--acc);color:#fff;border-color:var(--acc)}
 .ln-btn.primary:hover{opacity:.9}
-.lesson-nav{display:flex;align-items:center;justify-content:space-between;
-  padding-top:2rem;border-top:1px solid rgba(255,255,255,.25);margin-top:1.5rem;flex-wrap:wrap;gap:.75rem}
-.lesson-footer{text-align:center;padding:1.5rem;font-family:var(--M);font-size:.72rem;
-  color:var(--muted);border-top:1px solid var(--border);background:var(--surface)}
+.ln{display:flex;align-items:center;justify-content:space-between;padding-top:1.5rem;border-top:1px solid rgba(255,255,255,.25);margin-top:1.5rem;flex-wrap:wrap;gap:.75rem}
+.ub{display:inline-flex;align-items:center;gap:.5rem;background:var(--acc);color:#fff;font-family:var(--D);font-weight:700;font-size:.88rem;padding:.75rem 1.6rem;border-radius:10px;border:none;cursor:pointer;transition:transform .2s,box-shadow .2s;box-shadow:0 4px 14px var(--acs);margin-top:1.2rem}
+.ub:hover{transform:translateY(-2px);box-shadow:0 8px 22px var(--acs)}
+.ub:active{transform:scale(.97)}
+#toast{position:fixed;bottom:90px;right:1.5rem;z-index:999;background:#1e293b;color:#fff;border-radius:10px;padding:.75rem 1.2rem;font-family:var(--D);font-size:.85rem;font-weight:600;box-shadow:0 8px 24px rgba(0,0,0,.25);transform:translateY(20px);opacity:0;transition:all .3s;pointer-events:none}
+#toast.show{transform:translateY(0);opacity:1}
+#go-top{position:fixed;bottom:1.5rem;right:1.5rem;z-index:300;width:44px;height:44px;border-radius:50%;background:var(--acc);color:#fff;border:none;cursor:pointer;font-size:1.15rem;box-shadow:0 4px 16px var(--acs);display:flex;align-items:center;justify-content:center;opacity:0;transform:translateY(10px);transition:opacity .3s,transform .3s,box-shadow .2s;pointer-events:none}
+#go-top.visible{opacity:1;transform:translateY(0);pointer-events:auto}
+#go-top:hover{box-shadow:0 8px 24px var(--acs);transform:translateY(-2px)}
+#cc{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:998;display:none}
+.lf{text-align:center;padding:1.5rem;font-family:var(--M);font-size:.72rem;color:var(--mu);border-top:1px solid var(--br);background:var(--sf)}
 </style>
 </head>
 <body>
 <nav class="l-nav">
   <a href="../index.html" class="l-nav-logo">⚡ Techbase HTML</a>
-  <span class="l-nav-label">Lesson 19 of 34</span>
+  <span class="l-nav-lbl">Lesson 19 of 34</span>
   <a href="../index.html" class="l-nav-back">← All Lessons</a>
 </nav>
-<div class="progress-wrap"><div class="progress-bar" id="pbar"></div></div>
-
-<div class="l-hero">
-  <div class="l-hero-inner">
-    <div class="l-badge">HTML · Lesson 19</div>
-    <h1>Lesson 19 – HTML class and id Attributes</h1>
-    <div class="l-hero-sub">9 phases · Build: Project Overview</div>
-  </div>
-</div>
-
-<section style="background:linear-gradient(160deg,#fff5f2 0%,#f8fafc 55%,#ffe8e0 100%);padding-bottom:1.5rem;border-bottom:1px solid var(--border)">
-  <div style="max-width:860px;margin:0 auto;padding:0 1.5rem"><div class="welcome-box">
-  <h2>👋 Welcome to Lesson 19</h2>
-  <div style="font-size:.9rem;line-height:1.85;opacity:.93"><p class="v2-p">Welcome to Lesson 19! In this lesson you will learn two of the most important tools that web developers use every single day: the <strong><code>class</code> attribute</strong> and the <strong><code>id</code> attribute</strong>.</p>
-<p class="v2-p">By the end of this lesson you will be able to:</p>
-<ul class="v2-ul"><li>Understand what <code>class</code> and <code>id</code> attributes are and why they exist</li><li>Use <code>class</code> to apply the same style to many elements at once</li><li>Assign multiple classes to a single element</li><li>Use <code>id</code> to uniquely identify a single element</li><li>Use <code>id</code> to create page bookmark links that let users jump to sections</li><li>Understand the difference between <code>class</code> and <code>id</code></li><li>Use JavaScript's <code>getElementsByClassName()</code> and <code>getElementById()</code> methods to interact with elements</li></ul>
-<p class="v2-p">Think of this lesson like learning how to <strong>label boxes in a warehouse</strong>. Some boxes share the same label because they contain the same type of product — that is like <code>class</code>. Other boxes have a unique serial number that belongs to only one box — that is like <code>id</code>.</p>
-<hr class="v2-hr"></div>
-  <div class="welcome-meta">
-    <span>📚 9 phases</span>
-    <span>🏗️ Project Overview</span>
-  </div>
+<div class="pw"><div class="pb" id="pbar"></div></div>
+<div class="l-hero"><div class="l-hero-in">
+  <div class="badge">HTML · Lesson 19</div>
+  <h1>Lesson 19 – HTML class and id Attributes</h1>
+  <div class="l-hero-sub">9 phases &nbsp;·&nbsp; Build: Project Overview</div>
 </div></div>
-</section>
-
-<main style="max-width:860px;margin:0 auto;padding:2rem 1.5rem 5rem">
-<div class="phase" id="phase1">
-  <div class="phase-header">
-    <div class="phase-num">Phase 1 of 9</div>
-    <div class="phase-title">Lesson Introduction</div>
-    <div class="phase-check" id="chk1"></div>
-  </div>
-  <div class="phase-body">
-    <p class="v2-p">Welcome to Lesson 19! In this lesson you will learn two of the most important tools that web developers use every single day: the <strong><code>class</code> attribute</strong> and the <strong><code>id</code> attribute</strong>.</p>
+<section style="background:linear-gradient(160deg,#fff5f2 0%,#f8fafc 55%,#ffe8e0 100%);padding-bottom:1.5rem;border-bottom:1px solid var(--br)">
+  <div style="max-width:860px;margin:0 auto;padding:0 1.5rem"><div class="wb"><h2>👋 Welcome to Lesson 19</h2><div style="font-size:.92rem;line-height:1.85;color:var(--t2)"><p class="v2-p">Welcome to Lesson 19! In this lesson you will learn two of the most important tools that web developers use every single day: the <strong><code>class</code> attribute</strong> and the <strong><code>id</code> attribute</strong>.</p>
 <p class="v2-p">By the end of this lesson you will be able to:</p>
 <ul class="v2-ul"><li>Understand what <code>class</code> and <code>id</code> attributes are and why they exist</li><li>Use <code>class</code> to apply the same style to many elements at once</li><li>Assign multiple classes to a single element</li><li>Use <code>id</code> to uniquely identify a single element</li><li>Use <code>id</code> to create page bookmark links that let users jump to sections</li><li>Understand the difference between <code>class</code> and <code>id</code></li><li>Use JavaScript's <code>getElementsByClassName()</code> and <code>getElementById()</code> methods to interact with elements</li></ul>
 <p class="v2-p">Think of this lesson like learning how to <strong>label boxes in a warehouse</strong>. Some boxes share the same label because they contain the same type of product — that is like <code>class</code>. Other boxes have a unique serial number that belongs to only one box — that is like <code>id</code>.</p>
-<hr class="v2-hr">
-    <div class="task-box">
-      <div class="task-label">✏️ Your Task</div>
-      <div class="task-body">Now practise what you just learned about <strong>Lesson Introduction</strong>. Open your editor, type the examples above by hand, then modify them — change values, rename variables, and observe what happens. Active experimentation is how code sticks.</div>
-    </div>
-    <button class="unlock-btn" onclick="unlockNext(1)">Start Lesson ✓</button>
-  </div>
-</div>
-<div class="phase locked" id="phase2">
-  <div class="phase-header">
-    <div class="phase-num">Phase 2 of 9</div>
-    <div class="phase-title">Prerequisite Concepts</div>
-    <div class="phase-check" id="chk2"></div>
-  </div>
-  <div class="phase-body">
-    <p class="v2-p">Before diving in, let's make sure you understand a few things from earlier lessons. If these feel familiar, great! If not, read carefully — this foundation is important.</p>
+<hr class="v2-hr"></div><div class="wm"><span>📚 9 phases</span><span>🏗️ Project Overview</span><span>🌐 GitHub Pages</span></div></div></div>
+</section>
+<main style="max-width:860px;margin:0 auto;padding:2rem 1.5rem 5rem">
+<div class="phase" id="phase1"><div class="ph"><div class="pn">Phase 1/9</div><div class="pt">Lesson Introduction</div><div class="pc" id="chk1"></div></div><div class="pb2"><p class="v2-p">Welcome to Lesson 19! In this lesson you will learn two of the most important tools that web developers use every single day: the <strong><code>class</code> attribute</strong> and the <strong><code>id</code> attribute</strong>.</p>
+<p class="v2-p">By the end of this lesson you will be able to:</p>
+<ul class="v2-ul"><li>Understand what <code>class</code> and <code>id</code> attributes are and why they exist</li><li>Use <code>class</code> to apply the same style to many elements at once</li><li>Assign multiple classes to a single element</li><li>Use <code>id</code> to uniquely identify a single element</li><li>Use <code>id</code> to create page bookmark links that let users jump to sections</li><li>Understand the difference between <code>class</code> and <code>id</code></li><li>Use JavaScript's <code>getElementsByClassName()</code> and <code>getElementById()</code> methods to interact with elements</li></ul>
+<p class="v2-p">Think of this lesson like learning how to <strong>label boxes in a warehouse</strong>. Some boxes share the same label because they contain the same type of product — that is like <code>class</code>. Other boxes have a unique serial number that belongs to only one box — that is like <code>id</code>.</p>
+<hr class="v2-hr"><div class="task-box"><div class="task-lbl">✏️ Your Task</div><div class="task-body">Practise what you just learned about <strong>Lesson Introduction</strong>. Open your editor, type the examples above by hand, modify them, and observe what changes.</div></div><button class="ub" onclick="unlockNext(1)">Start Lesson ✓</button></div></div>
+<div class="phase locked" id="phase2"><div class="ph"><div class="pn">Phase 2/9</div><div class="pt">Prerequisite Concepts</div><div class="pc" id="chk2"></div></div><div class="pb2"><p class="v2-p">Before diving in, let's make sure you understand a few things from earlier lessons. If these feel familiar, great! If not, read carefully — this foundation is important.</p>
 <h3 class="v2-h3">What is an HTML Attribute?</h3>
 <p class="v2-p">An <strong>attribute</strong> gives extra information about an HTML element. Attributes live inside the <strong>opening tag</strong> and always follow this pattern:</p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;tagname attribute=&quot;value&quot;&gt;content&lt;/tagname&gt;</code></pre></div></div>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;tagname attribute=&quot;value&quot;&gt;content&lt;/tagname&gt;</code></pre></div></div>
 <p class="v2-p">For example:</p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;p style=&quot;color: red;&quot;&gt;Hello!&lt;/p&gt;</code></pre></div></div>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;p style=&quot;color: red;&quot;&gt;Hello!&lt;/p&gt;</code></pre></div></div>
 <p class="v2-p">Here <code>style</code> is the attribute and <code>"color: red;"</code> is its value.</p>
 <h3 class="v2-h3">What is CSS?</h3>
 <p class="v2-p"><strong>CSS (Cascading Style Sheets)</strong> is the language used to style HTML elements — controlling colours, sizes, spacing, fonts, and more. In this lesson, CSS styles will be written inside a <code>&lt;style&gt;</code> tag in the <code>&lt;head&gt;</code> section of the HTML page.</p>
 <p class="v2-p">A CSS rule looks like this:</p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">css</span></div><div class="v2-code-body"><pre><code>selector {
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">css</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>selector {
   property: value;
 }</code></pre></div></div>
 <p class="v2-p">For example:</p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">css</span></div><div class="v2-code-body"><pre><code>p {
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">css</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>p {
   color: blue;
 }</code></pre></div></div>
 <p class="v2-p">This turns all paragraph text blue. You do not need to be a CSS expert — just understand that CSS rules target elements and change how they look.</p>
-<hr class="v2-hr">
-    <div class="task-box">
-      <div class="task-label">✏️ Your Task</div>
-      <div class="task-body">Now practise what you just learned about <strong>Prerequisite Concepts</strong>. Open your editor, type the examples above by hand, then modify them — change values, rename variables, and observe what happens. Active experimentation is how code sticks.</div>
-    </div>
-    <button class="unlock-btn" onclick="unlockNext(2)">Phase Complete — Unlock Next ✓</button>
-  </div>
-</div>
-<div class="phase locked" id="phase3">
-  <div class="phase-header">
-    <div class="phase-num">Phase 3 of 9</div>
-    <div class="phase-title">Part 1 – The HTML `class` Attribute</div>
-    <div class="phase-check" id="chk3"></div>
-  </div>
-  <div class="phase-body">
-    <h3 class="v2-h3">What is the <code>class</code> Attribute?</h3>
+<hr class="v2-hr"><div class="task-box"><div class="task-lbl">✏️ Your Task</div><div class="task-body">Practise what you just learned about <strong>Prerequisite Concepts</strong>. Open your editor, type the examples above by hand, modify them, and observe what changes.</div></div><button class="ub" onclick="unlockNext(2)">Phase Complete — Unlock Next ✓</button></div></div>
+<div class="phase locked" id="phase3"><div class="ph"><div class="pn">Phase 3/9</div><div class="pt">Part 1 – The HTML `class` Attribute</div><div class="pc" id="chk3"></div></div><div class="pb2"><h3 class="v2-h3">What is the <code>class</code> Attribute?</h3>
 <p class="v2-p">The <code>class</code> attribute is used to <strong>group HTML elements together</strong> so they can all share the same style. Think of it like giving a group of students the same uniform. You create a "uniform style" once, and every student wearing that uniform automatically looks the same.</p>
 <p class="v2-p"><strong>Why does this exist?</strong> Without <code>class</code>, if you wanted ten paragraphs to all have a red background, you would have to write <code>style="background-color: red;"</code> ten times — once on each paragraph. With <code>class</code>, you write the style <strong>once</strong> in CSS, give it a name, and then add <code>class="that-name"</code> to every element you want styled. Done.</p>
 <p class="v2-p"><strong>What problem does it solve?</strong> It removes repetition. It makes your code cleaner, easier to read, and much easier to maintain. If you later want to change the background colour, you change it in one place — not ten.</p>
 <h3 class="v2-h3">How <code>class</code> Works — Step by Step</h3>
 <p class="v2-p">Here is the formula:</p>
 <p class="v2-p"><strong>Step 1:</strong> Create a CSS rule using a <code>.</code> (dot/period) followed by your class name.</p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">css</span></div><div class="v2-code-body"><pre><code>.myClass {
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">css</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>.myClass {
   color: blue;
 }</code></pre></div></div>
 <p class="v2-p"><strong>Step 2:</strong> Add <code>class="myClass"</code> to any HTML element you want to style.</p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;p class=&quot;myClass&quot;&gt;This text will be blue.&lt;/p&gt;</code></pre></div></div>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;p class=&quot;myClass&quot;&gt;This text will be blue.&lt;/p&gt;</code></pre></div></div>
 <p class="v2-p">The dot (<code>.</code>) in CSS is how you say "target elements with this class name". The class name itself (without the dot) goes inside the HTML attribute.</p>
 <hr class="v2-hr">
 <h3 class="v2-h3">Simple Example 1 — Styling Three Headings the Same Way</h3>
 <p class="v2-p">Let's say you are building a travel website. You have three city headings: London, Paris, and Tokyo. You want each one to have a tomato-red background, white text, and some padding.</p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
 &lt;html&gt;
 &lt;head&gt;
   &lt;style&gt;
@@ -303,7 +209,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--B);font-size:16px;
 <hr class="v2-hr">
 <h3 class="v2-h3">Simple Example 2 — Highlighting Words Inside a Sentence</h3>
 <p class="v2-p">The <code>class</code> attribute is not just for big block elements. You can use it on inline elements like <code>&lt;span&gt;</code> to style just a few words inside a sentence.</p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
 &lt;html&gt;
 &lt;head&gt;
   &lt;style&gt;
@@ -329,7 +235,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--B);font-size:16px;
 <hr class="v2-hr">
 <h3 class="v2-h3">The CSS Syntax for a Class Rule</h3>
 <p class="v2-p">Here is the exact syntax again, clearly broken down:</p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">css</span></div><div class="v2-code-body"><pre><code>.className {
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">css</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>.className {
   property: value;
   property: value;
 }</code></pre></div></div>
@@ -337,10 +243,10 @@ body{background:var(--bg);color:var(--text);font-family:var(--B);font-size:16px;
 <hr class="v2-hr">
 <h3 class="v2-h3">Assigning Multiple Classes to One Element</h3>
 <p class="v2-p">An HTML element can belong to <strong>more than one class at the same time</strong>. You simply separate the class names with a <strong>space</strong> inside the attribute value.</p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;h2 class=&quot;city main&quot;&gt;London&lt;/h2&gt;</code></pre></div></div>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;h2 class=&quot;city main&quot;&gt;London&lt;/h2&gt;</code></pre></div></div>
 <p class="v2-p">This heading belongs to both the <code>city</code> class and the <code>main</code> class. It will receive the styling from <strong>both</strong> CSS rules.</p>
 <p class="v2-p"><strong>Full example:</strong></p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
 &lt;html&gt;
 &lt;head&gt;
   &lt;style&gt;
@@ -369,7 +275,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--B);font-size:16px;
 <hr class="v2-hr">
 <h3 class="v2-h3">Different Elements Can Share the Same Class</h3>
 <p class="v2-p">One class can be used by completely different types of elements. A <code>&lt;h2&gt;</code> and a <code>&lt;p&gt;</code> can both use <code>class="city"</code> and receive identical styling.</p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;h2 class=&quot;city&quot;&gt;Paris&lt;/h2&gt;
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;h2 class=&quot;city&quot;&gt;Paris&lt;/h2&gt;
 &lt;p class=&quot;city&quot;&gt;Paris is the capital of France.&lt;/p&gt;</code></pre></div></div>
 <p class="v2-p"><strong>Expected Output:</strong></p>
 <p class="v2-p">Both the heading and the paragraph will have the same background colour, text colour, and padding — because they share the same class. The browser does not care that one is a heading and one is a paragraph; both match the <code>.city</code> CSS rule.</p>
@@ -377,7 +283,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--B);font-size:16px;
 <h3 class="v2-h3">Using <code>class</code> with JavaScript</h3>
 <p class="v2-p">The <code>class</code> attribute is not only useful for CSS styling. JavaScript can also <strong>find and manipulate</strong> all elements that share a class name using the <code>getElementsByClassName()</code> method.</p>
 <p class="v2-p"><strong>What is <code>getElementsByClassName()</code>?</strong> This is a JavaScript function (a built-in tool) that searches the HTML document and returns a list of every element with a given class name.</p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
 &lt;html&gt;
 &lt;head&gt;
   &lt;style&gt;
@@ -413,22 +319,8 @@ body{background:var(--bg);color:var(--text);font-family:var(--B);font-size:16px;
 <p class="v2-p"><strong>What the JavaScript code does — line by line:</strong></p>
 <ul class="v2-ul"><li><code>function hideCities() { ... }</code> — Defines a reusable block of code called <code>hideCities</code>.</li><li><code>document.getElementsByClassName("city")</code> — Searches the page and returns all elements with <code>class="city"</code> as a list (called a collection).</li><li><code>for (var i = 0; i &lt; x.length; i++)</code> — Loops through every item in that list. <code>x.length</code> is the total number of items (3 in this case).</li><li><code>x[i].style.display = "none";</code> — Hides the current element by setting its <code>display</code> CSS property to <code>"none"</code>.</li></ul>
 <blockquote class="v2-bq"><p class="v2-p">💡 Don't worry if JavaScript feels confusing right now. The key takeaway is: <strong>class names are used not just for CSS, but also as targets for JavaScript actions</strong>.</p></blockquote>
-<hr class="v2-hr">
-    <div class="task-box">
-      <div class="task-label">✏️ Your Task</div>
-      <div class="task-body">Now practise what you just learned about <strong>– The HTML <code>class</code> Attribute</strong>. Open your editor, type the examples above by hand, then modify them — change values, rename variables, and observe what happens. Active experimentation is how code sticks.</div>
-    </div>
-    <button class="unlock-btn" onclick="unlockNext(3)">Phase Complete — Unlock Next ✓</button>
-  </div>
-</div>
-<div class="phase locked" id="phase4">
-  <div class="phase-header">
-    <div class="phase-num">Phase 4 of 9</div>
-    <div class="phase-title">Part 2 – The HTML `id` Attribute</div>
-    <div class="phase-check" id="chk4"></div>
-  </div>
-  <div class="phase-body">
-    <h3 class="v2-h3">What is the <code>id</code> Attribute?</h3>
+<hr class="v2-hr"><div class="task-box"><div class="task-lbl">✏️ Your Task</div><div class="task-body">Practise what you just learned about <strong>– The HTML <code>class</code> Attribute</strong>. Open your editor, type the examples above by hand, modify them, and observe what changes.</div></div><button class="ub" onclick="unlockNext(3)">Phase Complete — Unlock Next ✓</button></div></div>
+<div class="phase locked" id="phase4"><div class="ph"><div class="pn">Phase 4/9</div><div class="pt">Part 2 – The HTML `id` Attribute</div><div class="pc" id="chk4"></div></div><div class="pb2"><h3 class="v2-h3">What is the <code>id</code> Attribute?</h3>
 <p class="v2-p">The <code>id</code> attribute gives an HTML element a <strong>unique identity</strong>. Think of it like a national ID number or a passport number — only <strong>one person in the entire country</strong> can have that exact number.</p>
 <p class="v2-p">In the same way, only <strong>one element in an entire HTML document</strong> can have a specific <code>id</code> value. If you try to use the same <code>id</code> on two elements, the browser will not crash, but your code will be incorrect — CSS and JavaScript will behave unpredictably.</p>
 <p class="v2-p"><strong>Why does it exist?</strong> Sometimes you need to target one exact element — not a group, not a type, just one single specific element. The <code>id</code> attribute makes that possible.</p>
@@ -438,15 +330,15 @@ body{background:var(--bg);color:var(--text);font-family:var(--B);font-size:16px;
 <h3 class="v2-h3">How <code>id</code> Works — Step by Step</h3>
 <p class="v2-p">Here is the formula:</p>
 <p class="v2-p"><strong>Step 1:</strong> Create a CSS rule using a <code>#</code> (hash symbol) followed by your id name.</p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">css</span></div><div class="v2-code-body"><pre><code>#myHeader {
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">css</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>#myHeader {
   background-color: lightblue;
 }</code></pre></div></div>
 <p class="v2-p"><strong>Step 2:</strong> Add <code>id="myHeader"</code> to the one HTML element you want to style.</p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;h1 id=&quot;myHeader&quot;&gt;Welcome!&lt;/h1&gt;</code></pre></div></div>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;h1 id=&quot;myHeader&quot;&gt;Welcome!&lt;/h1&gt;</code></pre></div></div>
 <p class="v2-p">The <code>#</code> in CSS is how you say "target the element with this exact id". The id name itself (without the <code>#</code>) goes inside the HTML attribute.</p>
 <hr class="v2-hr">
 <h3 class="v2-h3">Simple Example 1 — Styling a Single Unique Header</h3>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
 &lt;html&gt;
 &lt;head&gt;
   &lt;style&gt;
@@ -471,7 +363,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--B);font-size:16px;
 <hr class="v2-hr">
 <h3 class="v2-h3">Simple Example 2 — Class and ID Side by Side</h3>
 <p class="v2-p">This example shows both <code>class</code> (for many elements) and <code>id</code> (for one element) working together in the same page:</p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
 &lt;html&gt;
 &lt;head&gt;
   &lt;style&gt;
@@ -515,53 +407,25 @@ body{background:var(--bg);color:var(--text);font-family:var(--B);font-size:16px;
 <p class="v2-p">Unlike <code>class</code>, which is quite flexible, the <code>id</code> attribute has strict rules:</p>
 <ul class="v2-ul"><li>The <code>id</code> value must be <strong>unique</strong> — no two elements on the same page can share the same <code>id</code>.</li><li>The <code>id</code> name is <strong>case sensitive</strong> — <code>id="myHeader"</code> and <code>id="myheader"</code> are different.</li><li>The <code>id</code> name must contain <strong>at least one character</strong>.</li><li>The <code>id</code> name <strong>cannot start with a number</strong>.</li><li>The <code>id</code> name must <strong>not contain spaces</strong> (no spaces, tabs, or line breaks).</li></ul>
 <p class="v2-p"><strong>Valid id examples:</strong></p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;div id=&quot;mainContent&quot;&gt;...&lt;/div&gt;
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;div id=&quot;mainContent&quot;&gt;...&lt;/div&gt;
 &lt;p id=&quot;intro-paragraph&quot;&gt;...&lt;/div&gt;
 &lt;h1 id=&quot;pageTitle&quot;&gt;...&lt;/h1&gt;</code></pre></div></div>
 <p class="v2-p"><strong>Invalid id examples (these will cause problems):</strong></p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;div id=&quot;main content&quot;&gt;...&lt;/div&gt;   &lt;!-- NO: contains a space --&gt;
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;div id=&quot;main content&quot;&gt;...&lt;/div&gt;   &lt;!-- NO: contains a space --&gt;
 &lt;p id=&quot;1stParagraph&quot;&gt;...&lt;/p&gt;       &lt;!-- NO: starts with a number --&gt;
 &lt;h1 id=&quot;&quot;&gt;...&lt;/h1&gt;                  &lt;!-- NO: empty value --&gt;</code></pre></div></div>
-<hr class="v2-hr">
-    <div class="task-box">
-      <div class="task-label">✏️ Your Task</div>
-      <div class="task-body">Now practise what you just learned about <strong>– The HTML <code>id</code> Attribute</strong>. Open your editor, type the examples above by hand, then modify them — change values, rename variables, and observe what happens. Active experimentation is how code sticks.</div>
-    </div>
-    <button class="unlock-btn" onclick="unlockNext(4)">Phase Complete — Unlock Next ✓</button>
-  </div>
-</div>
-<div class="phase locked" id="phase5">
-  <div class="phase-header">
-    <div class="phase-num">Phase 5 of 9</div>
-    <div class="phase-title">Part 3 – The Difference Between `class` and `id`</div>
-    <div class="phase-check" id="chk5"></div>
-  </div>
-  <div class="phase-body">
-    <p class="v2-p">This is one of the most commonly confused topics for beginners. Here is a simple table:</p>
+<hr class="v2-hr"><div class="task-box"><div class="task-lbl">✏️ Your Task</div><div class="task-body">Practise what you just learned about <strong>– The HTML <code>id</code> Attribute</strong>. Open your editor, type the examples above by hand, modify them, and observe what changes.</div></div><button class="ub" onclick="unlockNext(4)">Phase Complete — Unlock Next ✓</button></div></div>
+<div class="phase locked" id="phase5"><div class="ph"><div class="pn">Phase 5/9</div><div class="pt">Part 3 – The Difference Between `class` and `id`</div><div class="pc" id="chk5"></div></div><div class="pb2"><p class="v2-p">This is one of the most commonly confused topics for beginners. Here is a simple table:</p>
 <div class="v2-table-wrap"><table class="v2-table"><thead><tr><th>Feature</th><th><code>class</code></th><th><code>id</code></th></tr></thead><tbody><tr><td>Can be used on multiple elements?</td><td>✅ Yes</td><td>❌ No — unique only</td></tr><tr><td>CSS selector symbol</td><td><code>.</code> (dot)</td><td><code>#</code> (hash)</td></tr><tr><td>Can one element have several?</td><td>✅ Yes (<code>class="a b c"</code>)</td><td>❌ No — only one id per element</td></tr><tr><td>Used for</td><td>Grouping similar elements</td><td>Identifying one specific element</td></tr><tr><td>JavaScript method</td><td><code>getElementsByClassName()</code></td><td><code>getElementById()</code></td></tr></tbody></table></div>
 <p class="v2-p"><strong>Analogy:</strong> Think of a school. A <code>class</code> is like the school uniform — hundreds of students wear the same uniform. An <code>id</code> is like a student's unique admission number — only one student in the entire school has that number.</p>
-<hr class="v2-hr">
-    <div class="task-box">
-      <div class="task-label">✏️ Your Task</div>
-      <div class="task-body">Now practise what you just learned about <strong>– The Difference Between <code>class</code> and <code>id</code></strong>. Open your editor, type the examples above by hand, then modify them — change values, rename variables, and observe what happens. Active experimentation is how code sticks.</div>
-    </div>
-    <button class="unlock-btn" onclick="unlockNext(5)">Phase Complete — Unlock Next ✓</button>
-  </div>
-</div>
-<div class="phase locked" id="phase6">
-  <div class="phase-header">
-    <div class="phase-num">Phase 6 of 9</div>
-    <div class="phase-title">Part 4 – HTML Bookmarks Using `id`</div>
-    <div class="phase-check" id="chk6"></div>
-  </div>
-  <div class="phase-body">
-    <h3 class="v2-h3">What is a Bookmark Link?</h3>
+<hr class="v2-hr"><div class="task-box"><div class="task-lbl">✏️ Your Task</div><div class="task-body">Practise what you just learned about <strong>– The Difference Between <code>class</code> and <code>id</code></strong>. Open your editor, type the examples above by hand, modify them, and observe what changes.</div></div><button class="ub" onclick="unlockNext(5)">Phase Complete — Unlock Next ✓</button></div></div>
+<div class="phase locked" id="phase6"><div class="ph"><div class="pn">Phase 6/9</div><div class="pt">Part 4 – HTML Bookmarks Using `id`</div><div class="pc" id="chk6"></div></div><div class="pb2"><h3 class="v2-h3">What is a Bookmark Link?</h3>
 <p class="v2-p">When a webpage is very long — like a long tutorial, a legal document, or a recipe with many sections — it can be frustrating to scroll down manually to find the section you want. <strong>Bookmark links</strong> solve this.</p>
 <p class="v2-p">A bookmark link is a clickable link that, when clicked, <strong>jumps the page</strong> directly to a specific section, rather than loading a new page.</p>
 <p class="v2-p"><strong>How bookmarks work:</strong></p>
 <ol class="v2-ol"><li>You give a target element an <code>id</code>.</li><li>You create a link with <code>href="#idName"</code> that points to that element.</li><li>When the user clicks the link, the browser scrolls to the element with that <code>id</code>.</li></ol>
 <h3 class="v2-h3">Example — Bookmarks on the Same Page</h3>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
 &lt;html&gt;
 &lt;head&gt;
   &lt;style&gt;
@@ -599,28 +463,14 @@ body{background:var(--bg);color:var(--text);font-family:var(--B);font-size:16px;
 <hr class="v2-hr">
 <h3 class="v2-h3">Linking to a Bookmark on a Different Page</h3>
 <p class="v2-p">You can also link to a specific section <strong>on a completely different page</strong>. The syntax combines the page URL with the id:</p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;a href=&quot;page2.html#chapter4&quot;&gt;Go to Chapter 4 on Page 2&lt;/a&gt;</code></pre></div></div>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;a href=&quot;page2.html#chapter4&quot;&gt;Go to Chapter 4 on Page 2&lt;/a&gt;</code></pre></div></div>
 <p class="v2-p">When this link is clicked, the browser opens <code>page2.html</code> and automatically scrolls to the element with <code>id="chapter4"</code> on that page.</p>
 <p class="v2-p"><strong>Real-world use case:</strong> Wikipedia uses this constantly. When you click a reference number at the bottom of a Wikipedia article, it jumps to that reference in the footnotes section — that is a bookmark link using <code>id</code>.</p>
-<hr class="v2-hr">
-    <div class="task-box">
-      <div class="task-label">✏️ Your Task</div>
-      <div class="task-body">Now practise what you just learned about <strong>– HTML Bookmarks Using <code>id</code></strong>. Open your editor, type the examples above by hand, then modify them — change values, rename variables, and observe what happens. Active experimentation is how code sticks.</div>
-    </div>
-    <button class="unlock-btn" onclick="unlockNext(6)">Phase Complete — Unlock Next ✓</button>
-  </div>
-</div>
-<div class="phase locked" id="phase7">
-  <div class="phase-header">
-    <div class="phase-num">Phase 7 of 9</div>
-    <div class="phase-title">Part 5 – Using `id` with JavaScript</div>
-    <div class="phase-check" id="chk7"></div>
-  </div>
-  <div class="phase-body">
-    <p class="v2-p">Just like <code>class</code> works with <code>getElementsByClassName()</code>, the <code>id</code> attribute works with JavaScript's <code>getElementById()</code> method.</p>
+<hr class="v2-hr"><div class="task-box"><div class="task-lbl">✏️ Your Task</div><div class="task-body">Practise what you just learned about <strong>– HTML Bookmarks Using <code>id</code></strong>. Open your editor, type the examples above by hand, modify them, and observe what changes.</div></div><button class="ub" onclick="unlockNext(6)">Phase Complete — Unlock Next ✓</button></div></div>
+<div class="phase locked" id="phase7"><div class="ph"><div class="pn">Phase 7/9</div><div class="pt">Part 5 – Using `id` with JavaScript</div><div class="pc" id="chk7"></div></div><div class="pb2"><p class="v2-p">Just like <code>class</code> works with <code>getElementsByClassName()</code>, the <code>id</code> attribute works with JavaScript's <code>getElementById()</code> method.</p>
 <p class="v2-p"><strong>What is <code>getElementById()</code>?</strong> It is a JavaScript function that finds the <strong>one exact element</strong> with a given <code>id</code> and returns it, so you can then change it, read it, or interact with it.</p>
 <h3 class="v2-h3">Example — Changing Text with JavaScript</h3>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
 &lt;html&gt;
 &lt;head&gt;
   &lt;style&gt;
@@ -649,22 +499,8 @@ body{background:var(--bg);color:var(--text);font-family:var(--B);font-size:16px;
 <p class="v2-p"><strong>What the JavaScript does — line by line:</strong></p>
 <ul class="v2-ul"><li><code>function changeText() { ... }</code> — Defines a function called <code>changeText</code>.</li><li><code>document.getElementById("myHeader")</code> — Searches the page for the element with <code>id="myHeader"</code> and returns it. There is only one such element, so this is always a precise target.</li><li><code>.innerHTML = "Have a nice day!";</code> — Changes the text inside that element to the new text.</li></ul>
 <p class="v2-p"><strong>Why is <code>id</code> important here?</strong> Because <code>getElementById()</code> grabs exactly one element. If you used a class, you would get a list and have to loop through it. With <code>id</code>, it is instant and precise.</p>
-<hr class="v2-hr">
-    <div class="task-box">
-      <div class="task-label">✏️ Your Task</div>
-      <div class="task-body">Now practise what you just learned about <strong>– Using <code>id</code> with JavaScript</strong>. Open your editor, type the examples above by hand, then modify them — change values, rename variables, and observe what happens. Active experimentation is how code sticks.</div>
-    </div>
-    <button class="unlock-btn" onclick="unlockNext(7)">Phase Complete — Unlock Next ✓</button>
-  </div>
-</div>
-<div class="phase locked" id="phase8">
-  <div class="phase-header">
-    <div class="phase-num">Phase 8 of 9</div>
-    <div class="phase-title">Part 6 – Guided Practice Exercises</div>
-    <div class="phase-check" id="chk8"></div>
-  </div>
-  <div class="phase-body">
-    <h3 class="v2-h3">Exercise 1 – Warm-Up: Style a Group with Class</h3>
+<hr class="v2-hr"><div class="task-box"><div class="task-lbl">✏️ Your Task</div><div class="task-body">Practise what you just learned about <strong>– Using <code>id</code> with JavaScript</strong>. Open your editor, type the examples above by hand, modify them, and observe what changes.</div></div><button class="ub" onclick="unlockNext(7)">Phase Complete — Unlock Next ✓</button></div></div>
+<div class="phase locked" id="phase8"><div class="ph"><div class="pn">Phase 8/9</div><div class="pt">Part 6 – Guided Practice Exercises</div><div class="pc" id="chk8"></div></div><div class="pb2"><div class="chal-box"><div class="chal-lbl">🎯 Your Challenge</div><div class="chal-body"><h3 class="v2-h3">Exercise 1 – Warm-Up: Style a Group with Class</h3>
 <p class="v2-p"><strong>Objective:</strong> Practice creating a CSS class and applying it to multiple elements.</p>
 <p class="v2-p"><strong>Scenario:</strong> You are building a simple menu for a restaurant. You want all menu items to have the same card-like appearance.</p>
 <p class="v2-p"><strong>Steps:</strong></p>
@@ -675,8 +511,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--B);font-size:16px;
 <p class="v2-p">Four yellow boxes, each with an orange border and padding, displaying one dish name each.</p>
 <p class="v2-p"><strong>Hints:</strong></p>
 <ul class="v2-ul"><li>Remember the <code>.</code> before the class name in CSS.</li><li>The <code>margin</code> property adds space <em>outside</em> the element.</li><li>The <code>border</code> property draws a visible border line.</li></ul>
-<p class="v2-p"><strong>Solution:</strong></p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
+<p class="v2-p"><strong>Solution:</strong></p></div></div><div class="task-box"><div class="task-lbl">✏️ Task</div><div class="task-body">Practise what you just learned about <strong>– Guided Practice Exercises</strong>. Open your editor, type the examples above by hand, modify them, and observe what changes.</div></div><button class="reveal-btn" onclick="toggleReveal(this)">👁️ Reveal Answer</button><div class="reveal-content"><div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
 &lt;html&gt;
 &lt;head&gt;
   &lt;style&gt;
@@ -708,7 +543,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--B);font-size:16px;
 <p class="v2-p"><strong>Expected Output:</strong></p>
 <ul class="v2-ul"><li>First card: gold background, larger text.</li><li>Other three cards: grey background, normal text.</li></ul>
 <p class="v2-p"><strong>Solution:</strong></p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
 &lt;html&gt;
 &lt;head&gt;
   &lt;style&gt;
@@ -740,7 +575,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--B);font-size:16px;
 <p class="v2-p"><strong>Objective:</strong> Practice creating and using an <code>id</code> to style a unique element.</p>
 <p class="v2-p"><strong>Scenario:</strong> A webpage has a special announcement banner at the top. Only one such banner exists on the page — it should have a red background, white text, and large centred text.</p>
 <p class="v2-p"><strong>Solution:</strong></p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
 &lt;html&gt;
 &lt;head&gt;
   &lt;style&gt;
@@ -771,7 +606,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--B);font-size:16px;
 <p class="v2-p"><strong>Objective:</strong> Create an in-page navigation menu using <code>id</code> bookmarks.</p>
 <p class="v2-p"><strong>Scenario:</strong> You are building a simple FAQ page with multiple questions. Users should be able to click on a question at the top to jump directly to the answer below.</p>
 <p class="v2-p"><strong>Solution:</strong></p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
 &lt;html&gt;
 &lt;head&gt;
   &lt;style&gt;
@@ -810,42 +645,28 @@ body{background:var(--bg);color:var(--text);font-family:var(--B);font-size:16px;
 <p class="v2-p">A grey navigation panel at the top with three clickable links. Clicking each link scrolls the page directly to that question's heading and answer.</p>
 <p class="v2-p"><strong>Self-check questions:</strong></p>
 <ul class="v2-ul"><li>What is the <code>href</code> value pattern for a bookmark link?</li><li>What would happen if you used <code>href="q1"</code> without the <code>#</code>?</li></ul>
-<hr class="v2-hr">
-    <div class="task-box">
-      <div class="task-label">✏️ Your Task</div>
-      <div class="task-body">Now practise what you just learned about <strong>– Guided Practice Exercises</strong>. Open your editor, type the examples above by hand, then modify them — change values, rename variables, and observe what happens. Active experimentation is how code sticks.</div>
-    </div>
-    <button class="unlock-btn" onclick="unlockNext(8)">Phase Complete — Unlock Next ✓</button>
-  </div>
-</div>
-<div class="phase locked" id="phase9">
-  <div class="phase-header">
-    <div class="phase-num">Phase 9 of 9</div>
-    <div class="phase-title">Part 8 – Common Beginner Mistakes</div>
-    <div class="phase-check" id="chk9"></div>
-  </div>
-  <div class="phase-body">
-    <h3 class="v2-h3">Mistake 1 — Using <code>id</code> for Multiple Elements</h3>
+<hr class="v2-hr"></div><button class="ub" onclick="unlockNext(8)">Mark Complete — Unlock Next ✓</button></div></div>
+<div class="phase locked" id="phase9"><div class="ph"><div class="pn">Phase 9/9</div><div class="pt">Part 8 – Common Beginner Mistakes</div><div class="pc" id="chk9"></div></div><div class="pb2"><h3 class="v2-h3">Mistake 1 — Using <code>id</code> for Multiple Elements</h3>
 <p class="v2-p"><strong>Wrong:</strong></p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;h2 id=&quot;city&quot;&gt;London&lt;/h2&gt;
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;h2 id=&quot;city&quot;&gt;London&lt;/h2&gt;
 &lt;h2 id=&quot;city&quot;&gt;Paris&lt;/h2&gt;
 &lt;h2 id=&quot;city&quot;&gt;Tokyo&lt;/h2&gt;</code></pre></div></div>
 <p class="v2-p"><strong>Why it's wrong:</strong> An <code>id</code> must be <strong>unique</strong> on a page. Using the same <code>id</code> on multiple elements breaks HTML validity and causes JavaScript's <code>getElementById()</code> to only find the first one.</p>
 <p class="v2-p"><strong>Correct:</strong></p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;h2 class=&quot;city&quot;&gt;London&lt;/h2&gt;
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;h2 class=&quot;city&quot;&gt;London&lt;/h2&gt;
 &lt;h2 class=&quot;city&quot;&gt;Paris&lt;/h2&gt;
 &lt;h2 class=&quot;city&quot;&gt;Tokyo&lt;/h2&gt;</code></pre></div></div>
 <p class="v2-p">Use <code>class</code> when multiple elements need the same style.</p>
 <hr class="v2-hr">
 <h3 class="v2-h3">Mistake 2 — Wrong Selector Symbol in CSS</h3>
 <p class="v2-p"><strong>Wrong:</strong></p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">css</span></div><div class="v2-code-body"><pre><code>/* Trying to style a class but using # */
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">css</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>/* Trying to style a class but using # */
 #city {
   background-color: tomato;
 }</code></pre></div></div>
 <p class="v2-p">This would look for an element with <code>id="city"</code>, not <code>class="city"</code>.</p>
 <p class="v2-p"><strong>Correct:</strong></p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">css</span></div><div class="v2-code-body"><pre><code>/* Dot for class */
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">css</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>/* Dot for class */
 .city {
   background-color: tomato;
 }
@@ -857,32 +678,32 @@ body{background:var(--bg);color:var(--text);font-family:var(--B);font-size:16px;
 <hr class="v2-hr">
 <h3 class="v2-h3">Mistake 3 — Space in Class or ID Names</h3>
 <p class="v2-p"><strong>Wrong:</strong></p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;div class=&quot;main content&quot;&gt;...&lt;/div&gt;</code></pre></div></div>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;div class=&quot;main content&quot;&gt;...&lt;/div&gt;</code></pre></div></div>
 <p class="v2-p">Wait — this is actually valid! A space between class names means the element has <strong>two classes</strong>: <code>main</code> and <code>content</code>. This is intentional for multiple classes.</p>
 <p class="v2-p">But in <code>id</code>:</p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;h1 id=&quot;my header&quot;&gt;Wrong!&lt;/h1&gt;</code></pre></div></div>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;h1 id=&quot;my header&quot;&gt;Wrong!&lt;/h1&gt;</code></pre></div></div>
 <p class="v2-p">This is invalid. <code>id</code> values cannot contain spaces. The browser may interpret this as broken HTML.</p>
 <p class="v2-p"><strong>Correct:</strong></p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;h1 id=&quot;my-header&quot;&gt;Correct!&lt;/h1&gt;
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;h1 id=&quot;my-header&quot;&gt;Correct!&lt;/h1&gt;
 &lt;h1 id=&quot;myHeader&quot;&gt;Also correct!&lt;/h1&gt;</code></pre></div></div>
 <hr class="v2-hr">
 <h3 class="v2-h3">Mistake 4 — Forgetting the <code>#</code> in Bookmark <code>href</code></h3>
 <p class="v2-p"><strong>Wrong:</strong></p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;a href=&quot;chapter1&quot;&gt;Jump to Chapter 1&lt;/a&gt;</code></pre></div></div>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;a href=&quot;chapter1&quot;&gt;Jump to Chapter 1&lt;/a&gt;</code></pre></div></div>
 <p class="v2-p">Without the <code>#</code>, the browser thinks you are linking to a file named <code>chapter1</code>, not a bookmark on the current page.</p>
 <p class="v2-p"><strong>Correct:</strong></p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;a href=&quot;#chapter1&quot;&gt;Jump to Chapter 1&lt;/a&gt;</code></pre></div></div>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;a href=&quot;#chapter1&quot;&gt;Jump to Chapter 1&lt;/a&gt;</code></pre></div></div>
 <hr class="v2-hr">
 <h3 class="v2-h3">Mistake 5 — Case Sensitivity</h3>
 <p class="v2-p"><strong>Wrong:</strong></p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;style&gt;
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;style&gt;
   .City { background-color: tomato; }
 &lt;/style&gt;
 
 &lt;h2 class=&quot;city&quot;&gt;London&lt;/h2&gt;</code></pre></div></div>
 <p class="v2-p">The CSS rule <code>.City</code> will not match <code>class="city"</code> because CSS class names are case sensitive.</p>
 <p class="v2-p"><strong>Correct:</strong></p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;style&gt;
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;style&gt;
   .city { background-color: tomato; }
 &lt;/style&gt;
 
@@ -891,29 +712,18 @@ body{background:var(--bg);color:var(--text);font-family:var(--B);font-size:16px;
 <hr class="v2-hr">
 <h3 class="v2-h3">Mistake 6 — Starting an <code>id</code> with a Number</h3>
 <p class="v2-p"><strong>Wrong:</strong></p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;div id=&quot;1stSection&quot;&gt;...&lt;/div&gt;</code></pre></div></div>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;div id=&quot;1stSection&quot;&gt;...&lt;/div&gt;</code></pre></div></div>
 <p class="v2-p"><strong>Correct:</strong></p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;div id=&quot;firstSection&quot;&gt;...&lt;/div&gt;
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;div id=&quot;firstSection&quot;&gt;...&lt;/div&gt;
 &lt;div id=&quot;section1&quot;&gt;...&lt;/div&gt;</code></pre></div></div>
 <p class="v2-p"><code>id</code> values must not start with a number. You can include numbers in the middle or end.</p>
+<hr class="v2-hr"><div class="task-box"><div class="task-lbl">✏️ Your Task</div><div class="task-body">Practise what you just learned about <strong>– Common Beginner Mistakes</strong>. Open your editor, type the examples above by hand, modify them, and observe what changes.</div></div><button class="ub" onclick="unlockNext(9)">Phase Complete — Unlock Next ✓</button></div></div>
+<div class="build-box" id="build-it"><div class="build-lbl">🏗️ Build It — Mini Project</div><div class="build-name">Project Overview</div><div class="build-req"><h3 class="v2-h3">Project Overview</h3>
+<p class="v2-p">You will build a simple student grade report card webpage that uses both <code>class</code> and <code>id</code> attributes together. The page will have a unique page header (using <code>id</code>), styled grade cards for each subject (using <code>class</code>), highlighted failing and passing grades (using multiple classes), and a quick navigation menu (using <code>id</code> bookmarks).</p>
+<p class="v2-p">This simulates what a real school system interface might look like.</p>
 <hr class="v2-hr">
-    <div class="task-box">
-      <div class="task-label">✏️ Your Task</div>
-      <div class="task-body">Now practise what you just learned about <strong>– Common Beginner Mistakes</strong>. Open your editor, type the examples above by hand, then modify them — change values, rename variables, and observe what happens. Active experimentation is how code sticks.</div>
-    </div>
-    <button class="unlock-btn" onclick="unlockNext(9)">Phase Complete — Unlock Next ✓</button>
-  </div>
-</div>
-<div class="build-box" id="build-it">
-  <div class="build-label">🏗️ Build It</div>
-  <div class="build-name">Project Overview</div>
-  <div class="build-desc">You will build a simple student grade report card webpage that uses both <code>class</code> and <code>id</code> attributes together. The page will have a unique page header (using <code>id</code>), styled grade cards for each subject (using <code>class</code>), highlighted failing and passing grades (using multiple classes), and a quick navigation menu (using <code>id</code> bookmarks).</div>
-  <div class="v2-code-wrap">
-    <div class="v2-code-bar">
-      <span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span>
-      <span class="v2-code-lang">starter.html</span>
-    </div>
-    <div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
+<h3 class="v2-h3">Stage 1 – Setup the Page Structure</h3>
+<p class="v2-p">Start with a basic HTML page:</p></div><button class="reveal-btn" onclick="toggleCode(this)">💻 Reveal Starter Code</button><div class="reveal-content"><div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">starter.html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
 &lt;html lang=&quot;en&quot;&gt;
 &lt;head&gt;
   &lt;meta charset=&quot;UTF-8&quot;&gt;
@@ -924,10 +734,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--B);font-size:16px;
   &lt;h1&gt;Student Report Card&lt;/h1&gt;
 
 &lt;/body&gt;
-&lt;/html&gt;</code></pre></div>
-  </div>
-  <div style="display:flex;gap:.8rem;flex-wrap:wrap;margin-top:1.2rem">
-    <button class="unlock-btn" onclick="downloadStarter(`<!DOCTYPE html>
+&lt;/html&gt;</code></pre></div></div><div style="display:flex;gap:.75rem;flex-wrap:wrap;margin-top:1rem"><button class="ub" onclick="downloadStarter(`<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -938,87 +745,66 @@ body{background:var(--bg);color:var(--text);font-family:var(--B);font-size:16px;
   <h1>Student Report Card</h1>
 
 </body>
-</html>`)"
-      style="background:#10b981;box-shadow:0 4px 14px rgba(16,185,129,.3)">
-      ⬇ Download starter.html
-    </button>
-    <button class="unlock-btn" onclick="showGithub()"
-      style="background:#0f172a;box-shadow:none">
-      🐙 Push to GitHub →
-    </button>
-  </div>
-</div>
+</html>`)" style="background:#10b981;box-shadow:0 4px 14px rgba(16,185,129,.3)">⬇ Download starter.html</button><button class="ub" onclick="showGithub()" style="background:#0f172a;box-shadow:none">🐙 Push to GitHub Pages →</button></div></div></div>
 <div class="gh-acc" id="gh-steps" style="display:none">
-  <div class="gh-acc-head" onclick="toggleGh(this)">
-    🐙 Push Your Project to GitHub Pages &nbsp;<span>▼</span>
-  </div>
-  <div class="gh-acc-body">
-    <div class="gh-step"><div class="gh-step-n">1</div>
-    <p>Go to <strong>github.com</strong> → click <strong>New repository</strong> → name it <code>html-lesson-19-project-overview</code>.</p></div>
-    <div class="gh-step"><div class="gh-step-n">2</div>
-    <p>Set it to <strong>Public</strong>, tick <strong>Add a README</strong>, then click <strong>Create repository</strong>.</p></div>
-    <div class="gh-step"><div class="gh-step-n">3</div>
-    <p>Click <strong>Add file → Upload files</strong>. Upload your <code>starter.html</code> — rename it to <code>index.html</code> before uploading.</p></div>
-    <div class="gh-step"><div class="gh-step-n">4</div>
-    <p>Commit message: <em>"Add HTML lesson 19 project"</em> → click <strong>Commit changes</strong>.</p></div>
-    <div class="gh-step"><div class="gh-step-n">5</div>
-    <p>Go to <strong>Settings → Pages</strong> → branch <strong>main</strong> → <strong>Save</strong>. Your project goes live at <code>https://YOUR-NAME.github.io/html-lesson-19-project-overview/</code> in about 1 minute! 🎉</p></div>
-    <button class="unlock-btn" onclick="showEnd()" style="margin-top:.5rem">I've pushed to GitHub — Finish Session ✅</button>
-  </div>
-</div>
-<div class="session-end" id="session-end">
-  <h2>🎉 Lesson 19 complete!</h2>
-  <p style="margin-bottom:.8rem;font-size:.9rem;opacity:.9">You covered:</p>
-  <ul><li>✅ Lesson Introduction</li><li>✅ Prerequisite Concepts</li><li>✅ Part 1 – The HTML `class` Attribute</li><li>✅ Part 2 – The HTML `id` Attribute</li><li>✅ Part 3 – The Difference Between `class` and `id`</li><li>✅ Part 4 – HTML Bookmarks Using `id`</li><li>✅ Part 5 – Using `id` with JavaScript</li><li>✅ Part 6 – Guided Practice Exercises</li></ul>
-  <div class="lesson-nav"><a href="lesson_18.html" class="ln-btn">← Lesson 18</a><a href="lesson_20.html" class="ln-btn primary">Lesson 20 →</a></div>
-</div>
+<div class="gh-hd" onclick="toggleGh(this)">🐙 Push to GitHub Pages &nbsp;<span>▼</span></div>
+<div class="gh-bd">
+<div class="gh-st"><div class="gh-n">1</div><p>Go to <strong>github.com → New repository</strong> → name it <code>html-lesson-19-project-overview</code>. Set <strong>Public</strong>, tick <strong>Add README</strong>, click <strong>Create</strong>.</p></div>
+<div class="gh-st"><div class="gh-n">2</div><p>Click <strong>Add file → Upload files</strong>. Rename your file to <code>index.html</code> then upload it.</p></div>
+<div class="gh-st"><div class="gh-n">3</div><p>Commit message: <em>"Add HTML lesson 19 project"</em> → <strong>Commit changes</strong>.</p></div>
+<div class="gh-st"><div class="gh-n">4</div><p>Go to <strong>Settings → Pages</strong> → Source: <strong>main</strong> → <strong>Save</strong>. Live in ~1 min at <code>https://YOUR-NAME.github.io/html-lesson-19-project-overview/</code> 🎉</p></div>
+<button class="ub" onclick="showEnd()" style="margin-top:.5rem">Done — Finish Session ✅</button>
+</div></div>
+<div class="se" id="session-end"><h2>🎉 Lesson 19 complete!</h2><p style="margin-bottom:.8rem;font-size:.9rem;opacity:.9">You covered:</p><ul><li>✅ Lesson Introduction</li><li>✅ Prerequisite Concepts</li><li>✅ Part 1 – The HTML `class` Attribute</li><li>✅ Part 2 – The HTML `id` Attribute</li><li>✅ Part 3 – The Difference Between `class` and `id`</li><li>✅ Part 4 – HTML Bookmarks Using `id`</li><li>✅ Part 5 – Using `id` with JavaScript</li><li>✅ Part 6 – Guided Practice Exercises</li></ul><div class="ln"><a href="lesson_18.html" class="ln-btn">← Lesson 18</a><a href="lesson_20.html" class="ln-btn primary">Lesson 20 →</a></div></div>
 </main>
-
-<footer class="lesson-footer">
-  Techbase Code Coach · HTML Course · Lesson 19 · © 2025 Techbase Consultant Services, Ibadan
-</footer>
+<footer class="lf">Techbase Code Coach &nbsp;·&nbsp; HTML Course &nbsp;·&nbsp; Lesson 19 &nbsp;·&nbsp; © 2025 Techbase Consultant Services, Ibadan</footer>
+<div id="toast"></div>
+<button id="go-top" title="Back to top">↑</button>
+<canvas id="cc"></canvas>
 <script>
 const TOTAL=9,KEY='techbase_html_l19';
-let current=parseInt(localStorage.getItem(KEY)||'1');
-function init(){
-  for(let i=2;i<=current;i++) unlockPhase(i,false);
-  updateBar();
-}
+let cur=parseInt(localStorage.getItem(KEY)||'1');
+function init(){for(let i=2;i<=cur;i++)unlock(i,false);bar();}
 function unlockNext(n){
-  const chk=document.getElementById('chk'+n);
-  if(chk){chk.classList.add('done');chk.textContent='✓';}
-  localStorage.setItem(KEY,n+1); current=n+1;
+  const c=document.getElementById('chk'+n);
+  if(c){c.classList.add('done');c.textContent='✓';}
+  localStorage.setItem(KEY,n+1);cur=n+1;
   if(n===TOTAL){
-    document.getElementById('build-it').style.display='block';
-    updateBar(100);
+    document.getElementById('build-it').classList.add('visible');
+    bar(100);toast('🏗️ Build It unlocked!');
     setTimeout(()=>document.getElementById('build-it').scrollIntoView({behavior:'smooth'}),200);
-  }else{
-    unlockPhase(n+1,true); updateBar();
-  }
+    setTimeout(confetti,600);
+  }else{unlock(n+1,true);bar();toast(['✅ Phase complete!','🎯 Keep going!','💡 Nice work!','🚀 Nailed it!'][n%4]);}
 }
-function unlockPhase(n,scroll){
-  const el=document.getElementById('phase'+n);
-  if(el){el.classList.remove('locked');if(scroll)setTimeout(()=>el.scrollIntoView({behavior:'smooth',block:'start'}),150);}
+function unlock(n,scroll){
+  const el=document.getElementById('phase'+n);if(!el)return;
+  el.classList.remove('locked');
+  if(scroll)setTimeout(()=>el.scrollIntoView({behavior:'smooth',block:'start'}),180);
 }
-function updateBar(pct){
-  const p=pct!==undefined?pct:Math.round((current-1)/TOTAL*95);
-  document.getElementById('pbar').style.width=p+'%';
+function bar(p){document.getElementById('pbar').style.width=(p!==undefined?p:Math.round((cur-1)/TOTAL*95))+'%';}
+function toggleReveal(btn){const w=btn.nextElementSibling;const o=w.classList.toggle('open');btn.textContent=o?'🙈 Hide Answer':'👁️ Reveal Answer';}
+function toggleCode(btn){const w=btn.nextElementSibling;const o=w.classList.toggle('open');btn.textContent=o?'🙈 Hide Starter Code':'💻 Reveal Starter Code';}
+function copyCode(btn){
+  const code=btn.closest('.v2-code-wrap').querySelector('code').innerText;
+  navigator.clipboard.writeText(code).then(()=>{btn.textContent='✓ Copied!';btn.classList.add('copied');setTimeout(()=>{btn.textContent='⎘ Copy';btn.classList.remove('copied');},1800);}).catch(()=>{});
 }
-function showGithub(){
-  const g=document.getElementById('gh-steps');
-  if(g){g.style.display='block';setTimeout(()=>g.scrollIntoView({behavior:'smooth'}),150);}
-}
-function showEnd(){
-  const e=document.getElementById('session-end');
-  if(e){e.classList.add('visible');setTimeout(()=>e.scrollIntoView({behavior:'smooth'}),150);}
-}
+const tEl=document.getElementById('toast');let tT;
+function toast(msg){tEl.innerHTML=msg;tEl.classList.add('show');clearTimeout(tT);tT=setTimeout(()=>tEl.classList.remove('show'),2400);}
+const gEl=document.getElementById('go-top');
+window.addEventListener('scroll',()=>gEl.classList.toggle('visible',scrollY>320),{passive:true});
+gEl.addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
 function toggleGh(el){el.nextElementSibling.classList.toggle('open');}
-function downloadStarter(code){
-  const a=document.createElement('a');
-  a.href='data:text/html;charset=utf-8,'+encodeURIComponent(code);
-  a.download='starter.html';a.click();
+function showGithub(){const g=document.getElementById('gh-steps');if(g){g.style.display='block';setTimeout(()=>g.scrollIntoView({behavior:'smooth'}),150);}}
+function showEnd(){const e=document.getElementById('session-end');if(e){e.classList.add('visible');setTimeout(()=>e.scrollIntoView({behavior:'smooth'}),150);}}
+function downloadStarter(code){const ext='html'==='python'?'py':'html';const a=document.createElement('a');a.href='data:text/'+(ext==='py'?'x-python':'html')+';charset=utf-8,'+encodeURIComponent(code);a.download='starter.'+ext;a.click();}
+function confetti(){
+  const cv=document.getElementById('cc');cv.style.display='block';const ctx=cv.getContext('2d');
+  cv.width=innerWidth;cv.height=innerHeight;
+  const ps=Array.from({length:130},()=>{return{x:Math.random()*cv.width,y:-10-Math.random()*120,r:4+Math.random()*6,d:2+Math.random()*3,c:['#e34c26','#0284c7','#d97706','#059669','#7c3aed','#ec4899'][Math.floor(Math.random()*6)],ta:0};}); 
+  let f=0;
+  function draw(){ctx.clearRect(0,0,cv.width,cv.height);ps.forEach(p=>{p.ta+=.1;p.y+=p.d;p.x+=Math.sin(f/20);ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fillStyle=p.c;ctx.fill();});f++;if(f<200)requestAnimationFrame(draw);else{ctx.clearRect(0,0,cv.width,cv.height);cv.style.display='none';}}
+  draw();toast('🎉 All phases done! Build It awaits!');
 }
 init();
 </script>
-</body>
-</html>
+</body></html>

@@ -1,218 +1,136 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>Lesson 29: HTML Style Guide, Character Entities, Symbols &amp; Emojis — Techbase HTML</title>
-<meta name="description" content="HTML Style Guide, Character Entities, Symbols &amp; Emojis">
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<style>
-:root{
-  --acc:#e34c26;--acc-d:#c0391a;--acc-pale:#fff5f2;
-  --acc-b:rgba(227,76,38,.25);--acc-sh:rgba(227,76,38,.25);
-  --bg:#f8fafc;--surface:#fff;--border:#e2e8f0;--border2:#cbd5e1;
-  --text:#0f172a;--t2:#334155;--muted:#64748b;
-  --D:'Space Grotesk',sans-serif;--B:'Plus Jakarta Sans',sans-serif;--M:'JetBrains Mono',monospace;
-}
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"><style>
+:root{--acc:#e34c26;--acd:#c0391a;--acp:#fff5f2;--acb:rgba(227,76,38,.22);--acs:rgba(227,76,38,.28);--bg:#f8fafc;--sf:#fff;--br:#e2e8f0;--tx:#0f172a;--t2:#334155;--mu:#64748b;--D:'Space Grotesk',sans-serif;--B:'Plus Jakarta Sans',sans-serif;--M:'JetBrains Mono',monospace}
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased}
-body{background:var(--bg);color:var(--text);font-family:var(--B);font-size:16px;line-height:1.75;overflow-x:hidden}
-
-/* NAV */
-.l-nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(255,255,255,.95);
-  backdrop-filter:blur(12px);border-bottom:1px solid var(--border);height:58px;
-  display:flex;align-items:center;padding:0 1.5rem;gap:1rem;justify-content:space-between}
-.l-nav-logo{font-family:var(--D);font-weight:700;font-size:.9rem;color:var(--text);text-decoration:none}
-.l-nav-back{font-size:.8rem;color:var(--muted);text-decoration:none;font-weight:500;display:flex;align-items:center;gap:.3rem;transition:color .2s}
+body{background:var(--bg);color:var(--tx);font-family:var(--B);font-size:16px;line-height:1.75;overflow-x:hidden}
+.l-nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(255,255,255,.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--br);height:58px;display:flex;align-items:center;padding:0 1.5rem;justify-content:space-between}
+.l-nav-logo{font-family:var(--D);font-weight:700;font-size:.9rem;color:var(--tx);text-decoration:none}
+.l-nav-back{font-size:.8rem;color:var(--mu);text-decoration:none;font-weight:500;transition:color .2s}
 .l-nav-back:hover{color:var(--acc)}
-.l-nav-label{font-family:var(--M);font-size:.68rem;color:var(--muted)}
-
-/* PROGRESS */
-.progress-wrap{position:fixed;top:58px;left:0;right:0;z-index:199;height:4px;background:var(--border)}
-.progress-bar{height:100%;background:var(--acc);transition:width .4s ease;width:0%}
-
-/* HERO */
-.l-hero{padding:80px 1.5rem 2rem;background:linear-gradient(160deg,#fff5f2 0%,#f8fafc 55%,#ffe8e0 100%);border-bottom:1px solid var(--border)}
-.l-hero-inner{max-width:860px;margin:0 auto}
-.l-badge{display:inline-flex;align-items:center;gap:.4rem;border-radius:100px;padding:.2rem .85rem;
-  font-family:var(--M);font-size:.62rem;letter-spacing:.08em;text-transform:uppercase;font-weight:600;
-  color:var(--acc);background:var(--acc-pale);border:1px solid var(--acc-b);margin-bottom:.8rem}
-.l-hero h1{font-family:var(--D);font-weight:700;font-size:clamp(1.5rem,4vw,2.3rem);
-  letter-spacing:-.02em;line-height:1.15;margin-bottom:.5rem}
-.l-hero-sub{font-size:.95rem;color:var(--muted);margin-bottom:1rem}
-
-/* WELCOME BOX */
-.welcome-box{background:linear-gradient(135deg,var(--acc),var(--acc-d));color:#fff;
-  border-radius:16px;padding:1.5rem 1.8rem;max-width:860px;margin:1.5rem auto 0}
-.welcome-box h2{font-family:var(--D);font-weight:700;font-size:1.05rem;margin-bottom:.6rem}
-.welcome-box p,.welcome-box li{font-size:.9rem;line-height:1.8;opacity:.93}
-.welcome-box ul{margin-left:1.2rem;margin-top:.5rem}
-.welcome-meta{display:flex;gap:1rem;margin-top:1rem;flex-wrap:wrap}
-.welcome-meta span{background:rgba(255,255,255,.18);border-radius:6px;padding:.2rem .75rem;
-  font-family:var(--M);font-size:.68rem;font-weight:500}
-
-/* PHASE */
-.phase{background:var(--surface);border:1.5px solid var(--border);border-radius:16px;
-  margin-bottom:1.5rem;overflow:hidden;transition:opacity .3s,transform .3s,filter .3s}
-.phase.locked{opacity:.35;pointer-events:none;filter:blur(1.5px)}
-.phase-header{padding:1rem 1.4rem;background:#fff8f5;
-  border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;gap:1rem;cursor:default}
-.phase-num{font-family:var(--M);font-size:.7rem;font-weight:600;letter-spacing:.08em;
-  text-transform:uppercase;color:var(--acc)}
-.phase-title{font-family:var(--D);font-weight:700;font-size:.95rem;color:var(--text);
-  flex:1;margin:0 .8rem}
-.phase-check{width:26px;height:26px;border-radius:50%;background:var(--border);
-  display:flex;align-items:center;justify-content:center;font-size:.8rem;flex-shrink:0;
-  transition:background .3s,color .3s}
-.phase-check.done{background:#10b981;color:#fff}
-.phase-body{padding:1.6rem 1.8rem}
-
-/* RICH CONTENT STYLES */
+.l-nav-lbl{font-family:var(--M);font-size:.68rem;color:var(--mu)}
+.pw{position:fixed;top:58px;left:0;right:0;z-index:199;height:4px;background:var(--br)}
+.pb{height:100%;background:linear-gradient(90deg,var(--acc),var(--acd));transition:width .5s cubic-bezier(.4,0,.2,1);width:0%;position:relative}
+.pb::after{content:'';position:absolute;right:0;top:0;bottom:0;width:20px;background:inherit;filter:brightness(1.4);animation:pg 1.5s ease-in-out infinite}
+@keyframes pg{0%,100%{opacity:1}50%{opacity:.35}}
+.l-hero{padding:80px 1.5rem 2rem;background:linear-gradient(160deg,#fff5f2 0%,#f8fafc 55%,#ffe8e0 100%);border-bottom:1px solid var(--br)}
+.l-hero-in{max-width:860px;margin:0 auto}
+.badge{display:inline-flex;align-items:center;border-radius:100px;padding:.22rem .9rem;font-family:var(--M);font-size:.62rem;letter-spacing:.08em;text-transform:uppercase;font-weight:700;color:var(--acc);background:var(--acp);border:1.5px solid var(--acb);margin-bottom:.85rem}
+.l-hero h1{font-family:var(--D);font-weight:700;font-size:clamp(1.5rem,4vw,2.3rem);letter-spacing:-.02em;line-height:1.15;margin-bottom:.5rem}
+.l-hero-sub{font-size:.9rem;color:var(--mu)}
+.wb{background:#fff;border:1.5px solid var(--acb);border-left:5px solid var(--acc);border-radius:14px;padding:1.4rem 1.6rem;max-width:860px;margin:1.5rem auto 0;box-shadow:0 2px 12px var(--acs)}
+.wb h2{font-family:var(--D);font-weight:700;font-size:1.05rem;color:var(--acd);margin-bottom:.6rem}
+.wb p,.wb li{font-size:.92rem;line-height:1.85;color:var(--t2)}
+.wb ul{margin-left:1.2rem;margin-top:.4rem}
+.wm{display:flex;gap:.65rem;margin-top:1rem;flex-wrap:wrap}
+.wm span{background:var(--acp);color:var(--acd);border:1px solid var(--acb);border-radius:7px;padding:.22rem .7rem;font-family:var(--M);font-size:.68rem;font-weight:600}
+.phase{background:var(--sf);border:1.5px solid var(--br);border-radius:16px;margin-bottom:1.5rem;overflow:hidden;transition:opacity .35s,filter .35s,transform .35s}
+.phase.locked{opacity:.28;pointer-events:none;filter:blur(2px);transform:scale(.99)}
+.ph{padding:1rem 1.4rem;background:#fff8f5;border-bottom:1px solid var(--br);display:flex;align-items:center;gap:.8rem}
+.pn{font-family:var(--M);font-size:.65rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--acc);white-space:nowrap}
+.pt{font-family:var(--D);font-weight:700;font-size:.95rem;color:var(--tx);flex:1}
+.pc{width:26px;height:26px;border-radius:50%;background:var(--br);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:.8rem;transition:background .3s,transform .4s}
+.pc.done{background:#10b981;color:#fff;transform:scale(1.15) rotate(360deg)}
+.pb2{padding:1.6rem 1.8rem}
 .v2-p{margin-bottom:1rem;font-size:.95rem;color:var(--t2);line-height:1.85}
-.v2-h3{font-family:var(--D);font-weight:700;font-size:1.05rem;color:var(--text);
-  margin:1.6rem 0 .5rem;padding-top:.2rem;border-top:2px solid var(--acc-pale)}
-.v2-h4{font-family:var(--D);font-weight:600;font-size:.95rem;color:var(--t2);margin:1.1rem 0 .4rem}
-.v2-h5,.v2-h6{font-family:var(--D);font-weight:600;font-size:.9rem;color:var(--muted);margin:.8rem 0 .3rem}
+.v2-h3{font-family:var(--D);font-weight:700;font-size:1.05rem;color:var(--tx);margin:1.6rem 0 .5rem;border-top:2px solid var(--acp);padding-top:.4rem}
+.v2-h4{font-family:var(--D);font-weight:600;font-size:.95rem;color:var(--t2);margin:1rem 0 .35rem}
+.v2-h5,.v2-h6{font-family:var(--D);font-weight:600;font-size:.88rem;color:var(--mu);margin:.7rem 0 .3rem}
 .v2-ul,.v2-ol{margin:.6rem 0 1rem 1.4rem;font-size:.93rem;color:var(--t2);line-height:1.9}
 .v2-ul li,.v2-ol li{margin-bottom:.3rem}
-.v2-bq{border-left:4px solid var(--acc);background:var(--acc-pale);border-radius:0 10px 10px 0;
-  padding:.9rem 1.2rem;margin:1rem 0;font-size:.92rem;color:#7b1c06;font-style:italic}
+.v2-bq{border-left:4px solid var(--acc);background:var(--acp);border-radius:0 10px 10px 0;padding:.9rem 1.2rem;margin:1rem 0;font-size:.92rem;color:#7b1c06;font-style:italic}
 .v2-bq p{margin:0;color:inherit}
-.v2-bq strong{font-style:normal}
-.v2-hr{border:none;border-top:1px solid var(--border);margin:1.2rem 0}
-.v2-table-wrap{overflow-x:auto;margin:1rem 0}
+.v2-hr{border:none;border-top:1px solid var(--br);margin:1.2rem 0}
+.v2-table-wrap{overflow-x:auto;margin:1rem 0;border-radius:10px;border:1px solid var(--br)}
 .v2-table{width:100%;border-collapse:collapse;font-size:.87rem}
-.v2-table th{background:var(--acc-pale);color:#7b1c06;font-family:var(--D);
-  font-weight:700;padding:9px 12px;text-align:left;border:1px solid var(--acc-b)}
-.v2-table td{padding:8px 12px;border:1px solid var(--border);color:var(--t2);vertical-align:top}
-.v2-table tr:nth-child(even) td{background:#f8fafc}
-.v2-table code{background:var(--acc-pale);color:var(--acc);border-radius:4px;
-  padding:1px 5px;font-family:var(--M);font-size:.8em}
-.phase-body code{background:var(--acc-pale);color:var(--acc-d);border-radius:4px;
-  padding:1px 6px;font-family:var(--M);font-size:.82em}
-.phase-body a{color:var(--acc);text-decoration:underline;text-underline-offset:2px}
-.phase-body strong{color:var(--text)}
-
-/* CODE BLOCKS */
-.v2-code-wrap{margin:1.2rem 0;border-radius:12px;overflow:hidden;border:1px solid #1e293b;box-shadow:0 4px 16px rgba(0,0,0,.15)}
+.v2-table th{background:var(--acp);color:#7b1c06;font-family:var(--D);font-weight:700;padding:10px 12px;text-align:left;border-bottom:2px solid var(--acb)}
+.v2-table td{padding:8px 12px;border-bottom:1px solid var(--br);color:var(--t2);vertical-align:top}
+.v2-table tr:last-child td{border:none}
+.v2-table tr:hover td{background:var(--acp)}
+.pb2 code{background:var(--acp);color:var(--acd);border-radius:4px;padding:1px 6px;font-family:var(--M);font-size:.82em}
+.pb2 a{color:var(--acc);text-decoration:underline;text-underline-offset:2px}
+.pb2 strong{color:var(--tx)}
+.v2-code-wrap{margin:1.2rem 0;border-radius:12px;overflow:hidden;border:1px solid #1e293b;box-shadow:0 4px 18px rgba(0,0,0,.18)}
 .v2-code-bar{background:#1e293b;padding:.55rem 1rem;display:flex;align-items:center;gap:.4rem}
 .v2-dot{width:10px;height:10px;border-radius:50%}
 .v2-dot.r{background:#ff5f57}.v2-dot.y{background:#febc2e}.v2-dot.g{background:#28c840}
-.v2-code-lang{margin-left:.6rem;font-family:var(--M);font-size:.65rem;color:#64748b;text-transform:uppercase;letter-spacing:.08em}
+.v2-code-lang{margin-left:.5rem;font-family:var(--M);font-size:.62rem;color:#64748b;text-transform:uppercase;letter-spacing:.08em;flex:1}
+.copy-btn{background:rgba(255,255,255,.08);color:#94a3b8;border:none;border-radius:6px;padding:.25rem .65rem;font-family:var(--M);font-size:.65rem;cursor:pointer;transition:background .2s,color .2s}
+.copy-btn:hover{background:rgba(255,255,255,.2);color:#fff}
+.copy-btn.copied{background:#10b981;color:#fff}
 .v2-code-body{background:#0f172a;padding:1.3rem 1.5rem;overflow-x:auto}
 .v2-code-body pre{margin:0}
-.v2-code-body code{font-family:var(--M);font-size:.8rem;line-height:1.9;color:#e2e8f0;
-  white-space:pre;background:transparent;padding:0;border-radius:0}
-
-/* TASK BOX */
-.task-box{background:#fff0ec;border:2px dashed #e34c26;
-  border-radius:12px;padding:1rem 1.3rem;margin:1.4rem 0}
-.task-label{font-family:var(--M);font-size:.65rem;font-weight:700;letter-spacing:.1em;
-  text-transform:uppercase;color:#7b1c06;margin-bottom:.5rem;display:flex;align-items:center;gap:.4rem}
-.task-box p,.task-body{font-size:.92rem;color:#7b1c06;line-height:1.8}
-.task-box code{background:rgba(0,0,0,.08);border-radius:4px;padding:1px 6px;
-  font-family:var(--M);font-size:.82em}
-
-/* UNLOCK BUTTON */
-.unlock-btn{display:inline-flex;align-items:center;gap:.5rem;background:var(--acc);
-  color:#fff;font-family:var(--D);font-weight:700;font-size:.88rem;
-  padding:.75rem 1.6rem;border-radius:10px;border:none;cursor:pointer;
-  transition:transform .2s,box-shadow .2s;box-shadow:0 4px 14px var(--acc-sh);margin-top:1.2rem}
-.unlock-btn:hover{transform:translateY(-2px);box-shadow:0 8px 22px var(--acc-sh)}
-
-/* BUILD IT */
+.v2-code-body code{font-family:var(--M);font-size:.8rem;line-height:1.95;color:#e2e8f0;white-space:pre;background:transparent;padding:0;border-radius:0}
+.task-box{background:#fff0ec;border:2px dashed #e34c26;border-radius:12px;padding:1.1rem 1.3rem;margin:1.4rem 0}
+.task-lbl{font-family:var(--M);font-size:.65rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#7b1c06;margin-bottom:.5rem;display:flex;align-items:center;gap:.4rem}
+.task-body{font-size:.93rem;color:#7b1c06;line-height:1.85}
+.task-body code{background:rgba(0,0,0,.1);border-radius:4px;padding:1px 6px;font-family:var(--M);font-size:.82em}
+.chal-box{background:linear-gradient(135deg,#fff5f2 0%,#fff 100%);border:2px solid var(--acc);border-radius:14px;padding:1.2rem 1.4rem;margin-bottom:1.2rem}
+.chal-lbl{font-family:var(--M);font-size:.65rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--acd);margin-bottom:.6rem}
+.chal-body{font-size:.95rem;color:var(--tx);line-height:1.85}
+.chal-body code{background:var(--acp);color:var(--acd);border-radius:4px;padding:1px 5px;font-family:var(--M);font-size:.82em}
+.reveal-btn{display:inline-flex;align-items:center;gap:.5rem;background:transparent;color:var(--acd);font-family:var(--D);font-weight:700;font-size:.85rem;padding:.6rem 1.2rem;border-radius:8px;border:2px solid var(--acc);cursor:pointer;transition:background .2s,color .2s;margin:.6rem 0}
+.reveal-btn:hover{background:var(--acc);color:#fff}
+.reveal-content{display:none;margin-top:.6rem;animation:fi .3s ease}
+.reveal-content.open{display:block}
+@keyframes fi{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
 .build-box{background:#f0fdf4;border:2px solid #16a34a;border-radius:16px;padding:1.6rem;margin:2rem 0;display:none}
-.build-label{font-family:var(--M);font-size:.65rem;font-weight:700;letter-spacing:.1em;
-  text-transform:uppercase;color:#15803d;margin-bottom:.4rem}
-.build-name{font-family:var(--D);font-weight:700;font-size:1.1rem;color:#14532d;margin-bottom:.5rem}
-.build-desc{font-size:.9rem;color:#166534;margin-bottom:1.2rem;line-height:1.75}
-.build-desc code{background:rgba(22,163,74,.12);border-radius:4px;padding:1px 6px;font-family:var(--M);font-size:.82em}
-.build-desc strong{color:#14532d}
-
-/* GITHUB ACCORDION */
-.gh-acc{border:1.5px solid var(--border);border-radius:12px;overflow:hidden;margin:1.5rem 0}
-.gh-acc-head{padding:1rem 1.2rem;background:#f8fafc;cursor:pointer;
-  display:flex;align-items:center;justify-content:space-between;
-  font-family:var(--D);font-weight:600;font-size:.9rem;user-select:none}
-.gh-acc-body{display:none;padding:1.2rem;border-top:1px solid var(--border)}
-.gh-acc-body.open{display:block}
-.gh-step{display:flex;gap:.8rem;margin-bottom:1rem;align-items:flex-start}
-.gh-step-n{width:26px;height:26px;border-radius:50%;background:var(--acc);color:#fff;
-  font-family:var(--D);font-weight:700;font-size:.75rem;display:flex;align-items:center;
-  justify-content:center;flex-shrink:0;margin-top:2px}
-.gh-step p{font-size:.88rem;color:var(--t2);line-height:1.7}
-.gh-step code{background:var(--acc-pale);color:var(--acc-d);border-radius:4px;
-  padding:1px 6px;font-family:var(--M);font-size:.82em}
-
-/* SESSION END */
-.session-end{background:linear-gradient(135deg,var(--acc),var(--acc-d));color:#fff;
-  border-radius:16px;padding:1.6rem 1.8rem;margin:2rem 0;display:none}
-.session-end.visible{display:block}
-.session-end h2{font-family:var(--D);font-weight:700;font-size:1.1rem;margin-bottom:.8rem}
-.session-end ul{list-style:none;display:flex;flex-direction:column;gap:.4rem}
-.session-end li{font-size:.9rem;opacity:.93;display:flex;align-items:center;gap:.5rem}
-.ln-btn{display:inline-flex;align-items:center;gap:.4rem;background:var(--surface);
-  color:var(--t2);font-family:var(--D);font-weight:600;font-size:.82rem;
-  padding:.65rem 1.2rem;border-radius:8px;text-decoration:none;
-  border:1.5px solid var(--border);transition:border-color .2s,color .2s}
+.build-box.visible{display:block;animation:fi .4s ease}
+.build-lbl{font-family:var(--M);font-size:.65rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#15803d;margin-bottom:.4rem}
+.build-name{font-family:var(--D);font-weight:700;font-size:1.15rem;color:#14532d;margin-bottom:.6rem}
+.build-req{font-size:.93rem;color:#166534;line-height:1.8;margin-bottom:.8rem}
+.build-req code{background:rgba(22,163,74,.12);border-radius:4px;padding:1px 6px;font-family:var(--M);font-size:.82em}
+.build-req strong{color:#14532d}
+.gh-acc{border:1.5px solid var(--br);border-radius:12px;overflow:hidden;margin:1.5rem 0}
+.gh-hd{padding:1rem 1.2rem;background:#f8fafc;cursor:pointer;display:flex;align-items:center;justify-content:space-between;font-family:var(--D);font-weight:600;font-size:.9rem;user-select:none;transition:background .2s}
+.gh-hd:hover{background:#f1f5f9}
+.gh-bd{display:none;padding:1.2rem;border-top:1px solid var(--br)}
+.gh-bd.open{display:block;animation:fi .25s ease}
+.gh-st{display:flex;gap:.8rem;margin-bottom:1rem;align-items:flex-start}
+.gh-n{width:26px;height:26px;border-radius:50%;background:var(--acc);color:#fff;font-family:var(--D);font-weight:700;font-size:.75rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px}
+.gh-st p{font-size:.88rem;color:var(--t2);line-height:1.7}
+.gh-st code{background:var(--acp);color:var(--acd);border-radius:4px;padding:1px 6px;font-family:var(--M);font-size:.82em}
+.gh-nop{background:#fef3c7;border:1.5px solid #fde68a;border-radius:10px;padding:1rem 1.2rem;font-size:.9rem;color:#78350f;line-height:1.75;margin-bottom:1rem}
+.se{background:linear-gradient(135deg,var(--acc),var(--acd));color:#fff;border-radius:16px;padding:1.6rem 1.8rem;margin:2rem 0;display:none}
+.se.visible{display:block;animation:fi .4s ease}
+.se h2{font-family:var(--D);font-weight:700;font-size:1.1rem;margin-bottom:.8rem}
+.se ul{list-style:none;display:flex;flex-direction:column;gap:.4rem}
+.se li{font-size:.9rem;opacity:.93;display:flex;align-items:center;gap:.5rem}
+.ln-btn{display:inline-flex;align-items:center;gap:.4rem;background:var(--sf);color:var(--t2);font-family:var(--D);font-weight:600;font-size:.82rem;padding:.65rem 1.2rem;border-radius:8px;text-decoration:none;border:1.5px solid var(--br);transition:border-color .2s,color .2s}
 .ln-btn:hover{border-color:var(--acc);color:var(--acc)}
 .ln-btn.primary{background:var(--acc);color:#fff;border-color:var(--acc)}
 .ln-btn.primary:hover{opacity:.9}
-.lesson-nav{display:flex;align-items:center;justify-content:space-between;
-  padding-top:2rem;border-top:1px solid rgba(255,255,255,.25);margin-top:1.5rem;flex-wrap:wrap;gap:.75rem}
-.lesson-footer{text-align:center;padding:1.5rem;font-family:var(--M);font-size:.72rem;
-  color:var(--muted);border-top:1px solid var(--border);background:var(--surface)}
+.ln{display:flex;align-items:center;justify-content:space-between;padding-top:1.5rem;border-top:1px solid rgba(255,255,255,.25);margin-top:1.5rem;flex-wrap:wrap;gap:.75rem}
+.ub{display:inline-flex;align-items:center;gap:.5rem;background:var(--acc);color:#fff;font-family:var(--D);font-weight:700;font-size:.88rem;padding:.75rem 1.6rem;border-radius:10px;border:none;cursor:pointer;transition:transform .2s,box-shadow .2s;box-shadow:0 4px 14px var(--acs);margin-top:1.2rem}
+.ub:hover{transform:translateY(-2px);box-shadow:0 8px 22px var(--acs)}
+.ub:active{transform:scale(.97)}
+#toast{position:fixed;bottom:90px;right:1.5rem;z-index:999;background:#1e293b;color:#fff;border-radius:10px;padding:.75rem 1.2rem;font-family:var(--D);font-size:.85rem;font-weight:600;box-shadow:0 8px 24px rgba(0,0,0,.25);transform:translateY(20px);opacity:0;transition:all .3s;pointer-events:none}
+#toast.show{transform:translateY(0);opacity:1}
+#go-top{position:fixed;bottom:1.5rem;right:1.5rem;z-index:300;width:44px;height:44px;border-radius:50%;background:var(--acc);color:#fff;border:none;cursor:pointer;font-size:1.15rem;box-shadow:0 4px 16px var(--acs);display:flex;align-items:center;justify-content:center;opacity:0;transform:translateY(10px);transition:opacity .3s,transform .3s,box-shadow .2s;pointer-events:none}
+#go-top.visible{opacity:1;transform:translateY(0);pointer-events:auto}
+#go-top:hover{box-shadow:0 8px 24px var(--acs);transform:translateY(-2px)}
+#cc{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:998;display:none}
+.lf{text-align:center;padding:1.5rem;font-family:var(--M);font-size:.72rem;color:var(--mu);border-top:1px solid var(--br);background:var(--sf)}
 </style>
 </head>
 <body>
 <nav class="l-nav">
   <a href="../index.html" class="l-nav-logo">⚡ Techbase HTML</a>
-  <span class="l-nav-label">Lesson 29 of 34</span>
+  <span class="l-nav-lbl">Lesson 29 of 34</span>
   <a href="../index.html" class="l-nav-back">← All Lessons</a>
 </nav>
-<div class="progress-wrap"><div class="progress-bar" id="pbar"></div></div>
-
-<div class="l-hero">
-  <div class="l-hero-inner">
-    <div class="l-badge">HTML · Lesson 29</div>
-    <h1>HTML Style Guide, Character Entities, Symbols &amp; Emojis</h1>
-    <div class="l-hero-sub">8 phases · Build: Project Description</div>
-  </div>
-</div>
-
-<section style="background:linear-gradient(160deg,#fff5f2 0%,#f8fafc 55%,#ffe8e0 100%);padding-bottom:1.5rem;border-bottom:1px solid var(--border)">
-  <div style="max-width:860px;margin:0 auto;padding:0 1.5rem"><div class="welcome-box">
-  <h2>👋 Welcome to Lesson 29</h2>
-  <div style="font-size:.9rem;line-height:1.85;opacity:.93"><p class="v2-p">Imagine reading a book where every page uses a different font size, some sentences are randomly CAPITALISED, and paragraphs jump all over the page with no consistent spacing. Even if the words are correct, it feels messy and unprofessional.</p>
-<p class="v2-p">HTML code works the same way. Two developers can write HTML that produces <em>identical</em> web pages — but one codebase is clean, consistent, and easy to understand, while the other is a chaotic mess that no one else wants to work with.</p>
-<p class="v2-p">Beyond writing clean code, every HTML developer also needs to know how to display characters that you cannot simply type on a keyboard — things like the © copyright symbol, the € euro sign, the ™ trademark symbol, mathematical operators like ∑ (sigma), Greek letters like Δ (delta), and even emojis like 😄 and 🚀 — all directly inside an HTML page.</p>
-<p class="v2-p">This lesson covers four tightly related topics in one smooth progression:</p>
-<ol class="v2-ol"><li><strong>HTML Style Guide</strong> — the rules and conventions for writing clean, readable,</li></ol>
-<p class="v2-p">professional HTML</p>
-<ol class="v2-ol"><li><strong>HTML Character Entities</strong> — how to display reserved and special characters</li></ol>
-<p class="v2-p">using entity names and entity numbers</p>
-<ol class="v2-ol"><li><strong>HTML Symbols</strong> — a rich world of special symbols including currencies,</li></ol>
-<p class="v2-p">arrows, mathematics, and Greek letters</p>
-<ol class="v2-ol"><li><strong>HTML Emojis</strong> — how emojis work as UTF-8 characters and how to add them</li></ol>
-<p class="v2-p">to any web page</p>
-<p class="v2-p">By the end of this lesson, you will write clean, professional code and be able to place any character, symbol, or emoji on a web page with confidence.</p>
-<hr class="v2-hr"></div>
-  <div class="welcome-meta">
-    <span>📚 8 phases</span>
-    <span>🏗️ Project Description</span>
-  </div>
+<div class="pw"><div class="pb" id="pbar"></div></div>
+<div class="l-hero"><div class="l-hero-in">
+  <div class="badge">HTML · Lesson 29</div>
+  <h1>HTML Style Guide, Character Entities, Symbols &amp; Emojis</h1>
+  <div class="l-hero-sub">8 phases &nbsp;·&nbsp; Build: Project Description</div>
 </div></div>
-</section>
-
-<main style="max-width:860px;margin:0 auto;padding:2rem 1.5rem 5rem">
-<div class="phase" id="phase1">
-  <div class="phase-header">
-    <div class="phase-num">Phase 1 of 8</div>
-    <div class="phase-title">Lesson Introduction</div>
-    <div class="phase-check" id="chk1"></div>
-  </div>
-  <div class="phase-body">
-    <p class="v2-p">Imagine reading a book where every page uses a different font size, some sentences are randomly CAPITALISED, and paragraphs jump all over the page with no consistent spacing. Even if the words are correct, it feels messy and unprofessional.</p>
+<section style="background:linear-gradient(160deg,#fff5f2 0%,#f8fafc 55%,#ffe8e0 100%);padding-bottom:1.5rem;border-bottom:1px solid var(--br)">
+  <div style="max-width:860px;margin:0 auto;padding:0 1.5rem"><div class="wb"><h2>👋 Welcome to Lesson 29</h2><div style="font-size:.92rem;line-height:1.85;color:var(--t2)"><p class="v2-p">Imagine reading a book where every page uses a different font size, some sentences are randomly CAPITALISED, and paragraphs jump all over the page with no consistent spacing. Even if the words are correct, it feels messy and unprofessional.</p>
 <p class="v2-p">HTML code works the same way. Two developers can write HTML that produces <em>identical</em> web pages — but one codebase is clean, consistent, and easy to understand, while the other is a chaotic mess that no one else wants to work with.</p>
 <p class="v2-p">Beyond writing clean code, every HTML developer also needs to know how to display characters that you cannot simply type on a keyboard — things like the © copyright symbol, the € euro sign, the ™ trademark symbol, mathematical operators like ∑ (sigma), Greek letters like Δ (delta), and even emojis like 😄 and 🚀 — all directly inside an HTML page.</p>
 <p class="v2-p">This lesson covers four tightly related topics in one smooth progression:</p>
@@ -225,22 +143,24 @@ body{background:var(--bg);color:var(--text);font-family:var(--B);font-size:16px;
 <ol class="v2-ol"><li><strong>HTML Emojis</strong> — how emojis work as UTF-8 characters and how to add them</li></ol>
 <p class="v2-p">to any web page</p>
 <p class="v2-p">By the end of this lesson, you will write clean, professional code and be able to place any character, symbol, or emoji on a web page with confidence.</p>
-<hr class="v2-hr">
-    <div class="task-box">
-      <div class="task-label">✏️ Your Task</div>
-      <div class="task-body">Now practise what you just learned about <strong>Lesson Introduction</strong>. Open your editor, type the examples above by hand, then modify them — change values, rename variables, and observe what happens. Active experimentation is how code sticks.</div>
-    </div>
-    <button class="unlock-btn" onclick="unlockNext(1)">Start Lesson ✓</button>
-  </div>
-</div>
-<div class="phase locked" id="phase2">
-  <div class="phase-header">
-    <div class="phase-num">Phase 2 of 8</div>
-    <div class="phase-title">Prerequisite Concepts</div>
-    <div class="phase-check" id="chk2"></div>
-  </div>
-  <div class="phase-body">
-    <h3 class="v2-h3">What is a Character Set?</h3>
+<hr class="v2-hr"></div><div class="wm"><span>📚 8 phases</span><span>🏗️ Project Description</span><span>🌐 GitHub Pages</span></div></div></div>
+</section>
+<main style="max-width:860px;margin:0 auto;padding:2rem 1.5rem 5rem">
+<div class="phase" id="phase1"><div class="ph"><div class="pn">Phase 1/8</div><div class="pt">Lesson Introduction</div><div class="pc" id="chk1"></div></div><div class="pb2"><p class="v2-p">Imagine reading a book where every page uses a different font size, some sentences are randomly CAPITALISED, and paragraphs jump all over the page with no consistent spacing. Even if the words are correct, it feels messy and unprofessional.</p>
+<p class="v2-p">HTML code works the same way. Two developers can write HTML that produces <em>identical</em> web pages — but one codebase is clean, consistent, and easy to understand, while the other is a chaotic mess that no one else wants to work with.</p>
+<p class="v2-p">Beyond writing clean code, every HTML developer also needs to know how to display characters that you cannot simply type on a keyboard — things like the © copyright symbol, the € euro sign, the ™ trademark symbol, mathematical operators like ∑ (sigma), Greek letters like Δ (delta), and even emojis like 😄 and 🚀 — all directly inside an HTML page.</p>
+<p class="v2-p">This lesson covers four tightly related topics in one smooth progression:</p>
+<ol class="v2-ol"><li><strong>HTML Style Guide</strong> — the rules and conventions for writing clean, readable,</li></ol>
+<p class="v2-p">professional HTML</p>
+<ol class="v2-ol"><li><strong>HTML Character Entities</strong> — how to display reserved and special characters</li></ol>
+<p class="v2-p">using entity names and entity numbers</p>
+<ol class="v2-ol"><li><strong>HTML Symbols</strong> — a rich world of special symbols including currencies,</li></ol>
+<p class="v2-p">arrows, mathematics, and Greek letters</p>
+<ol class="v2-ol"><li><strong>HTML Emojis</strong> — how emojis work as UTF-8 characters and how to add them</li></ol>
+<p class="v2-p">to any web page</p>
+<p class="v2-p">By the end of this lesson, you will write clean, professional code and be able to place any character, symbol, or emoji on a web page with confidence.</p>
+<hr class="v2-hr"><div class="task-box"><div class="task-lbl">✏️ Your Task</div><div class="task-body">Practise what you just learned about <strong>Lesson Introduction</strong>. Open your editor, type the examples above by hand, modify them, and observe what changes.</div></div><button class="ub" onclick="unlockNext(1)">Start Lesson ✓</button></div></div>
+<div class="phase locked" id="phase2"><div class="ph"><div class="pn">Phase 2/8</div><div class="pt">Prerequisite Concepts</div><div class="pc" id="chk2"></div></div><div class="pb2"><h3 class="v2-h3">What is a Character Set?</h3>
 <p class="v2-p">A <strong>character set</strong> (or <strong>charset</strong>) is the system a computer uses to map numbers to letters, symbols, and characters. Every character stored on a computer is secretly just a number.</p>
 <p class="v2-p">For example:</p>
 <ul class="v2-ul"><li>The letter <strong>A</strong> = number <strong>65</strong></li><li>The letter <strong>B</strong> = number <strong>66</strong></li><li>The symbol <strong>©</strong> = number <strong>169</strong></li><li>The emoji <strong>😄</strong> = number <strong>128516</strong></li></ul>
@@ -251,29 +171,15 @@ body{background:var(--bg);color:var(--text);font-family:var(--B);font-size:16px;
 <p class="v2-p">There are two forms:</p>
 <ul class="v2-ul"><li><strong>Entity name</strong>: <code>&amp;lt;</code> → displays <code>&lt;</code></li><li><strong>Entity number</strong>: <code>&amp;#60;</code> → displays <code>&lt;</code></li></ul>
 <p class="v2-p">You will learn both in depth throughout this lesson.</p>
-<hr class="v2-hr">
-    <div class="task-box">
-      <div class="task-label">✏️ Your Task</div>
-      <div class="task-body">Now practise what you just learned about <strong>Prerequisite Concepts</strong>. Open your editor, type the examples above by hand, then modify them — change values, rename variables, and observe what happens. Active experimentation is how code sticks.</div>
-    </div>
-    <button class="unlock-btn" onclick="unlockNext(2)">Phase Complete — Unlock Next ✓</button>
-  </div>
-</div>
-<div class="phase locked" id="phase3">
-  <div class="phase-header">
-    <div class="phase-num">Phase 3 of 8</div>
-    <div class="phase-title">Part 1 — HTML Style Guide and Coding Conventions</div>
-    <div class="phase-check" id="chk3"></div>
-  </div>
-  <div class="phase-body">
-    <h3 class="v2-h3">Why Does Coding Style Matter?</h3>
+<hr class="v2-hr"><div class="task-box"><div class="task-lbl">✏️ Your Task</div><div class="task-body">Practise what you just learned about <strong>Prerequisite Concepts</strong>. Open your editor, type the examples above by hand, modify them, and observe what changes.</div></div><button class="ub" onclick="unlockNext(2)">Phase Complete — Unlock Next ✓</button></div></div>
+<div class="phase locked" id="phase3"><div class="ph"><div class="pn">Phase 3/8</div><div class="pt">Part 1 — HTML Style Guide and Coding Conventions</div><div class="pc" id="chk3"></div></div><div class="pb2"><h3 class="v2-h3">Why Does Coding Style Matter?</h3>
 <p class="v2-p">A style guide is a set of rules that make your HTML code consistent, clean, and readable — even when many people work on the same project. Think of it like grammar rules for a language: you <em>can</em> break them and still be understood, but following them makes communication much smoother.</p>
 <blockquote class="v2-bq"><p class="v2-p">💡 <strong>Real-world analogy:</strong> A coding style guide is like the formatting rules in a professional report — consistent heading sizes, margins, fonts, and paragraph spacing. The content may be great, but inconsistent formatting makes it harder to read and looks unprofessional.</p></blockquote>
 <p class="v2-p">The HTML style guide recommendations below are the industry-accepted best practices followed by professional developers worldwide.</p>
 <hr class="v2-hr">
 <h3 class="v2-h3">Rule 1 — Always Declare the Document Type</h3>
 <p class="v2-p">Every HTML file should begin with <code>&lt;!DOCTYPE html&gt;</code> on the very first line. This tells the browser you are writing modern HTML5.</p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
 &lt;html lang=&quot;en&quot;&gt;
 &lt;head&gt;
   &lt;title&gt;My Page&lt;/title&gt;
@@ -286,7 +192,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--B);font-size:16px;
 <hr class="v2-hr">
 <h3 class="v2-h3">Rule 2 — Use Lowercase Element Names</h3>
 <p class="v2-p">HTML allows you to write tags in uppercase or lowercase. However, always use <strong>lowercase</strong>. Lowercase is the professional standard, easier to read, and faster to type.</p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;!-- ✅ Good: --&gt;
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;!-- ✅ Good: --&gt;
 &lt;body&gt;
   &lt;p&gt;This is a paragraph.&lt;/p&gt;
 &lt;/body&gt;
@@ -299,7 +205,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--B);font-size:16px;
 <hr class="v2-hr">
 <h3 class="v2-h3">Rule 3 — Always Close All HTML Elements</h3>
 <p class="v2-p">HTML does not <em>require</em> you to close every element — for example, a <code>&lt;p&gt;</code> tag without a closing <code>&lt;/p&gt;</code> will still work in many browsers. But it is strongly recommended to always close all elements.</p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;!-- ✅ Good: --&gt;
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;!-- ✅ Good: --&gt;
 &lt;section&gt;
   &lt;p&gt;This is a paragraph.&lt;/p&gt;
   &lt;p&gt;This is another paragraph.&lt;/p&gt;
@@ -314,7 +220,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--B);font-size:16px;
 <hr class="v2-hr">
 <h3 class="v2-h3">Rule 4 — Use Lowercase Attribute Names</h3>
 <p class="v2-p">Just like element names, attribute names should always be lowercase.</p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;!-- ✅ Good: --&gt;
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;!-- ✅ Good: --&gt;
 &lt;a href=&quot;https://www.example.com&quot;&gt;Visit here&lt;/a&gt;
 
 &lt;!-- ❌ Bad: --&gt;
@@ -322,7 +228,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--B);font-size:16px;
 <hr class="v2-hr">
 <h3 class="v2-h3">Rule 5 — Always Quote Attribute Values</h3>
 <p class="v2-p">Attribute values should always be wrapped in double quotes, even when quotes are technically optional. There are situations where missing quotes cause bugs — especially when the value contains spaces.</p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;!-- ✅ Good: --&gt;
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;!-- ✅ Good: --&gt;
 &lt;table class=&quot;striped-table&quot;&gt;
 
 &lt;!-- ❌ Bad (no quotes): --&gt;
@@ -334,7 +240,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--B);font-size:16px;
 <hr class="v2-hr">
 <h3 class="v2-h3">Rule 6 — Always Specify <code>alt</code>, <code>width</code>, and <code>height</code> for Images</h3>
 <p class="v2-p">Every <code>&lt;img&gt;</code> element should always have three attributes: <code>alt</code>, <code>width</code>, and <code>height</code>.</p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;!-- ✅ Good: --&gt;
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;!-- ✅ Good: --&gt;
 &lt;img src=&quot;photo.jpg&quot; alt=&quot;A sunset over Lagos Lagoon&quot; width=&quot;640&quot; height=&quot;480&quot;&gt;
 
 &lt;!-- ❌ Bad: --&gt;
@@ -347,7 +253,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--B);font-size:16px;
 <hr class="v2-hr">
 <h3 class="v2-h3">Rule 7 — No Spaces Around Equal Signs in Attributes</h3>
 <p class="v2-p">Keep attribute assignments tight, with no spaces around the <code>=</code> sign.</p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;!-- ✅ Good: --&gt;
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;!-- ✅ Good: --&gt;
 &lt;link rel=&quot;stylesheet&quot; href=&quot;styles.css&quot;&gt;
 
 &lt;!-- ❌ Bad: --&gt;
@@ -356,7 +262,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--B);font-size:16px;
 <hr class="v2-hr">
 <h3 class="v2-h3">Rule 8 — Avoid Very Long Code Lines</h3>
 <p class="v2-p">Very long lines of HTML are difficult to read — you have to scroll horizontally in your editor. Break long lines onto multiple lines where it makes sense.</p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;!-- ✅ Good — broken into readable lines: --&gt;
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;!-- ✅ Good — broken into readable lines: --&gt;
 &lt;meta
   name=&quot;description&quot;
   content=&quot;A beginner-friendly guide to growing tomatoes at home in Lagos.&quot;&gt;
@@ -366,7 +272,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--B);font-size:16px;
 <hr class="v2-hr">
 <h3 class="v2-h3">Rule 9 — Use Blank Lines and Indentation Sensibly</h3>
 <p class="v2-p">Use <strong>two spaces</strong> for indentation inside elements. Do NOT use the Tab key for indentation (different editors render tabs differently, causing inconsistency). Add blank lines to separate large logical blocks of code, but not between every line.</p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;!-- ✅ Good: --&gt;
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;!-- ✅ Good: --&gt;
 &lt;body&gt;
 
   &lt;h1&gt;Famous Cities&lt;/h1&gt;
@@ -386,7 +292,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--B);font-size:16px;
 &lt;h2&gt;Accra&lt;/h2&gt;&lt;p&gt;Accra is the capital city of Ghana.&lt;/p&gt;
 &lt;/body&gt;</code></pre></div></div>
 <p class="v2-p"><strong>Good table indentation example:</strong></p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;table&gt;
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;table&gt;
   &lt;tr&gt;
     &lt;th&gt;City&lt;/th&gt;
     &lt;th&gt;Country&lt;/th&gt;
@@ -397,7 +303,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--B);font-size:16px;
   &lt;/tr&gt;
 &lt;/table&gt;</code></pre></div></div>
 <p class="v2-p"><strong>Good list indentation example:</strong></p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;ul&gt;
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;ul&gt;
   &lt;li&gt;HTML&lt;/li&gt;
   &lt;li&gt;CSS&lt;/li&gt;
   &lt;li&gt;JavaScript&lt;/li&gt;
@@ -405,12 +311,12 @@ body{background:var(--bg);color:var(--text);font-family:var(--B);font-size:16px;
 <hr class="v2-hr">
 <h3 class="v2-h3">Rule 10 — Never Skip the <code>&lt;title&gt;</code> Element</h3>
 <p class="v2-p">The <code>&lt;title&gt;</code> element is <strong>required</strong> in HTML. It defines the page title that appears in the browser tab and is used by search engines.</p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;title&gt;HTML Style Guide and Best Practices&lt;/title&gt;</code></pre></div></div>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;title&gt;HTML Style Guide and Best Practices&lt;/title&gt;</code></pre></div></div>
 <p class="v2-p">Always make the title accurate and descriptive.</p>
 <hr class="v2-hr">
 <h3 class="v2-h3">Rule 11 — Never Omit <code>&lt;html&gt;</code>, <code>&lt;head&gt;</code>, and <code>&lt;body&gt;</code></h3>
 <p class="v2-p">While technically a browser will render a page without these wrapper tags, you should <strong>always include them</strong>. Omitting <code>&lt;body&gt;</code> can cause errors in older browsers. Omitting <code>&lt;html&gt;</code> can crash XML or DOM-processing tools.</p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;!-- ✅ Always write the full structure: --&gt;
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;!-- ✅ Always write the full structure: --&gt;
 &lt;!DOCTYPE html&gt;
 &lt;html lang=&quot;en&quot;&gt;
 &lt;head&gt;
@@ -424,7 +330,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--B);font-size:16px;
 <hr class="v2-hr">
 <h3 class="v2-h3">Rule 12 — Add the <code>lang</code> Attribute to <code>&lt;html&gt;</code></h3>
 <p class="v2-p">Always declare the language of your page by including the <code>lang</code> attribute on the <code>&lt;html&gt;</code> tag. This helps search engines and screen readers understand what language the page is in.</p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;html lang=&quot;en&quot;&gt;       &lt;!-- English --&gt;
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;html lang=&quot;en&quot;&gt;       &lt;!-- English --&gt;
 &lt;html lang=&quot;fr&quot;&gt;       &lt;!-- French --&gt;
 &lt;html lang=&quot;yo&quot;&gt;       &lt;!-- Yoruba --&gt;
 &lt;html lang=&quot;ar&quot;&gt;       &lt;!-- Arabic --&gt;
@@ -432,7 +338,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--B);font-size:16px;
 <hr class="v2-hr">
 <h3 class="v2-h3">Rule 13 — Meta Data: Charset and Viewport First</h3>
 <p class="v2-p">The character encoding declaration and viewport setting should appear as the very first items inside <code>&lt;head&gt;</code>, before anything else:</p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
 &lt;html lang=&quot;en-us&quot;&gt;
 &lt;head&gt;
   &lt;meta charset=&quot;UTF-8&quot;&gt;
@@ -442,9 +348,9 @@ body{background:var(--bg);color:var(--text);font-family:var(--B);font-size:16px;
 <hr class="v2-hr">
 <h3 class="v2-h3">Rule 14 — Use Consistent Comment Style</h3>
 <p class="v2-p">Short comments go on one line:</p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;!-- This is a short comment --&gt;</code></pre></div></div>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;!-- This is a short comment --&gt;</code></pre></div></div>
 <p class="v2-p">Long comments span multiple lines with indentation:</p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;!--
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;!--
   This is a longer comment describing
   the purpose of the section below.
   It spans multiple lines for clarity.
@@ -453,7 +359,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--B);font-size:16px;
 <h3 class="v2-h3">Rule 15 — Use Lowercase Filenames</h3>
 <p class="v2-p">Some web servers (Linux/Apache) are <strong>case-sensitive</strong> about file names. <code>photo.jpg</code> and <code>Photo.jpg</code> would be treated as different files. Other servers (Windows/IIS) are case-insensitive.</p>
 <p class="v2-p">To avoid your website breaking when moved between servers: <strong>always use lowercase filenames</strong>.</p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span></div><div class="v2-code-body"><pre><code>✅ Good:   index.html,  style.css,  logo.png
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>✅ Good:   index.html,  style.css,  logo.png
 ❌ Bad:    Index.HTML,  Style.CSS,  Logo.PNG</code></pre></div></div>
 <hr class="v2-hr">
 <h3 class="v2-h3">Rule 16 — Use Correct File Extensions</h3>
@@ -465,7 +371,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--B);font-size:16px;
 <hr class="v2-hr">
 <h3 class="v2-h3">Rule 18 — JavaScript in HTML: Keep It Simple</h3>
 <p class="v2-p">When loading external JavaScript files, no <code>type</code> attribute is needed:</p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;!-- ✅ Simple and correct: --&gt;
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;!-- ✅ Simple and correct: --&gt;
 &lt;script src=&quot;myscript.js&quot;&gt;&lt;/script&gt;
 
 &lt;!-- No need for: --&gt;
@@ -473,45 +379,31 @@ body{background:var(--bg);color:var(--text);font-family:var(--B);font-size:16px;
 <hr class="v2-hr">
 <h3 class="v2-h3">Rule 19 — Case Sensitivity Matters for JavaScript</h3>
 <p class="v2-p">When HTML IDs and JavaScript work together, case matters. These two lines target <strong>different</strong> elements:</p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">javascript</span></div><div class="v2-code-body"><pre><code>document.getElementById(&quot;Demo&quot;).innerHTML = &quot;Hello&quot;;  // Targets id=&quot;Demo&quot;
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">javascript</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>document.getElementById(&quot;Demo&quot;).innerHTML = &quot;Hello&quot;;  // Targets id=&quot;Demo&quot;
 document.getElementById(&quot;demo&quot;).innerHTML = &quot;Hello&quot;;  // Targets id=&quot;demo&quot;</code></pre></div></div>
 <p class="v2-p">Always use consistent lowercase IDs in your HTML and match exactly in your JavaScript.</p>
 <hr class="v2-hr">
 <h3 class="v2-h3">Quick Style Guide Reference</h3>
 <div class="v2-table-wrap"><table class="v2-table"><thead><tr><th>Rule</th><th>Do This</th><th>Avoid This</th></tr></thead><tbody><tr><td>Document type</td><td><code>&lt;!DOCTYPE html&gt;</code></td><td>No DOCTYPE</td></tr><tr><td>Element names</td><td><code>&lt;body&gt;</code>, <code>&lt;p&gt;</code></td><td><code>&lt;BODY&gt;</code>, <code>&lt;P&gt;</code></td></tr><tr><td>Attribute names</td><td><code>href=</code>, <code>class=</code></td><td><code>HREF=</code>, <code>CLASS=</code></td></tr><tr><td>Attribute values</td><td><code>class="nav"</code></td><td><code>class=nav</code></td></tr><tr><td>Closing tags</td><td><code>&lt;p&gt;text&lt;/p&gt;</code></td><td><code>&lt;p&gt;text</code></td></tr><tr><td>Indentation</td><td>2 spaces</td><td>Tab key</td></tr><tr><td>Image alt text</td><td>Always include</td><td>Omit</td></tr><tr><td><code>lang</code> attribute</td><td><code>&lt;html lang="en"&gt;</code></td><td><code>&lt;html&gt;</code></td></tr><tr><td>Filenames</td><td><code>index.html</code></td><td><code>Index.HTML</code></td></tr></tbody></table></div>
-<hr class="v2-hr">
-    <div class="task-box">
-      <div class="task-label">✏️ Your Task</div>
-      <div class="task-body">`
+<hr class="v2-hr"><div class="task-box"><div class="task-lbl">✏️ Your Task</div><div class="task-body">`
 
 Always make the title accurate and descriptive.
 
----</div>
-    </div>
-    <button class="unlock-btn" onclick="unlockNext(3)">Phase Complete — Unlock Next ✓</button>
-  </div>
-</div>
-<div class="phase locked" id="phase4">
-  <div class="phase-header">
-    <div class="phase-num">Phase 4 of 8</div>
-    <div class="phase-title">Part 2 — HTML Character Entities</div>
-    <div class="phase-check" id="chk4"></div>
-  </div>
-  <div class="phase-body">
-    <h3 class="v2-h3">The Problem: Characters That Confuse HTML</h3>
+---</div></div><button class="ub" onclick="unlockNext(3)">Phase Complete — Unlock Next ✓</button></div></div>
+<div class="phase locked" id="phase4"><div class="ph"><div class="pn">Phase 4/8</div><div class="pt">Part 2 — HTML Character Entities</div><div class="pc" id="chk4"></div></div><div class="pb2"><h3 class="v2-h3">The Problem: Characters That Confuse HTML</h3>
 <p class="v2-p">Some characters have special meaning inside HTML. The most obvious example is the <strong>angle bracket</strong> (<code>&lt;</code>). When the browser sees <code>&lt;</code>, it assumes an HTML tag is starting. So what happens if you want to display the actual character <code>&lt;</code> as text on your page?</p>
 <p class="v2-p">If you write this:</p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;p&gt;5 &lt; 10&lt;/p&gt;</code></pre></div></div>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;p&gt;5 &lt; 10&lt;/p&gt;</code></pre></div></div>
 <p class="v2-p">The browser sees <code>&lt; 10&lt;/p&gt;</code> and gets confused, thinking <code>&lt; 10&lt;/p&gt;</code> might be a tag. The text may display incorrectly or not at all.</p>
 <p class="v2-p">The solution is <strong>HTML character entities</strong>.</p>
 <hr class="v2-hr">
 <h3 class="v2-h3">What is an HTML Character Entity?</h3>
 <p class="v2-p">A <strong>character entity</strong> is a code you write inside HTML to represent a character. There are two formats:</p>
 <p class="v2-p"><strong>Entity name format:</strong></p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span></div><div class="v2-code-body"><pre><code>&amp;entity_name;</code></pre></div></div>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&amp;entity_name;</code></pre></div></div>
 <p class="v2-p">Example: <code>&amp;lt;</code> displays as <code>&lt;</code></p>
 <p class="v2-p"><strong>Entity number format:</strong></p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span></div><div class="v2-code-body"><pre><code>&amp;#entity_number;</code></pre></div></div>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&amp;#entity_number;</code></pre></div></div>
 <p class="v2-p">Example: <code>&amp;#60;</code> displays as <code>&lt;</code></p>
 <p class="v2-p">Both formats work identically. The entity name is easier to remember, while the entity number is more universal (every character has a number, but not every character has an entity name).</p>
 <blockquote class="v2-bq"><p class="v2-p">⚠️ <strong>Important:</strong> Entity names are <strong>case-sensitive</strong>. <code>&amp;lt;</code> is correct. <code>&amp;LT;</code> is NOT the same thing.</p></blockquote>
@@ -523,7 +415,7 @@ Always make the title accurate and descriptive.
 <p class="v2-p">These four characters have special meaning in HTML and <strong>must always be written as entities</strong> when you want to display them as visible text:</p>
 <div class="v2-table-wrap"><table class="v2-table"><thead><tr><th>Character</th><th>What it does in HTML</th><th>Entity Name</th><th>Entity Number</th></tr></thead><tbody><tr><td><code>&lt;</code></td><td>Opens a tag</td><td><code>&amp;lt;</code></td><td><code>&amp;#60;</code></td></tr><tr><td><code>&gt;</code></td><td>Closes a tag</td><td><code>&amp;gt;</code></td><td><code>&amp;#62;</code></td></tr><tr><td><code>&amp;</code></td><td>Starts an entity</td><td><code>&amp;amp;</code></td><td><code>&amp;#38;</code></td></tr><tr><td><code>"</code></td><td>Starts/ends attribute value</td><td><code>&amp;quot;</code></td><td><code>&amp;#34;</code></td></tr></tbody></table></div>
 <h3 class="v2-h3">Simple Example — Displaying Code in a Paragraph</h3>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
 &lt;html lang=&quot;en&quot;&gt;
 &lt;head&gt;
   &lt;meta charset=&quot;UTF-8&quot;&gt;
@@ -536,7 +428,7 @@ Always make the title accurate and descriptive.
 &lt;/body&gt;
 &lt;/html&gt;</code></pre></div></div>
 <p class="v2-p"><strong>Output displayed on the page:</strong></p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span></div><div class="v2-code-body"><pre><code>In HTML, a paragraph tag looks like this: &lt;p&gt;
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>In HTML, a paragraph tag looks like this: &lt;p&gt;
 An anchor tag looks like this: &lt;a href=&quot;...&quot;&gt;
 The price is 5 &amp; 10 naira.</code></pre></div></div>
 <p class="v2-p">Without entities, the browser would try to <em>execute</em> the <code>&lt;p&gt;</code> and <code>&lt;a&gt;</code> as actual tags instead of displaying them as text.</p>
@@ -546,30 +438,30 @@ The price is 5 &amp; 10 naira.</code></pre></div></div>
 <p class="v2-p">A regular space in HTML can cause the browser to wrap text to a new line if the line gets too long. A non-breaking space prevents that — the two words on either side of it will always stay together on the same line.</p>
 <p class="v2-p"><strong>When is this useful?</strong></p>
 <ul class="v2-ul"><li>Phone numbers: <code>+234&amp;nbsp;080&amp;nbsp;1234&amp;nbsp;5678</code></li><li>Units: <code>10&amp;nbsp;km/h</code>, <code>35&amp;nbsp;°C</code>, <code>5&amp;nbsp;kg</code></li><li>Legal sections: <code>§&amp;nbsp;10</code></li><li>Names: <code>Dr.&amp;nbsp;Eze</code></li></ul>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;p&gt;The temperature is 35&amp;nbsp;°C outside today.&lt;/p&gt;
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;p&gt;The temperature is 35&amp;nbsp;°C outside today.&lt;/p&gt;
 &lt;p&gt;Contact us at §&amp;nbsp;10 of the agreement.&lt;/p&gt;</code></pre></div></div>
 <p class="v2-p"><strong>Output:</strong></p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span></div><div class="v2-code-body"><pre><code>The temperature is 35 °C outside today.
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>The temperature is 35 °C outside today.
 Contact us at § 10 of the agreement.</code></pre></div></div>
 <p class="v2-p">The space between <code>35</code> and <code>°C</code> will never break onto a new line.</p>
 <p class="v2-p"><strong>Second use of <code>&amp;nbsp;</code> — adding multiple spaces:</strong></p>
 <p class="v2-p">HTML normally collapses multiple spaces into just one. To add extra visible spaces, use multiple <code>&amp;nbsp;</code>:</p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;p&gt;Name:&amp;nbsp;&amp;nbsp;&amp;nbsp;Amara&lt;/p&gt;
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;p&gt;Name:&amp;nbsp;&amp;nbsp;&amp;nbsp;Amara&lt;/p&gt;
 &lt;p&gt;Age:&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;25&lt;/p&gt;</code></pre></div></div>
 <p class="v2-p"><strong>Output:</strong></p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span></div><div class="v2-code-body"><pre><code>Name:   Amara
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>Name:   Amara
 Age:    25</code></pre></div></div>
 <hr class="v2-hr">
 <h3 class="v2-h3">The Non-Breaking Hyphen: <code>&amp;#8209;</code></h3>
 <p class="v2-p">Similarly, the <strong>non-breaking hyphen</strong> (<code>&amp;#8209;</code>) is a hyphen that refuses to break onto a new line. Useful for hyphenated names or compound words where splitting across lines would be confusing.</p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;p&gt;Dr.&amp;nbsp;Akin&amp;#8209;Obi is the lead researcher.&lt;/p&gt;</code></pre></div></div>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;p&gt;Dr.&amp;nbsp;Akin&amp;#8209;Obi is the lead researcher.&lt;/p&gt;</code></pre></div></div>
 <p class="v2-p">The hyphen in <code>Akin-Obi</code> will now never be the point at which a line breaks.</p>
 <hr class="v2-hr">
 <h3 class="v2-h3">Complete Table of Useful HTML Entities</h3>
 <div class="v2-table-wrap"><table class="v2-table"><thead><tr><th>Symbol Displayed</th><th>Description</th><th>Entity Name</th><th>Entity Number</th></tr></thead><tbody><tr><td>(space)</td><td>Non-breaking space</td><td><code>&amp;nbsp;</code></td><td><code>&amp;#160;</code></td></tr><tr><td><code>&lt;</code></td><td>Less than</td><td><code>&amp;lt;</code></td><td><code>&amp;#60;</code></td></tr><tr><td><code>&gt;</code></td><td>Greater than</td><td><code>&amp;gt;</code></td><td><code>&amp;#62;</code></td></tr><tr><td><code>&amp;</code></td><td>Ampersand</td><td><code>&amp;amp;</code></td><td><code>&amp;#38;</code></td></tr><tr><td><code>"</code></td><td>Double quotation mark</td><td><code>&amp;quot;</code></td><td><code>&amp;#34;</code></td></tr><tr><td><code>'</code></td><td>Single quotation mark</td><td><code>&amp;apos;</code></td><td><code>&amp;#39;</code></td></tr><tr><td><code>¢</code></td><td>Cent sign</td><td><code>&amp;cent;</code></td><td><code>&amp;#162;</code></td></tr><tr><td><code>£</code></td><td>Pound sign</td><td><code>&amp;pound;</code></td><td><code>&amp;#163;</code></td></tr><tr><td><code>¥</code></td><td>Yen sign</td><td><code>&amp;yen;</code></td><td><code>&amp;#165;</code></td></tr><tr><td><code>€</code></td><td>Euro sign</td><td><code>&amp;euro;</code></td><td><code>&amp;#8364;</code></td></tr><tr><td><code>©</code></td><td>Copyright</td><td><code>&amp;copy;</code></td><td><code>&amp;#169;</code></td></tr><tr><td><code>®</code></td><td>Registered trademark</td><td><code>&amp;reg;</code></td><td><code>&amp;#174;</code></td></tr><tr><td><code>™</code></td><td>Trademark</td><td><code>&amp;trade;</code></td><td><code>&amp;#8482;</code></td></tr></tbody></table></div>
 <hr class="v2-hr">
 <h3 class="v2-h3">Practical Example — A Product Page with Entities</h3>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
 &lt;html lang=&quot;en&quot;&gt;
 &lt;head&gt;
   &lt;meta charset=&quot;UTF-8&quot;&gt;
@@ -583,7 +475,7 @@ Age:    25</code></pre></div></div>
 &lt;/body&gt;
 &lt;/html&gt;</code></pre></div></div>
 <p class="v2-p"><strong>Output on the page:</strong></p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span></div><div class="v2-code-body"><pre><code>Bright Smile™ Toothpaste
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>Bright Smile™ Toothpaste
 
 Price: €3.99  |  £3.49  |  ₦2,500
 
@@ -595,32 +487,18 @@ Effective for teeth &lt; 30 years old &amp; sensitive gums.
 <p class="v2-p">A <strong>diacritical mark</strong> is a small symbol added to a letter to change its pronunciation. Examples: <code>à</code>, <code>é</code>, <code>â</code>, <code>ã</code>. These are created by combining a base letter with a mark entity number.</p>
 <p class="v2-p">The pattern is: write the letter, then immediately write the mark's entity number (no space between them).</p>
 <div class="v2-table-wrap"><table class="v2-table"><thead><tr><th>Mark</th><th>Letter</th><th>Code</th><th>Result</th></tr></thead><tbody><tr><td>Grave accent (`)</td><td>a</td><td><code>a&amp;#768;</code></td><td>à</td></tr><tr><td>Acute accent (´)</td><td>a</td><td><code>a&amp;#769;</code></td><td>á</td></tr><tr><td>Circumflex (^)</td><td>a</td><td><code>a&amp;#770;</code></td><td>â</td></tr><tr><td>Tilde (~)</td><td>a</td><td><code>a&amp;#771;</code></td><td>ã</td></tr><tr><td>Grave accent (`)</td><td>O</td><td><code>O&amp;#768;</code></td><td>Ò</td></tr><tr><td>Acute accent (´)</td><td>O</td><td><code>O&amp;#769;</code></td><td>Ó</td></tr><tr><td>Circumflex (^)</td><td>O</td><td><code>O&amp;#770;</code></td><td>Ô</td></tr><tr><td>Tilde (~)</td><td>O</td><td><code>O&amp;#771;</code></td><td>Õ</td></tr></tbody></table></div>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;p&gt;Caf&amp;eacute;&lt;/p&gt;     &lt;!-- Shows: Café --&gt;
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;p&gt;Caf&amp;eacute;&lt;/p&gt;     &lt;!-- Shows: Café --&gt;
 &lt;p&gt;na&amp;iuml;ve&lt;/p&gt;      &lt;!-- Shows: naïve --&gt;
 &lt;p&gt;O&amp;#769;Brien&lt;/p&gt;    &lt;!-- Shows: Óbrién (Irish name with accent) --&gt;</code></pre></div></div>
 <blockquote class="v2-bq"><p class="v2-p">💡 Many accented European letters also have their own named entities: <code>&amp;eacute;</code> = é, <code>&amp;agrave;</code> = à, <code>&amp;ntilde;</code> = ñ, <code>&amp;uuml;</code> = ü</p></blockquote>
-<hr class="v2-hr">
-    <div class="task-box">
-      <div class="task-label">✏️ Your Task</div>
-      <div class="task-body">Now practise what you just learned about <strong>HTML Character Entities</strong>. Open your editor, type the examples above by hand, then modify them — change values, rename variables, and observe what happens. Active experimentation is how code sticks.</div>
-    </div>
-    <button class="unlock-btn" onclick="unlockNext(4)">Phase Complete — Unlock Next ✓</button>
-  </div>
-</div>
-<div class="phase locked" id="phase5">
-  <div class="phase-header">
-    <div class="phase-num">Phase 5 of 8</div>
-    <div class="phase-title">Part 3 — HTML Symbols</div>
-    <div class="phase-check" id="chk5"></div>
-  </div>
-  <div class="phase-body">
-    <h3 class="v2-h3">What are HTML Symbols?</h3>
+<hr class="v2-hr"><div class="task-box"><div class="task-lbl">✏️ Your Task</div><div class="task-body">Practise what you just learned about <strong>HTML Character Entities</strong>. Open your editor, type the examples above by hand, modify them, and observe what changes.</div></div><button class="ub" onclick="unlockNext(4)">Phase Complete — Unlock Next ✓</button></div></div>
+<div class="phase locked" id="phase5"><div class="ph"><div class="pn">Phase 5/8</div><div class="pt">Part 3 — HTML Symbols</div><div class="pc" id="chk5"></div></div><div class="pb2"><h3 class="v2-h3">What are HTML Symbols?</h3>
 <p class="v2-p">Beyond the standard entities for reserved characters, HTML gives you access to hundreds of <strong>special symbols</strong> that do not exist on a standard keyboard: currency signs, arrows, mathematical operators, playing card suits, Greek letters, and much more.</p>
 <p class="v2-p">All symbols can be displayed using either their <strong>entity name</strong> (if one exists) or their <strong>entity number</strong> — in decimal (<code>&amp;#NNNN;</code>) or hexadecimal (<code>&amp;#xHHHH;</code>).</p>
 <hr class="v2-hr">
 <h3 class="v2-h3">The Three Ways to Display Any Symbol</h3>
 <p class="v2-p">All three methods produce the same result. Using the Euro sign as an example:</p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;p&gt;I will display &amp;euro;&lt;/p&gt;      &lt;!-- Entity name --&gt;
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;p&gt;I will display &amp;euro;&lt;/p&gt;      &lt;!-- Entity name --&gt;
 &lt;p&gt;I will display &amp;#8364;&lt;/p&gt;     &lt;!-- Decimal entity number --&gt;
 &lt;p&gt;I will display &amp;#x20AC;&lt;/p&gt;    &lt;!-- Hexadecimal entity number --&gt;</code></pre></div></div>
 <p class="v2-p"><strong>All three display:</strong> €</p>
@@ -628,12 +506,12 @@ Effective for teeth &lt; 30 years old &amp; sensitive gums.
 <h3 class="v2-h3">Common Symbol Entities Table</h3>
 <div class="v2-table-wrap"><table class="v2-table"><thead><tr><th>Symbol</th><th>Decimal</th><th>Entity Name</th><th>Description</th></tr></thead><tbody><tr><td>©</td><td><code>&amp;#169;</code></td><td><code>&amp;copy;</code></td><td>Copyright</td></tr><tr><td>®</td><td><code>&amp;#174;</code></td><td><code>&amp;reg;</code></td><td>Registered trademark</td></tr><tr><td>™</td><td><code>&amp;#8482;</code></td><td><code>&amp;trade;</code></td><td>Trademark</td></tr><tr><td>€</td><td><code>&amp;#8364;</code></td><td><code>&amp;euro;</code></td><td>Euro sign</td></tr><tr><td>←</td><td><code>&amp;#8592;</code></td><td><code>&amp;larr;</code></td><td>Left arrow</td></tr><tr><td>↑</td><td><code>&amp;#8593;</code></td><td><code>&amp;uarr;</code></td><td>Up arrow</td></tr><tr><td>→</td><td><code>&amp;#8594;</code></td><td><code>&amp;rarr;</code></td><td>Right arrow</td></tr><tr><td>↓</td><td><code>&amp;#8595;</code></td><td><code>&amp;darr;</code></td><td>Down arrow</td></tr><tr><td>♠</td><td><code>&amp;#9824;</code></td><td><code>&amp;spades;</code></td><td>Spade (card suit)</td></tr><tr><td>♣</td><td><code>&amp;#9827;</code></td><td><code>&amp;clubs;</code></td><td>Club (card suit)</td></tr><tr><td>♥</td><td><code>&amp;#9829;</code></td><td><code>&amp;hearts;</code></td><td>Heart (card suit)</td></tr><tr><td>♦</td><td><code>&amp;#9830;</code></td><td><code>&amp;diams;</code></td><td>Diamond (card suit)</td></tr></tbody></table></div>
 <h3 class="v2-h3">Simple Example — Using Symbol Entities</h3>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;p&gt;All prices are in &amp;euro; (Euros).&lt;/p&gt;
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;p&gt;All prices are in &amp;euro; (Euros).&lt;/p&gt;
 &lt;p&gt;Navigate: &amp;larr; Back &amp;nbsp; | &amp;nbsp; Forward &amp;rarr;&lt;/p&gt;
 &lt;p&gt;Card suits: &amp;spades; &amp;clubs; &amp;hearts; &amp;diams;&lt;/p&gt;
 &lt;p&gt;This product is &amp;copy; 2025 and &amp;trade; registered.&lt;/p&gt;</code></pre></div></div>
 <p class="v2-p"><strong>Output:</strong></p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span></div><div class="v2-code-body"><pre><code>All prices are in € (Euros).
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>All prices are in € (Euros).
 Navigate: ← Back  |  Forward →
 Card suits: ♠ ♣ ♥ ♦
 This product is © 2025 and ™ registered.</code></pre></div></div>
@@ -642,7 +520,7 @@ This product is © 2025 and ™ registered.</code></pre></div></div>
 <p class="v2-p">HTML supports a rich set of mathematical symbols — useful for science websites, educational content, data analysis pages, and engineering documentation.</p>
 <div class="v2-table-wrap"><table class="v2-table"><thead><tr><th>Symbol</th><th>Decimal</th><th>Entity Name</th><th>Description</th></tr></thead><tbody><tr><td>∀</td><td><code>&amp;#8704;</code></td><td><code>&amp;forall;</code></td><td>For all</td></tr><tr><td>∂</td><td><code>&amp;#8706;</code></td><td><code>&amp;part;</code></td><td>Partial differential</td></tr><tr><td>∃</td><td><code>&amp;#8707;</code></td><td><code>&amp;exist;</code></td><td>There exists</td></tr><tr><td>∅</td><td><code>&amp;#8709;</code></td><td><code>&amp;empty;</code></td><td>Empty set</td></tr><tr><td>∇</td><td><code>&amp;#8711;</code></td><td><code>&amp;nabla;</code></td><td>Nabla (del operator)</td></tr><tr><td>∈</td><td><code>&amp;#8712;</code></td><td><code>&amp;isin;</code></td><td>Element of</td></tr><tr><td>∉</td><td><code>&amp;#8713;</code></td><td><code>&amp;notin;</code></td><td>Not an element of</td></tr><tr><td>∋</td><td><code>&amp;#8715;</code></td><td><code>&amp;ni;</code></td><td>Contains as member</td></tr><tr><td>∏</td><td><code>&amp;#8719;</code></td><td><code>&amp;prod;</code></td><td>Product (capital pi)</td></tr><tr><td>∑</td><td><code>&amp;#8721;</code></td><td><code>&amp;sum;</code></td><td>Summation (sigma)</td></tr></tbody></table></div>
 <h3 class="v2-h3">Example — A Simple Maths Reference Page</h3>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
 &lt;html lang=&quot;en&quot;&gt;
 &lt;head&gt;
   &lt;meta charset=&quot;UTF-8&quot;&gt;
@@ -659,7 +537,7 @@ This product is © 2025 and ™ registered.</code></pre></div></div>
 &lt;/body&gt;
 &lt;/html&gt;</code></pre></div></div>
 <p class="v2-p"><strong>Output:</strong></p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span></div><div class="v2-code-body"><pre><code>Summation: ∑
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>Summation: ∑
 For all values: ∀
 There exists: ∃
 Empty set: ∅
@@ -671,7 +549,7 @@ Is NOT an element of: ∉</code></pre></div></div>
 <p class="v2-p">Greek letters are widely used in mathematics (π, Σ), physics (Ω, λ), science (Δ, α, β), and statistics (μ, σ). HTML provides entity names for all of them.</p>
 <div class="v2-table-wrap"><table class="v2-table"><thead><tr><th>Symbol</th><th>Decimal</th><th>Entity Name</th><th>Description</th></tr></thead><tbody><tr><td>Α</td><td><code>&amp;#913;</code></td><td><code>&amp;Alpha;</code></td><td>Greek capital Alpha</td></tr><tr><td>Β</td><td><code>&amp;#914;</code></td><td><code>&amp;Beta;</code></td><td>Greek capital Beta</td></tr><tr><td>Γ</td><td><code>&amp;#915;</code></td><td><code>&amp;Gamma;</code></td><td>Greek capital Gamma</td></tr><tr><td>Δ</td><td><code>&amp;#916;</code></td><td><code>&amp;Delta;</code></td><td>Greek capital Delta</td></tr><tr><td>Ε</td><td><code>&amp;#917;</code></td><td><code>&amp;Epsilon;</code></td><td>Greek capital Epsilon</td></tr><tr><td>Ζ</td><td><code>&amp;#918;</code></td><td><code>&amp;Zeta;</code></td><td>Greek capital Zeta</td></tr><tr><td>α</td><td><code>&amp;#945;</code></td><td><code>&amp;alpha;</code></td><td>Greek small alpha</td></tr><tr><td>β</td><td><code>&amp;#946;</code></td><td><code>&amp;beta;</code></td><td>Greek small beta</td></tr><tr><td>γ</td><td><code>&amp;#947;</code></td><td><code>&amp;gamma;</code></td><td>Greek small gamma</td></tr><tr><td>δ</td><td><code>&amp;#948;</code></td><td><code>&amp;delta;</code></td><td>Greek small delta</td></tr><tr><td>π</td><td><code>&amp;#960;</code></td><td><code>&amp;pi;</code></td><td>Greek small pi</td></tr><tr><td>σ</td><td><code>&amp;#963;</code></td><td><code>&amp;sigma;</code></td><td>Greek small sigma</td></tr><tr><td>μ</td><td><code>&amp;#956;</code></td><td><code>&amp;mu;</code></td><td>Greek small mu</td></tr><tr><td>ω</td><td><code>&amp;#969;</code></td><td><code>&amp;omega;</code></td><td>Greek small omega</td></tr><tr><td>Ω</td><td><code>&amp;#937;</code></td><td><code>&amp;Omega;</code></td><td>Greek capital Omega</td></tr><tr><td>Σ</td><td><code>&amp;#931;</code></td><td><code>&amp;Sigma;</code></td><td>Greek capital Sigma</td></tr></tbody></table></div>
 <h3 class="v2-h3">Example — A Physics Formula Page</h3>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
 &lt;html lang=&quot;en&quot;&gt;
 &lt;head&gt;
   &lt;meta charset=&quot;UTF-8&quot;&gt;
@@ -687,7 +565,7 @@ Is NOT an element of: ∉</code></pre></div></div>
 &lt;/body&gt;
 &lt;/html&gt;</code></pre></div></div>
 <p class="v2-p"><strong>Output:</strong></p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span></div><div class="v2-code-body"><pre><code>Pi (π) = 3.14159...
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>Pi (π) = 3.14159...
 Ohm (Ω) is the unit of resistance.
 Delta (Δ) means &quot;change in&quot; a value.
 Sigma (σ) represents standard deviation in statistics.
@@ -697,31 +575,17 @@ Mu (μ) represents the mean (average).</code></pre></div></div>
 <p class="v2-p">HTML (via UTF-8) provides symbols in many more categories. Here is a preview of what's available:</p>
 <ul class="v2-ul"><li><strong>Currency symbols:</strong> € £ ¥ ¢ ₿ ₽ (Bitcoin, Ruble, etc.)</li><li><strong>Arrows:</strong> ← ↑ → ↓ ⇐ ⇑ ⇒ ⇓ (and dozens more)</li><li><strong>Weather symbols:</strong> ☀ ☁ ☂ ☃ ★ ☆</li><li><strong>Playing card suits:</strong> ♠ ♣ ♥ ♦</li><li><strong>Chess pieces:</strong> ♔ ♕ ♘ ♖</li><li><strong>Musical notes:</strong> ♩ ♪ ♫ ♬</li><li><strong>Geometric shapes:</strong> ▲ △ ▣ ▧ ◐</li><li><strong>Recycling/peace:</strong> ♲ ♻ ☮ ☯</li><li><strong>Gender/planet symbols:</strong> ♂ ♀ ☿ ♃</li></ul>
 <p class="v2-p">All of these can be used in HTML using their entity numbers.</p>
-<hr class="v2-hr">
-    <div class="task-box">
-      <div class="task-label">✏️ Your Task</div>
-      <div class="task-body">Now practise what you just learned about <strong>HTML Symbols</strong>. Open your editor, type the examples above by hand, then modify them — change values, rename variables, and observe what happens. Active experimentation is how code sticks.</div>
-    </div>
-    <button class="unlock-btn" onclick="unlockNext(5)">Phase Complete — Unlock Next ✓</button>
-  </div>
-</div>
-<div class="phase locked" id="phase6">
-  <div class="phase-header">
-    <div class="phase-num">Phase 6 of 8</div>
-    <div class="phase-title">Part 4 — HTML Emojis</div>
-    <div class="phase-check" id="chk6"></div>
-  </div>
-  <div class="phase-body">
-    <h3 class="v2-h3">What Are Emojis? They Are NOT Images!</h3>
+<hr class="v2-hr"><div class="task-box"><div class="task-lbl">✏️ Your Task</div><div class="task-body">Practise what you just learned about <strong>HTML Symbols</strong>. Open your editor, type the examples above by hand, modify them, and observe what changes.</div></div><button class="ub" onclick="unlockNext(5)">Phase Complete — Unlock Next ✓</button></div></div>
+<div class="phase locked" id="phase6"><div class="ph"><div class="pn">Phase 6/8</div><div class="pt">Part 4 — HTML Emojis</div><div class="pc" id="chk6"></div></div><div class="pb2"><h3 class="v2-h3">What Are Emojis? They Are NOT Images!</h3>
 <p class="v2-p">This surprises many beginners: <strong>emojis are not images</strong>. They are <strong>characters</strong> — letters from the UTF-8 character set, just like A, B, C. This means emojis behave exactly like text:</p>
 <ul class="v2-ul"><li>They can be <strong>sized</strong> with CSS <code>font-size</code></li><li>They can be <strong>coloured</strong> with CSS (in some cases)</li><li>They can be <strong>copied and pasted</strong> as text</li><li>They can be placed inside any HTML element</li><li>They work everywhere that text works</li></ul>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span></div><div class="v2-code-body"><pre><code>😄 = UTF-8 character number 128516
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>😄 = UTF-8 character number 128516
 😍 = UTF-8 character number 128525
 💗 = UTF-8 character number 128151</code></pre></div></div>
 <hr class="v2-hr">
 <h3 class="v2-h3">How to Display an Emoji Using an Entity Number</h3>
 <p class="v2-p">Since emojis are just UTF-8 characters with very high numbers, you display them exactly like any other character entity: using <code>&amp;#</code> followed by the number, followed by <code>;</code>.</p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
 &lt;html&gt;
 &lt;head&gt;
   &lt;meta charset=&quot;UTF-8&quot;&gt;
@@ -735,7 +599,7 @@ Mu (μ) represents the mean (average).</code></pre></div></div>
 <hr class="v2-hr">
 <h3 class="v2-h3">The Connection Between UTF-8 and Emojis</h3>
 <p class="v2-p">Let us first understand with regular letters to build the concept:</p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
 &lt;html&gt;
 &lt;head&gt;
   &lt;meta charset=&quot;UTF-8&quot;&gt;
@@ -747,13 +611,13 @@ Mu (μ) represents the mean (average).</code></pre></div></div>
 &lt;/html&gt;</code></pre></div></div>
 <p class="v2-p"><strong>Both lines display:</strong> <code>A B C</code></p>
 <p class="v2-p">Because <code>A = 65</code>, <code>B = 66</code>, <code>C = 67</code> in UTF-8. Now apply the same logic to emojis:</p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;p&gt;&amp;#128512; &amp;#128516; &amp;#128525; &amp;#128151;&lt;/p&gt;</code></pre></div></div>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;p&gt;&amp;#128512; &amp;#128516; &amp;#128525; &amp;#128151;&lt;/p&gt;</code></pre></div></div>
 <p class="v2-p"><strong>Displays:</strong> 😀 😄 😍 💗</p>
 <p class="v2-p">The browser reads each <code>&amp;#NNNNNN;</code>, looks up that UTF-8 number, and renders the corresponding character — which happens to look like a colourful picture.</p>
 <hr class="v2-hr">
 <h3 class="v2-h3">Sizing Emojis with CSS</h3>
 <p class="v2-p">Because emojis are characters, you can resize them using the <code>font-size</code> CSS property, just like text:</p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
 &lt;html&gt;
 &lt;head&gt;
   &lt;meta charset=&quot;UTF-8&quot;&gt;
@@ -776,25 +640,10 @@ Mu (μ) represents the mean (average).</code></pre></div></div>
 <h3 class="v2-h3">Emoji Categories Available in HTML</h3>
 <p class="v2-p">The UTF-8 character set includes emojis covering every area of modern life:</p>
 <p class="v2-p"><strong>Smileys and emotions:</strong> 😀 😂 😊 😎 😜 <strong>Hand gestures:</strong> ✌ ✊ ☝ ✋ 👌 <strong>People:</strong> 👮 🧕 👦 💏 🤴 <strong>Office &amp; work:</strong> 📈 💻 📌 📆 📒 <strong>Places &amp; landmarks:</strong> ⛺ 🌋 🗽 🗿 🏢 <strong>Transport:</strong> 🚈 🚗 🚢 🚌 🚀 <strong>Animals:</strong> 🐴 🐕 🐘 🐻 🐞 <strong>Food &amp; drink:</strong> ☕ 🌭 🍞 🍩 🍣 <strong>Plants:</strong> 🌴 🌳 🌼 🍁 🥑 <strong>Fruits:</strong> 🍇 🍊 🍏 🥝 🥥 <strong>Sports:</strong> ⚽ 🏆 🤿 🏋 ⛳ <strong>Weather:</strong> ⛅ ☔ 🌈 🌂 ⛄ <strong>Celebration:</strong> 🎁 🎃 🎈 🎓 🎂 <strong>Symbols:</strong> 💡 💰 🔐 🔞 🔔</p>
-<hr class="v2-hr">
-    <div class="task-box">
-      <div class="task-label">✏️ Your Task</div>
-      <div class="task-body">Now practise what you just learned about <strong>HTML Emojis</strong>. Open your editor, type the examples above by hand, then modify them — change values, rename variables, and observe what happens. Active experimentation is how code sticks.</div>
-    </div>
-    <button class="unlock-btn" onclick="unlockNext(6)">Phase Complete — Unlock Next ✓</button>
-  </div>
-</div>
-<div class="phase locked" id="phase7">
-  <div class="phase-header">
-    <div class="phase-num">Phase 7 of 8</div>
-    <div class="phase-title">Guided Practice Exercises</div>
-    <div class="phase-check" id="chk7"></div>
-  </div>
-  <div class="phase-body">
-    <h3 class="v2-h3">✅ Exercise 1 — Clean Up Messy HTML Code</h3>
+<hr class="v2-hr"><div class="task-box"><div class="task-lbl">✏️ Your Task</div><div class="task-body">Practise what you just learned about <strong>HTML Emojis</strong>. Open your editor, type the examples above by hand, modify them, and observe what changes.</div></div><button class="ub" onclick="unlockNext(6)">Phase Complete — Unlock Next ✓</button></div></div>
+<div class="phase locked" id="phase7"><div class="ph"><div class="pn">Phase 7/8</div><div class="pt">Guided Practice Exercises</div><div class="pc" id="chk7"></div></div><div class="pb2"><div class="chal-box"><div class="chal-lbl">🎯 Your Challenge</div><div class="chal-body"><h3 class="v2-h3">✅ Exercise 1 — Clean Up Messy HTML Code</h3>
 <p class="v2-p"><strong>Objective:</strong> Apply the HTML Style Guide rules to fix a messy HTML file.</p>
-<p class="v2-p"><strong>The broken code (contains 8 style violations):</strong></p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;!DOCTYPE HTML&gt;
+<p class="v2-p"><strong>The broken code (contains 8 style violations):</strong></p></div></div><div class="task-box"><div class="task-lbl">✏️ Task</div><div class="task-body">Practise what you just learned about <strong>Guided Practice Exercises</strong>. Open your editor, type the examples above by hand, modify them, and observe what changes.</div></div><button class="reveal-btn" onclick="toggleReveal(this)">👁️ Reveal Answer</button><div class="reveal-content"><div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;!DOCTYPE HTML&gt;
 &lt;HTML LANG=&quot;EN&quot;&gt;
 &lt;HEAD&gt;
 &lt;TITLE&gt;MY WEBSITE&lt;/TITLE&gt;
@@ -810,7 +659,7 @@ Mu (μ) represents the mean (average).</code></pre></div></div>
 <p class="v2-p"><strong>Violations to find:</strong></p>
 <ol class="v2-ol"><li><code>DOCTYPE HTML</code> — should be <code>DOCTYPE html</code> (lowercase)</li><li><code>&lt;HTML LANG="EN"&gt;</code> — should be <code>&lt;html lang="en"&gt;</code> (lowercase)</li><li><code>&lt;HEAD&gt;</code>, <code>&lt;TITLE&gt;</code>, <code>&lt;BODY&gt;</code>, <code>&lt;H1&gt;</code>, <code>&lt;P&gt;</code>, <code>&lt;IMG&gt;</code> — all uppercase</li><li><code>&lt;P&gt;This is a page...</code> — no closing <code>&lt;/p&gt;</code> tag</li><li><code>&lt;P&gt;Lagos is the biggest city.</code> — no closing <code>&lt;/p&gt;</code> tag</li><li><code>SRC=lagos.jpg</code> — attribute name uppercase, value not quoted</li><li>No <code>&lt;meta charset="UTF-8"&gt;</code></li><li>No <code>alt</code>, <code>width</code>, or <code>height</code> on the image</li></ol>
 <p class="v2-p"><strong>Corrected version:</strong></p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
 &lt;html lang=&quot;en&quot;&gt;
 &lt;head&gt;
   &lt;meta charset=&quot;UTF-8&quot;&gt;
@@ -830,11 +679,11 @@ Mu (μ) represents the mean (average).</code></pre></div></div>
 <p class="v2-p"><strong>Objective:</strong> Write a page that displays HTML tag examples as text content.</p>
 <p class="v2-p"><strong>Scenario:</strong> You are writing an HTML tutorial page and need to show code examples <em>as visible text</em> rather than having the browser execute them.</p>
 <p class="v2-p"><strong>Your task:</strong> Create a paragraph that displays this exact text on screen:</p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span></div><div class="v2-code-body"><pre><code>An HTML link looks like: &lt;a href=&quot;url&quot;&gt;Link text&lt;/a&gt;
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>An HTML link looks like: &lt;a href=&quot;url&quot;&gt;Link text&lt;/a&gt;
 An image tag looks like: &lt;img src=&quot;photo.jpg&quot; alt=&quot;description&quot;&gt;
 Use &amp; to join things together.</code></pre></div></div>
 <p class="v2-p"><strong>Solution:</strong></p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
 &lt;html lang=&quot;en&quot;&gt;
 &lt;head&gt;
   &lt;meta charset=&quot;UTF-8&quot;&gt;
@@ -849,7 +698,7 @@ Use &amp; to join things together.</code></pre></div></div>
 &lt;/body&gt;
 &lt;/html&gt;</code></pre></div></div>
 <p class="v2-p"><strong>Expected output:</strong></p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span></div><div class="v2-code-body"><pre><code>An HTML link looks like: &lt;a href=&quot;url&quot;&gt;Link text&lt;/a&gt;
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>An HTML link looks like: &lt;a href=&quot;url&quot;&gt;Link text&lt;/a&gt;
 An image tag looks like: &lt;img src=&quot;photo.jpg&quot; alt=&quot;description&quot;&gt;
 Use &amp; to join things together.</code></pre></div></div>
 <p class="v2-p"><strong>Self-check:</strong> What happens if you remove the <code>&amp;lt;</code> and write <code>&lt;a</code> instead? (Answer: The browser tries to create an actual link instead of showing the text.)</p>
@@ -858,7 +707,7 @@ Use &amp; to join things together.</code></pre></div></div>
 <p class="v2-p"><strong>Objective:</strong> Use currency entities to build a product pricing table.</p>
 <p class="v2-p"><strong>Scenario:</strong> You run an online store and need a clean pricing table showing prices in multiple currencies.</p>
 <p class="v2-p"><strong>Your task:</strong> Build this output:</p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span></div><div class="v2-code-body"><pre><code>Product Price List
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>Product Price List
 ==================
 Item            Price
 Laptop          €850 / £730 / ¥95,000
@@ -866,7 +715,7 @@ Coffee Mug      €12 / £10.50 / ¥1,400
 Notebook        €5.99 / £4.99 / ¥650
 © 2025 ShopEasy™ — All prices include VAT.</code></pre></div></div>
 <p class="v2-p"><strong>Solution:</strong></p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
 &lt;html lang=&quot;en&quot;&gt;
 &lt;head&gt;
   &lt;meta charset=&quot;UTF-8&quot;&gt;
@@ -901,14 +750,14 @@ Notebook        €5.99 / £4.99 / ¥650
 <p class="v2-p"><strong>Objective:</strong> Use Greek letter and math symbol entities in a real content context.</p>
 <p class="v2-p"><strong>Scenario:</strong> You are building a physics reference website for students.</p>
 <p class="v2-p"><strong>Your task:</strong> Create a page with these formulas and terms displayed correctly:</p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span></div><div class="v2-code-body"><pre><code>Area of a circle: A = π × r²
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>Area of a circle: A = π × r²
 Summation formula: ∑ (sigma)
 Standard deviation: σ (sigma lowercase)
 Change in temperature: ΔT
 Ohm&#x27;s Law: V = I × Ω
 Angular velocity: ω (omega)</code></pre></div></div>
 <p class="v2-p"><strong>Solution:</strong></p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
 &lt;html lang=&quot;en&quot;&gt;
 &lt;head&gt;
   &lt;meta charset=&quot;UTF-8&quot;&gt;
@@ -925,7 +774,7 @@ Angular velocity: ω (omega)</code></pre></div></div>
 &lt;/body&gt;
 &lt;/html&gt;</code></pre></div></div>
 <p class="v2-p"><strong>Output:</strong></p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span></div><div class="v2-code-body"><pre><code>Area of a circle: A = π × r²
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>Area of a circle: A = π × r²
 Summation formula: ∑ (sigma)
 Standard deviation: σ (sigma lowercase)
 Change in temperature: ΔT
@@ -939,7 +788,7 @@ Angular velocity: ω (omega)</code></pre></div></div>
 <p class="v2-p"><strong>Scenario:</strong> You are building a school project submission page and want to add fun visual elements using emojis without images.</p>
 <p class="v2-p"><strong>Your task:</strong> Create a page that shows emojis in three sizes with labels.</p>
 <p class="v2-p"><strong>Solution:</strong></p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
 &lt;html lang=&quot;en&quot;&gt;
 &lt;head&gt;
   &lt;meta charset=&quot;UTF-8&quot;&gt;
@@ -980,59 +829,45 @@ Angular velocity: ω (omega)</code></pre></div></div>
 &lt;/html&gt;</code></pre></div></div>
 <p class="v2-p"><strong>Visual output:</strong></p>
 <ul class="v2-ul"><li>Three rows of the same smiley emojis, each at a progressively larger font size</li><li>A second section showing different topic emojis at 40px</li></ul>
-<hr class="v2-hr">
-    <div class="task-box">
-      <div class="task-label">✏️ Your Task</div>
-      <div class="task-body">Now practise what you just learned about <strong>Guided Practice Exercises</strong>. Open your editor, type the examples above by hand, then modify them — change values, rename variables, and observe what happens. Active experimentation is how code sticks.</div>
-    </div>
-    <button class="unlock-btn" onclick="unlockNext(7)">Phase Complete — Unlock Next ✓</button>
-  </div>
-</div>
-<div class="phase locked" id="phase8">
-  <div class="phase-header">
-    <div class="phase-num">Phase 8 of 8</div>
-    <div class="phase-title">Common Beginner Mistakes</div>
-    <div class="phase-check" id="chk8"></div>
-  </div>
-  <div class="phase-body">
-    <h3 class="v2-h3">Mistake 1 — Forgetting the Semicolon at the End of an Entity</h3>
+<hr class="v2-hr"></div><button class="ub" onclick="unlockNext(7)">Mark Complete — Unlock Next ✓</button></div></div>
+<div class="phase locked" id="phase8"><div class="ph"><div class="pn">Phase 8/8</div><div class="pt">Common Beginner Mistakes</div><div class="pc" id="chk8"></div></div><div class="pb2"><h3 class="v2-h3">Mistake 1 — Forgetting the Semicolon at the End of an Entity</h3>
 <p class="v2-p">❌ <strong>Wrong (semicolon missing):</strong></p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;p&gt;Copyright &amp;copy 2025 My Company&lt;/p&gt;</code></pre></div></div>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;p&gt;Copyright &amp;copy 2025 My Company&lt;/p&gt;</code></pre></div></div>
 <p class="v2-p">✅ <strong>Correct:</strong></p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;p&gt;Copyright &amp;copy; 2025 My Company&lt;/p&gt;</code></pre></div></div>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;p&gt;Copyright &amp;copy; 2025 My Company&lt;/p&gt;</code></pre></div></div>
 <p class="v2-p"><strong>Output difference:</strong></p>
 <ul class="v2-ul"><li>Wrong: <code>Copyright &amp;copy 2025 My Company</code> (literally shows <code>&amp;copy</code>)</li><li>Correct: <code>Copyright © 2025 My Company</code></li></ul>
 <p class="v2-p">The semicolon <code>;</code> is <strong>mandatory</strong>. Without it, the browser does not recognise the entity and displays it as raw text.</p>
 <hr class="v2-hr">
 <h3 class="v2-h3">Mistake 2 — Using Wrong Case in Entity Names</h3>
 <p class="v2-p">❌ <strong>Wrong (wrong case):</strong></p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;p&gt;&amp;COPY; 2025&lt;/p&gt;
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;p&gt;&amp;COPY; 2025&lt;/p&gt;
 &lt;p&gt;&amp;LT;p&amp;GT;&lt;/p&gt;</code></pre></div></div>
 <p class="v2-p">✅ <strong>Correct:</strong></p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;p&gt;&amp;copy; 2025&lt;/p&gt;
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;p&gt;&amp;copy; 2025&lt;/p&gt;
 &lt;p&gt;&amp;lt;p&amp;gt;&lt;/p&gt;</code></pre></div></div>
 <p class="v2-p">Entity names are <strong>case-sensitive</strong>. <code>&amp;copy;</code> works. <code>&amp;COPY;</code> does not.</p>
 <hr class="v2-hr">
 <h3 class="v2-h3">Mistake 3 — Using <code>&lt;</code> Directly in Text Content</h3>
 <p class="v2-p">❌ <strong>Wrong (will confuse the browser):</strong></p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;p&gt;If x &lt; 10 and y &gt; 5, the condition is true.&lt;/p&gt;</code></pre></div></div>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;p&gt;If x &lt; 10 and y &gt; 5, the condition is true.&lt;/p&gt;</code></pre></div></div>
 <p class="v2-p">✅ <strong>Correct:</strong></p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;p&gt;If x &amp;lt; 10 and y &amp;gt; 5, the condition is true.&lt;/p&gt;</code></pre></div></div>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;p&gt;If x &amp;lt; 10 and y &amp;gt; 5, the condition is true.&lt;/p&gt;</code></pre></div></div>
 <p class="v2-p"><strong>Output:</strong> <code>If x &lt; 10 and y &gt; 5, the condition is true.</code></p>
 <p class="v2-p">The browser sees raw <code>&lt;</code> as the beginning of a tag. Always use <code>&amp;lt;</code> for the less-than sign in text content, and <code>&amp;gt;</code> for the greater-than sign.</p>
 <hr class="v2-hr">
 <h3 class="v2-h3">Mistake 4 — Writing <code>&amp;</code> Directly in Text or Attributes</h3>
 <p class="v2-p">❌ <strong>Wrong:</strong></p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;p&gt;Bread &amp; Butter Café&lt;/p&gt;
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;p&gt;Bread &amp; Butter Café&lt;/p&gt;
 &lt;a href=&quot;page.html?a=1&amp;b=2&quot;&gt;Link&lt;/a&gt;</code></pre></div></div>
 <p class="v2-p">✅ <strong>Correct:</strong></p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;p&gt;Bread &amp;amp; Butter Café&lt;/p&gt;
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;p&gt;Bread &amp;amp; Butter Café&lt;/p&gt;
 &lt;a href=&quot;page.html?a=1&amp;amp;b=2&quot;&gt;Link&lt;/a&gt;</code></pre></div></div>
 <p class="v2-p">The raw <code>&amp;</code> has special meaning in HTML as the start of an entity. To display the <code>&amp;</code> character itself, always write <code>&amp;amp;</code>. This applies inside URLs (href attributes) too.</p>
 <hr class="v2-hr">
 <h3 class="v2-h3">Mistake 5 — Forgetting <code>&lt;meta charset="UTF-8"&gt;</code> Before Using Emojis or Special Characters</h3>
 <p class="v2-p">❌ <strong>Wrong (emojis may not display):</strong></p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
 &lt;html lang=&quot;en&quot;&gt;
 &lt;head&gt;
   &lt;title&gt;My Page&lt;/title&gt;
@@ -1041,7 +876,7 @@ Angular velocity: ω (omega)</code></pre></div></div>
   &lt;p&gt;&amp;#128512;&lt;/p&gt;
 &lt;/body&gt;</code></pre></div></div>
 <p class="v2-p">✅ <strong>Correct:</strong></p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
 &lt;html lang=&quot;en&quot;&gt;
 &lt;head&gt;
   &lt;meta charset=&quot;UTF-8&quot;&gt;
@@ -1054,44 +889,32 @@ Angular velocity: ω (omega)</code></pre></div></div>
 <hr class="v2-hr">
 <h3 class="v2-h3">Mistake 6 — Using Uppercase Element or Attribute Names</h3>
 <p class="v2-p">❌ <strong>Wrong:</strong></p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;P CLASS=&quot;intro&quot;&gt;Hello&lt;/P&gt;
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;P CLASS=&quot;intro&quot;&gt;Hello&lt;/P&gt;
 &lt;IMG SRC=&quot;photo.jpg&quot; ALT=&quot;A photo&quot;&gt;</code></pre></div></div>
 <p class="v2-p">✅ <strong>Correct:</strong></p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;p class=&quot;intro&quot;&gt;Hello&lt;/p&gt;
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;p class=&quot;intro&quot;&gt;Hello&lt;/p&gt;
 &lt;img src=&quot;photo.jpg&quot; alt=&quot;A photo&quot;&gt;</code></pre></div></div>
 <p class="v2-p">Always lowercase. Always.</p>
 <hr class="v2-hr">
 <h3 class="v2-h3">Mistake 7 — Not Quoting Attribute Values</h3>
 <p class="v2-p">❌ <strong>Wrong:</strong></p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;img src=photo.jpg alt=Lagos skyline&gt;</code></pre></div></div>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;img src=photo.jpg alt=Lagos skyline&gt;</code></pre></div></div>
 <p class="v2-p">✅ <strong>Correct:</strong></p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;img src=&quot;photo.jpg&quot; alt=&quot;Lagos skyline&quot;&gt;</code></pre></div></div>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;img src=&quot;photo.jpg&quot; alt=&quot;Lagos skyline&quot;&gt;</code></pre></div></div>
 <p class="v2-p">The unquoted version with spaces fails entirely because the browser reads <code>alt=Lagos</code> as one attribute and then sees <code>skyline</code> as a stray word with no attribute to attach to.</p>
 <hr class="v2-hr">
 <h3 class="v2-h3">Mistake 8 — Trying to Resize an Emoji with <code>width</code> and <code>height</code> (Like an Image)</h3>
 <p class="v2-p">❌ <strong>Wrong (emojis are not images):</strong></p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;img src=&quot;😀&quot; width=&quot;50&quot; height=&quot;50&quot;&gt;  &lt;!-- This doesn&#x27;t work --&gt;</code></pre></div></div>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;img src=&quot;😀&quot; width=&quot;50&quot; height=&quot;50&quot;&gt;  &lt;!-- This doesn&#x27;t work --&gt;</code></pre></div></div>
 <p class="v2-p">✅ <strong>Correct (use font-size since emojis are characters):</strong></p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;p style=&quot;font-size: 50px;&quot;&gt;&amp;#128512;&lt;/p&gt;</code></pre></div></div>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;p style=&quot;font-size: 50px;&quot;&gt;&amp;#128512;&lt;/p&gt;</code></pre></div></div>
 <p class="v2-p">Emojis are characters, not images. Use CSS <code>font-size</code> to control their size.</p>
+<hr class="v2-hr"><div class="task-box"><div class="task-lbl">✏️ Your Task</div><div class="task-body">Practise what you just learned about <strong>Common Beginner Mistakes</strong>. Open your editor, type the examples above by hand, modify them, and observe what changes.</div></div><button class="ub" onclick="unlockNext(8)">Phase Complete — Unlock Next ✓</button></div></div>
+<div class="build-box" id="build-it"><div class="build-lbl">🏗️ Build It — Mini Project</div><div class="build-name">Project Description</div><div class="build-req"><h3 class="v2-h3">Project Description</h3>
+<p class="v2-p">You will build a complete, professionally written "About Us" page for a fictional business called <strong>NairaTrack Finance</strong>, applying every concept from this lesson:</p>
+<ul class="v2-ul"><li>Correct HTML style guide conventions throughout</li><li>Character entities for reserved and special characters</li><li>Currency, trademark, and copyright symbols</li><li>Mathematical and Greek symbols (relevant to finance)</li><li>Emojis used tastefully to add personality</li></ul>
 <hr class="v2-hr">
-    <div class="task-box">
-      <div class="task-label">✏️ Your Task</div>
-      <div class="task-body">Now practise what you just learned about <strong>Common Beginner Mistakes</strong>. Open your editor, type the examples above by hand, then modify them — change values, rename variables, and observe what happens. Active experimentation is how code sticks.</div>
-    </div>
-    <button class="unlock-btn" onclick="unlockNext(8)">Phase Complete — Unlock Next ✓</button>
-  </div>
-</div>
-<div class="build-box" id="build-it">
-  <div class="build-label">🏗️ Build It</div>
-  <div class="build-name">Project Description</div>
-  <div class="build-desc">You will build a complete, professionally written "About Us" page for a</div>
-  <div class="v2-code-wrap">
-    <div class="v2-code-bar">
-      <span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span>
-      <span class="v2-code-lang">starter.html</span>
-    </div>
-    <div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
+<h3 class="v2-h3">Stage 1 — Base Structure with Style Guide Applied</h3></div><button class="reveal-btn" onclick="toggleCode(this)">💻 Reveal Starter Code</button><div class="reveal-content"><div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">starter.html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
 &lt;html lang=&quot;en&quot;&gt;
 &lt;head&gt;
   &lt;meta charset=&quot;UTF-8&quot;&gt;
@@ -1104,10 +927,7 @@ Angular velocity: ω (omega)</code></pre></div></div>
 &lt;body&gt;
   &lt;!-- Content added in next stages --&gt;
 &lt;/body&gt;
-&lt;/html&gt;</code></pre></div>
-  </div>
-  <div style="display:flex;gap:.8rem;flex-wrap:wrap;margin-top:1.2rem">
-    <button class="unlock-btn" onclick="downloadStarter(`<!DOCTYPE html>
+&lt;/html&gt;</code></pre></div></div><div style="display:flex;gap:.75rem;flex-wrap:wrap;margin-top:1rem"><button class="ub" onclick="downloadStarter(`<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -1120,87 +940,66 @@ Angular velocity: ω (omega)</code></pre></div></div>
 <body>
   <!-- Content added in next stages -->
 </body>
-</html>`)"
-      style="background:#10b981;box-shadow:0 4px 14px rgba(16,185,129,.3)">
-      ⬇ Download starter.html
-    </button>
-    <button class="unlock-btn" onclick="showGithub()"
-      style="background:#0f172a;box-shadow:none">
-      🐙 Push to GitHub →
-    </button>
-  </div>
-</div>
+</html>`)" style="background:#10b981;box-shadow:0 4px 14px rgba(16,185,129,.3)">⬇ Download starter.html</button><button class="ub" onclick="showGithub()" style="background:#0f172a;box-shadow:none">🐙 Push to GitHub Pages →</button></div></div></div>
 <div class="gh-acc" id="gh-steps" style="display:none">
-  <div class="gh-acc-head" onclick="toggleGh(this)">
-    🐙 Push Your Project to GitHub Pages &nbsp;<span>▼</span>
-  </div>
-  <div class="gh-acc-body">
-    <div class="gh-step"><div class="gh-step-n">1</div>
-    <p>Go to <strong>github.com</strong> → click <strong>New repository</strong> → name it <code>html-lesson-29-project-description</code>.</p></div>
-    <div class="gh-step"><div class="gh-step-n">2</div>
-    <p>Set it to <strong>Public</strong>, tick <strong>Add a README</strong>, then click <strong>Create repository</strong>.</p></div>
-    <div class="gh-step"><div class="gh-step-n">3</div>
-    <p>Click <strong>Add file → Upload files</strong>. Upload your <code>starter.html</code> — rename it to <code>index.html</code> before uploading.</p></div>
-    <div class="gh-step"><div class="gh-step-n">4</div>
-    <p>Commit message: <em>"Add HTML lesson 29 project"</em> → click <strong>Commit changes</strong>.</p></div>
-    <div class="gh-step"><div class="gh-step-n">5</div>
-    <p>Go to <strong>Settings → Pages</strong> → branch <strong>main</strong> → <strong>Save</strong>. Your project goes live at <code>https://YOUR-NAME.github.io/html-lesson-29-project-description/</code> in about 1 minute! 🎉</p></div>
-    <button class="unlock-btn" onclick="showEnd()" style="margin-top:.5rem">I've pushed to GitHub — Finish Session ✅</button>
-  </div>
-</div>
-<div class="session-end" id="session-end">
-  <h2>🎉 Lesson 29 complete!</h2>
-  <p style="margin-bottom:.8rem;font-size:.9rem;opacity:.9">You covered:</p>
-  <ul><li>✅ Lesson Introduction</li><li>✅ Prerequisite Concepts</li><li>✅ Part 1 — HTML Style Guide and Coding Conventions</li><li>✅ Part 2 — HTML Character Entities</li><li>✅ Part 3 — HTML Symbols</li><li>✅ Part 4 — HTML Emojis</li><li>✅ Guided Practice Exercises</li><li>✅ Common Beginner Mistakes</li></ul>
-  <div class="lesson-nav"><a href="lesson_28.html" class="ln-btn">← Lesson 28</a><a href="lesson_30.html" class="ln-btn primary">Lesson 30 →</a></div>
-</div>
+<div class="gh-hd" onclick="toggleGh(this)">🐙 Push to GitHub Pages &nbsp;<span>▼</span></div>
+<div class="gh-bd">
+<div class="gh-st"><div class="gh-n">1</div><p>Go to <strong>github.com → New repository</strong> → name it <code>html-lesson-29-project-description</code>. Set <strong>Public</strong>, tick <strong>Add README</strong>, click <strong>Create</strong>.</p></div>
+<div class="gh-st"><div class="gh-n">2</div><p>Click <strong>Add file → Upload files</strong>. Rename your file to <code>index.html</code> then upload it.</p></div>
+<div class="gh-st"><div class="gh-n">3</div><p>Commit message: <em>"Add HTML lesson 29 project"</em> → <strong>Commit changes</strong>.</p></div>
+<div class="gh-st"><div class="gh-n">4</div><p>Go to <strong>Settings → Pages</strong> → Source: <strong>main</strong> → <strong>Save</strong>. Live in ~1 min at <code>https://YOUR-NAME.github.io/html-lesson-29-project-description/</code> 🎉</p></div>
+<button class="ub" onclick="showEnd()" style="margin-top:.5rem">Done — Finish Session ✅</button>
+</div></div>
+<div class="se" id="session-end"><h2>🎉 Lesson 29 complete!</h2><p style="margin-bottom:.8rem;font-size:.9rem;opacity:.9">You covered:</p><ul><li>✅ Lesson Introduction</li><li>✅ Prerequisite Concepts</li><li>✅ Part 1 — HTML Style Guide and Coding Conventions</li><li>✅ Part 2 — HTML Character Entities</li><li>✅ Part 3 — HTML Symbols</li><li>✅ Part 4 — HTML Emojis</li><li>✅ Guided Practice Exercises</li><li>✅ Common Beginner Mistakes</li></ul><div class="ln"><a href="lesson_28.html" class="ln-btn">← Lesson 28</a><a href="lesson_30.html" class="ln-btn primary">Lesson 30 →</a></div></div>
 </main>
-
-<footer class="lesson-footer">
-  Techbase Code Coach · HTML Course · Lesson 29 · © 2025 Techbase Consultant Services, Ibadan
-</footer>
+<footer class="lf">Techbase Code Coach &nbsp;·&nbsp; HTML Course &nbsp;·&nbsp; Lesson 29 &nbsp;·&nbsp; © 2025 Techbase Consultant Services, Ibadan</footer>
+<div id="toast"></div>
+<button id="go-top" title="Back to top">↑</button>
+<canvas id="cc"></canvas>
 <script>
 const TOTAL=8,KEY='techbase_html_l29';
-let current=parseInt(localStorage.getItem(KEY)||'1');
-function init(){
-  for(let i=2;i<=current;i++) unlockPhase(i,false);
-  updateBar();
-}
+let cur=parseInt(localStorage.getItem(KEY)||'1');
+function init(){for(let i=2;i<=cur;i++)unlock(i,false);bar();}
 function unlockNext(n){
-  const chk=document.getElementById('chk'+n);
-  if(chk){chk.classList.add('done');chk.textContent='✓';}
-  localStorage.setItem(KEY,n+1); current=n+1;
+  const c=document.getElementById('chk'+n);
+  if(c){c.classList.add('done');c.textContent='✓';}
+  localStorage.setItem(KEY,n+1);cur=n+1;
   if(n===TOTAL){
-    document.getElementById('build-it').style.display='block';
-    updateBar(100);
+    document.getElementById('build-it').classList.add('visible');
+    bar(100);toast('🏗️ Build It unlocked!');
     setTimeout(()=>document.getElementById('build-it').scrollIntoView({behavior:'smooth'}),200);
-  }else{
-    unlockPhase(n+1,true); updateBar();
-  }
+    setTimeout(confetti,600);
+  }else{unlock(n+1,true);bar();toast(['✅ Phase complete!','🎯 Keep going!','💡 Nice work!','🚀 Nailed it!'][n%4]);}
 }
-function unlockPhase(n,scroll){
-  const el=document.getElementById('phase'+n);
-  if(el){el.classList.remove('locked');if(scroll)setTimeout(()=>el.scrollIntoView({behavior:'smooth',block:'start'}),150);}
+function unlock(n,scroll){
+  const el=document.getElementById('phase'+n);if(!el)return;
+  el.classList.remove('locked');
+  if(scroll)setTimeout(()=>el.scrollIntoView({behavior:'smooth',block:'start'}),180);
 }
-function updateBar(pct){
-  const p=pct!==undefined?pct:Math.round((current-1)/TOTAL*95);
-  document.getElementById('pbar').style.width=p+'%';
+function bar(p){document.getElementById('pbar').style.width=(p!==undefined?p:Math.round((cur-1)/TOTAL*95))+'%';}
+function toggleReveal(btn){const w=btn.nextElementSibling;const o=w.classList.toggle('open');btn.textContent=o?'🙈 Hide Answer':'👁️ Reveal Answer';}
+function toggleCode(btn){const w=btn.nextElementSibling;const o=w.classList.toggle('open');btn.textContent=o?'🙈 Hide Starter Code':'💻 Reveal Starter Code';}
+function copyCode(btn){
+  const code=btn.closest('.v2-code-wrap').querySelector('code').innerText;
+  navigator.clipboard.writeText(code).then(()=>{btn.textContent='✓ Copied!';btn.classList.add('copied');setTimeout(()=>{btn.textContent='⎘ Copy';btn.classList.remove('copied');},1800);}).catch(()=>{});
 }
-function showGithub(){
-  const g=document.getElementById('gh-steps');
-  if(g){g.style.display='block';setTimeout(()=>g.scrollIntoView({behavior:'smooth'}),150);}
-}
-function showEnd(){
-  const e=document.getElementById('session-end');
-  if(e){e.classList.add('visible');setTimeout(()=>e.scrollIntoView({behavior:'smooth'}),150);}
-}
+const tEl=document.getElementById('toast');let tT;
+function toast(msg){tEl.innerHTML=msg;tEl.classList.add('show');clearTimeout(tT);tT=setTimeout(()=>tEl.classList.remove('show'),2400);}
+const gEl=document.getElementById('go-top');
+window.addEventListener('scroll',()=>gEl.classList.toggle('visible',scrollY>320),{passive:true});
+gEl.addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
 function toggleGh(el){el.nextElementSibling.classList.toggle('open');}
-function downloadStarter(code){
-  const a=document.createElement('a');
-  a.href='data:text/html;charset=utf-8,'+encodeURIComponent(code);
-  a.download='starter.html';a.click();
+function showGithub(){const g=document.getElementById('gh-steps');if(g){g.style.display='block';setTimeout(()=>g.scrollIntoView({behavior:'smooth'}),150);}}
+function showEnd(){const e=document.getElementById('session-end');if(e){e.classList.add('visible');setTimeout(()=>e.scrollIntoView({behavior:'smooth'}),150);}}
+function downloadStarter(code){const ext='html'==='python'?'py':'html';const a=document.createElement('a');a.href='data:text/'+(ext==='py'?'x-python':'html')+';charset=utf-8,'+encodeURIComponent(code);a.download='starter.'+ext;a.click();}
+function confetti(){
+  const cv=document.getElementById('cc');cv.style.display='block';const ctx=cv.getContext('2d');
+  cv.width=innerWidth;cv.height=innerHeight;
+  const ps=Array.from({length:130},()=>{return{x:Math.random()*cv.width,y:-10-Math.random()*120,r:4+Math.random()*6,d:2+Math.random()*3,c:['#e34c26','#0284c7','#d97706','#059669','#7c3aed','#ec4899'][Math.floor(Math.random()*6)],ta:0};}); 
+  let f=0;
+  function draw(){ctx.clearRect(0,0,cv.width,cv.height);ps.forEach(p=>{p.ta+=.1;p.y+=p.d;p.x+=Math.sin(f/20);ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fillStyle=p.c;ctx.fill();});f++;if(f<200)requestAnimationFrame(draw);else{ctx.clearRect(0,0,cv.width,cv.height);cv.style.display='none';}}
+  draw();toast('🎉 All phases done! Build It awaits!');
 }
 init();
 </script>
-</body>
-</html>
+</body></html>

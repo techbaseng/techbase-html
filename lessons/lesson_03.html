@@ -1,273 +1,179 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>Lesson 03: HTML Elements: Anatomy, Nesting, Empty Elements &amp; Case Sensitivity — Techbase HTML</title>
-<meta name="description" content="HTML Elements: Anatomy, Nesting, Empty Elements &amp; Case Sensitivity">
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<style>
-:root{
-  --acc:#e34c26;--acc-d:#c0391a;--acc-pale:#fff5f2;
-  --acc-b:rgba(227,76,38,.25);--acc-sh:rgba(227,76,38,.25);
-  --bg:#f8fafc;--surface:#fff;--border:#e2e8f0;--border2:#cbd5e1;
-  --text:#0f172a;--t2:#334155;--muted:#64748b;
-  --D:'Space Grotesk',sans-serif;--B:'Plus Jakarta Sans',sans-serif;--M:'JetBrains Mono',monospace;
-}
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"><style>
+:root{--acc:#e34c26;--acd:#c0391a;--acp:#fff5f2;--acb:rgba(227,76,38,.22);--acs:rgba(227,76,38,.28);--bg:#f8fafc;--sf:#fff;--br:#e2e8f0;--tx:#0f172a;--t2:#334155;--mu:#64748b;--D:'Space Grotesk',sans-serif;--B:'Plus Jakarta Sans',sans-serif;--M:'JetBrains Mono',monospace}
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased}
-body{background:var(--bg);color:var(--text);font-family:var(--B);font-size:16px;line-height:1.75;overflow-x:hidden}
-
-/* NAV */
-.l-nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(255,255,255,.95);
-  backdrop-filter:blur(12px);border-bottom:1px solid var(--border);height:58px;
-  display:flex;align-items:center;padding:0 1.5rem;gap:1rem;justify-content:space-between}
-.l-nav-logo{font-family:var(--D);font-weight:700;font-size:.9rem;color:var(--text);text-decoration:none}
-.l-nav-back{font-size:.8rem;color:var(--muted);text-decoration:none;font-weight:500;display:flex;align-items:center;gap:.3rem;transition:color .2s}
+body{background:var(--bg);color:var(--tx);font-family:var(--B);font-size:16px;line-height:1.75;overflow-x:hidden}
+.l-nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(255,255,255,.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--br);height:58px;display:flex;align-items:center;padding:0 1.5rem;justify-content:space-between}
+.l-nav-logo{font-family:var(--D);font-weight:700;font-size:.9rem;color:var(--tx);text-decoration:none}
+.l-nav-back{font-size:.8rem;color:var(--mu);text-decoration:none;font-weight:500;transition:color .2s}
 .l-nav-back:hover{color:var(--acc)}
-.l-nav-label{font-family:var(--M);font-size:.68rem;color:var(--muted)}
-
-/* PROGRESS */
-.progress-wrap{position:fixed;top:58px;left:0;right:0;z-index:199;height:4px;background:var(--border)}
-.progress-bar{height:100%;background:var(--acc);transition:width .4s ease;width:0%}
-
-/* HERO */
-.l-hero{padding:80px 1.5rem 2rem;background:linear-gradient(160deg,#fff5f2 0%,#f8fafc 55%,#ffe8e0 100%);border-bottom:1px solid var(--border)}
-.l-hero-inner{max-width:860px;margin:0 auto}
-.l-badge{display:inline-flex;align-items:center;gap:.4rem;border-radius:100px;padding:.2rem .85rem;
-  font-family:var(--M);font-size:.62rem;letter-spacing:.08em;text-transform:uppercase;font-weight:600;
-  color:var(--acc);background:var(--acc-pale);border:1px solid var(--acc-b);margin-bottom:.8rem}
-.l-hero h1{font-family:var(--D);font-weight:700;font-size:clamp(1.5rem,4vw,2.3rem);
-  letter-spacing:-.02em;line-height:1.15;margin-bottom:.5rem}
-.l-hero-sub{font-size:.95rem;color:var(--muted);margin-bottom:1rem}
-
-/* WELCOME BOX */
-.welcome-box{background:linear-gradient(135deg,var(--acc),var(--acc-d));color:#fff;
-  border-radius:16px;padding:1.5rem 1.8rem;max-width:860px;margin:1.5rem auto 0}
-.welcome-box h2{font-family:var(--D);font-weight:700;font-size:1.05rem;margin-bottom:.6rem}
-.welcome-box p,.welcome-box li{font-size:.9rem;line-height:1.8;opacity:.93}
-.welcome-box ul{margin-left:1.2rem;margin-top:.5rem}
-.welcome-meta{display:flex;gap:1rem;margin-top:1rem;flex-wrap:wrap}
-.welcome-meta span{background:rgba(255,255,255,.18);border-radius:6px;padding:.2rem .75rem;
-  font-family:var(--M);font-size:.68rem;font-weight:500}
-
-/* PHASE */
-.phase{background:var(--surface);border:1.5px solid var(--border);border-radius:16px;
-  margin-bottom:1.5rem;overflow:hidden;transition:opacity .3s,transform .3s,filter .3s}
-.phase.locked{opacity:.35;pointer-events:none;filter:blur(1.5px)}
-.phase-header{padding:1rem 1.4rem;background:#fff8f5;
-  border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;gap:1rem;cursor:default}
-.phase-num{font-family:var(--M);font-size:.7rem;font-weight:600;letter-spacing:.08em;
-  text-transform:uppercase;color:var(--acc)}
-.phase-title{font-family:var(--D);font-weight:700;font-size:.95rem;color:var(--text);
-  flex:1;margin:0 .8rem}
-.phase-check{width:26px;height:26px;border-radius:50%;background:var(--border);
-  display:flex;align-items:center;justify-content:center;font-size:.8rem;flex-shrink:0;
-  transition:background .3s,color .3s}
-.phase-check.done{background:#10b981;color:#fff}
-.phase-body{padding:1.6rem 1.8rem}
-
-/* RICH CONTENT STYLES */
+.l-nav-lbl{font-family:var(--M);font-size:.68rem;color:var(--mu)}
+.pw{position:fixed;top:58px;left:0;right:0;z-index:199;height:4px;background:var(--br)}
+.pb{height:100%;background:linear-gradient(90deg,var(--acc),var(--acd));transition:width .5s cubic-bezier(.4,0,.2,1);width:0%;position:relative}
+.pb::after{content:'';position:absolute;right:0;top:0;bottom:0;width:20px;background:inherit;filter:brightness(1.4);animation:pg 1.5s ease-in-out infinite}
+@keyframes pg{0%,100%{opacity:1}50%{opacity:.35}}
+.l-hero{padding:80px 1.5rem 2rem;background:linear-gradient(160deg,#fff5f2 0%,#f8fafc 55%,#ffe8e0 100%);border-bottom:1px solid var(--br)}
+.l-hero-in{max-width:860px;margin:0 auto}
+.badge{display:inline-flex;align-items:center;border-radius:100px;padding:.22rem .9rem;font-family:var(--M);font-size:.62rem;letter-spacing:.08em;text-transform:uppercase;font-weight:700;color:var(--acc);background:var(--acp);border:1.5px solid var(--acb);margin-bottom:.85rem}
+.l-hero h1{font-family:var(--D);font-weight:700;font-size:clamp(1.5rem,4vw,2.3rem);letter-spacing:-.02em;line-height:1.15;margin-bottom:.5rem}
+.l-hero-sub{font-size:.9rem;color:var(--mu)}
+.wb{background:#fff;border:1.5px solid var(--acb);border-left:5px solid var(--acc);border-radius:14px;padding:1.4rem 1.6rem;max-width:860px;margin:1.5rem auto 0;box-shadow:0 2px 12px var(--acs)}
+.wb h2{font-family:var(--D);font-weight:700;font-size:1.05rem;color:var(--acd);margin-bottom:.6rem}
+.wb p,.wb li{font-size:.92rem;line-height:1.85;color:var(--t2)}
+.wb ul{margin-left:1.2rem;margin-top:.4rem}
+.wm{display:flex;gap:.65rem;margin-top:1rem;flex-wrap:wrap}
+.wm span{background:var(--acp);color:var(--acd);border:1px solid var(--acb);border-radius:7px;padding:.22rem .7rem;font-family:var(--M);font-size:.68rem;font-weight:600}
+.phase{background:var(--sf);border:1.5px solid var(--br);border-radius:16px;margin-bottom:1.5rem;overflow:hidden;transition:opacity .35s,filter .35s,transform .35s}
+.phase.locked{opacity:.28;pointer-events:none;filter:blur(2px);transform:scale(.99)}
+.ph{padding:1rem 1.4rem;background:#fff8f5;border-bottom:1px solid var(--br);display:flex;align-items:center;gap:.8rem}
+.pn{font-family:var(--M);font-size:.65rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--acc);white-space:nowrap}
+.pt{font-family:var(--D);font-weight:700;font-size:.95rem;color:var(--tx);flex:1}
+.pc{width:26px;height:26px;border-radius:50%;background:var(--br);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:.8rem;transition:background .3s,transform .4s}
+.pc.done{background:#10b981;color:#fff;transform:scale(1.15) rotate(360deg)}
+.pb2{padding:1.6rem 1.8rem}
 .v2-p{margin-bottom:1rem;font-size:.95rem;color:var(--t2);line-height:1.85}
-.v2-h3{font-family:var(--D);font-weight:700;font-size:1.05rem;color:var(--text);
-  margin:1.6rem 0 .5rem;padding-top:.2rem;border-top:2px solid var(--acc-pale)}
-.v2-h4{font-family:var(--D);font-weight:600;font-size:.95rem;color:var(--t2);margin:1.1rem 0 .4rem}
-.v2-h5,.v2-h6{font-family:var(--D);font-weight:600;font-size:.9rem;color:var(--muted);margin:.8rem 0 .3rem}
+.v2-h3{font-family:var(--D);font-weight:700;font-size:1.05rem;color:var(--tx);margin:1.6rem 0 .5rem;border-top:2px solid var(--acp);padding-top:.4rem}
+.v2-h4{font-family:var(--D);font-weight:600;font-size:.95rem;color:var(--t2);margin:1rem 0 .35rem}
+.v2-h5,.v2-h6{font-family:var(--D);font-weight:600;font-size:.88rem;color:var(--mu);margin:.7rem 0 .3rem}
 .v2-ul,.v2-ol{margin:.6rem 0 1rem 1.4rem;font-size:.93rem;color:var(--t2);line-height:1.9}
 .v2-ul li,.v2-ol li{margin-bottom:.3rem}
-.v2-bq{border-left:4px solid var(--acc);background:var(--acc-pale);border-radius:0 10px 10px 0;
-  padding:.9rem 1.2rem;margin:1rem 0;font-size:.92rem;color:#7b1c06;font-style:italic}
+.v2-bq{border-left:4px solid var(--acc);background:var(--acp);border-radius:0 10px 10px 0;padding:.9rem 1.2rem;margin:1rem 0;font-size:.92rem;color:#7b1c06;font-style:italic}
 .v2-bq p{margin:0;color:inherit}
-.v2-bq strong{font-style:normal}
-.v2-hr{border:none;border-top:1px solid var(--border);margin:1.2rem 0}
-.v2-table-wrap{overflow-x:auto;margin:1rem 0}
+.v2-hr{border:none;border-top:1px solid var(--br);margin:1.2rem 0}
+.v2-table-wrap{overflow-x:auto;margin:1rem 0;border-radius:10px;border:1px solid var(--br)}
 .v2-table{width:100%;border-collapse:collapse;font-size:.87rem}
-.v2-table th{background:var(--acc-pale);color:#7b1c06;font-family:var(--D);
-  font-weight:700;padding:9px 12px;text-align:left;border:1px solid var(--acc-b)}
-.v2-table td{padding:8px 12px;border:1px solid var(--border);color:var(--t2);vertical-align:top}
-.v2-table tr:nth-child(even) td{background:#f8fafc}
-.v2-table code{background:var(--acc-pale);color:var(--acc);border-radius:4px;
-  padding:1px 5px;font-family:var(--M);font-size:.8em}
-.phase-body code{background:var(--acc-pale);color:var(--acc-d);border-radius:4px;
-  padding:1px 6px;font-family:var(--M);font-size:.82em}
-.phase-body a{color:var(--acc);text-decoration:underline;text-underline-offset:2px}
-.phase-body strong{color:var(--text)}
-
-/* CODE BLOCKS */
-.v2-code-wrap{margin:1.2rem 0;border-radius:12px;overflow:hidden;border:1px solid #1e293b;box-shadow:0 4px 16px rgba(0,0,0,.15)}
+.v2-table th{background:var(--acp);color:#7b1c06;font-family:var(--D);font-weight:700;padding:10px 12px;text-align:left;border-bottom:2px solid var(--acb)}
+.v2-table td{padding:8px 12px;border-bottom:1px solid var(--br);color:var(--t2);vertical-align:top}
+.v2-table tr:last-child td{border:none}
+.v2-table tr:hover td{background:var(--acp)}
+.pb2 code{background:var(--acp);color:var(--acd);border-radius:4px;padding:1px 6px;font-family:var(--M);font-size:.82em}
+.pb2 a{color:var(--acc);text-decoration:underline;text-underline-offset:2px}
+.pb2 strong{color:var(--tx)}
+.v2-code-wrap{margin:1.2rem 0;border-radius:12px;overflow:hidden;border:1px solid #1e293b;box-shadow:0 4px 18px rgba(0,0,0,.18)}
 .v2-code-bar{background:#1e293b;padding:.55rem 1rem;display:flex;align-items:center;gap:.4rem}
 .v2-dot{width:10px;height:10px;border-radius:50%}
 .v2-dot.r{background:#ff5f57}.v2-dot.y{background:#febc2e}.v2-dot.g{background:#28c840}
-.v2-code-lang{margin-left:.6rem;font-family:var(--M);font-size:.65rem;color:#64748b;text-transform:uppercase;letter-spacing:.08em}
+.v2-code-lang{margin-left:.5rem;font-family:var(--M);font-size:.62rem;color:#64748b;text-transform:uppercase;letter-spacing:.08em;flex:1}
+.copy-btn{background:rgba(255,255,255,.08);color:#94a3b8;border:none;border-radius:6px;padding:.25rem .65rem;font-family:var(--M);font-size:.65rem;cursor:pointer;transition:background .2s,color .2s}
+.copy-btn:hover{background:rgba(255,255,255,.2);color:#fff}
+.copy-btn.copied{background:#10b981;color:#fff}
 .v2-code-body{background:#0f172a;padding:1.3rem 1.5rem;overflow-x:auto}
 .v2-code-body pre{margin:0}
-.v2-code-body code{font-family:var(--M);font-size:.8rem;line-height:1.9;color:#e2e8f0;
-  white-space:pre;background:transparent;padding:0;border-radius:0}
-
-/* TASK BOX */
-.task-box{background:#fff0ec;border:2px dashed #e34c26;
-  border-radius:12px;padding:1rem 1.3rem;margin:1.4rem 0}
-.task-label{font-family:var(--M);font-size:.65rem;font-weight:700;letter-spacing:.1em;
-  text-transform:uppercase;color:#7b1c06;margin-bottom:.5rem;display:flex;align-items:center;gap:.4rem}
-.task-box p,.task-body{font-size:.92rem;color:#7b1c06;line-height:1.8}
-.task-box code{background:rgba(0,0,0,.08);border-radius:4px;padding:1px 6px;
-  font-family:var(--M);font-size:.82em}
-
-/* UNLOCK BUTTON */
-.unlock-btn{display:inline-flex;align-items:center;gap:.5rem;background:var(--acc);
-  color:#fff;font-family:var(--D);font-weight:700;font-size:.88rem;
-  padding:.75rem 1.6rem;border-radius:10px;border:none;cursor:pointer;
-  transition:transform .2s,box-shadow .2s;box-shadow:0 4px 14px var(--acc-sh);margin-top:1.2rem}
-.unlock-btn:hover{transform:translateY(-2px);box-shadow:0 8px 22px var(--acc-sh)}
-
-/* BUILD IT */
+.v2-code-body code{font-family:var(--M);font-size:.8rem;line-height:1.95;color:#e2e8f0;white-space:pre;background:transparent;padding:0;border-radius:0}
+.task-box{background:#fff0ec;border:2px dashed #e34c26;border-radius:12px;padding:1.1rem 1.3rem;margin:1.4rem 0}
+.task-lbl{font-family:var(--M);font-size:.65rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#7b1c06;margin-bottom:.5rem;display:flex;align-items:center;gap:.4rem}
+.task-body{font-size:.93rem;color:#7b1c06;line-height:1.85}
+.task-body code{background:rgba(0,0,0,.1);border-radius:4px;padding:1px 6px;font-family:var(--M);font-size:.82em}
+.chal-box{background:linear-gradient(135deg,#fff5f2 0%,#fff 100%);border:2px solid var(--acc);border-radius:14px;padding:1.2rem 1.4rem;margin-bottom:1.2rem}
+.chal-lbl{font-family:var(--M);font-size:.65rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--acd);margin-bottom:.6rem}
+.chal-body{font-size:.95rem;color:var(--tx);line-height:1.85}
+.chal-body code{background:var(--acp);color:var(--acd);border-radius:4px;padding:1px 5px;font-family:var(--M);font-size:.82em}
+.reveal-btn{display:inline-flex;align-items:center;gap:.5rem;background:transparent;color:var(--acd);font-family:var(--D);font-weight:700;font-size:.85rem;padding:.6rem 1.2rem;border-radius:8px;border:2px solid var(--acc);cursor:pointer;transition:background .2s,color .2s;margin:.6rem 0}
+.reveal-btn:hover{background:var(--acc);color:#fff}
+.reveal-content{display:none;margin-top:.6rem;animation:fi .3s ease}
+.reveal-content.open{display:block}
+@keyframes fi{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
 .build-box{background:#f0fdf4;border:2px solid #16a34a;border-radius:16px;padding:1.6rem;margin:2rem 0;display:none}
-.build-label{font-family:var(--M);font-size:.65rem;font-weight:700;letter-spacing:.1em;
-  text-transform:uppercase;color:#15803d;margin-bottom:.4rem}
-.build-name{font-family:var(--D);font-weight:700;font-size:1.1rem;color:#14532d;margin-bottom:.5rem}
-.build-desc{font-size:.9rem;color:#166534;margin-bottom:1.2rem;line-height:1.75}
-.build-desc code{background:rgba(22,163,74,.12);border-radius:4px;padding:1px 6px;font-family:var(--M);font-size:.82em}
-.build-desc strong{color:#14532d}
-
-/* GITHUB ACCORDION */
-.gh-acc{border:1.5px solid var(--border);border-radius:12px;overflow:hidden;margin:1.5rem 0}
-.gh-acc-head{padding:1rem 1.2rem;background:#f8fafc;cursor:pointer;
-  display:flex;align-items:center;justify-content:space-between;
-  font-family:var(--D);font-weight:600;font-size:.9rem;user-select:none}
-.gh-acc-body{display:none;padding:1.2rem;border-top:1px solid var(--border)}
-.gh-acc-body.open{display:block}
-.gh-step{display:flex;gap:.8rem;margin-bottom:1rem;align-items:flex-start}
-.gh-step-n{width:26px;height:26px;border-radius:50%;background:var(--acc);color:#fff;
-  font-family:var(--D);font-weight:700;font-size:.75rem;display:flex;align-items:center;
-  justify-content:center;flex-shrink:0;margin-top:2px}
-.gh-step p{font-size:.88rem;color:var(--t2);line-height:1.7}
-.gh-step code{background:var(--acc-pale);color:var(--acc-d);border-radius:4px;
-  padding:1px 6px;font-family:var(--M);font-size:.82em}
-
-/* SESSION END */
-.session-end{background:linear-gradient(135deg,var(--acc),var(--acc-d));color:#fff;
-  border-radius:16px;padding:1.6rem 1.8rem;margin:2rem 0;display:none}
-.session-end.visible{display:block}
-.session-end h2{font-family:var(--D);font-weight:700;font-size:1.1rem;margin-bottom:.8rem}
-.session-end ul{list-style:none;display:flex;flex-direction:column;gap:.4rem}
-.session-end li{font-size:.9rem;opacity:.93;display:flex;align-items:center;gap:.5rem}
-.ln-btn{display:inline-flex;align-items:center;gap:.4rem;background:var(--surface);
-  color:var(--t2);font-family:var(--D);font-weight:600;font-size:.82rem;
-  padding:.65rem 1.2rem;border-radius:8px;text-decoration:none;
-  border:1.5px solid var(--border);transition:border-color .2s,color .2s}
+.build-box.visible{display:block;animation:fi .4s ease}
+.build-lbl{font-family:var(--M);font-size:.65rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#15803d;margin-bottom:.4rem}
+.build-name{font-family:var(--D);font-weight:700;font-size:1.15rem;color:#14532d;margin-bottom:.6rem}
+.build-req{font-size:.93rem;color:#166534;line-height:1.8;margin-bottom:.8rem}
+.build-req code{background:rgba(22,163,74,.12);border-radius:4px;padding:1px 6px;font-family:var(--M);font-size:.82em}
+.build-req strong{color:#14532d}
+.gh-acc{border:1.5px solid var(--br);border-radius:12px;overflow:hidden;margin:1.5rem 0}
+.gh-hd{padding:1rem 1.2rem;background:#f8fafc;cursor:pointer;display:flex;align-items:center;justify-content:space-between;font-family:var(--D);font-weight:600;font-size:.9rem;user-select:none;transition:background .2s}
+.gh-hd:hover{background:#f1f5f9}
+.gh-bd{display:none;padding:1.2rem;border-top:1px solid var(--br)}
+.gh-bd.open{display:block;animation:fi .25s ease}
+.gh-st{display:flex;gap:.8rem;margin-bottom:1rem;align-items:flex-start}
+.gh-n{width:26px;height:26px;border-radius:50%;background:var(--acc);color:#fff;font-family:var(--D);font-weight:700;font-size:.75rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px}
+.gh-st p{font-size:.88rem;color:var(--t2);line-height:1.7}
+.gh-st code{background:var(--acp);color:var(--acd);border-radius:4px;padding:1px 6px;font-family:var(--M);font-size:.82em}
+.gh-nop{background:#fef3c7;border:1.5px solid #fde68a;border-radius:10px;padding:1rem 1.2rem;font-size:.9rem;color:#78350f;line-height:1.75;margin-bottom:1rem}
+.se{background:linear-gradient(135deg,var(--acc),var(--acd));color:#fff;border-radius:16px;padding:1.6rem 1.8rem;margin:2rem 0;display:none}
+.se.visible{display:block;animation:fi .4s ease}
+.se h2{font-family:var(--D);font-weight:700;font-size:1.1rem;margin-bottom:.8rem}
+.se ul{list-style:none;display:flex;flex-direction:column;gap:.4rem}
+.se li{font-size:.9rem;opacity:.93;display:flex;align-items:center;gap:.5rem}
+.ln-btn{display:inline-flex;align-items:center;gap:.4rem;background:var(--sf);color:var(--t2);font-family:var(--D);font-weight:600;font-size:.82rem;padding:.65rem 1.2rem;border-radius:8px;text-decoration:none;border:1.5px solid var(--br);transition:border-color .2s,color .2s}
 .ln-btn:hover{border-color:var(--acc);color:var(--acc)}
 .ln-btn.primary{background:var(--acc);color:#fff;border-color:var(--acc)}
 .ln-btn.primary:hover{opacity:.9}
-.lesson-nav{display:flex;align-items:center;justify-content:space-between;
-  padding-top:2rem;border-top:1px solid rgba(255,255,255,.25);margin-top:1.5rem;flex-wrap:wrap;gap:.75rem}
-.lesson-footer{text-align:center;padding:1.5rem;font-family:var(--M);font-size:.72rem;
-  color:var(--muted);border-top:1px solid var(--border);background:var(--surface)}
+.ln{display:flex;align-items:center;justify-content:space-between;padding-top:1.5rem;border-top:1px solid rgba(255,255,255,.25);margin-top:1.5rem;flex-wrap:wrap;gap:.75rem}
+.ub{display:inline-flex;align-items:center;gap:.5rem;background:var(--acc);color:#fff;font-family:var(--D);font-weight:700;font-size:.88rem;padding:.75rem 1.6rem;border-radius:10px;border:none;cursor:pointer;transition:transform .2s,box-shadow .2s;box-shadow:0 4px 14px var(--acs);margin-top:1.2rem}
+.ub:hover{transform:translateY(-2px);box-shadow:0 8px 22px var(--acs)}
+.ub:active{transform:scale(.97)}
+#toast{position:fixed;bottom:90px;right:1.5rem;z-index:999;background:#1e293b;color:#fff;border-radius:10px;padding:.75rem 1.2rem;font-family:var(--D);font-size:.85rem;font-weight:600;box-shadow:0 8px 24px rgba(0,0,0,.25);transform:translateY(20px);opacity:0;transition:all .3s;pointer-events:none}
+#toast.show{transform:translateY(0);opacity:1}
+#go-top{position:fixed;bottom:1.5rem;right:1.5rem;z-index:300;width:44px;height:44px;border-radius:50%;background:var(--acc);color:#fff;border:none;cursor:pointer;font-size:1.15rem;box-shadow:0 4px 16px var(--acs);display:flex;align-items:center;justify-content:center;opacity:0;transform:translateY(10px);transition:opacity .3s,transform .3s,box-shadow .2s;pointer-events:none}
+#go-top.visible{opacity:1;transform:translateY(0);pointer-events:auto}
+#go-top:hover{box-shadow:0 8px 24px var(--acs);transform:translateY(-2px)}
+#cc{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:998;display:none}
+.lf{text-align:center;padding:1.5rem;font-family:var(--M);font-size:.72rem;color:var(--mu);border-top:1px solid var(--br);background:var(--sf)}
 </style>
 </head>
 <body>
 <nav class="l-nav">
   <a href="../index.html" class="l-nav-logo">⚡ Techbase HTML</a>
-  <span class="l-nav-label">Lesson 03 of 34</span>
+  <span class="l-nav-lbl">Lesson 03 of 34</span>
   <a href="../index.html" class="l-nav-back">← All Lessons</a>
 </nav>
-<div class="progress-wrap"><div class="progress-bar" id="pbar"></div></div>
-
-<div class="l-hero">
-  <div class="l-hero-inner">
-    <div class="l-badge">HTML · Lesson 03</div>
-    <h1>HTML Elements: Anatomy, Nesting, Empty Elements &amp; Case Sensitivity</h1>
-    <div class="l-hero-sub">11 phases · Build: Project Overview</div>
-  </div>
-</div>
-
-<section style="background:linear-gradient(160deg,#fff5f2 0%,#f8fafc 55%,#ffe8e0 100%);padding-bottom:1.5rem;border-bottom:1px solid var(--border)">
-  <div style="max-width:860px;margin:0 auto;padding:0 1.5rem"><div class="welcome-box">
-  <h2>👋 Welcome to Lesson 03</h2>
-  <div style="font-size:.9rem;line-height:1.85;opacity:.93"><p class="v2-p">Welcome to Lesson 3! In Lessons 1 and 2, you learned what HTML is, how a document is structured, and how to use tags like <code>&lt;h1&gt;</code>, <code>&lt;p&gt;</code>, <code>&lt;a&gt;</code>, and <code>&lt;img&gt;</code>. You have already been <em>using</em> HTML elements — but do you truly understand what an element actually <em>is</em>?</p>
-<p class="v2-p">In this lesson, we go deeper. We step back and study the fundamental building block of every single web page ever made: <strong>the HTML element</strong>.</p>
-<p class="v2-p">By the end of this lesson you will be able to:</p>
-<ul class="v2-ul"><li>Precisely define what an HTML element is and name all of its parts</li><li>Understand why elements are nested inside each other and how to read that nesting clearly</li><li>Explain the full nesting structure of a standard HTML document from the outside in</li><li>Identify empty elements and explain why they have no closing tag</li><li>Know why HTML is case insensitive but why you should always write in lowercase</li><li>Confidently diagnose and fix common element-related mistakes</li><li>Build a structured, multi-section web page using correct element nesting</li></ul>
-<blockquote class="v2-bq"><p class="v2-p"><strong>Real-world connection:</strong> Every developer, whether they are building a personal blog, a banking app, or a space agency's website, must have a rock-solid understanding of HTML elements and nesting. This is the grammar of the web — once it clicks, reading and writing HTML becomes effortless.</p></blockquote>
-<hr class="v2-hr"></div>
-  <div class="welcome-meta">
-    <span>📚 11 phases</span>
-    <span>🏗️ Project Overview</span>
-  </div>
+<div class="pw"><div class="pb" id="pbar"></div></div>
+<div class="l-hero"><div class="l-hero-in">
+  <div class="badge">HTML · Lesson 03</div>
+  <h1>HTML Elements: Anatomy, Nesting, Empty Elements &amp; Case Sensitivity</h1>
+  <div class="l-hero-sub">11 phases &nbsp;·&nbsp; Build: Project Overview</div>
 </div></div>
-</section>
-
-<main style="max-width:860px;margin:0 auto;padding:2rem 1.5rem 5rem">
-<div class="phase" id="phase1">
-  <div class="phase-header">
-    <div class="phase-num">Phase 1 of 11</div>
-    <div class="phase-title">Lesson Introduction</div>
-    <div class="phase-check" id="chk1"></div>
-  </div>
-  <div class="phase-body">
-    <p class="v2-p">Welcome to Lesson 3! In Lessons 1 and 2, you learned what HTML is, how a document is structured, and how to use tags like <code>&lt;h1&gt;</code>, <code>&lt;p&gt;</code>, <code>&lt;a&gt;</code>, and <code>&lt;img&gt;</code>. You have already been <em>using</em> HTML elements — but do you truly understand what an element actually <em>is</em>?</p>
+<section style="background:linear-gradient(160deg,#fff5f2 0%,#f8fafc 55%,#ffe8e0 100%);padding-bottom:1.5rem;border-bottom:1px solid var(--br)">
+  <div style="max-width:860px;margin:0 auto;padding:0 1.5rem"><div class="wb"><h2>👋 Welcome to Lesson 03</h2><div style="font-size:.92rem;line-height:1.85;color:var(--t2)"><p class="v2-p">Welcome to Lesson 3! In Lessons 1 and 2, you learned what HTML is, how a document is structured, and how to use tags like <code>&lt;h1&gt;</code>, <code>&lt;p&gt;</code>, <code>&lt;a&gt;</code>, and <code>&lt;img&gt;</code>. You have already been <em>using</em> HTML elements — but do you truly understand what an element actually <em>is</em>?</p>
 <p class="v2-p">In this lesson, we go deeper. We step back and study the fundamental building block of every single web page ever made: <strong>the HTML element</strong>.</p>
 <p class="v2-p">By the end of this lesson you will be able to:</p>
 <ul class="v2-ul"><li>Precisely define what an HTML element is and name all of its parts</li><li>Understand why elements are nested inside each other and how to read that nesting clearly</li><li>Explain the full nesting structure of a standard HTML document from the outside in</li><li>Identify empty elements and explain why they have no closing tag</li><li>Know why HTML is case insensitive but why you should always write in lowercase</li><li>Confidently diagnose and fix common element-related mistakes</li><li>Build a structured, multi-section web page using correct element nesting</li></ul>
 <blockquote class="v2-bq"><p class="v2-p"><strong>Real-world connection:</strong> Every developer, whether they are building a personal blog, a banking app, or a space agency's website, must have a rock-solid understanding of HTML elements and nesting. This is the grammar of the web — once it clicks, reading and writing HTML becomes effortless.</p></blockquote>
-<hr class="v2-hr">
-    <div class="task-box">
-      <div class="task-label">✏️ Your Task</div>
-      <div class="task-body">Now practise what you just learned about <strong>Lesson Introduction</strong>. Open your editor, type the examples above by hand, then modify them — change values, rename variables, and observe what happens. Active experimentation is how code sticks.</div>
-    </div>
-    <button class="unlock-btn" onclick="unlockNext(1)">Start Lesson ✓</button>
-  </div>
-</div>
-<div class="phase locked" id="phase2">
-  <div class="phase-header">
-    <div class="phase-num">Phase 2 of 11</div>
-    <div class="phase-title">Prerequisite Concepts</div>
-    <div class="phase-check" id="chk2"></div>
-  </div>
-  <div class="phase-body">
-    <p class="v2-p">Before exploring elements in depth, let us briefly revisit two things from Lesson 2 that directly connect to this lesson.</p>
+<hr class="v2-hr"></div><div class="wm"><span>📚 11 phases</span><span>🏗️ Project Overview</span><span>🌐 GitHub Pages</span></div></div></div>
+</section>
+<main style="max-width:860px;margin:0 auto;padding:2rem 1.5rem 5rem">
+<div class="phase" id="phase1"><div class="ph"><div class="pn">Phase 1/11</div><div class="pt">Lesson Introduction</div><div class="pc" id="chk1"></div></div><div class="pb2"><p class="v2-p">Welcome to Lesson 3! In Lessons 1 and 2, you learned what HTML is, how a document is structured, and how to use tags like <code>&lt;h1&gt;</code>, <code>&lt;p&gt;</code>, <code>&lt;a&gt;</code>, and <code>&lt;img&gt;</code>. You have already been <em>using</em> HTML elements — but do you truly understand what an element actually <em>is</em>?</p>
+<p class="v2-p">In this lesson, we go deeper. We step back and study the fundamental building block of every single web page ever made: <strong>the HTML element</strong>.</p>
+<p class="v2-p">By the end of this lesson you will be able to:</p>
+<ul class="v2-ul"><li>Precisely define what an HTML element is and name all of its parts</li><li>Understand why elements are nested inside each other and how to read that nesting clearly</li><li>Explain the full nesting structure of a standard HTML document from the outside in</li><li>Identify empty elements and explain why they have no closing tag</li><li>Know why HTML is case insensitive but why you should always write in lowercase</li><li>Confidently diagnose and fix common element-related mistakes</li><li>Build a structured, multi-section web page using correct element nesting</li></ul>
+<blockquote class="v2-bq"><p class="v2-p"><strong>Real-world connection:</strong> Every developer, whether they are building a personal blog, a banking app, or a space agency's website, must have a rock-solid understanding of HTML elements and nesting. This is the grammar of the web — once it clicks, reading and writing HTML becomes effortless.</p></blockquote>
+<hr class="v2-hr"><div class="task-box"><div class="task-lbl">✏️ Your Task</div><div class="task-body">Practise what you just learned about <strong>Lesson Introduction</strong>. Open your editor, type the examples above by hand, modify them, and observe what changes.</div></div><button class="ub" onclick="unlockNext(1)">Start Lesson ✓</button></div></div>
+<div class="phase locked" id="phase2"><div class="ph"><div class="pn">Phase 2/11</div><div class="pt">Prerequisite Concepts</div><div class="pc" id="chk2"></div></div><div class="pb2"><p class="v2-p">Before exploring elements in depth, let us briefly revisit two things from Lesson 2 that directly connect to this lesson.</p>
 <h3 class="v2-h3">Quick Recap — Tags vs Elements</h3>
 <p class="v2-p">In Lesson 2, you used <strong>tags</strong> like <code>&lt;p&gt;</code> and <code>&lt;/p&gt;</code>. But a <strong>tag</strong> and an <strong>element</strong> are not the same thing. Understanding the difference is the first step of this lesson.</p>
 <ul class="v2-ul"><li>A <strong>tag</strong> is just the label itself: <code>&lt;p&gt;</code> or <code>&lt;/p&gt;</code></li><li>An <strong>element</strong> is the <em>complete package</em>: the opening tag + the content + the closing tag</li></ul>
 <p class="v2-p">Think of it this way:</p>
 <div class="v2-table-wrap"><table class="v2-table"><thead><tr><th>Term</th><th>What it is</th><th>Example</th></tr></thead><tbody><tr><td>Opening tag</td><td>The starting label</td><td><code>&lt;p&gt;</code></td></tr><tr><td>Closing tag</td><td>The ending label</td><td><code>&lt;/p&gt;</code></td></tr><tr><td>Content</td><td>The text or other elements inside</td><td><code>Hello, world!</code></td></tr><tr><td><strong>Element</strong></td><td><strong>All three combined</strong></td><td><code>&lt;p&gt;Hello, world!&lt;/p&gt;</code></td></tr></tbody></table></div>
-<hr class="v2-hr">
-    <div class="task-box">
-      <div class="task-label">✏️ Your Task</div>
-      <div class="task-body">Now practise what you just learned about <strong>Prerequisite Concepts</strong>. Open your editor, type the examples above by hand, then modify them — change values, rename variables, and observe what happens. Active experimentation is how code sticks.</div>
-    </div>
-    <button class="unlock-btn" onclick="unlockNext(2)">Phase Complete — Unlock Next ✓</button>
-  </div>
-</div>
-<div class="phase locked" id="phase3">
-  <div class="phase-header">
-    <div class="phase-num">Phase 3 of 11</div>
-    <div class="phase-title">Part 1 — What Exactly Is an HTML Element?</div>
-    <div class="phase-check" id="chk3"></div>
-  </div>
-  <div class="phase-body">
-    <h3 class="v2-h3">The Official Definition</h3>
+<hr class="v2-hr"><div class="task-box"><div class="task-lbl">✏️ Your Task</div><div class="task-body">Practise what you just learned about <strong>Prerequisite Concepts</strong>. Open your editor, type the examples above by hand, modify them, and observe what changes.</div></div><button class="ub" onclick="unlockNext(2)">Phase Complete — Unlock Next ✓</button></div></div>
+<div class="phase locked" id="phase3"><div class="ph"><div class="pn">Phase 3/11</div><div class="pt">Part 1 — What Exactly Is an HTML Element?</div><div class="pc" id="chk3"></div></div><div class="pb2"><h3 class="v2-h3">The Official Definition</h3>
 <p class="v2-p">An <strong>HTML element</strong> is defined as everything from the <strong>start tag</strong> to the <strong>end tag</strong>, including the content between them.</p>
 <p class="v2-p">The formal structure is:</p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span></div><div class="v2-code-body"><pre><code>&lt;tagname&gt;Content goes here...&lt;/tagname&gt;</code></pre></div></div>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;tagname&gt;Content goes here...&lt;/tagname&gt;</code></pre></div></div>
 <p class="v2-p">Where:</p>
 <ul class="v2-ul"><li><code>&lt;tagname&gt;</code> is the <strong>opening tag</strong> (or start tag)</li><li><code>Content goes here...</code> is the <strong>element content</strong> — the text or other elements it holds</li><li><code>&lt;/tagname&gt;</code> is the <strong>closing tag</strong> (or end tag) — note the forward slash <code>/</code> that distinguishes it from the opening tag</li></ul>
 <hr class="v2-hr">
 <h3 class="v2-h3">Breaking Down Three Real Elements</h3>
 <p class="v2-p">Let us look at three familiar elements and label every part:</p>
 <p class="v2-p"><strong>Element 1 — A Heading:</strong></p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;h1&gt;My First Heading&lt;/h1&gt;</code></pre></div></div>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;h1&gt;My First Heading&lt;/h1&gt;</code></pre></div></div>
 <div class="v2-table-wrap"><table class="v2-table"><thead><tr><th>Part</th><th>Symbol</th><th>Meaning</th></tr></thead><tbody><tr><td>Opening tag</td><td><code>&lt;h1&gt;</code></td><td>"A level-1 heading starts here"</td></tr><tr><td>Content</td><td><code>My First Heading</code></td><td>The visible text</td></tr><tr><td>Closing tag</td><td><code>&lt;/h1&gt;</code></td><td>"The heading ends here"</td></tr></tbody></table></div>
 <p class="v2-p"><strong>Element 2 — A Paragraph:</strong></p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;p&gt;My first paragraph.&lt;/p&gt;</code></pre></div></div>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;p&gt;My first paragraph.&lt;/p&gt;</code></pre></div></div>
 <div class="v2-table-wrap"><table class="v2-table"><thead><tr><th>Part</th><th>Symbol</th><th>Meaning</th></tr></thead><tbody><tr><td>Opening tag</td><td><code>&lt;p&gt;</code></td><td>"A paragraph starts here"</td></tr><tr><td>Content</td><td><code>My first paragraph.</code></td><td>The visible text</td></tr><tr><td>Closing tag</td><td><code>&lt;/p&gt;</code></td><td>"The paragraph ends here"</td></tr></tbody></table></div>
 <p class="v2-p"><strong>Element 3 — A Line Break (special case — covered fully in Part 4):</strong></p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;br&gt;</code></pre></div></div>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;br&gt;</code></pre></div></div>
 <div class="v2-table-wrap"><table class="v2-table"><thead><tr><th>Part</th><th>Symbol</th><th>Meaning</th></tr></thead><tbody><tr><td>Opening tag</td><td><code>&lt;br&gt;</code></td><td>"Insert a line break here"</td></tr><tr><td>Content</td><td><em>none</em></td><td>This element has no content</td></tr><tr><td>Closing tag</td><td><em>none</em></td><td>This element has no closing tag</td></tr></tbody></table></div>
 <blockquote class="v2-bq"><p class="v2-p"><strong>Analogy:</strong> Think of an HTML element like a labelled container at a post office. The label on the front (<code>&lt;p&gt;</code>) tells the postal worker (browser) what kind of item is inside. The contents (text, images, other elements) are what gets delivered to the screen. The label on the back (<code>&lt;/p&gt;</code>) seals the container shut.</p></blockquote>
 <hr class="v2-hr">
 <h3 class="v2-h3">A Visual Map of an HTML Element</h3>
 <p class="v2-p">Here is a diagram labelling every part of one element:</p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span></div><div class="v2-code-body"><pre><code>     Opening tag          Content          Closing tag
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>     Opening tag          Content          Closing tag
          │                   │                  │
          ▼                   ▼                  ▼
       &lt;tagname&gt;   Content goes here...   &lt;/tagname&gt;
@@ -276,7 +182,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--B);font-size:16px;
 <p class="v2-p">Everything between and including the two tags is <strong>one complete HTML element</strong>.</p>
 <hr class="v2-hr">
 <h3 class="v2-h3">Simple Example — Seeing Elements Clearly</h3>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
 &lt;html&gt;
 &lt;body&gt;
 
@@ -286,27 +192,13 @@ body{background:var(--bg);color:var(--text);font-family:var(--B);font-size:16px;
 &lt;/body&gt;
 &lt;/html&gt;</code></pre></div></div>
 <p class="v2-p"><strong>Expected output in browser:</strong></p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span></div><div class="v2-code-body"><pre><code>My First Heading     ← rendered by the &lt;h1&gt; element
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>My First Heading     ← rendered by the &lt;h1&gt; element
 My first paragraph.  ← rendered by the &lt;p&gt; element</code></pre></div></div>
 <p class="v2-p">In this short page, there are <strong>four</strong> HTML elements:</p>
 <ol class="v2-ol"><li>The <code>&lt;html&gt;</code> element — wraps everything</li><li>The <code>&lt;body&gt;</code> element — wraps the visible content</li><li>The <code>&lt;h1&gt;</code> element — the heading</li><li>The <code>&lt;p&gt;</code> element — the paragraph</li></ol>
 <blockquote class="v2-bq"><p class="v2-p"><strong>Thinking prompt:</strong> Can you count the total number of <em>tags</em> in this example? (Answer: 8 — four opening tags and four closing tags.)</p></blockquote>
-<hr class="v2-hr">
-    <div class="task-box">
-      <div class="task-label">✏️ Your Task</div>
-      <div class="task-body">Now practise what you just learned about <strong>What Exactly Is an HTML Element?</strong>. Open your editor, type the examples above by hand, then modify them — change values, rename variables, and observe what happens. Active experimentation is how code sticks.</div>
-    </div>
-    <button class="unlock-btn" onclick="unlockNext(3)">Phase Complete — Unlock Next ✓</button>
-  </div>
-</div>
-<div class="phase locked" id="phase4">
-  <div class="phase-header">
-    <div class="phase-num">Phase 4 of 11</div>
-    <div class="phase-title">Part 2 — Nested HTML Elements</div>
-    <div class="phase-check" id="chk4"></div>
-  </div>
-  <div class="phase-body">
-    <h3 class="v2-h3">What Does "Nested" Mean?</h3>
+<hr class="v2-hr"><div class="task-box"><div class="task-lbl">✏️ Your Task</div><div class="task-body">Practise what you just learned about <strong>What Exactly Is an HTML Element?</strong>. Open your editor, type the examples above by hand, modify them, and observe what changes.</div></div><button class="ub" onclick="unlockNext(3)">Phase Complete — Unlock Next ✓</button></div></div>
+<div class="phase locked" id="phase4"><div class="ph"><div class="pn">Phase 4/11</div><div class="pt">Part 2 — Nested HTML Elements</div><div class="pc" id="chk4"></div></div><div class="pb2"><h3 class="v2-h3">What Does "Nested" Mean?</h3>
 <p class="v2-p"><strong>Nesting</strong> means placing one element <em>inside</em> another element. The element that sits inside is called the <strong>child element</strong>. The element it sits inside is called the <strong>parent element</strong>.</p>
 <p class="v2-p">Think of Russian nesting dolls (matryoshka dolls). The big doll is the outermost parent. Inside it sits a slightly smaller doll (its child). Inside that doll sits an even smaller one. HTML elements work exactly the same way.</p>
 <p class="v2-p">Or think of it like folders on your computer:</p>
@@ -316,7 +208,7 @@ My first paragraph.  ← rendered by the &lt;p&gt; element</code></pre></div></d
 <hr class="v2-hr">
 <h3 class="v2-h3">The Full Nesting Structure — Explained Layer by Layer</h3>
 <p class="v2-p">Here is the complete example document, and we will peel it apart layer by layer:</p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
 &lt;html&gt;
 &lt;body&gt;
 
@@ -327,7 +219,7 @@ My first paragraph.  ← rendered by the &lt;p&gt; element</code></pre></div></d
 &lt;/html&gt;</code></pre></div></div>
 <h4 class="v2-h4">Layer 1 — The <code>&lt;html&gt;</code> Element (The Root)</h4>
 <p class="v2-p">The <code>&lt;html&gt;</code> element is the <strong>root element</strong>. It defines the entire HTML document. Every other element in the file lives inside it.</p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;html&gt;
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;html&gt;
   ...everything else lives here...
 &lt;/html&gt;</code></pre></div></div>
 <p class="v2-p">Think of <code>&lt;html&gt;</code> as the outer walls of a house. Nothing in the house can exist outside those walls.</p>
@@ -336,7 +228,7 @@ My first paragraph.  ← rendered by the &lt;p&gt; element</code></pre></div></d
 <hr class="v2-hr">
 <h4 class="v2-h4">Layer 2 — The <code>&lt;body&gt;</code> Element (Lives Inside <code>&lt;html&gt;</code>)</h4>
 <p class="v2-p">Inside the <code>&lt;html&gt;</code> element lives the <code>&lt;body&gt;</code> element:</p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;body&gt;
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;body&gt;
   &lt;h1&gt;My First Heading&lt;/h1&gt;
   &lt;p&gt;My first paragraph.&lt;/p&gt;
 &lt;/body&gt;</code></pre></div></div>
@@ -347,14 +239,14 @@ My first paragraph.  ← rendered by the &lt;p&gt; element</code></pre></div></d
 <hr class="v2-hr">
 <h4 class="v2-h4">Layer 3 — The <code>&lt;h1&gt;</code> and <code>&lt;p&gt;</code> Elements (Live Inside <code>&lt;body&gt;</code>)</h4>
 <p class="v2-p">Inside the <code>&lt;body&gt;</code> element there are two more elements:</p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;h1&gt;My First Heading&lt;/h1&gt;
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;h1&gt;My First Heading&lt;/h1&gt;
 &lt;p&gt;My first paragraph.&lt;/p&gt;</code></pre></div></div>
 <ul class="v2-ul"><li>The <code>&lt;h1&gt;</code> element defines a heading. Its content is the text <code>My First Heading</code>.</li><li>The <code>&lt;p&gt;</code> element defines a paragraph. Its content is the text <code>My first paragraph.</code></li></ul>
 <p class="v2-p">Both <code>&lt;h1&gt;</code> and <code>&lt;p&gt;</code> are <strong>children</strong> of <code>&lt;body&gt;</code>. They are also <strong>siblings</strong> of each other (two children of the same parent).</p>
 <hr class="v2-hr">
 <h3 class="v2-h3">Visualising Nesting as a Tree</h3>
 <p class="v2-p">Developers often think of an HTML document as a <strong>tree structure</strong>, where each element branches off from its parent:</p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span></div><div class="v2-code-body"><pre><code>html
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>html
 ├── body
 │   ├── h1  →  &quot;My First Heading&quot;
 │   └── p   →  &quot;My first paragraph.&quot;</code></pre></div></div>
@@ -364,7 +256,7 @@ My first paragraph.  ← rendered by the &lt;p&gt; element</code></pre></div></d
 <hr class="v2-hr">
 <h3 class="v2-h3">A More Complex Nesting Example</h3>
 <p class="v2-p">Nesting is not limited to two levels. Elements can be nested many levels deep:</p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
 &lt;html&gt;
 &lt;body&gt;
 
@@ -375,13 +267,13 @@ My first paragraph.  ← rendered by the &lt;p&gt; element</code></pre></div></d
 &lt;/body&gt;
 &lt;/html&gt;</code></pre></div></div>
 <p class="v2-p"><strong>Expected output in browser:</strong></p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span></div><div class="v2-code-body"><pre><code>My Tech Blog
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>My Tech Blog
 
 Welcome to my blog about web development.
                          ^^^^^^^^^^^^^^^^
                          (blue, underlined, clickable link)</code></pre></div></div>
 <p class="v2-p">Here the <code>&lt;a&gt;</code> element is nested <strong>inside</strong> the <code>&lt;p&gt;</code> element. The tree looks like:</p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span></div><div class="v2-code-body"><pre><code>html
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>html
 └── body
     ├── h1  →  &quot;My Tech Blog&quot;
     └── p
@@ -393,32 +285,18 @@ Welcome to my blog about web development.
 <hr class="v2-hr">
 <h3 class="v2-h3">The Golden Rule of Nesting</h3>
 <p class="v2-p">When you open an element inside another element, you <strong>must close the inner element before closing the outer element</strong>.</p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;!-- CORRECT: Inner closes before outer --&gt;
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;!-- CORRECT: Inner closes before outer --&gt;
 &lt;p&gt;Welcome to &lt;a href=&quot;#&quot;&gt;my site&lt;/a&gt;.&lt;/p&gt;
 
 &lt;!-- WRONG: Overlapping — inner closes after outer --&gt;
 &lt;p&gt;Welcome to &lt;a href=&quot;#&quot;&gt;my site&lt;/p&gt;&lt;/a&gt;</code></pre></div></div>
 <p class="v2-p">Think of it like brackets in maths:</p>
 <ul class="v2-ul"><li>Correct: <code>( [ ] )</code> — inner brackets closed before outer</li><li>Wrong: <code>( [ ) ]</code> — brackets overlapping, which makes no sense</li></ul>
-<hr class="v2-hr">
-    <div class="task-box">
-      <div class="task-label">✏️ Your Task</div>
-      <div class="task-body">Now practise what you just learned about <strong>Nested HTML Elements</strong>. Open your editor, type the examples above by hand, then modify them — change values, rename variables, and observe what happens. Active experimentation is how code sticks.</div>
-    </div>
-    <button class="unlock-btn" onclick="unlockNext(4)">Phase Complete — Unlock Next ✓</button>
-  </div>
-</div>
-<div class="phase locked" id="phase5">
-  <div class="phase-header">
-    <div class="phase-num">Phase 5 of 11</div>
-    <div class="phase-title">Part 3 — Never Skip the End Tag</div>
-    <div class="phase-check" id="chk5"></div>
-  </div>
-  <div class="phase-body">
-    <h3 class="v2-h3">The Browser Is Forgiving — But You Should Not Be</h3>
+<hr class="v2-hr"><div class="task-box"><div class="task-lbl">✏️ Your Task</div><div class="task-body">Practise what you just learned about <strong>Nested HTML Elements</strong>. Open your editor, type the examples above by hand, modify them, and observe what changes.</div></div><button class="ub" onclick="unlockNext(4)">Phase Complete — Unlock Next ✓</button></div></div>
+<div class="phase locked" id="phase5"><div class="ph"><div class="pn">Phase 5/11</div><div class="pt">Part 3 — Never Skip the End Tag</div><div class="pc" id="chk5"></div></div><div class="pb2"><h3 class="v2-h3">The Browser Is Forgiving — But You Should Not Be</h3>
 <p class="v2-p">HTML browsers are designed to be tolerant. In many cases, if you forget a closing tag, the browser will guess what you meant and still display something.</p>
 <p class="v2-p">For example, this will likely still display two paragraphs in most browsers:</p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;html&gt;
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;html&gt;
 &lt;body&gt;
 
 &lt;p&gt;This is a paragraph
@@ -427,7 +305,7 @@ Welcome to my blog about web development.
 &lt;/body&gt;
 &lt;/html&gt;</code></pre></div></div>
 <p class="v2-p"><strong>What the browser might show:</strong></p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span></div><div class="v2-code-body"><pre><code>This is a paragraph
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>This is a paragraph
 This is a paragraph</code></pre></div></div>
 <p class="v2-p">It looks fine! But this is dangerous. Here is why.</p>
 <hr class="v2-hr">
@@ -438,7 +316,7 @@ This is a paragraph</code></pre></div></div>
 <p class="v2-p"><strong>Problem 3 — JavaScript and CSS failures.</strong> Code that reads your HTML structure (like JavaScript or CSS selectors) relies on properly closed elements. Missing tags can break interactivity and styling.</p>
 <p class="v2-p"><strong>Problem 4 — Validation failures.</strong> Professional web projects use HTML validators to check code quality. Missing tags cause validation errors that can block deployment.</p>
 <h4 class="v2-h4">Example of Cascading Nesting Error</h4>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;!-- WRONG: Missing &lt;/p&gt; inside a larger structure --&gt;
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;!-- WRONG: Missing &lt;/p&gt; inside a larger structure --&gt;
 &lt;body&gt;
   &lt;p&gt;First paragraph
   &lt;p&gt;Second paragraph
@@ -447,7 +325,7 @@ This is a paragraph</code></pre></div></div>
   &lt;/div&gt;
 &lt;/body&gt;</code></pre></div></div>
 <p class="v2-p">The browser has to guess where the <code>&lt;p&gt;</code> elements end. In complex layouts, this guessing frequently goes wrong — columns collapse, text appears in the wrong place, or entire sections disappear.</p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;!-- CORRECT: All tags properly closed --&gt;
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;!-- CORRECT: All tags properly closed --&gt;
 &lt;body&gt;
   &lt;p&gt;First paragraph&lt;/p&gt;
   &lt;p&gt;Second paragraph&lt;/p&gt;
@@ -456,37 +334,23 @@ This is a paragraph</code></pre></div></div>
   &lt;/div&gt;
 &lt;/body&gt;</code></pre></div></div>
 <blockquote class="v2-bq"><p class="v2-p"><strong>Rule to live by:</strong> Always close your tags. Every single time. No exceptions. The habit of always closing tags will save you hours of debugging confusion throughout your career.</p></blockquote>
-<hr class="v2-hr">
-    <div class="task-box">
-      <div class="task-label">✏️ Your Task</div>
-      <div class="task-body">Now practise what you just learned about <strong>Never Skip the End Tag</strong>. Open your editor, type the examples above by hand, then modify them — change values, rename variables, and observe what happens. Active experimentation is how code sticks.</div>
-    </div>
-    <button class="unlock-btn" onclick="unlockNext(5)">Phase Complete — Unlock Next ✓</button>
-  </div>
-</div>
-<div class="phase locked" id="phase6">
-  <div class="phase-header">
-    <div class="phase-num">Phase 6 of 11</div>
-    <div class="phase-title">Part 4 — Empty HTML Elements</div>
-    <div class="phase-check" id="chk6"></div>
-  </div>
-  <div class="phase-body">
-    <h3 class="v2-h3">What is an Empty Element?</h3>
+<hr class="v2-hr"><div class="task-box"><div class="task-lbl">✏️ Your Task</div><div class="task-body">Practise what you just learned about <strong>Never Skip the End Tag</strong>. Open your editor, type the examples above by hand, modify them, and observe what changes.</div></div><button class="ub" onclick="unlockNext(5)">Phase Complete — Unlock Next ✓</button></div></div>
+<div class="phase locked" id="phase6"><div class="ph"><div class="pn">Phase 6/11</div><div class="pt">Part 4 — Empty HTML Elements</div><div class="pc" id="chk6"></div></div><div class="pb2"><h3 class="v2-h3">What is an Empty Element?</h3>
 <p class="v2-p">An <strong>empty element</strong> (also called a <strong>void element</strong>) is an HTML element that:</p>
 <ul class="v2-ul"><li>Has <strong>no content</strong> between its tags</li><li>Therefore has <strong>no closing tag</strong></li></ul>
 <p class="v2-p">The most common empty element you will use early on is <code>&lt;br&gt;</code>.</p>
 <h3 class="v2-h3">The <code>&lt;br&gt;</code> Element — Line Break</h3>
 <p class="v2-p">The <code>&lt;br&gt;</code> tag forces a <strong>line break</strong> — it moves the following content to the next line, without starting a whole new paragraph.</p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;p&gt;This is a &lt;br&gt; paragraph with a line break.&lt;/p&gt;</code></pre></div></div>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;p&gt;This is a &lt;br&gt; paragraph with a line break.&lt;/p&gt;</code></pre></div></div>
 <p class="v2-p"><strong>Expected output in browser:</strong></p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span></div><div class="v2-code-body"><pre><code>This is a
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>This is a
 paragraph with a line break.</code></pre></div></div>
 <p class="v2-p">Notice: the text wraps onto the next line at the exact point where <code>&lt;br&gt;</code> appears.</p>
 <hr class="v2-hr">
 <h3 class="v2-h3">Why Does <code>&lt;br&gt;</code> Have No Closing Tag?</h3>
 <p class="v2-p">Think about it logically. A line break is not a <em>container</em> for content. It does not "hold" anything. It is simply an instruction: <em>"break the line here."</em> Since there is nothing to wrap around, there is nothing to close.</p>
 <p class="v2-p">Compare this to <code>&lt;p&gt;</code>, which <strong>does</strong> hold content:</p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;!-- &lt;p&gt; holds content, so it needs opening AND closing tags --&gt;
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;!-- &lt;p&gt; holds content, so it needs opening AND closing tags --&gt;
 &lt;p&gt;This paragraph holds content.&lt;/p&gt;
 
 &lt;!-- &lt;br&gt; holds nothing, so it has only one tag --&gt;
@@ -499,7 +363,7 @@ paragraph with a line break.</code></pre></div></div>
 <p class="v2-p">You already used <code>&lt;img&gt;</code> in Lesson 2. Now you know <em>why</em> it has no closing tag — because it is an empty element that simply points to an image file, rather than wrapping around content.</p>
 <hr class="v2-hr">
 <h3 class="v2-h3">Simple Example — Using <code>&lt;br&gt;</code> in a Real Context</h3>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
 &lt;html&gt;
 &lt;body&gt;
 
@@ -514,7 +378,7 @@ paragraph with a line break.</code></pre></div></div>
 &lt;/body&gt;
 &lt;/html&gt;</code></pre></div></div>
 <p class="v2-p"><strong>Expected output in browser:</strong></p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span></div><div class="v2-code-body"><pre><code>My Contact Details
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>My Contact Details
 
 Amara Okafor
 14 Victoria Island
@@ -524,7 +388,7 @@ Tel: +234 801 234 5678</code></pre></div></div>
 <hr class="v2-hr">
 <h3 class="v2-h3">Second Example — <code>&lt;br&gt;</code> Compared to <code>&lt;p&gt;</code></h3>
 <p class="v2-p">Understanding <em>when</em> to use <code>&lt;br&gt;</code> versus <code>&lt;p&gt;</code> is important. Here is the difference:</p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;!-- Using &lt;br&gt;: Same paragraph, different lines --&gt;
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;!-- Using &lt;br&gt;: Same paragraph, different lines --&gt;
 &lt;p&gt;Line one.&lt;br&gt;Line two.&lt;br&gt;Line three.&lt;/p&gt;
 
 &lt;!-- Using &lt;p&gt;: Three separate paragraphs with spacing between --&gt;
@@ -532,12 +396,12 @@ Tel: +234 801 234 5678</code></pre></div></div>
 &lt;p&gt;Paragraph two.&lt;/p&gt;
 &lt;p&gt;Paragraph three.&lt;/p&gt;</code></pre></div></div>
 <p class="v2-p"><strong>Expected output with <code>&lt;br&gt;</code>:</strong></p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span></div><div class="v2-code-body"><pre><code>Line one.
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>Line one.
 Line two.
 Line three.</code></pre></div></div>
 <p class="v2-p">(No extra spacing between lines — they are all inside one paragraph.)</p>
 <p class="v2-p"><strong>Expected output with <code>&lt;p&gt;</code>:</strong></p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span></div><div class="v2-code-body"><pre><code>Paragraph one.
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>Paragraph one.
 
 Paragraph two.
 
@@ -547,36 +411,22 @@ Paragraph three.</code></pre></div></div>
 <ul class="v2-ul"><li>Use <code>&lt;br&gt;</code> for content that is one logical unit but needs line breaks — like an address, a poem, or song lyrics.</li><li>Use <code>&lt;p&gt;</code> for genuinely separate paragraphs of content.</li></ul></blockquote>
 <hr class="v2-hr">
 <h3 class="v2-h3">Common Beginner Mistake — Adding a Closing <code>&lt;/br&gt;</code> Tag</h3>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;!-- WRONG: &lt;br&gt; does not have a closing tag --&gt;
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;!-- WRONG: &lt;br&gt; does not have a closing tag --&gt;
 &lt;p&gt;Line one.&lt;/br&gt;Line two.&lt;/p&gt;
 
 &lt;!-- CORRECT: &lt;br&gt; is an empty element, no closing tag needed --&gt;
 &lt;p&gt;Line one.&lt;br&gt;Line two.&lt;/p&gt;</code></pre></div></div>
 <p class="v2-p">Some older tutorials you might find online write <code>&lt;br /&gt;</code> (with a self-closing slash). This was the style used in a stricter version of HTML called XHTML. In modern HTML5, you can write either <code>&lt;br&gt;</code> or <code>&lt;br /&gt;</code> and both work. W3Schools and modern best practice recommends simply <code>&lt;br&gt;</code>.</p>
-<hr class="v2-hr">
-    <div class="task-box">
-      <div class="task-label">✏️ Your Task</div>
-      <div class="task-body">Now practise what you just learned about <strong>Empty HTML Elements</strong>. Open your editor, type the examples above by hand, then modify them — change values, rename variables, and observe what happens. Active experimentation is how code sticks.</div>
-    </div>
-    <button class="unlock-btn" onclick="unlockNext(6)">Phase Complete — Unlock Next ✓</button>
-  </div>
-</div>
-<div class="phase locked" id="phase7">
-  <div class="phase-header">
-    <div class="phase-num">Phase 7 of 11</div>
-    <div class="phase-title">Part 5 — HTML is Not Case Sensitive</div>
-    <div class="phase-check" id="chk7"></div>
-  </div>
-  <div class="phase-body">
-    <h3 class="v2-h3">What Does "Not Case Sensitive" Mean?</h3>
+<hr class="v2-hr"><div class="task-box"><div class="task-lbl">✏️ Your Task</div><div class="task-body">Practise what you just learned about <strong>Empty HTML Elements</strong>. Open your editor, type the examples above by hand, modify them, and observe what changes.</div></div><button class="ub" onclick="unlockNext(6)">Phase Complete — Unlock Next ✓</button></div></div>
+<div class="phase locked" id="phase7"><div class="ph"><div class="pn">Phase 7/11</div><div class="pt">Part 5 — HTML is Not Case Sensitive</div><div class="pc" id="chk7"></div></div><div class="pb2"><h3 class="v2-h3">What Does "Not Case Sensitive" Mean?</h3>
 <p class="v2-p"><strong>Case sensitivity</strong> means whether the computer treats uppercase and lowercase letters as the same or different.</p>
 <p class="v2-p">In HTML, the browser does <strong>not</strong> distinguish between uppercase and lowercase tag names. All of these mean exactly the same thing to the browser:</p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;P&gt;This is a paragraph.&lt;/P&gt;
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;P&gt;This is a paragraph.&lt;/P&gt;
 &lt;p&gt;This is a paragraph.&lt;/p&gt;
 &lt;P&gt;This is a paragraph.&lt;/p&gt;
 &lt;p&gt;This is a paragraph.&lt;/P&gt;</code></pre></div></div>
 <p class="v2-p">All four lines produce identical output:</p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span></div><div class="v2-code-body"><pre><code>This is a paragraph.</code></pre></div></div>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>This is a paragraph.</code></pre></div></div>
 <p class="v2-p">The browser treats <code>&lt;P&gt;</code>, <code>&lt;p&gt;</code>, and even <code>&lt;P&gt;</code> with a <code>&lt;/p&gt;</code> closer as the same element.</p>
 <hr class="v2-hr">
 <h3 class="v2-h3">So... Can I Write in Uppercase?</h3>
@@ -590,7 +440,7 @@ Paragraph three.</code></pre></div></div>
 <hr class="v2-hr">
 <h3 class="v2-h3">The Simple Rule</h3>
 <blockquote class="v2-bq"><p class="v2-p"><strong>Always write HTML tag names in lowercase. No exceptions.</strong></p></blockquote>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;!-- WRONG: uppercase tags --&gt;
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;!-- WRONG: uppercase tags --&gt;
 &lt;H1&gt;My Heading&lt;/H1&gt;
 &lt;P&gt;My paragraph.&lt;/P&gt;
 
@@ -602,66 +452,37 @@ Paragraph three.</code></pre></div></div>
 &lt;h1&gt;My Heading&lt;/h1&gt;
 &lt;p&gt;My paragraph.&lt;/p&gt;</code></pre></div></div>
 <p class="v2-p"><strong>Expected output for all three:</strong> Identical — the browser renders the same heading and paragraph regardless. But your code quality, professionalism, and compatibility are far better with the lowercase version.</p>
-<hr class="v2-hr">
-    <div class="task-box">
-      <div class="task-label">✏️ Your Task</div>
-      <div class="task-body">Now practise what you just learned about <strong>HTML is Not Case Sensitive</strong>. Open your editor, type the examples above by hand, then modify them — change values, rename variables, and observe what happens. Active experimentation is how code sticks.</div>
-    </div>
-    <button class="unlock-btn" onclick="unlockNext(7)">Phase Complete — Unlock Next ✓</button>
-  </div>
-</div>
-<div class="phase locked" id="phase8">
-  <div class="phase-header">
-    <div class="phase-num">Phase 8 of 11</div>
-    <div class="phase-title">Part 6 — Key HTML Elements Reference</div>
-    <div class="phase-check" id="chk8"></div>
-  </div>
-  <div class="phase-body">
-    <p class="v2-p">The following table lists the most fundamental HTML elements you have encountered so far. These are the building blocks you will use in almost every HTML page you ever write.</p>
+<hr class="v2-hr"><div class="task-box"><div class="task-lbl">✏️ Your Task</div><div class="task-body">Practise what you just learned about <strong>HTML is Not Case Sensitive</strong>. Open your editor, type the examples above by hand, modify them, and observe what changes.</div></div><button class="ub" onclick="unlockNext(7)">Phase Complete — Unlock Next ✓</button></div></div>
+<div class="phase locked" id="phase8"><div class="ph"><div class="pn">Phase 8/11</div><div class="pt">Part 6 — Key HTML Elements Reference</div><div class="pc" id="chk8"></div></div><div class="pb2"><p class="v2-p">The following table lists the most fundamental HTML elements you have encountered so far. These are the building blocks you will use in almost every HTML page you ever write.</p>
 <div class="v2-table-wrap"><table class="v2-table"><thead><tr><th>Tag</th><th>Description</th><th>Type</th></tr></thead><tbody><tr><td><code>&lt;html&gt;</code></td><td>Defines the root of an HTML document</td><td>Parent container</td></tr><tr><td><code>&lt;body&gt;</code></td><td>Defines the document's visible body</td><td>Parent container</td></tr><tr><td><code>&lt;h1&gt;</code> to <code>&lt;h6&gt;</code></td><td>Defines HTML headings (h1 = largest, h6 = smallest)</td><td>Block element</td></tr><tr><td><code>&lt;p&gt;</code></td><td>Defines a paragraph</td><td>Block element</td></tr><tr><td><code>&lt;a&gt;</code></td><td>Defines a hyperlink</td><td>Inline element</td></tr><tr><td><code>&lt;img&gt;</code></td><td>Embeds an image</td><td>Empty element</td></tr><tr><td><code>&lt;br&gt;</code></td><td>Inserts a line break</td><td>Empty element</td></tr></tbody></table></div>
 <blockquote class="v2-bq"><p class="v2-p">You will learn the difference between <strong>block</strong> and <strong>inline</strong> elements in a later lesson — it is an important concept for understanding page layout. For now, just know that block elements (like <code>&lt;p&gt;</code> and <code>&lt;h1&gt;</code>) always start on a new line, while inline elements (like <code>&lt;a&gt;</code>) sit within the flow of text.</p></blockquote>
-<hr class="v2-hr">
-    <div class="task-box">
-      <div class="task-label">✏️ Your Task</div>
-      <div class="task-body">Now practise what you just learned about <strong>Key HTML Elements Reference</strong>. Open your editor, type the examples above by hand, then modify them — change values, rename variables, and observe what happens. Active experimentation is how code sticks.</div>
-    </div>
-    <button class="unlock-btn" onclick="unlockNext(8)">Phase Complete — Unlock Next ✓</button>
-  </div>
-</div>
-<div class="phase locked" id="phase9">
-  <div class="phase-header">
-    <div class="phase-num">Phase 9 of 11</div>
-    <div class="phase-title">Guided Practice Exercises</div>
-    <div class="phase-check" id="chk9"></div>
-  </div>
-  <div class="phase-body">
-    <p class="v2-p">Work through these exercises in order. Each one builds on the last.</p>
+<hr class="v2-hr"><div class="task-box"><div class="task-lbl">✏️ Your Task</div><div class="task-body">Practise what you just learned about <strong>Key HTML Elements Reference</strong>. Open your editor, type the examples above by hand, modify them, and observe what changes.</div></div><button class="ub" onclick="unlockNext(8)">Phase Complete — Unlock Next ✓</button></div></div>
+<div class="phase locked" id="phase9"><div class="ph"><div class="pn">Phase 9/11</div><div class="pt">Guided Practice Exercises</div><div class="pc" id="chk9"></div></div><div class="pb2"><div class="chal-box"><div class="chal-lbl">🎯 Your Challenge</div><div class="chal-body"><p class="v2-p">Work through these exercises in order. Each one builds on the last.</p>
 <hr class="v2-hr">
 <h3 class="v2-h3">Exercise 1 — Label the Parts of an Element</h3>
 <p class="v2-p">Look at each HTML line below and identify: the opening tag, the content, and the closing tag.</p>
-<p class="v2-p"><strong>Line 1:</strong></p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;h2&gt;Introduction to Python&lt;/h2&gt;</code></pre></div></div>
+<p class="v2-p"><strong>Line 1:</strong></p></div></div><div class="task-box"><div class="task-lbl">✏️ Task</div><div class="task-body">Practise what you just learned about <strong>Guided Practice Exercises</strong>. Open your editor, type the examples above by hand, modify them, and observe what changes.</div></div><button class="reveal-btn" onclick="toggleReveal(this)">👁️ Reveal Answer</button><div class="reveal-content"><div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;h2&gt;Introduction to Python&lt;/h2&gt;</code></pre></div></div>
 <p class="v2-p"><strong>Answers:</strong></p>
 <ul class="v2-ul"><li>Opening tag: <code>&lt;h2&gt;</code></li><li>Content: <code>Introduction to Python</code></li><li>Closing tag: <code>&lt;/h2&gt;</code></li></ul>
 <hr class="v2-hr">
 <p class="v2-p"><strong>Line 2:</strong></p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;p&gt;Learning to code is one of the best skills you can develop.&lt;/p&gt;</code></pre></div></div>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;p&gt;Learning to code is one of the best skills you can develop.&lt;/p&gt;</code></pre></div></div>
 <p class="v2-p"><strong>Answers:</strong></p>
 <ul class="v2-ul"><li>Opening tag: <code>&lt;p&gt;</code></li><li>Content: <code>Learning to code is one of the best skills you can develop.</code></li><li>Closing tag: <code>&lt;/p&gt;</code></li></ul>
 <hr class="v2-hr">
 <p class="v2-p"><strong>Line 3:</strong></p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;a href=&quot;https://www.github.com&quot;&gt;Visit GitHub&lt;/a&gt;</code></pre></div></div>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;a href=&quot;https://www.github.com&quot;&gt;Visit GitHub&lt;/a&gt;</code></pre></div></div>
 <p class="v2-p"><strong>Answers:</strong></p>
 <ul class="v2-ul"><li>Opening tag: <code>&lt;a href="https://www.github.com"&gt;</code> ← note: the full opening tag includes the attribute</li><li>Content: <code>Visit GitHub</code></li><li>Closing tag: <code>&lt;/a&gt;</code></li></ul>
 <hr class="v2-hr">
 <p class="v2-p"><strong>Line 4:</strong></p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;br&gt;</code></pre></div></div>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;br&gt;</code></pre></div></div>
 <p class="v2-p"><strong>Answers:</strong></p>
 <ul class="v2-ul"><li>Opening tag: <code>&lt;br&gt;</code></li><li>Content: <em>none</em></li><li>Closing tag: <em>none — this is an empty element</em></li></ul>
 <hr class="v2-hr">
 <h3 class="v2-h3">Exercise 2 — Draw the Nesting Tree</h3>
 <p class="v2-p">Look at the following HTML and draw its nesting tree on paper (or type it out). Then check against the answer below.</p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
 &lt;html&gt;
 &lt;body&gt;
 
@@ -672,7 +493,7 @@ Paragraph three.</code></pre></div></div>
 &lt;/body&gt;
 &lt;/html&gt;</code></pre></div></div>
 <p class="v2-p"><strong>Your nesting tree should look like this:</strong></p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span></div><div class="v2-code-body"><pre><code>html
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>html
 └── body
     ├── h1  →  &quot;My Portfolio&quot;
     ├── p
@@ -686,7 +507,7 @@ Paragraph three.</code></pre></div></div>
 <h3 class="v2-h3">Exercise 3 — Fix the Broken Nesting</h3>
 <p class="v2-p">The following HTML has <strong>four nesting and structural errors</strong>. Find all four and write the corrected version.</p>
 <p class="v2-p"><strong>Broken code:</strong></p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
 &lt;HTML&gt;
 &lt;body&gt;
 
@@ -702,7 +523,7 @@ Paragraph three.</code></pre></div></div>
 <p class="v2-p"><strong>Hint — Four errors:</strong></p>
 <ol class="v2-ol"><li>One tag uses incorrect case for the root element</li><li>One opening tag is missing its closing partner</li><li>The nesting order of two tags is wrong (they overlap)</li><li>An empty element has been given an incorrect closing tag</li></ol>
 <p class="v2-p"><strong>Corrected code:</strong></p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
 &lt;html&gt;                                         &lt;!-- Fix 1: lowercase &lt;html&gt; --&gt;
 &lt;body&gt;
 
@@ -716,7 +537,7 @@ Paragraph three.</code></pre></div></div>
 &lt;/body&gt;
 &lt;/html&gt;</code></pre></div></div>
 <p class="v2-p"><strong>Expected output in browser:</strong></p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span></div><div class="v2-code-body"><pre><code>My Recipe Blog
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>My Recipe Blog
 
 Welcome to my cooking website.
 
@@ -731,7 +552,7 @@ Today&#x27;s recipe is Jollof Rice
 <p class="v2-p"><strong>Requirements:</strong></p>
 <ul class="v2-ul"><li>Valid document structure (<code>&lt;!DOCTYPE&gt;</code>, <code>&lt;html&gt;</code>, <code>&lt;body&gt;</code>)</li><li>One <code>&lt;h1&gt;</code> for the page title</li><li>Three <code>&lt;h2&gt;</code> headings for three school days</li><li>Under each day, at least two <code>&lt;p&gt;</code> elements listing subjects</li><li>At least one <code>&lt;br&gt;</code> used appropriately</li><li>All tags in lowercase</li><li>All tags correctly closed</li></ul>
 <p class="v2-p"><strong>Solution:</strong></p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
 &lt;html&gt;
 &lt;body&gt;
 
@@ -752,7 +573,7 @@ Today&#x27;s recipe is Jollof Rice
 &lt;/body&gt;
 &lt;/html&gt;</code></pre></div></div>
 <p class="v2-p"><strong>Expected output in browser:</strong></p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span></div><div class="v2-code-body"><pre><code>My Weekly Timetable
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>My Weekly Timetable
 
 Monday
 
@@ -772,26 +593,12 @@ Friday
 
 11:00am — Chemistry
 12:00pm — Break</code></pre></div></div>
-<hr class="v2-hr">
-    <div class="task-box">
-      <div class="task-label">✏️ Your Task</div>
-      <div class="task-body">Now practise what you just learned about <strong>Guided Practice Exercises</strong>. Open your editor, type the examples above by hand, then modify them — change values, rename variables, and observe what happens. Active experimentation is how code sticks.</div>
-    </div>
-    <button class="unlock-btn" onclick="unlockNext(9)">Phase Complete — Unlock Next ✓</button>
-  </div>
-</div>
-<div class="phase locked" id="phase10">
-  <div class="phase-header">
-    <div class="phase-num">Phase 10 of 11</div>
-    <div class="phase-title">HTML Elements Code Challenges</div>
-    <div class="phase-check" id="chk10"></div>
-  </div>
-  <div class="phase-body">
-    <p class="v2-p">These challenges test your understanding of element structure, nesting, empty elements, and case sensitivity.</p>
+<hr class="v2-hr"></div><button class="ub" onclick="unlockNext(9)">Mark Complete — Unlock Next ✓</button></div></div>
+<div class="phase locked" id="phase10"><div class="ph"><div class="pn">Phase 10/11</div><div class="pt">HTML Elements Code Challenges</div><div class="pc" id="chk10"></div></div><div class="pb2"><p class="v2-p">These challenges test your understanding of element structure, nesting, empty elements, and case sensitivity.</p>
 <hr class="v2-hr">
 <h3 class="v2-h3">Challenge 1 — Spot All the Elements</h3>
 <p class="v2-p">Look at the code below and answer the questions that follow:</p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
 &lt;html&gt;
 &lt;body&gt;
 &lt;h2&gt;African Wildlife&lt;/h2&gt;
@@ -807,7 +614,7 @@ Friday
 <hr class="v2-hr">
 <h3 class="v2-h3">Challenge 2 — Rewrite in Correct Case and Structure</h3>
 <p class="v2-p">The following code is written with inconsistent case and has missing end tags. Rewrite it entirely in correct, professional HTML:</p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;!DOCTYPE HTML&gt;
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;!DOCTYPE HTML&gt;
 &lt;HTML&gt;
 &lt;BODY&gt;
 
@@ -819,7 +626,7 @@ Friday
 &lt;/BODY&gt;
 &lt;/HTML&gt;</code></pre></div></div>
 <p class="v2-p"><strong>Corrected version:</strong></p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
 &lt;html&gt;
 &lt;body&gt;
 
@@ -831,7 +638,7 @@ Friday
 &lt;/body&gt;
 &lt;/html&gt;</code></pre></div></div>
 <p class="v2-p"><strong>Expected output in browser:</strong></p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span></div><div class="v2-code-body"><pre><code>Technology News
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>Technology News
 
 Artificial Intelligence
 
@@ -841,7 +648,7 @@ From healthcare to agriculture, the possibilities are endless.</code></pre></div
 <hr class="v2-hr">
 <h3 class="v2-h3">Challenge 3 — Fix the Overlapping Nesting</h3>
 <p class="v2-p">The following code has <strong>overlapping elements</strong> — the most common nesting mistake beginners make. Find and fix the overlapping.</p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
 &lt;html&gt;
 &lt;body&gt;
 
@@ -851,7 +658,7 @@ From healthcare to agriculture, the possibilities are endless.</code></pre></div
 &lt;/html&gt;</code></pre></div></div>
 <p class="v2-p"><strong>What is wrong:</strong> The <code>&lt;a&gt;</code> element is opened inside <code>&lt;p&gt;</code>, but it is closed <em>after</em> <code>&lt;/p&gt;</code> has already closed. This is an overlap — the inner element (<code>&lt;a&gt;</code>) must close before the outer element (<code>&lt;p&gt;</code>) closes.</p>
 <p class="v2-p"><strong>Corrected version:</strong></p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
 &lt;html&gt;
 &lt;body&gt;
 
@@ -860,18 +667,18 @@ From healthcare to agriculture, the possibilities are endless.</code></pre></div
 &lt;/body&gt;
 &lt;/html&gt;</code></pre></div></div>
 <p class="v2-p"><strong>Expected output in browser:</strong></p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span></div><div class="v2-code-body"><pre><code>Visit BBC News for the latest updates.
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>Visit BBC News for the latest updates.
       ^^^^^^^^
       (blue, underlined, clickable)</code></pre></div></div>
 <hr class="v2-hr">
 <h3 class="v2-h3">Challenge 4 — Build a Poem Page Using <code>&lt;br&gt;</code></h3>
 <p class="v2-p"><strong>Task:</strong> Write an HTML page that displays the following poem correctly. Each line of the poem must appear on its own line, but <strong>all four lines must be inside a single <code>&lt;p&gt;</code> element</strong> (not four separate <code>&lt;p&gt;</code> tags). Use <code>&lt;br&gt;</code> to create the line breaks.</p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span></div><div class="v2-code-body"><pre><code>The web is built with tags and code,
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>The web is built with tags and code,
 Each element carrying its load,
 Nested deep and structured right,
 Turning words to pages bright.</code></pre></div></div>
 <p class="v2-p"><strong>Solution:</strong></p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
 &lt;html&gt;
 &lt;body&gt;
 
@@ -887,7 +694,7 @@ Turning words to pages bright.</code></pre></div></div>
 &lt;/body&gt;
 &lt;/html&gt;</code></pre></div></div>
 <p class="v2-p"><strong>Expected output in browser:</strong></p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span></div><div class="v2-code-body"><pre><code>A Developer&#x27;s Poem
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>A Developer&#x27;s Poem
 
 The web is built with tags and code,
 Each element carrying its load,
@@ -897,7 +704,7 @@ Turning words to pages bright.</code></pre></div></div>
 <hr class="v2-hr">
 <h3 class="v2-h3">Challenge 5 — The Full Nesting Analysis</h3>
 <p class="v2-p">Study this more complex page and answer the questions:</p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
 &lt;html&gt;
 &lt;body&gt;
 
@@ -916,7 +723,7 @@ Turning words to pages bright.</code></pre></div></div>
 <ol class="v2-ol"><li>Draw the complete nesting tree for this document.</li><li>How many <code>&lt;a&gt;</code> elements are on this page?</li><li>How many <code>&lt;p&gt;</code> elements are on this page?</li><li>Which <code>&lt;p&gt;</code> element contains a <code>&lt;br&gt;</code>?</li><li>Which elements are siblings of <code>&lt;h1&gt;</code>?</li></ol>
 <p class="v2-p"><strong>Answers:</strong></p>
 <p class="v2-p"><strong>1. Nesting tree:</strong></p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span></div><div class="v2-code-body"><pre><code>html
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>html
 └── body
     ├── h1   →  &quot;My Coding Journey&quot;
     ├── h2   →  &quot;Languages I Am Learning&quot;
@@ -937,22 +744,8 @@ Turning words to pages bright.</code></pre></div></div>
 <p class="v2-p"><strong>3.</strong> There are <strong>3</strong> <code>&lt;p&gt;</code> elements.</p>
 <p class="v2-p"><strong>4.</strong> The <strong>third <code>&lt;p&gt;</code></strong> (under "My First Project") contains the <code>&lt;br&gt;</code>.</p>
 <p class="v2-p"><strong>5.</strong> Siblings of <code>&lt;h1&gt;</code> are: both <code>&lt;h2&gt;</code> elements and all three <code>&lt;p&gt;</code> elements — because they all share <code>&lt;body&gt;</code> as their parent.</p>
-<hr class="v2-hr">
-    <div class="task-box">
-      <div class="task-label">✏️ Your Task</div>
-      <div class="task-body">Now practise what you just learned about <strong>HTML Elements Code Challenges</strong>. Open your editor, type the examples above by hand, then modify them — change values, rename variables, and observe what happens. Active experimentation is how code sticks.</div>
-    </div>
-    <button class="unlock-btn" onclick="unlockNext(10)">Phase Complete — Unlock Next ✓</button>
-  </div>
-</div>
-<div class="phase locked" id="phase11">
-  <div class="phase-header">
-    <div class="phase-num">Phase 11 of 11</div>
-    <div class="phase-title">Common Beginner Mistakes — Full Summary for This Lesson</div>
-    <div class="phase-check" id="chk11"></div>
-  </div>
-  <div class="phase-body">
-    <p class="v2-p"><strong>Element Structure Mistakes:</strong></p>
+<hr class="v2-hr"><div class="task-box"><div class="task-lbl">✏️ Your Task</div><div class="task-body">Practise what you just learned about <strong>HTML Elements Code Challenges</strong>. Open your editor, type the examples above by hand, modify them, and observe what changes.</div></div><button class="ub" onclick="unlockNext(10)">Phase Complete — Unlock Next ✓</button></div></div>
+<div class="phase locked" id="phase11"><div class="ph"><div class="pn">Phase 11/11</div><div class="pt">Common Beginner Mistakes — Full Summary for This Lesson</div><div class="pc" id="chk11"></div></div><div class="pb2"><p class="v2-p"><strong>Element Structure Mistakes:</strong></p>
 <ul class="v2-ul"><li>Confusing a tag (<code>&lt;p&gt;</code>) with an element (<code>&lt;p&gt;content&lt;/p&gt;</code>) — they are not the same thing</li><li>Forgetting the forward slash <code>/</code> in closing tags: writing <code>&lt;p</code> again instead of <code>&lt;/p&gt;</code></li><li>Writing the attribute in the closing tag: <code>&lt;/a href="#"&gt;</code> — attributes only go in opening tags</li></ul>
 <p class="v2-p"><strong>Nesting Mistakes:</strong></p>
 <ul class="v2-ul"><li>Overlapping elements — closing the outer element before the inner one: <code>&lt;p&gt;&lt;a&gt;text&lt;/p&gt;&lt;/a&gt;</code></li><li>Skipping levels of nesting — putting <code>&lt;h1&gt;</code> directly inside <code>&lt;p&gt;</code> makes no semantic sense</li><li>Putting content outside <code>&lt;body&gt;</code> — all visible content must be inside <code>&lt;body&gt;</code></li></ul>
@@ -960,121 +753,87 @@ Turning words to pages bright.</code></pre></div></div>
 <ul class="v2-ul"><li>Adding a closing tag to <code>&lt;br&gt;</code>: <code>&lt;br&gt;&lt;/br&gt;</code> — empty elements have no closing tags</li><li>Adding a closing tag to <code>&lt;img&gt;</code>: <code>&lt;img src="x.jpg"&gt;&lt;/img&gt;</code> — also wrong</li><li>Confusing <code>&lt;br&gt;</code> (line break within a paragraph) with <code>&lt;p&gt;</code> (a separate paragraph block)</li></ul>
 <p class="v2-p"><strong>Case Sensitivity Mistakes:</strong></p>
 <ul class="v2-ul"><li>Writing <code>&lt;H1&gt;</code> or <code>&lt;BODY&gt;</code> instead of <code>&lt;h1&gt;</code> and <code>&lt;body&gt;</code></li><li>Mixing cases: <code>&lt;H1&gt;Heading&lt;/h1&gt;</code> — always match case, and always use lowercase</li><li>Thinking uppercase HTML will break in all browsers — it will not, but it is still wrong practice</li></ul>
+<hr class="v2-hr"><div class="task-box"><div class="task-lbl">✏️ Your Task</div><div class="task-body">Practise what you just learned about <strong>Common Beginner Mistakes — Full Summary for This Lesson</strong>. Open your editor, type the examples above by hand, modify them, and observe what changes.</div></div><button class="ub" onclick="unlockNext(11)">Phase Complete — Unlock Next ✓</button></div></div>
+<div class="build-box" id="build-it"><div class="build-lbl">🏗️ Build It — Mini Project</div><div class="build-name">Project Overview</div><div class="build-req"><p class="v2-p">Now you will combine everything from Lessons 1 through 3 into a polished, correctly structured article page with proper nesting throughout.</p>
 <hr class="v2-hr">
-    <div class="task-box">
-      <div class="task-label">✏️ Your Task</div>
-      <div class="task-body">Now practise what you just learned about <strong>Common Beginner Mistakes — Full Summary for This Lesson</strong>. Open your editor, type the examples above by hand, then modify them — change values, rename variables, and observe what happens. Active experimentation is how code sticks.</div>
-    </div>
-    <button class="unlock-btn" onclick="unlockNext(11)">Phase Complete — Unlock Next ✓</button>
-  </div>
-</div>
-<div class="build-box" id="build-it">
-  <div class="build-label">🏗️ Build It</div>
-  <div class="build-name">Project Overview</div>
-  <div class="build-desc"><strong>Project name:</strong> My HTML Knowledge Base Article</div>
-  <div class="v2-code-wrap">
-    <div class="v2-code-bar">
-      <span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span>
-      <span class="v2-code-lang">starter.html</span>
-    </div>
-    <div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
+<h3 class="v2-h3">Project Overview</h3>
+<p class="v2-p"><strong>Project name:</strong> My HTML Knowledge Base Article <strong>Goal:</strong> A fully valid, correctly nested HTML article page on any topic you choose, demonstrating mastery of document structure, element anatomy, nesting, empty elements, and correct case usage.</p>
+<hr class="v2-hr">
+<h3 class="v2-h3">Stage 1 — The Document Skeleton</h3>
+<p class="v2-p">Start with the correctly structured skeleton:</p></div><button class="reveal-btn" onclick="toggleCode(this)">💻 Reveal Starter Code</button><div class="reveal-content"><div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">starter.html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
 &lt;html&gt;
 &lt;body&gt;
 
 &lt;!-- Article content will go here --&gt;
 
 &lt;/body&gt;
-&lt;/html&gt;</code></pre></div>
-  </div>
-  <div style="display:flex;gap:.8rem;flex-wrap:wrap;margin-top:1.2rem">
-    <button class="unlock-btn" onclick="downloadStarter(`<!DOCTYPE html>
+&lt;/html&gt;</code></pre></div></div><div style="display:flex;gap:.75rem;flex-wrap:wrap;margin-top:1rem"><button class="ub" onclick="downloadStarter(`<!DOCTYPE html>
 <html>
 <body>
 
 <!-- Article content will go here -->
 
 </body>
-</html>`)"
-      style="background:#10b981;box-shadow:0 4px 14px rgba(16,185,129,.3)">
-      ⬇ Download starter.html
-    </button>
-    <button class="unlock-btn" onclick="showGithub()"
-      style="background:#0f172a;box-shadow:none">
-      🐙 Push to GitHub →
-    </button>
-  </div>
-</div>
+</html>`)" style="background:#10b981;box-shadow:0 4px 14px rgba(16,185,129,.3)">⬇ Download starter.html</button><button class="ub" onclick="showGithub()" style="background:#0f172a;box-shadow:none">🐙 Push to GitHub Pages →</button></div></div></div>
 <div class="gh-acc" id="gh-steps" style="display:none">
-  <div class="gh-acc-head" onclick="toggleGh(this)">
-    🐙 Push Your Project to GitHub Pages &nbsp;<span>▼</span>
-  </div>
-  <div class="gh-acc-body">
-    <div class="gh-step"><div class="gh-step-n">1</div>
-    <p>Go to <strong>github.com</strong> → click <strong>New repository</strong> → name it <code>html-lesson-03-project-overview</code>.</p></div>
-    <div class="gh-step"><div class="gh-step-n">2</div>
-    <p>Set it to <strong>Public</strong>, tick <strong>Add a README</strong>, then click <strong>Create repository</strong>.</p></div>
-    <div class="gh-step"><div class="gh-step-n">3</div>
-    <p>Click <strong>Add file → Upload files</strong>. Upload your <code>starter.html</code> — rename it to <code>index.html</code> before uploading.</p></div>
-    <div class="gh-step"><div class="gh-step-n">4</div>
-    <p>Commit message: <em>"Add HTML lesson 03 project"</em> → click <strong>Commit changes</strong>.</p></div>
-    <div class="gh-step"><div class="gh-step-n">5</div>
-    <p>Go to <strong>Settings → Pages</strong> → branch <strong>main</strong> → <strong>Save</strong>. Your project goes live at <code>https://YOUR-NAME.github.io/html-lesson-03-project-overview/</code> in about 1 minute! 🎉</p></div>
-    <button class="unlock-btn" onclick="showEnd()" style="margin-top:.5rem">I've pushed to GitHub — Finish Session ✅</button>
-  </div>
-</div>
-<div class="session-end" id="session-end">
-  <h2>🎉 Lesson 03 complete!</h2>
-  <p style="margin-bottom:.8rem;font-size:.9rem;opacity:.9">You covered:</p>
-  <ul><li>✅ Lesson Introduction</li><li>✅ Prerequisite Concepts</li><li>✅ Part 1 — What Exactly Is an HTML Element?</li><li>✅ Part 2 — Nested HTML Elements</li><li>✅ Part 3 — Never Skip the End Tag</li><li>✅ Part 4 — Empty HTML Elements</li><li>✅ Part 5 — HTML is Not Case Sensitive</li><li>✅ Part 6 — Key HTML Elements Reference</li></ul>
-  <div class="lesson-nav"><a href="lesson_02.html" class="ln-btn">← Lesson 02</a><a href="lesson_04.html" class="ln-btn primary">Lesson 04 →</a></div>
-</div>
+<div class="gh-hd" onclick="toggleGh(this)">🐙 Push to GitHub Pages &nbsp;<span>▼</span></div>
+<div class="gh-bd">
+<div class="gh-st"><div class="gh-n">1</div><p>Go to <strong>github.com → New repository</strong> → name it <code>html-lesson-03-project-overview</code>. Set <strong>Public</strong>, tick <strong>Add README</strong>, click <strong>Create</strong>.</p></div>
+<div class="gh-st"><div class="gh-n">2</div><p>Click <strong>Add file → Upload files</strong>. Rename your file to <code>index.html</code> then upload it.</p></div>
+<div class="gh-st"><div class="gh-n">3</div><p>Commit message: <em>"Add HTML lesson 03 project"</em> → <strong>Commit changes</strong>.</p></div>
+<div class="gh-st"><div class="gh-n">4</div><p>Go to <strong>Settings → Pages</strong> → Source: <strong>main</strong> → <strong>Save</strong>. Live in ~1 min at <code>https://YOUR-NAME.github.io/html-lesson-03-project-overview/</code> 🎉</p></div>
+<button class="ub" onclick="showEnd()" style="margin-top:.5rem">Done — Finish Session ✅</button>
+</div></div>
+<div class="se" id="session-end"><h2>🎉 Lesson 03 complete!</h2><p style="margin-bottom:.8rem;font-size:.9rem;opacity:.9">You covered:</p><ul><li>✅ Lesson Introduction</li><li>✅ Prerequisite Concepts</li><li>✅ Part 1 — What Exactly Is an HTML Element?</li><li>✅ Part 2 — Nested HTML Elements</li><li>✅ Part 3 — Never Skip the End Tag</li><li>✅ Part 4 — Empty HTML Elements</li><li>✅ Part 5 — HTML is Not Case Sensitive</li><li>✅ Part 6 — Key HTML Elements Reference</li></ul><div class="ln"><a href="lesson_02.html" class="ln-btn">← Lesson 02</a><a href="lesson_04.html" class="ln-btn primary">Lesson 04 →</a></div></div>
 </main>
-
-<footer class="lesson-footer">
-  Techbase Code Coach · HTML Course · Lesson 03 · © 2025 Techbase Consultant Services, Ibadan
-</footer>
+<footer class="lf">Techbase Code Coach &nbsp;·&nbsp; HTML Course &nbsp;·&nbsp; Lesson 03 &nbsp;·&nbsp; © 2025 Techbase Consultant Services, Ibadan</footer>
+<div id="toast"></div>
+<button id="go-top" title="Back to top">↑</button>
+<canvas id="cc"></canvas>
 <script>
 const TOTAL=11,KEY='techbase_html_l03';
-let current=parseInt(localStorage.getItem(KEY)||'1');
-function init(){
-  for(let i=2;i<=current;i++) unlockPhase(i,false);
-  updateBar();
-}
+let cur=parseInt(localStorage.getItem(KEY)||'1');
+function init(){for(let i=2;i<=cur;i++)unlock(i,false);bar();}
 function unlockNext(n){
-  const chk=document.getElementById('chk'+n);
-  if(chk){chk.classList.add('done');chk.textContent='✓';}
-  localStorage.setItem(KEY,n+1); current=n+1;
+  const c=document.getElementById('chk'+n);
+  if(c){c.classList.add('done');c.textContent='✓';}
+  localStorage.setItem(KEY,n+1);cur=n+1;
   if(n===TOTAL){
-    document.getElementById('build-it').style.display='block';
-    updateBar(100);
+    document.getElementById('build-it').classList.add('visible');
+    bar(100);toast('🏗️ Build It unlocked!');
     setTimeout(()=>document.getElementById('build-it').scrollIntoView({behavior:'smooth'}),200);
-  }else{
-    unlockPhase(n+1,true); updateBar();
-  }
+    setTimeout(confetti,600);
+  }else{unlock(n+1,true);bar();toast(['✅ Phase complete!','🎯 Keep going!','💡 Nice work!','🚀 Nailed it!'][n%4]);}
 }
-function unlockPhase(n,scroll){
-  const el=document.getElementById('phase'+n);
-  if(el){el.classList.remove('locked');if(scroll)setTimeout(()=>el.scrollIntoView({behavior:'smooth',block:'start'}),150);}
+function unlock(n,scroll){
+  const el=document.getElementById('phase'+n);if(!el)return;
+  el.classList.remove('locked');
+  if(scroll)setTimeout(()=>el.scrollIntoView({behavior:'smooth',block:'start'}),180);
 }
-function updateBar(pct){
-  const p=pct!==undefined?pct:Math.round((current-1)/TOTAL*95);
-  document.getElementById('pbar').style.width=p+'%';
+function bar(p){document.getElementById('pbar').style.width=(p!==undefined?p:Math.round((cur-1)/TOTAL*95))+'%';}
+function toggleReveal(btn){const w=btn.nextElementSibling;const o=w.classList.toggle('open');btn.textContent=o?'🙈 Hide Answer':'👁️ Reveal Answer';}
+function toggleCode(btn){const w=btn.nextElementSibling;const o=w.classList.toggle('open');btn.textContent=o?'🙈 Hide Starter Code':'💻 Reveal Starter Code';}
+function copyCode(btn){
+  const code=btn.closest('.v2-code-wrap').querySelector('code').innerText;
+  navigator.clipboard.writeText(code).then(()=>{btn.textContent='✓ Copied!';btn.classList.add('copied');setTimeout(()=>{btn.textContent='⎘ Copy';btn.classList.remove('copied');},1800);}).catch(()=>{});
 }
-function showGithub(){
-  const g=document.getElementById('gh-steps');
-  if(g){g.style.display='block';setTimeout(()=>g.scrollIntoView({behavior:'smooth'}),150);}
-}
-function showEnd(){
-  const e=document.getElementById('session-end');
-  if(e){e.classList.add('visible');setTimeout(()=>e.scrollIntoView({behavior:'smooth'}),150);}
-}
+const tEl=document.getElementById('toast');let tT;
+function toast(msg){tEl.innerHTML=msg;tEl.classList.add('show');clearTimeout(tT);tT=setTimeout(()=>tEl.classList.remove('show'),2400);}
+const gEl=document.getElementById('go-top');
+window.addEventListener('scroll',()=>gEl.classList.toggle('visible',scrollY>320),{passive:true});
+gEl.addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
 function toggleGh(el){el.nextElementSibling.classList.toggle('open');}
-function downloadStarter(code){
-  const a=document.createElement('a');
-  a.href='data:text/html;charset=utf-8,'+encodeURIComponent(code);
-  a.download='starter.html';a.click();
+function showGithub(){const g=document.getElementById('gh-steps');if(g){g.style.display='block';setTimeout(()=>g.scrollIntoView({behavior:'smooth'}),150);}}
+function showEnd(){const e=document.getElementById('session-end');if(e){e.classList.add('visible');setTimeout(()=>e.scrollIntoView({behavior:'smooth'}),150);}}
+function downloadStarter(code){const ext='html'==='python'?'py':'html';const a=document.createElement('a');a.href='data:text/'+(ext==='py'?'x-python':'html')+';charset=utf-8,'+encodeURIComponent(code);a.download='starter.'+ext;a.click();}
+function confetti(){
+  const cv=document.getElementById('cc');cv.style.display='block';const ctx=cv.getContext('2d');
+  cv.width=innerWidth;cv.height=innerHeight;
+  const ps=Array.from({length:130},()=>{return{x:Math.random()*cv.width,y:-10-Math.random()*120,r:4+Math.random()*6,d:2+Math.random()*3,c:['#e34c26','#0284c7','#d97706','#059669','#7c3aed','#ec4899'][Math.floor(Math.random()*6)],ta:0};}); 
+  let f=0;
+  function draw(){ctx.clearRect(0,0,cv.width,cv.height);ps.forEach(p=>{p.ta+=.1;p.y+=p.d;p.x+=Math.sin(f/20);ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fillStyle=p.c;ctx.fill();});f++;if(f<200)requestAnimationFrame(draw);else{ctx.clearRect(0,0,cv.width,cv.height);cv.style.display='none';}}
+  draw();toast('🎉 All phases done! Build It awaits!');
 }
 init();
 </script>
-</body>
-</html>
+</body></html>

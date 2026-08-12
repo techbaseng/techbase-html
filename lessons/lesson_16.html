@@ -1,233 +1,153 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>Lesson 16: HTML Tables — From Zero to Professional — Techbase HTML</title>
-<meta name="description" content="HTML Tables — From Zero to Professional">
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<style>
-:root{
-  --acc:#e34c26;--acc-d:#c0391a;--acc-pale:#fff5f2;
-  --acc-b:rgba(227,76,38,.25);--acc-sh:rgba(227,76,38,.25);
-  --bg:#f8fafc;--surface:#fff;--border:#e2e8f0;--border2:#cbd5e1;
-  --text:#0f172a;--t2:#334155;--muted:#64748b;
-  --D:'Space Grotesk',sans-serif;--B:'Plus Jakarta Sans',sans-serif;--M:'JetBrains Mono',monospace;
-}
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"><style>
+:root{--acc:#e34c26;--acd:#c0391a;--acp:#fff5f2;--acb:rgba(227,76,38,.22);--acs:rgba(227,76,38,.28);--bg:#f8fafc;--sf:#fff;--br:#e2e8f0;--tx:#0f172a;--t2:#334155;--mu:#64748b;--D:'Space Grotesk',sans-serif;--B:'Plus Jakarta Sans',sans-serif;--M:'JetBrains Mono',monospace}
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased}
-body{background:var(--bg);color:var(--text);font-family:var(--B);font-size:16px;line-height:1.75;overflow-x:hidden}
-
-/* NAV */
-.l-nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(255,255,255,.95);
-  backdrop-filter:blur(12px);border-bottom:1px solid var(--border);height:58px;
-  display:flex;align-items:center;padding:0 1.5rem;gap:1rem;justify-content:space-between}
-.l-nav-logo{font-family:var(--D);font-weight:700;font-size:.9rem;color:var(--text);text-decoration:none}
-.l-nav-back{font-size:.8rem;color:var(--muted);text-decoration:none;font-weight:500;display:flex;align-items:center;gap:.3rem;transition:color .2s}
+body{background:var(--bg);color:var(--tx);font-family:var(--B);font-size:16px;line-height:1.75;overflow-x:hidden}
+.l-nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(255,255,255,.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--br);height:58px;display:flex;align-items:center;padding:0 1.5rem;justify-content:space-between}
+.l-nav-logo{font-family:var(--D);font-weight:700;font-size:.9rem;color:var(--tx);text-decoration:none}
+.l-nav-back{font-size:.8rem;color:var(--mu);text-decoration:none;font-weight:500;transition:color .2s}
 .l-nav-back:hover{color:var(--acc)}
-.l-nav-label{font-family:var(--M);font-size:.68rem;color:var(--muted)}
-
-/* PROGRESS */
-.progress-wrap{position:fixed;top:58px;left:0;right:0;z-index:199;height:4px;background:var(--border)}
-.progress-bar{height:100%;background:var(--acc);transition:width .4s ease;width:0%}
-
-/* HERO */
-.l-hero{padding:80px 1.5rem 2rem;background:linear-gradient(160deg,#fff5f2 0%,#f8fafc 55%,#ffe8e0 100%);border-bottom:1px solid var(--border)}
-.l-hero-inner{max-width:860px;margin:0 auto}
-.l-badge{display:inline-flex;align-items:center;gap:.4rem;border-radius:100px;padding:.2rem .85rem;
-  font-family:var(--M);font-size:.62rem;letter-spacing:.08em;text-transform:uppercase;font-weight:600;
-  color:var(--acc);background:var(--acc-pale);border:1px solid var(--acc-b);margin-bottom:.8rem}
-.l-hero h1{font-family:var(--D);font-weight:700;font-size:clamp(1.5rem,4vw,2.3rem);
-  letter-spacing:-.02em;line-height:1.15;margin-bottom:.5rem}
-.l-hero-sub{font-size:.95rem;color:var(--muted);margin-bottom:1rem}
-
-/* WELCOME BOX */
-.welcome-box{background:linear-gradient(135deg,var(--acc),var(--acc-d));color:#fff;
-  border-radius:16px;padding:1.5rem 1.8rem;max-width:860px;margin:1.5rem auto 0}
-.welcome-box h2{font-family:var(--D);font-weight:700;font-size:1.05rem;margin-bottom:.6rem}
-.welcome-box p,.welcome-box li{font-size:.9rem;line-height:1.8;opacity:.93}
-.welcome-box ul{margin-left:1.2rem;margin-top:.5rem}
-.welcome-meta{display:flex;gap:1rem;margin-top:1rem;flex-wrap:wrap}
-.welcome-meta span{background:rgba(255,255,255,.18);border-radius:6px;padding:.2rem .75rem;
-  font-family:var(--M);font-size:.68rem;font-weight:500}
-
-/* PHASE */
-.phase{background:var(--surface);border:1.5px solid var(--border);border-radius:16px;
-  margin-bottom:1.5rem;overflow:hidden;transition:opacity .3s,transform .3s,filter .3s}
-.phase.locked{opacity:.35;pointer-events:none;filter:blur(1.5px)}
-.phase-header{padding:1rem 1.4rem;background:#fff8f5;
-  border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;gap:1rem;cursor:default}
-.phase-num{font-family:var(--M);font-size:.7rem;font-weight:600;letter-spacing:.08em;
-  text-transform:uppercase;color:var(--acc)}
-.phase-title{font-family:var(--D);font-weight:700;font-size:.95rem;color:var(--text);
-  flex:1;margin:0 .8rem}
-.phase-check{width:26px;height:26px;border-radius:50%;background:var(--border);
-  display:flex;align-items:center;justify-content:center;font-size:.8rem;flex-shrink:0;
-  transition:background .3s,color .3s}
-.phase-check.done{background:#10b981;color:#fff}
-.phase-body{padding:1.6rem 1.8rem}
-
-/* RICH CONTENT STYLES */
+.l-nav-lbl{font-family:var(--M);font-size:.68rem;color:var(--mu)}
+.pw{position:fixed;top:58px;left:0;right:0;z-index:199;height:4px;background:var(--br)}
+.pb{height:100%;background:linear-gradient(90deg,var(--acc),var(--acd));transition:width .5s cubic-bezier(.4,0,.2,1);width:0%;position:relative}
+.pb::after{content:'';position:absolute;right:0;top:0;bottom:0;width:20px;background:inherit;filter:brightness(1.4);animation:pg 1.5s ease-in-out infinite}
+@keyframes pg{0%,100%{opacity:1}50%{opacity:.35}}
+.l-hero{padding:80px 1.5rem 2rem;background:linear-gradient(160deg,#fff5f2 0%,#f8fafc 55%,#ffe8e0 100%);border-bottom:1px solid var(--br)}
+.l-hero-in{max-width:860px;margin:0 auto}
+.badge{display:inline-flex;align-items:center;border-radius:100px;padding:.22rem .9rem;font-family:var(--M);font-size:.62rem;letter-spacing:.08em;text-transform:uppercase;font-weight:700;color:var(--acc);background:var(--acp);border:1.5px solid var(--acb);margin-bottom:.85rem}
+.l-hero h1{font-family:var(--D);font-weight:700;font-size:clamp(1.5rem,4vw,2.3rem);letter-spacing:-.02em;line-height:1.15;margin-bottom:.5rem}
+.l-hero-sub{font-size:.9rem;color:var(--mu)}
+.wb{background:#fff;border:1.5px solid var(--acb);border-left:5px solid var(--acc);border-radius:14px;padding:1.4rem 1.6rem;max-width:860px;margin:1.5rem auto 0;box-shadow:0 2px 12px var(--acs)}
+.wb h2{font-family:var(--D);font-weight:700;font-size:1.05rem;color:var(--acd);margin-bottom:.6rem}
+.wb p,.wb li{font-size:.92rem;line-height:1.85;color:var(--t2)}
+.wb ul{margin-left:1.2rem;margin-top:.4rem}
+.wm{display:flex;gap:.65rem;margin-top:1rem;flex-wrap:wrap}
+.wm span{background:var(--acp);color:var(--acd);border:1px solid var(--acb);border-radius:7px;padding:.22rem .7rem;font-family:var(--M);font-size:.68rem;font-weight:600}
+.phase{background:var(--sf);border:1.5px solid var(--br);border-radius:16px;margin-bottom:1.5rem;overflow:hidden;transition:opacity .35s,filter .35s,transform .35s}
+.phase.locked{opacity:.28;pointer-events:none;filter:blur(2px);transform:scale(.99)}
+.ph{padding:1rem 1.4rem;background:#fff8f5;border-bottom:1px solid var(--br);display:flex;align-items:center;gap:.8rem}
+.pn{font-family:var(--M);font-size:.65rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--acc);white-space:nowrap}
+.pt{font-family:var(--D);font-weight:700;font-size:.95rem;color:var(--tx);flex:1}
+.pc{width:26px;height:26px;border-radius:50%;background:var(--br);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:.8rem;transition:background .3s,transform .4s}
+.pc.done{background:#10b981;color:#fff;transform:scale(1.15) rotate(360deg)}
+.pb2{padding:1.6rem 1.8rem}
 .v2-p{margin-bottom:1rem;font-size:.95rem;color:var(--t2);line-height:1.85}
-.v2-h3{font-family:var(--D);font-weight:700;font-size:1.05rem;color:var(--text);
-  margin:1.6rem 0 .5rem;padding-top:.2rem;border-top:2px solid var(--acc-pale)}
-.v2-h4{font-family:var(--D);font-weight:600;font-size:.95rem;color:var(--t2);margin:1.1rem 0 .4rem}
-.v2-h5,.v2-h6{font-family:var(--D);font-weight:600;font-size:.9rem;color:var(--muted);margin:.8rem 0 .3rem}
+.v2-h3{font-family:var(--D);font-weight:700;font-size:1.05rem;color:var(--tx);margin:1.6rem 0 .5rem;border-top:2px solid var(--acp);padding-top:.4rem}
+.v2-h4{font-family:var(--D);font-weight:600;font-size:.95rem;color:var(--t2);margin:1rem 0 .35rem}
+.v2-h5,.v2-h6{font-family:var(--D);font-weight:600;font-size:.88rem;color:var(--mu);margin:.7rem 0 .3rem}
 .v2-ul,.v2-ol{margin:.6rem 0 1rem 1.4rem;font-size:.93rem;color:var(--t2);line-height:1.9}
 .v2-ul li,.v2-ol li{margin-bottom:.3rem}
-.v2-bq{border-left:4px solid var(--acc);background:var(--acc-pale);border-radius:0 10px 10px 0;
-  padding:.9rem 1.2rem;margin:1rem 0;font-size:.92rem;color:#7b1c06;font-style:italic}
+.v2-bq{border-left:4px solid var(--acc);background:var(--acp);border-radius:0 10px 10px 0;padding:.9rem 1.2rem;margin:1rem 0;font-size:.92rem;color:#7b1c06;font-style:italic}
 .v2-bq p{margin:0;color:inherit}
-.v2-bq strong{font-style:normal}
-.v2-hr{border:none;border-top:1px solid var(--border);margin:1.2rem 0}
-.v2-table-wrap{overflow-x:auto;margin:1rem 0}
+.v2-hr{border:none;border-top:1px solid var(--br);margin:1.2rem 0}
+.v2-table-wrap{overflow-x:auto;margin:1rem 0;border-radius:10px;border:1px solid var(--br)}
 .v2-table{width:100%;border-collapse:collapse;font-size:.87rem}
-.v2-table th{background:var(--acc-pale);color:#7b1c06;font-family:var(--D);
-  font-weight:700;padding:9px 12px;text-align:left;border:1px solid var(--acc-b)}
-.v2-table td{padding:8px 12px;border:1px solid var(--border);color:var(--t2);vertical-align:top}
-.v2-table tr:nth-child(even) td{background:#f8fafc}
-.v2-table code{background:var(--acc-pale);color:var(--acc);border-radius:4px;
-  padding:1px 5px;font-family:var(--M);font-size:.8em}
-.phase-body code{background:var(--acc-pale);color:var(--acc-d);border-radius:4px;
-  padding:1px 6px;font-family:var(--M);font-size:.82em}
-.phase-body a{color:var(--acc);text-decoration:underline;text-underline-offset:2px}
-.phase-body strong{color:var(--text)}
-
-/* CODE BLOCKS */
-.v2-code-wrap{margin:1.2rem 0;border-radius:12px;overflow:hidden;border:1px solid #1e293b;box-shadow:0 4px 16px rgba(0,0,0,.15)}
+.v2-table th{background:var(--acp);color:#7b1c06;font-family:var(--D);font-weight:700;padding:10px 12px;text-align:left;border-bottom:2px solid var(--acb)}
+.v2-table td{padding:8px 12px;border-bottom:1px solid var(--br);color:var(--t2);vertical-align:top}
+.v2-table tr:last-child td{border:none}
+.v2-table tr:hover td{background:var(--acp)}
+.pb2 code{background:var(--acp);color:var(--acd);border-radius:4px;padding:1px 6px;font-family:var(--M);font-size:.82em}
+.pb2 a{color:var(--acc);text-decoration:underline;text-underline-offset:2px}
+.pb2 strong{color:var(--tx)}
+.v2-code-wrap{margin:1.2rem 0;border-radius:12px;overflow:hidden;border:1px solid #1e293b;box-shadow:0 4px 18px rgba(0,0,0,.18)}
 .v2-code-bar{background:#1e293b;padding:.55rem 1rem;display:flex;align-items:center;gap:.4rem}
 .v2-dot{width:10px;height:10px;border-radius:50%}
 .v2-dot.r{background:#ff5f57}.v2-dot.y{background:#febc2e}.v2-dot.g{background:#28c840}
-.v2-code-lang{margin-left:.6rem;font-family:var(--M);font-size:.65rem;color:#64748b;text-transform:uppercase;letter-spacing:.08em}
+.v2-code-lang{margin-left:.5rem;font-family:var(--M);font-size:.62rem;color:#64748b;text-transform:uppercase;letter-spacing:.08em;flex:1}
+.copy-btn{background:rgba(255,255,255,.08);color:#94a3b8;border:none;border-radius:6px;padding:.25rem .65rem;font-family:var(--M);font-size:.65rem;cursor:pointer;transition:background .2s,color .2s}
+.copy-btn:hover{background:rgba(255,255,255,.2);color:#fff}
+.copy-btn.copied{background:#10b981;color:#fff}
 .v2-code-body{background:#0f172a;padding:1.3rem 1.5rem;overflow-x:auto}
 .v2-code-body pre{margin:0}
-.v2-code-body code{font-family:var(--M);font-size:.8rem;line-height:1.9;color:#e2e8f0;
-  white-space:pre;background:transparent;padding:0;border-radius:0}
-
-/* TASK BOX */
-.task-box{background:#fff0ec;border:2px dashed #e34c26;
-  border-radius:12px;padding:1rem 1.3rem;margin:1.4rem 0}
-.task-label{font-family:var(--M);font-size:.65rem;font-weight:700;letter-spacing:.1em;
-  text-transform:uppercase;color:#7b1c06;margin-bottom:.5rem;display:flex;align-items:center;gap:.4rem}
-.task-box p,.task-body{font-size:.92rem;color:#7b1c06;line-height:1.8}
-.task-box code{background:rgba(0,0,0,.08);border-radius:4px;padding:1px 6px;
-  font-family:var(--M);font-size:.82em}
-
-/* UNLOCK BUTTON */
-.unlock-btn{display:inline-flex;align-items:center;gap:.5rem;background:var(--acc);
-  color:#fff;font-family:var(--D);font-weight:700;font-size:.88rem;
-  padding:.75rem 1.6rem;border-radius:10px;border:none;cursor:pointer;
-  transition:transform .2s,box-shadow .2s;box-shadow:0 4px 14px var(--acc-sh);margin-top:1.2rem}
-.unlock-btn:hover{transform:translateY(-2px);box-shadow:0 8px 22px var(--acc-sh)}
-
-/* BUILD IT */
+.v2-code-body code{font-family:var(--M);font-size:.8rem;line-height:1.95;color:#e2e8f0;white-space:pre;background:transparent;padding:0;border-radius:0}
+.task-box{background:#fff0ec;border:2px dashed #e34c26;border-radius:12px;padding:1.1rem 1.3rem;margin:1.4rem 0}
+.task-lbl{font-family:var(--M);font-size:.65rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#7b1c06;margin-bottom:.5rem;display:flex;align-items:center;gap:.4rem}
+.task-body{font-size:.93rem;color:#7b1c06;line-height:1.85}
+.task-body code{background:rgba(0,0,0,.1);border-radius:4px;padding:1px 6px;font-family:var(--M);font-size:.82em}
+.chal-box{background:linear-gradient(135deg,#fff5f2 0%,#fff 100%);border:2px solid var(--acc);border-radius:14px;padding:1.2rem 1.4rem;margin-bottom:1.2rem}
+.chal-lbl{font-family:var(--M);font-size:.65rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--acd);margin-bottom:.6rem}
+.chal-body{font-size:.95rem;color:var(--tx);line-height:1.85}
+.chal-body code{background:var(--acp);color:var(--acd);border-radius:4px;padding:1px 5px;font-family:var(--M);font-size:.82em}
+.reveal-btn{display:inline-flex;align-items:center;gap:.5rem;background:transparent;color:var(--acd);font-family:var(--D);font-weight:700;font-size:.85rem;padding:.6rem 1.2rem;border-radius:8px;border:2px solid var(--acc);cursor:pointer;transition:background .2s,color .2s;margin:.6rem 0}
+.reveal-btn:hover{background:var(--acc);color:#fff}
+.reveal-content{display:none;margin-top:.6rem;animation:fi .3s ease}
+.reveal-content.open{display:block}
+@keyframes fi{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
 .build-box{background:#f0fdf4;border:2px solid #16a34a;border-radius:16px;padding:1.6rem;margin:2rem 0;display:none}
-.build-label{font-family:var(--M);font-size:.65rem;font-weight:700;letter-spacing:.1em;
-  text-transform:uppercase;color:#15803d;margin-bottom:.4rem}
-.build-name{font-family:var(--D);font-weight:700;font-size:1.1rem;color:#14532d;margin-bottom:.5rem}
-.build-desc{font-size:.9rem;color:#166534;margin-bottom:1.2rem;line-height:1.75}
-.build-desc code{background:rgba(22,163,74,.12);border-radius:4px;padding:1px 6px;font-family:var(--M);font-size:.82em}
-.build-desc strong{color:#14532d}
-
-/* GITHUB ACCORDION */
-.gh-acc{border:1.5px solid var(--border);border-radius:12px;overflow:hidden;margin:1.5rem 0}
-.gh-acc-head{padding:1rem 1.2rem;background:#f8fafc;cursor:pointer;
-  display:flex;align-items:center;justify-content:space-between;
-  font-family:var(--D);font-weight:600;font-size:.9rem;user-select:none}
-.gh-acc-body{display:none;padding:1.2rem;border-top:1px solid var(--border)}
-.gh-acc-body.open{display:block}
-.gh-step{display:flex;gap:.8rem;margin-bottom:1rem;align-items:flex-start}
-.gh-step-n{width:26px;height:26px;border-radius:50%;background:var(--acc);color:#fff;
-  font-family:var(--D);font-weight:700;font-size:.75rem;display:flex;align-items:center;
-  justify-content:center;flex-shrink:0;margin-top:2px}
-.gh-step p{font-size:.88rem;color:var(--t2);line-height:1.7}
-.gh-step code{background:var(--acc-pale);color:var(--acc-d);border-radius:4px;
-  padding:1px 6px;font-family:var(--M);font-size:.82em}
-
-/* SESSION END */
-.session-end{background:linear-gradient(135deg,var(--acc),var(--acc-d));color:#fff;
-  border-radius:16px;padding:1.6rem 1.8rem;margin:2rem 0;display:none}
-.session-end.visible{display:block}
-.session-end h2{font-family:var(--D);font-weight:700;font-size:1.1rem;margin-bottom:.8rem}
-.session-end ul{list-style:none;display:flex;flex-direction:column;gap:.4rem}
-.session-end li{font-size:.9rem;opacity:.93;display:flex;align-items:center;gap:.5rem}
-.ln-btn{display:inline-flex;align-items:center;gap:.4rem;background:var(--surface);
-  color:var(--t2);font-family:var(--D);font-weight:600;font-size:.82rem;
-  padding:.65rem 1.2rem;border-radius:8px;text-decoration:none;
-  border:1.5px solid var(--border);transition:border-color .2s,color .2s}
+.build-box.visible{display:block;animation:fi .4s ease}
+.build-lbl{font-family:var(--M);font-size:.65rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#15803d;margin-bottom:.4rem}
+.build-name{font-family:var(--D);font-weight:700;font-size:1.15rem;color:#14532d;margin-bottom:.6rem}
+.build-req{font-size:.93rem;color:#166534;line-height:1.8;margin-bottom:.8rem}
+.build-req code{background:rgba(22,163,74,.12);border-radius:4px;padding:1px 6px;font-family:var(--M);font-size:.82em}
+.build-req strong{color:#14532d}
+.gh-acc{border:1.5px solid var(--br);border-radius:12px;overflow:hidden;margin:1.5rem 0}
+.gh-hd{padding:1rem 1.2rem;background:#f8fafc;cursor:pointer;display:flex;align-items:center;justify-content:space-between;font-family:var(--D);font-weight:600;font-size:.9rem;user-select:none;transition:background .2s}
+.gh-hd:hover{background:#f1f5f9}
+.gh-bd{display:none;padding:1.2rem;border-top:1px solid var(--br)}
+.gh-bd.open{display:block;animation:fi .25s ease}
+.gh-st{display:flex;gap:.8rem;margin-bottom:1rem;align-items:flex-start}
+.gh-n{width:26px;height:26px;border-radius:50%;background:var(--acc);color:#fff;font-family:var(--D);font-weight:700;font-size:.75rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px}
+.gh-st p{font-size:.88rem;color:var(--t2);line-height:1.7}
+.gh-st code{background:var(--acp);color:var(--acd);border-radius:4px;padding:1px 6px;font-family:var(--M);font-size:.82em}
+.gh-nop{background:#fef3c7;border:1.5px solid #fde68a;border-radius:10px;padding:1rem 1.2rem;font-size:.9rem;color:#78350f;line-height:1.75;margin-bottom:1rem}
+.se{background:linear-gradient(135deg,var(--acc),var(--acd));color:#fff;border-radius:16px;padding:1.6rem 1.8rem;margin:2rem 0;display:none}
+.se.visible{display:block;animation:fi .4s ease}
+.se h2{font-family:var(--D);font-weight:700;font-size:1.1rem;margin-bottom:.8rem}
+.se ul{list-style:none;display:flex;flex-direction:column;gap:.4rem}
+.se li{font-size:.9rem;opacity:.93;display:flex;align-items:center;gap:.5rem}
+.ln-btn{display:inline-flex;align-items:center;gap:.4rem;background:var(--sf);color:var(--t2);font-family:var(--D);font-weight:600;font-size:.82rem;padding:.65rem 1.2rem;border-radius:8px;text-decoration:none;border:1.5px solid var(--br);transition:border-color .2s,color .2s}
 .ln-btn:hover{border-color:var(--acc);color:var(--acc)}
 .ln-btn.primary{background:var(--acc);color:#fff;border-color:var(--acc)}
 .ln-btn.primary:hover{opacity:.9}
-.lesson-nav{display:flex;align-items:center;justify-content:space-between;
-  padding-top:2rem;border-top:1px solid rgba(255,255,255,.25);margin-top:1.5rem;flex-wrap:wrap;gap:.75rem}
-.lesson-footer{text-align:center;padding:1.5rem;font-family:var(--M);font-size:.72rem;
-  color:var(--muted);border-top:1px solid var(--border);background:var(--surface)}
+.ln{display:flex;align-items:center;justify-content:space-between;padding-top:1.5rem;border-top:1px solid rgba(255,255,255,.25);margin-top:1.5rem;flex-wrap:wrap;gap:.75rem}
+.ub{display:inline-flex;align-items:center;gap:.5rem;background:var(--acc);color:#fff;font-family:var(--D);font-weight:700;font-size:.88rem;padding:.75rem 1.6rem;border-radius:10px;border:none;cursor:pointer;transition:transform .2s,box-shadow .2s;box-shadow:0 4px 14px var(--acs);margin-top:1.2rem}
+.ub:hover{transform:translateY(-2px);box-shadow:0 8px 22px var(--acs)}
+.ub:active{transform:scale(.97)}
+#toast{position:fixed;bottom:90px;right:1.5rem;z-index:999;background:#1e293b;color:#fff;border-radius:10px;padding:.75rem 1.2rem;font-family:var(--D);font-size:.85rem;font-weight:600;box-shadow:0 8px 24px rgba(0,0,0,.25);transform:translateY(20px);opacity:0;transition:all .3s;pointer-events:none}
+#toast.show{transform:translateY(0);opacity:1}
+#go-top{position:fixed;bottom:1.5rem;right:1.5rem;z-index:300;width:44px;height:44px;border-radius:50%;background:var(--acc);color:#fff;border:none;cursor:pointer;font-size:1.15rem;box-shadow:0 4px 16px var(--acs);display:flex;align-items:center;justify-content:center;opacity:0;transform:translateY(10px);transition:opacity .3s,transform .3s,box-shadow .2s;pointer-events:none}
+#go-top.visible{opacity:1;transform:translateY(0);pointer-events:auto}
+#go-top:hover{box-shadow:0 8px 24px var(--acs);transform:translateY(-2px)}
+#cc{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:998;display:none}
+.lf{text-align:center;padding:1.5rem;font-family:var(--M);font-size:.72rem;color:var(--mu);border-top:1px solid var(--br);background:var(--sf)}
 </style>
 </head>
 <body>
 <nav class="l-nav">
   <a href="../index.html" class="l-nav-logo">⚡ Techbase HTML</a>
-  <span class="l-nav-label">Lesson 16 of 34</span>
+  <span class="l-nav-lbl">Lesson 16 of 34</span>
   <a href="../index.html" class="l-nav-back">← All Lessons</a>
 </nav>
-<div class="progress-wrap"><div class="progress-bar" id="pbar"></div></div>
-
-<div class="l-hero">
-  <div class="l-hero-inner">
-    <div class="l-badge">HTML · Lesson 16</div>
-    <h1>HTML Tables — From Zero to Professional</h1>
-    <div class="l-hero-sub">13 phases · Build: Project Goal</div>
-  </div>
-</div>
-
-<section style="background:linear-gradient(160deg,#fff5f2 0%,#f8fafc 55%,#ffe8e0 100%);padding-bottom:1.5rem;border-bottom:1px solid var(--border)">
-  <div style="max-width:860px;margin:0 auto;padding:0 1.5rem"><div class="welcome-box">
-  <h2>👋 Welcome to Lesson 16</h2>
-  <div style="font-size:.9rem;line-height:1.85;opacity:.93"><p class="v2-p">Imagine you are a teacher who wants to show students their exam results. You need a neat grid with rows for each student and columns for each subject. Or imagine you are a web developer building a product pricing page with plans, features, and prices lined up side by side. That neat, grid-like arrangement of data is a <strong>table</strong> — and HTML gives you everything you need to build one.</p>
-<p class="v2-p">In this lesson, you will learn how to create HTML tables from scratch, style them beautifully with CSS, control their size and layout, merge cells across rows and columns, and use advanced features like column grouping. By the end, you will build a realistic mini project: a fully styled class schedule table.</p>
-<p class="v2-p"><strong>What you will learn:</strong></p>
-<ul class="v2-ul"><li>What HTML tables are and why they exist</li><li>How to build a basic table with rows, columns, and headers</li><li>How to add borders, adjust sizes, and control spacing</li><li>How to add captions and vertical headers</li><li>How to merge cells horizontally (colspan) and vertically (rowspan)</li><li>How to style tables with zebra stripes, hover effects, and dividers</li><li>How to use <code>&lt;colgroup&gt;</code> to style entire columns at once</li></ul>
-<blockquote class="v2-bq"><p class="v2-p"><strong>No prior experience needed.</strong> This lesson assumes you know basic HTML tags like <code>&lt;p&gt;</code>, <code>&lt;h1&gt;</code>, and <code>&lt;div&gt;</code>. If you do, you are ready!</p></blockquote>
-<hr class="v2-hr"></div>
-  <div class="welcome-meta">
-    <span>📚 13 phases</span>
-    <span>🏗️ Project Goal</span>
-  </div>
+<div class="pw"><div class="pb" id="pbar"></div></div>
+<div class="l-hero"><div class="l-hero-in">
+  <div class="badge">HTML · Lesson 16</div>
+  <h1>HTML Tables — From Zero to Professional</h1>
+  <div class="l-hero-sub">13 phases &nbsp;·&nbsp; Build: Project Goal</div>
 </div></div>
-</section>
-
-<main style="max-width:860px;margin:0 auto;padding:2rem 1.5rem 5rem">
-<div class="phase" id="phase1">
-  <div class="phase-header">
-    <div class="phase-num">Phase 1 of 13</div>
-    <div class="phase-title">Lesson Introduction</div>
-    <div class="phase-check" id="chk1"></div>
-  </div>
-  <div class="phase-body">
-    <p class="v2-p">Imagine you are a teacher who wants to show students their exam results. You need a neat grid with rows for each student and columns for each subject. Or imagine you are a web developer building a product pricing page with plans, features, and prices lined up side by side. That neat, grid-like arrangement of data is a <strong>table</strong> — and HTML gives you everything you need to build one.</p>
+<section style="background:linear-gradient(160deg,#fff5f2 0%,#f8fafc 55%,#ffe8e0 100%);padding-bottom:1.5rem;border-bottom:1px solid var(--br)">
+  <div style="max-width:860px;margin:0 auto;padding:0 1.5rem"><div class="wb"><h2>👋 Welcome to Lesson 16</h2><div style="font-size:.92rem;line-height:1.85;color:var(--t2)"><p class="v2-p">Imagine you are a teacher who wants to show students their exam results. You need a neat grid with rows for each student and columns for each subject. Or imagine you are a web developer building a product pricing page with plans, features, and prices lined up side by side. That neat, grid-like arrangement of data is a <strong>table</strong> — and HTML gives you everything you need to build one.</p>
 <p class="v2-p">In this lesson, you will learn how to create HTML tables from scratch, style them beautifully with CSS, control their size and layout, merge cells across rows and columns, and use advanced features like column grouping. By the end, you will build a realistic mini project: a fully styled class schedule table.</p>
 <p class="v2-p"><strong>What you will learn:</strong></p>
 <ul class="v2-ul"><li>What HTML tables are and why they exist</li><li>How to build a basic table with rows, columns, and headers</li><li>How to add borders, adjust sizes, and control spacing</li><li>How to add captions and vertical headers</li><li>How to merge cells horizontally (colspan) and vertically (rowspan)</li><li>How to style tables with zebra stripes, hover effects, and dividers</li><li>How to use <code>&lt;colgroup&gt;</code> to style entire columns at once</li></ul>
 <blockquote class="v2-bq"><p class="v2-p"><strong>No prior experience needed.</strong> This lesson assumes you know basic HTML tags like <code>&lt;p&gt;</code>, <code>&lt;h1&gt;</code>, and <code>&lt;div&gt;</code>. If you do, you are ready!</p></blockquote>
-<hr class="v2-hr">
-    <div class="task-box">
-      <div class="task-label">✏️ Your Task</div>
-      <div class="task-body">Now practise what you just learned about <strong>Lesson Introduction</strong>. Open your editor, type the examples above by hand, then modify them — change values, rename variables, and observe what happens. Active experimentation is how code sticks.</div>
-    </div>
-    <button class="unlock-btn" onclick="unlockNext(1)">Start Lesson ✓</button>
-  </div>
-</div>
-<div class="phase locked" id="phase2">
-  <div class="phase-header">
-    <div class="phase-num">Phase 2 of 13</div>
-    <div class="phase-title">Prerequisite Concepts</div>
-    <div class="phase-check" id="chk2"></div>
-  </div>
-  <div class="phase-body">
-    <p class="v2-p">Before diving into tables, let us quickly cover two ideas you need to understand.</p>
+<hr class="v2-hr"></div><div class="wm"><span>📚 13 phases</span><span>🏗️ Project Goal</span><span>🌐 GitHub Pages</span></div></div></div>
+</section>
+<main style="max-width:860px;margin:0 auto;padding:2rem 1.5rem 5rem">
+<div class="phase" id="phase1"><div class="ph"><div class="pn">Phase 1/13</div><div class="pt">Lesson Introduction</div><div class="pc" id="chk1"></div></div><div class="pb2"><p class="v2-p">Imagine you are a teacher who wants to show students their exam results. You need a neat grid with rows for each student and columns for each subject. Or imagine you are a web developer building a product pricing page with plans, features, and prices lined up side by side. That neat, grid-like arrangement of data is a <strong>table</strong> — and HTML gives you everything you need to build one.</p>
+<p class="v2-p">In this lesson, you will learn how to create HTML tables from scratch, style them beautifully with CSS, control their size and layout, merge cells across rows and columns, and use advanced features like column grouping. By the end, you will build a realistic mini project: a fully styled class schedule table.</p>
+<p class="v2-p"><strong>What you will learn:</strong></p>
+<ul class="v2-ul"><li>What HTML tables are and why they exist</li><li>How to build a basic table with rows, columns, and headers</li><li>How to add borders, adjust sizes, and control spacing</li><li>How to add captions and vertical headers</li><li>How to merge cells horizontally (colspan) and vertically (rowspan)</li><li>How to style tables with zebra stripes, hover effects, and dividers</li><li>How to use <code>&lt;colgroup&gt;</code> to style entire columns at once</li></ul>
+<blockquote class="v2-bq"><p class="v2-p"><strong>No prior experience needed.</strong> This lesson assumes you know basic HTML tags like <code>&lt;p&gt;</code>, <code>&lt;h1&gt;</code>, and <code>&lt;div&gt;</code>. If you do, you are ready!</p></blockquote>
+<hr class="v2-hr"><div class="task-box"><div class="task-lbl">✏️ Your Task</div><div class="task-body">Practise what you just learned about <strong>Lesson Introduction</strong>. Open your editor, type the examples above by hand, modify them, and observe what changes.</div></div><button class="ub" onclick="unlockNext(1)">Start Lesson ✓</button></div></div>
+<div class="phase locked" id="phase2"><div class="ph"><div class="pn">Phase 2/13</div><div class="pt">Prerequisite Concepts</div><div class="pc" id="chk2"></div></div><div class="pb2"><p class="v2-p">Before diving into tables, let us quickly cover two ideas you need to understand.</p>
 <h3 class="v2-h3">What is CSS?</h3>
 <p class="v2-p"><strong>CSS</strong> stands for Cascading Style Sheets. It is a language you use to control how HTML elements look — their colour, size, font, spacing, and more. You write CSS rules like this:</p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">css</span></div><div class="v2-code-body"><pre><code>/* This means: &quot;Select all &lt;p&gt; tags and make the text colour blue.&quot; */
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">css</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>/* This means: &quot;Select all &lt;p&gt; tags and make the text colour blue.&quot; */
 p {
   color: blue;
 }</code></pre></div></div>
@@ -235,22 +155,8 @@ p {
 <h3 class="v2-h3">What is a Grid?</h3>
 <p class="v2-p">A <strong>grid</strong> is a system of rows and columns, like a spreadsheet or a calendar. Tables are HTML's built-in way to create a grid. Every table has:</p>
 <ul class="v2-ul"><li><strong>Rows</strong> — horizontal lines going left to right</li><li><strong>Columns</strong> — vertical lines going top to bottom</li><li><strong>Cells</strong> — the individual boxes where a row and column cross</li></ul>
-<hr class="v2-hr">
-    <div class="task-box">
-      <div class="task-label">✏️ Your Task</div>
-      <div class="task-body">Now practise what you just learned about <strong>Prerequisite Concepts</strong>. Open your editor, type the examples above by hand, then modify them — change values, rename variables, and observe what happens. Active experimentation is how code sticks.</div>
-    </div>
-    <button class="unlock-btn" onclick="unlockNext(2)">Phase Complete — Unlock Next ✓</button>
-  </div>
-</div>
-<div class="phase locked" id="phase3">
-  <div class="phase-header">
-    <div class="phase-num">Phase 3 of 13</div>
-    <div class="phase-title">Part 1: Understanding HTML Tables</div>
-    <div class="phase-check" id="chk3"></div>
-  </div>
-  <div class="phase-body">
-    <h3 class="v2-h3">What Is an HTML Table?</h3>
+<hr class="v2-hr"><div class="task-box"><div class="task-lbl">✏️ Your Task</div><div class="task-body">Practise what you just learned about <strong>Prerequisite Concepts</strong>. Open your editor, type the examples above by hand, modify them, and observe what changes.</div></div><button class="ub" onclick="unlockNext(2)">Phase Complete — Unlock Next ✓</button></div></div>
+<div class="phase locked" id="phase3"><div class="ph"><div class="pn">Phase 3/13</div><div class="pt">Part 1: Understanding HTML Tables</div><div class="pc" id="chk3"></div></div><div class="pb2"><h3 class="v2-h3">What Is an HTML Table?</h3>
 <p class="v2-p">An HTML table is a structured element that arranges data into <strong>rows</strong> and <strong>columns</strong>. Think of it like a spreadsheet embedded in a web page.</p>
 <p class="v2-p"><strong>Real-world uses of tables:</strong></p>
 <ul class="v2-ul"><li>Student grade sheets</li><li>Product comparison charts</li><li>Price lists</li><li>Train/bus schedules</li><li>Sports standings</li><li>Financial reports</li></ul>
@@ -262,24 +168,10 @@ p {
 <h3 class="v2-h3">Additional Table Tags</h3>
 <p class="v2-p">There are more tags you will use as tables grow more complex:</p>
 <div class="v2-table-wrap"><table class="v2-table"><thead><tr><th>Tag</th><th>Description</th></tr></thead><tbody><tr><td><code>&lt;caption&gt;</code></td><td>Adds a title above the table</td></tr><tr><td><code>&lt;thead&gt;</code></td><td>Groups the header rows (top section)</td></tr><tr><td><code>&lt;tbody&gt;</code></td><td>Groups the body rows (middle section)</td></tr><tr><td><code>&lt;tfoot&gt;</code></td><td>Groups the footer rows (bottom section)</td></tr><tr><td><code>&lt;colgroup&gt;</code></td><td>Groups one or more columns for styling</td></tr><tr><td><code>&lt;col&gt;</code></td><td>Defines style properties for a column inside <code>&lt;colgroup&gt;</code></td></tr></tbody></table></div>
-<hr class="v2-hr">
-    <div class="task-box">
-      <div class="task-label">✏️ Your Task</div>
-      <div class="task-body">Now practise what you just learned about <strong>: Understanding HTML Tables</strong>. Open your editor, type the examples above by hand, then modify them — change values, rename variables, and observe what happens. Active experimentation is how code sticks.</div>
-    </div>
-    <button class="unlock-btn" onclick="unlockNext(3)">Phase Complete — Unlock Next ✓</button>
-  </div>
-</div>
-<div class="phase locked" id="phase4">
-  <div class="phase-header">
-    <div class="phase-num">Phase 4 of 13</div>
-    <div class="phase-title">Part 2: Building Your First Table</div>
-    <div class="phase-check" id="chk4"></div>
-  </div>
-  <div class="phase-body">
-    <h3 class="v2-h3">Step 1 — The Simplest Possible Table</h3>
+<hr class="v2-hr"><div class="task-box"><div class="task-lbl">✏️ Your Task</div><div class="task-body">Practise what you just learned about <strong>: Understanding HTML Tables</strong>. Open your editor, type the examples above by hand, modify them, and observe what changes.</div></div><button class="ub" onclick="unlockNext(3)">Phase Complete — Unlock Next ✓</button></div></div>
+<div class="phase locked" id="phase4"><div class="ph"><div class="pn">Phase 4/13</div><div class="pt">Part 2: Building Your First Table</div><div class="pc" id="chk4"></div></div><div class="pb2"><h3 class="v2-h3">Step 1 — The Simplest Possible Table</h3>
 <p class="v2-p">Let us start with the smallest table that makes sense: one row, three cells.</p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;table&gt;
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;table&gt;
   &lt;tr&gt;
     &lt;td&gt;Emil&lt;/td&gt;
     &lt;td&gt;Tobias&lt;/td&gt;
@@ -289,11 +181,11 @@ p {
 <p class="v2-p"><strong>What each line does:</strong></p>
 <ul class="v2-ul"><li><code>&lt;table&gt;</code> — Opens the table. Everything between here and <code>&lt;/table&gt;</code> is part of the table.</li><li><code>&lt;tr&gt;</code> — Opens a row. One <code>&lt;tr&gt;</code> = one horizontal row in the table.</li><li><code>&lt;td&gt;Emil&lt;/td&gt;</code> — Opens a cell and puts the text "Emil" inside it. Then closes the cell.</li><li><code>&lt;td&gt;Tobias&lt;/td&gt;</code> — Same, but with "Tobias".</li><li><code>&lt;td&gt;Linus&lt;/td&gt;</code> — Same, but with "Linus".</li><li><code>&lt;/tr&gt;</code> — Closes the row.</li><li><code>&lt;/table&gt;</code> — Closes the whole table.</li></ul>
 <p class="v2-p"><strong>Expected output (no borders yet, just plain text in a row):</strong></p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span></div><div class="v2-code-body"><pre><code>Emil   Tobias   Linus</code></pre></div></div>
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>Emil   Tobias   Linus</code></pre></div></div>
 <blockquote class="v2-bq"><p class="v2-p"><strong>Think about this:</strong> What happens if you add a second <code>&lt;tr&gt;...&lt;/tr&gt;</code> block with three more <code>&lt;td&gt;</code> tags? Try it!</p></blockquote>
 <h3 class="v2-h3">Step 2 — Adding Multiple Rows</h3>
 <p class="v2-p">Now let us add two rows, each with three cells:</p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;table&gt;
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;table&gt;
   &lt;tr&gt;
     &lt;td&gt;Emil&lt;/td&gt;
     &lt;td&gt;Tobias&lt;/td&gt;
@@ -306,13 +198,13 @@ p {
   &lt;/tr&gt;
 &lt;/table&gt;</code></pre></div></div>
 <p class="v2-p"><strong>Expected output (no borders, two rows):</strong></p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span></div><div class="v2-code-body"><pre><code>Emil    Tobias   Linus
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>Emil    Tobias   Linus
 16      14       10</code></pre></div></div>
 <p class="v2-p">Each <code>&lt;tr&gt;</code> is a new row. Each <code>&lt;td&gt;</code> inside it is a new cell in that row.</p>
 <p class="v2-p"><strong>Important rule:</strong> Every row should have the same number of cells. If one row has 3 cells and another has 2, the table looks broken. (We will learn about exceptions when we cover <code>colspan</code>.)</p>
 <h3 class="v2-h3">Step 3 — Adding Header Cells</h3>
 <p class="v2-p">Header cells use <code>&lt;th&gt;</code> instead of <code>&lt;td&gt;</code>. They are automatically displayed in <strong>bold</strong> and <strong>centred</strong> in most browsers — no extra CSS needed.</p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;table&gt;
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;table&gt;
   &lt;tr&gt;
     &lt;th&gt;Person 1&lt;/th&gt;
     &lt;th&gt;Person 2&lt;/th&gt;
@@ -330,13 +222,13 @@ p {
   &lt;/tr&gt;
 &lt;/table&gt;</code></pre></div></div>
 <p class="v2-p"><strong>Expected output:</strong></p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span></div><div class="v2-code-body"><pre><code>Person 1   Person 2   Person 3   ← bold, centred (header row)
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>Person 1   Person 2   Person 3   ← bold, centred (header row)
 Emil       Tobias     Linus
 16         14         10</code></pre></div></div>
 <blockquote class="v2-bq"><p class="v2-p"><strong>Why use <code>&lt;th&gt;</code> instead of just making <code>&lt;td&gt;</code> text bold?</strong> Because <code>&lt;th&gt;</code> tells the browser (and screen readers for people with vision impairments) that this cell is a <em>header</em> — a label, not just data. It makes your HTML more meaningful and accessible.</p></blockquote>
 <h3 class="v2-h3">A Complete Real-World Example</h3>
 <p class="v2-p">Here is a company contact table — the kind you see on many business websites:</p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;table&gt;
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;table&gt;
   &lt;tr&gt;
     &lt;th&gt;Company&lt;/th&gt;
     &lt;th&gt;Contact&lt;/th&gt;
@@ -359,32 +251,18 @@ Emil       Tobias     Linus
   &lt;/tr&gt;
 &lt;/table&gt;</code></pre></div></div>
 <p class="v2-p"><strong>Expected output:</strong></p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span></div><div class="v2-code-body"><pre><code>Company                     Contact           Country
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>Company                     Contact           Country
 Alfreds Futterkiste         Maria Anders      Germany
 Centro comercial Moctezuma  Francisco Chang   Mexico
 Ernst Handel                Roland Mendel     Austria</code></pre></div></div>
 <p class="v2-p">This is a proper data table with a header row and three data rows. The first row uses <code>&lt;th&gt;</code> for "Company", "Contact", and "Country".</p>
-<hr class="v2-hr">
-    <div class="task-box">
-      <div class="task-label">✏️ Your Task</div>
-      <div class="task-body">Now practise what you just learned about <strong>: Building Your First Table</strong>. Open your editor, type the examples above by hand, then modify them — change values, rename variables, and observe what happens. Active experimentation is how code sticks.</div>
-    </div>
-    <button class="unlock-btn" onclick="unlockNext(4)">Phase Complete — Unlock Next ✓</button>
-  </div>
-</div>
-<div class="phase locked" id="phase5">
-  <div class="phase-header">
-    <div class="phase-num">Phase 5 of 13</div>
-    <div class="phase-title">Part 3: Table Borders</div>
-    <div class="phase-check" id="chk5"></div>
-  </div>
-  <div class="phase-body">
-    <p class="v2-p">Right now, your table has no visible lines. The data floats in space. We use CSS to add borders.</p>
+<hr class="v2-hr"><div class="task-box"><div class="task-lbl">✏️ Your Task</div><div class="task-body">Practise what you just learned about <strong>: Building Your First Table</strong>. Open your editor, type the examples above by hand, modify them, and observe what changes.</div></div><button class="ub" onclick="unlockNext(4)">Phase Complete — Unlock Next ✓</button></div></div>
+<div class="phase locked" id="phase5"><div class="ph"><div class="pn">Phase 5/13</div><div class="pt">Part 3: Table Borders</div><div class="pc" id="chk5"></div></div><div class="pb2"><p class="v2-p">Right now, your table has no visible lines. The data floats in space. We use CSS to add borders.</p>
 <h3 class="v2-h3">Why Borders Matter</h3>
 <p class="v2-p">Without borders, the columns and rows are hard to read. With borders, the table looks clean and professional — like a real spreadsheet.</p>
 <h3 class="v2-h3">Adding a Basic Border</h3>
 <p class="v2-p">Use the CSS <code>border</code> property on <code>table</code>, <code>th</code>, and <code>td</code> elements:</p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
 &lt;html&gt;
 &lt;head&gt;
   &lt;style&gt;
@@ -413,7 +291,7 @@ Ernst Handel                Roland Mendel     Austria</code></pre></div></div>
 <p class="v2-p"><strong>Expected output:</strong> A table where every cell has its own border drawn around it. However, notice something: each cell has its OWN border, so between two adjacent cells, you will see a DOUBLE line (one from each cell's border). Let us fix that next.</p>
 <h3 class="v2-h3">Collapsed Borders (Removing Double Lines)</h3>
 <p class="v2-p">The <code>border-collapse: collapse</code> property merges touching borders into a single border:</p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;style&gt;
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;style&gt;
   table, th, td {
     border: 1px solid black;
     border-collapse: collapse;
@@ -424,7 +302,7 @@ Ernst Handel                Roland Mendel     Austria</code></pre></div></div>
 <blockquote class="v2-bq"><p class="v2-p"><strong>Real-world analogy:</strong> Without <code>border-collapse</code>, it is like every house in a street has its own fence — so there are double fences between neighbours. With <code>border-collapse</code>, neighbours share a single fence.</p></blockquote>
 <h3 class="v2-h3">Styled/Invisible Borders (Modern Look)</h3>
 <p class="v2-p">You can create a modern "no visible outer border" effect by using a white border combined with a coloured background:</p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;style&gt;
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;style&gt;
   table, th, td {
     border: 1px solid white;
     border-collapse: collapse;
@@ -436,14 +314,14 @@ Ernst Handel                Roland Mendel     Austria</code></pre></div></div>
 <p class="v2-p"><strong>What this does:</strong> The borders exist (they are 1px wide) but are the same colour as the background. So visually, you only see the gap between cells created by the border, giving an invisible-divider effect.</p>
 <h3 class="v2-h3">Rounded Borders</h3>
 <p class="v2-p">Add <code>border-radius</code> to give cells rounded corners:</p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;style&gt;
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;style&gt;
   table, th, td {
     border: 1px solid black;
     border-radius: 10px;
   }
 &lt;/style&gt;</code></pre></div></div>
 <p class="v2-p"><strong>Expected output:</strong> Every cell has rounded corners. Note: if you also want rounded corners on the outer table box, include <code>table</code> in the selector. If you only want rounded inner cells, write:</p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;style&gt;
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;style&gt;
   th, td {
     border: 1px solid black;
     border-radius: 10px;
@@ -451,7 +329,7 @@ Ernst Handel                Roland Mendel     Austria</code></pre></div></div>
 &lt;/style&gt;</code></pre></div></div>
 <h3 class="v2-h3">Border Styles</h3>
 <p class="v2-p">The <code>border-style</code> property controls the visual appearance of the border line. Supported values: <code>dotted</code>, <code>dashed</code>, <code>solid</code>, <code>double</code>, <code>groove</code>, <code>ridge</code>, <code>inset</code>, <code>outset</code>, <code>none</code>, <code>hidden</code>.</p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;style&gt;
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;style&gt;
   th, td {
     border-style: dotted;
   }
@@ -459,7 +337,7 @@ Ernst Handel                Roland Mendel     Austria</code></pre></div></div>
 <p class="v2-p"><strong>Expected output:</strong> All cell borders appear as dotted lines instead of solid lines.</p>
 <h3 class="v2-h3">Border Colour</h3>
 <p class="v2-p">Control the border colour with <code>border-color</code>:</p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;style&gt;
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;style&gt;
   th, td {
     border: 1px solid #96D4D4;  /* teal border */
     border-collapse: collapse;
@@ -467,25 +345,11 @@ Ernst Handel                Roland Mendel     Austria</code></pre></div></div>
 &lt;/style&gt;</code></pre></div></div>
 <p class="v2-p"><strong>Expected output:</strong> All cell borders are teal-coloured instead of black.</p>
 <blockquote class="v2-bq"><p class="v2-p"><strong>Common beginner mistake:</strong> Writing <code>border: 1px solid black</code> on only <code>table</code> but not <code>th</code> and <code>td</code>. This draws a box around the whole table but leaves the inner cells without borders. Always style all three: <code>table, th, td</code>.</p></blockquote>
-<hr class="v2-hr">
-    <div class="task-box">
-      <div class="task-label">✏️ Your Task</div>
-      <div class="task-body">Now practise what you just learned about <strong>: Table Borders</strong>. Open your editor, type the examples above by hand, then modify them — change values, rename variables, and observe what happens. Active experimentation is how code sticks.</div>
-    </div>
-    <button class="unlock-btn" onclick="unlockNext(5)">Phase Complete — Unlock Next ✓</button>
-  </div>
-</div>
-<div class="phase locked" id="phase6">
-  <div class="phase-header">
-    <div class="phase-num">Phase 6 of 13</div>
-    <div class="phase-title">Part 4: Table Sizes</div>
-    <div class="phase-check" id="chk6"></div>
-  </div>
-  <div class="phase-body">
-    <p class="v2-p">By default, a table is only as wide as its content needs it to be. You can control the width and height using the CSS <code>width</code> and <code>height</code> properties.</p>
+<hr class="v2-hr"><div class="task-box"><div class="task-lbl">✏️ Your Task</div><div class="task-body">Practise what you just learned about <strong>: Table Borders</strong>. Open your editor, type the examples above by hand, modify them, and observe what changes.</div></div><button class="ub" onclick="unlockNext(5)">Phase Complete — Unlock Next ✓</button></div></div>
+<div class="phase locked" id="phase6"><div class="ph"><div class="pn">Phase 6/13</div><div class="pt">Part 4: Table Sizes</div><div class="pc" id="chk6"></div></div><div class="pb2"><p class="v2-p">By default, a table is only as wide as its content needs it to be. You can control the width and height using the CSS <code>width</code> and <code>height</code> properties.</p>
 <h3 class="v2-h3">Setting Table Width</h3>
 <p class="v2-p">To make the table take up the full width of the page:</p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;table style=&quot;width: 100%&quot;&gt;
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;table style=&quot;width: 100%&quot;&gt;
   &lt;tr&gt;
     &lt;th&gt;Firstname&lt;/th&gt;
     &lt;th&gt;Lastname&lt;/th&gt;
@@ -507,7 +371,7 @@ Ernst Handel                Roland Mendel     Austria</code></pre></div></div>
 <p class="v2-p">You can also use pixel values: <code>style="width: 500px"</code> would make the table exactly 500 pixels wide.</p>
 <h3 class="v2-h3">Setting Column Width</h3>
 <p class="v2-p">To make a specific column wider, add the <code>style</code> attribute to that column's <code>&lt;th&gt;</code> or <code>&lt;td&gt;</code>:</p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;table style=&quot;width: 100%&quot;&gt;
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;table style=&quot;width: 100%&quot;&gt;
   &lt;tr&gt;
     &lt;th style=&quot;width: 70%&quot;&gt;Firstname&lt;/th&gt;
     &lt;th&gt;Lastname&lt;/th&gt;
@@ -524,7 +388,7 @@ Ernst Handel                Roland Mendel     Austria</code></pre></div></div>
 <blockquote class="v2-bq"><p class="v2-p"><strong>Think about this:</strong> If you set column 1 to 70%, column 2 to 20%, and column 3 to 10%, that adds up to 100%. What happens if you set them to values that add up to more than 100%?</p></blockquote>
 <h3 class="v2-h3">Setting Row Height</h3>
 <p class="v2-p">Add <code>style="height: Xpx"</code> to a <code>&lt;tr&gt;</code> to make that row taller:</p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;table style=&quot;width: 100%&quot;&gt;
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;table style=&quot;width: 100%&quot;&gt;
   &lt;tr&gt;
     &lt;th&gt;Firstname&lt;/th&gt;
     &lt;th&gt;Lastname&lt;/th&gt;
@@ -542,25 +406,11 @@ Ernst Handel                Roland Mendel     Austria</code></pre></div></div>
   &lt;/tr&gt;
 &lt;/table&gt;</code></pre></div></div>
 <p class="v2-p"><strong>Expected output:</strong> The second row (Jill Smith, 50) is 200 pixels tall. The third row (Eve Jackson, 94) is its normal height. This is useful for tables where rows contain images or large amounts of content.</p>
-<hr class="v2-hr">
-    <div class="task-box">
-      <div class="task-label">✏️ Your Task</div>
-      <div class="task-body">Now practise what you just learned about <strong>: Table Sizes</strong>. Open your editor, type the examples above by hand, then modify them — change values, rename variables, and observe what happens. Active experimentation is how code sticks.</div>
-    </div>
-    <button class="unlock-btn" onclick="unlockNext(6)">Phase Complete — Unlock Next ✓</button>
-  </div>
-</div>
-<div class="phase locked" id="phase7">
-  <div class="phase-header">
-    <div class="phase-num">Phase 7 of 13</div>
-    <div class="phase-title">Part 5: Table Headers</div>
-    <div class="phase-check" id="chk7"></div>
-  </div>
-  <div class="phase-body">
-    <p class="v2-p">You have already seen horizontal headers (at the top of a table). But headers can also appear vertically on the left side, and a table can have a caption (a title above it).</p>
+<hr class="v2-hr"><div class="task-box"><div class="task-lbl">✏️ Your Task</div><div class="task-body">Practise what you just learned about <strong>: Table Sizes</strong>. Open your editor, type the examples above by hand, modify them, and observe what changes.</div></div><button class="ub" onclick="unlockNext(6)">Phase Complete — Unlock Next ✓</button></div></div>
+<div class="phase locked" id="phase7"><div class="ph"><div class="pn">Phase 7/13</div><div class="pt">Part 5: Table Headers</div><div class="pc" id="chk7"></div></div><div class="pb2"><p class="v2-p">You have already seen horizontal headers (at the top of a table). But headers can also appear vertically on the left side, and a table can have a caption (a title above it).</p>
 <h3 class="v2-h3">Horizontal Header (Top Row)</h3>
 <p class="v2-p">The most common pattern: use <code>&lt;th&gt;</code> in the first row to label each column.</p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;table&gt;
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;table&gt;
   &lt;tr&gt;
     &lt;th&gt;Firstname&lt;/th&gt;
     &lt;th&gt;Lastname&lt;/th&gt;
@@ -578,12 +428,12 @@ Ernst Handel                Roland Mendel     Austria</code></pre></div></div>
   &lt;/tr&gt;
 &lt;/table&gt;</code></pre></div></div>
 <p class="v2-p"><strong>Expected output:</strong></p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span></div><div class="v2-code-body"><pre><code>Firstname   Lastname   Age    ← bold, centred (header row)
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>Firstname   Lastname   Age    ← bold, centred (header row)
 Jill        Smith      50
 Eve         Jackson    94</code></pre></div></div>
 <h3 class="v2-h3">Vertical Header (Left Column)</h3>
 <p class="v2-p">Use <code>&lt;th&gt;</code> as the first cell in each row to create a vertical header on the left side:</p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;table&gt;
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;table&gt;
   &lt;tr&gt;
     &lt;th&gt;Firstname&lt;/th&gt;
     &lt;td&gt;Jill&lt;/td&gt;
@@ -601,13 +451,13 @@ Eve         Jackson    94</code></pre></div></div>
   &lt;/tr&gt;
 &lt;/table&gt;</code></pre></div></div>
 <p class="v2-p"><strong>Expected output:</strong></p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span></div><div class="v2-code-body"><pre><code>Firstname   Jill    Eve
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>Firstname   Jill    Eve
 Lastname    Smith   Jackson
 Age         50      94</code></pre></div></div>
 <p class="v2-p">Each row now has ONE <code>&lt;th&gt;</code> (the label on the left) and multiple <code>&lt;td&gt;</code> (the actual data). This is useful when comparing properties of different items.</p>
 <h3 class="v2-h3">Aligning Header Text to the Left</h3>
 <p class="v2-p">By default, <code>&lt;th&gt;</code> text is centred and bold. To left-align it (like regular text):</p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;style&gt;
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;style&gt;
   th {
     text-align: left;
   }
@@ -615,7 +465,7 @@ Age         50      94</code></pre></div></div>
 <p class="v2-p"><strong>Expected output:</strong> Header text is aligned left, matching the alignment of data cells.</p>
 <h3 class="v2-h3">Header That Spans Multiple Columns</h3>
 <p class="v2-p">Sometimes one header label applies to multiple columns. For example, "Name" might cover both "First Name" and "Last Name". Use the <code>colspan</code> attribute:</p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;table&gt;
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;table&gt;
   &lt;tr&gt;
     &lt;th colspan=&quot;2&quot;&gt;Name&lt;/th&gt;  &lt;!-- spans 2 columns --&gt;
     &lt;th&gt;Age&lt;/th&gt;
@@ -633,14 +483,14 @@ Age         50      94</code></pre></div></div>
 &lt;/table&gt;</code></pre></div></div>
 <p class="v2-p"><strong>What <code>colspan="2"</code> does:</strong> The "Name" header cell stretches horizontally to cover 2 columns instead of 1.</p>
 <p class="v2-p"><strong>Expected output:</strong></p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span></div><div class="v2-code-body"><pre><code>     Name          Age    ← &quot;Name&quot; stretches across 2 columns
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>     Name          Age    ← &quot;Name&quot; stretches across 2 columns
 First Name  Last Name
 Jill        Smith   50
 Eve         Jackson 94</code></pre></div></div>
 <p class="v2-p">We will explore <code>colspan</code> and its vertical equivalent <code>rowspan</code> in detail in Part 7.</p>
 <h3 class="v2-h3">Adding a Table Caption</h3>
 <p class="v2-p">A <code>&lt;caption&gt;</code> tag adds a title above the table (or sometimes below, depending on CSS):</p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;table style=&quot;width: 100%&quot;&gt;
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;table style=&quot;width: 100%&quot;&gt;
   &lt;caption&gt;Monthly Savings&lt;/caption&gt;
   &lt;tr&gt;
     &lt;th&gt;Month&lt;/th&gt;
@@ -657,33 +507,19 @@ Eve         Jackson 94</code></pre></div></div>
 &lt;/table&gt;</code></pre></div></div>
 <p class="v2-p"><strong>Important:</strong> <code>&lt;caption&gt;</code> must come immediately after the opening <code>&lt;table&gt;</code> tag — before any <code>&lt;tr&gt;</code> elements.</p>
 <p class="v2-p"><strong>Expected output:</strong></p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span></div><div class="v2-code-body"><pre><code>        Monthly Savings         ← centred title
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>        Monthly Savings         ← centred title
 Month         Savings
 January       $100
 February      $50</code></pre></div></div>
 <p class="v2-p">The caption is automatically centred above the table. Captions are great for reports and data documents because they label the table's purpose.</p>
-<hr class="v2-hr">
-    <div class="task-box">
-      <div class="task-label">✏️ Your Task</div>
-      <div class="task-body">Now practise what you just learned about <strong>: Table Headers</strong>. Open your editor, type the examples above by hand, then modify them — change values, rename variables, and observe what happens. Active experimentation is how code sticks.</div>
-    </div>
-    <button class="unlock-btn" onclick="unlockNext(7)">Phase Complete — Unlock Next ✓</button>
-  </div>
-</div>
-<div class="phase locked" id="phase8">
-  <div class="phase-header">
-    <div class="phase-num">Phase 8 of 13</div>
-    <div class="phase-title">Part 6: Table Padding and Spacing</div>
-    <div class="phase-check" id="chk8"></div>
-  </div>
-  <div class="phase-body">
-    <p class="v2-p">Now let us talk about the space around and between cell content. There are two separate concepts here: <strong>padding</strong> and <strong>spacing</strong>.</p>
+<hr class="v2-hr"><div class="task-box"><div class="task-lbl">✏️ Your Task</div><div class="task-body">Practise what you just learned about <strong>: Table Headers</strong>. Open your editor, type the examples above by hand, modify them, and observe what changes.</div></div><button class="ub" onclick="unlockNext(7)">Phase Complete — Unlock Next ✓</button></div></div>
+<div class="phase locked" id="phase8"><div class="ph"><div class="pn">Phase 8/13</div><div class="pt">Part 6: Table Padding and Spacing</div><div class="pc" id="chk8"></div></div><div class="pb2"><p class="v2-p">Now let us talk about the space around and between cell content. There are two separate concepts here: <strong>padding</strong> and <strong>spacing</strong>.</p>
 <h3 class="v2-h3">What is Padding vs Spacing?</h3>
 <p class="v2-p">Imagine a table cell like a room in a house:</p>
 <ul class="v2-ul"><li><strong>Padding</strong> = the distance from the wall to the furniture <em>inside</em> the room. It is the gap between the cell border and the cell content (the text).</li><li><strong>Spacing</strong> = the distance from one room's wall to the next room's wall. It is the gap between one cell and another cell.</li></ul>
 <h3 class="v2-h3">Cell Padding</h3>
 <p class="v2-p">Cell padding is controlled with the CSS <code>padding</code> property on <code>th</code> and <code>td</code>:</p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;style&gt;
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;style&gt;
   th, td {
     padding: 15px;   /* 15px of space on all 4 sides inside the cell */
     border: 1px solid black;
@@ -692,7 +528,7 @@ February      $50</code></pre></div></div>
 &lt;/style&gt;</code></pre></div></div>
 <p class="v2-p"><strong>Expected output:</strong> Each cell has a comfortable 15px gap between its border and its text. Without padding, the text would be squished right against the border.</p>
 <p class="v2-p">You can also control each side independently:</p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;style&gt;
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;style&gt;
   th, td {
     padding-top: 10px;
     padding-bottom: 20px;
@@ -704,7 +540,7 @@ February      $50</code></pre></div></div>
 <blockquote class="v2-bq"><p class="v2-p"><strong>Real-world use:</strong> Professional tables on websites usually use at least <code>padding: 8px 12px</code> (8px top/bottom, 12px left/right) so the content does not look cramped.</p></blockquote>
 <h3 class="v2-h3">Cell Spacing</h3>
 <p class="v2-p">Cell spacing is controlled with <code>border-spacing</code> on the <code>table</code> element itself. This adds a gap <em>between</em> cells:</p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;style&gt;
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;style&gt;
   table {
     border-spacing: 30px;   /* 30px gap between each cell */
     border: 1px solid black;
@@ -717,27 +553,13 @@ February      $50</code></pre></div></div>
 <p class="v2-p"><strong>Expected output:</strong> Each cell appears separated from its neighbours by a 30-pixel gap.</p>
 <blockquote class="v2-bq"><p class="v2-p"><strong>Think about this:</strong> What is the difference between adding more <code>padding</code> to cells vs adding more <code>border-spacing</code>?</p>
 <ul class="v2-ul"><li>More <strong>padding</strong> makes the content <em>inside</em> each cell smaller relative to the cell.</li><li>More <strong>spacing</strong> makes the cells themselves further apart.</li></ul></blockquote>
-<hr class="v2-hr">
-    <div class="task-box">
-      <div class="task-label">✏️ Your Task</div>
-      <div class="task-body">Now practise what you just learned about <strong>: Table Padding and Spacing</strong>. Open your editor, type the examples above by hand, then modify them — change values, rename variables, and observe what happens. Active experimentation is how code sticks.</div>
-    </div>
-    <button class="unlock-btn" onclick="unlockNext(8)">Phase Complete — Unlock Next ✓</button>
-  </div>
-</div>
-<div class="phase locked" id="phase9">
-  <div class="phase-header">
-    <div class="phase-num">Phase 9 of 13</div>
-    <div class="phase-title">Part 7: Colspan and Rowspan (Merging Cells)</div>
-    <div class="phase-check" id="chk9"></div>
-  </div>
-  <div class="phase-body">
-    <p class="v2-p">This is one of the most powerful table features. You can make a single cell cover multiple columns or multiple rows — just like "merging cells" in Microsoft Excel or Google Sheets.</p>
+<hr class="v2-hr"><div class="task-box"><div class="task-lbl">✏️ Your Task</div><div class="task-body">Practise what you just learned about <strong>: Table Padding and Spacing</strong>. Open your editor, type the examples above by hand, modify them, and observe what changes.</div></div><button class="ub" onclick="unlockNext(8)">Phase Complete — Unlock Next ✓</button></div></div>
+<div class="phase locked" id="phase9"><div class="ph"><div class="pn">Phase 9/13</div><div class="pt">Part 7: Colspan and Rowspan (Merging Cells)</div><div class="pc" id="chk9"></div></div><div class="pb2"><p class="v2-p">This is one of the most powerful table features. You can make a single cell cover multiple columns or multiple rows — just like "merging cells" in Microsoft Excel or Google Sheets.</p>
 <h3 class="v2-h3">What is Colspan?</h3>
 <p class="v2-p"><code>colspan</code> lets a cell stretch <strong>horizontally</strong> across multiple columns. Think of it as a cell that is "2 columns wide" or "3 columns wide".</p>
 <p class="v2-p"><strong>Real-world example:</strong> A table showing a person's contact info where "Name" covers both "First Name" and "Last Name" columns.</p>
 <h4 class="v2-h4">Colspan Example</h4>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;table style=&quot;width:100%&quot;&gt;
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;table style=&quot;width:100%&quot;&gt;
   &lt;tr&gt;
     &lt;th colspan=&quot;2&quot;&gt;Name&lt;/th&gt;   &lt;!-- stretches across 2 columns --&gt;
     &lt;th&gt;Age&lt;/th&gt;
@@ -755,7 +577,7 @@ February      $50</code></pre></div></div>
 &lt;/table&gt;</code></pre></div></div>
 <p class="v2-p"><strong>What <code>colspan="2"</code> does:</strong> The "Name" cell occupies the space of TWO normal cells. So that row effectively has only 2 things in it: "Name" (spanning 2 columns) + "Age" (1 column) = 3 columns total.</p>
 <p class="v2-p"><strong>Expected output:</strong></p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span></div><div class="v2-code-body"><pre><code>         Name            Age
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>         Name            Age
 First Name   Last Name
 Jill         Smith        43
 Eve          Jackson      57</code></pre></div></div>
@@ -764,7 +586,7 @@ Eve          Jackson      57</code></pre></div></div>
 <p class="v2-p"><code>rowspan</code> lets a cell stretch <strong>vertically</strong> across multiple rows. Think of it as a cell that is "2 rows tall" or "3 rows tall".</p>
 <p class="v2-p"><strong>Real-world example:</strong> A schedule where "Monday" spans all the time slots for that day.</p>
 <h4 class="v2-h4">Rowspan Example</h4>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;table style=&quot;width:100%&quot;&gt;
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;table style=&quot;width:100%&quot;&gt;
   &lt;tr&gt;
     &lt;th&gt;Name&lt;/th&gt;
     &lt;td&gt;Jill&lt;/td&gt;
@@ -779,14 +601,14 @@ Eve          Jackson      57</code></pre></div></div>
 &lt;/table&gt;</code></pre></div></div>
 <p class="v2-p"><strong>What <code>rowspan="2"</code> does:</strong> The "Phone" header cell occupies the space of TWO rows vertically. So it appears tall, aligned with the row below it as well.</p>
 <p class="v2-p"><strong>Expected output:</strong></p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span></div><div class="v2-code-body"><pre><code>Name     Jill
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>Name     Jill
 Phone    555-1234
          555-8745</code></pre></div></div>
 <p class="v2-p">"Phone" spans both the second and third rows vertically.</p>
 <blockquote class="v2-bq"><p class="v2-p"><strong>Common beginner mistake with rowspan:</strong> If a cell has <code>rowspan="2"</code>, the NEXT row must have one fewer <code>&lt;td&gt;</code> because the rowspanned cell is already occupying that space. Forgetting this causes rows to shift incorrectly.</p></blockquote>
 <h3 class="v2-h3">Combining Colspan and Rowspan</h3>
 <p class="v2-p">You can use both in the same table to create complex layouts like timetables or invoice templates:</p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;table style=&quot;width:100%&quot;&gt;
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;table style=&quot;width:100%&quot;&gt;
   &lt;tr&gt;
     &lt;th colspan=&quot;3&quot;&gt;First Half of 2024&lt;/th&gt;  &lt;!-- spans 3 columns --&gt;
   &lt;/tr&gt;
@@ -806,29 +628,15 @@ Phone    555-1234
   &lt;/tr&gt;
 &lt;/table&gt;</code></pre></div></div>
 <p class="v2-p"><strong>Expected output:</strong></p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span></div><div class="v2-code-body"><pre><code>          First Half of 2024
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">code</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>          First Half of 2024
 Month       Sales        Profit
 Q1          January      $5,000
             February     $4,500</code></pre></div></div>
-<hr class="v2-hr">
-    <div class="task-box">
-      <div class="task-label">✏️ Your Task</div>
-      <div class="task-body">Now practise what you just learned about <strong>: Colspan and Rowspan (Merging Cells)</strong>. Open your editor, type the examples above by hand, then modify them — change values, rename variables, and observe what happens. Active experimentation is how code sticks.</div>
-    </div>
-    <button class="unlock-btn" onclick="unlockNext(9)">Phase Complete — Unlock Next ✓</button>
-  </div>
-</div>
-<div class="phase locked" id="phase10">
-  <div class="phase-header">
-    <div class="phase-num">Phase 10 of 13</div>
-    <div class="phase-title">Part 8: Table Styling with CSS</div>
-    <div class="phase-check" id="chk10"></div>
-  </div>
-  <div class="phase-body">
-    <p class="v2-p">Now let us go beyond basic borders and make your tables look truly professional.</p>
+<hr class="v2-hr"><div class="task-box"><div class="task-lbl">✏️ Your Task</div><div class="task-body">Practise what you just learned about <strong>: Colspan and Rowspan (Merging Cells)</strong>. Open your editor, type the examples above by hand, modify them, and observe what changes.</div></div><button class="ub" onclick="unlockNext(9)">Phase Complete — Unlock Next ✓</button></div></div>
+<div class="phase locked" id="phase10"><div class="ph"><div class="pn">Phase 10/13</div><div class="pt">Part 8: Table Styling with CSS</div><div class="pc" id="chk10"></div></div><div class="pb2"><p class="v2-p">Now let us go beyond basic borders and make your tables look truly professional.</p>
 <h3 class="v2-h3">Zebra Stripes (Alternating Row Colours)</h3>
 <p class="v2-p">One of the most common and readable table styles is "zebra striping" — alternating light and slightly darker rows. This makes it much easier to scan across long rows of data.</p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;style&gt;
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;style&gt;
   table {
     width: 100%;
     border-collapse: collapse;
@@ -874,7 +682,7 @@ Q1          January      $5,000
 <blockquote class="v2-bq"><p class="v2-p"><strong>Tip:</strong> If you use <code>nth-child(odd)</code> instead, the colouring applies to rows 1, 3, 5 etc.</p></blockquote>
 <h3 class="v2-h3">Vertical Zebra Stripes (Column Colouring)</h3>
 <p class="v2-p">You can also stripe COLUMNS instead of rows:</p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;style&gt;
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;style&gt;
   td:nth-child(even), th:nth-child(even) {
     background-color: #D6EEEE;
   }
@@ -882,7 +690,7 @@ Q1          January      $5,000
 <p class="v2-p"><strong>Expected output:</strong> Every second column is tinted — columns 2 and 4 have colour, columns 1 and 3 are plain. This works well for wide tables with many columns.</p>
 <h3 class="v2-h3">Combined Zebra Stripes</h3>
 <p class="v2-p">Combine both to create a grid-like checkered pattern. Use a transparent colour so where rows and columns overlap, the colours blend:</p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;style&gt;
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;style&gt;
   tr:nth-child(even) {
     background-color: rgba(150, 212, 212, 0.4);
   }
@@ -895,7 +703,7 @@ Q1          January      $5,000
 <p class="v2-p"><strong>Expected output:</strong> A visually appealing grid where every other row is lightly tinted, every other column is lightly tinted, and intersecting cells are slightly darker.</p>
 <h3 class="v2-h3">Horizontal Dividers (Row-only Borders)</h3>
 <p class="v2-p">Instead of borders on all sides, you can add borders only at the bottom of each row for a cleaner, minimalist look:</p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;style&gt;
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;style&gt;
   table {
     width: 100%;
     border-collapse: collapse;
@@ -934,7 +742,7 @@ Q1          January      $5,000
 <p class="v2-p"><strong>Expected output:</strong> Each row has a thin grey line below it. No side borders on individual cells. This is a popular modern "flat design" table style used on most professional websites today.</p>
 <h3 class="v2-h3">Hoverable Table Rows</h3>
 <p class="v2-p">Add an interactive highlight when the user moves their mouse over a row:</p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;style&gt;
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;style&gt;
   tr:hover {
     background-color: #D6EEEE;
   }
@@ -942,27 +750,13 @@ Q1          January      $5,000
 <p class="v2-p"><strong>What <code>:hover</code> means:</strong> This is a CSS "pseudo-class" that applies when the user's mouse pointer is over the element. When the mouse moves over any row, that row turns teal.</p>
 <p class="v2-p"><strong>Expected output:</strong> As you move your mouse over different rows in the browser, each row you hover over turns teal. Moving away removes the colour.</p>
 <blockquote class="v2-bq"><p class="v2-p"><strong>Real-world use:</strong> Hoverable rows make tables feel interactive and help users track which row they are reading, especially in wide tables.</p></blockquote>
-<hr class="v2-hr">
-    <div class="task-box">
-      <div class="task-label">✏️ Your Task</div>
-      <div class="task-body">Now practise what you just learned about <strong>: Table Styling with CSS</strong>. Open your editor, type the examples above by hand, then modify them — change values, rename variables, and observe what happens. Active experimentation is how code sticks.</div>
-    </div>
-    <button class="unlock-btn" onclick="unlockNext(10)">Phase Complete — Unlock Next ✓</button>
-  </div>
-</div>
-<div class="phase locked" id="phase11">
-  <div class="phase-header">
-    <div class="phase-num">Phase 11 of 13</div>
-    <div class="phase-title">Part 9: Table Colgroup — Styling Entire Columns</div>
-    <div class="phase-check" id="chk11"></div>
-  </div>
-  <div class="phase-body">
-    <p class="v2-p"><code>&lt;colgroup&gt;</code> is a special element that lets you apply styles to entire columns without adding <code>style=""</code> to every single cell. This is a big time-saver!</p>
+<hr class="v2-hr"><div class="task-box"><div class="task-lbl">✏️ Your Task</div><div class="task-body">Practise what you just learned about <strong>: Table Styling with CSS</strong>. Open your editor, type the examples above by hand, modify them, and observe what changes.</div></div><button class="ub" onclick="unlockNext(10)">Phase Complete — Unlock Next ✓</button></div></div>
+<div class="phase locked" id="phase11"><div class="ph"><div class="pn">Phase 11/13</div><div class="pt">Part 9: Table Colgroup — Styling Entire Columns</div><div class="pc" id="chk11"></div></div><div class="pb2"><p class="v2-p"><code>&lt;colgroup&gt;</code> is a special element that lets you apply styles to entire columns without adding <code>style=""</code> to every single cell. This is a big time-saver!</p>
 <h3 class="v2-h3">Why Do We Need Colgroup?</h3>
 <p class="v2-p">Imagine a table with 50 rows and 4 columns. You want the first column to have a yellow background. Without <code>&lt;colgroup&gt;</code>, you would have to add <code>style="background-color: yellow"</code> to 50 individual <code>&lt;td&gt;</code> elements. With <code>&lt;colgroup&gt;</code>, you do it once.</p>
 <h3 class="v2-h3">Basic Colgroup Usage</h3>
 <p class="v2-p">Place <code>&lt;colgroup&gt;</code> immediately after <code>&lt;table&gt;</code> (and after <code>&lt;caption&gt;</code>, if present) — before any rows:</p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;table style=&quot;width: 100%&quot;&gt;
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;table style=&quot;width: 100%&quot;&gt;
   &lt;colgroup&gt;
     &lt;col span=&quot;2&quot; style=&quot;background-color: #D6EEEE&quot;&gt;
   &lt;/colgroup&gt;
@@ -986,7 +780,7 @@ Q1          January      $5,000
 <p class="v2-p"><strong>Expected output:</strong> The Monday and Tuesday columns have a teal background throughout all rows. Wednesday, Thursday, and Friday remain plain white.</p>
 <h3 class="v2-h3">Multiple Col Elements</h3>
 <p class="v2-p">Style different groups of columns differently by using multiple <code>&lt;col&gt;</code> elements:</p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;table style=&quot;width: 100%&quot;&gt;
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;table style=&quot;width: 100%&quot;&gt;
   &lt;colgroup&gt;
     &lt;col span=&quot;2&quot; style=&quot;background-color: #D6EEEE&quot;&gt;  &lt;!-- MON, TUE = teal --&gt;
     &lt;col span=&quot;3&quot; style=&quot;background-color: pink&quot;&gt;     &lt;!-- WED, THU, FRI = pink --&gt;
@@ -1002,7 +796,7 @@ Q1          January      $5,000
 <p class="v2-p"><strong>Expected output:</strong> The first two columns (MON, TUE) are teal, and the next three (WED, THU, FRI) are pink.</p>
 <h3 class="v2-h3">Skipping Columns (Empty Col)</h3>
 <p class="v2-p">To style only the <em>middle</em> columns (not the first ones), insert an empty <code>&lt;col&gt;</code> for the columns you want to skip:</p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;table style=&quot;width: 100%&quot;&gt;
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;table style=&quot;width: 100%&quot;&gt;
   &lt;colgroup&gt;
     &lt;col span=&quot;3&quot;&gt;  &lt;!-- Skip the first 3 columns (no style applied) --&gt;
     &lt;col span=&quot;2&quot; style=&quot;background-color: pink&quot;&gt;  &lt;!-- Style columns 4 and 5 --&gt;
@@ -1019,7 +813,7 @@ Q1          January      $5,000
 <p class="v2-p"><strong>Expected output:</strong> MON, TUE, and WED have no background colour. THU and FRI have a pink background.</p>
 <h3 class="v2-h3">Hiding Columns</h3>
 <p class="v2-p">Use <code>visibility: collapse</code> to hide entire columns from view (but keep the table structure intact):</p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;table style=&quot;width: 100%&quot;&gt;
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;table style=&quot;width: 100%&quot;&gt;
   &lt;colgroup&gt;
     &lt;col span=&quot;2&quot;&gt;  &lt;!-- First 2 columns: visible --&gt;
     &lt;col span=&quot;3&quot; style=&quot;visibility: collapse&quot;&gt;  &lt;!-- Columns 3, 4, 5: hidden --&gt;
@@ -1038,22 +832,8 @@ Q1          January      $5,000
 <p class="v2-p">Only a limited set of CSS properties work inside <code>&lt;col&gt;</code> and <code>&lt;colgroup&gt;</code>:</p>
 <ul class="v2-ul"><li><code>width</code></li><li><code>visibility</code></li><li><code>background</code> properties (<code>background-color</code>, <code>background-image</code>, etc.)</li><li><code>border</code> properties</li></ul>
 <p class="v2-p">Other CSS properties like <code>font-size</code>, <code>color</code>, <code>padding</code>, and <code>text-align</code> <strong>will not work</strong> on <code>&lt;col&gt;</code> elements. For those, you need to style the <code>td</code> and <code>th</code> elements directly.</p>
-<hr class="v2-hr">
-    <div class="task-box">
-      <div class="task-label">✏️ Your Task</div>
-      <div class="task-body">Now practise what you just learned about <strong>: Table Colgroup — Styling Entire Columns</strong>. Open your editor, type the examples above by hand, then modify them — change values, rename variables, and observe what happens. Active experimentation is how code sticks.</div>
-    </div>
-    <button class="unlock-btn" onclick="unlockNext(11)">Phase Complete — Unlock Next ✓</button>
-  </div>
-</div>
-<div class="phase locked" id="phase12">
-  <div class="phase-header">
-    <div class="phase-num">Phase 12 of 13</div>
-    <div class="phase-title">Guided Practice Exercises</div>
-    <div class="phase-check" id="chk12"></div>
-  </div>
-  <div class="phase-body">
-    <h3 class="v2-h3">Exercise 1 — Build a Student Grade Table</h3>
+<hr class="v2-hr"><div class="task-box"><div class="task-lbl">✏️ Your Task</div><div class="task-body">Practise what you just learned about <strong>: Table Colgroup — Styling Entire Columns</strong>. Open your editor, type the examples above by hand, modify them, and observe what changes.</div></div><button class="ub" onclick="unlockNext(11)">Phase Complete — Unlock Next ✓</button></div></div>
+<div class="phase locked" id="phase12"><div class="ph"><div class="pn">Phase 12/13</div><div class="pt">Guided Practice Exercises</div><div class="pc" id="chk12"></div></div><div class="pb2"><div class="chal-box"><div class="chal-lbl">🎯 Your Challenge</div><div class="chal-body"><h3 class="v2-h3">Exercise 1 — Build a Student Grade Table</h3>
 <p class="v2-p"><strong>Objective:</strong> Create a basic HTML table showing student grades.</p>
 <p class="v2-p"><strong>Scenario:</strong> You are a teacher recording results for 4 students across 3 subjects.</p>
 <p class="v2-p"><strong>Steps:</strong></p>
@@ -1073,8 +853,7 @@ Q1          January      $5,000
 <p class="v2-p"><strong>Steps:</strong></p>
 <p class="v2-p">Build this table:</p>
 <div class="v2-table-wrap"><table class="v2-table"><thead><tr><th>Time</th><th>Stall 1</th><th>Stall 2</th></tr></thead><tbody><tr><td>9:00am</td><td>Bread &amp; Baking (rowspan=2)</td><td>Fresh Juice</td></tr><tr><td>10:00am</td><td>(merged above)</td><td>Smoothies</td></tr><tr><td>11:00am</td><td>Vegetables</td><td>Spices</td></tr></tbody></table></div>
-<p class="v2-p"><strong>Code to build this:</strong></p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;table style=&quot;width: 60%&quot;&gt;
+<p class="v2-p"><strong>Code to build this:</strong></p></div></div><div class="task-box"><div class="task-lbl">✏️ Task</div><div class="task-body">Practise what you just learned about <strong>Guided Practice Exercises</strong>. Open your editor, type the examples above by hand, modify them, and observe what changes.</div></div><button class="reveal-btn" onclick="toggleReveal(this)">👁️ Reveal Answer</button><div class="reveal-content"><div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;table style=&quot;width: 60%&quot;&gt;
   &lt;caption&gt;Weekend Market Schedule&lt;/caption&gt;
   &lt;tr&gt;
     &lt;th&gt;Time&lt;/th&gt;
@@ -1104,7 +883,7 @@ Q1          January      $5,000
 <h3 class="v2-h3">Exercise 3 — Pricing Table (Colspan + Colgroup)</h3>
 <p class="v2-p"><strong>Objective:</strong> Build a pricing comparison table using colspan for header grouping and colgroup for column styling.</p>
 <p class="v2-p"><strong>Scenario:</strong> A software company offers Basic, Pro, and Enterprise plans.</p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
 &lt;html&gt;
 &lt;head&gt;
   &lt;style&gt;
@@ -1172,29 +951,15 @@ Q1          January      $5,000
 &lt;/html&gt;</code></pre></div></div>
 <p class="v2-p"><strong>Self-check questions:</strong></p>
 <ul class="v2-ul"><li>Do the Basic and Enterprise columns have a light green background (from colgroup)?</li><li>Does hovering over a row highlight it in light grey?</li><li>Is the header row green with white text?</li></ul>
-<hr class="v2-hr">
-    <div class="task-box">
-      <div class="task-label">✏️ Your Task</div>
-      <div class="task-body">Now practise what you just learned about <strong>Guided Practice Exercises</strong>. Open your editor, type the examples above by hand, then modify them — change values, rename variables, and observe what happens. Active experimentation is how code sticks.</div>
-    </div>
-    <button class="unlock-btn" onclick="unlockNext(12)">Phase Complete — Unlock Next ✓</button>
-  </div>
-</div>
-<div class="phase locked" id="phase13">
-  <div class="phase-header">
-    <div class="phase-num">Phase 13 of 13</div>
-    <div class="phase-title">Common Beginner Mistakes</div>
-    <div class="phase-check" id="chk13"></div>
-  </div>
-  <div class="phase-body">
-    <h3 class="v2-h3">Mistake 1: Forgetting to Add <code>border-collapse: collapse</code></h3>
+<hr class="v2-hr"></div><button class="ub" onclick="unlockNext(12)">Mark Complete — Unlock Next ✓</button></div></div>
+<div class="phase locked" id="phase13"><div class="ph"><div class="pn">Phase 13/13</div><div class="pt">Common Beginner Mistakes</div><div class="pc" id="chk13"></div></div><div class="pb2"><h3 class="v2-h3">Mistake 1: Forgetting to Add <code>border-collapse: collapse</code></h3>
 <p class="v2-p"><strong>The problem:</strong></p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">css</span></div><div class="v2-code-body"><pre><code>/* BAD — double borders between cells */
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">css</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>/* BAD — double borders between cells */
 table, th, td {
   border: 1px solid black;
 }</code></pre></div></div>
 <p class="v2-p"><strong>The fix:</strong></p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">css</span></div><div class="v2-code-body"><pre><code>/* GOOD — clean single borders */
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">css</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>/* GOOD — clean single borders */
 table, th, td {
   border: 1px solid black;
   border-collapse: collapse;
@@ -1203,12 +968,12 @@ table, th, td {
 <hr class="v2-hr">
 <h3 class="v2-h3">Mistake 2: Styling Only the <code>table</code> Tag, Not <code>th</code> and <code>td</code></h3>
 <p class="v2-p"><strong>The problem:</strong></p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">css</span></div><div class="v2-code-body"><pre><code>/* BAD — only the outer table has a border */
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">css</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>/* BAD — only the outer table has a border */
 table {
   border: 1px solid black;
 }</code></pre></div></div>
 <p class="v2-p"><strong>The fix:</strong></p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">css</span></div><div class="v2-code-body"><pre><code>/* GOOD — all elements get borders */
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">css</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>/* GOOD — all elements get borders */
 table, th, td {
   border: 1px solid black;
   border-collapse: collapse;
@@ -1217,7 +982,7 @@ table, th, td {
 <hr class="v2-hr">
 <h3 class="v2-h3">Mistake 3: Wrong Row Count with Rowspan</h3>
 <p class="v2-p"><strong>The problem:</strong></p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;!-- BROKEN: Row 2 has too many cells because we forgot that the rowspan occupies space --&gt;
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;!-- BROKEN: Row 2 has too many cells because we forgot that the rowspan occupies space --&gt;
 &lt;tr&gt;
   &lt;td rowspan=&quot;2&quot;&gt;Category&lt;/td&gt;
   &lt;td&gt;Item A&lt;/td&gt;
@@ -1227,7 +992,7 @@ table, th, td {
   &lt;td&gt;Item B&lt;/td&gt;
 &lt;/tr&gt;</code></pre></div></div>
 <p class="v2-p"><strong>The fix:</strong></p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;!-- CORRECT: Row 2 has one fewer cell because &quot;Category&quot; still covers it --&gt;
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;!-- CORRECT: Row 2 has one fewer cell because &quot;Category&quot; still covers it --&gt;
 &lt;tr&gt;
   &lt;td rowspan=&quot;2&quot;&gt;Category&lt;/td&gt;
   &lt;td&gt;Item A&lt;/td&gt;
@@ -1240,13 +1005,13 @@ table, th, td {
 <hr class="v2-hr">
 <h3 class="v2-h3">Mistake 4: Using <code>border-spacing</code> with <code>border-collapse: collapse</code></h3>
 <p class="v2-p"><strong>The problem:</strong></p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">css</span></div><div class="v2-code-body"><pre><code>/* These two conflict — border-spacing has no effect when borders are collapsed */
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">css</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>/* These two conflict — border-spacing has no effect when borders are collapsed */
 table {
   border-collapse: collapse;
   border-spacing: 20px;  /* This does nothing! */
 }</code></pre></div></div>
 <p class="v2-p"><strong>The fix:</strong> Use ONE or the OTHER:</p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">css</span></div><div class="v2-code-body"><pre><code>/* OPTION A: Collapsed borders (no gap between cells) */
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">css</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>/* OPTION A: Collapsed borders (no gap between cells) */
 table {
   border-collapse: collapse;
 }
@@ -1259,7 +1024,7 @@ table {
 <hr class="v2-hr">
 <h3 class="v2-h3">Mistake 5: Placing <code>&lt;caption&gt;</code> After the First Row</h3>
 <p class="v2-p"><strong>The problem:</strong></p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;!-- WRONG order --&gt;
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;!-- WRONG order --&gt;
 &lt;table&gt;
   &lt;tr&gt;
     &lt;th&gt;Name&lt;/th&gt;
@@ -1267,7 +1032,7 @@ table {
   &lt;caption&gt;My Table&lt;/caption&gt;  &lt;!-- Too late! --&gt;
 &lt;/table&gt;</code></pre></div></div>
 <p class="v2-p"><strong>The fix:</strong></p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;!-- CORRECT order --&gt;
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;!-- CORRECT order --&gt;
 &lt;table&gt;
   &lt;caption&gt;My Table&lt;/caption&gt;  &lt;!-- Must be FIRST inside &lt;table&gt; --&gt;
   &lt;tr&gt;
@@ -1277,7 +1042,7 @@ table {
 <hr class="v2-hr">
 <h3 class="v2-h3">Mistake 6: Forgetting <code>colgroup</code> Must Come Before Rows</h3>
 <p class="v2-p"><strong>The problem:</strong></p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;!-- WRONG: colgroup after rows --&gt;
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;!-- WRONG: colgroup after rows --&gt;
 &lt;table&gt;
   &lt;tr&gt;&lt;th&gt;A&lt;/th&gt;&lt;th&gt;B&lt;/th&gt;&lt;/tr&gt;
   &lt;colgroup&gt;
@@ -1285,31 +1050,19 @@ table {
   &lt;/colgroup&gt;
 &lt;/table&gt;</code></pre></div></div>
 <p class="v2-p"><strong>The fix:</strong></p>
-<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span></div><div class="v2-code-body"><pre><code>&lt;!-- CORRECT: colgroup before all rows (but after caption if present) --&gt;
+<div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;!-- CORRECT: colgroup before all rows (but after caption if present) --&gt;
 &lt;table&gt;
   &lt;colgroup&gt;
     &lt;col style=&quot;background: yellow&quot;&gt;
   &lt;/colgroup&gt;
   &lt;tr&gt;&lt;th&gt;A&lt;/th&gt;&lt;th&gt;B&lt;/th&gt;&lt;/tr&gt;
 &lt;/table&gt;</code></pre></div></div>
-<hr class="v2-hr">
-    <div class="task-box">
-      <div class="task-label">✏️ Your Task</div>
-      <div class="task-body">Now practise what you just learned about <strong>Common Beginner Mistakes</strong>. Open your editor, type the examples above by hand, then modify them — change values, rename variables, and observe what happens. Active experimentation is how code sticks.</div>
-    </div>
-    <button class="unlock-btn" onclick="unlockNext(13)">Phase Complete — Unlock Next ✓</button>
-  </div>
-</div>
-<div class="build-box" id="build-it">
-  <div class="build-label">🏗️ Build It</div>
-  <div class="build-name">Project Goal</div>
-  <div class="build-desc">Build a fully styled weekly class timetable for a fictional school. It should have:</div>
-  <div class="v2-code-wrap">
-    <div class="v2-code-bar">
-      <span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span>
-      <span class="v2-code-lang">starter.html</span>
-    </div>
-    <div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
+<hr class="v2-hr"><div class="task-box"><div class="task-lbl">✏️ Your Task</div><div class="task-body">Practise what you just learned about <strong>Common Beginner Mistakes</strong>. Open your editor, type the examples above by hand, modify them, and observe what changes.</div></div><button class="ub" onclick="unlockNext(13)">Phase Complete — Unlock Next ✓</button></div></div>
+<div class="build-box" id="build-it"><div class="build-lbl">🏗️ Build It — Mini Project</div><div class="build-name">Project Goal</div><div class="build-req"><p class="v2-p">Let us combine everything you have learned to build a real class schedule — the kind displayed in schools and universities worldwide.</p>
+<h3 class="v2-h3">Project Goal</h3>
+<p class="v2-p">Build a fully styled weekly class timetable for a fictional school. It should have:</p>
+<ul class="v2-ul"><li>Time slots as row headers (left column)</li><li>Days of the week as column headers (top row)</li><li>Merged cells where a subject spans two periods</li><li>Zebra-striped rows for readability</li><li>Hover highlighting</li><li>A caption</li><li>Column colouring for the weekend using colgroup</li></ul>
+<h3 class="v2-h3">Stage 1 — Setup and Basic Structure</h3></div><button class="reveal-btn" onclick="toggleCode(this)">💻 Reveal Starter Code</button><div class="reveal-content"><div class="v2-code-wrap"><div class="v2-code-bar"><span class="v2-dot r"></span><span class="v2-dot y"></span><span class="v2-dot g"></span><span class="v2-code-lang">starter.html</span><button class="copy-btn" onclick="copyCode(this)">⎘ Copy</button></div><div class="v2-code-body"><pre><code>&lt;!DOCTYPE html&gt;
 &lt;html&gt;
 &lt;head&gt;
   &lt;title&gt;Class Timetable&lt;/title&gt;
@@ -1385,10 +1138,7 @@ table {
 &lt;/table&gt;
 
 &lt;/body&gt;
-&lt;/html&gt;</code></pre></div>
-  </div>
-  <div style="display:flex;gap:.8rem;flex-wrap:wrap;margin-top:1.2rem">
-    <button class="unlock-btn" onclick="downloadStarter(`<!DOCTYPE html>
+&lt;/html&gt;</code></pre></div></div><div style="display:flex;gap:.75rem;flex-wrap:wrap;margin-top:1rem"><button class="ub" onclick="downloadStarter(`<!DOCTYPE html>
 <html>
 <head>
   <title>Class Timetable</title>
@@ -1464,87 +1214,66 @@ table {
 </table>
 
 </body>
-</html>`)"
-      style="background:#10b981;box-shadow:0 4px 14px rgba(16,185,129,.3)">
-      ⬇ Download starter.html
-    </button>
-    <button class="unlock-btn" onclick="showGithub()"
-      style="background:#0f172a;box-shadow:none">
-      🐙 Push to GitHub →
-    </button>
-  </div>
-</div>
+</html>`)" style="background:#10b981;box-shadow:0 4px 14px rgba(16,185,129,.3)">⬇ Download starter.html</button><button class="ub" onclick="showGithub()" style="background:#0f172a;box-shadow:none">🐙 Push to GitHub Pages →</button></div></div></div>
 <div class="gh-acc" id="gh-steps" style="display:none">
-  <div class="gh-acc-head" onclick="toggleGh(this)">
-    🐙 Push Your Project to GitHub Pages &nbsp;<span>▼</span>
-  </div>
-  <div class="gh-acc-body">
-    <div class="gh-step"><div class="gh-step-n">1</div>
-    <p>Go to <strong>github.com</strong> → click <strong>New repository</strong> → name it <code>html-lesson-16-project-goal</code>.</p></div>
-    <div class="gh-step"><div class="gh-step-n">2</div>
-    <p>Set it to <strong>Public</strong>, tick <strong>Add a README</strong>, then click <strong>Create repository</strong>.</p></div>
-    <div class="gh-step"><div class="gh-step-n">3</div>
-    <p>Click <strong>Add file → Upload files</strong>. Upload your <code>starter.html</code> — rename it to <code>index.html</code> before uploading.</p></div>
-    <div class="gh-step"><div class="gh-step-n">4</div>
-    <p>Commit message: <em>"Add HTML lesson 16 project"</em> → click <strong>Commit changes</strong>.</p></div>
-    <div class="gh-step"><div class="gh-step-n">5</div>
-    <p>Go to <strong>Settings → Pages</strong> → branch <strong>main</strong> → <strong>Save</strong>. Your project goes live at <code>https://YOUR-NAME.github.io/html-lesson-16-project-goal/</code> in about 1 minute! 🎉</p></div>
-    <button class="unlock-btn" onclick="showEnd()" style="margin-top:.5rem">I've pushed to GitHub — Finish Session ✅</button>
-  </div>
-</div>
-<div class="session-end" id="session-end">
-  <h2>🎉 Lesson 16 complete!</h2>
-  <p style="margin-bottom:.8rem;font-size:.9rem;opacity:.9">You covered:</p>
-  <ul><li>✅ Lesson Introduction</li><li>✅ Prerequisite Concepts</li><li>✅ Part 1: Understanding HTML Tables</li><li>✅ Part 2: Building Your First Table</li><li>✅ Part 3: Table Borders</li><li>✅ Part 4: Table Sizes</li><li>✅ Part 5: Table Headers</li><li>✅ Part 6: Table Padding and Spacing</li></ul>
-  <div class="lesson-nav"><a href="lesson_15.html" class="ln-btn">← Lesson 15</a><a href="lesson_17.html" class="ln-btn primary">Lesson 17 →</a></div>
-</div>
+<div class="gh-hd" onclick="toggleGh(this)">🐙 Push to GitHub Pages &nbsp;<span>▼</span></div>
+<div class="gh-bd">
+<div class="gh-st"><div class="gh-n">1</div><p>Go to <strong>github.com → New repository</strong> → name it <code>html-lesson-16-project-goal</code>. Set <strong>Public</strong>, tick <strong>Add README</strong>, click <strong>Create</strong>.</p></div>
+<div class="gh-st"><div class="gh-n">2</div><p>Click <strong>Add file → Upload files</strong>. Rename your file to <code>index.html</code> then upload it.</p></div>
+<div class="gh-st"><div class="gh-n">3</div><p>Commit message: <em>"Add HTML lesson 16 project"</em> → <strong>Commit changes</strong>.</p></div>
+<div class="gh-st"><div class="gh-n">4</div><p>Go to <strong>Settings → Pages</strong> → Source: <strong>main</strong> → <strong>Save</strong>. Live in ~1 min at <code>https://YOUR-NAME.github.io/html-lesson-16-project-goal/</code> 🎉</p></div>
+<button class="ub" onclick="showEnd()" style="margin-top:.5rem">Done — Finish Session ✅</button>
+</div></div>
+<div class="se" id="session-end"><h2>🎉 Lesson 16 complete!</h2><p style="margin-bottom:.8rem;font-size:.9rem;opacity:.9">You covered:</p><ul><li>✅ Lesson Introduction</li><li>✅ Prerequisite Concepts</li><li>✅ Part 1: Understanding HTML Tables</li><li>✅ Part 2: Building Your First Table</li><li>✅ Part 3: Table Borders</li><li>✅ Part 4: Table Sizes</li><li>✅ Part 5: Table Headers</li><li>✅ Part 6: Table Padding and Spacing</li></ul><div class="ln"><a href="lesson_15.html" class="ln-btn">← Lesson 15</a><a href="lesson_17.html" class="ln-btn primary">Lesson 17 →</a></div></div>
 </main>
-
-<footer class="lesson-footer">
-  Techbase Code Coach · HTML Course · Lesson 16 · © 2025 Techbase Consultant Services, Ibadan
-</footer>
+<footer class="lf">Techbase Code Coach &nbsp;·&nbsp; HTML Course &nbsp;·&nbsp; Lesson 16 &nbsp;·&nbsp; © 2025 Techbase Consultant Services, Ibadan</footer>
+<div id="toast"></div>
+<button id="go-top" title="Back to top">↑</button>
+<canvas id="cc"></canvas>
 <script>
 const TOTAL=13,KEY='techbase_html_l16';
-let current=parseInt(localStorage.getItem(KEY)||'1');
-function init(){
-  for(let i=2;i<=current;i++) unlockPhase(i,false);
-  updateBar();
-}
+let cur=parseInt(localStorage.getItem(KEY)||'1');
+function init(){for(let i=2;i<=cur;i++)unlock(i,false);bar();}
 function unlockNext(n){
-  const chk=document.getElementById('chk'+n);
-  if(chk){chk.classList.add('done');chk.textContent='✓';}
-  localStorage.setItem(KEY,n+1); current=n+1;
+  const c=document.getElementById('chk'+n);
+  if(c){c.classList.add('done');c.textContent='✓';}
+  localStorage.setItem(KEY,n+1);cur=n+1;
   if(n===TOTAL){
-    document.getElementById('build-it').style.display='block';
-    updateBar(100);
+    document.getElementById('build-it').classList.add('visible');
+    bar(100);toast('🏗️ Build It unlocked!');
     setTimeout(()=>document.getElementById('build-it').scrollIntoView({behavior:'smooth'}),200);
-  }else{
-    unlockPhase(n+1,true); updateBar();
-  }
+    setTimeout(confetti,600);
+  }else{unlock(n+1,true);bar();toast(['✅ Phase complete!','🎯 Keep going!','💡 Nice work!','🚀 Nailed it!'][n%4]);}
 }
-function unlockPhase(n,scroll){
-  const el=document.getElementById('phase'+n);
-  if(el){el.classList.remove('locked');if(scroll)setTimeout(()=>el.scrollIntoView({behavior:'smooth',block:'start'}),150);}
+function unlock(n,scroll){
+  const el=document.getElementById('phase'+n);if(!el)return;
+  el.classList.remove('locked');
+  if(scroll)setTimeout(()=>el.scrollIntoView({behavior:'smooth',block:'start'}),180);
 }
-function updateBar(pct){
-  const p=pct!==undefined?pct:Math.round((current-1)/TOTAL*95);
-  document.getElementById('pbar').style.width=p+'%';
+function bar(p){document.getElementById('pbar').style.width=(p!==undefined?p:Math.round((cur-1)/TOTAL*95))+'%';}
+function toggleReveal(btn){const w=btn.nextElementSibling;const o=w.classList.toggle('open');btn.textContent=o?'🙈 Hide Answer':'👁️ Reveal Answer';}
+function toggleCode(btn){const w=btn.nextElementSibling;const o=w.classList.toggle('open');btn.textContent=o?'🙈 Hide Starter Code':'💻 Reveal Starter Code';}
+function copyCode(btn){
+  const code=btn.closest('.v2-code-wrap').querySelector('code').innerText;
+  navigator.clipboard.writeText(code).then(()=>{btn.textContent='✓ Copied!';btn.classList.add('copied');setTimeout(()=>{btn.textContent='⎘ Copy';btn.classList.remove('copied');},1800);}).catch(()=>{});
 }
-function showGithub(){
-  const g=document.getElementById('gh-steps');
-  if(g){g.style.display='block';setTimeout(()=>g.scrollIntoView({behavior:'smooth'}),150);}
-}
-function showEnd(){
-  const e=document.getElementById('session-end');
-  if(e){e.classList.add('visible');setTimeout(()=>e.scrollIntoView({behavior:'smooth'}),150);}
-}
+const tEl=document.getElementById('toast');let tT;
+function toast(msg){tEl.innerHTML=msg;tEl.classList.add('show');clearTimeout(tT);tT=setTimeout(()=>tEl.classList.remove('show'),2400);}
+const gEl=document.getElementById('go-top');
+window.addEventListener('scroll',()=>gEl.classList.toggle('visible',scrollY>320),{passive:true});
+gEl.addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
 function toggleGh(el){el.nextElementSibling.classList.toggle('open');}
-function downloadStarter(code){
-  const a=document.createElement('a');
-  a.href='data:text/html;charset=utf-8,'+encodeURIComponent(code);
-  a.download='starter.html';a.click();
+function showGithub(){const g=document.getElementById('gh-steps');if(g){g.style.display='block';setTimeout(()=>g.scrollIntoView({behavior:'smooth'}),150);}}
+function showEnd(){const e=document.getElementById('session-end');if(e){e.classList.add('visible');setTimeout(()=>e.scrollIntoView({behavior:'smooth'}),150);}}
+function downloadStarter(code){const ext='html'==='python'?'py':'html';const a=document.createElement('a');a.href='data:text/'+(ext==='py'?'x-python':'html')+';charset=utf-8,'+encodeURIComponent(code);a.download='starter.'+ext;a.click();}
+function confetti(){
+  const cv=document.getElementById('cc');cv.style.display='block';const ctx=cv.getContext('2d');
+  cv.width=innerWidth;cv.height=innerHeight;
+  const ps=Array.from({length:130},()=>{return{x:Math.random()*cv.width,y:-10-Math.random()*120,r:4+Math.random()*6,d:2+Math.random()*3,c:['#e34c26','#0284c7','#d97706','#059669','#7c3aed','#ec4899'][Math.floor(Math.random()*6)],ta:0};}); 
+  let f=0;
+  function draw(){ctx.clearRect(0,0,cv.width,cv.height);ps.forEach(p=>{p.ta+=.1;p.y+=p.d;p.x+=Math.sin(f/20);ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fillStyle=p.c;ctx.fill();});f++;if(f<200)requestAnimationFrame(draw);else{ctx.clearRect(0,0,cv.width,cv.height);cv.style.display='none';}}
+  draw();toast('🎉 All phases done! Build It awaits!');
 }
 init();
 </script>
-</body>
-</html>
+</body></html>
