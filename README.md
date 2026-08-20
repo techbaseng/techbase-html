@@ -12,6 +12,10 @@ title: HTML Fundamentals — Techbase STEM Academy
 
 ## About
 
+**Live:** https://techbaseng.github.io/techbase-html/
+
+**Tech stack:** static HTML lessons (one file per lesson) + Jekyll (`minima` theme) for the course README page; `index.html` is a hand-built static homepage served as-is, outside Jekyll's layout system.
+
 HTML (HyperText Markup Language) is the foundation of every website. In this course you will build real web pages from scratch — 34 lessons, zero prerequisites.
 
 **Prerequisites:** None.  **Next step after this course:** [CSS Styling](https://techbaseng.github.io/techbase-css/)
